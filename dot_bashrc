@@ -18,5 +18,5 @@ bind '"\e[B":history-search-forward'
 [ -f "$HOME/.config/shellconfig/aliases" ] && source "$HOME/.config/shellconfig/aliases"
 [ -f "$HOME/.config/shellconfig/functions" ] && source "$HOME/.config/shellconfig/functions"
 
-# Starship prompt #test line
+# Starship prompt
 eval "$(starship init bash)"
