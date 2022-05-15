@@ -1,0 +1,22 @@
+" highlight syntax
+syntax on
+
+" show line numbers 
+set number 
+" disable the swapfile
+set noswapfile
+
+" highlight all results
+set hlsearch 
+
+" ignore case in search
+set ignorecase 
+" show search results as you type
+set incsearch
+
+" Speed up scrolling in Vim
+set ttyfast
+
+" Status bar
+set laststatus=2
+ 

@@ -1,0 +1,72 @@
+# Aliases
+alias ls='ls --color=auto'                         # enable if terminal does not show ls colors
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+#GDM
+alias gnomestart='sudo systemctl start gdm'
+alias gnomestop='sudo systemctl stop gdm'
+
+# pacman and yay
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)' # remove orphaned packages
+alias pacs='sudo pacman -S'                      # Install standard pkg
+alias pacsyu='sudo pacman -Syu'                  # Update the system and upgrade all system packages
+alias pacsyyu='sudo pacman -Syyu'                # synchronize with the repositories and update the system
+alias yaysua='yay -Sua'                          # update only AUR pkgs (yay)
+alias yaysyu='yay -Syu'                          # update standard pkgs and AUR pkgs (yay)
+
+# DNF/Flatpak
+alias cleanall='sudo dnf clean all'             #cleans caches
+alias dnfup='sudo dnf update'                   #updates packages
+alias dnfupr='sudo dnf update --refresh'        #updates and refresh packages
+alias flatclean='flatpak uninstall --unused'    #cleans unused packages
+alias flatup='flatpak update'                   #flatpak update
+
+#APT
+alias aptacl='sudo apt autoclean'
+alias aptcl='sudo apt clean'
+alias aptup='sudo apt update && sudo apt upgrade'
+
+alias startpkitd='systemctl restart packagekit.service'
+
+# OneDrive Rclone mount
+alias onedrive='rclone --vfs-cache-mode writes mount --daemon "onedrive": ~/onedrive/'
+# Dropbox Rclone mount
+alias dropbox='rclone --vfs-cache-mode writes mount --daemon "dropbox": ~/dropbox/'
+
+alias sensorwatch='watch -n 1 sensors'
+alias history='fc -l 1'
+
+# Dir
+alias df='df -h'
+alias up='cd ..'
+alias l='ls -lah'
+
+# Rsync
+alias backupm='$HOME/scripts/rsync-home'
+alias backupp='$HOME/scripts/rsync-home-purkki'
+
+#nvme smart
+alias nvm='sudo nvme smart-log /dev/nvme0'
+
+# Weather
+alias weather='curl wttr.in/'
+
+# Cowsay
+alias fortunec='fortune | cowsay'
+
+# Yle-dl
+alias yleupdate='pip3 install --user --upgrade yle-dl'
+alias yledown='yle-dl --destdir ~/Downloads'
+
+# System Journal
+alias loger='journalctl -p 3 -xb'
+alias logf='journalctl -f'
+alias logr='sudo journalctl --rotate'
+alias logs='journalctl --disk-usage'
+alias logv='journalctl --verify'
+alias logw='sudo journalctl --vacuum-time=1s'
+
+# Github dotfiles
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

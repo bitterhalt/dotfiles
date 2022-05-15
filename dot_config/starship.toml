@@ -1,0 +1,61 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Make prompt a single line instead of two lines
+[line_break]
+disabled = false
+
+# Host name and prompt
+[character]
+success_symbol = "[❯](bold green)"
+#error_symbol = "[✗](bold red)"
+
+[directory]
+style = "bold blue"
+read_only = "🔒"
+truncation_length = 8
+truncation_symbol = "…/"
+
+[hostname]
+ssh_only = false
+format = "@[$hostname](bold red) "
+trim_at = ".companyname.com"
+disabled = true
+
+[username]
+style_user = "yellow bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = true
+show_always = true
+
+#[time]
+#time_format = "%R"
+#format = "$time($style) "
+#style = "bright-white"
+#disabled = false
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+#[python]
+#disabled = true
+
+#[ruby]
+#disabled = true
+
+#[rust]
+#disabled = true
+
+#[nodejs]
+#disabled = true
+
+#[java]
+#disabled = true
+
+#[golang]
+#disabled = true
+
+#[aws]
+#disabled = true
