@@ -68,5 +68,3 @@ alias logs='journalctl --disk-usage'
 alias logv='journalctl --verify'
 alias logw='sudo journalctl --vacuum-time=1s'
 
-# Github dotfiles
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
