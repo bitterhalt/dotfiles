@@ -15,8 +15,8 @@ bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
 # Load aliases and functions if existent.
-[ -f "$HOME/.config/shellconfig/aliases" ] && source "$HOME/.config/shellconfig/aliases"
-[ -f "$HOME/.config/shellconfig/functions" ] && source "$HOME/.config/shellconfig/functions"
+[ -f "$HOME/.config/aliases" ] && source "$HOME/.config/aliases"
+[ -f "$HOME/.config/functions" ] && source "$HOME/.config/functions"
 
 # Starship prompt
 eval "$(starship init bash)"
