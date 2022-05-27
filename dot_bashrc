@@ -7,6 +7,8 @@ then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
+export EDITOR=vim
+
 PS1='\[\e[0;33m\]\w\[\e[0;1;31m\] ❯ \[\e[0m\]'
 
 ## Use the up and down arrow keys for finding a command in history
