@@ -40,8 +40,8 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 
 # Load aliases and functions if existent.
-[ -f "$HOME/.config/aliases" ] && source "$HOME/.config/aliases"
-[ -f "$HOME/.config/functions" ] && source "$HOME/.config/functions"
+[ -f "$HOME/.config/shellconf/aliases" ] && source "$HOME/.config/shellconf/aliases"
+[ -f "$HOME/.config/shellconf/functions" ] && source "$HOME/.config/shellconf/functions"
 
 # Plugin list; put syntax-highlighting last!
 # Put downloadet plugins to /home/zsh/plugins
