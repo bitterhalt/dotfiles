@@ -6,7 +6,7 @@ checkupr() { # check for updates, needs "pacman-contrib" and "yay"
   # assume packages containing these strings in name need reboot after updating
   local REBOOT="(ucode|cryptsetup|linux|nvidia|mesa|systemd|wayland|xf86-video|xorg)"
   if [[ $UPDATES =~ $REBOOT ]]; then
-    echo -n "Warning: reboot after updating, just in case!"
+    echo "Warning: reboot after updating, just in case!"
     return 1
   fi
   return 0
