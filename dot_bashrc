@@ -1,6 +1,9 @@
 #
 # ~/.bashrc
 #
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
