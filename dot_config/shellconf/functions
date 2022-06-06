@@ -1,4 +1,4 @@
-### Check if update needs restard
+### Check if update needs restart
 
 checkupr() { # check for updates, needs "pacman-contrib" and "yay"
   local UPDATES=$(checkupdates; yay -Qua)
