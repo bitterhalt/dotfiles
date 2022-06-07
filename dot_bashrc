@@ -11,6 +11,7 @@ then
 fi
 
 export EDITOR=vim
+export VISUAL=vim
 
 PS1='\[\e[0;33m\]\w\[\e[0;1;31m\] ❯ \[\e[0m\]'
 
