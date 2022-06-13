@@ -101,8 +101,8 @@ ${alignr}${offset -6}< $swap/$swapmax swap ─┤       │
 ${alignr}${offset -6}< ${swapbar 5,120} > ─┘     │       │
 ${alignr}${offset -6}< ${fs_used /}/${fs_size /} > /root ─┤       │
 ${alignr}${offset -6}< ${fs_bar 5,120 /} > ─┘     │       │
-${alignr}${offset -6}< ${fs_used /home}/${fs_size /home} > /home ─┘       │
-${alignr}${offset -6}< ${fs_bar 5,120 /home} > ─┘             │
+${alignr}${offset -6}< ${fs_used /mnt/wd1tb}/${fs_size /mnt/wd1tb} > /WD ─┘       │
+${alignr}${offset -6}< ${fs_bar 5,120 /mnt/wd1tb} > ─┘             │
 ${alignr}${offset -6}Network ─┘
 ${alignr}${offset -32}< $nodename > hostname ─┤
 ${alignr}${offset -32}< ${downspeed enp34s0} k/s > download ─┤
