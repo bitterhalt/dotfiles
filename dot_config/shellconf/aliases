@@ -38,10 +38,11 @@ alias dropbox='rclone --vfs-cache-mode writes mount --daemon "dropbox": ~/dropbo
 alias sensorwatch='watch -n 1 sensors'
 alias history='fc -l 1'
 
-# Dir
+# Dir / exa  / lsd
 alias df='df -h'
-alias up='cd ..'
-alias l='ls -lah'
+#alias ls='exa --group-directories-first --icons'
+alias ls='lsd'
+
 
 # Rsync
 alias backupm='$HOME/scripts/rsync-home'
