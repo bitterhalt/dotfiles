@@ -1,6 +1,6 @@
 ### Check if update needs restart
 
-checkupr() { # check for updates, needs "pacman-contrib" and "yay"
+checkup() { # check for updates, needs "pacman-contrib" and "yay"
   local UPDATES=$(checkupdates; yay -Qua)
   [[ "$UPDATES" == "" ]] && return 2 || echo "$UPDATES"
   # assume packages containing these strings in name need reboot after updating
