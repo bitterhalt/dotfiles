@@ -20,3 +20,10 @@ set ttyfast
 " Status bar
 set laststatus=2
  
+" Set combatibility to Vim only
+set nocompatible
+
+" No auto backups
+set nobackup
+
+
