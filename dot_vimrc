@@ -26,4 +26,5 @@ set nocompatible
 " No auto backups
 set nobackup
 
-
+" Enable mouse
+set mouse=a
