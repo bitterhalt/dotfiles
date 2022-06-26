@@ -10,6 +10,7 @@ fi
 # Enable colors and change prompt:
 autoload -U colors && colors
 
+# Some prompts.
 #PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "  #zsh style
 PROMPT="%F{blue}%~%f %F{green❯%f "
 #PROMPT="%B%F{yellow}%~%f%b %B%F{blue}→%f%b "
@@ -19,23 +20,22 @@ PROMPT="%F{blue}%~%f %F{green❯%f "
 HISTFILE=~/.zsh_history                 # History filepath
 HISTSIZE=5000                           # Maximum events for internal history
 SAVEHIST=5000                           # Maximum events in history file
-setopt APPEND_HISTORY
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_SAVE_NO_DUPS
+setopt APPEND_HISTORY                   # Immediately append history instead of overwriting
+setopt HIST_IGNORE_ALL_DUPS             # If a new command is a duplicate, remove the older one
+setopt HIST_SAVE_NO_DUPS                # Do not save duplicated command
+setopt auto_cd                          # Changing directories without 'cd'
 
-export EDITOR=vim
+export EDITOR=vim                       # use vim as editor
 export VISUAL=vim
-
-# Changing directories without 'cd'
-setopt auto_cd
 
 # Basic auto/tab complete
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
-_comp_options+=(globdots)		# Include hidden files.
+_comp_options+=(globdots)               # Include hidden files.
 
+# Enable searching through history
 bindkey "^R" history-incremental-pattern-search-backward
 
 # make auto/tab colors match ls-colors
