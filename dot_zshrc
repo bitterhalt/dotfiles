@@ -10,7 +10,7 @@ fi
 # Enable colors and change prompt:
 autoload -U colors && colors
 
-# Some prompts.
+# Some prompts. (Not needed at all if you are using starship)
 #PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "  #zsh style
 PROMPT="%F{blue}%~%f %F{green❯%f "
 #PROMPT="%B%F{yellow}%~%f%b %B%F{blue}→%f%b "
