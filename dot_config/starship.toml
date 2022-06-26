@@ -1,43 +1,35 @@
-# Don't print a new line at the start of the prompt
+## Don't print a new line at the start of the prompt
 add_newline = false
 
-# Make prompt a single line instead of two lines
+## Make prompt a single line instead of two lines
 [line_break]
 disabled = false
 
-# Host name and prompt
+## Prompt, directory etc
 [character]
 success_symbol = "[❯](bold green)"
 #error_symbol = "[✗](bold red)"
 
 [directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
 style = "bold blue"
 read_only = "🔒"
 truncation_length = 8
 truncation_symbol = "…/"
 
-[hostname]
-ssh_only = false
-format = "@[$hostname](bold red) "
-trim_at = ".companyname.com"
-disabled = true
-
-[username]
-style_user = "yellow bold"
-style_root = "red bold"
-format = "[$user]($style) "
-disabled = true
-show_always = true
-
-#[time]
-#time_format = "%R"
-#format = "$time($style) "
-#style = "bright-white"
+#[username]
+#style_user = "yellow bold"
+#style_root = "red bold"
+#format = "[$user]($style) "
 #disabled = false
+#show_always = true
 
-# Disable the package module, hiding it from the prompt completely
+### Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
+
+#[lua]
+#disabled = false
 
 #[python]
 #disabled = true
@@ -59,3 +51,5 @@ disabled = true
 
 #[aws]
 #disabled = true
+
+
