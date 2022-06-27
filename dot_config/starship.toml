@@ -7,9 +7,13 @@ disabled = false
 
 ## Prompt, directory etc
 [character]
-success_symbol = "[❯](bold green)"
-#error_symbol = "[✗](bold red)"
+#success_symbol = "[❯](bold green)"
+#error_symbol = "[❯](bold red)"
+success_symbol = "[➜](bold green) "
+error_symbol = "[➜](bold red)"
 
+
+# Directory settings. This is almost stock
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
 style = "bold blue"
@@ -17,14 +21,25 @@ read_only = "🔒"
 truncation_length = 8
 truncation_symbol = "…/"
 
+# Username: set "true" if you wish to see username
 #[username]
-#style_user = "yellow bold"
+#style_user = "blue bold"
 #style_root = "red bold"
 #format = "[$user]($style) "
 #disabled = false
 #show_always = true
 
-### Disable the package module, hiding it from the prompt completely
+
+# Shell indicator: set disabled --> "false" if you want to see indicators
+#[shell]
+#fish_indicator = ""
+#powershell_indicator = "_"
+#zsh_indicator = ""
+#unknown_indicator = "mystery shell"
+#style = "cyan bold"
+#disabled = true
+
+### Disable the package module, hiding it from the prompt completely. Add more or delete as you like
 [package]
 disabled = true
 
