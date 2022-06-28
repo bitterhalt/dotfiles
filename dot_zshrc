@@ -37,6 +37,8 @@ _comp_options+=(globdots)               # Include hidden files.
 
 # Enable searching through history
 bindkey "^R" history-incremental-pattern-search-backward
+bindkey "^F" history-incremental-pattern-search-forward
+
 
 # make auto/tab colors match ls-colors
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
