@@ -183,6 +183,51 @@ draw_bold_text_with_bright_colors: true
 ##      START OF COLOR SCHEMES       ##
 #######################################
 schemes:
+### Breeze ###
+Breeze: &Breeze
+  # Default colors
+  primary:
+    background: '0x232627'
+    foreground: '0xfcfcfc'
+
+    dim_foreground: '0xeff0f1'
+    bright_foreground: '0xffffff'
+    dim_background: '0x31363b'
+    bright_background: '0x000000'
+
+  # Normal colors
+  normal:
+    black: '0x232627'
+    red: '0xed1515'
+    green: '0x11d116'
+    yellow: '0xf67400'
+    blue: '0x1d99f3'
+    magenta: '0x9b59b6'
+    cyan: '0x1abc9c'
+    white: '0xfcfcfc'
+
+  # Bright colors
+  bright:
+    black: '0x7f8c8d'
+    red: '0xc0392b'
+    green: '0x1cdc9a'
+    yellow: '0xfdbc4b'
+    blue: '0x3daee9'
+    magenta: '0x8e44ad'
+    cyan: '0x16a085'
+    white: '0xffffff'
+
+  # Dim colors
+  dim:
+    black: '0x31363b'
+    red: '0x783228'
+    green: '0x17a262'
+    yellow: '0xb65619'
+    blue: '0x1b668f'
+    magenta: '0x614a73'
+    cyan: '0x186c60'
+    white: '0x63686d'
+
   ### Doom One ###
   DoomOne: &DoomOne
     primary:
@@ -444,35 +489,6 @@ Dracula: &DraculaDarker
       cyan:    '#5fb3b3'
       white:   '#d8dee9'
 
-  ### Palenight ###
-  Palenight: &Palenight
-    # Default colors
-    primary:
-      background: '#292d3e'
-      foreground: '#d0d0d0'
-
-    # Normal colors
-    normal:
-      black:   '#292d3e'
-      red:     '#f07178'
-      green:   '#c3e88d'
-      yellow:  '#ffcb6b'
-      blue:    '#82aaff'
-      magenta: '#c792ea'
-      cyan:    '#89ddff'
-      white:   '#d0d0d0'
-
-    # Bright colors
-    bright:
-      black:   '#434758'
-      red:     '#ff8b92'
-      green:   '#ddffa7'
-      yellow:  '#ffe585'
-      blue:    '#9cc4ff'
-      magenta: '#e1acff'
-      cyan:    '#a3f7ff'
-      white:   '#ffffff'
-
   ### Solarized Dark ###
   SolarizedDark: &SolarizedDark
     # Default colors
@@ -541,44 +557,12 @@ Dracula: &DraculaDarker
       cyan:    '#93a1a1' # base1
       white:   '#fdf6e3' # base3
 
-  ### Tomorrow Night ###
-  TomorrowNight: &TomorrowNight
-     # Default colors
-    primary:
-      background: '#1d1f21'
-      foreground: '#c5c8c6'
-
-    # Colors the cursor will use if `custom_cursor_colors` is true
-    cursor:
-      text: '#1d1f21'
-      cursor: '#ffffff'
-
-    # Normal colors
-    normal:
-      black:   '#1d1f21'
-      red:     '#cc6666'
-      green:   '#b5bd68'
-      yellow:  '#e6c547'
-      blue:    '#81a2be'
-      magenta: '#b294bb'
-      cyan:    '#70c0ba'
-      white:   '#373b41'
-
-    # Bright colors
-    bright:
-      black:   '#666666'
-      red:     '#ff3334'
-      green:   '#9ec400'
-      yellow:  '#f0c674'
-      blue:    '#81a2be'
-      magenta: '#b77ee0'
-      cyan:    '#54ced6'
-      white:   '#282a2e'
 
 ######################################################################
 ## SET THEME: Choose ONE color scheme from those in the above list. ##
 ## ###################################################################
 # Available themes are:
+# *Breeze
 # *DoomOne
 # *Dracula
 # *DraculaDarker
@@ -589,9 +573,8 @@ Dracula: &DraculaDarker
 # *Palenight
 # *SolarizedLight
 # *SolarizedDark
-# *TomorrowNight
 
-colors: *DraculaDarker
+colors: *Dracula
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
