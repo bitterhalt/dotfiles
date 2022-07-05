@@ -11,6 +11,7 @@ alias gnomestop='sudo systemctl stop gdm'
 # pacman and yay
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)' # remove orphaned packages
 alias pacs='sudo pacman -S'                      # Install standard pkg
+alias pacsyy='sudo pacman -Syy'			 # update the software database
 alias pacsyu='sudo pacman -Syu'                  # Update the system and upgrade all system packages
 alias pacsyyu='sudo pacman -Syyu'                # synchronize with the repositories and update the system
 alias yaysua='yay -Sua'                          # update only AUR pkgs (yay)
