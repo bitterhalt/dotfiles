@@ -574,7 +574,7 @@ Dracula: &DraculaDarker
 # *SolarizedLight
 # *SolarizedDark
 
-colors: *Dracula
+colors: *DraculaDarker
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
@@ -958,9 +958,9 @@ cursor:
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
-# Open new window in same directory
+#  Spawn new instance in same directory
 key_bindings:
-  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
 #debug:
   # Display the time it takes to redraw each frame.
   #render_timer: false
