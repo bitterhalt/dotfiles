@@ -253,7 +253,7 @@ Breeze: &Breeze
       red:     '#da8548'
       green:   '#4db5bd'
       yellow:  '#ecbe7b'
-      blue:    '#3071db'   # This is 2257a0 in Doom Emacs but I lightened it.
+      blue:    '#3071db'   
       magenta: '#a9a1e1'
       cyan:    '#46d9ff'
       white:   '#dfdfdf'
