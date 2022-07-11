@@ -50,32 +50,31 @@ conky.text = [[
 ${alignr}${offset -6}
 ${alignr}${offset -6}${execi 6000 lsb_release -d | grep 'Descr'|awk {'print $2 " " $3" " $4" " $5'}}
 ${alignr}${offset -6}└──────────┐
-${alignr}${offset -6}${exec lsb_release -si} ${machine} ─┤
 ${alignr}${offset -6}< ${kernel} > Kernel ─┤   │
 ${alignr}${offset -6}< ${uptime_short} > Uptime ─┤   │
 ${alignr}${offset -6}< ${execi 14400 checkupdates | wc -l} > updates ─┘   │
 ${alignr}${offset -6}│
-${alignr}${offset -6}system ─┤   │
+${alignr}${offset -6}system ─┤
 ${alignr}${offset -6}< ${execi 6000 cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'| uniq | cut -c 1-39} > CPU ─┤   │
-${alignr}${offset -6}< ${freq_g} GHz Usage :(${cpu}%) ─┤   │
-${alignr}${offset -6}│   │
-${alignr}${offset -6}< $loadavg > load ─┤   │
-${alignr}${offset -6}< ${top name 01} ${top cpu 1} > ─┤   │
-${alignr}${offset -6}< ${top name 02} ${top cpu 2} > ─┤   │
-${alignr}${offset -6}< ${top name 03} ${top cpu 3} > ─┤   │
-${alignr}${offset -6}< ${top name 04} ${top cpu 4} > ─┤   │
-${alignr}${offset -6}< ${top name 05} ${top cpu 5} > ─┤   │
+${alignr}${offset -6}< ${freq_g} GHz (${cpu}%) > Usage ─┤   │
+${alignr}${offset -6}│   │   │
+${alignr}${offset -6}< $loadavg > load ─┤   │   │
+${alignr}${offset -6}< ${top name 01} ${top cpu 1} > ─┤   │   │
+${alignr}${offset -6}< ${top name 02} ${top cpu 2} > ─┤   │   │
+${alignr}${offset -6}< ${top name 03} ${top cpu 3} > ─┤   │   │
+${alignr}${offset -6}< ${top name 04} ${top cpu 4} > ─┤   │   │
+${alignr}${offset -6}< ${top name 05} ${top cpu 5} > ─┘   │   │
 ${alignr}${offset -6}│   │
 ${alignr}${offset -6}│   │
 ${alignr}${offset -6}Memory ─┤   │
-${alignr}${offset -6}< $mem/$memmax ($memperc%) ─┤   │
-${alignr}${offset -6}< ${membar 5,120} > ─┤   │
-${alignr}${offset -6}│   │
-${alignr}${offset -6}< ${top_mem name 1} ${top_mem mem_res 1} > ─┤   │
-${alignr}${offset -6}< ${top_mem name 2} ${top_mem mem_res 2} > ─┤   │
-${alignr}${offset -6}< ${top_mem name 3} ${top_mem mem_res 3} > ─┤   │
-${alignr}${offset -6}< ${top_mem name 4} ${top_mem mem_res 4} > ─┤   │
-${alignr}${offset -6}< ${top_mem name 5} ${top_mem mem_res 5} > ─┤   │
+${alignr}${offset -6}< $memperc% > used ─┤   │   │
+${alignr}${offset -6}< $mem/$memmax > ─┤   │   │
+${alignr}${offset -6}< ${membar 5,120} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 1} ${top_mem mem_res 1} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 2} ${top_mem mem_res 2} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 3} ${top_mem mem_res 3} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 4} ${top_mem mem_res 4} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 5} ${top_mem mem_res 5} > ─┘   │   │
 ${alignr}${offset -6}│   │
 ${alignr}${offset -6}Processes ─┤   │
 ${alignr}${offset -6}< $processes > ─ < $running_processes > ─┘   │   │
@@ -85,7 +84,6 @@ ${alignr}${offset -6}Temperatures ─┤   │
 ${alignr}${offset -6}< ${execi 5 sensors | grep Tctl: | cut -c 16-19}°C cpu ─┤   │   │
 ${alignr}${offset -6}< ${execi 5 sensors | grep edge: | cut -c 16-19} °C gpu ─┤   │   │
 ${alignr}${offset -6}< ${execi 5 sensors | grep Composite: | cut -c 16-19}°C ssd ─┘   │   │
-${alignr}${offset -6}│   │
 ${alignr}${offset -6}│   │
 ${alignr}${offset -6}│   │
 ${alignr}${offset -6}Disk Usage ─┘   │
