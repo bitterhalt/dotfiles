@@ -52,7 +52,7 @@ ${alignr}${offset -6}${execi 6000 lsb_release -d | grep 'Descr'|awk {'print $2 "
 ${alignr}${offset -6}└──────────┐
 ${alignr}${offset -6}< ${kernel} > Kernel ─┤   │
 ${alignr}${offset -6}< ${uptime_short} > Uptime ─┤   │
-${alignr}${offset -6}< ${execi 14400 checkupdates | wc -l} > updates ─┘   │
+${alignr}${offset -6}< ${execi 10800 checkupdates | wc -l} > updates ─┘   │
 ${alignr}${offset -6}│
 ${alignr}${offset -6}system ─┤
 ${alignr}${offset -6}< ${execi 6000 cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'| uniq | cut -c 1-39} > CPU ─┤   │
