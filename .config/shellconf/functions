@@ -1,0 +1,13 @@
+### Check if update needs restart
+
+checkup() { # check for updates, needs "pacman-contrib" and "paru" or "yay"
+  local UPDATES=$(checkupdates; paru -Qua)
+  [[ "$UPDATES" == "" ]] && return 2 || echo "$UPDATES"
+  # assume packages containing these strings in name need reboot after updating
+  local REBOOT="(ucode|cryptsetup|linux|nvidia|mesa|systemd|wayland|xf86-video|xorg)"
+  if [[ $UPDATES =~ $REBOOT ]]; then
+    echo "Warning: reboot required after update!"
+    return 1
+  fi
+  return 0
+}

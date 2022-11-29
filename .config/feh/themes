@@ -1,0 +1,8 @@
+feh \
+-B black \
+-d \
+--geometry 640x480 \
+--auto-zoom \
+--info "printf '%%s\n'  \ Size:\ '%S' \ Dimension:\ '%wx%h'" \
+--scale-down
+

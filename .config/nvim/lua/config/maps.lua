@@ -1,0 +1,55 @@
+-------------------------------------------------
+-- KEYBINDINGS
+-------------------------------------------------
+
+local function map(m, k,v)
+	vim.keymap.set(m, k, v, { silent = true })
+end
+
+-- Keybindings for telescope
+map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
+map("n", "<leader>ff", "<CMD>Telescope find_files <CR>")
+map("n", "<leader>fe", "<CMD>Telescope file_browser<CR>")
+map("n", "<leader>fb", "<CMD>Telescope buffers<cr>")
+map("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
+map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
+
+-- move between buffers
+map("n", "<S-l>", "<CMD>:bnext<CR>")
+map("n", "<S-h>", "<CMD>:bprevious<CR>")
+
+-- Move around splits using Ctrl + {h,j,k,l}
+map('n', '<C-h>', '<C-w>h')
+map('n', '<C-j>', '<C-w>j')
+map('n', '<C-k>', '<C-w>k')
+map('n', '<C-l>', '<C-w>l')
+
+-- Resize with arrows
+map("n", "<C-Up>", ":resize -2<CR>")
+map("n", "<C-Down>", ":resize +2<CR>")
+map("n", "<C-Left>", ":vertical resize -2<CR>")
+map("n", "<C-Right>", ":vertical resize +2<CR>")
+
+ -- Vifm 
+map ('n', "<Leader>vv", "<CMD>:Vifm<CR>")
+map ('n', "<Leader>vs", "<CMD>:VsplitVifm<CR>")
+map ('n', "<Leader>sp", "<CMD>:SplitVifm<CR>")
+map ('n', "<Leader>dv", "<CMD>:DiffVifm<CR>")
+map ('n', "<Leader>tb", "<CMD>:TabVifm<CR>")
+
+-- Close all windows and exit from Neovim with <leader>
+map('n', '<leader>q', ':qa!<CR>')
+
+-- Clear search highlighting with <leader> and c
+map('n', '<C-c>', ':nohl<CR>')
+-- Save file
+map ('n', "<C-s>", "<CMD>:w<CR>")
+
+-- Change split orientation
+map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
+map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
+
+-- Toggle nvim-tree
+map('n', '<C-n>',     "<CMD>NvimTreeToggle<CR>")
+
+

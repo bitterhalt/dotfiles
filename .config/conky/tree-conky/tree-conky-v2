@@ -1,0 +1,106 @@
+conky.config = {
+
+	background = true,
+	use_xft = true,
+	font = 'monospace:size=8',
+	xftalpha = 0.8,
+	update_interval = 2,
+	total_run_times = 0,
+	own_window = true,
+	own_window_transparent = true,
+	own_window_type = 'normal',
+	own_window_class = 'conky',
+	own_window_argb_visual = true,
+--	own_window_colour = '#263041',
+--  own_window_argb_value = 120,
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	double_buffer = true,
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = true,
+	stippled_borders = 1,
+	border_width = 1,
+	default_color = '#d8dee9',
+	default_shade_color = 'gray',
+	default_outline_color = 'black',
+	alignment = 'top_right',
+	gap_x = 5,
+	gap_y = 0,
+
+-- Misc Console #
+   out_to_console = false,
+   out_to_stderr = false,
+   extra_newline = false,
+
+   no_buffers = true,
+   cpu_avg_samples = 2,
+   net_avg_samples = 2,
+   override_utf8_locale = true,
+   use_spacer = 'right',
+   maximum_width = 400,
+   minimum_height = 800,
+   uppercase = true,
+
+};
+
+conky.text = [[
+#leet chars: ┤┤└└┴┴┐┐││┘┘┌┌├├┬┬┼┼┴┴── ││ ▽▼△▲▵▴▾▿
+
+${alignr}${offset -6}
+${alignr}${offset -6}${execi 6000 lsb_release -d | grep 'Descr'|awk {'print $2 " " $3" " $4" " $5'}}
+${alignr}${offset -6}└──────────┐
+${alignr}${offset -6}< ${kernel} > Kernel ─┤   │
+${alignr}${offset -6}< ${uptime_short} > Uptime ─┤   │
+${alignr}${offset -6}< ${execi 7200 checkupdates | wc -l} > updates ─┘   │
+${alignr}${offset -6}│
+${alignr}${offset -6}system ─┤
+${alignr}${offset -6}< ${execi 6000 cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'| uniq | cut -c 1-39} > CPU ─┤   │
+${alignr}${offset -6}< ${freq_g} GHz (${cpu}%) > Usage ─┤   │
+${alignr}${offset -6}│   │   │
+${alignr}${offset -6}< $loadavg > load ─┤   │   │
+${alignr}${offset -6}< ${top name 01} ${top cpu 1} > ─┤   │   │
+${alignr}${offset -6}< ${top name 02} ${top cpu 2} > ─┤   │   │
+${alignr}${offset -6}< ${top name 03} ${top cpu 3} > ─┤   │   │
+${alignr}${offset -6}< ${top name 04} ${top cpu 4} > ─┤   │   │
+${alignr}${offset -6}< ${top name 05} ${top cpu 5} > ─┘   │   │
+${alignr}${offset -6}│   │
+${alignr}${offset -6}│   │
+${alignr}${offset -6}Memory ─┤   │
+${alignr}${offset -6}< $memperc% > used ─┤   │   │
+${alignr}${offset -6}< $mem/$memmax > ─┤   │   │
+${alignr}${offset -6}< ${membar 5,120} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 1} ${top_mem mem_res 1} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 2} ${top_mem mem_res 2} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 3} ${top_mem mem_res 3} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 4} ${top_mem mem_res 4} > ─┤   │   │
+${alignr}${offset -6}< ${top_mem name 5} ${top_mem mem_res 5} > ─┘   │   │
+${alignr}${offset -6}│   │
+${alignr}${offset -6}Processes ─┤   │
+${alignr}${offset -6}< $processes > ─ < $running_processes > ─┘   │   │
+${alignr}${offset -6}│   │
+${alignr}${offset -6}│   │
+${alignr}${offset -6}Temperatures ─┤   │
+${alignr}${offset -6}< ${execi 5 sensors | grep Tctl: | cut -c 16-19}°C cpu ─┤   │   │
+${alignr}${offset -6}< ${execi 5 sensors | grep edge: | cut -c 16-19} °C gpu ─┤   │   │
+${alignr}${offset -6}< ${execi 5 sensors | grep Composite: | cut -c 16-19}°C ssd ─┘   │   │
+${alignr}${offset -6}│   │
+${alignr}${offset -6}│   │
+${alignr}${offset -6}Disk Usage ─┘   │
+${alignr}${offset -6}< $diskio_read >  read ─┤       │
+${alignr}${offset -6}< $diskio_write > write ─┤       │
+${alignr}${offset -6}< $swap/$swapmax swap ─┤       │
+${alignr}${offset -6}< ${swapbar 5,120} > ─┘     │       │
+${alignr}${offset -6}< ${fs_used /}/${fs_size /} > /root ─┤       │
+${alignr}${offset -6}< ${fs_bar 5,120 /} > ─┘     │       │
+${alignr}${offset -6}< ${fs_used /mnt/wd1tb}/${fs_size /mnt/wd1tb} > /WD ─┘       │
+${alignr}${offset -6}< ${fs_bar 5,120 /mnt/wd1tb} > ─┘             │
+${alignr}${offset -6}│
+${alignr}${offset -6}Network ─┘
+${alignr}${offset -32}< $nodename > hostname ─┤
+${alignr}${offset -32}< ${downspeed enp34s0} k/s > download ─┤
+${alignr}${offset -32}< ${downspeedgraph enp34s0 12,120 136311 11B014} > ─┘    │
+${alignr}${offset -32}< ${upspeed enp34s0} k/s >   upload ─┘
+${alignr}${offset -62}< ${upspeedgraph enp34s0 12,120 BA0B0B FC0707} > ─┘
+]];
+

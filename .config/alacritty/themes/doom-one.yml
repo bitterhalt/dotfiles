@@ -1,0 +1,30 @@
+  colors:
+    primary:
+      background: '#282c34'
+      foreground: '#bbc2cf'
+    cursor:
+      text: CellBackground
+      cursor: '#528bff'
+    selection:
+      text: CellForeground
+      background: '#3e4451'
+    normal:
+      black:   '#1c1f24'
+      red:     '#ff6c6b'
+      green:   '#98be65'
+      yellow:  '#da8548'
+      blue:    '#51afef'
+      magenta: '#c678dd'
+      cyan:    '#5699af'
+      white:   '#dfdfdf' # original emacs value 202328
+    bright:
+      black:   '#5b6268'
+      red:     '#da8548'
+      green:   '#4db5bd'
+      yellow:  '#ECBE7B'
+      blue:    '#3071db' # original emacs value is: 2257a0
+      magenta: '#a9a1e1'
+      cyan:    '#46D9FF'
+      white:   '#dfdfdf'
+
+
