@@ -181,9 +181,9 @@ draw_bold_text_with_bright_colors: true
 # rose-pine.yml
 # tokyo-night-storm.yml
 # tokyo-night.yml
-
+# purify.yml
 import:
-  - ~/.config/alacritty/themes/dracula-darker.yml
+  - ~/.config/alacritty/themes/purify.yml
 #######################################
 ##       END OF COLOR SCHEMES        ##
 #######################################
