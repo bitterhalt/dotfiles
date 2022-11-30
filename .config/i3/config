@@ -108,28 +108,12 @@ bindcode $mod+Shift+90 	 move container to workspace  $ws10
 
 # resize window (you can also use the mouse for that):
 #mode "resize" {
-# These bindings trigger as soon as you enter the resize mode
-# Pressing left will shrink the window's width.
-# Pressing right will grow the window's width.
-# Pressing up will shrink the window's height.
-# Pressing down will grow the window's height.
-#        bindsym j resize shrink width 10 px or 10 ppt
-#        bindsym k resize grow height 10 px or 10 ppt
-#        bindsym l resize shrink height 10 px or 10 ppt
-#        bindsym ntilde resize grow width 10 px or 10 ppt
+# Resize windows
+bindsym $mod+Ctrl+Shift+Right resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Up resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Down resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Left resize grow width 10 px or 10 ppt
 
-# same bindings, but for the arrow keys
-#	bindsym Left resize shrink width 10 px or 10 ppt
-#        bindsym Down resize grow height 10 px or 10 ppt
-#        bindsym Up resize shrink height 10 px or 10 ppt
-#        bindsym Right resize grow width 10 px or 10 ppt
-
-# back to normal: Enter or Escape
-#	bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-
-#bindsym $mod+r mode "resize"
 
 ###############
 # keybindings #
@@ -338,10 +322,10 @@ assign [class="discord"] $ws5
 assign [class="Deluge-gtk"] $ws7
 assign [class="Joplin"] $ws4
 assign [class="qBittorrent"] $ws7
-# automatic set focus new window if it opens on another workspace then the current:
 for_window [class="Spotify"] move to workspace $ws5
+# automatic set focus new window if it opens on another workspace then the current:
 for_window [class=(?i)firefox] focus
-for_window [class=Thunar] focus
+# for_window [class=Thunar] focus
 
 ##############
 # compositor #
@@ -390,41 +374,4 @@ client.urgent           #ff665c #ff665c #DFDFDF #ff665c
 client.placeholder      #242730 #242730 #DFDFDF #242730
 
 client.background       #DFDFDF
-################
-# bar settings #
-################
-
-# Start i3bar to display a workspace bar
-# (plus the system information i3status finds out, if available)
-#bar {
-#		height 25
-#		font pango: JetBrains Mono Regular 10
-#		status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#		status_command i3bar
-#	    	position top
-#	    	i3bar_command i3bar --transparency
-# it could be that you have no primary display set: set one (xrandr --output <output> --primary)
-# reference: https://i3wm.org/docs/userguide.html#_tray_output
-#		    tray_output primary
-#		    tray_padding 0
-
-# When strip_workspace_numbers is set to yes,
-# any workspace that has a name of the form
-# “[n][:][NAME]” will display only the name.
-#strip_workspace_numbers yes
-##strip_workspace_name no
-
-#colors {
-#background #282C34
-#statusline #DFDFDF
-#separator  #5B6268
-
-# item	           border  bground text
-#focused_workspace  #3f444a #3f444a #DFDFDF
-#active_workspace   #5B6268 #5B6268 #DFDFDF
-#inactive_workspace #282C34 #282C34 #DFDFDF
-#urgent_workspace   #FF6C6B #FF6C6B #DFDFDF
-#binding_mode       #FF6C6B #FF6C6B #DFDFDF
-#  }
-#}
 
