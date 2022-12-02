@@ -183,7 +183,7 @@ draw_bold_text_with_bright_colors: true
 # tokyo-night.yml
 # purify.yml
 import:
-  - ~/.config/alacritty/themes/purify.yml
+  - ~/.config/alacritty/themes/tokyo-night.yml
 #######################################
 ##       END OF COLOR SCHEMES        ##
 #######################################
