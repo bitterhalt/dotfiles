@@ -170,20 +170,21 @@ draw_bold_text_with_bright_colors: true
 ## #################################################################
 ## THEMES ##
 # decaycs.yml
-# doom-one.yml
 # doom-one-vibrant.yml
+# doom-one.yml
 # dracula-darker.yml
 # dracula.yml
 # gruvbox-dark.yml
+# gruvbox-material-dark
 # nord.yml
+# purify.yml
 # rose-pine-dawn.yml
 # rose-pine-moon.yml
 # rose-pine.yml
 # tokyo-night-storm.yml
 # tokyo-night.yml
-# purify.yml
 import:
-  - ~/.config/alacritty/themes/tokyo-night.yml
+  - ~/.config/alacritty/themes/gruvbox-dark.yml
 #######################################
 ##       END OF COLOR SCHEMES        ##
 #######################################
