@@ -1,68 +1,58 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- *
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
-
+/*---------------------------------------------------------------------------*/
 /*****----- Configuration -----*****/
+/*---------------------------------------------------------------------------*/
 configuration {
     show-icons:                 false;
+
+    font:                        "JetBrains Mono Nerd Font 12";
 }
 
 /*****----- Global Properties -----*****/
 @import "~/.config/rofi/colors.rasi"
-@import "~/.config/rofi/fonts.rasi"
-
+/*---------------------------------------------------------------------------*/
 /*****----- Main Window -----*****/
+/*---------------------------------------------------------------------------*/
 window {
-    /* properties for window widget */
     transparency:                "real";
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       605px;
+    width:                       800px;
     x-offset:                    0px;
     y-offset:                    0px;
 
-    /* properties for all widgets */
-    enabled:                     true;
-    margin:                      0px;
     padding:                     0px;
-    border:                      2px solid;
+    border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @foreground;
     cursor:                      "default";
     background-color:            @background;
 }
 
+/*---------------------------------------------------------------------------*/
 /*****----- Main Box -----*****/
+/*---------------------------------------------------------------------------*/
 mainbox {
     enabled:                     true;
-    spacing:                     10px;
-    margin:                      0px;
-    padding:                     20px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @selected;
-    background-color:            transparent;
-    children:                    [ "inputbar", "message", "listview" ];
-}
-
-/*****----- Inputbar -----*****/
-inputbar {
-    enabled:                     false;
-    spacing:                     10px;
+    spacing:                     0px;
     margin:                      0px;
     padding:                     0px;
-    border:                      0px;
+    border:                      1px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @foreground;
     background-color:            transparent;
-    text-color:                  @foreground;
-    children:                    [ "textbox-prompt-colon", dummy, "prompt"];
+    children:                    [ "inputbar", "listview", "message" ];
+}
+
+/*---------------------------------------------------------------------------*/
+/*****----- Inputbar -----*****/
+/*---------------------------------------------------------------------------*/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    padding:                     15px 15px;
+    background-color:            @background;
+    children:                    [ "textbox-prompt-colon", "dummy","prompt"];
 }
 
 dummy {
@@ -72,50 +62,23 @@ dummy {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         "";
-    padding:                     10px 14px;
-    border-radius:               4px;
-    background-color:            @urgent;
-    text-color:                  @background;
+    str:                         "力 System";
+    padding:                     12px;
+    border-radius:               0px;
+    background-color:            @background;
+    text-color:                  @foreground;
 }
 prompt {
     enabled:                     true;
-    padding:                     10px;
-    border-radius:               4px;
-    background-color:            @active;
-    text-color:                  @background;
-}
-
-/*****----- Message -----*****/
-message {
-    enabled:                     true;
-    margin:                      0px;
-    padding:                     10px;
-    border:                      0px solid;
-    border-radius:               4px;
-    border-color:                @selected;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
-}
-textbox {
-    background-color:            inherit;
-    text-color:                  inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
-    placeholder-color:           @foreground;
-    blink:                       true;
-    markup:                      true;
-}
-error-message {
-    padding:                     10px;
-    border:                      0px solid;
+    padding:                     12px;
     border-radius:               0px;
-    border-color:                @selected;
     background-color:            @background;
     text-color:                  @foreground;
 }
 
+/*---------------------------------------------------------------------------*/
 /*****----- Listview -----*****/
+/*---------------------------------------------------------------------------*/
 listview {
     enabled:                     true;
     columns:                     5;
@@ -128,31 +91,25 @@ listview {
     fixed-height:                true;
     fixed-columns:               true;
 
-    spacing:                     10px;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @selected;
+    spacing:                     15px;
+    margin:                      15px;
     background-color:            transparent;
-    text-color:                  @foreground;
     cursor:                      "default";
 }
 
+/*---------------------------------------------------------------------------*/
 /*****----- Elements -----*****/
+/*---------------------------------------------------------------------------*/
 element {
     enabled:                     true;
-    spacing:                     0px;
-    margin:                      0px;
-    padding:                     10px;
-    border:                      0px solid;
-    border-radius:               4px;
-    border-color:                @selected;
+    padding:                     30px 10px;
+    border-radius:               0px;
     background-color:            @background-alt;
     text-color:                  @foreground;
     cursor:                      pointer;
 }
 element-text {
+    font:                        "JetBrains Mono Nerd 32";
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
@@ -160,8 +117,24 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    border:                      0px 2px 0px 2px;
-    border-radius:               4px;
     background-color:            var(selected);
     text-color:                  var(background);
+}
+
+/*---------------------------------------------------------------------------*/
+/*****----- Message -----*****/
+/*---------------------------------------------------------------------------*/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     15px;
+    border-radius:               0px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
 }
