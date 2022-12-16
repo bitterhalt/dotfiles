@@ -3,7 +3,10 @@
 # https://github.com/LukeSmithxyz/voidrice/blob/master/.config/lf/lfrc
 
 
-# Basic vars
+# =============================================================================
+#                                 OPTIONS
+# =============================================================================
+
 set shellopts '-eu'
 set drawbox
 set ifs "\n"
@@ -15,16 +18,15 @@ set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
 set autoquit on
 
-# Custom Functions
+# =============================================================================
+#                                FUNCIONS
+# =============================================================================
 
-# cmds/functions
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+
 cmd open ${{
-    case $(file --mime-type "$(readlink -f $f)" -b) in
-	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) localc $fx ;;
-	image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
-        text/*|application/json|inode/x-empty) $EDITOR $fx;;
-	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
-	image/svg+xml) display -- $f ;;
+    case $(file --mime-type -Lb $f) in
+        text/*) $EDITOR $fx ;;
 	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" |
 		setsid -f feh -aio 2>/dev/null | while read -r file; do
 			[ -z "$file" ] && continue
@@ -32,21 +34,12 @@ cmd open ${{
 			lf -remote "send toggle"
 		done &
 		;;
-	audio/*) mpv --audio-display=no $f ;;
+    audio/*) mpv --audio-display=no $f ;;
 	video/*|application/vnd.rn-realmedia) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
-	application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
-	application/pgp-encrypted) $EDITOR $fx ;;
-	application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text) setsid -f lowriter $fx >/dev/null 2>&1 ;;
-	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/octet-stream|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template) setsid -f localc $fx >/dev/null 2>&1 ;;
-	application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.oasis.opendocument.presentation|application/vnd.ms-powerpoint) setsid -f loimpress $fx >/dev/null 2>&1 ;;
-	application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template) setsid -f lodraw $fx >/dev/null 2>&1 ;;
-	application/vnd.oasis.opendocument.formula) setsid -f lomath $fx >/dev/null 2>&1 ;;
-	application/vnd.oasis.opendocument.database) setsid -f lobase $fx >/dev/null 2>&1 ;;
+	application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
     esac
 }}
-
-
 
 
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
@@ -68,7 +61,10 @@ cmd delete ${{
 	read ans
 	[ $ans = "y" ] && rm -rf -- $fx
 }}
-# Bindings
+
+# =============================================================================
+#                              KEYBINDINGS
+# =============================================================================
 
 map <c-n> push :mkdir<space>
 map <c-r> reload
