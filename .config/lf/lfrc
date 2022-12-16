@@ -28,7 +28,7 @@ cmd open ${{
     case $(file --mime-type -Lb $f) in
         text/*) $EDITOR $fx ;;
 	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" |
-		setsid -f feh -aio 2>/dev/null | while read -r file; do
+		setsid -f nsxiv -aio 2>/dev/null | while read -r file; do
 			[ -z "$file" ] && continue
 			lf -remote "send select \"$file\""
 			lf -remote "send toggle"
