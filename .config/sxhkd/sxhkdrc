@@ -169,16 +169,22 @@ super + shift + F12
 #################
 # Multimedia keys
 #################
+# Raise volume
 XF86AudioRaiseVolume
   pactl set-sink-volume @DEFAULT_SINK@ +5%
 
-# Still multimedia
+# Lover volume
 XF86AudioLowerVolume
   pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 # Mute
 XF86AudioMute
   pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Play
+XF86AudioPlay
+    playerctl play-pause
+
 #Next
 XF86AudioNext
     playerctl next
