@@ -25,46 +25,34 @@ end
 
 return packer.startup({
     function(use)
-		use { 'wbthomason/packer.nvim' }
-        
+		use ('wbthomason/packer.nvim' )
 		-- Alpha
-		use {'goolord/alpha-nvim',
-		config = get_setup('alpha'),
-		}
- 
-        -- Impatient
-		use {'lewis6991/impatient.nvim'}
-		
-		-- Telescope
-        use { 'nvim-telescope/telescope.nvim',
-            config = get_setup('telescope'),
-        }
+		use ('goolord/alpha-nvim')
 
-     	-- Lualine	                  
-        use { 'nvim-lualine/lualine.nvim',
-            config = get_setup('lualine'),
-        }
+        -- Impatient
+		use ('lewis6991/impatient.nvim')
+
+	-- Telescope
+    	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.0",
+		requires = { { "nvim-lua/plenary.nvim" } },
+	    })
+
+     	-- Lualine
+        use ('nvim-lualine/lualine.nvim')
 		-- Nvim-tree
-        use { 'nvim-tree/nvim-tree.lua',
-            requires = {
-                'nvim-lua/plenary.nvim',
-            },
-            config = get_setup('neo-tree'),
-        }
-    
+        use ('nvim-tree/nvim-tree.lua')
 		-- Syntax Highlighting and Colors --
-		use {"RRethy/nvim-base16"}	
-		use {"PotatoesMaster/i3-vim-syntax"}
-		use {"kovetskiy/sxhkd-vim"}
-		use {"vim-python/python-syntax"}
-		use {"ap/vim-css-color"}
-		
+		use ('RRethy/nvim-base16')
+		use ('PotatoesMaster/i3-vim-syntax')
+		use ('kovetskiy/sxhkd-vim')
+		use ('vim-python/python-syntax')
+		use ('ap/vim-css-color')
+
 		-- Whichkey
-		use{"folke/which-key.nvim",
-		config = get_setup('which-key'),
-		}
-		
-	
+		use('folke/which-key.nvim')
+
         if PACKER_JUST_INSTALLED then
             vim.api.nvim_create_autocmd('User PackerComplete', {
                 command = 'qa!',
