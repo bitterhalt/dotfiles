@@ -10,7 +10,7 @@ super + Return
 super + d
 	~/.config/rofi/applauncher/rofidmenu2
 # Rofi window
-#super + shift + d
+#super + t
 #	~/.config/rofi/applauncher/rofiwindow
 
 # power-menu
@@ -127,11 +127,11 @@ super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
-super + alt + {Left,Right}
-	bspc desktop -f {prev,next}.local
+super + {Tab,shift+Tab}
+	bspc desktop -f {next,prev}.local
 
 # focus the last node/desktop
-super + {section,Tab}
+alt + {section,Tab}
 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
@@ -157,7 +157,7 @@ super + control + {Left,Down,Up,Right}
 	bspc node -z left -20 0}
 
 # change inner gaps
-super + alt + {plus,0}
+super + alt + {plus,minus}
     { bspc config -d focused window_gap $(( $(bspc config -d focused window_gap) + 5 )), \
     [ $(bspc config -d focused window_gap) -ge 5 ] && \
     bspc config -d focused window_gap $(( $(bspc config -d focused window_gap) - 5 )) }
