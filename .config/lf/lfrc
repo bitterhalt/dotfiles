@@ -76,17 +76,7 @@ map D delete
 map E extract
 map o open
 map O open
-
-
 map R rename # at the very end
-map C push A<c-u> # new rename
-map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extension
-map a push A<a-b> # after extension
-
-
 map V push :!nvim<space>
-
 map W $setsid -f $TERMINAL >/dev/null 2>&1
-
 map Y $printf "%s" "$fx" | xclip -selection clipboard
