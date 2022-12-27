@@ -1,0 +1,33 @@
+" -----------------------------------------------------------------------------
+" Zathura mappings
+" -----------------------------------------------------------------------------
+
+" Zoom in/out
+map <C-+> zoom in
+map <C--> zoom out
+
+" Jump half up/down
+map u scroll half-up
+map d scroll half-down
+
+" Toggle mode
+map D toggle_page_mode
+
+" Fullscreen
+map [normal]     <F11> toggle_fullscreen
+map [fullscreen] <F11> toggle_fullscreen
+
+" Reload
+map [normal]     <C-r> reload
+map [fullscreen] <C-r> reload
+
+" -----------------------------------------------------------------------------
+" Zathura settings
+" -----------------------------------------------------------------------------
+" Autoadjust
+set adjust-open width
+
+" Clipboard
+set selection-clipboard clipboard
+
+set incremental-search true
