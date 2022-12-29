@@ -10,8 +10,8 @@ super + Return
 super + d
 	~/.config/rofi/applauncher/rofidmenu2
 # Rofi window
-#super + t
-#	~/.config/rofi/applauncher/rofiwindow
+alt + t
+	~/.config/rofi/applauncher/rofiwindow
 
 # power-menu
 super + shift + p
@@ -24,6 +24,9 @@ super + Escape
 # Launch Apps
 super shift + {e,w,m,d}
 	{thunar,firefox,thunderbird,discord}
+
+super + shift + Delete
+	bspc rule -a \* -o state=floating size=800x600 && $TERMINAL -e htop
 
 ###############
 # bspwm hotkeys
