@@ -5,10 +5,7 @@ end
 
 local function footer()
   local plugins_count = vim.fn.len(vim.fn.globpath("~/.local/share/nvim/site/pack/packer/start", "*", 0, 1))
-  local datetime = os.date("  %m-%d-%Y   %H:%M")
-  local version = vim.version()
-  local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
-  return datetime .. "   Plugins " .. plugins_count .. nvim_version_info
+  return  "   Plugins " .. plugins_count
 end
 
 local dashboard = require("alpha.themes.dashboard")
@@ -26,6 +23,7 @@ dashboard.section.buttons.val = {
   dashboard.button("ff", "  Find files", ":Telescope find_files <CR>"),
   dashboard.button("fw", "  Find text", ":Telescope live_grep <CR>"),
   dashboard.button("ht", "  Themes  ", ":Telescope colorscheme<CR>"),
+  dashboard.button("u", "  Update plugins", "<cmd>PackerSync<CR>"),
   dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
 dashboard.section.header.opts.hl = "Include"
