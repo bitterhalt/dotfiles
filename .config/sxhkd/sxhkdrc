@@ -174,7 +174,7 @@ super + {Left,Down,Up,Right}
 
 # Picom Toggle
 super + shift + F12
-    ~/.config/bspwm/scripts/picom-toggle.sh System
+    ~/.config/bspwm/scripts/picom-toggle.sh
 
 #################
 # Multimedia keys
