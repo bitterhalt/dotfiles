@@ -1,56 +1,29 @@
-## Don't print a new line at the start of the prompt
 add_newline = false
+format = "$directory$git_branch$git_status$character"
+right_format = """$all"""
 
-## Make prompt a single line instead of two lines
-[line_break]
-disabled = true
-
-## Prompt, directory etc
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
 
-# Directory settings. This is almost stock
 [directory]
-format = "[$path]($style)[$read_only]($read_only_style) "
-style = "bold blue"
-read_only = " "
-truncation_length = 8
-truncation_symbol = "…/"
+format = "[$path]($style)(bold blue)[$read_only](bold #F0FF42)($read_only_style) "
+truncation_length = 1
+home_symbol = "  "
+read_only = "  "
 
+[git_branch]
+style = "bold #7C83FD"
 
-## User
-# [username]
-# style_user = "green bold"
-# style_root = "red bold"
-# format = "[$user]($style) "
-# disabled = false
-# show_always = true
+[git_metrics]
+disabled = false
 
-### Disable the package module, hiding it from the prompt completely. Add more or delete as you like
-[package]
-disabled = true
+[git_status]
+ahead = " ⇡ ${count}"
+diverged = "⇕ ⇡ ${ahead_count} ⇣ ${behind_count}"
+behind = "⇣ ${count}"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "#ff00dd"
 
-#[lua]
+#[sudo]
 #disabled = false
-
-#[python]
-#disabled = true
-
-#[ruby]
-#disabled = true
-
-#[rust]
-#disabled = true
-
-#[nodejs]
-#disabled = true
-
-#[java]
-#disabled = true
-
-#[golang]
-#disabled = true
-
-#[aws]
-#disabled = true
