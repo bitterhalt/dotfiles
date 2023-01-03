@@ -21,49 +21,52 @@ workspace_layout default
 default_border pixel 2
 
 # Set inner/outer gaps
-gaps inner 6
-gaps outer 3
+gaps inner 10
+gaps outer 0
 # Press $mod+Shift+g to enter the gap mode.
 # Choose o or i for modifying outer/inner gaps.
 # Press one of + / - (in-/decrement for current workspace)
 # or 0 (remove gaps for current workspace). If you also press Shift
 # with these keys, the change will be global for all workspaces.
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
+#set $mode_gaps Gaps: (o) outer, (i) inner
+#set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+#set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+#bindsym $mod+Shift+g mode "$mode_gaps"
+#
+#mode "$mode_gaps" {
+#        bindsym o      mode "$mode_gaps_outer"
+#        bindsym i      mode "$mode_gaps_inner"
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
+#mode "$mode_gaps_inner" {
+#        bindsym plus  gaps inner current plus 5
+#        bindsym minus gaps inner current minus 5
+#        bindsym 0     gaps inner current set 0
+#
+#        bindsym Shift+plus  gaps inner all plus 5
+#        bindsym Shift+minus gaps inner all minus 5
+#        bindsym Shift+0     gaps inner all set 0
+#
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
+#mode "$mode_gaps_outer" {
+#        bindsym plus  gaps outer current plus 5
+#        bindsym minus gaps outer current minus 5
+#        bindsym 0     gaps outer current set 0
+#
+#        bindsym Shift+plus  gaps outer all plus 5
+#        bindsym Shift+minus gaps outer all minus 5
+#        bindsym Shift+0     gaps outer all set 0
+#
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
 
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
+# Adjust inner gaps
+bindsym $mod+mod1+plus   gaps inner current plus 5
+bindsym $mod+mod1+minus  gaps inner current minus 5
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -147,11 +150,10 @@ bindcode $mod+Shift+90 	 move container to workspace  $ws10
 # resize window (you can also use the mouse for that):
 #mode "resize" {
 # Resize windows
-bindsym $mod+Ctrl+Right resize shrink width 10 px or 10 ppt
-bindsym $mod+Ctrl+Up resize grow height 10 px or 10 ppt
-bindsym $mod+Ctrl+Down resize shrink height 10 px or 10 ppt
-bindsym $mod+Ctrl+Left resize grow width 10 px or 10 ppt
-
+bindsym $mod+Ctrl+Right resize shrink width 5 px or 5 ppt
+bindsym $mod+Ctrl+Up resize grow height 5 px or 5 ppt
+bindsym $mod+Ctrl+Down resize shrink height 5 px or 5 ppt
+bindsym $mod+Ctrl+Left resize grow width 5 px or 5 ppt
 
 ###############
 # keybindings #
@@ -196,11 +198,11 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+z split h
+# split in orizontal orientation
+bindsym $mod+x split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+z split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -228,25 +230,23 @@ bindsym $mod+shift+w exec --no-startup-id /usr/bin/firefox
 bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
+bindsym $mod+shift+Delete exec alacritty --class="floatterm" -e htop
 
+# automatic set focus new window if it opens on another workspace than the current:
+#for_window [class=Xfce4-terminal] focus
+#for_window [class=Thunderbird] focus
+for_window [class=Steam] focus
+for_window [class=Thunar] focus
+for_window [class=(?i)firefox] focus
 # Screenshots
-bindsym Print exec --no-startup-id scrot ~/Pictures/screenshots/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/screenshots/$(date +"%Y-%m-%d-%T")-screenshot.png"
+bindsym $mod+Print exec --no-startup-id flameshot full --path ~/Pictures/screenshots --delay 2000
 
-## Take various screen-shots
-bindsym $mod+Shift+Print mode "$mode_screen"
-set $mode_screen (a)rea  (w)indow
-mode "$mode_screen" {
-bindsym a --release exec --no-startup-id cd ~/Pictures/screenshots/ && scrot -s, mode "default"
-bindsym w exec --no-startup-id cd ~/Pictures/screenshots/ && sleep 1 && scrot -u, mode "default"
-
-#    exit system mode: "Enter" or "Escape"
-bindsym Escape mode "default"
-}
+bindsym $mod+Shift+Print exec --no-startup-id flameshot gui --path ~/Pictures/screenshots
 
 # Rofi:
 ## applacunher
 bindsym $mod+d exec rofi -modi drun -show drun \
-		-config ~/.config/rofi/applauncher/rofidmenu.rasi
+		-config ~/.config/rofi/applauncher/rofidmenu2.rasi
 
 ## window list
 bindsym $mod+t exec rofi -show window \
@@ -259,12 +259,9 @@ bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu3
 # floating rules #
 ##################
 
-## set floating (nontiling) for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-
-## #set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
@@ -277,16 +274,12 @@ for_window [window_role="About"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border pixel 2 move absolute position center
 for_window [class="Bitwarden"] floating enable move absolute position center
-#for_window [class="Gthumb"] floating enable move absolute position center
 for_window [class="Lxappearance"] floating enable enable move absolute position center
-## set border of floating window
-for_window [class="urxvt"] border pixel 1
+for_window [class="floatterm"] floating enable
 ## set size of floating window
 #for_window [window_role="(?i)GtkFileChooserDialog"] resize set 640 480 #to set size of file choose dialog
 #for_window [class=".*"] resize set 640 480 #to change size of all floating windows
 
-## set position of floating window
-#for_window [class=".*"] move position center
 #####################
 # Multimedia keys #
 #####################
@@ -307,7 +300,6 @@ bindsym XF86AudioPause exec --no-startup-id playerctl pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
-
 ##########################################
 # configuration for workspace behaviour: #
 ##########################################
@@ -325,16 +317,6 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# use workspaces on different displays:
-# where you have to replace VGA-0/HDMI-0 with the names for your displays
-
-# you can get from xrandr command
-#workspace $ws1 output VGA-0
-#workspace $ws2 output VGA-0
-#workspace $ws3 output HDMI-0
-#workspace $ws4 output HDMI-0
-#workspace $ws5 output HDMI-0
-# bind program to workspace and focus to them on startup:
 #assign [class="Xfce4-terminal"] $ws1
 assign [class="(?i)firefox"] $ws2
 assign [class="Thunar"] $ws3
@@ -347,7 +329,7 @@ assign [class="Joplin"] $ws4
 assign [class="qBittorrent"] $ws7
 for_window [class="Spotify"] move to workspace $ws5
 # automatic set focus new window if it opens on another workspace then the current:
-for_window [class=(?i)firefox] focus
+
 # for_window [class=Thunar] focus
 
 ##############
@@ -361,25 +343,17 @@ bindsym $mod+Shift+F12 exec --no-startup-id ~/.config/i3/scripts/picom-toggle
 #############################################
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-exec --no-startup-id dex --autostart --environment i3
-
+#exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
-
 #exec_always --no-startup-id sleep 20 && conky
-
 exec --no-startup-id ~/.config/.screenlayout/monitor.sh
-
 exec --no-startup-id sleep 2 && nitrogen --restore
-
 exec --no-startup-id sleep 6 && corectrl
-
-#exec --no-startup-id feh --bg-fill /your/image/location
 
 ## powersavings for display:
 exec --no-startup-id xset s 3600 dpms 3600 3600 3600
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 
 ## use xautolock to use autosuspend rules for mobile devices
 # https://wiki.archlinux.org/title/Session_lock#xautolock
