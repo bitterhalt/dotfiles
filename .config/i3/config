@@ -74,7 +74,7 @@ floating_modifier $mod
 # switch/iterate between workspaces
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-
+bindsym $mod+less workspace back_and_forth
 # switch to workspace
 bindsym $mod+1    workspace  $ws1
 bindsym $mod+2    workspace  $ws2
@@ -198,7 +198,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in orizontal orientation
+# split in horizontal orientation
 bindsym $mod+x split h
 
 # split in vertical orientation
@@ -223,9 +223,11 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 # open new empty workspace
 bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
+
 ####################################
 ## App shortcuts
 #####################################
+
 bindsym $mod+shift+w exec --no-startup-id /usr/bin/firefox
 bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
@@ -233,11 +235,11 @@ bindsym $mod+shift+m exec --no-startup-id thunderbird
 bindsym $mod+shift+Delete exec alacritty --class="floatterm" -e htop
 
 # automatic set focus new window if it opens on another workspace than the current:
-#for_window [class=Xfce4-terminal] focus
 #for_window [class=Thunderbird] focus
+#for_window [class=Xfce4-terminal] focus
+for_window [class=(?i)firefox] focus
 for_window [class=Steam] focus
 for_window [class=Thunar] focus
-for_window [class=(?i)firefox] focus
 # Screenshots
 bindsym $mod+Print exec --no-startup-id flameshot full --path ~/Pictures/screenshots --delay 2000
 
@@ -246,11 +248,11 @@ bindsym $mod+Shift+Print exec --no-startup-id flameshot gui --path ~/Pictures/sc
 # Rofi:
 ## applacunher
 bindsym $mod+d exec rofi -modi drun -show drun \
-		-config ~/.config/rofi/applauncher/rofidmenu2.rasi
+        -config ~/.config/rofi/applauncher/rofidmenu2.rasi
 
 ## window list
 bindsym $mod+t exec rofi -show window \
-		-config ~/.config/rofi/applauncher/rofiwindow.rasi
+        -config ~/.config/rofi/applauncher/rofiwindow.rasi
 
 # exit-menu
 bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu3
@@ -328,14 +330,11 @@ assign [class="Deluge-gtk"] $ws7
 assign [class="Joplin"] $ws4
 assign [class="qBittorrent"] $ws7
 for_window [class="Spotify"] move to workspace $ws5
-# automatic set focus new window if it opens on another workspace then the current:
-
-# for_window [class=Thunar] focus
 
 ##############
 # compositor #
 ##############
-#
+
 exec_always --no-startup-id killall picom; sleep 1; picom
 bindsym $mod+Shift+F12 exec --no-startup-id ~/.config/i3/scripts/picom-toggle
 #############################################
@@ -352,23 +351,24 @@ exec --no-startup-id sleep 6 && corectrl
 
 ## powersavings for display:
 exec --no-startup-id xset s 3600 dpms 3600 3600 3600
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 
+## bar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 ## use xautolock to use autosuspend rules for mobile devices
 # https://wiki.archlinux.org/title/Session_lock#xautolock
 #exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
 
-######################################
-# color settings for bar and windows #
-######################################
+###################
+# color settings  #
+###################
 
 # class                 border  bground text    indicator child_border
-client.focused          #ad8ee6 #ad8ee6 #32344a #7aa2f7
-client.focused_inactive #32344a #32344a #DFDFDF #32344a
-client.unfocused        #1a1b26 #242730 #DFDFDF #1a1b26
-client.urgent           #bd2c40 #bd2c40 #DFDFDF #bd2c40
-client.placeholder      #1a1b26 #1a1b26 #DFDFDF #1a1b26
+client.focused          #8EC07C #8EC07C #32344a #a89984
+client.focused_inactive #a89984 #a89984 #DFDFDF #a89984
+client.unfocused        #a89984 #a89984 #DFDFDF #a89984
+client.urgent           #CC241D #CC241d #DFDFDF #CC241d
+client.placeholder      #a89984 #a89984 #DFDFDF #a89984
 
 client.background       #DFDFDF
 
