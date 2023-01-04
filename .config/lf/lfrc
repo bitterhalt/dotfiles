@@ -65,7 +65,7 @@ cmd delete ${{
 # =============================================================================
 #                              KEYBINDINGS
 # =============================================================================
-
+#map e $$EDITOR "$f"
 map <c-n> push :mkdir<space>
 map <c-r> reload
 map <enter> shell
@@ -74,8 +74,8 @@ map x $$f
 map X !$f
 map D delete
 map E extract
-map o open
-map O open
+map o &mimeopen "$f"
+map O $mimeopen --ask "$f"
 map R rename
 map V push :!nvim<space>
 map W $setsid -f $TERMINAL >/dev/null 2>&1
