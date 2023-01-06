@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # This small script shows system info with libnotify
-# check your sensors and edit grep valua according to your temp sensor
+# check your sensors and edit grep value according to your temp sensor
 
 CPUTemp=$(sensors | grep 'Tccd1:' | awk '{print $2}' )
 GPUTemp=$(sensors | grep 'edge:' | awk '{print $2}' )
