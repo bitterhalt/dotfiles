@@ -67,7 +67,9 @@ gaps outer 0
 # Adjust inner gaps
 bindsym $mod+mod1+plus   gaps inner current plus 5
 bindsym $mod+mod1+minus  gaps inner current minus 5
-
+# Adjust outer gaps
+bindsym $mod+mod1+control plus   gaps outer current plus 5
+bindsym $mod+mod1+control minus  gaps outer current minus 5
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -224,17 +226,23 @@ bindsym $mod+Shift+a focus child
 # open new empty workspace
 bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
 
-####################################
-## App shortcuts
-#####################################
+#################
+# App shortcuts #
+#################
 
 bindsym $mod+shift+w exec --no-startup-id /usr/bin/firefox
 bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
-bindsym $mod+shift+Delete exec alacritty --class="floatterm" -e htop
+bindsym $mod+shift+Delete exec --no-startup-id alacritty --class="floatterm" -e htop
 
+###################
+# other shortcuts #
+###################
+bindsym $mod+control+i exec --no-startup-id $HOME/scripts/sysnfo
+bindsym $mod+control+w exec --no-startup-id $HOME/scripts/weather-notify
 # automatic set focus new window if it opens on another workspace than the current:
+
 #for_window [class=Thunderbird] focus
 #for_window [class=Xfce4-terminal] focus
 for_window [class=(?i)firefox] focus
@@ -268,7 +276,7 @@ for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Yad"] floating enable
 for_window [class="mpv"] floating enable border pixel 2
@@ -358,6 +366,16 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 ## use xautolock to use autosuspend rules for mobile devices
 # https://wiki.archlinux.org/title/Session_lock#xautolock
 #exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
+
+###############
+# scratchpad  #
+###############
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 ###################
 # color settings  #
