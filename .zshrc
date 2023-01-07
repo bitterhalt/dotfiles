@@ -25,8 +25,8 @@ setopt HIST_IGNORE_ALL_DUPS             # If a new command is a duplicate, remov
 setopt HIST_SAVE_NO_DUPS                # Do not save duplicated command
 setopt auto_cd                          # Changing directories without 'cd'
 
-export EDITOR=vim                       # use vim as editor
-export VISUAL=vim
+export EDITOR=nvim                       # use vim as editor
+export VISUAL=nvim
 
 # Basic auto/tab complete
 autoload -U compinit
