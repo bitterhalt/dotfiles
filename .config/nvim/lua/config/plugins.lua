@@ -49,6 +49,7 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
 	use ('kovetskiy/sxhkd-vim')
 	use ('vim-python/python-syntax')
 	use ('ap/vim-css-color')
+    use("kyazdani42/nvim-web-devicons")
 
 	-- Whichkey
 	use('folke/which-key.nvim')
