@@ -6,9 +6,9 @@
 CPUTemp=$(sensors | grep 'Tccd1:' | awk '{print $2}' )
 GPUTemp=$(sensors | grep 'edge:' | awk '{print $2}' )
 notify-send -t 8000 "$(
-free -m | awk 'NR==2{printf "MEM usage: %s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'
-top -bn1 | grep load | awk '{printf "CPU load: %.2f\n", $(NF-2)}'
-printf "CPU temp: $CPUTemp\n"
-printf "GPU temp: $GPUTemp"
+free -m | awk 'NR==2{printf "🐏 MEM usage: %s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'
+top -bn1 | grep load | awk '{printf "🧠 CPU load: %.2f\n", $(NF-2)}'
+printf "🌡️ CPU temp: $CPUTemp\n"
+printf "🌡️ GPU temp: $GPUTemp"
 )"
 
