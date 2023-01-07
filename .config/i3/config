@@ -23,11 +23,16 @@ default_border pixel 2
 # Set inner/outer gaps
 gaps inner 10
 gaps outer 0
+
+###############################
+# risize gaps (from gap mode) #
+###############################
 # Press $mod+Shift+g to enter the gap mode.
 # Choose o or i for modifying outer/inner gaps.
 # Press one of + / - (in-/decrement for current workspace)
 # or 0 (remove gaps for current workspace). If you also press Shift
 # with these keys, the change will be global for all workspaces.
+
 #set $mode_gaps Gaps: (o) outer, (i) inner
 #set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 #set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -64,12 +69,16 @@ gaps outer 0
 #        bindsym Escape mode "default"
 #}
 
+######################
+# risize gaps on fly #
+######################
 # Adjust inner gaps
 bindsym $mod+mod1+plus   gaps inner current plus 5
 bindsym $mod+mod1+minus  gaps inner current minus 5
 # Adjust outer gaps
 bindsym $mod+mod1+control plus   gaps outer current plus 5
 bindsym $mod+mod1+control minus  gaps outer current minus 5
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -223,8 +232,6 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
-# open new empty workspace
-bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
 
 #################
 # App shortcuts #
@@ -346,12 +353,12 @@ for_window [class="Spotify"] move to workspace $ws5
 
 exec_always --no-startup-id killall picom; sleep 1; picom
 bindsym $mod+Shift+F12 exec --no-startup-id ~/.config/i3/scripts/picom-toggle
+
 #############################################
 # autostart applications/services on login: #
 #############################################
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 #exec_always --no-startup-id sleep 20 && conky
 exec --no-startup-id ~/.config/.screenlayout/monitor.sh
@@ -383,7 +390,7 @@ bindsym $mod+minus scratchpad show
 ###################
 
 # class                 border  bground text    indicator child_border
-client.focused          #8EC07C #8EC07C #32344a #a89984
+client.focused          #8EC07C #8EC07C #282828 #a89984
 client.focused_inactive #a89984 #a89984 #DFDFDF #a89984
 client.unfocused        #a89984 #a89984 #DFDFDF #a89984
 client.urgent           #CC241D #CC241d #DFDFDF #CC241d
