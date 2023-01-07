@@ -171,13 +171,13 @@ bindsym $mod+Ctrl+Left resize grow width 5 px or 5 ppt
 ###############
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec --no-startup-id xfce4-terminal
 
 # kill focused window
 bindsym $mod+q kill
 
 # lock system by blurring the screen:
-bindsym $mod+control+l exec ~/.config/i3/scripts/i3lock-color
+bindsym $mod+control+l exec --no-startup-id ~/.config/i3/scripts/i3lock-color
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -276,6 +276,7 @@ bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu3
 # floating rules #
 ##################
 
+for_window [class="Psensor"] floating enable
 for_window [class="Bitwarden"] floating enable move absolute position center
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
