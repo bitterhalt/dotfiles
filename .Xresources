@@ -6,3 +6,75 @@ Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xcursor.theme: Qogir-dark
+
+!URxvt*imLocale: en_US.UTF-8
+!URxvt.depth:                      32
+!URxvt*termName: rxvt-unicode-256color
+!URxvt.intensityStyles: false
+!URxvt*font: xft:JetBrains Mono Nerd Font Mono:size=10
+!URxvt.saveLines: 2000
+!URxvt.scrollBar: false
+!URxvt.iso14755: false
+!URxvt.iso14755_52: false
+!!URxvt.internalBorder: 10
+!
+!! Uncomment below if too much font spacing, and fix glyphs performance issues.
+!URxvt.letterSpace:                -1
+!!URxvt.skipBuiltinGlyphs:          true
+!
+!! Extensions
+!URxvt.perl-ext-common: default,resize-font,keyboard-select,clipboard
+!
+!! Bindings for build-in extensions (at least on arch)
+!URxvt.keysym.Control-Shift-C:     eval:selection_to_clipboard
+!URxvt.keysym.Control-Shift-V:     eval:paste_clipboard
+!URxvt.keysym.Control-Up:          eval:scroll_up 1
+!URxvt.keysym.Control-Down:        eval:scroll_down 1
+!URxvt.keysym.Control-Home:        eval:scroll_to_top
+!URxvt.keysym.Control-End:         eval:scroll_to_bottom
+!
+!! Resize-font extension.
+!URxvt.keysym.Control-minus:       resize-font:smaller
+!URxvt.keysym.Control-plus:        resize-font:bigger
+!URxvt.keysym.Control-0:       resize-font:reset
+!URxvt.keysym.Control-question:    resize-font:show
+!URxvt.resize-font.step:           1
+!
+!
+!! Colors
+!! This includes xterm and urxvt
+!*.foreground:   #bbc2cf
+!*.background:   #282c34
+!*.cursorColor:  #bbc2cf
+!
+!! black
+!*.color0:       #1c1f24
+!*.color8:       #5b6268
+!
+!! red
+!*.color1:       #ff6c6b
+!*.color9:       #da8548
+!
+!! green
+!*.color2:       #98be65
+!*.color10:      #4db5bd
+!
+!! yellow
+!*.color3:       #da8548
+!*.color11:      #ecbe7b
+!
+!! blue
+!*.color4:       #51afef
+!*.color12:      #3071db
+!
+!! magenta
+!*.color5:       #c678dd
+!*.color13:      #a9a1e1
+!
+!! cyan
+!*.color6:       #5699af
+!*.color14:      #46d9ff
+!
+!! white
+!*.color7:       #202328
+
