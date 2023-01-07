@@ -26,7 +26,7 @@ super shift + {e,w,m,d}
 	{thunar,firefox,thunderbird,discord}
 
 super + shift + Delete
-	bspc rule -a \* -o state=floating size=800x600 && $TERMINAL -e htop
+	bspc rule -a \* -o state=floating && $TERMINAL -e htop
 
 ###############
 # bspwm hotkeys
