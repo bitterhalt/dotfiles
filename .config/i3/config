@@ -5,7 +5,7 @@ font pango: JetBrains Mono 10
 
 # set the mod key to the winkey:
 set $mod Mod4
-
+set $altmod Mod1
 #####################
 # workspace layout: #
 #####################
