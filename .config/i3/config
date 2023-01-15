@@ -363,10 +363,10 @@ exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 exec --no-startup-id ~/.config/.screenlayout/monitor.sh
 exec --no-startup-id sleep 2 && nitrogen --restore
 exec --no-startup-id sleep 6 && corectrl
+exec --no-startup-id nm-applet
 
 ## powersavings for display:
 exec --no-startup-id xset s 3600 dpms 3600 3600 3600
-exec --no-startup-id nm-applet
 
 ## bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
