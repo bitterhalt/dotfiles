@@ -158,13 +158,11 @@ bindcode $mod+Shift+80 	 move container to workspace  $ws8
 bindcode $mod+Shift+81 	 move container to workspace  $ws9
 bindcode $mod+Shift+90 	 move container to workspace  $ws10
 
-# resize window (you can also use the mouse for that):
-#mode "resize" {
 # Resize windows
-bindsym $mod+Ctrl+Right resize shrink width 5 px or 5 ppt
-bindsym $mod+Ctrl+Up resize grow height 5 px or 5 ppt
-bindsym $mod+Ctrl+Down resize shrink height 5 px or 5 ppt
-bindsym $mod+Ctrl+Left resize grow width 5 px or 5 ppt
+bindsym $mod+Ctrl+Right resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Up resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Down resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Left resize grow width 10 px or 10 ppt
 
 ###############
 # keybindings #
@@ -266,7 +264,7 @@ bindsym $mod+d exec rofi -modi drun -show drun \
         -config ~/.config/rofi/applauncher/rofidmenu2.rasi
 
 ## window list
-bindsym $mod+t exec rofi -show window \
+bindsym $altmod+Tab exec rofi -show window \
         -config ~/.config/rofi/applauncher/rofiwindow.rasi
 
 # exit-menu
@@ -372,6 +370,7 @@ exec --no-startup-id nm-applet
 
 ## bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 ## use xautolock to use autosuspend rules for mobile devices
 # https://wiki.archlinux.org/title/Session_lock#xautolock
 #exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
@@ -391,11 +390,11 @@ bindsym $mod+minus scratchpad show
 ###################
 
 # class                 border  bground text    indicator child_border
-client.focused          #8EC07C #8EC07C #282828 #a89984
-client.focused_inactive #a89984 #a89984 #DFDFDF #a89984
-client.unfocused        #a89984 #a89984 #DFDFDF #a89984
-client.urgent           #CC241D #CC241d #DFDFDF #CC241d
-client.placeholder      #a89984 #a89984 #DFDFDF #a89984
+client.focused          #689d6a #689d6a #dfdfdf #689d6a   #689d6a
+client.focused_inactive #a89984 #a89984 #DFDFDF #a89984   #a89984
+client.unfocused        #a89984 #a89984 #DFDFDF #a89984   #a89984
+client.urgent           #2f343a #900000 #dfdfdf #900000   #900000
+client.placeholder      #000000 #0c0c0c #dfdfdf #000000   #0c0c0c
 
 client.background       #DFDFDF
 
