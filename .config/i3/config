@@ -73,11 +73,11 @@ gaps outer 0
 # risize gaps on fly #
 ######################
 # Adjust inner gaps
-bindsym $mod+mod1+plus   gaps inner current plus 5
-bindsym $mod+mod1+minus  gaps inner current minus 5
+bindsym $mod+control+plus   gaps inner current plus 5
+bindsym $mod+control+minus  gaps inner current minus 5
 # Adjust outer gaps
-bindsym $mod+mod1+control plus   gaps outer current plus 5
-bindsym $mod+mod1+control minus  gaps outer current minus 5
+bindsym $mod+control+shift plus   gaps outer current plus 5
+bindsym $mod+control+shift minus  gaps outer current minus 5
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -390,11 +390,11 @@ bindsym $mod+minus scratchpad show
 ###################
 
 # class                 border  bground text    indicator child_border
-client.focused          #689d6a #689d6a #dfdfdf #689d6a   #689d6a
-client.focused_inactive #a89984 #a89984 #DFDFDF #a89984   #a89984
-client.unfocused        #a89984 #a89984 #DFDFDF #a89984   #a89984
+client.focused          #689d6a #689d6a #ebdbb2 #689d6a   #689d6a
+client.focused_inactive #a89984 #a89984 #282828 #a89984   #a89984
+client.unfocused        #a89984 #a89984 #282828 #a89984   #a89984
 client.urgent           #2f343a #900000 #dfdfdf #900000   #900000
-client.placeholder      #000000 #0c0c0c #dfdfdf #000000   #0c0c0c
+client.placeholder      #000000 #0c0c0c #ebdbb2 #000000   #0c0c0c
 
 client.background       #DFDFDF
 
