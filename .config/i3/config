@@ -240,7 +240,7 @@ bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
 bindsym $mod+shift+Delete exec --no-startup-id alacritty --class="floatterm" -e htop
-
+bindsym $mod+shift+f exec --no-startup-id $TERMINAL -e ~/.local/bin/lfub
 ###################
 # other shortcuts #
 ###################
@@ -390,9 +390,9 @@ bindsym $mod+minus scratchpad show
 ###################
 
 # class                 border  bground text    indicator child_border
-client.focused          #689d6a #689d6a #ebdbb2 #689d6a   #689d6a
-client.focused_inactive #a89984 #a89984 #282828 #a89984   #a89984
-client.unfocused        #a89984 #a89984 #282828 #a89984   #a89984
+client.focused          #8ec07c #8ec07c #ebdbb2 #8ec07c   #8ec07c
+client.focused_inactive #3c3836 #3c3836 #282828 #3c3836   #3c3836
+client.unfocused        #3c3836 #3c3836 #282828 #3c3836   #3c3836
 client.urgent           #2f343a #900000 #dfdfdf #900000   #900000
 client.placeholder      #000000 #0c0c0c #ebdbb2 #000000   #0c0c0c
 
