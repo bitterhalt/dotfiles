@@ -39,7 +39,7 @@ mainbox {
     padding:                     0px;
     border:                      1px solid;
     border-radius:               0px;
-    border-color:                @foreground;
+    border-color:                @selected;
     background-color:            transparent;
     children:                    [ "inputbar", "listview", "message" ];
 }
