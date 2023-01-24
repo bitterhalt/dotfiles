@@ -30,13 +30,6 @@ map("n", "<C-Down>", ":resize +2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
- -- Vifm 
-map ('n', "<Leader>vv", "<CMD>:Vifm<CR>")
-map ('n', "<Leader>vs", "<CMD>:VsplitVifm<CR>")
-map ('n', "<Leader>sp", "<CMD>:SplitVifm<CR>")
-map ('n', "<Leader>dv", "<CMD>:DiffVifm<CR>")
-map ('n', "<Leader>tb", "<CMD>:TabVifm<CR>")
-
 -- Close all windows and exit from Neovim with <leader>
 map('n', '<leader>q', ':qa!<CR>')
 
