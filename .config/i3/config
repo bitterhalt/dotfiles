@@ -255,7 +255,7 @@ for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, mo
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Yad"] floating enable
-for_window [class="dropdown"] floating enable, resize set 800 600, move scratchpad
+for_window [class="dropdown"] floating enable, resize set 800 600,border pixel 3, move scratchpad
 for_window [class="floatterm"] floating enable, border pixel 3, position center
 for_window [class="mpv"] floating enable border pixel 2
 for_window [class="qt5ct" instance="qt5ct"] floating enable
@@ -341,12 +341,13 @@ bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
+
 # Show Spotify from scratcpad
 bindsym $mod+shift+s [class="Spotify"] scratchpad show
 
-# Floating terminal
-#exec_always --no-startup-id alacritty --class=dropdown -e nvim
-
+# Scratchpad terminal
+exec_always --no-startup-id pgrep -f '^alacritty --class=dropdown -e nvim
+bindsym $mod+shift+t [class="dropdown"] scratchpad show
 ###################
 # color settings  #
 ###################
