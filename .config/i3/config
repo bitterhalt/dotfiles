@@ -24,54 +24,9 @@ default_border pixel 2
 gaps inner 10
 gaps outer 0
 
-###############################
-# risize gaps (from gap mode) #
-###############################
-# Press $mod+Shift+g to enter the gap mode.
-# Choose o or i for modifying outer/inner gaps.
-# Press one of + / - (in-/decrement for current workspace)
-# or 0 (remove gaps for current workspace). If you also press Shift
-# with these keys, the change will be global for all workspaces.
-
-#set $mode_gaps Gaps: (o) outer, (i) inner
-#set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-#set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-#bindsym $mod+Shift+g mode "$mode_gaps"
-#
-#mode "$mode_gaps" {
-#        bindsym o      mode "$mode_gaps_outer"
-#        bindsym i      mode "$mode_gaps_inner"
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-#mode "$mode_gaps_inner" {
-#        bindsym plus  gaps inner current plus 5
-#        bindsym minus gaps inner current minus 5
-#        bindsym 0     gaps inner current set 0
-#
-#        bindsym Shift+plus  gaps inner all plus 5
-#        bindsym Shift+minus gaps inner all minus 5
-#        bindsym Shift+0     gaps inner all set 0
-#
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-#mode "$mode_gaps_outer" {
-#        bindsym plus  gaps outer current plus 5
-#        bindsym minus gaps outer current minus 5
-#        bindsym 0     gaps outer current set 0
-#
-#        bindsym Shift+plus  gaps outer all plus 5
-#        bindsym Shift+minus gaps outer all minus 5
-#        bindsym Shift+0     gaps outer all set 0
-#
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-
-######################
-# risize gaps on fly #
-######################
+################
+# risize gaps  #
+################
 # Adjust inner gaps
 bindsym $mod+control+plus   gaps inner current plus 5
 bindsym $mod+control+minus  gaps inner current minus 5
@@ -240,25 +195,9 @@ bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
 bindsym $mod+shift+Delete exec --no-startup-id alacritty --class="floatterm" -e htop
-bindsym $mod+shift+f exec --no-startup-id $TERMINAL -e ~/.local/bin/lfub
-###################
-# other shortcuts #
-###################
+bindsym $mod+shift+f exec --no-startup-id $TERMINAL -e ranger
 bindsym $mod+control+i exec --no-startup-id $HOME/scripts/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/scripts/weather-notify
-# automatic set focus new window if it opens on another workspace than the current:
-
-#for_window [class=Thunderbird] focus
-#for_window [class=Xfce4-terminal] focus
-for_window [class=(?i)firefox] focus
-for_window [class=Steam] focus
-for_window [class=Thunar] focus
-# Screenshots
-bindsym $mod+Print exec --no-startup-id flameshot full --path ~/Pictures/screenshots --delay 2000
-
-bindsym $mod+Shift+Print exec --no-startup-id flameshot gui --path ~/Pictures/screenshots
-
-# Rofi:
 ## applacunher
 bindsym $mod+d exec rofi -modi drun -show drun \
         -config ~/.config/rofi/applauncher/rofidmenu2.rasi
@@ -269,30 +208,60 @@ bindsym $altmod+Tab exec rofi -show window \
 
 # exit-menu
 bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu3
+# Screenshots
+bindsym $mod+Print exec --no-startup-id flameshot full --path ~/Pictures/screenshots --delay 2000
 
-##################
-# floating rules #
-##################
+bindsym $mod+Shift+Print exec --no-startup-id flameshot gui --path ~/Pictures/screenshots
 
-for_window [class="Psensor"] floating enable
+####################################################################################
+# automatic set focus new window if it opens on another workspace than the current #
+####################################################################################
+#for_window [class=Thunderbird] focus
+#for_window [class=Xfce4-terminal] focus
+for_window [class=(?i)firefox] focus
+for_window [class=Steam] focus
+for_window [class=Thunar] focus
+#####################################
+# Spawn windows for specific workspaces #
+#####################################
+#assign [class="Xfce4-terminal"] $ws1
+assign [class="(?i)firefox"] $ws2
+assign [class="Deluge-gtk"] $ws7
+assign [class="Gimp"] $ws8
+assign [class="Joplin"] $ws4
+assign [class="Steam"] $ws6
+assign [class="TelegramDesktop"] $ws5
+assign [class="Thunar"] $ws3
+assign [class="discord"] $ws5
+assign [class="qBittorrent"] $ws7
+assign [class="thunderbird"] $ws4
+for_window [class="Spotify"] move to workspace $ws5
+#################
+# Windows rules #
+#################
 for_window [class="Bitwarden"] floating enable move absolute position center
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Gcolor3"] floating enable
+for_window [class="Gimp"] floating enable
 for_window [class="Lxappearance"] floating enable enable move absolute position center
 for_window [class="Nitrogen"] floating enable sticky enable border pixel 2 move absolute position center
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="Psensor"] floating enable
 for_window [class="Steam"] floating enable
+for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, move to scratchpad
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Yad"] floating enable
-for_window [class="floatterm"] floating enable
+for_window [class="dropdown"] floating enable, resize set 800 600, move scratchpad
+for_window [class="floatterm"] floating enable, border pixel 3, position center
 for_window [class="mpv"] floating enable border pixel 2
 for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="qt6ct" instance="qt6ct"] floating enable
 for_window [window_role="About"] floating enable
+
 ## set size of floating window
 #for_window [window_role="(?i)GtkFileChooserDialog"] resize set 640 480 #to set size of file choose dialog
 #for_window [class=".*"] resize set 640 480 #to change size of all floating windows
@@ -334,18 +303,6 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-#assign [class="Xfce4-terminal"] $ws1
-assign [class="(?i)firefox"] $ws2
-assign [class="Thunar"] $ws3
-assign [class="thunderbird"] $ws4
-assign [class="TelegramDesktop"] $ws5
-assign [class="Steam"] $ws6
-assign [class="discord"] $ws5
-assign [class="Deluge-gtk"] $ws7
-assign [class="Joplin"] $ws4
-assign [class="qBittorrent"] $ws7
-for_window [class="Spotify"] move to workspace $ws5
-
 ##############
 # compositor #
 ##############
@@ -384,6 +341,11 @@ bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
+# Show Spotify from scratcpad
+bindsym $mod+shift+s [class="Spotify"] scratchpad show
+
+# Floating terminal
+#exec_always --no-startup-id alacritty --class=dropdown -e nvim
 
 ###################
 # color settings  #
