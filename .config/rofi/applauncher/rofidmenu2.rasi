@@ -38,7 +38,7 @@ configuration {
     selected-normal-background:  var(selected);
     selected-normal-foreground:  var(background);
     selected-urgent-background:  var(active);
-    selected-urgent-foreground:  var(background);
+    selected-urgent-foreground:  var(foreground);
     selected-active-background:  var(urgent);
     selected-active-foreground:  var(background);
     alternate-normal-background: var(background);
@@ -56,7 +56,7 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       500;
+    width:                       480;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -64,7 +64,7 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      2px solid;
+    border:                      1px solid;
     border-radius:               0px;
     border-color:                @border-colour;
     cursor:                      "default";

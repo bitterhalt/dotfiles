@@ -177,3 +177,4 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 */
 }
+@theme "~/.config/rofi/themes/gruvbox-dark-soft.rasi"

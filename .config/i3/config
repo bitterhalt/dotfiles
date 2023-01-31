@@ -346,8 +346,8 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+shift+s [class="Spotify"] scratchpad show
 
 # Scratchpad terminal
-exec_always --no-startup-id pgrep -f '^alacritty --class=dropdown -e nvim
-bindsym $mod+shift+t [class="dropdown"] scratchpad show
+#exec_always --no-startup-id pgrep -f '^alacritty --class=dropdown -e nvim
+#bindsym $mod+shift+t [class="dropdown"] scratchpad show
 ###################
 # color settings  #
 ###################
