@@ -74,9 +74,9 @@ handle_extension() {
             exiftool "${FILE_PATH}" && exit 5
             exit 1;;
 
-        ## BitTorrent
+       ## BitTorrent
         torrent)
-           qbittorrent "${FILE_PATH}" && exit 5
+            transmission-show -- "${FILE_PATH}" && exit 5
             exit 1;;
 
         ## OpenDocument
