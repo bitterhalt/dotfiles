@@ -76,7 +76,7 @@ handle_extension() {
 
         ## BitTorrent
         torrent)
-            transmission-show -- "${FILE_PATH}" && exit 5
+           qbittorrent "${FILE_PATH}" && exit 5
             exit 1;;
 
         ## OpenDocument
