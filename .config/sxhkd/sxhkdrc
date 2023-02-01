@@ -44,6 +44,13 @@ super + {_,shift + }q
 super + g
 	bspc node -s biggest.window
 
+super + ctrl + i
+	$HOME/scripts/sysnfo
+
+super + ctrl + w
+	$home/scripts/weather
+
+
 ###########
 # preselect
 ###########
