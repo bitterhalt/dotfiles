@@ -78,3 +78,6 @@ Xcursor.theme: Qogir-dark
 !! white
 !*.color7:       #202328
 
+
+Nsxiv*background: #282828
+Nsxiv*foreground: #458588

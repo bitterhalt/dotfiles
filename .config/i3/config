@@ -242,24 +242,25 @@ for_window [class="Spotify"] move to workspace $ws5
 for_window [class="Bitwarden"] floating enable move absolute position center
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="dropdown"] floating enable, resize set 800 600,border pixel 3, move scratchpad
+for_window [class="floatterm"] floating enable, border pixel 3, position center
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Gcolor3"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Lxappearance"] floating enable enable move absolute position center
+for_window [class="mpv"] floating enable border pixel 2
 for_window [class="Nitrogen"] floating enable sticky enable border pixel 2 move absolute position center
+for_window [class="Nsxiv"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="Psensor"] floating enable
-for_window [class="Steam"] floating enable
-for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, move to scratchpad
-for_window [class="Xsane" instance="xsane"] floating enable
-for_window [class="Yad" instance="yad"] floating enable
-for_window [class="Yad"] floating enable
-for_window [class="dropdown"] floating enable, resize set 800 600,border pixel 3, move scratchpad
-for_window [class="floatterm"] floating enable, border pixel 3, position center
-for_window [class="mpv"] floating enable border pixel 2
 for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="qt6ct" instance="qt6ct"] floating enable
+for_window [class="Steam"] floating enable
+for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Yad"] floating enable
+for_window [class="Yad" instance="yad"] floating enable
 for_window [window_role="About"] floating enable
 
 ## set size of floating window
@@ -333,7 +334,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
 
 ###############
-# scratchpad  #
+# scratchpads  #
 ###############
 
 # Make the currently focused window a scratchpad
@@ -342,22 +343,27 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
-# Show Spotify from scratcpad
+# open apps from scratchpad
 bindsym $mod+shift+s [class="Spotify"] scratchpad show
+bindsym $mod+c [class="discord"] scratchpad show
 
 # Scratchpad terminal
-#exec_always --no-startup-id pgrep -f '^alacritty --class=dropdown -e nvim
-#bindsym $mod+shift+t [class="dropdown"] scratchpad show
+#bindsym $altmod+shift+t exec --no-startup-id alacritty -e nvim --class dropdown
+#bindsym $altmod+t [class="dropdown"] scratchpad show
+
+# Scratchpad using xfce4-terminal
+bindsym $mod+shift+t exec --no-startup-id exec xfce4-terminal --title=scratch-terminal
+bindsym $mod+t [class="Xfce4-terminal" title="scratch-terminal"] scratchpad show
 ###################
 # color settings  #
 ###################
 
-# class                 border  bground text    indicator child_border
-client.focused          #8ec07c #8ec07c #ebdbb2 #8ec07c   #8ec07c
-client.focused_inactive #3c3836 #3c3836 #282828 #3c3836   #3c3836
-client.unfocused        #3c3836 #3c3836 #282828 #3c3836   #3c3836
-client.urgent           #2f343a #900000 #dfdfdf #900000   #900000
-client.placeholder      #000000 #0c0c0c #ebdbb2 #000000   #0c0c0c
+# class                 border  bground text    indicator
+client.focused          #928374 #928374 #282828 #928374
+client.focused_inactive #3c3836 #3c3836 #ebdbb2 #3c3836
+client.unfocused        #3c3836 #3c3836 #ebdbb2 #3c3836
+client.urgent           #2f343a #900000 #dfdfdf #900000
+client.placeholder      #000000 #0c0c0c #ebdbb2 #000000
 
 client.background       #DFDFDF
 
