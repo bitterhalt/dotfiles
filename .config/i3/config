@@ -114,10 +114,10 @@ bindcode $mod+Shift+81 	 move container to workspace  $ws9
 bindcode $mod+Shift+90 	 move container to workspace  $ws10
 
 # Resize windows
-bindsym $mod+Ctrl+Right resize shrink width 10 px or 10 ppt
-bindsym $mod+Ctrl+Up resize grow height 10 px or 10 ppt
-bindsym $mod+Ctrl+Down resize shrink height 10 px or 10 ppt
-bindsym $mod+Ctrl+Left resize grow width 10 px or 10 ppt
+bindsym $mod+Ctrl+Right resize shrink width 20 px or 20 ppt
+bindsym $mod+Ctrl+Up resize grow height 20 px or 20 ppt
+bindsym $mod+Ctrl+Down resize shrink height 20 px or 20 ppt
+bindsym $mod+Ctrl+Left resize grow width 20 px or 20 ppt
 
 ###############
 # keybindings #
@@ -133,7 +133,7 @@ bindsym $mod+q kill
 bindsym $mod+control+l exec --no-startup-id ~/.config/i3/scripts/i3lock-color
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+Escape reload
 
 # restart i3 inplace (preserves your layout/session, can be used to update i3)
 bindsym $mod+Shift+r restart
@@ -156,7 +156,6 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -195,7 +194,7 @@ bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
 bindsym $mod+shift+Delete exec --no-startup-id alacritty --class="floatterm" -e htop
-bindsym $mod+shift+f exec --no-startup-id $TERMINAL -e ranger
+bindsym $mod+shift+f exec --no-startup-id alacritty --class floatterm -e ranger
 bindsym $mod+control+i exec --no-startup-id $HOME/scripts/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/scripts/weather-notify
 ## applacunher
@@ -258,6 +257,7 @@ for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="qt6ct" instance="qt6ct"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
+for_window [class="Xfce4-terminal" title="ranger-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Yad"] floating enable
 for_window [class="Yad" instance="yad"] floating enable
@@ -317,7 +317,7 @@ bindsym $mod+Shift+F12 exec --no-startup-id ~/.config/i3/scripts/picom-toggle
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
-#exec_always --no-startup-id sleep 20 && conky
+exec --no-startup-id sleep 20 && conky
 exec --no-startup-id ~/.config/.screenlayout/monitor.sh
 exec --no-startup-id sleep 2 && nitrogen --restore
 exec --no-startup-id sleep 6 && corectrl
@@ -348,18 +348,19 @@ bindsym $mod+shift+s [class="Spotify"] scratchpad show
 bindsym $mod+c [class="discord"] scratchpad show
 
 # Scratchpad terminal
-#bindsym $altmod+shift+t exec --no-startup-id alacritty -e nvim --class dropdown
-#bindsym $altmod+t [class="dropdown"] scratchpad show
+#bindsym $mod+shift+t exec --no-startup-id alacritty --class dropdown -e nvim
+#bindsym $mod+t [class="dropdown"] scratchpad show
 
 # Scratchpad using xfce4-terminal
 bindsym $mod+shift+t exec --no-startup-id exec xfce4-terminal --title=scratch-terminal
 bindsym $mod+t [class="Xfce4-terminal" title="scratch-terminal"] scratchpad show
+
 ###################
 # color settings  #
 ###################
 
 # class                 border  bground text    indicator
-client.focused          #928374 #928374 #282828 #928374
+client.focused          #458588 #458588 #282828 #458588
 client.focused_inactive #3c3836 #3c3836 #ebdbb2 #3c3836
 client.unfocused        #3c3836 #3c3836 #ebdbb2 #3c3836
 client.urgent           #2f343a #900000 #dfdfdf #900000
