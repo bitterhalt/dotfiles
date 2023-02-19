@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+#	ArchMaintainer 1.4
+#	Preforms maintenance and removes excess stuff from Arch.
+#	Dependencies: pacman, git, rankmirrors-systemd
+#
+#	By Joris van Dijk | Jorisvandijk.com
+#	Licensed under the GNU General Public License v3.0
+
+GRN='\033[0;32m'
+NC='\033[0m'
+
+PKGLISTLOCATION=$HOME
+
+# Check for failed systemd services
+printf "\n${GRN}>> Checking failed services:${NC}\n"
+systemctl --failed
+
+# Remove orphaned packages
+printf "\n${GRN}>> Removing orphaned packages if any.${NC}\n"
+sudo pacman -Rs $(pacman -Qqtd)
+printf "If 'no targets specified', no orphaned packages were found.\n"
+
+# Delete Pacman cache
+printf "\n${GRN}>> Deleting Pacman cache.${NC}"
+printf "\nCurrent size: "
+du -sh /var/cache/pacman/pkg/
+sudo pacman -Scc
+printf "\nNew size: "
+du -sh /var/cache/pacman/pkg/
+
+# Empty ~/.cache
+printf "\n${GRN}>> Emptying ~/.cache.${NC}"
+printf "\nCurrent size: "
+du -sh $HOME/.cache
+rm -rf $HOME/.cache/*
+printf "\nNew size: "
+du -sh $HOME/.cache
+
+# Empty Trash
+printf "\n${GRN}>> Emptying Trash.${NC}"
+printf "\nCurrent size: "
+du -sh $HOME/.local/share/Trash/files
+rm -rf $HOME/.local/share/Trash/files/*
+printf "\nNew size: "
+du -sh $HOME/.local/share/Trash/files
+
+# Saving a list of installed packages
+printf "\n${GRN}>> Saving list of installed packages.${NC}\n"
+pacman -Qqe > $PKGLISTLOCATION/pkglist
+
+# Updating and ranking mirrors
+printf "\n${GRN}>> Updating and ranking mirrors in mirrorlist.${NC}\n"
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+cd $HOME
+curl -s "https://archlinux.org/mirrorlist/?country=FI&country=SE&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > mirrorlist
+sudo mv mirrorlist /etc/pacman.d/mirrorlist
+
+# Done
+printf "\n${GRN}>> Done!${NC}\n"
+read -p "Press any key to exit"
+
