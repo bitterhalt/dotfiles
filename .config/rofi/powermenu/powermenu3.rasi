@@ -37,7 +37,7 @@ mainbox {
     spacing:                     0px;
     margin:                      0px;
     padding:                     0px;
-    border:                      1px solid;
+    border:                      2px solid;
     border-radius:               0px;
     border-color:                @selected;
     background-color:            transparent;
