@@ -199,7 +199,7 @@ bindsym $mod+control+i exec --no-startup-id $HOME/scripts/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/scripts/weather-notify
 ## applacunher
 bindsym $mod+d exec rofi -modi drun -show drun \
-        -config ~/.config/rofi/applauncher/rofidmenu2.rasi
+        -config ~/.config/rofi/applauncher/rofidmenu.rasi
 
 ## window list
 bindsym $altmod+Tab exec rofi -show window \
@@ -218,7 +218,6 @@ bindsym $mod+Shift+Print exec --no-startup-id flameshot gui --path ~/Pictures/sc
 #for_window [class=Thunderbird] focus
 #for_window [class=Xfce4-terminal] focus
 for_window [class=(?i)firefox] focus
-for_window [class=Steam] focus
 for_window [class=Thunar] focus
 #####################################
 # Spawn windows for specific workspaces #
@@ -239,6 +238,7 @@ for_window [class="Spotify"] move to workspace $ws5
 # Windows rules #
 #################
 for_window [class="Bitwarden"] floating enable move absolute position center
+for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="dropdown"] floating enable, resize set 800 600,border pixel 3, move scratchpad
@@ -247,7 +247,7 @@ for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Gcolor3"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Lxappearance"] floating enable enable move absolute position center
-for_window [class="mpv"] floating enable border pixel 2
+for_window [class="mpv"] floating enable border pixel 3
 for_window [class="Nitrogen"] floating enable sticky enable border pixel 2 move absolute position center
 for_window [class="Nsxiv"] floating enable
 for_window [class="Pamac-manager"] floating enable
