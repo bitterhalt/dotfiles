@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# This small script shows system info with libnotify
+# check your sensors and edit grep value according to your temp sensor
+
+CPUTemp=$(sensors | grep 'Tctl:' | awk '{print $2}' )
+CPUTemp2=$(sensors | grep 'Tccd1:' | awk '{print $2}' )
+GPUTemp=$(sensors | grep 'edge:' | awk '{print $2}' )
+uptime=$(uptime -p)
+notify-send -t 8000 "$(
+free -m | awk 'NR==2{printf "🐏 MEM usage: %s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'
+top -bn1 | grep load | awk '{printf "🧠 CPU load: %.2f\n", $(NF-2)}'
+df -h / | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "🚀 Free: %i GiB \n", $4 }'
+printf "🌡️ CPU Tctl: $CPUTemp\n"
+printf "🌡️ CPU Tccd1: $CPUTemp2\n"
+printf "🌡️ GPU temp: $GPUTemp\n"
+printf "⏱️ $uptime"
+)"
+
