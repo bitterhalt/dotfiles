@@ -195,8 +195,9 @@ bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
 bindsym $mod+shift+Delete exec --no-startup-id alacritty --class="floatterm" -e htop
 bindsym $mod+shift+f exec --no-startup-id alacritty --class floatterm -e ranger
-bindsym $mod+control+i exec --no-startup-id $HOME/scripts/sysnfo
+bindsym $mod+control+i exec --no-startup-id $HOME/.local/bin/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/scripts/weather-notify
+bindsym $mod+control+c exec --no-startup-id $HOME/.config/polybar/scripts/calendar
 ## applacunher
 bindsym $mod+d exec rofi -modi drun -show drun \
         -config ~/.config/rofi/applauncher/rofidmenu.rasi
