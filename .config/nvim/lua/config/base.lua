@@ -58,6 +58,6 @@ o.splitbelow = true
 
 opt.mouse = "a"
 
--- Map <leader> to space
+-- Map <leader> to comma
 g.mapleader = ","
 g.maplocalleader = " "
