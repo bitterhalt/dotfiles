@@ -133,10 +133,10 @@ bindsym $mod+q kill
 bindsym $mod+control+l exec --no-startup-id ~/.config/i3/scripts/i3lock-color
 
 # reload the configuration file
-bindsym $mod+Shift+Escape reload
+bindsym $mod+Control+Escape reload
 
 # restart i3 inplace (preserves your layout/session, can be used to update i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Control+r restart
 
 # change focus
 bindsym $mod+h focus left
@@ -186,7 +186,7 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
 #################
-# App shortcuts #
+# shortcuts #
 #################
 
 bindsym $mod+shift+w exec --no-startup-id /usr/bin/firefox
@@ -194,7 +194,7 @@ bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
 bindsym $mod+shift+Delete exec --no-startup-id alacritty --class="floatterm" -e htop
-bindsym $mod+shift+f exec --no-startup-id alacritty --class floatterm -e ranger
+bindsym $mod+shift+r exec --no-startup-id alacritty --class floatterm -e ranger
 bindsym $mod+control+i exec --no-startup-id $HOME/.local/bin/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/scripts/weather-notify
 bindsym $mod+control+c exec --no-startup-id $HOME/.config/polybar/scripts/calendar
@@ -346,7 +346,7 @@ bindsym $mod+minus scratchpad show
 
 # open apps from scratchpad
 bindsym $mod+shift+s [class="Spotify"] scratchpad show
-bindsym $mod+c [class="discord"] scratchpad show
+bindsym $mod+c [class="discord"] scratchpad show border pixel 3
 
 # Scratchpad terminal
 #bindsym $mod+shift+t exec --no-startup-id alacritty --class dropdown -e nvim
