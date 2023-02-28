@@ -35,13 +35,24 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
 	use('folke/which-key.nvim')
     use ('nvim-lualine/lualine.nvim')
     use ('nvim-tree/nvim-tree.lua')
-    use ('vimwiki/vimwiki')
     use("kyazdani42/nvim-web-devicons")
     use({"nvim-telescope/telescope.nvim",
 	tag = "0.1.0",requires = { { "nvim-lua/plenary.nvim" }
         },
     })
 
+  use {
+    'vimwiki/vimwiki',
+    config = function()
+        vim.g.vimwiki_list = {
+            {
+                path = '~/Documents/.vimwiki/',
+                syntax = 'markdown',
+                ext = '.md',
+            }
+        }
+    end
+}
 
 
 
