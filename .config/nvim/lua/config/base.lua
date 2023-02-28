@@ -2,6 +2,7 @@ local g = vim.g
 local o = vim.o
 local opt = vim.opt
 
+
 -- cmd('syntax on')
 -- vim.api.nvim_command('filetype plugin indent on')
 
@@ -43,6 +44,7 @@ o.clipboard = "unnamedplus"
 -- Case insensitive searching UNLESS /C or capital in search
 o.ignorecase = true
 o.smartcase = true
+
 
 -- Undo and backup options
 o.backup = false
