@@ -24,22 +24,26 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
 
     return packer.startup({
         function(use)
-	use ('wbthomason/packer.nvim' )
+	use ('PotatoesMaster/i3-vim-syntax')
+	use ('RRethy/nvim-base16')
+	use ('ap/vim-css-color')
 	use ('goolord/alpha-nvim')
+	use ('kovetskiy/sxhkd-vim')
 	use ('lewis6991/impatient.nvim')
+	use ('vim-python/python-syntax')
+	use ('wbthomason/packer.nvim' )
+	use('folke/which-key.nvim')
     use ('nvim-lualine/lualine.nvim')
     use ('nvim-tree/nvim-tree.lua')
-	use ('RRethy/nvim-base16')
-	use ('PotatoesMaster/i3-vim-syntax')
-	use ('kovetskiy/sxhkd-vim')
-	use ('vim-python/python-syntax')
-	use ('ap/vim-css-color')
+    use ('vimwiki/vimwiki')
     use("kyazdani42/nvim-web-devicons")
-	use('folke/which-key.nvim')
     use({"nvim-telescope/telescope.nvim",
 	tag = "0.1.0",requires = { { "nvim-lua/plenary.nvim" }
         },
     })
+
+
+
 
     if PACKER_JUST_INSTALLED then
         vim.api.nvim_create_autocmd('User PackerComplete', {
