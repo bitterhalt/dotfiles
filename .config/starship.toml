@@ -12,7 +12,8 @@ error_symbol = "[❯](red)"
 
 [directory]
 format = "[$path]($style)(bold blue)[$read_only](bold #F0FF42)($read_only_style) "
-truncation_length = 1
+truncation_length = 4
+truncation_symbol = '…/'
 home_symbol = "  "
 read_only = "  "
 
