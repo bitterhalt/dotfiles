@@ -1,6 +1,10 @@
 add_newline = false
-format = "$directory$git_branch$git_status$character"
-right_format = """$all"""
+format = """
+$directory\
+$git_branch\
+$git_status\
+$character\
+$cmd_duration"""
 
 [character]
 success_symbol = "[❯](green)"
@@ -25,5 +29,9 @@ behind = "⇣ ${count}"
 format = '([\[$all_status$ahead_behind\]]($style) )'
 style = "#ff00dd"
 
+[cmd_duration]
+disabled = false
+format = "[$duration]($style) "
+style = "yellow"
 #[sudo]
 #disabled = false
