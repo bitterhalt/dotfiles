@@ -12,6 +12,7 @@ configs.setup {
   ensure_installed = {
     "lua",
     "markdown",
+    "markdown_inline",
     "bash",
     "python",
     "html",
