@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# Nothing spceial here.. This just pushes weather info using libnotify
-notify-send -t 4500 "$(curl -s 'wttr.in/{oulu}?format=3')"
-
