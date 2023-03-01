@@ -44,11 +44,11 @@ super + {_,shift + }q
 super + g
 	bspc node -s biggest.window
 
-super + ctrl + i
-	$HOME/scripts/sysnfo
+super + ctrl + {i,w,c}
+	{sysnfo,weather-notify,dunst-calendar}
 
-super + ctrl + w
-	$home/scripts/weather
+
+
 
 
 ###########

@@ -11,7 +11,7 @@ bspc monitor -d 1 2 3 4 5 6 7 8 9
 #bspc monitor HDMI-A-0 -d 1 2 3 4 5 6 7 8 9
 
 # To make mouse movement smoother with higher refresh rate monitors
-bspc config pointer_motion_interval 14ms
+#bspc config pointer_motion_interval 14ms
 
 bspc config border_width          2
 bspc config window_gap           10
