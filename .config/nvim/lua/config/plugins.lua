@@ -38,6 +38,7 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
     use ('nvim-lualine/lualine.nvim')
     use ('nvim-tree/nvim-tree.lua')
     use("kyazdani42/nvim-web-devicons")
+    use ('nvim-treesitter/nvim-treesitter')
     use({"nvim-telescope/telescope.nvim",
 	tag = "0.1.0",requires = { { "nvim-lua/plenary.nvim" }
         },

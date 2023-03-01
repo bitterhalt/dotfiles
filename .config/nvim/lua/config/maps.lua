@@ -30,6 +30,12 @@ map("n", "<C-Down>", ":resize +2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
+-- move line(s) above/below"
+map('n', 'K', ':m .-2<CR>==')
+map('n', 'J', ':m .+1<CR>==')
+map('v', 'K', ':m \'<-2<CR>gv=gv')
+map('v', 'J', ':m \'>+1<CR>gv=gv')
+
 -- Close all windows and exit from Neovim with <leader>
 map('n', '<leader>q', ':qa!<CR>')
 
@@ -45,4 +51,5 @@ map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
 -- Toggle nvim-tree
 map('n', '<C-n>',     "<CMD>NvimTreeToggle<CR>")
 
-
+-- Close buffers
+map("n", "<S-q>", "<cmd>Bdelete!<CR>")
