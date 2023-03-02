@@ -133,7 +133,7 @@ bindsym $mod+q kill
 bindsym $mod+control+l exec --no-startup-id ~/.config/i3/scripts/i3lock-color
 
 # reload the configuration file
-bindsym $mod+Control+Escape reload
+bindsym $mod+Escape reload
 
 # restart i3 inplace (preserves your layout/session, can be used to update i3)
 bindsym $mod+Control+r restart

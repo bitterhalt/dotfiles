@@ -17,9 +17,6 @@ alt + t
 super + shift + p
      $HOME/.config/rofi/powermenu/powermenu3
 
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
 
 # Launch Apps
 super shift + {e,w,m,d}
@@ -33,7 +30,7 @@ super + shift + Delete
 ###############
 
 # quit/restart bspwm
-super + alt + {q,r}
+super + control + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
@@ -47,9 +44,9 @@ super + g
 super + ctrl + {i,w,c}
 	{sysnfo,weather-notify,dunst-calendar}
 
-
-
-
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
 
 ###########
 # preselect
