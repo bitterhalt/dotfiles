@@ -44,7 +44,7 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
         },
     })
 
-  use {
+    use {
     'vimwiki/vimwiki',
     config = function()
         vim.g.vimwiki_list = {
@@ -56,7 +56,6 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
         }
     end
 }
-
 
 
     if PACKER_JUST_INSTALLED then

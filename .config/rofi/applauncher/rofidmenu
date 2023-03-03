@@ -12,7 +12,7 @@
 ## style-11    style-12    style-13    style-14    style-15
 
 dir="$HOME/.config/rofi/applauncher"
-theme='rofidmenu2'
+theme='rofidmenu'
 
 ## Run
 rofi \

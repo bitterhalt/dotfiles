@@ -8,9 +8,10 @@ super + Return
 
 # program launcher
 super + d
-	~/.config/rofi/applauncher/rofidmenu2
+	~/.config/rofi/applauncher/rofidmenu
+
 # Rofi window
-alt + t
+alt + Tab
 	~/.config/rofi/applauncher/rofiwindow
 
 # power-menu
