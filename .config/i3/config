@@ -354,7 +354,7 @@ bindsym $mod+c [class="discord"] scratchpad show border pixel 3
 #bindsym $mod+t [class="dropdown"] scratchpad show
 
 # Scratchpad using xfce4-terminal
-bindsym $mod+shift+t exec --no-startup-id exec xfce4-terminal --title=scratch-terminal
+bindsym $mod+shift+t exec --no-startup-id xfce4-terminal --title=scratch-terminal
 bindsym $mod+t [class="Xfce4-terminal" title="scratch-terminal"] scratchpad show
 
 ###################
