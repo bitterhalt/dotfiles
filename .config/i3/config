@@ -119,9 +119,9 @@ bindsym $mod+Ctrl+Up resize grow height 20 px or 20 ppt
 bindsym $mod+Ctrl+Down resize shrink height 20 px or 20 ppt
 bindsym $mod+Ctrl+Left resize grow width 20 px or 20 ppt
 
-###############
-# keybindings #
-###############
+##################
+# i3-keybindings #
+##################
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id xfce4-terminal
@@ -185,9 +185,9 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
-#################
-# shortcuts #
-#################
+##############
+#  shortcuts #
+##############
 
 bindsym $mod+shift+w exec --no-startup-id /usr/bin/firefox
 bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
@@ -198,6 +198,7 @@ bindsym $mod+shift+r exec --no-startup-id alacritty --class floatterm -e ranger
 bindsym $mod+control+i exec --no-startup-id $HOME/.local/bin/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/.local/bin/weather-notify
 bindsym $mod+control+c exec --no-startup-id $HOME/.local/bin/dunst-calendar
+
 ## applacunher
 bindsym $mod+d exec rofi -modi drun -show drun \
         -config ~/.config/rofi/applauncher/rofidmenu.rasi
@@ -335,7 +336,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
 
 ###############
-# scratchpads  #
+# scratchpads #
 ###############
 
 # Make the currently focused window a scratchpad
