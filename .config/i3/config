@@ -234,7 +234,6 @@ assign [class="transmission-gtk"] $ws5
 assign [class="Thunar"] $ws3
 assign [class="qBittorrent"] $ws5
 assign [class="thunderbird"] $ws4
-for_window [class="Spotify"] move to workspace $ws5
 #################
 # Windows rules #
 #################
