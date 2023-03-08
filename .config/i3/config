@@ -230,9 +230,9 @@ assign [class="Deluge-gtk"] $ws7
 assign [class="Gimp"] $ws8
 assign [class="Joplin"] $ws4
 assign [class="Steam"] $ws6
-assign [class="TelegramDesktop"] $ws5
+assign [class="transmission-gtk"] $ws5
 assign [class="Thunar"] $ws3
-assign [class="qBittorrent"] $ws7
+assign [class="qBittorrent"] $ws5
 assign [class="thunderbird"] $ws4
 for_window [class="Spotify"] move to workspace $ws5
 #################
@@ -265,7 +265,7 @@ for_window [window_role="About"] floating enable
 ##########################
 for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
 for_window [class="Xfce4-terminal" title="ranger-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
-for_window [class="dropdown"] floating enable, resize set 800 600,border pixel 3, move scratchpad
+for_window [class="dropdown|nvim"] floating enable, resize set 800 600,border pixel 3, move scratchpad
 # Set certain apps to live in the scratchpad
 for_window [class="discord"] move window to scratchpad
 for_window [class="Spotify"] move window to scratchpad
