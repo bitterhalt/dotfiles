@@ -24,23 +24,23 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
 
     return packer.startup({
         function(use)
-	use ('PotatoesMaster/i3-vim-syntax')
+    use ('PotatoesMaster/i3-vim-syntax')
     use ('moll/vim-bbye')
-	use ('RRethy/nvim-base16')
-	use ('ap/vim-css-color')
+    use ('RRethy/nvim-base16')
+    use ('ap/vim-css-color')
     use ( "akinsho/bufferline.nvim")
-	use ('goolord/alpha-nvim')
-	use ('kovetskiy/sxhkd-vim')
-	use ('lewis6991/impatient.nvim')
-	use ('vim-python/python-syntax')
-	use ('wbthomason/packer.nvim' )
-	use('folke/which-key.nvim')
+    use ('goolord/alpha-nvim')
+    use ('kovetskiy/sxhkd-vim')
+    use ('lewis6991/impatient.nvim')
+    use ('vim-python/python-syntax')
+    use ('wbthomason/packer.nvim' )
+    use('folke/which-key.nvim')
     use ('nvim-lualine/lualine.nvim')
     use ('nvim-tree/nvim-tree.lua')
     use("kyazdani42/nvim-web-devicons")
     use ('nvim-treesitter/nvim-treesitter')
     use({"nvim-telescope/telescope.nvim",
-	tag = "0.1.0",requires = { { "nvim-lua/plenary.nvim" }
+    tag = "0.1.0",requires = { { "nvim-lua/plenary.nvim" }
         },
     })
 
