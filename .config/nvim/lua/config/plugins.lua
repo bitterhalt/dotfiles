@@ -45,18 +45,21 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
     })
 
     use {
-    'vimwiki/vimwiki',
-    config = function()
-        vim.g.vimwiki_list = {
+        'vimwiki/vimwiki',
+            config = function()
+            vim.g.vimwiki_list = {
             {
                 path = '~/Documents/.vimwiki/',
                 syntax = 'markdown',
                 ext = '.md',
-            }
+             }
         }
-    end
-}
-
+       end
+    }
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
 
     if PACKER_JUST_INSTALLED then
         vim.api.nvim_create_autocmd('User PackerComplete', {

@@ -53,3 +53,6 @@ map('n', '<C-n>',     "<CMD>NvimTreeToggle<CR>")
 
 -- Close buffers
 map("n", "<S-q>", "<cmd>Bdelete!<CR>")
+
+-- Markdown Preview toggle
+map("n", "<C-p>", "<cmd>MarkdownPreviewToggle<CR>")
