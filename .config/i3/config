@@ -1,5 +1,5 @@
-# i3-config taken and modified from EndeavourOS github:
-# https://github.com/endeavouros-team/endeavouros-i3wm-setup
+## i3-config taken and modified from EndeavourOS github:
+## https://github.com/endeavouros-team/endeavouros-i3wm-setup
 
 font pango: JetBrains Mono 10
 
@@ -259,15 +259,7 @@ for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Yad"] floating enable
 for_window [class="Yad" instance="yad"] floating enable
 for_window [window_role="About"] floating enable
-##########################
-# Scrathpad window rules #
-##########################
-for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
-for_window [class="Xfce4-terminal" title="ranger-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
-for_window [class="dropdown|nvim"] floating enable, resize set 800 600,border pixel 3, move scratchpad
-# Set certain apps to live in the scratchpad
-for_window [class="discord"] move window to scratchpad
-for_window [class="Spotify"] move window to scratchpad
+
 ###############
 # scratchpads #
 ###############
@@ -277,6 +269,16 @@ bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
+
+##########################
+# Scrathpad window rules #
+##########################
+for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
+for_window [class="dropdown|nvim|note"] floating enable, resize set 800 600,border pixel 3, move scratchpad
+
+# Set certain apps to live in the scratchpad
+for_window [class="discord"] move window to scratchpad
+for_window [class="Spotify"] move window to scratchpad
 
 # open apps from scratchpad
 bindsym $mod+shift+s [class="Spotify"] scratchpad show

@@ -25,8 +25,8 @@ dashboard.section.buttons.val = {
   dashboard.button("u", "  Update plugins", "<cmd>PackerSync<CR>"),
   dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
-dashboard.section.header.opts.hl = "Include"
-dashboard.section.footer.opts.hl = "Include"
+-- dashboard.section.header.opts.hl = "Include"
+-- dashboard.section.footer.opts.hl = "Include"
 dashboard.section.footer.val = footer()
 dashboard.opts.opts.noautocmd = false
 --vim.cmd[[autocmd User AlphaReady echo 'ready']]
