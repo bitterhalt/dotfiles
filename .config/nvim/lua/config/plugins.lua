@@ -2,8 +2,6 @@ local fn = vim.fn
 local data_path = fn.stdpath('data')
 local compile_path = data_path..'/site/plugin/packer_compiled.lua'
 local install_path = data_path..'/site/pack/packer/start/packer.nvim'
-local np_path = vim.fn.expand('~/projects/neoprojet')
-
 
     if fn.empty(fn.glob(install_path)) > 0 then
         PACKER_JUST_INSTALLED = fn.system({
@@ -12,6 +10,13 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
          })
          vim.cmd('packadd packer.nvim')
     end
+
+    vim.cmd([[
+      augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost plugins.lua source <afile> | PackerSync
+      augroup end
+    ]])
 
     local status_ok, packer = pcall(require, 'packer')
         if not status_ok then
@@ -32,7 +37,6 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
     use ('goolord/alpha-nvim')
     use ('kovetskiy/sxhkd-vim')
     use ('lewis6991/impatient.nvim')
-    use ('vim-python/python-syntax')
     use ('wbthomason/packer.nvim' )
     use ('folke/which-key.nvim')
     use ('nvim-lualine/lualine.nvim')
@@ -46,8 +50,7 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
         },
     })
 
-    use {
-        'vimwiki/vimwiki',
+    use {'vimwiki/vimwiki',
             config = function()
             vim.g.vimwiki_list = {
             {
@@ -58,8 +61,7 @@ local np_path = vim.fn.expand('~/projects/neoprojet')
         }
        end
     }
-    use({
-        "iamcco/markdown-preview.nvim",
+    use({"iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 

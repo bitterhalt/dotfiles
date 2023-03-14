@@ -4,9 +4,7 @@
 
 -- Uncomment just ONE of the following colorschemes!
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-dracula')
--- local ok, _ = pcall(vim.cmd, 'colorscheme gruvbox-baby')
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-monokai')
--- local ok, _ = pcall(vim.cmd, 'colorscheme base16-gruvbox-dark-hard')
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-nord')
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-oceanicnext')
 -- local ok, _ = pcall(vim.cmd, "colorscheme base16-onedark")
@@ -16,7 +14,6 @@
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-tomorrow-night')
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-tokyo-night-dark')
 --
-
 -------------------------------------------
 -- Gruvbox Baby
 -- https://github.com/luisiacc/gruvbox-baby
@@ -26,8 +23,7 @@ vim.g.gruvbox_baby_keyword_style = "italic"
 vim.g.gruvbox_baby_background_color = "dark"
 vim.g.gruvbox_baby_telescope_theme = 1
 
+local ok, _ = pcall(vim.cmd, "colorscheme gruvbox-baby")
 
--- Load the colorscheme
-vim.cmd[[colorscheme gruvbox-baby]]
 
 
