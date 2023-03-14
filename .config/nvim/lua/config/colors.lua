@@ -22,7 +22,6 @@ vim.g.gruvbox_baby_function_style = "NONE"
 vim.g.gruvbox_baby_keyword_style = "italic"
 vim.g.gruvbox_baby_background_color = "dark"
 vim.g.gruvbox_baby_telescope_theme = 1
-
 local ok, _ = pcall(vim.cmd, "colorscheme gruvbox-baby")
 
 
