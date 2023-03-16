@@ -7,13 +7,13 @@ local function map(m, k,v)
 end
 
 -- Keybindings for telescope
-map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
 map("n", "<leader>ff", "<CMD>Telescope find_files <CR>")
-map("n", "<leader>fe", "<CMD>Telescope file_browser<CR>")
+map("n", "<leader>fa", "<CMD>Telescope find_files hidden=true <CR>")
 map("n", "<leader>fb", "<CMD>Telescope buffers<cr>")
+map("n", "<leader>fh", "<CMD>Telescope help_tags<CR>")
+map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
 map("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
-
 -- move between buffers
 map("n", "<S-l>", "<CMD>:bnext<CR>")
 map("n", "<S-h>", "<CMD>:bprevious<CR>")
