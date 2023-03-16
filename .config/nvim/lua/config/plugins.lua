@@ -27,19 +27,15 @@ if not status_ok then
     return
 end
 
-local function get_setup(file_name)
-    return string.format('require("setup/%s")', file_name)
-end
+
 
 return packer.startup({
     function(use)
-        use ('PotatoesMaster/i3-vim-syntax')
         use ('moll/vim-bbye')
         use ('RRethy/nvim-base16')
         use ('ap/vim-css-color')
         use ('akinsho/bufferline.nvim')
         use ('goolord/alpha-nvim')
-        use ('kovetskiy/sxhkd-vim')
         use ('lewis6991/impatient.nvim')
         use ('wbthomason/packer.nvim' )
         use ('folke/which-key.nvim')
@@ -53,7 +49,7 @@ return packer.startup({
             },
         })
 
-        -- LSP-zero
+        -- LSP-Zero
         use {
             'VonHeikemen/lsp-zero.nvim',
             branch = 'v1.x',
@@ -113,3 +109,4 @@ return packer.startup({
         },
     },
 })
+

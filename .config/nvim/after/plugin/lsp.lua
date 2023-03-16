@@ -1,18 +1,17 @@
 local lsp = require('lsp-zero').preset({
-  name = 'minimal',
+  name = 'recommended',
   set_lsp_keymaps = true,
-  manage_nvim_cmp = false,
+  manage_nvim_cmp = true,
 })
+lsp.ensure_installed({
+  'tsserver',
+})
+-- (Optional) Configure lua language server for neovim
+lsp.nvim_workspace()
 
 lsp.setup()
-
-vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
-
-local cmp = require('cmp')
-local cmp_config = lsp.defaults.cmp_config({
-  window = {
-    completion = cmp.config.window.bordered()
-  }
+vim.diagnostic.config({
+    virtual_text = true
 })
 
-cmp.setup(cmp_config)
+
