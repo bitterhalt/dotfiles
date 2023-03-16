@@ -12,7 +12,7 @@ set $altmod Mod1
 
 # default i3 tiling mode:
 workspace_layout default
-
+workspace_layout default
 ##############################
 # extra options for windows: #
 ##############################
@@ -23,7 +23,6 @@ default_border pixel 2
 # Set inner/outer gaps
 gaps inner 10
 gaps outer 0
-
 ################
 # risize gaps  #
 ################
@@ -114,10 +113,10 @@ bindcode $mod+Shift+81 	 move container to workspace  $ws9
 bindcode $mod+Shift+90 	 move container to workspace  $ws10
 
 # Resize windows
-bindsym $mod+Ctrl+Right resize shrink width 20 px or 20 ppt
-bindsym $mod+Ctrl+Up resize grow height 20 px or 20 ppt
-bindsym $mod+Ctrl+Down resize shrink height 20 px or 20 ppt
-bindsym $mod+Ctrl+Left resize grow width 20 px or 20 ppt
+bindsym $mod+Ctrl+Right resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Up resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Down resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Left resize grow width 10 px or 10 ppt
 
 ##################
 # i3-keybindings #
@@ -226,7 +225,6 @@ for_window [class=Thunar] focus
 #####################################
 #assign [class="Xfce4-terminal"] $ws1
 assign [class="(?i)firefox"] $ws2
-assign [class="Deluge-gtk"] $ws7
 assign [class="Gimp"] $ws8
 assign [class="Joplin"] $ws4
 assign [class="Steam"] $ws6
@@ -234,6 +232,7 @@ assign [class="transmission-gtk"] $ws5
 assign [class="Thunar"] $ws3
 assign [class="qBittorrent"] $ws5
 assign [class="thunderbird"] $ws4
+assign [class="kdenlive"]   $ws3
 #################
 # Windows rules #
 #################
@@ -259,7 +258,7 @@ for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Yad"] floating enable
 for_window [class="Yad" instance="yad"] floating enable
 for_window [window_role="About"] floating enable
-
+for_window [class="kdenlive"] floating enable
 ###############
 # scratchpads #
 ###############
