@@ -1,23 +1,22 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-  return
+    return
 end
 
 local actions = require "telescope.actions"
 
 telescope.setup {
-  defaults = {
+    defaults = {
+        path_display = { "smart" },
+        file_ignore_patterns = { ".git/", "node_modules",},
 
-  },
-  pickers = {
-        find_files = {
-        theme = "dropdown",
-        }
-  },
-  extensions = {
-    -- Your extension configuration goes here:
-  },
+        mappings = {
+            i = {
+                ["<Down>"] = actions.cycle_history_next,
+                ["<Up>"] = actions.cycle_history_prev,
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+            },
+        },
+    },
 }
-
-
-
