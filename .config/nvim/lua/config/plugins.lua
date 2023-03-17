@@ -1,42 +1,37 @@
-local fn = vim.fn
-
--- Automatically install packer
-local data_path = fn.stdpath('data')
-local compile_path = data_path..'/site/plugin/packer_compiled.lua'
-local install_path = data_path..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_JUST_INSTALLED = fn.system({
-        'git', 'clone', '--depth', '1',
-        'https://github.com/wbthomason/packer.nvim', install_path
-    })
-    vim.cmd('packadd packer.nvim')
+-- auto install packer if not installed
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
 end
+local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- import packer safely
+local status, packer = pcall(require, "packer")
+if not status then
+  return
+end
+-- Reloads Neovim after whenever you save plugins.lua
 vim.cmd([[
-      augroup packer_user_config
+    augroup packer_user_config
       autocmd!
-      autocmd BufWritePost plugins.lua source <afile> | PackerSync
-      augroup end
-      ]])
+     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup END
+]])
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, 'packer')
-if not status_ok then
-    return
-end
+-- add list of plugins to install
+return packer.startup(function(use)
 
 
-
-return packer.startup({
-    function(use)
-        use ('moll/vim-bbye')
+        use ('goolord/alpha-nvim')
         use ('RRethy/nvim-base16')
         use ('ap/vim-css-color')
         use ('akinsho/bufferline.nvim')
-        use ('goolord/alpha-nvim')
-        use ('lewis6991/impatient.nvim')
         use ('wbthomason/packer.nvim' )
         use ('folke/which-key.nvim')
         use ('nvim-lualine/lualine.nvim')
@@ -49,7 +44,7 @@ return packer.startup({
             },
         })
 
-        -- LSP-Zero
+                -- LSP-Zero
         use {
             'VonHeikemen/lsp-zero.nvim',
             branch = 'v1.x',
@@ -89,24 +84,8 @@ return packer.startup({
             "iamcco/markdown-preview.nvim",
             run = function() vim.fn["mkdp#util#install"]() end,
         })
-
-        if PACKER_JUST_INSTALLED then
-            vim.api.nvim_create_autocmd('User PackerComplete', {
-                command = 'qa!',
-            })
-            packer.sync()
-        end
-
-        pcall(require, 'impatient')
-    end,
-    config = {
-        compile_path = compile_path,
-        display = {
-            open_fn = require('packer.util').float,
-        },
-        profile = {
-            enabled = true,
-        },
-    },
-})
+  if packer_bootstrap then
+    require("packer").sync()
+  end
+end)
 
