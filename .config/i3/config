@@ -194,7 +194,7 @@ bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
 bindsym $mod+shift+Delete exec --no-startup-id alacritty --class floatterm -e htop
 bindsym $mod+shift+r exec --no-startup-id alacritty --class floatterm -e ranger
-bindsym $mod+shift+n exec --no-startup-id alacritty --class floatterm -e nvim Documents/.vimwiki/index.md
+bindsym $mod+shift+n exec --no-startup-id alacritty --class floatterm -e nvim Documents/.vimwiki/notes.md
 bindsym $mod+control+i exec --no-startup-id $HOME/.local/bin/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/.local/bin/weather-notify
 bindsym $mod+control+c exec --no-startup-id $HOME/.local/bin/dunst-calendar
