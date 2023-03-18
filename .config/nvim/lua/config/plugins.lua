@@ -29,6 +29,7 @@ return packer.startup(function(use)
 
 
         use ('goolord/alpha-nvim')
+        use ('moll/vim-bbye')
         use ('RRethy/nvim-base16')
         use ('ap/vim-css-color')
         use ('akinsho/bufferline.nvim')
