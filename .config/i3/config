@@ -192,8 +192,9 @@ bindsym $mod+shift+w exec --no-startup-id /usr/bin/firefox
 bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
-bindsym $mod+shift+Delete exec --no-startup-id alacritty --class="floatterm" -e htop
+bindsym $mod+shift+Delete exec --no-startup-id alacritty --class floatterm -e htop
 bindsym $mod+shift+r exec --no-startup-id alacritty --class floatterm -e ranger
+bindsym $mod+shift+n exec --no-startup-id alacritty --class floatterm -e nvim Documents/.vimwiki/index.md
 bindsym $mod+control+i exec --no-startup-id $HOME/.local/bin/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/.local/bin/weather-notify
 bindsym $mod+control+c exec --no-startup-id $HOME/.local/bin/dunst-calendar
@@ -284,10 +285,10 @@ bindsym $mod+shift+s [class="Spotify"] scratchpad show
 bindsym $mod+c [class="discord"] scratchpad show border pixel 3
 
 # Scratchpad terminal
-#bindsym $mod+shift+t exec --no-startup-id alacritty --class dropdown -e nvim
+#bindsym $mod+shift+t exec --no-startup-id alacritty --class dropdown
 #bindsym $mod+t [class="dropdown"] scratchpad show
 
-# Scratchpad using xfce4-terminal
+## Scratchpad using xfce4-terminal
 bindsym $mod+shift+t exec --no-startup-id xfce4-terminal --title=scratch-terminal
 bindsym $mod+t [class="Xfce4-terminal" title="scratch-terminal"] scratchpad show
 

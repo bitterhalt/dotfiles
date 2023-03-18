@@ -72,9 +72,9 @@ return packer.startup(function(use)
             config = function()
                 vim.g.vimwiki_list = {
                     {
-                        path = '~/Documents/.vimwiki/',
-                        syntax = 'markdown',
-                        ext = '.md',
+                    path = '~/Documents/.vimwiki/',
+                    syntax = 'markdown',
+                    ext = '.md',
                     }
                 }
             end
@@ -84,6 +84,7 @@ return packer.startup(function(use)
             "iamcco/markdown-preview.nvim",
             run = function() vim.fn["mkdp#util#install"]() end,
         })
+
   if packer_bootstrap then
     require("packer").sync()
   end
