@@ -241,7 +241,7 @@ for_window [class="Bitwarden"] floating enable move absolute position center
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
-for_window [class="floatterm"] floating enable, border pixel 3, position center
+for_window [class="floatterm"] floating enable, resize set 800 600, border pixel 3, position center
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Gcolor3"] floating enable
 for_window [class="Gimp"] floating enable
@@ -274,7 +274,7 @@ bindsym $mod+minus scratchpad show
 # Scrathpad window rules #
 ##########################
 for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
-for_window [class="dropdown|nvim|note"] floating enable, resize set 800 600,border pixel 3, move scratchpad
+##for_window [class="dropdown|note"] floating enable, resize set 800 600,border pixel 3, move scratchpad
 
 # Set certain apps to live in the scratchpad
 for_window [class="discord"] move window to scratchpad
