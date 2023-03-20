@@ -27,7 +27,7 @@ setopt auto_cd                          # Changing directories without 'cd'
 cdpath=($HOME/.config)
 export EDITOR=nvim                       # use vim as editor
 export VISUAL=nvim
-
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Basic auto/tab complete
 autoload -U compinit
 zstyle ':completion:*' menu select

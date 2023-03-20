@@ -12,6 +12,7 @@ fi
 
 export EDITOR=vim
 export VISUAL=vim
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 PS1='\[\e[0;33m\]\w\[\e[0;1;31m\] ❯ \[\e[0m\]'
 
