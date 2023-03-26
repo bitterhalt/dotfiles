@@ -7,77 +7,58 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xcursor.theme: Qogir-dark
 
-!URxvt*imLocale: en_US.UTF-8
-!URxvt.depth:                      32
-!URxvt*termName: rxvt-unicode-256color
-!URxvt.intensityStyles: false
-!URxvt*font: xft:JetBrains Mono Nerd Font Mono:size=10
-!URxvt.saveLines: 2000
-!URxvt.scrollBar: false
-!URxvt.iso14755: false
-!URxvt.iso14755_52: false
-!!URxvt.internalBorder: 10
-!
-!! Uncomment below if too much font spacing, and fix glyphs performance issues.
-!URxvt.letterSpace:                -1
-!!URxvt.skipBuiltinGlyphs:          true
-!
-!! Extensions
-!URxvt.perl-ext-common: default,resize-font,keyboard-select,clipboard
-!
-!! Bindings for build-in extensions (at least on arch)
-!URxvt.keysym.Control-Shift-C:     eval:selection_to_clipboard
-!URxvt.keysym.Control-Shift-V:     eval:paste_clipboard
-!URxvt.keysym.Control-Up:          eval:scroll_up 1
-!URxvt.keysym.Control-Down:        eval:scroll_down 1
-!URxvt.keysym.Control-Home:        eval:scroll_to_top
-!URxvt.keysym.Control-End:         eval:scroll_to_bottom
-!
-!! Resize-font extension.
-!URxvt.keysym.Control-minus:       resize-font:smaller
-!URxvt.keysym.Control-plus:        resize-font:bigger
-!URxvt.keysym.Control-0:       resize-font:reset
-!URxvt.keysym.Control-question:    resize-font:show
-!URxvt.resize-font.step:           1
-!
-!
-!! Colors
-!! This includes xterm and urxvt
-!*.foreground:   #bbc2cf
-!*.background:   #282c34
-!*.cursorColor:  #bbc2cf
-!
-!! black
-!*.color0:       #1c1f24
-!*.color8:       #5b6268
-!
-!! red
-!*.color1:       #ff6c6b
-!*.color9:       #da8548
-!
-!! green
-!*.color2:       #98be65
-!*.color10:      #4db5bd
-!
-!! yellow
-!*.color3:       #da8548
-!*.color11:      #ecbe7b
-!
-!! blue
-!*.color4:       #51afef
-!*.color12:      #3071db
-!
-!! magenta
-!*.color5:       #c678dd
-!*.color13:      #a9a1e1
-!
-!! cyan
-!*.color6:       #5699af
-!*.color14:      #46d9ff
-!
-!! white
-!*.color7:       #202328
+
+!! Set a default font and font size as below:
+st.font: JetBrains Mono Nerd Font:pixelsize=14
+
+! st.termname: st-256color
+! st.borderpx: 2
+
+!! Colors:
+
+!! gruvbox:
+*.color0: #1d2021
+*.color1: #cc241d
+*.color2: #98971a
+*.color3: #d79921
+*.color4: #458588
+*.color5: #b16286
+*.color6: #689d6a
+*.color7: #a89984
+*.color8: #928374
+*.color9: #fb4934
+*.color10: #b8bb26
+*.color11: #fabd2f
+*.color12: #83a598
+*.color13: #d3869b
+*.color14: #8ec07c
+*.color15: #ebdbb2
+*.background: #1d2021
+*.cursorColor: #ebdbb2
+*.foreground: #ebdbb2
 
 
+!! Dracula
+!*.color0:     #000000
+!*.color1:     #FF5555
+!*.color2:     #50FA7B
+!*.color3:     #F1FA8C
+!*.color4:     #BD93F9
+!*.color5:     #FF79C6
+!*.color6:     #8BE9FD
+!*.color7:     #BFBFBF
+!*.color8:     #6272a4
+!*.color9:     #FF6E67
+!*.color10:    #5AF78E
+!*.color11:    #F4F99D
+!*.color12:    #CAA9FA
+!*.color13:    #FF92D0
+!*.color14:    #9AEDFE
+!*.color15:    #E6E6E6
+!*.background: #282A36
+!*.cursorColor:#F8F8F2
+!*.foreground: #F8F8F2
+
+!! Nsxiv colors
 Nsxiv*background: #282828
 Nsxiv*foreground: #458588
