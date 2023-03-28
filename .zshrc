@@ -24,10 +24,11 @@ setopt APPEND_HISTORY                   # Immediately append history instead of 
 setopt HIST_IGNORE_ALL_DUPS             # If a new command is a duplicate, remove the older one
 setopt HIST_SAVE_NO_DUPS                # Do not save duplicated command
 setopt auto_cd                          # Changing directories without 'cd'
-cdpath=($HOME/.config)
 export EDITOR=nvim                       # use vim as editor
 export VISUAL=nvim
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+cdpath=($HOME/.config)
+
 # Basic auto/tab complete
 autoload -U compinit
 zstyle ':completion:*' menu select
@@ -38,22 +39,15 @@ _comp_options+=(globdots)               # Include hidden files.
 # Enable searching through history
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^F" history-incremental-pattern-search-forward
-
-# bindkey -e  # force Emacs key bindings
-# bindkey -v  # force Vim key bindings
-
+# bindkey '^ ' autosuggest-accept
+bindkey '^x' autosuggest-toggle
 
 # make auto/tab colors match ls-colors
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-
 # Load aliases and functions if existent.
-[ -f "$HOME/.config/shellconf/aliases" ] && source "$HOME/.config/shellconf/aliases"
-[ -f "$HOME/.config/shellconf/functions" ] && source "$HOME/.config/shellconf/functions"
-
-# Custom ZSH Binds
-# bindkey '^ ' autosuggest-accept
-bindkey '^x' autosuggest-toggle
+[ -f "$HOME/.config/shell/aliases" ] && source "$HOME/.config/shell/aliases"
+[ -f "$HOME/.config/shell/functions" ] && source "$HOME/.config/shell/functions"
 
 # Plugin list; put syntax-highlighting last!
 # Put downloadet plugins to /home/zsh/plugins
