@@ -209,7 +209,7 @@ bindsym $altmod+Tab exec rofi -show window \
         -config ~/.config/rofi/applauncher/rofiwindow.rasi
 
 # exit-menu
-bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu
+bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu3
 # Screenshots
 bindsym $mod+Print exec --no-startup-id flameshot full --path ~/Pictures/screenshots --delay 2000
 
@@ -289,9 +289,6 @@ bindsym $mod+c [class="discord"] scratchpad show border pixel 3
 bindsym $mod+shift+t exec --no-startup-id st -c dropdown
 bindsym $mod+t [class="dropdown"] scratchpad show
 
-## Scratchpad using xfce4-terminal
-#bindsym $mod+shift+t exec --no-startup-id xfce4-terminal --title=scratch-terminal
-#bindsym $mod+t [class="Xfce4-terminal" title="scratch-terminal"] scratchpad show
 
 #####################
 # Multimedia keys #
