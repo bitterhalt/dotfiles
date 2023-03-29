@@ -123,7 +123,7 @@ bindsym $mod+Ctrl+Left resize grow width 10 px or 10 ppt
 ##################
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id xfce4-terminal
+bindsym $mod+Return exec --no-startup-id st
 
 # kill focused window
 bindsym $mod+q kill
@@ -192,9 +192,10 @@ bindsym $mod+shift+w exec --no-startup-id /usr/bin/firefox
 bindsym $mod+shift+e exec --no-startup-id /usr/bin/thunar
 bindsym $mod+shift+d exec --no-startup-id discord
 bindsym $mod+shift+m exec --no-startup-id thunderbird
-bindsym $mod+shift+Delete exec --no-startup-id alacritty --class floatterm -e htop
-bindsym $mod+shift+r exec --no-startup-id alacritty --class floatterm -e ranger
-bindsym $mod+shift+n exec --no-startup-id alacritty --class floatterm -e nvim Documents/.vimwiki/notes.md
+bindsym XF86Calculator  exec --no-startup-id galculator
+bindsym $mod+shift+Delete exec --no-startup-id st -c floatterm -e htop
+bindsym $mod+shift+r exec --no-startup-id st -c floatterm -e ranger
+bindsym $mod+shift+n exec --no-startup-id st -c floatterm -e nvim Documents/.vimwiki/notes.md
 bindsym $mod+control+i exec --no-startup-id $HOME/.local/bin/sysnfo
 bindsym $mod+control+w exec --no-startup-id $HOME/.local/bin/weather-notify
 bindsym $mod+control+c exec --no-startup-id $HOME/.local/bin/dunst-calendar
@@ -208,7 +209,7 @@ bindsym $altmod+Tab exec rofi -show window \
         -config ~/.config/rofi/applauncher/rofiwindow.rasi
 
 # exit-menu
-bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu3
+bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu
 # Screenshots
 bindsym $mod+Print exec --no-startup-id flameshot full --path ~/Pictures/screenshots --delay 2000
 
@@ -274,7 +275,7 @@ bindsym $mod+minus scratchpad show
 # Scrathpad window rules #
 ##########################
 for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
-##for_window [class="dropdown|note"] floating enable, resize set 800 600,border pixel 3, move scratchpad
+for_window [class="dropdown|note"] floating enable, resize set 800 600,border pixel 3, move scratchpad
 
 # Set certain apps to live in the scratchpad
 for_window [class="discord"] move window to scratchpad
@@ -285,12 +286,12 @@ bindsym $mod+shift+s [class="Spotify"] scratchpad show
 bindsym $mod+c [class="discord"] scratchpad show border pixel 3
 
 # Scratchpad terminal
-#bindsym $mod+shift+t exec --no-startup-id alacritty --class dropdown
-#bindsym $mod+t [class="dropdown"] scratchpad show
+bindsym $mod+shift+t exec --no-startup-id st -c dropdown
+bindsym $mod+t [class="dropdown"] scratchpad show
 
 ## Scratchpad using xfce4-terminal
-bindsym $mod+shift+t exec --no-startup-id xfce4-terminal --title=scratch-terminal
-bindsym $mod+t [class="Xfce4-terminal" title="scratch-terminal"] scratchpad show
+#bindsym $mod+shift+t exec --no-startup-id xfce4-terminal --title=scratch-terminal
+#bindsym $mod+t [class="Xfce4-terminal" title="scratch-terminal"] scratchpad show
 
 #####################
 # Multimedia keys #
@@ -364,7 +365,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 ###################
 
 # class                 border  bground text    indicator
-client.focused          #458588 #458588 #282828 #458588
+client.focused          #b16286 #b16286 #282828 #b16286
 client.focused_inactive #3c3836 #3c3836 #ebdbb2 #3c3836
 client.unfocused        #3c3836 #3c3836 #ebdbb2 #3c3836
 client.urgent           #2f343a #cc241d #282828 #cc241d

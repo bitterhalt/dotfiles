@@ -69,7 +69,14 @@ font:
   # Point size
   size: 10.0
 
-draw_bold_text_with_bright_colors: true
+    #font:
+    #  normal:
+    #    family: Caskaydia Cove Nerd Font
+    #    style: Regular
+    #  # Point size
+    #  size: 11.0
+
+draw_bold_text_with_bright_colors: false
 
   # Theme
 import:
