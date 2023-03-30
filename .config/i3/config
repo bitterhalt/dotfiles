@@ -201,15 +201,15 @@ bindsym $mod+control+w exec --no-startup-id $HOME/.local/bin/weather-notify
 bindsym $mod+control+c exec --no-startup-id $HOME/.local/bin/dunst-calendar
 
 ## applacunher
-bindsym $mod+d exec rofi -modi drun -show drun \
-        -config ~/.config/rofi/applauncher/rofidmenu.rasi
+bindsym $mod+d exec ~/.config/rofi/applauncher/rofidmenu
+        
 
 ## window list
 bindsym $altmod+Tab exec rofi -show window \
         -config ~/.config/rofi/applauncher/rofiwindow.rasi
 
 # exit-menu
-bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu3
+bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/powermenu
 # Screenshots
 bindsym $mod+Print exec --no-startup-id flameshot full --path ~/Pictures/screenshots --delay 2000
 
@@ -274,7 +274,6 @@ bindsym $mod+minus scratchpad show
 ##########################
 # Scrathpad window rules #
 ##########################
-for_window [class="Xfce4-terminal" title="scratch-terminal"] floating enable, resize set 800 600,border pixel 3 move to scratchpad
 for_window [class="dropdown|note"] floating enable, resize set 800 600,border pixel 3, move scratchpad
 
 # Set certain apps to live in the scratchpad
