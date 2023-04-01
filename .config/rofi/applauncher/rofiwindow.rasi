@@ -18,6 +18,7 @@ configuration {
     display-drun: 					" ";
     display-emoji: 					" ";
     display-combi: 					" ";
+    font: "JetBrains Mono Nerd Font 10";
 }
 
 @import                          "~/.config/rofi/theme.rasi"
