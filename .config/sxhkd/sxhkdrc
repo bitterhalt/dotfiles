@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	xfce4-terminal
+	st
 
 # program launcher
 super + d
@@ -16,7 +16,7 @@ alt + Tab
 
 # power-menu
 super + shift + p
-     $HOME/.config/rofi/powermenu/powermenu3
+     $HOME/.config/rofi/powermenu/powermenu
 
 
 # Launch Apps
