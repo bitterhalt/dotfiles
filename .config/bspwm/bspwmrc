@@ -11,7 +11,7 @@ bspc monitor -d 1 2 3 4 5 6 7 8 9
 #bspc monitor HDMI-A-0 -d 1 2 3 4 5 6 7 8 9
 
 # To make mouse movement smoother with higher refresh rate monitors
-#bspc config pointer_motion_interval 14ms
+bspc config pointer_motion_interval 7ms
 
 bspc config border_width          2
 bspc config window_gap           10
@@ -33,15 +33,13 @@ xset s 3600 dpms 3600 3600 3600
 # Window rules
 ##############
 #bspc rule -a Screenkey manage=off
-bspc rule -a discord desktop='^6' follow=off focus=off
 bspc rule -a authy state=floating
-bspc rule -a Joplin desktop='^3'
+bspc rule -a Joplin desktop='^4'
 bspc rule -a Steam desktop='^6' state=floating= follow=off focus=off
 bspc rule -a Pavucontrol state=floating
 bspc rule -a Galculator state=floating
 bspc rule -a mpv state=floating
 bspc rule -a thunderbird desktop='^4' follow=on focus=on
-bspc rule -a Thunar desktop='^3' follow=off focus=on
 bspc rule -a nitrogen state=floating
 bspc rule -a Gimp-2.10 state=floating follow=off focus=off
 bspc rule -a firefox desktop='^2' follow=on focus=on
@@ -51,6 +49,7 @@ bspc rule -a feh state=floating
 bspc rule -a Lxappearance state=floating
 bspc rule -a corectrl desktop '^7'
 bspc rule -a qBittorrent desktop '^7'
+bspc rule -a Nsxiv state=floating
 
 ########
 # colors
