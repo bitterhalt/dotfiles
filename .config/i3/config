@@ -221,7 +221,6 @@ bindsym $mod+Shift+Print exec --no-startup-id flameshot gui --path ~/Pictures/sc
 #for_window [class=Thunderbird] focus
 #for_window [class=Xfce4-terminal] focus
 for_window [class=(?i)firefox] focus
-for_window [class=Thunar] focus
 #####################################
 # Spawn windows for specific workspaces #
 #####################################
@@ -231,7 +230,6 @@ assign [class="Gimp"] $ws8
 assign [class="Joplin"] $ws4
 assign [class="Steam"] $ws6
 assign [class="transmission-gtk"] $ws5
-assign [class="Thunar"] $ws3
 assign [class="qBittorrent"] $ws5
 assign [class="thunderbird"] $ws4
 assign [class="kdenlive"]   $ws3

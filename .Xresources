@@ -62,3 +62,10 @@ st.font: JetBrains Mono Nerd Font:pixelsize=14
 !! Nsxiv colors
 Nsxiv*background: #282828
 Nsxiv*foreground: #458588
+
+dwm.normbordercolor: #3c3836
+dwm.normbgcolor: #1d2021
+dwm.normfgcolor: #a89984
+dwm.selbordercolor: #076678
+dwm.selbgcolor: #076678
+dwm.selfgcolor:#1d2021
