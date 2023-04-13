@@ -1,0 +1,4 @@
+#!/bin/sh
+. sb-theme
+display " $(date '+%H:%M') "
+

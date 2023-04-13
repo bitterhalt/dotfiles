@@ -1,0 +1,9 @@
+#!/bin/sh
+case $BLOCK_BUTTON in
+	1) st -c floatterm -g 144x41 -e paru ;;
+esac
+cupd=$(checkupdates | wc -l)
+. sb-theme
+display " $cupd"
+
+

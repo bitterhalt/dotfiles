@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Gruvbox colorscheme
+color0="#1d2021"
+color1="#cc241d"
+color2="#98971a"
+color3="#d79921"
+color4="#458588"
+color5="#b16286"
+color6="#689d6a"
+color7="#a89984"
+color8="#928374"
+color9="#ebdbb2"
+display() {
+    args=""
+    case $1 in
+        -n) args="-n"; shift ;;
+    esac
+
+    if [ -n "${2+x}" ]; then
+        color=$9
+	else
+		case "$(basename $0)" in
+            sb-updates) color="$color5" ;;
+            sb-cpu) color="$color7" ;;
+            sb-memory) color="$color7" ;;
+            sb-volume) color="$color5";;
+            sb-date) color="$color4";;
+            *) color="$color8" ;;
+        esac
+    fi
+    echo $args "^c$color^$1"
+}
