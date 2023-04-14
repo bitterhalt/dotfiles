@@ -2,28 +2,22 @@
 
 case $BLOCK_BUTTON in
 	1) st -c floatterm -e pulsemixer ;;
-	2) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
+	2) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
 esac
+. sb-theme
+if [ "$(pamixer --get-mute)" = true ]; then
+    display " "
+    exit
+fi
 
-vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
-
-[ "$vol" != "${vol%\[MUTED\]}" ] && echo  && exit
-
-vol="${vol#Volume: }"
-
-split() {
-	IFS=$2
-	set -- $1
-	printf '%s' "$@"
-}
-
-vol="$(printf "%.0f" "$(split "$vol" ".")")"
+vol="$(pamixer --get-volume)"
+[ $? -ne 0 ] && [ -z "$vol" ] && exit 1
 
 case 1 in
 	$((vol >= 30)) ) icon=" " ;;
 	$((vol >= 15)) ) icon=" " ;;
 	$((vol >= 1)) ) icon=" " ;;
-	* ) echo  && exit ;;
+	* ) display  && exit ;;
 esac
-. sb-theme
+
 display "$icon$vol%"

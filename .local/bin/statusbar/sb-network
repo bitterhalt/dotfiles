@@ -1,0 +1,23 @@
+#!/bin/sh
+# Original script made by Luke Smith: https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/statusbar/sb-internet
+# Nerd fonts or symbols needed to draw icons. If you want to use emojis just copy original script from luke's Github!
+case $BLOCK_BUTTON in
+	1) st -c floatterm -g 120x34 -e nmtui ;;
+	3) notify-send "󰈀  network module" "\- Click to connect
+ : wifi disabled
+睊: no wifi connection
+直: wifi connection with quality
+ : no ethernet
+󰈀 : ethernet working
+ : vpn is active
+" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+if grep -xq 'up' /sys/class/net/w*/operstate 2>/dev/null ; then
+	wifiicon="$(awk '/^\s*w/ { print "直", int($3 * 100 / 70) "% " }' /proc/net/wireless)"
+elif grep -xq 'down' /sys/class/net/w*/operstate 2>/dev/null ; then
+	grep -xq '0x1003' /sys/class/net/w*/flags && wifiicon="睊 " || wifiicon=" "
+fi
+
+printf "%s%s%s\n" "$wifiicon" "$(sed "s/down/ /;s/up/󰈀 /" /sys/class/net/e*/operstate 2>/dev/null)" "$(sed "s/.*//" /sys/class/net/tun*/operstate 2>/dev/null)"
