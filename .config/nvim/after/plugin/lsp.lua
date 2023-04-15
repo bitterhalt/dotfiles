@@ -24,8 +24,6 @@ cmp.setup({
         documentation = cmp.config.window.bordered(),
     },
     mapping = {
-        ['<Tab>'] = cmp_action.tab_complete(),
-        ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
         ['<C-b>'] = cmp_action.luasnip_jump_backward(),
         ['<Enter>'] = cmp.mapping.confirm({ select = true }),
