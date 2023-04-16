@@ -2,6 +2,7 @@
 case $BLOCK_BUTTON in
     1) notify-send "CPU usage" "$(ps axch -o cmd,%cpu --sort=-%cpu | head)" ;;
     3) st -c floatterm -g 120x34 -e htop ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 read cpu a b c previdle rest < /proc/stat
 prevtotal=$((a+b+c+previdle))
