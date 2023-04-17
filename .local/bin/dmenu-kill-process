@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-
-# dmenu theming
 lines="-l 20"
-
 selected="$(ps -a -u $USER | \
             dmenu -i -p "Type to search and select process to kill" \
             $lines | \
