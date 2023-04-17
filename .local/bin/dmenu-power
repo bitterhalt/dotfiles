@@ -1,6 +1,6 @@
 #!/bin/bash
 
-options=("Reboot" "Shutdown" "Suspend" "Lock" "Lockout")
+options=("Lock" "Lockout" "Suspend" "Reboot" "Shutdown")
 selected=$(printf '%s\n' "${options[@]}" | dmenu -i -p "Power Options:")
 
 if [[ -n "$selected" ]]; then
