@@ -24,7 +24,7 @@ if [[ -n "$selected" ]]; then
             fi
             ;;
         "Lock")
-            dm-tool lock
+            i3lock-color
             ;;
         "Lockout")
             confirm=$(echo -e "Yes\nNo" | dmenu -i -p "Are you sure you want to lock the screen and logout?")
