@@ -1,0 +1,16 @@
+#!/bin/sh
+
+DIRECTORIES="DOTFILES
+DWM
+ST
+DMENU
+DWMBLOCKS"
+DMENUCHOICE=$(printf "$DIRECTORIES" | dmenu -l 5 -p "Select directory:")
+
+case $DMENUCHOICE in
+    DOTFILES) $TERMINAL -e nvim ~/Documents/suckless/ ;;
+    DWM) $TERMINAL -e nvim   ~/Documents/suckless/dwm/ ;;
+    ST) $TERMINAL -e nvim ~/Documents/suckless/st/ ;;
+    DMENU) $TERMINAL -e nvim ~/Documents/suckless/dmenu/ ;;
+    DWMBLOCKS) $TERMINAL -e nvim ~/Documents/suckless/dwmblocks-async/ ;;
+esac
