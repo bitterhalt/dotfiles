@@ -2,7 +2,7 @@
 /* Everyone is permitted to copy and distribute copies of this file under GNU-GPL3 */
 
 configuration {
-    modes: "drun,window,emoji";
+    modes: "drun,run,emoji";
     location: 						0;
     fixed-num-lines: 				true;
     show-icons: 					false;

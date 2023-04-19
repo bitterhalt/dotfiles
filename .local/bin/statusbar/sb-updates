@@ -1,10 +1,12 @@
 #!/bin/sh
 case $BLOCK_BUTTON in
 	1) st -c floatterm -g 144x41 -e paru ;;
+    3) notify-send "UPDATES AVALIABLE:" "$(checkupdates | awk '{print $1}')" ;;
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 cupd=$(checkupdates | wc -l)
 . sb-theme
 display " $cupd"
+
 
 
