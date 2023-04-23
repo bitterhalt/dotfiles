@@ -2,7 +2,7 @@
 # Original script made by Luke Smith: https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/statusbar/sb-internet
 # Nerd fonts or symbols needed to draw icons. If you want to use emojis just copy original script from luke's Github!
 case $BLOCK_BUTTON in
-	1) st -c floatterm -g 120x34 -e nmtui ;;
+	1) nm-connection-editor ;;
 	3) notify-send "󰈀  network module" "\- Click to connect
  : wifi disabled
 睊: no wifi connection
