@@ -1,8 +1,5 @@
 /**
- * ROFI Color theme
- * NAME: dt-dmenu.rasi
- * DESCRIPTION: This is a horizontal prompt similar to dmenu.
- * AUTHOR: Derek Taylor (DT)
+ * Dmenu-like one line rofi. Originally made by Derek Taylor and modified by bitterhalt
  */
 
 /*****----- Configuration -----*****/
