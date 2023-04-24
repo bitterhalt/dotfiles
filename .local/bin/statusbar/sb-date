@@ -1,4 +1,8 @@
 #!/bin/sh
+case $BLOCK_BUTTON in
+    1) dunst-calendar ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
 . sb-theme
 display " $(date '+%H:%M') "
 
