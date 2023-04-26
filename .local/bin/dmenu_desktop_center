@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# uses dmenu to find .desktop files instead of binarys. dmenu and j4-dmenu needs to be installed!
+
+j4-dmenu-desktop --dmenu=" dmenu -p "Find" -i -c -l 15" &> /dev/null
+
