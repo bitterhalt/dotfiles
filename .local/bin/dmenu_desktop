@@ -1,5 +1,6 @@
 #!/bin/sh
 
 # uses dmenu to find .desktop files instead of binarys. dmenu and j4-dmenu needs to be installed!
+# if you want also list binarys, use something like: "j4-dmenu-desktop --dmenu="(cat ; (stest -flx $(echo $PATH | tr : ' ') | sort -u)) | dmenu"
 
 j4-dmenu-desktop --dmenu=" dmenu -p "Find" -i" &> /dev/null
