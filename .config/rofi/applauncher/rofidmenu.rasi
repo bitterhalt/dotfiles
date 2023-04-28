@@ -38,7 +38,7 @@ configuration {
 #entry {
     padding: 3px;
     expand: false;
-    width: 15em;
+    width: 50em;
     text-color:       @foreground;
 }
 #element {

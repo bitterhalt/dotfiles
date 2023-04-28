@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+lines="-l 17"
+theme_path="~/.config/rofi/applauncher/rofidmenu-centered.rasi"
+selected="$(ps -a -u $USER | \
+            rofi -dmenu -i -p "Kill!" \
+            -theme $theme_path \
+            $lines | \
+            awk '{print $1" "$4}')"
+
+if [[ ! -z $selected ]]; then
+    answer="$(echo -e "yes\nno" | \
+            rofi -dmenu -i -p "$selected will be killed, are you sure?" \
+            -theme $theme_path \
+            $lines )"
+
+    if [[ $answer == "yes" ]]; then
+        selpid="$(awk '{print $1}' <<< $selected)"
+        kill -9 $selpid
+    fi
+fi
+
+exit 0
+
