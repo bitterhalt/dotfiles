@@ -1,5 +1,6 @@
 #!/bin/sh
 # DWM autostart script
+
 # Processes to check
 processes=( "corectrl" "dwmblocks" "picom" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
 
