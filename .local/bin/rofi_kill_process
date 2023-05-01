@@ -9,7 +9,7 @@ selected="$(ps -a -u $USER | \
 
 if [[ ! -z $selected ]]; then
     answer="$(echo -e "yes\nno" | \
-            rofi -dmenu -i -p "$selected will be killed, are you sure?" \
+            rofi -dmenu -i -p "KILL! $selected?" \
             -theme $theme_path \
             $lines )"
 

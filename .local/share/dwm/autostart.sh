@@ -1,12 +1,19 @@
-#!/bin/bash
+#!/bin/sh
+# DWM autostart script
+# Processes to check
+processes=( "corectrl" "dwmblocks" "picom" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+
+# Iterate over the processes and check if they are already running
+for process in "${processes[@]}"; do
+    if ! pgrep -x "$process" > /dev/null; then
+        "$process" &
+    fi
+done
 
 ~/.config/.screenlayout/monitor.sh &
 nitrogen --restore &
-xset s 3600 dpms 3600 3600 3600
+xset s 3600 dpms 3600 3600 3600 &
+xclip &
 
 
-autostart="xclip dwmblocks picom corectrl /usr/lib/polkit-gnome-authentication-agent-1"
 
-for program in $autostart; do
-	pidof -sx "$program" || "$program" &
-done >/dev/null 2>&1
