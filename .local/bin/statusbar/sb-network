@@ -5,8 +5,8 @@ case $BLOCK_BUTTON in
 	1) nm-connection-editor ;;
 	3) notify-send "󰈀  network module" "\- Click to connect
  : wifi disabled
-睊: no wifi connection
-直: wifi connection with quality
+󰖪 : no wifi connection
+ : wifi connection with quality
  : no ethernet
 󰈀 : ethernet working
  : vpn is active
