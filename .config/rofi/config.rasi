@@ -1,5 +1,5 @@
 configuration {
-    modes: "combi,run,drun,emoji,ssh,network";
+    modes: "combi,run,drun,emoji,ssh,";
     disable-history: false;
     sorting-method: "normal";
 

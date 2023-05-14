@@ -4,5 +4,5 @@ case $BLOCK_BUTTON in
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 . sb-theme
-display " $(date '+%H:%M') "
+display "$(date '+%H:%M')"
 

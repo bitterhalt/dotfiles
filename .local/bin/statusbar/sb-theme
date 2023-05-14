@@ -8,7 +8,7 @@ color3="#d79921"
 color4="#458588"
 color5="#b16286"
 color6="#689d6a"
-color7="#a89984"
+color7="#bdae93"
 color8="#928374"
 color9="#ebdbb2"
 display() {
@@ -18,7 +18,7 @@ display() {
     esac
 
     if [ -n "${2+x}" ]; then
-        color=$9
+        color=$7
 	else
 		case "$(basename $0)" in
             sb-updates) color="$color5" ;;
@@ -26,6 +26,7 @@ display() {
             sb-memory) color="$color7" ;;
             sb-volume) color="$color5";;
             sb-date) color="$color4";;
+            sb-network) color="$color7";;
             *) color="$color8" ;;
         esac
     fi

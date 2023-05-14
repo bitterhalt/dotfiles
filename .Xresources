@@ -17,6 +17,7 @@ st.font: JetBrains Mono Nerd Font:pixelsize=14
 !! Colors:
 
 !! gruvbox:
+!*.color0: #282828
 *.color0: #1d2021
 *.color1: #cc241d
 *.color2: #98971a
@@ -33,6 +34,7 @@ st.font: JetBrains Mono Nerd Font:pixelsize=14
 *.color13: #d3869b
 *.color14: #8ec07c
 *.color15: #ebdbb2
+!*.background: #282828
 *.background: #1d2021
 *.cursorColor: #ebdbb2
 *.foreground: #ebdbb2
@@ -63,9 +65,11 @@ st.font: JetBrains Mono Nerd Font:pixelsize=14
 Nsxiv*background: #282828
 Nsxiv*foreground: #458588
 
+
+!! Dwm colors
 dwm.normbordercolor: #3c3836
 dwm.normbgcolor: #1d2021
-dwm.normfgcolor: #a89984
-dwm.selbordercolor: #076678
-dwm.selbgcolor: #076678
-dwm.selfgcolor:#1d2021
+dwm.normfgcolor: #bdae93
+dwm.selbordercolor: #458588
+dwm.selbgcolor: #458588
+dwm.selfgcolor: #1d2021
