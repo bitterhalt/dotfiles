@@ -6,7 +6,7 @@ case $BLOCK_BUTTON in
 esac
 cupd=$(checkupdates | wc -l)
 . sb-theme
-display " $cupd"
+display " ^d^$cupd"
 
 
 

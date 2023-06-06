@@ -1,13 +1,13 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-	1) st -c floatterm -e pulsemixer ;;
+	1) pavucontrol ;;
 	2) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 . sb-theme
 if [ "$(pamixer --get-mute)" = true ]; then
-    display " "
+    display "Mute "
     exit
 fi
 
@@ -18,7 +18,7 @@ case 1 in
 	$((vol >= 30)) ) icon=" " ;;
 	$((vol >= 15)) ) icon=" " ;;
 	$((vol >= 1)) ) icon=" " ;;
-	* ) display  && exit ;;
+	* ) display Mute && exit ;;
 esac
 
-display "$icon$vol%"
+display "$icon^d^$vol%"

@@ -1,16 +1,16 @@
 #!/bin/sh
 
 # Gruvbox colorscheme
-color0="#1d2021"
-color1="#cc241d"
-color2="#98971a"
-color3="#d79921"
-color4="#458588"
-color5="#b16286"
-color6="#689d6a"
-color7="#bdae93"
-color8="#928374"
-color9="#ebdbb2"
+color0="#1d2021" # black
+color1="#cc241d" # Red
+color2="#98971a" # green
+color3="#d79921" # yellow
+color4="#458588" # blue
+color5="#b16286" # purple
+color6="#689d6a" # green2
+color7="#bdae93" # grey
+color8="#928374" # gray2 
+color9="#ebdbb2" # white
 display() {
     args=""
     case $1 in
@@ -27,7 +27,7 @@ display() {
             sb-volume) color="$color5";;
             sb-date) color="$color4";;
             sb-network) color="$color7";;
-            *) color="$color8" ;;
+            *) color="$color7" ;;
         esac
     fi
     echo $args "^c$color^$1"
