@@ -13,7 +13,7 @@ done
 
 ~/.config/.screenlayout/monitor.sh &
 nitrogen --restore &
-xset s 3600 dpms 3600 3600 3600 &
+#xset s 3600 dpms 3600 3600 3600 &
 xclip &
 
 
