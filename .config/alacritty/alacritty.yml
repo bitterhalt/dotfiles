@@ -80,7 +80,7 @@ draw_bold_text_with_bright_colors: false
 
   # Theme
 import:
-  - ~/.config/alacritty/themes/onedark.yml
+  - ~/.config/alacritty/themes/gh-dark.yml
 
 # Visual Bell
 #
