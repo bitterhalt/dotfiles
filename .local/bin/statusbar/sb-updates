@@ -3,7 +3,7 @@ case $BLOCK_BUTTON in
 	1) st -c floatterm -g 144x41 -e paru && pkill -RTMIN+1 dwmblocks ;;
     3) updates=$(checkupdates | awk '{print $1}')
        if [ -z "$updates" ]; then
-           dunstify "There are no updates available"
+           dunstify "No updates available"
        else
            dunstify "Updates Available" "$updates"
        fi ;;
