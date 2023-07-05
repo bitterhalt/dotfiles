@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Simple screenshot rofi script. Depends on imagemagick
+# Original script: https://github.com/newmanls
+set -euo pipefail
+
+take_screenshot() {
+    filename="$(date +%Y-%m-%d-%H-%M).png"
+    filepath="${ssdir}/${filename}"
+
+    mkdir -p "${ssdir}"
+    import -silent "${@}" "${filepath}"
+
+    [ ! -f "${filepath}" ] && exit 1
+
+    xclip -selection clipboard -t image/png -i "${filepath}" &&
+        notify-send \
+            -i "${filepath}" \
+            -A "xdg-open ${filepath}"=Open \
+            "Screenshot saved" |
+            bash
+}
+
+ssdir="${HOME}/Pictures/screenshots"
+timer_delay=5
+options=(" Fullscreen" " Window" "󰩬 Select region" " Timer (${timer_delay}s)")
+chosen="$(printf "%s\n" "${options[@]}" | rofi -dmenu -i -p "Take screenshot" -theme ~/.config/rofi/applauncher/rofiscreenshotrasi)"
+
+case "${chosen}" in
+    " Fullscreen") take_screenshot -window root ;;
+    " Window")     take_screenshot -window "$(xdotool getactivewindow)" ;;
+    "󰩬 Select region") take_screenshot ;;
+    " Timer (${timer_delay}s)")     take_screenshot -window root -pause "${timer_delay}" ;;
+esac
+
