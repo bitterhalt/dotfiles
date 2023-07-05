@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+# https://github.com/bitterhalt
+
 lines="-l 17"
-theme_path="~/.config/rofi/applauncher/rofidmenu-centered.rasi"
+theme_path="~/.config/rofi/applauncher/rofi_applauncher.rasi"
 selected="$(ps -a -u $USER | \
             rofi -dmenu -i -p "Kill!" \
             -theme $theme_path \
