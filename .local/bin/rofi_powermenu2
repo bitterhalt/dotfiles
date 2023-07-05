@@ -5,10 +5,6 @@
 #
 ## Rofi   : Power Menu
 #
-## Available Styles
-#
-## style-1   style-2   style-3   style-4   style-5
-
 # Current Theme
 dir="$HOME/.config/rofi/powermenu/"
 theme='oneline_pwrmenu'
@@ -20,7 +16,7 @@ prompt=$(uptime -p | sed 's/up/Uptime:/;s/ days\?/d/;s/ hours\?/h/;
 shutdown=' Shutdown'
 reboot=' Reboot'
 lock=' Lock'
-suspend=' Suspend'
+suspend='  Suspend'
 logout=' Logout'
 yes='Yes'
 no='No'
