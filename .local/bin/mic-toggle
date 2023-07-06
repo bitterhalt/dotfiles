@@ -1,5 +1,6 @@
 #!/bin/bash
 
 
-amixer set Capture toggle && amixer get Capture | grep "\[off\]" && dunstify -t 3000 "Microphone is OFF" || dunstify -t 3000 "Microphone is ON"
+amixer set Capture toggle && amixer get Capture | grep "\[off\]" && dunstify -t 3000 "Microphone is OFF" || dunstify -t 3000 "Microphone is ON" && pkill -RTMIN+7 dwmblocks
+
 
