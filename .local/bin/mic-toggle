@@ -1,6 +1,12 @@
 #!/bin/bash
 
+pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-amixer set Capture toggle && amixer get Capture | grep "\[off\]" && dunstify -t 3000 "Microphone is OFF" || dunstify -t 3000 "Microphone is ON" && pkill -RTMIN+7 dwmblocks
+if pactl list sources | grep -q "Mute: yes"; then
+    dunstify -t 3000 "Microphone is OFF"
+else
+    dunstify -t 3000 "Microphone is ON"
+fi
+pkill -RTMIN+7 dwmblocks
 
 
