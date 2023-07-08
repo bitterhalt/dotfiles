@@ -6,19 +6,19 @@ case $BLOCK_BUTTON in
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 . sb-theme
-if [ "$(pamixer --get-mute)" = true ]; then
-    display "Mute "
+if [ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ]; then
+    display "󰸈"
     exit
 fi
 
-vol="$(pamixer --get-volume)"
+vol="$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%')"
 [ $? -ne 0 ] && [ -z "$vol" ] && exit 1
 
 case 1 in
 	$((vol >= 30)) ) icon=" " ;;
 	$((vol >= 15)) ) icon=" " ;;
 	$((vol >= 1)) ) icon=" " ;;
-	* ) display Mute && exit ;;
+	* ) display "󰸈" && exit ;;
 esac
 
-display "$icon^d^$vol%"
+display "$icon^d^"

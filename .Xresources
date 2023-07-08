@@ -39,37 +39,47 @@ st.font: JetBrains Mono Nerd Font:pixelsize=14
 *.cursorColor: #ebdbb2
 *.foreground: #ebdbb2
 
-
-!! Dracula
-!*.color0:     #000000
-!*.color1:     #FF5555
-!*.color2:     #50FA7B
-!*.color3:     #F1FA8C
-!*.color4:     #BD93F9
-!*.color5:     #FF79C6
-!*.color6:     #8BE9FD
-!*.color7:     #BFBFBF
-!*.color8:     #6272a4
-!*.color9:     #FF6E67
-!*.color10:    #5AF78E
-!*.color11:    #F4F99D
-!*.color12:    #CAA9FA
-!*.color13:    #FF92D0
-!*.color14:    #9AEDFE
-!*.color15:    #E6E6E6
-!*.background: #282A36
-!*.cursorColor:#F8F8F2
-!*.foreground: #F8F8F2
+!! One-dark
+!*.background: #1f2329
+!*.foreground: #a0a8b7
+!*.cursorColor:#a0a8b7
+!
+!*.color0: #181b20
+!*.color1: #e55561
+!*.color2: #8ebd6b
+!*.color3: #e2b86b
+!*.color4: #4fa6ed
+!*.color5: #bf68d9
+!*.color6: #48b0bd
+!*.color7: #535965
+!
+!*.color8:  #282c34
+!*.color9:  #e55561
+!*.color10: #8ebd6b
+!*.color11: #e2b86b
+!*.color12: #4fa6ed
+!*.color13: #bf68d9
+!*.color14: #48b0bd
+!*.color15: #a0a8b7
 
 !! Nsxiv colors
 Nsxiv*background: #282828
 Nsxiv*foreground: #458588
 
 
-!! Dwm colors
+
+!! Dwm colors Gruvbox
 dwm.normbordercolor: #3c3836
 dwm.normbgcolor: #1d2021
 dwm.normfgcolor: #bdae93
 dwm.selbordercolor: #458588
 dwm.selbgcolor: #458588
 dwm.selfgcolor: #1d2021
+
+!! Dwm colors One-dark
+!dwm.normbordercolor: #282c34
+!dwm.normbgcolor: #181b20
+!dwm.normfgcolor: #a0a8b7
+!dwm.selbordercolor: #48b0bd
+!dwm.selbgcolor: #48b0bd
+!dwm.selfgcolor: #181b20

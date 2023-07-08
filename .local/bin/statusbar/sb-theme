@@ -1,4 +1,14 @@
 #!/bin/sh
+#
+# One-dark colorscheme
+#color0= "#181b20"
+#color1= "#e55561"
+#color2= "#8ebd6b"
+#color3= "#e2b86b"
+#color4= "#4fa6ed"
+#color5= "#bf68d9"
+#color6= "#48b0bd"
+#color7= "#535965"
 
 # Gruvbox colorscheme
 color0="#1d2021" # black
@@ -7,10 +17,8 @@ color2="#98971a" # green
 color3="#d79921" # yellow
 color4="#458588" # blue
 color5="#b16286" # purple
-color6="#689d6a" # green2
-color7="#bdae93" # grey
-color8="#928374" # gray2 
-color9="#ebdbb2" # white
+color7="#928374" # fg
+color8="#ebdbb2" # fg 2
 display() {
     args=""
     case $1 in

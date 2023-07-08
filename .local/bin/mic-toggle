@@ -3,9 +3,9 @@
 pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 if pactl list sources | grep -q "Mute: yes"; then
-    dunstify -t 3000 "Microphone is OFF"
+    dunstify -i "mic" -u low "Microphone is off"
 else
-    dunstify -t 3000 "Microphone is ON"
+    dunstify -i "mic-off" -u low "Microphone is on"
 fi
 pkill -RTMIN+7 dwmblocks
 

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+step=5
+
+case "${1:-}" in
+    up)
+        pactl set-sink-mute @DEFAULT_SINK@ 0
+        pactl set-sink-volume @DEFAULT_SINK@ "+${step}%" 
+        kill -39 $(pidof dwmblocks) ;;
+    down)
+        pactl set-sink-mute @DEFAULT_SINK@ 0
+        pactl set-sink-volume @DEFAULT_SINK@ "-${step}%"
+        kill -39 $(pidof dwmblocks) ;;
+    mute)
+        pactl set-sink-mute @DEFAULT_SINK@ toggle 
+        kill -39 $(pidof dwmblocks) ;;
+esac
+
+vol=$(pactl get-sink-volume @DEFAULT_SINK@ | cut -s -d/ -f2 | tr -d " %")
+volume="${vol}%"
+is_muted=$(pactl get-sink-mute @DEFAULT_SINK@ | sed -n "s/Mute: //p")
+
+if [ "${is_muted}" = "yes" ]; then
+    volume="muted"
+    icon="volume-x"
+elif (( vol == 0 )); then
+    icon="volume-1"
+elif (( vol <= 30 )); then
+    icon="volume-2"
+elif (( vol <= 70 )); then
+    icon="volume-2"
+else
+    icon="volume-2"
+fi
+
+dunstify "${volume}" -i "${icon}" -r 2539 -t 1000
