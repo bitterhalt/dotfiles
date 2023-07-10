@@ -1,10 +1,13 @@
 add_newline = false
 format = """
+$os\
 $directory\
 $git_branch\
 $git_status\
 $character\
 $cmd_duration"""
+
+right_format = "$time"
 
 [character]
 success_symbol = "[❯](green)"
@@ -12,10 +15,44 @@ error_symbol = "[❯](red)"
 
 [directory]
 format = "[$path]($style)(bold blue)[$read_only](bold red)($read_only_style) "
-truncation_length = 4
+truncation_length = 3
 truncation_symbol = '…/'
-home_symbol = "  "
+home_symbol = " ~"
 read_only = " "
+
+[time]
+format = "[$time]($style)"
+disabled = false
+style = "grey"
+
+[os]
+disabled = false
+
+[os.symbols]
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Gentoo = " "
+HardenedBSD = "ﲊ "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+openSUSE = " "
+Pop = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = " "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
 
 [git_branch]
 style = "bold #7C83FD"
@@ -36,3 +73,4 @@ format = "[$duration]($style) "
 style = "yellow"
 #[sudo]
 #disabled = false
+
