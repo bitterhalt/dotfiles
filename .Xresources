@@ -34,6 +34,7 @@ st.font: JetBrains Mono Nerd Font:pixelsize=14
 
 
 !! One-dark
+!*.background: #1f2329
 *.background: #1e222a
 *.foreground: #c8ccd4
 *.cursorColor:#c8ccd4
@@ -69,9 +70,9 @@ Nsxiv*foreground: #56b6c2
 !dwm.selfgcolor: #1d2021
 
 !! Dwm colors One-dark
-dwm.normbordercolor: #2e323a
-dwm.normbgcolor: #1e222a
+dwm.normbordercolor: #282c34
+dwm.normbgcolor: #181b20
 dwm.normfgcolor: #abb2bf
 dwm.selbordercolor: #56b6c2
-dwm.selbgcolor: #2e323a
+dwm.selbgcolor: #282c34
 dwm.selfgcolor: #abb2bf
