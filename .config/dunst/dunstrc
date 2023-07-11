@@ -324,18 +324,20 @@
     background = "#1e222a"
     foreground = "#c8ccd4"
     timeout = 3
+#    icon = info
 
 [urgency_normal]
     background = "#1e222a"
     foreground = "#c8ccd4"
     timeout = 5
+#    icon = info
 
 [urgency_critical]
     background = "#1e222a"
-    foreground = "#c8ccd4"
-    frame_color = "#e2b86b"
+    foreground = "#FFFFFF"
+    frame_color = "#ff0000"
     timeout = 5
-
+    icon = alert-triangle
 
 [stack-volumes]
     appname = "some_volume_notifiers"
