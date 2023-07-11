@@ -7,79 +7,71 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xcursor.theme: Qogir-dark
 
-
-!! Set a default font and font size as below:
 st.font: JetBrains Mono Nerd Font:pixelsize=14
 
-! st.termname: st-256color
-! st.borderpx: 2
+!! gruvbox dark-hard:
+!*.background: #1d2021
+!*.cursorColor: #ebdbb2
+!*.foreground: #ebdbb2
+!
+!*.color0: #1d2021
+!*.color1: #cc241d
+!*.color2: #98971a
+!*.color3: #d79921
+!*.color4: #458588
+!*.color5: #b16286
+!*.color6: #689d6a
+!*.color7: #a89984
+!!!
+!*.color8: #928374
+!*.color9: #fb4934
+!*.color10: #b8bb26
+!*.color11: #fabd2f
+!*.color12: #83a598
+!*.color13: #d3869b
+!*.color14: #8ec07c
+!*.color15: #ebdbb2
 
-!! Colors:
-
-!! gruvbox:
-!*.color0: #282828
-*.color0: #1d2021
-*.color1: #cc241d
-*.color2: #98971a
-*.color3: #d79921
-*.color4: #458588
-*.color5: #b16286
-*.color6: #689d6a
-*.color7: #a89984
-*.color8: #928374
-*.color9: #fb4934
-*.color10: #b8bb26
-*.color11: #fabd2f
-*.color12: #83a598
-*.color13: #d3869b
-*.color14: #8ec07c
-*.color15: #ebdbb2
-!*.background: #282828
-*.background: #1d2021
-*.cursorColor: #ebdbb2
-*.foreground: #ebdbb2
 
 !! One-dark
-!*.background: #1f2329
-!*.foreground: #a0a8b7
-!*.cursorColor:#a0a8b7
+*.background: #1e222a
+*.foreground: #c8ccd4
+*.cursorColor:#c8ccd4
+
+*.color0: #282c34
+*.color1: #e06c75
+*.color2: #98c379
+*.color3: #e5c07b
+*.color4: #61afef
+*.color5: #c678dd
+*.color6: #56b6c2
+*.color7: #abb2bf
 !
-!*.color0: #181b20
-!*.color1: #e55561
-!*.color2: #8ebd6b
-!*.color3: #e2b86b
-!*.color4: #4fa6ed
-!*.color5: #bf68d9
-!*.color6: #48b0bd
-!*.color7: #535965
-!
-!*.color8:  #282c34
-!*.color9:  #e55561
-!*.color10: #8ebd6b
-!*.color11: #e2b86b
-!*.color12: #4fa6ed
-!*.color13: #bf68d9
-!*.color14: #48b0bd
-!*.color15: #a0a8b7
+*.color8:  #545862
+*.color9:  #e06c75
+*.color10: #98c379
+*.color11: #e5c07b
+*.color12: #61afef
+*.color13: #c678dd
+*.color14: #56b6c2
+*.color15: #c8ccd4
 
 !! Nsxiv colors
-Nsxiv*background: #282828
-Nsxiv*foreground: #458588
+Nsxiv*background: #1e222a
+Nsxiv*foreground: #56b6c2
 
-
-
-!! Dwm colors Gruvbox
-dwm.normbordercolor: #3c3836
-dwm.normbgcolor: #1d2021
-dwm.normfgcolor: #bdae93
-dwm.selbordercolor: #458588
-dwm.selbgcolor: #458588
-dwm.selfgcolor: #1d2021
+!!! Dwm colors Gruvbox
+!dwm.normbordercolor: #3c3836
+!dwm.normbgcolor: #1d2021
+!dwm.normfgcolor: #bdae93
+!dwm.selbordercolor: #458588
+!dwm.selbgcolor: #458588
+!dwm.selfgcolor: #1d2021
 
 !! Dwm colors One-dark
-!dwm.normbordercolor: #282c34
-!dwm.normbgcolor: #181b20
-!dwm.normfgcolor: #a0a8b7
-!dwm.selbordercolor: #48b0bd
-!dwm.selbgcolor: #48b0bd
-!dwm.selfgcolor: #181b20
+dwm.normbordercolor: #2e323a
+dwm.normbgcolor: #1e222a
+dwm.normfgcolor: #abb2bf
+dwm.selbordercolor: #56b6c2
+dwm.selbgcolor: #2e323a
+dwm.selfgcolor: #abb2bf

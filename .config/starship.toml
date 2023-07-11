@@ -30,7 +30,7 @@ disabled = false
 
 [os.symbols]
 Android = " "
-Arch = " "
+Arch = "  "
 CentOS = " "
 Debian = " "
 Emscripten = " "

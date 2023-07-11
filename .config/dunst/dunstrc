@@ -89,8 +89,8 @@
     frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#458588"
-    #frame_color = "#282c34"
+    #frame_color = "#458588"
+    frame_color = "#282c34"
 
     # Define a color for the separator.
     # possible values are:
@@ -185,10 +185,9 @@
 
     ### Icons ###
     # define all lookup paths
-    # enable_recursive_icon_lookup = true
 
     # Set icon theme (only used for recursive icon lookup)
-    icon_theme = Adwaita
+    #icon_theme = Qogir-dark
     # You can also set multiple icon themes, with the leftmost one being used first.
     # icon_theme = "Adwaita, breeze"
 
@@ -202,9 +201,8 @@
 
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 24
-
-    # Paths to default icons.
     icon_path = /home/bazz/Downloads/feather/
+    # Paths to default icons.
     #icon_path = /usr/share/icons/Qogir/16/status:/usr/share/icons/Qogir/16/devices/:/usr/share/icons/Qogir/16/apps/:/usr/share/pixmaps/
 
     ### History ###
@@ -298,49 +296,45 @@
     per_monitor_dpi = false
 
 ## Gruvbox-dark ##
-
-[urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#282828"
-    foreground = "#ebdbb2"
-    timeout = 5
-    # Icon for notifications with low urgency, uncomment to enable
-    #icon = /path/to/icon
-
-[urgency_normal]
-    background = "#282828"
-    foreground = "#ebdbb2"
-    timeout = 5
-    # Icon for notifications with normal urgency, uncomment to enable
-    #icon = /path/to/icon
-
-[urgency_critical]
-    background = "#282828"
-    foreground = "#FFFFFF"
-    frame_color = "#ff0000"
-    timeout = 0
-
-## One-dark ##
-#    frame_color = "#458588
-#    [urgency_low]
-#    background = "#181b20"
-#    foreground = "#a0a8b7"
-#    highlight = "#535965"
-#    timeout = 3
+#
+#[urgency_low]
+#    # IMPORTANT: colors have to be defined in quotation marks.
+#    # Otherwise the "#" and following would be interpreted as a comment.
+#    background = "#282828"
+#    foreground = "#ebdbb2"
+#    timeout = 5
+#    # Icon for notifications with low urgency, uncomment to enable
+#    #icon = /path/to/icon
 #
 #[urgency_normal]
-#    background = "#181b20"
-#    foreground = "#a0a8b7"
-#    highlight = "#535965"
+#    background = "#282828"
+#    foreground = "#ebdbb2"
 #    timeout = 5
+#    # Icon for notifications with normal urgency, uncomment to enable
+#    #icon = /path/to/icon
 #
 #[urgency_critical]
-#    background = "#181b20"
-#    foreground = "#a0a8b7"
-#    frame_color = "#e2b86b"
-#    highlight = "#535965"
-#    timeout = 5
+#    background = "#282828"
+#    foreground = "#FFFFFF"
+#    frame_color = "#ff0000"
+#    timeout = 0
+
+## One-dark ##
+    [urgency_low]
+    background = "#1e222a"
+    foreground = "#c8ccd4"
+    timeout = 3
+
+[urgency_normal]
+    background = "#1e222a"
+    foreground = "#c8ccd4"
+    timeout = 5
+
+[urgency_critical]
+    background = "#1e222a"
+    foreground = "#c8ccd4"
+    frame_color = "#e2b86b"
+    timeout = 5
 
 
 [stack-volumes]

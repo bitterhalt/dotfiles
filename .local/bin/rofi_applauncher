@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 dir="$HOME/.config/rofi/applauncher"
-theme='rofi_applauncher'
+theme='rofi_applauncher2'
 
 ## Run
 rofi \

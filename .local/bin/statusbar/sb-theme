@@ -1,24 +1,25 @@
 #!/bin/sh
 #
 # One-dark colorscheme
-#color0= "#181b20"
-#color1= "#e55561"
-#color2= "#8ebd6b"
-#color3= "#e2b86b"
-#color4= "#4fa6ed"
-#color5= "#bf68d9"
-#color6= "#48b0bd"
-#color7= "#535965"
+color0="#1e222a"
+color1="#282c34"
+color2="#e06c75"
+color3="#98c379"
+color4="#61afef"
+color5="#c678dd"
+color6="#56b6c2"
+color7="#535965"
+color8="#abb2bf"
 
 # Gruvbox colorscheme
-color0="#1d2021" # black
-color1="#cc241d" # Red
-color2="#98971a" # green
-color3="#d79921" # yellow
-color4="#458588" # blue
-color5="#b16286" # purple
-color7="#928374" # fg
-color8="#ebdbb2" # fg 2
+#color0="#1d2021" # black
+#color1="#cc241d" # Red
+#color2="#98971a" # green
+#color3="#d79921" # yellow
+#color4="#458588" # blue
+#color5="#b16286" # purple
+#color7="#bdae93" # fg
+#color8="#ebdbb2" # fg 2
 display() {
     args=""
     case $1 in
@@ -30,10 +31,10 @@ display() {
 	else
 		case "$(basename $0)" in
             sb-updates) color="$color5" ;;
-            sb-cpu) color="$color7" ;;
-            sb-memory) color="$color7" ;;
+            sb-cpu) color="$color8" ;;
+            sb-memory) color="$color8" ;;
             sb-volume) color="$color5";;
-            sb-date) color="$color4";;
+            sb-date) color="$color8";;
             sb-network) color="$color7";;
             *) color="$color7" ;;
         esac

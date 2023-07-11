@@ -39,7 +39,8 @@ return packer.startup(function(use)
     use ('nvim-tree/nvim-tree.lua')
     use ('kyazdani42/nvim-web-devicons')
     use ('nvim-treesitter/nvim-treesitter')
-    use ('luisiacc/gruvbox-baby')
+    --use ('luisiacc/gruvbox-baby')
+    use ('navarasu/onedark.nvim')
     use({"nvim-telescope/telescope.nvim",
         tag = "0.1.0",requires = { { "nvim-lua/plenary.nvim" }
         },

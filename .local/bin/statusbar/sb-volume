@@ -7,7 +7,7 @@ case $BLOCK_BUTTON in
 esac
 . sb-theme
 if [ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ]; then
-    display "󰸈"
+    display "  "
     exit
 fi
 
@@ -15,10 +15,10 @@ vol="$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%')"
 [ $? -ne 0 ] && [ -z "$vol" ] && exit 1
 
 case 1 in
-	$((vol >= 30)) ) icon=" " ;;
-	$((vol >= 15)) ) icon=" " ;;
-	$((vol >= 1)) ) icon=" " ;;
-	* ) display "󰸈" && exit ;;
+	$((vol >= 30)) ) icon="" ;;
+	$((vol >= 15)) ) icon="" ;;
+	$((vol >= 1)) ) icon="" ;;
+	* ) display " " && exit ;;
 esac
 
 display "$icon^d^"
