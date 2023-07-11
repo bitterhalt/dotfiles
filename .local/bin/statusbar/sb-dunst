@@ -1,0 +1,12 @@
+#!/bin/sh
+case $BLOCK_BUTTON in
+	3) dunst-toggle ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+if [ $(dunstctl is-paused | grep "true" | wc -c) -eq 0 ]
+then
+    echo "󰂚"
+else
+    echo "󰂛"
+fi
