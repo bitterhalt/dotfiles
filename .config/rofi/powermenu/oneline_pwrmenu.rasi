@@ -23,7 +23,7 @@ configuration {
 #prompt {
     padding:             3px;
     background-color: @selected;
-    text-color:       @background;
+    text-color:       @foreground;
 }
 #listview {
     layout: horizontal;
@@ -43,7 +43,7 @@ configuration {
 }
 element-text.selected {
     background-color: @selected;
-    text-color:       @background;
+    text-color:       @foreground;
 }
 element-text {
     background-color: inherit;

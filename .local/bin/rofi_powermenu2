@@ -83,7 +83,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-	    ~/.config/i3/scripts/i3lock-color
+	    ~/.local/bin/i3lock-color
         ;;
     $suspend)
 		run_cmd --suspend
