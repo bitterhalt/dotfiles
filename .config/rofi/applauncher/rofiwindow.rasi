@@ -12,7 +12,7 @@ configuration {
     display-window:             " Windows";
 	drun-display-format:        "{name}";
 	window-format:              "{c} · {t}";
-    font: "JetBrains Mono Nerd Font 10";
+    font: "JetBrains Mono 10";
 }
 
 /*****----- Global Properties -----*****/

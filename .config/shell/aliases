@@ -55,6 +55,7 @@ alias yle-down='yle-dl --destdir ~/Downloads'
 # System Journal
 alias loger='journalctl -p 3 -xb'
 alias logf='journalctl -f'
+alias logx='tail -f .xsession-errors'
 alias logr='sudo journalctl --rotate'
 alias logs='journalctl --disk-usage'
 alias logv='journalctl --verify'

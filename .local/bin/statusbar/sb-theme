@@ -34,9 +34,10 @@ display() {
             sb-cpu) color="$color8" ;;
             sb-memory) color="$color8" ;;
             sb-volume) color="$color5";;
+            sb-dunst) color="$color7" ;;
+            sb-mic) color="$color7" ;;
             sb-date) color="$color8";;
-            sb-network) color="$color7";;
-            *) color="$color7" ;;
+            *) color="$color8" ;;
         esac
     fi
     echo $args "^c$color^$1"

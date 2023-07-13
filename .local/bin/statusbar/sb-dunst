@@ -1,12 +1,15 @@
 #!/bin/sh
+
 case $BLOCK_BUTTON in
 	3) dunst-toggle ;;
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
-
+. sb-theme
 if [ $(dunstctl is-paused | grep "true" | wc -c) -eq 0 ]
 then
-    echo "󰂚"
+    status="󰂚"
 else
-    echo "󰂛"
+    status="󰂛"
 fi
+
+display "$status"^d^

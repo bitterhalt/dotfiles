@@ -5,7 +5,7 @@
 /*****----- Configuration -----*****/
 configuration { 
     modes: "drun,run,emoji";
-    font: "JetBrains Mono Nerd Font 10";
+    font: "JetBrains Mono 10";
     drun-display-format:        "{name}";
 }
 
