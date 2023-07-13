@@ -73,6 +73,6 @@ Nsxiv*foreground: #56b6c2
 dwm.normbordercolor: #282c34
 dwm.normbgcolor: #181b20
 dwm.normfgcolor: #abb2bf
-dwm.selbordercolor: #61afef
+dwm.selbordercolor: #abb2bf
 dwm.selbgcolor: #282c34
 dwm.selfgcolor: #abb2bf
