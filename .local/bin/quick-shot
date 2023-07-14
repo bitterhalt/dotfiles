@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Simple screenshot script for taking Screenshots on Xorg. Uses ffcast and slop
+# Depeds on: slop and ffcast. Check requirements from github
+# Usage: Run `screenshot` for full-screen screenshot or `screenshot -r` for regional screenshot
+# Based on Rofi screenshot: https://github.com/ceuk/rofi-screenshot
+
+# This script is poorly written by: bitterhalt @ github
+
+# Screenshot directory
+dir="${HOME}/Pictures/Screenshots"
+format=$(date "+%d-%m-%Y-%H:%M:%S")
+
+if [[ ! -d "$dir" ]]; then
+    mkdir -p "$dir"
+fi
+
+full() {
+    filename="$dir/$format.png"
+    ffcast png "$filename"
+    notify-send "Screenshot" "Saved: $filename"
+}
+
+regional() {
+    filename="$dir/$format.png"
+    notify-send "Screenshot" "Select a region to capture"
+    geometry=$(slop -n -f '-g %g') || {
+        notify-send "Screenshot" "Selection was cancelled"
+        exit 1
+    }
+    ffcast "$geometry" png "$filename"
+    if [[ $? -eq 0 ]]; then
+        notify-send "Screenshot" "Saved: $filename"
+    else
+        notify-send "Screenshot" "Failed to capture screenshot"
+    fi
+}
+
+if [[ $1 == "-r" ]]; then
+    regional
+else
+    full
+fi
+

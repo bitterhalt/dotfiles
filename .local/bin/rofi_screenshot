@@ -1,0 +1,230 @@
+#!/usr/bin/env bash
+
+## rofi-screenshot
+## Author: ceuk @ github
+## Licence: WTFPL
+## Usage:
+##    show the menu with rofi-screenshot
+##    stop recording with rofi-screenshot -s
+
+# Screenshot directory
+screenshot_directory="${ROFI_SCREENSHOT_DIR:-${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots}"
+
+# Default date format
+default_date_format="+%d-%m-%Y %H:%M:%S"
+
+# Rofi theme
+dir="$HOME/.config/rofi/applauncher"
+theme='rofi_applauncher2'
+
+# set ffmpeg defaults
+ffmpeg() {
+  command ffmpeg -hide_banner -loglevel error -nostdin "$@"
+}
+
+video_to_gif() {
+  ffmpeg -i "$1" -vf palettegen -f image2 -c:v png - |
+    ffmpeg -i "$1" -i - -filter_complex paletteuse "$2"
+}
+
+countdown() {
+  notify-send --app-name="screenshot" "Screenshot" "Recording in 3" -t 1000
+  sleep 1
+  notify-send --app-name="screenshot" "Screenshot" "Recording in 2" -t 1000
+  sleep 1
+  notify-send --app-name="screenshot" "Screenshot" "Recording in 1" -t 1000
+  sleep 1
+}
+
+crtf() {
+  notify-send --app-name="screenshot" "Screenshot" "Select a region to capture"
+  dt=$1
+  ffcast -q "$(slop -n -f '-g %g ')" png "$screenshot_directory/$dt.png"
+  notify-send --app-name="screenshot" "Screenshot" "Region saved to ${screenshot_directory//${HOME}/~}/$dt.png"
+}
+
+cstf_timer() {
+  dt=$1
+  sleep 5
+  ffcast -q png "$screenshot_directory/$dt.png"
+  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.png"
+}
+
+rgrtf() {
+  notify-send --app-name="screenshot" "Screenshot" "Select a region to record"
+  dt=$1
+  ffcast -q "$(slop -n -f '-g %g ' && countdown)" rec /tmp/screenshot_gif.mp4
+  notify-send --app-name="screenshot" "Screenshot" "Converting to gif… (can take a while)"
+  video_to_gif /tmp/screenshot_gif.mp4 "$screenshot_directory/$dt.gif"
+  rm /tmp/screenshot_gif.mp4
+  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.gif"
+}
+
+rgstf() {
+  countdown
+  dt=$1
+  ffcast -q rec /tmp/screenshot_gif.mp4
+  notify-send --app-name="screenshot" "Screenshot" "Converting to gif… (can take a while)"
+  video_to_gif /tmp/screenshot_gif.mp4 "$screenshot_directory/$dt.gif"
+  rm /tmp/screenshot_gif.mp4
+  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.gif"
+}
+
+rvrtf() {
+  notify-send --app-name="screenshot" "Screenshot" "Select a region to record"
+  dt=$1
+  ffcast -q "$(slop -n -f '-g %g ' && countdown)" rec "$screenshot_directory/$dt.mp4"
+  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.mp4"
+}
+
+rvstf() {
+  countdown
+  dt=$1
+  ffcast -q rec "$screenshot_directory/$dt.mp4"
+  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.mp4"
+}
+
+stop_recording() {
+  if [ -z "$(pgrep -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*')" ]; then
+    notify-send --app-name="screenshot" "Screenshot" "No recording found"
+    exit 1
+  fi
+
+  pkill -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*'
+  notify-send --app-name="screenshot" "Screenshot" "Recording stopped"
+}
+
+get_options() {
+  echo "  Region"
+  echo "  Screen (5.sec.timer)"
+  echo "  Region (GIF)"
+  echo "  Screen (GIF)"
+  echo "  Region (MP4)"
+  echo "  Screen (MP4)"
+  echo "  Stop recording"
+}
+
+check_deps() {
+  if ! hash "$1" 2> /dev/null; then
+    echo "Error: This script requires $1"
+    exit 1
+  fi
+}
+
+show_help() {
+  echo ### rofi-screenshot
+  echo "USAGE: rofi-screenshot [OPTION] <argument>"
+  echo "(no option)"
+  echo "    show the screenshot menu"
+  echo "-s, --stop"
+  echo "    stop recording"
+  echo "-h, --help"
+  echo "    this screen"
+  echo "-d, --directory <directory>"
+  echo "    set the screenshot directory"
+  echo "-t, --timestamp <format>"
+  echo "    set the format used for timestamps, in the format the date"
+  echo "    command expects (default '+%d-%m-%Y %H:%M:%S')"
+}
+
+check_directory() {
+  if [[ ! -d $1 ]]; then
+    echo "Directory does not exist!"
+    exit 1
+  fi
+}
+
+main() {
+  # check dependencies
+  check_deps slop
+  check_deps ffcast
+  check_deps ffmpeg
+  check_deps xclip
+  check_deps rofi
+
+  # rebind long args as short ones
+  for arg in "$@"; do
+    shift
+    case "$arg" in
+      '--help') set -- "$@" '-h' ;;
+      '--directory') set -- "$@" '-d' ;;
+      '--timestamp') set -- "$@" '-t' ;;
+      '--stop') set -- "$@" '-s' ;;
+      *) set -- "$@" "$arg" ;;
+    esac
+  done
+
+  # parse short options
+  OPTIND=1
+  date_format="$default_date_format"
+  while getopts "hd:t:s" opt; do
+    case "$opt" in
+      'h')
+        show_help
+        exit 0
+        ;;
+      'd')
+        check_directory $OPTARG
+        screenshot_directory="$OPTARG"
+        ;;
+      't')
+        date_format="$OPTARG"
+        ;;
+      's')
+        stop_recording
+        exit 0
+        ;;
+      '?')
+        show_help
+        exit 1
+        ;;
+    esac
+  done
+  shift $(expr $OPTIND - 1)
+
+  # Get choice from rofi
+  choice=$( (get_options) | rofi -dmenu -i -fuzzy -p "Screenshot" -theme ${dir}/${theme}.rasi)
+
+  # If user has not picked anything, exit
+  if [[ -z "${choice// /}" ]]; then
+    exit 1
+  fi
+
+  cmd='date "${date_format}"'
+  dt=$(eval $cmd)
+
+  # run the selected command
+  case $choice in
+    '  Region')
+      crtf "$dt"
+      ;;
+    '  Screen (5.sec.timer)')
+      cstf_timer "$dt"
+      ;;
+    '  Region (GIF)')
+      rgrtf "$dt"
+      ;;
+    '  Screen (GIF)')
+      rgstf "$dt"
+      ;;
+    '  Region (MP4)')
+      rvrtf "$dt"
+      ;;
+    '  Screen (MP4)')
+      rvstf "$dt"
+      ;;
+    '  Stop recording')
+      stop_recording
+      ;;
+  esac
+
+  # done
+  set -e
+}
+
+main "$@" &
+
+exit 0
+
+! /bin/bash
+
