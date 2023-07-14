@@ -10,7 +10,7 @@ for process in "${processes[@]}"; do
         "$process" &
     fi
 done
-sleep 2 && nitrogen --restore &
+sleep 2 && ~/.fehbg &
 ~/.config/.screenlayout/monitor.sh &
 #xset s 3600 dpms 3600 3600 3600 &
 xclip &
