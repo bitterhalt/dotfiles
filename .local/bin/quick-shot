@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Simple screenshot script for taking Screenshots on Xorg. Uses ffcast and slop
-# Depeds on: slop and ffcast. Check requirements from github
+# Simple screenshot script for taking screenshots in Xorg. Uses ffcast and slop
+# Depends on: slop and ffcast. Check requirements from their github
 # Usage: Run `screenshot` for full-screen screenshot or `screenshot -r` for regional screenshot
 # Based on Rofi screenshot: https://github.com/ceuk/rofi-screenshot
 
