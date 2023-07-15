@@ -2,9 +2,9 @@
 
 # Simple screenshot script for taking screenshots in Xorg. Uses ffcast and slop
 # Depends on: slop and ffcast. Check requirements from their github
-# Usage: Run `screenshot` for full-screen screenshot or `screenshot -r` for regional screenshot
+# Usage: Run `screenshot` for full-screen screenshot, `screenshot -r` for regional screenshot or `screenshot -d` for delayed screenshot
 # Based on Rofi screenshot: https://github.com/ceuk/rofi-screenshot
-
+#
 # This script is poorly written by: bitterhalt @ github
 
 # Screenshot directory
@@ -14,6 +14,17 @@ format=$(date "+%d-%m-%Y-%H:%M:%S")
 if [[ ! -d "$dir" ]]; then
     mkdir -p "$dir"
 fi
+
+countdown() {
+  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 4" -t 1000
+  sleep 1
+  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 3" -t 1000
+  sleep 1
+  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 2" -t 1000
+  sleep 1
+  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 1" -t 1000
+  sleep 1
+}
 
 full() {
     filename="$dir/$format.png"
@@ -36,8 +47,19 @@ regional() {
     fi
 }
 
+delayed_full() {
+    filename="$dir/$format.png"
+    countdown
+    notify-send "Screenshot" "Taking screenshot now!"
+    sleep 1
+    ffcast png "$filename"
+    notify-send "Screenshot" "Saved: $filename"
+}
+
 if [[ $1 == "-r" ]]; then
     regional
+elif [[ $1 == "-d" ]]; then
+    delayed_full
 else
     full
 fi

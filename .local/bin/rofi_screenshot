@@ -28,11 +28,13 @@ video_to_gif() {
 }
 
 countdown() {
-  notify-send --app-name="screenshot" "Screenshot" "Recording in 3" -t 1000
+  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 4" -t 1000
   sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Recording in 2" -t 1000
+  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 3" -t 1000
   sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Recording in 1" -t 1000
+  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 2" -t 1000
+  sleep 1
+  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 1" -t 1000
   sleep 1
 }
 
@@ -43,9 +45,15 @@ crtf() {
   notify-send --app-name="screenshot" "Screenshot" "Region saved to ${screenshot_directory//${HOME}/~}/$dt.png"
 }
 
-cstf_timer() {
+cstf() {
   dt=$1
-  sleep 5
+  ffcast -q png "$screenshot_directory/$dt.png"
+  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.png"
+}
+
+cstf_timer() {
+  countdown
+  dt=$1
   ffcast -q png "$screenshot_directory/$dt.png"
   notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.png"
 }
@@ -96,7 +104,8 @@ stop_recording() {
 
 get_options() {
   echo "  Region"
-  echo "  Screen (5.sec.timer)"
+  echo "  Screen"
+  echo "  Screen (Delay)"
   echo "  Region (GIF)"
   echo "  Screen (GIF)"
   echo "  Region (MP4)"
@@ -198,7 +207,10 @@ main() {
     '  Region')
       crtf "$dt"
       ;;
-    '  Screen (5.sec.timer)')
+    '  Screen')
+        cstf "$dt"
+        ;;
+    '  Screen (Delay)')
       cstf_timer "$dt"
       ;;
     '  Region (GIF)')
