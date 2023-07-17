@@ -2,7 +2,7 @@
 # Original script made by Luke Smith: https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/statusbar/sb-internet
 # Nerd fonts or symbols needed to draw icons. If you want to use emojis just copy original script from luke's Github!
 case $BLOCK_BUTTON in
-	1) nm-connection-editor ;;
+	1) dmenu_network ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 

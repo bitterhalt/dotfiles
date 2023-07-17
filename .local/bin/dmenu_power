@@ -27,7 +27,7 @@ if [[ -n "$selected" ]]; then
             fi
             ;;
         "Lock")
-            i3lock-color
+            betterlockscreen --lock blur
             ;;
         "Lockout")
             confirm=$(echo -e "Yes\nNo" | dmenu -i -p "Are you sure you want to lock the screen and logout?")

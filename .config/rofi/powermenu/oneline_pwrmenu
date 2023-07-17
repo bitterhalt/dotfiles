@@ -85,7 +85,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-	    ~/.config/i3/scripts/i3lock-color
+	    betterlockscreen --lock blur
         ;;
     $suspend)
 		run_cmd --suspend

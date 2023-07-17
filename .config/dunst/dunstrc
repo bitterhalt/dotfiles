@@ -321,19 +321,19 @@
 
 ## One-dark ##
     [urgency_low]
-    background = "#181b20"
+    background = "#1f2329"
     foreground = "#c8ccd4"
     timeout = 3
 #    icon = info
 
 [urgency_normal]
-    background = "#181b20"
+    background = "#1f2329"
     foreground = "#c8ccd4"
     timeout = 5
 #    icon = info
 
 [urgency_critical]
-    background = "#181b20"
+    background = "#000000"
     foreground = "#FFFFFF"
     frame_color = "#ff0000"
     timeout = 5

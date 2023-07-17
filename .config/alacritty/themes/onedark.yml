@@ -1,46 +1,41 @@
+# Colors (One Dark)
 colors:
   # Default colors
   primary:
-    background: '#1f2329'
-    foreground: '#c8ccd4'
-    bright_foreground: '#e6efff'
+    foreground: '#abb2bf'
+    background: '#282c34'
 
+  # Cursor colors
+  cursor:
+    text: '#2c323c'
+    cursor: '#5c6370'
+
+  # Selection colors
+  selection:
+    text: CellForeground
+    background: '#3e4452'
 
   # Normal colors
   normal:
-    black:   '#1e2127'
+    black:   '#2c323c'
     red:     '#e06c75'
     green:   '#98c379'
     yellow:  '#e5c07b'
     blue:    '#61afef'
     magenta: '#c678dd'
     cyan:    '#56b6c2'
-    white:   '#b6bdca'
+    white:   '#5c6370'
 
   # Bright colors
   bright:
-    black:   '#5c6370'
+    black:   '#3e4452'
     red:     '#e06c75'
     green:   '#98c379'
-    yellow:  '#d19a66'
+    yellow:  '#e5c07b'
     blue:    '#61afef'
     magenta: '#c678dd'
     cyan:    '#56b6c2'
-    white:   '#e6efff'
-
-  # Dim colors
-  #
-  # If the dim colors are not set, they will be calculated automatically based
-  # on the `normal` colors.
-  dim:
-    black:   '#1e2127'
-    red:     '#e06c75'
-    green:   '#98c379'
-    yellow:  '#d19a66'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#828791'
+    white:   '#abb2bf'
 
 
 

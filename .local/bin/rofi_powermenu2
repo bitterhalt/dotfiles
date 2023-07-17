@@ -83,7 +83,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-	    ~/.local/bin/i3lock-color
+	    betterlockscreen --lock blur
         ;;
     $suspend)
 		run_cmd --suspend

@@ -103,13 +103,13 @@ stop_recording() {
 }
 
 get_options() {
-  echo "  Region"
-  echo "  Screen"
-  echo "  Screen (Delay)"
-  echo "  Region (GIF)"
-  echo "  Screen (GIF)"
-  echo "  Region (MP4)"
-  echo "  Screen (MP4)"
+  echo "  Capture Region"
+  echo "  Capture Desktop"
+  echo "  Capture Desktop (Delay)"
+  echo "  Record Region (GIF)"
+  echo "  Record Screen (GIF)"
+  echo "  Record Region (MP4)"
+  echo "  Rocord Screen (MP4)"
   echo "  Stop recording"
 }
 
@@ -204,25 +204,25 @@ main() {
 
   # run the selected command
   case $choice in
-    '  Region')
+    '  Capture Region')
       crtf "$dt"
       ;;
-    '  Screen')
+    '  Capture Desktop')
         cstf "$dt"
         ;;
-    '  Screen (Delay)')
+    '  Capture Desktop (Delay)')
       cstf_timer "$dt"
       ;;
-    '  Region (GIF)')
+    '  Record Region (GIF)')
       rgrtf "$dt"
       ;;
-    '  Screen (GIF)')
+    '  Record Screen (GIF)')
       rgstf "$dt"
       ;;
-    '  Region (MP4)')
+    '  Record Region (MP4)')
       rvrtf "$dt"
       ;;
-    '  Screen (MP4)')
+    '  Rocord Screen (MP4)')
       rvstf "$dt"
       ;;
     '  Stop recording')

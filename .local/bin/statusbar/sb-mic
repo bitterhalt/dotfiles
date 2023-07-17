@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+case $BLOCK_BUTTON in
+	1) pavucontrol ; pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}" ;;
+	2) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+    . sb-theme
+
+if pactl get-source-mute @DEFAULT_SOURCE@ | grep -q no; then
+    status=""
+else
+    status=""
+fi
+display "$status"^d^
+

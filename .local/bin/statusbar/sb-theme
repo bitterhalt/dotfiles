@@ -35,6 +35,7 @@ display() {
             sb-memory) color="$color8" ;;
             sb-volume) color="$color5";;
             sb-dunst) color="$color7" ;;
+            sb-autolock) color="$color7";;
             sb-mic) color="$color7" ;;
             sb-date) color="$color8";;
             *) color="$color8" ;;

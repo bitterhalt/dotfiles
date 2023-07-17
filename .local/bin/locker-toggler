@@ -1,0 +1,8 @@
+#!/bin/env bash
+
+if xautolock -exit
+    then (notify-send -i "coffee" -u normal -t  5000  -- 'Autolock OFF') 2> /dev/null
+    else
+        notify-send -i "lock" -u normal -t 5000 -- 'Autolock ON'
+        xautolock -time 30 -locker 'betterlockscreen --lock blur' -notify 10 -notifier "notify-send -u normal -t 5000 -- 'LOCKING screen ...'"
+fi

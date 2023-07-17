@@ -7,8 +7,7 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xcursor.theme: Qogir-dark
 
-st.font: JetBrainsMono:style:Reguler:pixelsize=14
-
+*.font: JetBrains Mono:pixelsize=14
 !! gruvbox dark-hard:
 !*.background: #1d2021
 !*.cursorColor: #ebdbb2
@@ -58,7 +57,7 @@ st.font: JetBrainsMono:style:Reguler:pixelsize=14
 *.color15: #c8ccd4
 
 !! Nsxiv colors
-Nsxiv*background: #1e222a
+Nsxiv*background: #1f2329
 Nsxiv*foreground: #56b6c2
 
 !!! Dwm colors Gruvbox
@@ -71,8 +70,8 @@ Nsxiv*foreground: #56b6c2
 
 !! Dwm colors One-dark
 dwm.normbordercolor: #282c34
-dwm.normbgcolor: #181b20
+dwm.normbgcolor: #1f2329
 dwm.normfgcolor: #abb2bf
 dwm.selbordercolor: #abb2bf
-dwm.selbgcolor: #282c34
+dwm.selbgcolor: #545862
 dwm.selfgcolor: #abb2bf
