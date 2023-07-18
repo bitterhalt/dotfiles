@@ -8,10 +8,10 @@
 ##    stop recording with rofi-screenshot -s
 
 # Screenshot directory
-screenshot_directory="${ROFI_SCREENSHOT_DIR:-${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots}"
-
+screenshot_directory="$HOME/Pictures/Screenshots"
+video_directory="$HOME/Videos"
 # Default date format
-default_date_format="+%d-%m-%Y %H:%M:%S"
+default_date_format="+%d-%m-%Y-%H:%M:%S"
 
 # Rofi theme
 dir="$HOME/.config/rofi/applauncher"
@@ -58,26 +58,6 @@ cstf_timer() {
   notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.png"
 }
 
-rgrtf() {
-  notify-send --app-name="screenshot" "Screenshot" "Select a region to record"
-  dt=$1
-  ffcast -q "$(slop -n -f '-g %g ' && countdown)" rec /tmp/screenshot_gif.mp4
-  notify-send --app-name="screenshot" "Screenshot" "Converting to gif… (can take a while)"
-  video_to_gif /tmp/screenshot_gif.mp4 "$screenshot_directory/$dt.gif"
-  rm /tmp/screenshot_gif.mp4
-  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.gif"
-}
-
-rgstf() {
-  countdown
-  dt=$1
-  ffcast -q rec /tmp/screenshot_gif.mp4
-  notify-send --app-name="screenshot" "Screenshot" "Converting to gif… (can take a while)"
-  video_to_gif /tmp/screenshot_gif.mp4 "$screenshot_directory/$dt.gif"
-  rm /tmp/screenshot_gif.mp4
-  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.gif"
-}
-
 rvrtf() {
   notify-send --app-name="screenshot" "Screenshot" "Select a region to record"
   dt=$1
@@ -91,6 +71,21 @@ rvstf() {
   ffcast -q rec "$screenshot_directory/$dt.mp4"
   notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.mp4"
 }
+
+rvstfa() {
+    countdown
+    notify-send "Screenshot" "Recording fullscreen video"
+    sleep 1
+    dt=$1
+    pulse_input=$(pactl list sources short | awk -F '\t' '{print $2}' | grep analog-stereo.monitor)
+    ffcast -q ffmpeg \
+        -hide_banner \
+        -loglevel error \
+        -f x11grab -video_size $(xdpyinfo | grep 'dimensions:' | awk '{print $2}') -framerate 30 -i :0.0 \
+        -f pulse -i "$pulse_input" -ac 1 -shortest "$video_directory/$dt.mp4"
+    notify-send "Screenshot" "Recording saved to ${video_directory//${HOME}/~}/$dt.mp4"
+}
+
 
 stop_recording() {
   if [ -z "$(pgrep -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*')" ]; then
@@ -106,10 +101,9 @@ get_options() {
   echo "  Capture Region"
   echo "  Capture Desktop"
   echo "  Capture Desktop (Delay)"
-  echo "  Record Region (GIF)"
-  echo "  Record Screen (GIF)"
   echo "  Record Region (MP4)"
-  echo "  Rocord Screen (MP4)"
+  echo "  Record Screen (MP4)"
+  echo "  Record Screen+Audio (MP4)"
   echo "  Stop recording"
 }
 
@@ -213,17 +207,14 @@ main() {
     '  Capture Desktop (Delay)')
       cstf_timer "$dt"
       ;;
-    '  Record Region (GIF)')
-      rgrtf "$dt"
-      ;;
-    '  Record Screen (GIF)')
-      rgstf "$dt"
-      ;;
     '  Record Region (MP4)')
       rvrtf "$dt"
       ;;
-    '  Rocord Screen (MP4)')
+    '  Record Screen (MP4)')
       rvstf "$dt"
+      ;;
+  '  Record Screen+Audio (MP4)')
+      rvstfa "$dt"
       ;;
     '  Stop recording')
       stop_recording

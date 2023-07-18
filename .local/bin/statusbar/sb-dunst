@@ -5,9 +5,8 @@ case $BLOCK_BUTTON in
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 . sb-theme
-if [ $(dunstctl is-paused | grep "false" | wc -c) -eq 0 ]
+if dunstctl is-paused | grep -q true;
 then
     display "󰂛"
 fi
-
 
