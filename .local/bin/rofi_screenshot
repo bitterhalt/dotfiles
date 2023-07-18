@@ -10,12 +10,13 @@
 # Screenshot directory
 screenshot_directory="$HOME/Pictures/Screenshots"
 video_directory="$HOME/Videos"
+
 # Default date format
 default_date_format="+%d-%m-%Y-%H:%M:%S"
 
 # Rofi theme
 dir="$HOME/.config/rofi/applauncher"
-theme='rofi_applauncher2'
+theme='rofi_screenshot'
 
 # set ffmpeg defaults
 ffmpeg() {
@@ -42,34 +43,34 @@ crtf() {
   notify-send --app-name="screenshot" "Screenshot" "Select a region to capture"
   dt=$1
   ffcast -q "$(slop -n -f '-g %g ')" png "$screenshot_directory/$dt.png"
-  notify-send --app-name="screenshot" "Screenshot" "Region saved to ${screenshot_directory//${HOME}/~}/$dt.png"
+  notify-send --app-name="screenshot" "Screenshot" "Region saved to $screenshot_directory/$dt.png"
 }
 
 cstf() {
   dt=$1
   ffcast -q png "$screenshot_directory/$dt.png"
-  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.png"
+  notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.png"
 }
 
 cstf_timer() {
   countdown
   dt=$1
   ffcast -q png "$screenshot_directory/$dt.png"
-  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.png"
+  notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.png"
 }
 
 rvrtf() {
   notify-send --app-name="screenshot" "Screenshot" "Select a region to record"
   dt=$1
   ffcast -q "$(slop -n -f '-g %g ' && countdown)" rec "$screenshot_directory/$dt.mp4"
-  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.mp4"
+  notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.mp4"
 }
 
 rvstf() {
   countdown
   dt=$1
-  ffcast -q rec "$screenshot_directory/$dt.mp4"
-  notify-send --app-name="screenshot" "Screenshot" "Saved to ${screenshot_directory//${HOME}/~}/$dt.mp4"
+  ffcast -q rec "$video_directory/$dt.mp4"
+  notify-send --app-name="screenshot" "Screenshot" "Saved to $video_directory/$dt.mp4"
 }
 
 rvstfa() {
@@ -83,7 +84,7 @@ rvstfa() {
         -loglevel error \
         -f x11grab -video_size $(xdpyinfo | grep 'dimensions:' | awk '{print $2}') -framerate 30 -i :0.0 \
         -f pulse -i "$pulse_input" -ac 1 -shortest "$video_directory/$dt.mp4"
-    notify-send "Screenshot" "Recording saved to ${video_directory//${HOME}/~}/$dt.mp4"
+    notify-send "Screenshot" "Recording saved to $video_directory/$dt.mp4"
 }
 
 
