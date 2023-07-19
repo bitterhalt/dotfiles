@@ -16,20 +16,18 @@ if [[ ! -d "$dir" ]]; then
 fi
 
 countdown() {
-  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 4" -t 1000
+  notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 3" -t 1000
   sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 3" -t 1000
+  notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 2" -t 1000
   sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 2" -t 1000
-  sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 1" -t 1000
+  notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 1" -t 1000
   sleep 1
 }
 
 full() {
     filename="$dir/$format.png"
     ffcast png "$filename"
-    notify-send -i "camera" "Saved: $filename"
+    notify-send "Saved: $filename"
 }
 
 regional() {
@@ -50,7 +48,6 @@ regional() {
 delayed_full() {
     filename="$dir/$format.png"
     countdown
-    notify-send "Screenshot" "Taking screenshot now!"
     sleep 1
     ffcast png "$filename"
     notify-send "Screenshot" "Saved: $filename"
