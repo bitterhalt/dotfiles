@@ -2,7 +2,7 @@
 
 # Simple screenshot script for taking screenshots in Xorg. Uses ffcast and slop
 # Depends on: slop and ffcast. Check requirements from their github
-# Usage: Run `screenshot` for full-screen screenshot, `screenshot -r` for regional screenshot or `screenshot -d` for delayed screenshot
+# Usage: Run 'quick-shot-f' for full-screen screenshot, 'quick-shot-r' for regional screenshot or 'quick-shot -d' for delayed screenshot
 # Based on Rofi screenshot: https://github.com/ceuk/rofi-screenshot
 #
 # This script is poorly written by: bitterhalt @ github
@@ -11,6 +11,7 @@
 dir="${HOME}/Pictures/Screenshots"
 format=$(date "+%d-%m-%Y-%H:%M:%S")
 
+# Check and make dir
 if [[ ! -d "$dir" ]]; then
     mkdir -p "$dir"
 fi
@@ -30,7 +31,7 @@ full() {
     notify-send "Saved: $filename"
 }
 
-regional() {
+region() {
     filename="$dir/$format.png"
     notify-send "Screenshot" "Select a region to capture"
     geometry=$(slop -n -f '-g %g') || {
@@ -45,7 +46,7 @@ regional() {
     fi
 }
 
-delayed_full() {
+delay() {
     filename="$dir/$format.png"
     countdown
     sleep 1
@@ -53,11 +54,60 @@ delayed_full() {
     notify-send "Screenshot" "Saved: $filename"
 }
 
-if [[ $1 == "-r" ]]; then
-    regional
-elif [[ $1 == "-d" ]]; then
-    delayed_full
-else
-    full
-fi
+check_deps() {
+    if ! hash $1 2>/dev/null; then
+        echo "Error: This script requires $1"
+        exit 1
+    fi
+}
 
+
+usage() {
+    echo USAGE: quick-shot [OPTION]
+    echo -h, --help
+    echo "show this"
+    echo -f
+    echo "Capture full screen"
+    echo -r
+    echo "Capture region"
+    echo -d
+    echo "Capture fullscreen with delay"
+    exit 1
+}
+
+main() {
+    # check dependencies
+    check_deps slop
+    check_deps ffcast
+    check_deps ffmpeg
+
+    while [ "$1" != "" ]; do
+        PARAM="$1"
+        case $PARAM in
+        -h | --help)
+            usage
+            exit
+            ;;
+           -f)
+            full
+            ;;
+           -r)
+            region
+            ;;
+           -d)
+            delay
+            ;;
+            *)
+            echo "ERROR: unknown parameter \"$PARAM\""
+            usage
+            exit 1
+            ;;
+        esac
+        shift
+    done
+    # done
+    set -e
+}
+
+main $1 &
+exit 0

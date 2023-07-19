@@ -23,10 +23,6 @@ ffmpeg() {
   command ffmpeg -hide_banner -loglevel error -nostdin "$@"
 }
 
-video_to_gif() {
-  ffmpeg -i "$1" -vf palettegen -f image2 -c:v png - |
-    ffmpeg -i "$1" -i - -filter_complex paletteuse "$2"
-}
 
 countdown() {
   notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 4" -t 1000
@@ -98,6 +94,7 @@ stop_recording() {
   notify-send --app-name="screenshot" "Screenshot" "Recording stopped"
 }
 
+# Choices
 get_options() {
   echo "  Capture Region"
   echo "  Capture Desktop"
