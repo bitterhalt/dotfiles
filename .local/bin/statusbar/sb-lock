@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1) locker-toggler ;;
+    3) notify-send "Autolock module" "\
+󰅶  = autolock is off
+󰾪  = autolock is on
+" ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+. sb-theme
+if [ ! -f "/tmp/screenlock_toggle" ]; then
+    display "󰅶"
+else
+    display "󰾪"
+fi
+

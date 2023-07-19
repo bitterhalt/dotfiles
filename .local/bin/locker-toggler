@@ -1,8 +1,19 @@
-#!/bin/env bash
+#!/bin/bash
+# Simple script to toggle on/off xautolock. Usefull if you watch videos or play cames
+# You can edit "-locker" part if you use another screen locker
+# Delete or edit last line if you dont need signaling
 
-if xautolock -exit
-    then (notify-send -i "coffee" -u normal -t  5000  -- 'Autolock OFF') 2> /dev/null
-    else
-        notify-send -i "lock" -u normal -t 5000 -- 'Autolock ON'
-        xautolock -time 30 -locker 'betterlockscreen --lock blur' -notify 10 -notifier "notify-send -u normal -t 5000 -- 'LOCKING screen ...'"
+# author: bitterhalt @ github
+
+toggle_file="/tmp/screenlock_toggle"
+
+if [[ -f $toggle_file ]]; then
+  pkill -f "xautolock"
+  rm $toggle_file
+  notify-send "Screenlock disabled" -i "coffee"
+else
+  echo "enabled" > $toggle_file
+  xautolock -detectsleep -time 30 -locker 'betterlockscreen --lock blur' -notify 15 -notifier "notify-send 'Screen will lock in 15s'" &
+  notify-send "Screenlock enabled" -i "lock"
 fi
+pkill -RTMIN+9 dwmblocks

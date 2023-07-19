@@ -15,10 +15,13 @@ vol="$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%')"
 [ $? -ne 0 ] && [ -z "$vol" ] && exit 1
 
 case 1 in
-	$((vol >= 30)) ) icon="" ;;
-	$((vol >= 15)) ) icon="" ;;
-	$((vol >= 1)) ) icon="" ;;
+	$((vol >= 35)) ) icon="" ;;
+	$((vol >= 30)) ) icon="" ;;
+	$((vol >= 1)) ) icon="" ;;
 	* ) display " " && exit ;;
 esac
 
 display "$icon^d^"
+
+
+
