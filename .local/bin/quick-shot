@@ -29,7 +29,7 @@ countdown() {
 full() {
     filename="$dir/$format.png"
     ffcast png "$filename"
-    notify-send "Screenshot" "Saved: $filename"
+    notify-send -i "camera" "Saved: $filename"
 }
 
 regional() {

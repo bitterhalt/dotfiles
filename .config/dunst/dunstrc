@@ -88,10 +88,6 @@
     # Set to 0 to disable.
     frame_width = 2
 
-    # Defines color of the frame around the notification window.
-    #frame_color = "#458588"
-    frame_color = "#282c34"
-
     # Define a color for the separator.
     # possible values are:
     #  * auto: dunst tries to find a color fitting to the background;
@@ -200,8 +196,8 @@
     min_icon_size = 0
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 24
-    icon_path = /home/bazz/.local/share/icons/dunst/
+    max_icon_size = 32
+    icon_path = /home/bazz/.local/share/icons/feather/
     # Paths to default icons.
     #icon_path = /usr/share/icons/Qogir/16/status:/usr/share/icons/Qogir/16/devices/:/usr/share/icons/Qogir/16/apps/:/usr/share/pixmaps/
 
@@ -320,15 +316,19 @@
 #    timeout = 0
 
 ## One-dark ##
-    [urgency_low]
-    background = "#1f2329"
-    foreground = "#c8ccd4"
+[urgency_low]
+    background =  "#1f2329"
+    frame_color = "#282c34"
+    foreground =  "#c8ccd4"
+    highlight =   "#c8ccd4"
     timeout = 3
 #    icon = info
 
 [urgency_normal]
-    background = "#1f2329"
-    foreground = "#c8ccd4"
+    background =  "#1f2329"
+    frame_color = "#282c34"
+    foreground =  "#c8ccd4"
+    highlight =   "#c8ccd4"
     timeout = 5
 #    icon = info
 

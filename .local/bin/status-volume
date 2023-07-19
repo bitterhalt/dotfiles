@@ -35,4 +35,8 @@ else
     icon="volume-2"
 fi
 
-dunstify "${volume}" -i "${icon}" -r 2539 -t 1000
+notify-send \
+    "${volume}" \
+    -i "${icon}" \
+    -h int:value:"${vol}" \
+    -h string:x-dunst-stack-tag:volume
