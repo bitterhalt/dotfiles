@@ -319,16 +319,16 @@
 [urgency_low]
     background =  "#1f2329"
     frame_color = "#282c34"
-    foreground =  "#c8ccd4"
-    highlight =   "#c8ccd4"
+    foreground =  "#abb2bf"
+    highlight =   "#abb2bf"
     timeout = 3
 #    icon = info
 
 [urgency_normal]
     background =  "#1f2329"
     frame_color = "#282c34"
-    foreground =  "#c8ccd4"
-    highlight =   "#c8ccd4"
+    foreground =  "#abb2bf"
+    highlight =   "#abb2bf"
     timeout = 5
 #    icon = info
 

@@ -1,16 +1,17 @@
 # Dotfiles
 ![dotttttts](https://github.com/bitterhalt/dotfiles/assets/95308907/2ac52bd2-1ef2-4365-80d5-a8ae164fa867)
-This is where I keep all of my dotfiles for apps that I use daily. Feel free to copy any of the dotfiles or scripts you find here 🙃
+This is where I keep all of my dotfiles for apps that I use daily. Feel free to copy any of the dotfiles or scripts you find here
 
 This is purely hobby for me. I am not a developer or Linux expert. Everything here changes sometimes and bugs may appear. 
 Please do not try to copy my entire setup, as it is very disorganized and specific to my needs. Instead, try copying bits and pieces as you put together your own system.
+
 ## Details
 - Distro: [Arch Linux](https://archlinux.org/)
 - WM: dwm
  - Statusbar: [dwmblocks-acync](https://github.com/UtkarshVerma/dwmblocks-async)
 - Colorscheme is based: [onedark](https://github.com/navarasu/onedark.nvim)
 - Fonts: Jetbrains Mono
-- Symbols and icons: [Nerd Font Symbols](https://archlinux.org/packages/extra/any/ttf-nerd-fonts-symbols/) , [Feather Symbols](https://github.com/adi1090x/polybar-themes/blob/master/fonts/feather.ttf) [Feather Icons](https://feathericons.com/)
+- Symbols and icons: [Nerd Font Symbols](https://archlinux.org/packages/extra/any/ttf-nerd-fonts-symbols/) , [Feather Symbols](https://github.com/adi1090x/polybar-themes/blob/master/fonts/feather.ttf), [Feather Icons](https://feathericons.com/)
 - Terminal: [st](https://github.com/newmanls/st)
  - Shell: [zsh](https://www.zsh.org/)
  - Prompt: [starship](https://starship.rs/)
@@ -22,11 +23,10 @@ Please do not try to copy my entire setup, as it is very disorganized and specif
 - Document Viewer: [zathura](https://pwmt.org/projects/zathura/)
 - Notification daemon: [dunst](https://dunst-project.org/)
 
-
-
 ## Inspiration 
 - [seeingangelz](https://github.com/seeingangelz/dotfiles) 
 - [newmanls](https://github.com/newmanls)
 - [UtkarshVerma](https://github.com/UtkarshVerma)
+- [ericmurphyxyz](https://github.com/ericmurphyxyz)
 
 
