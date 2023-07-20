@@ -8,10 +8,10 @@ case $BLOCK_BUTTON in
 " ;;
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
-. sb-theme
+
 if [ ! -f "/tmp/screenlock_toggle" ]; then
-    display "󰅶"
+    echo "󰅶"
 else
-    display "󰾪"
+    echo "^c#545862^󰾪^d^"
 fi
 

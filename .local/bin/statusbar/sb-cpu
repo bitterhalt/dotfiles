@@ -1,4 +1,5 @@
 #!/bin/sh
+
 case $BLOCK_BUTTON in
     1) st -c floatterm -g 120x34 -e htop ;;
     3) notify-send "CPU usage" "$(ps axch -o cmd,%cpu --sort=-%cpu | head)" ;;

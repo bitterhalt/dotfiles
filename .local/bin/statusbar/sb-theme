@@ -10,6 +10,8 @@ color5="#c678dd"
 color6="#56b6c2"
 color7="#545862"
 color8="#abb2bf"
+color9="#c8ccd4"
+
 
 # Gruvbox colorscheme
 #color0="#1d2021" # black
@@ -27,7 +29,7 @@ display() {
     esac
 
     if [ -n "${2+x}" ]; then
-        color=$7
+        color=$8
 	else
 		case "$(basename $0)" in
             sb-updates) color="$color5" ;;
@@ -35,9 +37,9 @@ display() {
             sb-memory) color="$color8" ;;
             sb-volume) color="$color5";;
             sb-dunst) color="$color7" ;;
-            sb-lock) color="$color8";;
-            sb-mic) color="$color7" ;;
-            sb-date) color="$color8";;
+#            sb-lock) color="$color8" ;;
+#            sb-mic) color="color7" ;;
+            sb-date) color="$color9";;
             *) color="$color8" ;;
         esac
     fi

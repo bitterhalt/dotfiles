@@ -6,12 +6,11 @@ case $BLOCK_BUTTON in
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-    . sb-theme
 
 if pactl get-source-mute @DEFAULT_SOURCE@ | grep -q no; then
-    status=""
+    echo ""
 else
-    status=""
+    echo "^c#545862^"
 fi
-display "$status"^d^
+
 
