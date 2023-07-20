@@ -22,7 +22,7 @@ read_only = " "
 
 [time]
 format = "[$time]($style)"
-disabled = false
+disabled = true
 style = "grey"
 
 [os]

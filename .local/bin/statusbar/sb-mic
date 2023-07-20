@@ -1,8 +1,8 @@
 #!/bin/sh
 #
 case $BLOCK_BUTTON in
-	1) pavucontrol ; pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}" ;;
-	2) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+	1) pavucontrol ; pkill -RTMIN+7 "${STATUSBAR:-dwmblocks}" ;;
+	3) pactl set-source-mute @DEFAULT_SOURCE@ toggle ;;
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
