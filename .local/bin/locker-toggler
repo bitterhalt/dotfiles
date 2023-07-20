@@ -1,19 +1,52 @@
 #!/bin/bash
-# Simple script to toggle on/off xautolock. Usefull if you watch videos or play cames
+# Simple script to control xautolock. Usefull if you watch videos or play cames
 # You can edit "-locker" part if you use another screen locker
+# Usage: "locker-togler" (-t) to toggle on/off with notification (-e) and (-d) enable and disable silently
 # Delete or edit last line if you dont need signaling
 
 # author: bitterhalt @ github
 
 toggle_file="/tmp/screenlock_toggle"
 
-if [[ -f $toggle_file ]]; then
-  pkill -f "xautolock"
-  rm $toggle_file
-  notify-send "Screenlock disabled" -i "coffee"
-else
-  echo "enabled" > $toggle_file
-  xautolock -detectsleep -time 30 -locker 'betterlockscreen --lock blur' -notify 15 -notifier "notify-send 'Screen will lock in 15s'" &
-  notify-send "Screenlock enabled" -i "lock"
+
+toggle () {
+    if [[ -f $toggle_file ]]; then
+        pkill -f "xautolock"
+        rm $toggle_file
+        notify-send "Screenlock disabled" -i "coffee"
+    else
+        echo "enabled" > $toggle_file
+        xautolock -detectsleep -time 30 -locker 'betterlockscreen --lock blur' -notify 15 -notifier "notify-send 'Screen will lock in 15s'" &
+        notify-send "Screenlock enabled" -i "lock"
+    fi
+}
+
+enable () {
+    if [[ ! -f $toggle_file ]]; then
+        echo "enabled" > $toggle_file
+        xautolock -detectsleep -time 30 -locker 'betterlockscreen --lock blur' -notify 15 -notifier "notify-send 'Screen will lock in 15s'" &
+    fi
+}
+
+disable () {
+    if [[ -f $toggle_file ]]; then
+    pkill -f "xautolock"
+    rm $toggle_file
 fi
-pkill -RTMIN+9 dwmblocks
+}
+case "$1" in
+    -t|--toggle)
+        toggle
+        ;;
+    -e|--enable)
+        enable
+        ;;
+    -d|--disable)
+        disable
+        ;;
+    *)
+        echo "Usage: $0 {-t|--toggle|-e|--enable|-d|--disable}"
+        exit 1
+esac
+
+pkill -RTMIN+9 dwmblock
