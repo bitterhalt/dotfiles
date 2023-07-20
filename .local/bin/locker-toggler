@@ -1,5 +1,5 @@
 #!/bin/bash
-# Simple script to control xautolock. Usefull if you watch videos or play cames
+# Simple script to control xautolock. Usefull if you watch videos or play games
 # You can edit "-locker" part if you use another screen locker
 # Usage: "locker-togler" (-t) to toggle on/off with notification (-e) and (-d) enable and disable silently
 # Delete or edit last line if you dont need signaling
