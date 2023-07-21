@@ -29,7 +29,7 @@ dashboard.section.buttons.val = {
   dashboard.button("u", "  > Update plugins", "<cmd>PackerSync<CR>"),
   dashboard.button("q", "  > Quit", ":qa!<CR>"),
 }
-dashboard.section.header.opts.hl = "Type"
+dashboard.section.header.opts.hl = "Include"
 dashboard.section.footer.opts.hl = "Include"
 dashboard.section.footer.val = footer()
 dashboard.opts.opts.noautocmd = false

@@ -1,8 +1,8 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-    1) locker-toggler -t;;
-    3) notify-send "Autolock module" "\
+    3) locker-toggler -t;;
+    2) notify-send "Autolock module" "\
 󰅶  = autolock is off
 󰾪  = autolock is on
 " ;;
