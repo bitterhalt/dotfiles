@@ -1,113 +1,134 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Simple screenshot script for taking screenshots in Xorg. Uses ffcast and slop
-# Depends on: slop and ffcast. Check requirements from their github
+set -e
+
+# Simple universal screenshot script for taking screenshots in Xorg and Wayland
+# Depends on:  (Xorg: maim, xdotool) (Wayland: grim, slurp)
 # Usage: Run 'quick-shot-f' for full-screen screenshot, 'quick-shot-r' for regional screenshot or 'quick-shot -d' for delayed screenshot
-# Based on Rofi screenshot: https://github.com/ceuk/rofi-screenshot
-#
+
 # This script is poorly written by: bitterhalt @ github
 
 # Screenshot directory
-dir="${HOME}/Pictures/Screenshots"
-format=$(date "+%d-%m-%Y-%H:%M:%S")
+path="${HOME}/Pictures/Screenshots"
+format="$(date "+%d-%m-%Y-%H:%M:%S").png"
 
 # Check and make dir
-if [[ ! -d "$dir" ]]; then
-    mkdir -p "$dir"
+if [[ ! -d "$path" ]]; then
+    mkdir -p "$path"
 fi
 
 countdown() {
-  notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 3" -t 1000
-  sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 2" -t 1000
-  sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 1" -t 1000
-  sleep 1
+    notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 3" -t 1000
+    sleep 1
+    notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 2" -t 1000
+    sleep 1
+    notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 1" -t 1000
+    sleep 1
+}
+
+# Detect display server
+detect_display_server() {
+    if [ -n "$WAYLAND_DISPLAY" ]; then
+        display_server="wayland"
+    else
+        display_server="xorg"
+    fi
+}
+
+# Use "maim" in Xorg and "grim" in Wayland
+xorg_shot() {
+    maim "$@"
+}
+
+wayland_shot() {
+    grim "$@"
 }
 
 full() {
-    filename="$dir/$format.png"
-    ffcast png "$filename"
-    notify-send "Saved: $filename"
+    if [ -n "$WAYLAND_DISPLAY" ]; then
+        wayland_shot "$path/$format"
+    else
+        xorg_shot -q -d 0.2 "$path/$format"
+    fi
+    notify-send "Saved: $path/$format"
 }
 
 region() {
-    filename="$dir/$format.png"
-    notify-send "Screenshot" "Select a region to capture"
-    geometry=$(slop -n -f '-g %g') || {
-        notify-send "Screenshot" "Selection was cancelled"
-        exit 1
-    }
-    ffcast "$geometry" png "$filename"
-    if [[ $? -eq 0 ]]; then
-        notify-send "Screenshot" "Saved: $filename"
+    if [ -n "$WAYLAND_DISPLAY" ]; then
+        geometry=$(slurp)
+        wayland_shot "$geometry" "$path/$format"
     else
-        notify-send "Screenshot" "Failed to capture screenshot"
+        xorg_shot -u -s "$path/$format"
     fi
+    notify-send "Saved: $path/$format"
 }
 
 delay() {
-    filename="$dir/$format.png"
     countdown
     sleep 1
-    ffcast png "$filename"
-    notify-send "Screenshot" "Saved: $filename"
+    full
 }
 
 check_deps() {
-    if ! hash $1 2>/dev/null; then
-        echo "Error: This script requires $1"
+    if ! hash "$1" 2>/dev/null; then
+        echo "Error: This script requires $1" >&2
         exit 1
     fi
 }
 
-
 usage() {
-    echo USAGE: quick-shot [OPTION]
-    echo -h, --help
-    echo "show this"
-    echo -f
-    echo "Capture full screen"
-    echo -r
-    echo "Capture region"
-    echo -d
-    echo "Capture fullscreen with delay"
+    echo "USAGE: quick-shot [OPTION]" >&2
+    echo "-h, --help" >&2
+    echo "    show this" >&2
+    echo "-f" >&2
+    echo "    Capture full screen" >&2
+    echo "-r" >&2
+    echo "    Capture region" >&2
+    echo "-d" >&2
+    echo "    Capture fullscreen with delay" >&2
     exit 1
 }
 
 main() {
-    # check dependencies
-    check_deps slop
-    check_deps ffcast
-    check_deps ffmpeg
+    detect_display_server
+
+    if [ "$display_server" == "wayland" ]; then
+        check_deps grim
+        check_deps slurp
+    else
+        check_deps maim
+        check_deps xdotool
+    fi
+
+    if [ "$#" -eq 0 ]; then
+        usage
+    fi
 
     while [ "$1" != "" ]; do
         PARAM="$1"
         case $PARAM in
         -h | --help)
             usage
-            exit
             ;;
-           -f)
+        -f)
             full
             ;;
-           -r)
+        -r)
             region
             ;;
-           -d)
+        -d)
             delay
             ;;
-            *)
-            echo "ERROR: unknown parameter \"$PARAM\""
+        *)
+            echo "ERROR: unknown parameter \"$PARAM\"" >&2
             usage
             exit 1
             ;;
         esac
         shift
     done
-    # done
-    set -e
 }
 
-main $1 &
-exit 0
+main "$@"
+
+

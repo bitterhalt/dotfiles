@@ -72,6 +72,11 @@ alias gpull='git pull origin'
 alias gpush='git push origin'
 alias gtat='git status'
 
+# yt-dlp
+alias yta-mp3="yt-dlp --extract-audio --audio-format mp3 "
+alias ytv-best="yt-dlp -f bestvideo+bestaudio "
+
+
 # Random
 alias nvm='sudo nvme smart-log /dev/nvme0'
 alias sudoe='sudoedit'

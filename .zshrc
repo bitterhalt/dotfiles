@@ -26,7 +26,7 @@ setopt HIST_SAVE_NO_DUPS                # Do not save duplicated command
 setopt auto_cd                          # Changing directories without 'cd'
 export EDITOR=nvim                       # use vim as editor
 export VISUAL=nvim
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 cdpath=($HOME/.config)
 
 # Basic auto/tab complete

@@ -18,55 +18,61 @@ default_date_format="+%d-%m-%Y-%H:%M:%S"
 dir="$HOME/.config/rofi/applauncher"
 theme='rofi_screenshot'
 
+
 # set ffmpeg defaults
 ffmpeg() {
   command ffmpeg -hide_banner -loglevel error -nostdin "$@"
 }
 
+video_to_gif() {
+  ffmpeg -i "$1" -vf palettegen -f image2 -c:v png - |
+    ffmpeg -i "$1" -i - -filter_complex paletteuse "$2"
+}
+
 
 countdown() {
-  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 4" -t 1000
-  sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 3" -t 1000
-  sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 2" -t 1000
-  sleep 1
-  notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 1" -t 1000
-  sleep 1
+    notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 4" -t 1000
+    sleep 1
+    notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 3" -t 1000
+    sleep 1
+    notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 2" -t 1000
+    sleep 1
+    notify-send --app-name="screenshot" "Screenshot" "Take screenshot in 1" -t 1000
+    sleep 1
 }
 
 crtf() {
-  notify-send --app-name="screenshot" "Screenshot" "Select a region to capture"
-  dt=$1
-  ffcast -q "$(slop -n -f '-g %g ')" png "$screenshot_directory/$dt.png"
-  notify-send --app-name="screenshot" "Screenshot" "Region saved to $screenshot_directory/$dt.png"
+    notify-send --app-name="screenshot" "Screenshot" "Select a region to capture"
+    dt=$1
+    ffcast -q "$(slop -n -f '-g %g ')" png "$screenshot_directory/$dt.png"
+    notify-send --app-name="screenshot" "Screenshot" "Region saved to $screenshot_directory/$dt.png"
 }
 
 cstf() {
-  dt=$1
-  ffcast -q png "$screenshot_directory/$dt.png"
-  notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.png"
+    dt=$1
+    ffcast -q png "$screenshot_directory/$dt.png"
+    notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.png"
 }
 
 cstf_timer() {
-  countdown
-  dt=$1
-  ffcast -q png "$screenshot_directory/$dt.png"
-  notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.png"
+    countdown
+    dt=$1
+    ffcast -q png "$screenshot_directory/$dt.png"
+    notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.png"
 }
 
 rvrtf() {
-  notify-send --app-name="screenshot" "Screenshot" "Select a region to record"
-  dt=$1
-  ffcast -q "$(slop -n -f '-g %g ' && countdown)" rec "$screenshot_directory/$dt.mp4"
-  notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.mp4"
+    notify-send --app-name="screenshot" "Screenshot" "Select a region to record"
+    dt=$1
+    ffcast -q "$(slop -n -f '-g %g ' && countdown)" rec "$screenshot_directory/$dt.mp4"
+    notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.mp4"
 }
 
 rvstf() {
-  countdown
-  dt=$1
-  ffcast -q rec "$video_directory/$dt.mp4"
-  notify-send --app-name="screenshot" "Screenshot" "Saved to $video_directory/$dt.mp4"
+    countdown
+    dt=$1
+    ffcast -q rec "$video_directory/$dt.mp4"
+    notify-send --app-name="screenshot" "Screenshot" "Saved to $video_directory/$dt.mp4"
 }
 
 rvstfa() {
@@ -80,106 +86,130 @@ rvstfa() {
         -loglevel error \
         -f x11grab -video_size $(xdpyinfo | grep 'dimensions:' | awk '{print $2}') -framerate 30 -i :0.0 \
         -f pulse -i "$pulse_input" -ac 1 -shortest "$video_directory/$dt.mp4"
-    notify-send "Screenshot" "Recording saved to $video_directory/$dt.mp4"
+            notify-send "Screenshot" "Recording saved to $video_directory/$dt.mp4"
+        }
+
+rgrtf() {
+  notify-send --app-name="screenshot" "Screenshot" "Select a region to record"
+  dt=$1
+  ffcast -q "$(slop -n -f '-g %g ' && countdown)" rec /tmp/screenshot_gif.mp4
+  notify-send --app-name="screenshot" "Screenshot" "Converting to gif… (can take a while)"
+  video_to_gif /tmp/screenshot_gif.mp4 "$screenshot_directory/$dt.gif"
+  rm /tmp/screenshot_gif.mp4
+  notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.gif"
+}
+
+rgstf() {
+  countdown
+  dt=$1
+  ffcast -q rec /tmp/screenshot_gif.mp4
+  notify-send --app-name="screenshot" "Screenshot" "Converting to gif… (can take a while)"
+  video_to_gif /tmp/screenshot_gif.mp4 "$screenshot_directory/$dt.gif"
+  rm /tmp/screenshot_gif.mp4
+  notify-send --app-name="screenshot" "Screenshot" "Saved to $screenshot_directory/$dt.gif"
 }
 
 
-stop_recording() {
-  if [ -z "$(pgrep -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*')" ]; then
-    notify-send --app-name="screenshot" "Screenshot" "No recording found"
-    exit 1
-  fi
 
-  pkill -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*'
-  notify-send --app-name="screenshot" "Screenshot" "Recording stopped"
-}
+
+        stop_recording() {
+            if [ -z "$(pgrep -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*')" ]; then
+                notify-send --app-name="screenshot" "Screenshot" "No recording found"
+                exit 1
+            fi
+
+            pkill -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*'
+            notify-send --app-name="screenshot" "Screenshot" "Recording stopped"
+        }
 
 # Choices
 get_options() {
-  echo "  Capture Region"
-  echo "  Capture Desktop"
-  echo "  Capture Desktop (Delay)"
-  echo "  Record Region (MP4)"
-  echo "  Record Screen (MP4)"
-  echo "  Record Screen+Audio (MP4)"
-  echo "  Stop recording"
+    echo "  Capture Region"
+    echo "  Capture Desktop"
+    echo "  Capture Desktop (Delay)"
+    echo "  Record Region (MP4)"
+    echo "  Record Screen (MP4)"
+    echo "  Record Screen+Audio (MP4)"
+    echo "  Record Region (GIF)"
+    echo "  Record Screen (GIF)"
+    echo "  Stop recording"
 }
 
 check_deps() {
-  if ! hash "$1" 2> /dev/null; then
-    echo "Error: This script requires $1"
-    exit 1
-  fi
+    if ! hash "$1" 2> /dev/null; then
+        echo "Error: This script requires $1"
+        exit 1
+    fi
 }
 
 show_help() {
-  echo ### rofi-screenshot
-  echo "USAGE: rofi-screenshot [OPTION] <argument>"
-  echo "(no option)"
-  echo "    show the screenshot menu"
-  echo "-s, --stop"
-  echo "    stop recording"
-  echo "-h, --help"
-  echo "    this screen"
-  echo "-d, --directory <directory>"
-  echo "    set the screenshot directory"
-  echo "-t, --timestamp <format>"
-  echo "    set the format used for timestamps, in the format the date"
-  echo "    command expects (default '+%d-%m-%Y %H:%M:%S')"
+    echo ### rofi-screenshot
+    echo "USAGE: rofi-screenshot [OPTION] <argument>"
+    echo "(no option)"
+    echo "    show the screenshot menu"
+    echo "-s, --stop"
+    echo "    stop recording"
+    echo "-h, --help"
+    echo "    this screen"
+    echo "-d, --directory <directory>"
+    echo "    set the screenshot directory"
+    echo "-t, --timestamp <format>"
+    echo "    set the format used for timestamps, in the format the date"
+    echo "    command expects (default '+%d-%m-%Y %H:%M:%S')"
 }
 
 check_directory() {
-  if [[ ! -d $1 ]]; then
-    echo "Directory does not exist!"
-    exit 1
-  fi
+    if [[ ! -d $1 ]]; then
+        echo "Directory does not exist!"
+        exit 1
+    fi
 }
 
 main() {
-  # check dependencies
-  check_deps slop
-  check_deps ffcast
-  check_deps ffmpeg
-  check_deps xclip
-  check_deps rofi
+    # check dependencies
+    check_deps slop
+    check_deps ffcast
+    check_deps ffmpeg
+    check_deps xclip
+    check_deps rofi
 
   # rebind long args as short ones
   for arg in "$@"; do
-    shift
-    case "$arg" in
-      '--help') set -- "$@" '-h' ;;
-      '--directory') set -- "$@" '-d' ;;
-      '--timestamp') set -- "$@" '-t' ;;
-      '--stop') set -- "$@" '-s' ;;
-      *) set -- "$@" "$arg" ;;
-    esac
+      shift
+      case "$arg" in
+          '--help') set -- "$@" '-h' ;;
+          '--directory') set -- "$@" '-d' ;;
+          '--timestamp') set -- "$@" '-t' ;;
+          '--stop') set -- "$@" '-s' ;;
+          *) set -- "$@" "$arg" ;;
+      esac
   done
 
   # parse short options
   OPTIND=1
   date_format="$default_date_format"
   while getopts "hd:t:s" opt; do
-    case "$opt" in
-      'h')
-        show_help
-        exit 0
-        ;;
-      'd')
-        check_directory $OPTARG
-        screenshot_directory="$OPTARG"
-        ;;
-      't')
-        date_format="$OPTARG"
-        ;;
-      's')
-        stop_recording
-        exit 0
-        ;;
-      '?')
-        show_help
-        exit 1
-        ;;
-    esac
+      case "$opt" in
+          'h')
+              show_help
+              exit 0
+              ;;
+          'd')
+              check_directory $OPTARG
+              screenshot_directory="$OPTARG"
+              ;;
+          't')
+              date_format="$OPTARG"
+              ;;
+          's')
+              stop_recording
+              exit 0
+              ;;
+          '?')
+              show_help
+              exit 1
+              ;;
+      esac
   done
   shift $(expr $OPTIND - 1)
 
@@ -188,7 +218,7 @@ main() {
 
   # If user has not picked anything, exit
   if [[ -z "${choice// /}" ]]; then
-    exit 1
+      exit 1
   fi
 
   cmd='date "${date_format}"'
@@ -196,27 +226,33 @@ main() {
 
   # run the selected command
   case $choice in
-    '  Capture Region')
-      crtf "$dt"
-      ;;
-    '  Capture Desktop')
-        cstf "$dt"
-        ;;
-    '  Capture Desktop (Delay)')
-      cstf_timer "$dt"
-      ;;
-    '  Record Region (MP4)')
-      rvrtf "$dt"
-      ;;
-    '  Record Screen (MP4)')
-      rvstf "$dt"
-      ;;
-  '  Record Screen+Audio (MP4)')
-      rvstfa "$dt"
-      ;;
-    '  Stop recording')
-      stop_recording
-      ;;
+      '  Capture Region')
+          crtf "$dt"
+          ;;
+      '  Capture Desktop')
+          cstf "$dt"
+          ;;
+      '  Record Region (GIF)')
+          rgrtf "$dt"
+          ;;
+      '  Record Screen (GIF)')
+          rgstf "$dt"
+          ;;
+      '  Capture Desktop (Delay)')
+          cstf_timer "$dt"
+          ;;
+      '  Record Region (MP4)')
+          rvrtf "$dt"
+          ;;
+      '  Record Screen (MP4)')
+          rvstf "$dt"
+          ;;
+      '  Record Screen+Audio (MP4)')
+          rvstfa "$dt"
+          ;;
+      '  Stop recording')
+          stop_recording
+          ;;
   esac
 
   # done
