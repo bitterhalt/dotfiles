@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# forked from: https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/dmenurecord
+set -e
+
+getdim() {
+  xrandr | sed -n "s/\s*\([0-9]\+x[0-9]\+\).*\*.*/\1/p"
+}
+
+killrecording() {
+  recpid="$(cat /tmp/recordingpid)"
+  kill -15 "$recpid"
+  rm -f /tmp/recordingpid
+}
+
+screencast() {
+  pulse_input=$(pactl list sources short | awk -F '\t' '{print $2}' | grep analog-stereo.monitor)
+  ffmpeg -y \
+    -f x11grab \
+    -framerate 30 \
+    -s "$(getdim)" \
+    -i "$DISPLAY" \
+    -f pulse -i "$pulse_input" -ac 1 -shortest \
+    -r 60 \
+    -use_wallclock_as_timestamps 1 \
+    -c:v h264 \
+    -crf 23 -preset ultrafast -c:a aac \
+    "$HOME/Videos/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
+  echo $! > /tmp/recordingpid
+}
+
+video() {
+  ffmpeg \
+    -f x11grab \
+    -framerate 30 \
+    -s "$(getdim)" \
+    -i "$DISPLAY" \
+    -c:v libx264 -qp 0 -r 60 \
+    "$HOME/Videos/video-$(date '+%y%m%d-%H%M-%S').mkv" &
+  echo $! > /tmp/recordingpid
+}
+
+region() {
+
+  slop -f "%x %y %w %h" > /tmp/slop
+  read -r X Y W H < /tmp/slop
+  rm /tmp/slop
+
+  ffmpeg \
+    -f x11grab \
+    -framerate 30 \
+    -video_size "$W"x"$H" \
+    -i :0.0+"$X,$Y" \
+    -c:v libx264 -qp 0 -r 30 \
+    "$HOME/Videos/box-$(date '+%d-%m-%y-%h:%m:%S"').mkv" &
+  echo $! > /tmp/recordingpid
+}
+
+
+display_help() {
+  echo "Usage: quick-record [options]"
+  echo "Options:"
+  echo "  -sc        Record full screen and audio."
+  echo "  -v         Record full screen video only."
+  echo "  -vs        Record a selected area of the screen."
+  echo "  -kill      Stop the ongoing recording."
+  echo "  -h         Display this help message."
+}
+
+case "$1" in
+  -sc) screencast;;
+  -v) video;;
+  -r) region;;
+  -kill) killrecording;;
+  -h) display_help;;
+  *) display_help;;
+esac
