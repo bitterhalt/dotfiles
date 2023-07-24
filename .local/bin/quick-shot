@@ -36,10 +36,10 @@ ssdir="${HOME}/Pictures/Screenshots"
 
 while getopts "fwst:h" opt; do
     case "${opt}" in
-        f) quick-shot ;;
-        w) quick-shot -i "$(xdotool getactivewindow)" ;;
-        s) quick-shot -s ;;
-        t) timer_delay="${OPTARG}"; quick-shot -d "${timer_delay}" ;;
+        f) quick-shot -u ;;
+        w) quick-shot -u -i "$(xdotool getactivewindow)" ;;
+        s) quick-shot -u -s ;;
+        t) timer_delay="${OPTARG}"; quick-shot -u -d "${timer_delay}" ;;
         h) print_help; exit 0 ;;
         *) print_help; exit 1 ;;
     esac
