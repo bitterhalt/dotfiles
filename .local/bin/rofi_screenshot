@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # rofi theme
-THEME="$HOME/.config/rofi/rofi_screenrecord/theme.rasi"
+THEME="$HOME/.config/rofi/rofi_screenshot/theme.rasi"
 
 get_options() {
   echo "  Record Screen (MP4)"
