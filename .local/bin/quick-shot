@@ -1,134 +1,51 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Simple screenshot script for xorg. Uses maim and xclip.
+# Forked from: Newman Sanchez (https://github.com/newmanls)
 
-set -e
+set -euo pipefail
 
-# Simple universal screenshot script for taking screenshots in Xorg and Wayland
-# Depends on:  (Xorg: maim, xdotool) (Wayland: grim, slurp)
-# Usage: Run 'quick-shot-f' for full-screen screenshot, 'quick-shot-r' for regional screenshot or 'quick-shot -d' for delayed screenshot
+quick-shot() {
+    filename="$(date +%d-%m-%Y-%H:%M:%S).png"
+    filepath="${ssdir}/${filename}"
 
-# This script is poorly written by: bitterhalt @ github
+    mkdir -p "${ssdir}"
+    maim "${@}" "${filepath}"
 
-# Screenshot directory
-path="${HOME}/Pictures/Screenshots"
-format="$(date "+%d-%m-%Y-%H:%M:%S").png"
+    [ ! -f "${filepath}" ] && exit 1
 
-# Check and make dir
-if [[ ! -d "$path" ]]; then
-    mkdir -p "$path"
+    xclip -selection clipboard -t image/png -i "${filepath}" &&
+        notify-send \
+            -i "${filepath}" \
+            -A "xdg-open ${filepath}"=Open \
+            "Screenshot saved" \
+            "You can also paste the image from the clipboard." |
+            bash
+}
+
+print_help() {
+    echo "Usage: quick-shot [options]"
+    echo "Options:"
+    echo "  -f           Capture the fullscreen."
+    echo "  -w           Capture the active window."
+    echo "  -s           Select a region to capture."
+    echo "  -t <seconds> Capture after a delay."
+    echo "  -h           Show this help message."
+}
+
+ssdir="${HOME}/Pictures/Screenshots"
+
+while getopts "fwst:h" opt; do
+    case "${opt}" in
+        f) quick-shot ;;
+        w) quick-shot -i "$(xdotool getactivewindow)" ;;
+        s) quick-shot -s ;;
+        t) timer_delay="${OPTARG}"; take_screenshot -d "${timer_delay}" ;;
+        h) print_help; exit 0 ;;
+        *) print_help; exit 1 ;;
+    esac
+done
+
+if [ $OPTIND -eq 1 ]; then
+    print_help
 fi
-
-countdown() {
-    notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 3" -t 1000
-    sleep 1
-    notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 2" -t 1000
-    sleep 1
-    notify-send --app-name="screenshot" "Screenshot" "Taking screenshot in 1" -t 1000
-    sleep 1
-}
-
-# Detect display server
-detect_display_server() {
-    if [ -n "$WAYLAND_DISPLAY" ]; then
-        display_server="wayland"
-    else
-        display_server="xorg"
-    fi
-}
-
-# Use "maim" in Xorg and "grim" in Wayland
-xorg_shot() {
-    maim "$@"
-}
-
-wayland_shot() {
-    grim "$@"
-}
-
-full() {
-    if [ -n "$WAYLAND_DISPLAY" ]; then
-        wayland_shot "$path/$format"
-    else
-        xorg_shot -q -d 0.2 "$path/$format"
-    fi
-    notify-send "Saved: $path/$format"
-}
-
-region() {
-    if [ -n "$WAYLAND_DISPLAY" ]; then
-        geometry=$(slurp)
-        wayland_shot "$geometry" "$path/$format"
-    else
-        xorg_shot -u -s "$path/$format"
-    fi
-    notify-send "Saved: $path/$format"
-}
-
-delay() {
-    countdown
-    sleep 1
-    full
-}
-
-check_deps() {
-    if ! hash "$1" 2>/dev/null; then
-        echo "Error: This script requires $1" >&2
-        exit 1
-    fi
-}
-
-usage() {
-    echo "USAGE: quick-shot [OPTION]" >&2
-    echo "-h, --help" >&2
-    echo "    show this" >&2
-    echo "-f" >&2
-    echo "    Capture full screen" >&2
-    echo "-r" >&2
-    echo "    Capture region" >&2
-    echo "-d" >&2
-    echo "    Capture fullscreen with delay" >&2
-    exit 1
-}
-
-main() {
-    detect_display_server
-
-    if [ "$display_server" == "wayland" ]; then
-        check_deps grim
-        check_deps slurp
-    else
-        check_deps maim
-        check_deps xdotool
-    fi
-
-    if [ "$#" -eq 0 ]; then
-        usage
-    fi
-
-    while [ "$1" != "" ]; do
-        PARAM="$1"
-        case $PARAM in
-        -h | --help)
-            usage
-            ;;
-        -f)
-            full
-            ;;
-        -r)
-            region
-            ;;
-        -d)
-            delay
-            ;;
-        *)
-            echo "ERROR: unknown parameter \"$PARAM\"" >&2
-            usage
-            exit 1
-            ;;
-        esac
-        shift
-    done
-}
-
-main "$@"
-
 
