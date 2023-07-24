@@ -7,6 +7,9 @@ get_options() {
   echo "  Record Screen (MP4)"
   echo "  Record Screen (MP4+Audio)"
   echo "  Record Region (MP4)"
+  echo "  Screenshot Full"
+  echo "  Screenshot Region"
+  echo "  Screenshot Full+delay"
   echo "  Stop Recording"
 }
 
@@ -30,6 +33,15 @@ main() {
     ;;
    '  Record Region (MP4)')
     quick-record -r
+    ;;
+   '  Screenshot Full' )
+    quick-shot -f
+    ;;
+  '  Screenshot Region')
+    quick-shot -s
+    ;;
+   '  Screenshot Full+delay')
+    quick-shot -t 3
     ;;
   '  Stop Recording')
     quick-record -kill

@@ -25,7 +25,7 @@ screencast() {
     -use_wallclock_as_timestamps 1 \
     -c:v h264 \
     -crf 23 -preset ultrafast -c:a aac \
-    "$HOME/Videos/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
+    "$HOME/Videos/screencast-$(date '+%d-%m-%Y-%H:%M:%S').mp4" &
   echo $! > /tmp/recordingpid
 }
 
@@ -36,7 +36,7 @@ video() {
     -s "$(getdim)" \
     -i "$DISPLAY" \
     -c:v libx264 -qp 0 -r 60 \
-    "$HOME/Videos/video-$(date '+%y%m%d-%H%M-%S').mkv" &
+    "$HOME/Videos/video-$(date '+%d-%m-%Y-%H:%M:%S').mkv" &
   echo $! > /tmp/recordingpid
 }
 
@@ -52,7 +52,7 @@ region() {
     -video_size "$W"x"$H" \
     -i :0.0+"$X,$Y" \
     -c:v libx264 -qp 0 -r 30 \
-    "$HOME/Videos/box-$(date '+%d-%m-%y-%h:%m:%S"').mkv" &
+    "$HOME/Videos/box-$(date '+%d-%m-%Y-%H:%M:%S').mkv" &
   echo $! > /tmp/recordingpid
 }
 

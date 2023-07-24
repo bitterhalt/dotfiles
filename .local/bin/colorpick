@@ -6,5 +6,5 @@ preview='/tmp/colorpicker-preview.png'
 color="$(xcolor)"
 
 xclip -selection clipboard -rmlastnl <<< "${color}"
-magick -size 64x64 xc:"${color}" "${preview}"
+magick -size 128x128 xc:"${color}" "${preview}"
 notify-send -i "${preview}" "${color}"

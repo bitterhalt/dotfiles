@@ -9,7 +9,7 @@ Please do not try to copy my entire setup, as it is very disorganized and specif
 - Distro: [Arch Linux](https://archlinux.org/)
  - WM: [dwm](https://github.com/bitterhalt/dwm)
  - Statusbar: [dwmblocks-acync](https://github.com/UtkarshVerma/dwmblocks-async)
-- Colorscheme is based: [onedark](https://github.com/navarasu/onedark.nvim)
+- Colorscheme is based: [onedark.nvim](https://github.com/navarasu/onedark.nvim) [onedark.vim](https://github.com/joshdick/onedark.vim)
 - Fonts: JetBrains Mono
 - Symbols and icons: [Nerd Font Symbols](https://archlinux.org/packages/extra/any/ttf-nerd-fonts-symbols/) , [Feather Symbols](https://github.com/adi1090x/polybar-themes/blob/master/fonts/feather.ttf), [Feather Icons](https://feathericons.com/)
 - Terminal: [st](https://github.com/newmanls/st)

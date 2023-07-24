@@ -70,8 +70,8 @@ Nsxiv*foreground: #56b6c2
 
 !! Dwm colors One-dark
 dwm.normbordercolor: #282c34
-dwm.normbgcolor: #1f2329
+dwm.normbgcolor: #181b20
 dwm.normfgcolor: #abb2bf
 dwm.selbordercolor: #abb2bf
-dwm.selbgcolor: #545862
+dwm.selbgcolor: #282c34
 dwm.selfgcolor: #c8ccd4
