@@ -26,11 +26,9 @@ if [ "${is_muted}" = "yes" ]; then
     volume="muted"
     icon="volume-x"
 elif (( vol == 0 )); then
-    icon="volume"
-elif (( vol <= 30 )); then
+    icon="volume-x"
+elif (( vol <= 35 )); then
     icon="volume-1"
-elif (( vol <= 70 )); then
-    icon="volume-2"
 else
     icon="volume-2"
 fi

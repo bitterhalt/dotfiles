@@ -32,7 +32,7 @@ display() {
         color=$8
 	else
 		case "$(basename $0)" in
-            sb-updates) color="$color7" ;;
+            sb-updates) color="$color8" ;;
             sb-cpu) color="$color8" ;;
             sb-memory) color="$color8" ;;
             sb-volume) color="$color5";;
