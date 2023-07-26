@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# forged from: https://github.com/newmanls/dotfiles/blob/master/.local/bin/lrfetch.py
+# forked from: https://github.com/newmanls/dotfiles/blob/master/.local/bin/lrfetch.py
 
 from os import environ
 from os.path import expanduser
@@ -43,6 +43,12 @@ def get_wm():
     wm = getoutput("wmctrl -m").splitlines()[0].split(":")[1].strip()
     return wm
 
+def get_uptime():
+    return getoutput("uptime -p").split("up")[-1].strip()
+
+def get_born():
+    return getoutput("stat -c %w / | cut -d ' ' -f 1 | date '+%d-%m-%Y' -f -")
+
 def printcolors():
     for i in 3, 9:
         print()
@@ -60,6 +66,8 @@ if __name__ == "__main__":
     info["wm"] = get_wm()
     info["term"] = get_term()
     info["theme"] = get_gtk_theme()
+    info["uptime"] = get_uptime()
+    info["born"] = get_born()
 
     print()
     for key, value in info.items():

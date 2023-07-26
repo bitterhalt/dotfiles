@@ -1,14 +1,18 @@
 #!/bin/sh
 while read file
 do
-        case "$1" in
+    case "$1" in
         "C-d")
-                mv "$file" ~/.trash ;;
+            mv "$file" ~/.trash ;;
         "C-r")
-                convert -rotate 90 "$file" "$file" ;;
+            convert -rotate 90 "$file" "$file" ;;
         "C-c")
-                echo -n "$file" | xclip -selection clipboard ;;
+            echo -n "$file" | xclip -selection clipboard ;;
         "C-w")
-                feh --bg-scale "$file" ;;
+            feh --bg-scale "$file" &&  betterlockscreen -q -u "$file" 
+            notify-send  "Lock screen wallpaper updated" ;;
+        "y")
+            xclip -selection clipboard "$file" -t image/png &&
+                notify-send "$file copied to clipboard!"
         esac
-done
+    done
