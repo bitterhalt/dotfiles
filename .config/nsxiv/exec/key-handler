@@ -2,15 +2,20 @@
 while read file
 do
     case "$1" in
-        "C-d")
+        "d")
             mv "$file" ~/.trash ;;
-        "C-r")
+        "r")
             convert -rotate 90 "$file" "$file" ;;
-        "C-c")
+        "c")
             echo -n "$file" | xclip -selection clipboard ;;
-        "C-w")
+        "w")
+            feh --bg-scale "$file" ;;
+        "l")
+            betterlockscreen -q -u "$file"
+            notify-send "Locksreen Wallpaper Changed!" ;;
+        "a")
             feh --bg-scale "$file" &&  betterlockscreen -q -u "$file" 
-            notify-send  "Lock screen wallpaper updated" ;;
+            notify-send  "Locksreen Wallpaper Changed!" ;;
         "y")
             xclip -selection clipboard "$file" -t image/png &&
                 notify-send "$file copied to clipboard!"
