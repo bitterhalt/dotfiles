@@ -1,0 +1,17 @@
+#!/bin/bash
+# forked https://github.com/seeingangelz/dotfiles/blob/master/.local/bin/wg
+wallpaper_dir="$HOME/Pictures/wallpaper"
+
+if [ ! -d "$wallpaper_dir" ]; then
+  notify-send "Wallpaper directory not found"
+  exit 1
+fi
+
+nsxiv -q -r -t "$wallpaper_dir" &
+nsxiv_pid=$!
+
+while ! ps -p $nsxiv_pid > /dev/null; do
+  sleep 1
+done
+
+notify-send "Select your wallpaper!"
