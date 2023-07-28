@@ -5,6 +5,3 @@ configuration {
 
 }
 
-//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
-//@theme "/usr/share/rofi/themes/dmenu.rasi"
-@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"

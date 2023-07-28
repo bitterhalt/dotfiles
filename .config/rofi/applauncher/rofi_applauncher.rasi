@@ -5,12 +5,14 @@ configuration {
     modes: "drun,run,window,emoji";
     location: 						0;
     fixed-num-lines: 				true;
+    show-icons: 					false;
     sidebar-mode: 					false;
     scroll-method: 					1;
+    window-format: 					"{c} ·  {t}";
     click-to-exit: 					true;
     combi-hide-mode-prefix: 		false;
 
-    font: "JetBrains Mono            12";
+    font: "JetBrains Mono            10";
 }
 
 @import                          "~/.config/rofi/theme.rasi"
@@ -23,7 +25,7 @@ window {
     border: 						1px;
     border-color: 					@selected;
     border-radius: 					0px;
-    width: 							480px;
+    width: 							580px;
     height: 						0px;
 }
 
@@ -73,11 +75,11 @@ mainbox {
     border: 						0px;
     border-color: 					@selected;
     spacing: 						6px;
-    padding: 						15px;
+    padding: 						10px;
 }
 
 listview {
-    lines:							7;
+    lines:							10;
     columns:						1;
     fixed-height: 					0;
     border: 						0px;

@@ -1,0 +1,60 @@
+/**
+ * Dmenu-like one line rofi. Originally made by Derek Taylor and modified by bitterhalt
+ */
+
+/*****----- Configuration -----*****/
+configuration { 
+    font: "JetBrains Mono 10";
+    drun-display-format:        "{name}";
+}
+
+*{
+    height:                     24px;
+    background-color:           @background;
+}
+@import                          "~/.config/rofi/theme.rasi"
+
+#window {
+    anchor: north;
+    location: north;
+    width: 100%;
+    padding: 0px;
+    children: [ horibox ];
+}
+#horibox {
+    orientation: horizontal;
+    children: [ prompt, entry, listview ];
+}
+#prompt {
+    padding:             3px;
+    background-color: @selected;
+    text-color:       @background;
+}
+#listview {
+    layout: horizontal;
+    lines: 100;
+}
+#entry {
+    padding: 3px;
+    expand: false;
+    width: 50em;
+    text-color:       @foreground;
+}
+#element {
+    padding: 3px 8px;
+}
+#element selected {
+    background-color: @selected;
+}
+element-text.selected {
+    background-color: @selected;
+    text-color:       @background;
+}
+element-text {
+    background-color: inherit;
+    text-color:       @foreground;
+}
+
+
+
+

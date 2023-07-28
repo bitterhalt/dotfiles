@@ -1,0 +1,4 @@
+/* Import color-scheme for all rofi scripts from `themes` directory */
+
+@import "~/.config/rofi/themes/onedark.rasi"
+
