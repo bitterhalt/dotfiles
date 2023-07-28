@@ -1,7 +1,0 @@
-configuration {
-    modes: "combi,run,drun,emoji,ssh,";
-    disable-history: false;
-    sorting-method: "normal";
-
-}
-
