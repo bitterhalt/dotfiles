@@ -1,5 +1,5 @@
 # Dotfiles
-![desktop](https://github.com/bitterhalt/dotfiles/assets/95308907/104e5936-2fc4-4937-b213-a03222ba9bbe)
+![desktop](https://github.com/bitterhalt/dotfiles/assets/95308907/dda08a48-c772-41dc-991b-5ce483303d14)
 This is where I keep all of my dotfiles for apps that I use daily. Feel free to copy any of the dotfiles or scripts you find here
 
 This is purely hobby for me. I am not a developer or Linux expert. Everything here changes sometimes and bugs may appear. 
