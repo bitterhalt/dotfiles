@@ -13,5 +13,3 @@ nsxiv_pid=$!
 while ! ps -p $nsxiv_pid > /dev/null; do
   sleep 1
 done
-
-notify-send "Select your wallpaper!"

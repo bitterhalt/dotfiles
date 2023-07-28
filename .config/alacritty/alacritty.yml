@@ -30,7 +30,7 @@ draw_bold_text_with_bright_colors: false
 
 # Theme
 import:
-  - ~/.config/alacritty/themes/onedark.yml
+  - ~/.config/alacritty/themes/gruvbox-dark-hard.yml
 
 selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
