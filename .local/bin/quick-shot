@@ -1,25 +1,38 @@
 #!/usr/bin/env bash
-# Simple screenshot script for xorg. Uses maim and xclip.
+# Simple screenshot script for Xorg. Uses maim and xclip.
 # Forked from: Newman Sanchez (https://github.com/newmanls)
 
 set -euo pipefail
 
-quick-shot() {
-    filename="$(date +%d-%m-%Y-%H:%M:%S).png"
-    filepath="${ssdir}/${filename}"
+capture_mode=""
+ssdir="${HOME}/Pictures/Screenshots"
+tmpdir="/tmp/screenshots"
+
+quick_shot() {
+    local filename="$(date +%d-%m-%Y-%H:%M:%S).png"
+    local filepath="${ssdir}/${filename}"
+    local temp_filepath="${tmpdir}/${filename}"
 
     mkdir -p "${ssdir}"
-    maim "${@}" "${filepath}"
+    mkdir -p "${tmpdir}"
 
-    [ ! -f "${filepath}" ] && exit 1
+    if [[ "$capture_mode" == "region" ]]; then
+        maim -s | xclip -selection clipboard -t image/png
+        xclip -selection clipboard -t image/png -o > "${temp_filepath}"
+        notify_saved "${temp_filepath}"
+    else
+        maim "${@}" "${filepath}"
 
-    xclip -selection clipboard -t image/png -i "${filepath}" &&
-        notify-send \
-            -i "${filepath}" \
-            -A "xdg-open ${filepath}"=Open \
-            "Screenshot saved" \
-            "You can also paste the image from the clipboard." |
-            bash
+        [ ! -f "${filepath}" ] && exit 1
+
+        xclip -selection clipboard -t image/png -i "${filepath}"
+        notify_saved "${filepath}"
+    fi
+}
+
+notify_saved() {
+    local filepath="$1"
+    notify-send -i "${filepath}" -A "xdg-open ${filepath}"=Open "Screenshot saved" "You can also paste the image from the clipboard."
 }
 
 print_help() {
@@ -27,25 +40,28 @@ print_help() {
     echo "Options:"
     echo "  -f           Capture the fullscreen."
     echo "  -w           Capture the active window."
-    echo "  -s           Select a region to capture."
+    echo "  -c           Capture region to clipboard."
+    echo "  -s           Capture region."
     echo "  -t <seconds> Capture after a delay."
     echo "  -h           Show this help message."
 }
 
-ssdir="${HOME}/Pictures/Screenshots"
-
-while getopts "fwst:h" opt; do
+while getopts "fwcst:h" opt; do
     case "${opt}" in
-        f) quick-shot -u ;;
-        w) quick-shot -u -i "$(xdotool getactivewindow)" ;;
-        s) quick-shot -u -s ;;
-        t) timer_delay="${OPTARG}"; quick-shot -u -d "${timer_delay}" ;;
+        f) capture_mode="fullscreen";;
+        w) capture_mode="window";;
+        c) capture_mode="region";;
+        s) capture_mode="select";;
+        t) timer_delay="${OPTARG}"; capture_mode="delayed";;
         h) print_help; exit 0 ;;
         *) print_help; exit 1 ;;
     esac
 done
 
-if [ $OPTIND -eq 1 ]; then
+if [[ -z "$capture_mode" ]]; then
     print_help
+    exit 1
 fi
+
+quick_shot "${@}"
 
