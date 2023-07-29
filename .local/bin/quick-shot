@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Simple screenshot script for Xorg. Uses maim and xclip.
 # Forked from: Newman Sanchez (https://github.com/newmanls)
+# Use original from Newman if you you want more simple and less bloated approach :D
 
 set -euo pipefail
 
