@@ -5,35 +5,22 @@
 
 set -euo pipefail
 
-capture_mode=""
-ssdir="${HOME}/Pictures/Screenshots"
-tmpdir="/tmp/screenshots"
-
-quick_shot() {
-    local filename="$(date +%d-%m-%Y-%H:%M:%S).png"
-    local filepath="${ssdir}/${filename}"
-    local temp_filepath="${tmpdir}/${filename}"
+take_screenshot() {
+    filename="$(date +%Y%m%d_%H%M%S).png"
+    filepath="${ssdir}/${filename}"
 
     mkdir -p "${ssdir}"
-    mkdir -p "${tmpdir}"
+    maim "${@}" "${filepath}"
 
-    if [[ "$capture_mode" == "region" ]]; then
-        maim -s | xclip -selection clipboard -t image/png
-        xclip -selection clipboard -t image/png -o > "${temp_filepath}"
-        notify_saved "${temp_filepath}"
-    else
-        maim "${@}" "${filepath}"
+    [ ! -f "${filepath}" ] && exit 1
 
-        [ ! -f "${filepath}" ] && exit 1
-
-        xclip -selection clipboard -t image/png -i "${filepath}"
-        notify_saved "${filepath}"
-    fi
-}
-
-notify_saved() {
-    local filepath="$1"
-    notify-send -i "${filepath}" -A "xdg-open ${filepath}"=Open "Screenshot saved" "You can also paste the image from the clipboard."
+    xclip -selection clipboard -t image/png -i "${filepath}" &&
+        notify-send \
+            -i "${filepath}" \
+            -A "xdg-open ${filepath}"=Open \
+            "Screenshot saved" \
+            "You can also paste the image from the clipboard." |
+            bash
 }
 
 print_help() {
@@ -41,28 +28,25 @@ print_help() {
     echo "Options:"
     echo "  -f           Capture the fullscreen."
     echo "  -w           Capture the active window."
-    echo "  -c           Capture region to clipboard."
-    echo "  -s           Capture region."
+    echo "  -s           Select a region to capture."
     echo "  -t <seconds> Capture after a delay."
     echo "  -h           Show this help message."
 }
 
-while getopts "fwcst:h" opt; do
+ssdir="${HOME}/Pictures/Screenshots"
+
+while getopts "fwst:h" opt; do
     case "${opt}" in
-        f) capture_mode="fullscreen";;
-        w) capture_mode="window";;
-        c) capture_mode="region";;
-        s) capture_mode="select";;
-        t) timer_delay="${OPTARG}"; capture_mode="delayed";;
+        f) take_screenshot ;;
+        w) take_screenshot -i "$(xdotool getactivewindow)" ;;
+        s) take_screenshot -s ;;
+        t) timer_delay="${OPTARG}"; take_screenshot -d "${timer_delay}" ;;
         h) print_help; exit 0 ;;
         *) print_help; exit 1 ;;
     esac
 done
 
-if [[ -z "$capture_mode" ]]; then
+# If no options were provided, show the help message
+if [ $OPTIND -eq 1 ]; then
     print_help
-    exit 1
 fi
-
-quick_shot "${@}"
-
