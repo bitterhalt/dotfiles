@@ -23,7 +23,7 @@ SAVEHIST=5000                           # Maximum events in history file
 setopt APPEND_HISTORY                   # Immediately append history instead of overwriting
 setopt HIST_IGNORE_ALL_DUPS             # If a new command is a duplicate, remove the older one
 setopt HIST_SAVE_NO_DUPS                # Do not save duplicated command
-setopt auto_cd                          # Changing directories without 'cd'
+# setopt auto_cd                          # Changing directories without 'cd'
 export EDITOR=nvim                       # use vim as editor
 export VISUAL=nvim
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"

@@ -16,7 +16,7 @@ set period 1
 set hidden true
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
-set autoquit on
+set autoquit true
 
 # =============================================================================
 #                                FUNCTIONS
