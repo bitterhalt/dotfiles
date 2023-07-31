@@ -35,7 +35,7 @@ display() {
             sb-updates) color="$color8" ;;
             sb-cpu) color="$color8" ;;
             sb-memory) color="$color8" ;;
-            sb-volume) color="$color5";;
+            sb-volume) color="$color8";;
             sb-dunst) color="$color7" ;;
 #            sb-lock) color="$color8" ;;
 #            sb-mic) color="color7" ;;

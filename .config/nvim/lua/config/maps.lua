@@ -1,7 +1,3 @@
--------------------------------------------------
--- KEYBINDINGS
--------------------------------------------------
-
 local function map(m, k,v)
 	vim.keymap.set(m, k, v, { silent = true })
 end
@@ -30,9 +26,7 @@ map("n", "<C-Down>", ":resize +2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
--- move line(s) above/below"
-map('n', 'K', ':m .-2<CR>==')
-map('n', 'J', ':m .+1<CR>==')
+-- move highlighted line(s) above/below"
 map('v', 'K', ':m \'<-2<CR>gv=gv')
 map('v', 'J', ':m \'>+1<CR>gv=gv')
 
@@ -56,3 +50,6 @@ map("n", "<S-q>", "<cmd>Bdelete!<CR>")
 
 -- Markdown Preview toggle
 map("n", "<C-p>", "<cmd>MarkdownPreviewToggle<CR>")
+
+-- replace word
+map("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

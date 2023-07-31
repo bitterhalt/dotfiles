@@ -21,7 +21,7 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: Hack
+    family: Iosevka Nerd Font
     style: Regular
   # Point size
   size: 10.0

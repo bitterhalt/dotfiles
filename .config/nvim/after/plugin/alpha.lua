@@ -36,7 +36,6 @@ dashboard.opts.opts.noautocmd = false
 --vim.cmd[[autocmd User AlphaReady echo 'ready']]
 alpha.setup(dashboard.opts)
 
-
 -- Disable statuslines in dashboard
 
 vim.api.nvim_create_autocmd("User", {

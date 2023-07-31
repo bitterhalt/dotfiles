@@ -1,4 +1,3 @@
--- auto install packer if not installed
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -9,14 +8,13 @@ local ensure_packer = function()
     end
     return false
 end
-local packer_bootstrap = ensure_packer() -- true if packer was just installed
+local packer_bootstrap = ensure_packer()
 
--- import packer safely
 local status, packer = pcall(require, "packer")
 if not status then
     return
 end
--- Reloads Neovim after whenever you save plugins.lua
+
 vim.cmd([[
     augroup packer_user_config
     autocmd!
@@ -24,9 +22,7 @@ vim.cmd([[
     augroup END
 ]])
 
--- add list of plugins to install
 return packer.startup(function(use)
-
 
     use ('goolord/alpha-nvim')
     use ('moll/vim-bbye')
@@ -51,7 +47,6 @@ return packer.startup(function(use)
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
         requires = {
-            -- LSP Support
             {'neovim/nvim-lspconfig'},
             {
                 'williamboman/mason.nvim',
@@ -60,16 +55,12 @@ return packer.startup(function(use)
                 end,
             },
             {'williamboman/mason-lspconfig.nvim'},
-
-            -- Autocompletion
             {'hrsh7th/nvim-cmp'},
             {'hrsh7th/cmp-buffer'},
             {'hrsh7th/cmp-path'},
             {'saadparwaiz1/cmp_luasnip'},
             {'hrsh7th/cmp-nvim-lsp'},
             {'hrsh7th/cmp-nvim-lua'},
-
-            -- Snippets
             {'L3MON4D3/LuaSnip'},
             {'rafamadriz/friendly-snippets'},
         }
