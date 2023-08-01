@@ -6,7 +6,7 @@
 set -euo pipefail
 
 take_screenshot() {
-    filename="$(date +%Y%m%d_%H%M%S).png"
+    filename="$(date +%Y-%m-%d-%H%M%S).png"
     filepath="${ssdir}/${filename}"
 
     mkdir -p "${ssdir}"
@@ -33,7 +33,7 @@ print_help() {
     echo "  -h           Show this help message."
 }
 
-ssdir="${HOME}/Pictures/Screenshots"
+ssdir="${HOME}/Pictures/test"
 
 while getopts "fwst:h" opt; do
     case "${opt}" in
