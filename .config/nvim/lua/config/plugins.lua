@@ -45,7 +45,7 @@ return packer.startup(function(use)
     -- LSP-Zero
     use {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
+        branch = 'dev-v3',
         requires = {
             {'neovim/nvim-lspconfig'},
             {
@@ -87,4 +87,3 @@ return packer.startup(function(use)
         require("packer").sync()
     end
 end)
-
