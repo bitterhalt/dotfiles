@@ -13,7 +13,7 @@
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-solarized-light')
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-tomorrow-night')
 -- local ok, _ = pcall(vim.cmd, 'colorscheme base16-tokyo-night-dark')
---
+
 -------------------------------------------
 -- Gruvbox Baby
 -- https://github.com/luisiacc/gruvbox-baby
@@ -23,13 +23,7 @@
 --vim.g.gruvbox_baby_background_color = "dark"
 --vim.g.gruvbox_baby_telescope_theme = 1
 --local _ = pcall(vim.cmd, "colorscheme gruvbox-baby")
---------------------------------------------
--- Onedark
---------------------------------------------
-require('onedark').setup {
-    style = 'darker'
-}
-require('onedark').load()
+
 
 
 
