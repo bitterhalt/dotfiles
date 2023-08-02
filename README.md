@@ -17,7 +17,7 @@ Please do not try to copy my entire setup, as it is very disorganized and specif
  - Prompt: [starship](https://starship.rs/)
  - Editor: [neovim](https://neovim.io/)
  - Filemanager: [Ranger](https://github.com/ranger/ranger)
- - Launcher: [Rofi](https://github.com/davatorium/rofi) + [dmenu](https://github.com/newmanls/dmenu)
+ - Launcher: [Rofi](https://github.com/davatorium/rofi) + [dmenu](https://github.com/newmanls/dmenu) (Why both? -- > beacause: Why not?)
  - Image Viewer: [nsxiv](https://github.com/nsxiv/nsxiv)
 - Media Player: [mpv](https://mpv.io/)
 - Document Viewer: [zathura](https://pwmt.org/projects/zathura/)
