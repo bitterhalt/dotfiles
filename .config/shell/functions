@@ -1,7 +1,7 @@
 ### Check if update needs restart
 
 checkup() { # check for updates, needs "pacman-contrib" and "paru" or "yay"
-  local UPDATES=$(checkupdates; paru -Qua)
+  local UPDATES=$(checkupdates; yay -Qua)
   [[ "$UPDATES" == "" ]] && return 2 || echo "$UPDATES"
   # assume packages containing these strings in name need reboot after updating
   local REBOOT="(ucode|cryptsetup|linux|nvidia|mesa|systemd|wayland|xf86-video|xorg)"

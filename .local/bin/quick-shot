@@ -36,10 +36,10 @@ print_help() {
 
 while getopts "fwst:h" opt; do
     case "${opt}" in
-        f) take_screenshot ;;
-        w) take_screenshot -i "$(xdotool getactivewindow)" ;;
-        s) take_screenshot -s ;;
-        t) timer_delay="${OPTARG}"; take_screenshot -d "${timer_delay}" ;;
+        f) take_screenshot -u ;;
+        w) take_screenshot -u -i "$(xdotool getactivewindow)" ;;
+        s) take_screenshot -u -s ;;
+        t) timer_delay="${OPTARG}"; take_screenshot -u -d "${timer_delay}" ;;
         h) print_help; exit 0 ;;
         *) print_help; exit 1 ;;
     esac

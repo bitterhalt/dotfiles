@@ -11,7 +11,6 @@ alias pacsyu='sudo pacman -Syu'                  # Update the system and upgrade
 alias pacsyy='sudo pacman -Syy'			         # update the software database
 alias pacsyyu='sudo pacman -Syyu'                # synchronize with the repositories and update the system
 alias pacdifc='sudo DIFFPROG=meld pacdiff'       # merge or remove pacnew files
-alias yay='paru'
 
 ## DNF/Flatpak
 #alias cleanall='sudo dnf clean all'             #cleans caches
