@@ -7,7 +7,7 @@ if [ ! -d "$wallpaper_dir" ]; then
   exit 1
 fi
 
-nsxiv -q -r -t "$wallpaper_dir" &
+nsxiv -q -t "$wallpaper_dir" &
 nsxiv_pid=$!
 
 while ! ps -p $nsxiv_pid > /dev/null; do

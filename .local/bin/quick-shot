@@ -4,7 +4,7 @@
 # Use original from Newman if you you want more simple and less bloated approach :D
 
 set -euo pipefail
-ssdir="${HOME}/Pictures/Screenshot"
+ssdir="${HOME}/Pictures/Screenshots"
 
 take_screenshot() {
     filename="$(date +%Y-%m-%d-%H:%M:%S).png"
