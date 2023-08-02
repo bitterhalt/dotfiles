@@ -4,9 +4,10 @@
 # Use original from Newman if you you want more simple and less bloated approach :D
 
 set -euo pipefail
+ssdir="${HOME}/Pictures/Screenshot"
 
 take_screenshot() {
-    filename="$(date +%Y-%m-%d-%H%M%S).png"
+    filename="$(date +%Y-%m-%d-%H:%M:%S).png"
     filepath="${ssdir}/${filename}"
 
     mkdir -p "${ssdir}"
@@ -33,8 +34,6 @@ print_help() {
     echo "  -h           Show this help message."
 }
 
-ssdir="${HOME}/Pictures/test"
-
 while getopts "fwst:h" opt; do
     case "${opt}" in
         f) take_screenshot ;;
@@ -46,7 +45,6 @@ while getopts "fwst:h" opt; do
     esac
 done
 
-# If no options were provided, show the help message
 if [ $OPTIND -eq 1 ]; then
     print_help
 fi
