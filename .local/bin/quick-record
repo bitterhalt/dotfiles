@@ -76,3 +76,5 @@ case "$1" in
   -h) display_help;;
   *) display_help;;
 esac
+
+pkill -RTMIN+10 dwmblocks

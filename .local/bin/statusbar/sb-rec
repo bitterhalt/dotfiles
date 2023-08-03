@@ -1,0 +1,7 @@
+#!/bin/sh
+# Displays an indicator during screen records.
+
+if [ -f /tmp/recordingpid ]; then
+    . sb-theme
+    display "󰑊"
+fi
