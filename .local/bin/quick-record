@@ -10,6 +10,7 @@ getdim() {
 killrecording() {
   recpid="$(cat /tmp/recordingpid)"
   kill -15 "$recpid"
+  notify-send -i "check-square" "Recording has been saved to $HOME/Videos"
   rm -f /tmp/recordingpid
 }
 
