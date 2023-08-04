@@ -1,6 +1,11 @@
 #!/bin/sh
 # Displays an indicator during screen records.
 
+case $BLOCK_BUTTON in
+	1) quick-record -kill ; pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}" ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
 if [ -f /tmp/recordingpid ]; then
     . sb-theme
     display "󰑊"
