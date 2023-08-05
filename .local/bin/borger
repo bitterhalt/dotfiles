@@ -1,6 +1,9 @@
 #!/bin/bash
-# Small helper scritp to borgmatic.
+# Small helper script to borgmatic
 # Uses dmenu
+# This script does not work if you run borgmatic as root!
+# You need to setup your borgmatic before using this script: https://torsion.org/borgmatic/docs/how-to/set-up-backups/
+#
 # Author: bitterhalt@github
 
 set -e
