@@ -1,0 +1,38 @@
+#!/bin/bash
+# Small helper scritp to take and mount snapshot with borgmatic
+# Author: bitterhalt@github
+
+set -e
+
+snapshot() {
+    notify-send "Taking snapshot! This could take a while.."
+    borgmatic --verbosity -1 --syslog-verbosity 1
+    notify-send "Snapshot ready!"
+}
+
+mount() {
+    borgmatic mount --archive latest --mount-point $HOME/temp
+    notify-send "Latest snapshot mounted at $HOME/temp/"
+}
+
+umount() {
+    borgmatic umount --mount-point $HOME/temp
+    notify-send "Umount complete!"
+}
+
+display_help() {
+    echo "Usage: borg script [options]"
+    echo "Options:"
+    echo "  -s  Take snapshot"
+    echo "  -m     Mount latest snapshot"
+    echo "  -u    umount snapshot"
+    echo "  -h         Display this help message."
+}
+
+case "$1" in
+    -s) snapshot;;
+    -m) mount;;
+    -u) umount;;
+    -h) display_help;;
+    *) display_help;;
+esac
