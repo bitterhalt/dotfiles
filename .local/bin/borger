@@ -1,38 +1,32 @@
 #!/bin/bash
-# Small helper scritp to take and mount snapshot with borgmatic
+# Small helper scritp to borgmatic.
+# Uses dmenu
 # Author: bitterhalt@github
 
 set -e
 
-snapshot() {
-    notify-send "Taking snapshot! This could take a while.."
-    borgmatic --verbosity -1 --syslog-verbosity 1
-    notify-send "Snapshot ready!"
-}
+if [[ ! -d ~/temp ]]; then
+    mkdir ~/temp > /dev/null 2>&1
+fi
 
-mount() {
-    borgmatic mount --archive latest --mount-point $HOME/temp
-    notify-send "Latest snapshot mounted at $HOME/temp/"
-}
+options=("Take snapshot" "Mount snapshot" "Umount snapshot")
+selected=$(printf '%s\n' "${options[@]}" | dmenu -i -p "Quick snapshot")
 
-umount() {
-    borgmatic umount --mount-point $HOME/temp
-    notify-send "Umount complete!"
-}
 
-display_help() {
-    echo "Usage: borg script [options]"
-    echo "Options:"
-    echo "  -s  Take snapshot"
-    echo "  -m     Mount latest snapshot"
-    echo "  -u    umount snapshot"
-    echo "  -h         Display this help message."
-}
-
-case "$1" in
-    -s) snapshot;;
-    -m) mount;;
-    -u) umount;;
-    -h) display_help;;
-    *) display_help;;
-esac
+if [[ -n "$selected" ]]; then
+    case "$selected" in
+        "Take snapshot") # Takes snapshot
+            notify-send "Taking snapshot! This could take a while.."
+            borgmatic --verbosity -1 --syslog-verbosity 1
+            notify-send "Snapshot ready!"
+            ;;
+        "Mount snapshot") # Mounts latest snapshot to ~/temp
+            borgmatic mount --archive latest --mount-point $HOME/temp
+            notify-send "Latest snapshot mounted at $HOME/temp/"
+            ;;
+        "Umount snapshot") # Umounts snapshot
+            borgmatic umount --mount-point $HOME/temp
+            notify-send "Umount complete!"
+            ;;
+    esac
+fi
