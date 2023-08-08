@@ -19,17 +19,17 @@ selected=$(printf '%s\n' "${options[@]}" | dmenu -i -p "Quick snapshot")
 if [[ -n "$selected" ]]; then
     case "$selected" in
         "Take snapshot") # Takes snapshot
-            notify-send "Taking snapshot! This could take a while.."
+            notify-send -i "info" "Taking snapshot! This could take a while.."
             borgmatic --verbosity -1 --syslog-verbosity 1
-            notify-send "Snapshot ready!"
+            notify-send -i "check-circle" "Snapshot ready!"  
             ;;
         "Mount snapshot") # Mounts latest snapshot to ~/temp
             borgmatic mount --archive latest --mount-point $HOME/temp
-            notify-send "Latest snapshot mounted at $HOME/temp/"
+            notify-send -i "folder" "Latest snapshot mounted at $HOME/temp/"
             ;;
         "Umount snapshot") # Umounts snapshot
             borgmatic umount --mount-point $HOME/temp
-            notify-send "Umount complete!"
+            notify-send -i "folder-minus" "Umount complete!"
             ;;
     esac
 fi

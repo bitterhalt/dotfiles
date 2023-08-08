@@ -2,7 +2,7 @@
 # DWM autostart script
 
 # Processes to check
-processes=( "corectrl" "dwmblocks" "picom" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+processes=( "dwmblocks" "picom" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" )
 # locker
 locker="$HOME/.local/bin/locker-toggler"
 
@@ -13,10 +13,7 @@ for process in "${processes[@]}"; do
     fi
 done
 
-
-
-
-sleep 2 && ~/.fehbg &
+sleep 2 && setbg &
 ~/.config/.screenlayout/monitor.sh &
 sleep 3 && $locker -e &
 #xset s 3600 dpms 3600 3600 3600 &

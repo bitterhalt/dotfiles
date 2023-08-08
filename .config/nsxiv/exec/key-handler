@@ -2,22 +2,28 @@
 while read file
 do
     case "$1" in
-        "d")
-            mv "$file" ~/.trash ;;
-        "r")
-            convert -rotate 90 "$file" "$file" ;;
         "c")
-            echo -n "$file" | xclip -selection clipboard ;;
+            xclip -selection clipboard "$file" -t image/png &&
+            notify-send "$file copied to clipboard!" && exit 0
+            ;;
+        "d")
+            [ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && 
+            rm "$file" && notify-send "$file deleted."
+            ;;
+        "r")
+            convert -rotate 90 "$file" "$file" 
+            ;;
         "w")
-            feh --bg-scale "$file" ;;
+            setbg "$file" &&
+            notify-send "$file has been set as your wallpaper." && exit 0
+            ;;
         "l")
             betterlockscreen -q -u "$file"
-            notify-send "Locksreen Wallpaper Changed!" ;;
+            notify-send "Locksreen Wallpaper Changed!" && exit 0
+            ;;
         "a")
-            feh --bg-scale "$file" &&  betterlockscreen -q -u "$file" 
-            notify-send  "Locksreen Wallpaper Changed!" ;;
-        "y")
-            xclip -selection clipboard "$file" -t image/png &&
-                notify-send "$file copied to clipboard!"
+            setbg "$file" &&  betterlockscreen -q -u "$file" 
+            notify-send  "Wallpaper and locksreen changed!" && exit 0
+            ;;
         esac
     done

@@ -8,12 +8,11 @@ repositories:
 
 one_file_system: true
 
-encryption_passcommand: sh -c "cat ~/.borg-passphrase"
+encryption_passcommand: sh -c "cat ~/.credentials/.borg-passphrase"
 
 keep_daily: 7
 keep_weekly: 4
 keep_monthly: 6
-keep_yearly: 1
 
 exclude_if_present:
   - .nobackup
