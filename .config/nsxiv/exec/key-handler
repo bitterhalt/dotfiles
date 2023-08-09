@@ -10,6 +10,9 @@ do
             [ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && 
             rm "$file" && notify-send "$file deleted."
             ;;
+        "e")
+             gimp "$file"
+            ;;
         "r")
             convert -rotate 90 "$file" "$file" 
             ;;
