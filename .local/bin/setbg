@@ -2,6 +2,7 @@
 
 # Sets wallpaper using xwallpaper and makes symlink to $home/.config
 # If you want to restore wallpaper after reboot just add "setbg &" in your window manager config or autostart script
+# help: "man xwallpaper"
 
 # Stolen from: https://github.com/newmanls/dotfiles/blob/master/.local/bin/setbg
 
