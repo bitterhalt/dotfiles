@@ -44,7 +44,7 @@ alias tpr="trash-restore"
 # Weather
 alias weather='curl wttr.in/'
 
-# Cowsay
+# Most usefull alias
 alias fortunec='fortune | cowsay'
 
 # Yle-dl
@@ -60,16 +60,6 @@ alias logs='journalctl --disk-usage'
 alias logv='journalctl --verify'
 alias logw='sudo journalctl --vacuum-time=1s'
 
-# git
-alias gad='git add .'
-alias gbr='git branch'
-alias gch='git checkout'
-alias gcl='git clone'
-alias gco='git commit -m'
-alias fetch='git fetch'
-alias gpull='git pull origin'
-alias gpush='git push origin'
-alias gtat='git status'
 
 # yt-dlp
 alias yta-mp3="yt-dlp --extract-audio --audio-format mp3 "
@@ -79,4 +69,5 @@ alias ytv-best="yt-dlp -f bestvideo+bestaudio "
 # Random
 alias nvm='sudo nvme smart-log /dev/nvme0'
 alias sudoe='sudoedit'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/Documents/.dotfiles/ --work-tree=$HOME'
+
