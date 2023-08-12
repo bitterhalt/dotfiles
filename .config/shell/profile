@@ -1,0 +1,20 @@
+# Defaults
+export EDITOR="nvim"
+export TERMINAL="st"
+export BROWSER="firefox"
+
+# PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin/statusbar:$PATH"
+
+# XDG Base Directory
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export QT_QPA_PLATFORMTHEME='qt6ct'
+
+# ~/ Clean-up:
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GOPATH="$XDG_DATA_HOME/go"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
