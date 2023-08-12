@@ -34,7 +34,7 @@ Xcursor.theme: Qogir-dark
 
 !! One-dark
 *.background: #1f2329
-!*.background: #1e222a
+*.black: #181b20
 *.foreground: #c8ccd4
 *.cursorColor:#c8ccd4
 
