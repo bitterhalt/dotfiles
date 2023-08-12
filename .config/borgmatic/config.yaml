@@ -8,7 +8,7 @@ repositories:
 
 one_file_system: true
 
-encryption_passcommand: sh -c "cat ~/.credentials/.borg-passphrase"
+encryption_passcommand: sh -c "cat ~/credentials/.borg-passphrase"
 
 keep_daily: 7
 keep_weekly: 4
@@ -70,3 +70,5 @@ exclude_patterns:
   - /home/*/.local/share/Trash
 
 exclude_caches: true
+
+borgmatic_source_directory: ~/.local/share/borgmatic
