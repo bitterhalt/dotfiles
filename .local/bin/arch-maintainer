@@ -10,7 +10,7 @@
 GRN='\033[0;32m'
 NC='\033[0m'
 
-PKGLISTLOCATION=$HOME
+PKGLISTLOCATION=$HOME/.config
 
 # Check for failed systemd services
 printf "\n${GRN}>> Checking failed services:${NC}\n"
