@@ -1,5 +1,1 @@
-#!/bin/sh
-# This is only needed with lightdm to source .zsenv or .zprofile https://wiki.archlinux.org/title/LightDM#Optional_configuration_and_tweaks
-
-# [[ -f ~/.zshenv ]] && source ~/.zshenv
-[[ -f ~/.zprofile ]] && source ~/.zprofile
+/home/bazz/.config/x11/xprofile
