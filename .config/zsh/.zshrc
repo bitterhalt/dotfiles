@@ -18,27 +18,23 @@ SAVEHIST=5000                           # Maximum events in history file
 setopt APPEND_HISTORY                   # Immediately append history instead of overwriting
 setopt HIST_IGNORE_ALL_DUPS             # If a new command is a duplicate, remove the older one
 setopt HIST_SAVE_NO_DUPS                # Do not save duplicated command
-# setopt auto_cd                          # Changing directories without 'cd'
-export EDITOR=nvim                       # use vim as editor
+setopt globdots
+
+export EDITOR=nvim
 export VISUAL=nvim
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-cdpath=($HOME/.config)
 
 # Basic auto/tab complete
 autoload -U compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zmodload zsh/complist
 compinit
-_comp_options+=(globdots)               # Include hidden files.
-compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION # Delete this line if you use zsh default dir
-# Enable searching through history
+
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^F" history-incremental-pattern-search-forward
-# bindkey '^ ' autosuggest-accept
 bindkey '^x' autosuggest-toggle
-
-# make auto/tab colors match ls-colors
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # Load aliases and functions if existent.
 [ -f "$HOME/.config/shell/aliases" ] && source "$HOME/.config/shell/aliases"
@@ -51,4 +47,3 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # Starship prompt
 eval "$(starship init zsh)"
-
