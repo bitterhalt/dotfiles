@@ -2,25 +2,27 @@
 [[ $- != *i* ]] && return
 
 autoload -U colors && colors
-autoload -U compinit && compinit
 
 # History
-HISTFILE=~/.zsh_history                 # History filepath
 HISTSIZE=5000                           # Maximum events for internal history
 SAVEHIST=5000                           # Maximum events in history file
-setopt APPEND_HISTORY                   # Immediately append history instead of overwriting
-setopt HIST_IGNORE_ALL_DUPS             # If a new command is a duplicate, remove the older one
-setopt HIST_SAVE_NO_DUPS                # Do not save duplicated command
+HISTFILE=~/.zsh_history                 # History filepath
+setopt append_history                   # Immediately append history instead of overwriting
+setopt hist_ignore_all_dups             # If a new command is a duplicate, remove the older one
+setopt hist_save_no_dups                # Do not save duplicated command
+setopt auto_cd                          # Move between directories without cd
 
+# Defaults
 export EDITOR=nvim
 export VISUAL=nvim
-#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Basic auto/tab complete
+autoload -U compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zmodload zsh/complist
+#_comp_options+=(globdots)		# Include hidden files.
 
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^F" history-incremental-pattern-search-forward
