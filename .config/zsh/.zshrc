@@ -15,6 +15,8 @@ setopt auto_cd                          # Move between directories without cd
 # Defaults
 export EDITOR=nvim
 export VISUAL=nvim
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
 
 # Basic auto/tab complete
 autoload -U compinit && compinit
