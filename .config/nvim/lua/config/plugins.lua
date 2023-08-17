@@ -32,6 +32,7 @@ return packer.startup(function(use)
     use ('wbthomason/packer.nvim' )
     use ('folke/which-key.nvim')
     use ('nvim-lualine/lualine.nvim')
+   -- use {'nvim-tree/nvim-tree.lua', commit = 'ace64228ad5d89035fbe6f85e7f45a1f7b9e29c1' }
     use ('nvim-tree/nvim-tree.lua')
     use ('kyazdani42/nvim-web-devicons')
     use ('nvim-treesitter/nvim-treesitter')
