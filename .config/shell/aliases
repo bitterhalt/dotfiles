@@ -70,4 +70,5 @@ alias ytv-best="yt-dlp -f bestvideo+bestaudio "
 alias nvm='sudo nvme smart-log /dev/nvme0'
 alias sudoe='sudoedit'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/Documents/.dotfiles/ --work-tree=$HOME'
+alias dot='/usr/bin/git --git-dir=$HOME/Documents/.dotfiles/ --work-tree=$HOME'
 

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Load essentials
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+    for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
+        [ -x "${f}" ] && source "${f}"
+    done && unset f
+fi
+
+# Autostart
+
+xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$!
+setbg &
+~/.config/Screenlayout/monitor.sh &
+locker-toggler -e &
+
+# Check is processes
+processes=( "dwmblocks" "picom" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+
+for process in "${processes[@]}"; do
+    if ! pgrep -x "$process" > /dev/null; then
+        "$process" &
+    fi
+done
+
+[ -n "$xrdbpid" ] && wait "$xrdbpid"
+
+exec dwm
