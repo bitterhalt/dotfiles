@@ -24,9 +24,5 @@ Please do not try to copy my entire setup, as it is very disorganized and specif
 - Notification daemon: [dunst](https://dunst-project.org/)
 
 ## Inspiration 
-- [seeingangelz](https://github.com/seeingangelz/dotfiles) 
-- [newmanls](https://github.com/newmanls)
-- [UtkarshVerma](https://github.com/UtkarshVerma)
-- [ericmurphyxyz](https://github.com/ericmurphyxyz)
-
+- [See my stars](https://github.com/bitterhalt?tab=stars) 
 
