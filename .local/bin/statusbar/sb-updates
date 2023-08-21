@@ -1,6 +1,6 @@
 #!/bin/sh
 case $BLOCK_BUTTON in
-	1) st -c floatterm -g 144x41 -e yay && pkill -RTMIN+1 dwmblocks ;;
+	1) st -c floatterm -g 144x41 -e popupgrade ;;
     3) updates=$(checkupdates | awk '{print $1}')
        if [ -z "$updates" ]; then
            dunstify "No updates available"

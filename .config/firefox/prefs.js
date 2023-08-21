@@ -17,6 +17,7 @@ user_pref("browser.newtabpage.introShown", true);
 user_pref("browser.selfsupport.url", "");
 user_pref("browser.send_pings", false);
 user_pref("browser.sessionstore.privacy_level", 0);
+user_pref("dom.battery.enabled", false);
 user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("browser.startup.homepage_override.mstone", "ignore");
 user_pref("browser.tabs.crashReporting.sendReport", false);

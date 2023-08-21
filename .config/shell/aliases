@@ -11,6 +11,7 @@ alias pacsyu='sudo pacman -Syu'                  # Update the system and upgrade
 alias pacsyy='sudo pacman -Syy'			         # update the software database
 alias pacsyyu='sudo pacman -Syyu'                # synchronize with the repositories and update the system
 alias pacdifc='sudo DIFFPROG=meld pacdiff'       # merge or remove pacnew files
+alias yep='yay -Pw && yay'                       # Show Arch news before update
 
 ## DNF/Flatpak
 #alias cleanall='sudo dnf clean all'             #cleans caches
@@ -64,7 +65,6 @@ alias logw='sudo journalctl --vacuum-time=1s'
 # yt-dlp
 alias yta-mp3="yt-dlp --extract-audio --audio-format mp3 "
 alias ytv-best="yt-dlp -f bestvideo+bestaudio "
-
 
 # Random
 alias nvm='sudo nvme smart-log /dev/nvme0'

@@ -20,7 +20,9 @@ export GOPATH="$XDG_DATA_HOME/go"
 export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
 #
 ## Start graphical server
-[ -z "${DISPLAY}" -a ${XDG_VTNR:-0} -eq 1 ] &&
-    exec startx -- -keeptty >~/.xorg.log 2>&1
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+   exec startx -- -keeptty >~/.xorg.log 2>&1
+fi
 
 
