@@ -2,7 +2,9 @@
 [[ $- != *i* ]] && return
 
 autoload -U colors && colors
+setopt prompt_subst
 
+PROMPT='%B%F{blue}%1~%b%f%F{red}$(_git_info)%f %(?.%F{green}❯%f .%F{red}❯%b%f )'
 # History
 HISTSIZE=5000                           # Maximum events for internal history
 SAVEHIST=5000                           # Maximum events in history file
@@ -37,6 +39,3 @@ bindkey '^x' autosuggest-toggle
 # Plugin list; put syntax-highlighting last!
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Starship prompt
-eval "$(starship init zsh)"
