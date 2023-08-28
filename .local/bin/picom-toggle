@@ -5,7 +5,7 @@ if [ `pgrep -x picom` ]; then
    killall picom;
 else
    notify-send -i "check-circle" -t 2000 'Picom enabled!'
-   picom &
+   picom -b
 fi
 exit
 
