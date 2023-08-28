@@ -14,8 +14,9 @@ xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$!
 setbg &
 ~/.config/Screenlayout/monitor.sh &
 locker-toggler -e &
+picom -b
 
-processes=( "dwmblocks" "picom" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "clipmenud" )
+processes=( "dwmblocks" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "clipmenud" )
 
 for process in "${processes[@]}"; do
     if ! pgrep -x "$process" > /dev/null; then
