@@ -10,8 +10,6 @@ color5="#c678dd"
 color6="#56b6c2"
 color7="#545862"
 color8="#abb2bf"
-color9="#c8ccd4"
-
 
 # Gruvbox colorscheme
 #color0="#1d2021" # black
@@ -40,7 +38,7 @@ display() {
             sb-dunst) color="$color7" ;;
 #            sb-lock) color="$color8" ;;
 #            sb-mic) color="color7" ;;
-            sb-date) color="$color9";;
+            sb-date) color="$color8";;
             *) color="$color8" ;;
         esac
     fi
