@@ -1,7 +1,7 @@
 # Defaults
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="LibreWolf"
+export BROWSER="librewolf"
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
