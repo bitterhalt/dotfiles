@@ -1,6 +1,3 @@
-### Check if update needs restart
-
-
 ### Archive extraction
 # usage: ex <file>
 ex ()
