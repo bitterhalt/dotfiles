@@ -11,15 +11,6 @@ color6="#56b6c2"
 color7="#545862"
 color8="#abb2bf"
 
-# Gruvbox colorscheme
-#color0="#1d2021" # black
-#color1="#cc241d" # Red
-#color2="#98971a" # green
-#color3="#d79921" # yellow
-#color4="#458588" # blue
-#color5="#b16286" # purple
-#color7="#bdae93" # fg
-#color8="#ebdbb2" # fg 2
 display() {
     args=""
     case $1 in
