@@ -6,6 +6,7 @@ Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xcursor.theme: Qogir-dark
+*.font: JetBrains Mono:pixelsize=14
 
 !! One-dark
 *.background: #1f2329
