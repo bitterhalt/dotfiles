@@ -1,6 +1,6 @@
 #!/bin/sh
 case $BLOCK_BUTTON in
-	1) st -c floatterm -g 144x41 -e popupgrade ;;
+	1) setsid -f "$TERMINAL" -e popupgrade ;;
     3) updates=$(checkupdates | awk '{print $1}')
        if [ -z "$updates" ]; then
            dunstify "No updates available"
