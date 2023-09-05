@@ -11,6 +11,10 @@ def get_value(key, file):
             if key in line:
                 return line.split("=")[1].strip(" \"\n")
 
+def get_host():
+    host =  "Samsung Smart Toaster"
+    return host
+
 def get_distro():
     distro = get_value("NAME", "/etc/os-release")
     return distro
@@ -59,6 +63,7 @@ def printcolors():
 
 if __name__ == "__main__":
     info = {}
+    info["host"] = get_host()
     info["os"] = get_distro()
     info["kernel"] = get_kernel()
     info["pkgs"] = get_packages()

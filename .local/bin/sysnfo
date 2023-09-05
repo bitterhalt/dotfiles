@@ -11,6 +11,7 @@ notify-send -t 8000 "$(
 free -m | awk 'NR==2{printf " MEM usage: %s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'
 top -bn1 | grep load | awk '{printf " CPU load: %.2f\n", $(NF-2)}'
 df -h / | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf " Free: %i GiB \n", $4 }'
+unane -r | 
 printf " CPU Tctl: $CPUTemp\n"
 printf " CPU Tccd1: $CPUTemp2\n"
 printf " GPU temp: $GPUTemp\n"

@@ -1,6 +1,6 @@
 #!/bin/sh
 case $BLOCK_BUTTON in
-    1) st -c floatterm -g 120x34 -e htop ;;
+    1) st -e htop ;;
     3) notify-send "RAM usage" "$(ps axch -o cmd,rss | awk '{printf "%-30s %s\n", $1, $2/1024}' | sort -k2 -n -r | head | awk '{printf "%-30s %s\n", $1, $2}')" ;;
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac

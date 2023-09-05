@@ -8,7 +8,7 @@ dim_level=40
 blur_level=1
 pixel_scale=10,1000
 solid_color=333333
-wallpaper_cmd="feh --bg-fill"
+# wallpaper_cmd="feh --bg-fill"
 quiet=false
 
 # default theme
