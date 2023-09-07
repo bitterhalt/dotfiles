@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+cupd=$(checkupdates | wc -l)
+updates=$(checkupdates | awk '{print $1}')
+if [ -z "$updates" ]; then
+    dunstify "No updates available"
+else
+    dunstify " $cupd Updates Available:" "$updates"
+fi
+
