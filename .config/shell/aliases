@@ -34,8 +34,8 @@ alias history='fc -l 1'
 
 # Dir / exa  / lsd
 alias df='df -h'
-alias ls='exa -al --group-directories-first'
-alias la='exa -a --group-directories-first'
+alias ls='eza -al --group-directories-first'
+alias la='eza -a --group-directories-first'
 
 # Trash-cli
 alias tp="trash-put"
