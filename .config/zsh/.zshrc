@@ -4,7 +4,7 @@
 autoload -U colors && colors
 setopt prompt_subst
 
-PROMPT='%B%F{blue}%1~%b%f%F{red}$(_git_info)%f %(?.%F{green}❯%f .%F{red}❯%b%f )'
+PROMPT='%B%F{blue}%1~%b%f%F{red}$(_git_info)%f %(?.%F{green}$%f .%F{red}$%b%f )'
 # History
 HISTSIZE=5000                           # Maximum events for internal history
 SAVEHIST=5000                           # Maximum events in history file
