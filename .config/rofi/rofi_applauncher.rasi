@@ -64,7 +64,7 @@ configuration {
 }
 #element.selected.normal {
     background-color: @selected-background;
-    text-color:       @foreground;
+    text-color:       @selected-foreground;
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;

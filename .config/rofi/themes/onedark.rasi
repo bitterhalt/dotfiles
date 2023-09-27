@@ -2,6 +2,7 @@
     foreground: #abb2bf;
     background-color: #181b20;
     active-background: #282c34;
+    selected-foreground: #abb2bf;
     urgent-background: #e06c75;
     urgent-foreground: #545862;
 }

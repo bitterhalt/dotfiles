@@ -12,6 +12,6 @@ esac
 if [ ! -f "/tmp/screenlock_toggle" ]; then
     echo "󰅶"
 else
-    echo "^c#545862^󰾪^d^"
+    echo "^c#43434C^󰾪^d^"
 fi
 
