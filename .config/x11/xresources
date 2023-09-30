@@ -10,7 +10,6 @@ Xcursor.theme: Qogir-dark
 
 !! One-dark
 *.background: #1f2329
-*.black: #181b20
 *.foreground: #c8ccd4
 *.cursorColor:#c8ccd4
 
@@ -34,12 +33,12 @@ Xcursor.theme: Qogir-dark
 
 !! Nsxiv colors
 Nsxiv*background: #1f2329
-Nsxiv*foreground: #56b6c2
+Nsxiv*foreground: #abb2bf
 
 !! Dwm colors One-dark
 dwm.normbordercolor: #282c34
-dwm.normbgcolor: #181b20
+dwm.normbgcolor: #14161b
 dwm.normfgcolor: #abb2bf
 dwm.selbordercolor: #abb2bf
-dwm.selbgcolor: #282c34
+dwm.selbgcolor: #33363d
 dwm.selfgcolor: #abb2bf
