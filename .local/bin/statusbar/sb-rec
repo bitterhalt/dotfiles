@@ -8,5 +8,5 @@ esac
 
 if [ -f /tmp/recordingpid ]; then
     . sb-theme
-    display "󰑊"
+    display ":: Screen record on! ::"
 fi

@@ -72,7 +72,7 @@ configuration {
 }
 #element.selected.active {
     background-color: @selected-active-background;
-    text-color:       @foreground;
+    text-color:       @background-color;
 }
 #element.alternate.normal {
     background-color: @background-color;
@@ -84,7 +84,7 @@ configuration {
 }
 #element.alternate.active {
     background-color: @active-background;
-    text-color:       @foreground;
+    text-color:       @background-color;
 }
 #scrollbar {
     width:        2px ;
