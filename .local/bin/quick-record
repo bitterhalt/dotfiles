@@ -31,13 +31,16 @@ screencast() {
 }
 
 video() {
-  ffmpeg \
+  ffmpeg -y \
     -f x11grab \
     -framerate 30 \
     -s "$(getdim)" \
     -i "$DISPLAY" \
-    -c:v libx264 -qp 0 -r 60 \
-    "$HOME/Videos/video-$(date '+%d-%m-%Y-%H:%M:%S').mkv" &
+    -r 60 \
+    -use_wallclock_as_timestamps 1 \
+    -c:v h264 \
+    -crf 23 -preset ultrafast \
+    "$HOME/Videos/capture-$(date '+%d-%m-%Y-%H:%M:%S').mp4" &
   echo $! > /tmp/recordingpid
 }
 
