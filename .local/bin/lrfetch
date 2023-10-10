@@ -12,7 +12,7 @@ def get_value(key, file):
                 return line.split("=")[1].strip(" \"\n")
 
 def get_host():
-    host =  "Samsung Smart Toaster"
+    host =  getoutput("cat /etc/hostname")
     return host
 
 def get_distro():
