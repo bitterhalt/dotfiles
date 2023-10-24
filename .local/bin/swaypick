@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Wayland color picker script grabs color-code from image and pastes it to wl-clipboard with tiny notification
+# Inspiration: https://github.com/sdushantha/farge/blob/master/farge
+# Github: bitterhalt
+
+# Dependencies:
+check_dependencies() {
+    local missing_deps=()
+    command -v grim >/dev/null 2>&1 || missing_deps+=("grim")
+    command -v slurp >/dev/null 2>&1 || missing_deps+=("slurp")
+    command -v magick >/dev/null 2>&1 || missing_deps+=("ImageMagick")
+    command -v wl-copy >/dev/null 2>&1 || missing_deps+=("wl-clipboard")
+
+    if [ ${#missing_deps[@]} -gt 0 ]; then
+        echo "The following dependencies are missing:"
+        for dep in "${missing_deps[@]}"; do
+            echo " - $dep"
+        done
+        echo "Please install them before running this script."
+        echo "For example, on Debian/Ubuntu: sudo apt-get install grim slurp imagemagick wl-clipboard"
+        exit 1
+    fi
+}
+
+# Super Magical Script!:
+main () {
+    check_dependencies
+
+    # Variables
+    IMAGE="/tmp/image.png"
+    ICON="/tmp/icon.png"
+
+    HEXCODE=$(grim -g "$(slurp -p)" - > $IMAGE
+    magick $IMAGE -colors 1 txt: | awk 'NR==2 {print $3}')
+    magick convert $IMAGE -filter point -resize 96x96 $ICON
+    notify-send -i $ICON  "$HEXCODE"
+    wl-copy -n $HEXCODE
+    rm -f $IMAGE $ICON
+}
+main
