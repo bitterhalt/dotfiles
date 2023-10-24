@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Wayland color picker script grabs color-code from image and pastes it to wl-clipboard with tiny notification
+# Wayland color picker script that grabs color-code from image and pastes it to wl-clipboard with tiny notification
 # Inspiration: https://github.com/sdushantha/farge/blob/master/farge
 # Github: bitterhalt
 
