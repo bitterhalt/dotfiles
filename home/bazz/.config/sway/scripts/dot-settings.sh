@@ -20,5 +20,5 @@ FOOT) $TERMCMD -e nvim $HOME/.config/foot/foot.ini ;;
 FUZZEL) $TERMCMD -e nvim $HOME/.config/fuzzel/fuzzel.ini ;;
 NEOVIM) $TERMCMD -e nvim $HOME/.config/nvim/init.lua ;;
 SWAY) $TERMCMD -e nvim $HOME/.config/sway/config ;;
-WAYBAR) $TERMCMD -e nvim $HOME/.config/waybar/config.jsonc ;;
+WAYBAR) $TERMCMD -e nvim -p $HOME/.config/waybar/config.jsonc $HOME/.config/waybar/style.css ;;
 esac
