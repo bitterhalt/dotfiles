@@ -11,6 +11,9 @@ set $down j
 set $up k
 set $right l
 
+# Xcursor
+set $xcursor Bibata-Modern-Classic 24
+
 # Modifier
 set $mod Mod4
 set $alt Mod1
@@ -67,6 +70,9 @@ smart_gaps off
 
 # Timeout to hide inactive cursor (Milliseconds)
 seat seat0 hide_cursor 15000
+
+# Xorg don't be stubid
+seat seat0 xcursor_theme $xcursor
 
 #-----------------------------------------------------#
 #                      Devices                        #
