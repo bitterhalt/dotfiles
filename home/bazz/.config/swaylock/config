@@ -1,7 +1,7 @@
 # indicator
 # no-unlock-indicator
 # daemonize
-color=#11C1B1A
+color=#000000
 indicator-caps-lock
 show-failed-attempts
 image=$HOME/.config/swaylock/lock.png
