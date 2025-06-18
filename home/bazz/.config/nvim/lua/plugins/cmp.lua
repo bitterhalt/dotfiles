@@ -2,8 +2,8 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    "hrsh7th/cmp-buffer", -- text from currrent buffer
-    "hrsh7th/cmp-path", -- file system paths
+    "hrsh7th/cmp-buffer",   -- text from currrent buffer
+    "hrsh7th/cmp-path",     -- file system paths
     "hrsh7th/cmp-nvim-lsp", --  nvim language servers
     {
       "L3MON4D3/LuaSnip",
