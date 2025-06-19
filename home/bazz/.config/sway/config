@@ -333,6 +333,7 @@ for_window [app_id="pcsx2"] inhibit_idle fullscreen
 #-----------------------------------------------------#
 set $bg1     #100F0F
 set $bg2     #282726
+set $bg3     #1c1b1a
 set $fg1     #CECDC3
 set $fg2     #6F6E69
 set $red     #AF3029
@@ -342,7 +343,7 @@ set $black   #000000
 set $white   #ffffff
 
 # Class                 Border  Backgr. Text    Indigator Child border
-client.focused          $fg2    $bg2     $fg1    $cyan     $cyan
+client.focused          $bg2    $bg3     $fg1    $cyan     $cyan
 client.focused_inactive $bg2    $bg1     $fg2    $bg2      $bg2
 client.unfocused        $bg2    $bg1     $fg2    $bg2      $bg2
 client.urgent           $bg2    $red    $white  $red      $red
