@@ -4,7 +4,7 @@
 if pgrep -x waybar >/dev/null; then
   killall -q waybar
   # Send notication
-  notify-send -t 2000 -a System -i ~/.local/share/icons/feather/x.svg "Bar disabled" -h string:x-canonical-private-synchronous:volume
+  notify-send -t 2000 -a System -i ~/.local/share/icons/feather/x.svg "Waybar" "disabled" -h string:x-canonical-private-synchronous:volume
 else
   # Launch Waybar
   waybar &
