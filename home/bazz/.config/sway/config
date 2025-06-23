@@ -54,11 +54,12 @@ set $sig_3 pkill -SIGRTMIN+3 waybar
 # Font
 font pango: JetBrains Mono 10
 
-# Center window title
+# Titlebar
 title_align center
+titlebar_border_thickness 0
 
 # Border size
-default_border pixel 1
+default_border pixel 2
 
 # Gaps
 gaps inner 4
@@ -68,11 +69,11 @@ gaps outer 0
 smart_borders off
 smart_gaps off
 
-# Timeout to hide inactive cursor (Milliseconds)
-seat seat0 hide_cursor 15000
-
-# Xorg don't be stubid
-seat seat0 xcursor_theme $xcursor
+# Xcursor settings
+seat seat0 {
+hide_cursor 15000
+xcursor_theme $xcursor
+}
 
 #-----------------------------------------------------#
 #                      Devices                        #
@@ -95,7 +96,7 @@ input type:pointer {
 }
 
 # Touchpad
-input "type:touchpad" {
+input type:touchpad {
     dwt enabled
     tap enabled
     middle_emulation enabled
@@ -320,7 +321,7 @@ for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
 # Fix missing borders
-for_window [app_id="Firefox"] border pixel 1
+for_window [app_id="Firefox"] border pixel 2
 for_window [app_id="Thunderbird"] border pixel 1
 
 # Inhibit idle
