@@ -3,7 +3,7 @@
 #-----------------------------------------------------#
 
 # Enable if you use Swayfx tweaks
-#include ~/.config/sway/swayfx
+include ~/.config/sway/swayfx
 
 # Vim keys for moving
 set $left h
