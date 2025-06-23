@@ -50,6 +50,7 @@ grub-i386-efi
 grub-x86_64-efi
 gtk-engine-murrine
 htop
+hyprpicker
 iwd
 jq
 lf
@@ -79,6 +80,7 @@ neovim
 nerd-fonts-symbols-ttf
 net-tools
 nethogs
+niri
 nodejs
 noto-fonts-cjk
 noto-fonts-emoji
@@ -109,7 +111,7 @@ snooze
 socklog-void
 starship
 steam
-sway
+swayfx
 swayidle
 swayimg
 swaylock
