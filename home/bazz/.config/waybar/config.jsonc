@@ -41,7 +41,7 @@
   },
   "network": {
     "format-wifi": "󰖩",
-    "format-ethernet": "", // No icons needed if thernet is connected
+    "format-ethernet": "", // No icons needed if ethernet is connected
     "format-linked": "{ifname} (No IP) ?",
     "format-disconnected": "󰅛",
     "tooltip-format": "{ifname} via {gwaddr}",
