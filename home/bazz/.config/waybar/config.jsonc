@@ -23,13 +23,6 @@
     "icon": true,
     "icon-size": 20,
   },
-  "wireplumber": {
-    "format": "{icon}",
-    "tooltip-format": "{node_name}\nVolume: {volume}%",
-    "format-muted": "",
-    "on-click": "helvum",
-    "format-icons": ["󰕿", "󰖀", "󰕾 "],
-  },
   "tray": {
     "icon-size": 16,
     "spacing": 12,
@@ -67,6 +60,23 @@
     "on-scroll-up": "~/.config/river/scripts/volume.sh up; pkill -SIGRTMIN+3 waybar",
     "on-scroll-down": "~/.config/river/scripts/volume.sh down; pkill -SIGRTMIN+3 waybar",
     "signal": 3,
+  },
+  "wireplumber#sink": {
+    "format": "{icon}",
+    "format-icons": ["󰕿", "󰖀", "󰕾 "],
+    "tooltip-format": "{node_name}\nVolume: {volume}%",
+    "format-muted": "",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+  },
+  "wireplumber#source": {
+    "node-type": "Audio/Source",
+    "format": "󰍬",
+    "format-muted": "",
+    "tooltip-format": "{node_name}\nVolume: {volume}%",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-click-right": "pavucontrol",
+    "scroll-step": 5,
   },
   "clock": {
     "format": "{:%b %d %H:%M}",
