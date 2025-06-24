@@ -50,6 +50,7 @@
     "on-click-right": "foot -a floatterm -e nethogs",
   },
   "custom/pipewire": {
+    // A placeholder since I had some problems with default wireplumber module in past
     "interval": "once",
     "return-type": "json",
     "format": "{}",

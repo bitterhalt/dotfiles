@@ -116,7 +116,7 @@ bindsym $mod+v exec $editor
 bindsym $mod+w exec $browser
 bindsym $mod+tab exec $winmenu
 bindsym $mod+F1 exec ~/.local/bin/noti_sysnfo
-bindsym $mod+F10 exec ~/.config/sway/scripts/mic-toggle.sh && $sig_2
+bindsym $mod+F10 exec ~/.config/sway/scripts/mic-toggle.sh
 bindsym $mod+F11 exec ~/.config/sway/scripts/locker.sh
 bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
 bindsym $mod+F2 exec ~/.local/bin/noti_usage cpu
@@ -238,12 +238,12 @@ bindsym $mod+ctrl+j resize shrink height 10 px
 bindsym $mod+ctrl+h resize grow width 10 px
 
 # Media keys
-bindsym XF86AudioRaiseVolume exec ~/.config/sway/scripts/volume.sh up && $sig_3
-bindsym XF86AudioLowerVolume exec ~/.config/sway/scripts/volume.sh down && $sig_3
-bindsym ctrl+shift+Up exec ~/.config/sway/scripts/volume.sh up && $sig_3
-bindsym ctrl+shift+Down exec ~/.config/sway/scripts/volume.sh down && $sig_3
-bindsym XF86AudioMute exec ~/.config/sway/scripts/volume.sh mute && $sig_3
-bindsym XF86AudioMicMute exec ~/.config/sway/scripts/mic-toggle.sh && $sig_2
+bindsym XF86AudioRaiseVolume exec ~/.config/sway/scripts/volume.sh up
+bindsym XF86AudioLowerVolume exec ~/.config/sway/scripts/volume.sh down
+bindsym ctrl+shift+Up exec ~/.config/sway/scripts/volume.sh up
+bindsym ctrl+shift+Down exec ~/.config/sway/scripts/volume.sh down
+bindsym XF86AudioMute exec ~/.config/sway/scripts/volume.sh mute
+bindsym XF86AudioMicMute exec ~/.config/sway/scripts/mic-toggle.sh
 bindsym XF86Calculator exec galculator
 bindsym XF86AudioPlay exec ~/.config/sway/scripts/mediactrl.sh --play
 bindsym XF86AudioStop exec ~/.config/sway/scripts/mediactrl.sh --stop
