@@ -50,6 +50,7 @@ grub-i386-efi
 grub-x86_64-efi
 gtk-engine-murrine
 htop
+impala
 iwd
 jq
 lf
