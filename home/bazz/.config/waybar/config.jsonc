@@ -80,10 +80,22 @@
   },
   "clock": {
     "format": "{:%b %d %H:%M}",
-    "tooltip": false,
-    "on-click": "~/.config/waybar/scripts/calendar.sh",
-    "on-scroll-up": "~/.config/waybar/scripts/calendar.sh next",
-    "on-scroll-down": "~/.config/waybar/scripts/calendar.sh prev",
+    "tooltip-format": "<span color='#CECDC3'><tt>{calendar}</tt></span>",
+    "calendar": {
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#CECDC3'><b>{}</b></span>",
+        "weekdays": "<span color='#24837B'><b>{}</b></span>",
+        "today": "<span color='#100F0F' background='#24837B'><b>{}</b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    },
   },
   // "in case tzdata update fucks up your clock",
   "custom/clock": {
