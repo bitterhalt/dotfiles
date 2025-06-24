@@ -63,9 +63,9 @@
   },
   "wireplumber#sink": {
     "format": "{icon}",
-    "format-icons": ["󰕿", "󰖀", "󰕾 "],
+    "format-icons": ["󰕿", "󰖀", "󰕾"],
     "tooltip-format": "{node_name}\nVolume: {volume}%",
-    "format-muted": "",
+    "format-muted": "󰝟",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "pavucontrol",
   },
@@ -134,6 +134,14 @@
       "click-to-reveal": true,
     },
     "modules": ["custom/markl", "cpu", "memory"],
+  },
+  "group/wireplumber": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 600,
+      "transition-to-left": true,
+    },
+    "modules": ["wireplumber#sink", "wireplumber#source"],
   },
   "custom/markr": {
     "interval": "once",
