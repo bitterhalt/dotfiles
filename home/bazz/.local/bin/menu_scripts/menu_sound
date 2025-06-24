@@ -10,4 +10,4 @@ id=$(pw-dump Node | jq --arg desc "$node" -r '.[]|select(.info.props|."api.alsa.
 
 # Set the selected node as default
 wpctl set-default "$id"
-notify-send -a center_notify "Audio notify" "Audio device changed"
+notify-send -t 5000 "Audio notify" "Audio device changed"
