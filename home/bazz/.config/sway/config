@@ -322,7 +322,7 @@ for_window [window_type="menu"] floating enable
 
 # Fix missing borders
 for_window [app_id="Firefox"] border pixel 2
-for_window [app_id="Thunderbird"] border pixel 1
+for_window [app_id="Thunderbird"] border pixel 2
 
 # Inhibit idle
 for_window [app_id="Firefox"] inhibit_idle fullscreen

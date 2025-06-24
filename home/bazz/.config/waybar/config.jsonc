@@ -8,8 +8,7 @@
     "group/sys",
     "tray",
     "network",
-    "custom/pipewire",
-    "custom/mic",
+    "group/sound",
     "custom/swayidle",
     "battery",
     "custom/power",
@@ -135,7 +134,7 @@
     },
     "modules": ["custom/markl", "cpu", "memory"],
   },
-  "group/wireplumber": {
+  "group/sound": {
     "orientation": "horizontal",
     "drawer": {
       "transition-duration": 600,
