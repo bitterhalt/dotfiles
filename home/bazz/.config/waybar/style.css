@@ -19,7 +19,7 @@
     JetBrains Mono,
     Symbols Nerd Font Mono;
   font-size: 14px;
-  border-radius: 0;
+  border-radius: 6;
   border: none;
   box-shadow: none;
   transition: none;
@@ -39,7 +39,6 @@ window#waybar {
 tooltip {
   background: @bg-1;
   border: solid 1px @bg-3;
-  border-radius: 4px;
 }
 
 tooltip label {
@@ -67,7 +66,6 @@ button:hover {
   color: @cyan;
   font-weight: normal;
   box-shadow: inset 0 0 0 1px @bg-3;
-  border-radius: 4px;
 }
 
 #workspaces button.urgent {
@@ -78,7 +76,6 @@ button:hover {
   padding: 0 10px;
   margin: 2px 0px;
   box-shadow: inset 0 0 0 1px @bg-3;
-  border-radius: 4px;
 }
 #window {
   color: @text-2;
@@ -103,12 +100,10 @@ button:hover {
   padding: 0 10px;
   margin: 2px 0px;
   box-shadow: inset 0 0 0 1px @bg-3;
-  border-radius: 4px;
 }
 #tray menu {
   background-color: @bg-2;
   border: solid 1px @bg-3;
-  border-radius: 4px;
 }
 #custom-sep,
 #custom-markl,

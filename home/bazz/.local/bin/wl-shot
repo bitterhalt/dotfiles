@@ -27,7 +27,7 @@ region() {
 timer() {
   sleep 5
   grim "$FILENAME"
-  notify-send -t 5000 i ~/.local/share/icons/feather/camera.svg "Screenshot" "File saved as $SAVEDIR"
+  notify-send -t 5000 -i ~/.local/share/icons/feather/camera.svg "Screenshot" "File saved as $SAVEDIR"
   wl-copy <"$FILENAME"
   pw-play "$HOME/.local/share/Sounds/camera-shutter.oga"
 }
