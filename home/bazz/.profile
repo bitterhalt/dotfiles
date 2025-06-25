@@ -32,5 +32,5 @@ export SSH_AUTH_SOCK="$XDG_DATA_HOME/ssh-agent.sock"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
-# Don't forget DBUSS address
+# Don't forget DBUS address
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
