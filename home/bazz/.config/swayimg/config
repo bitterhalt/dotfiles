@@ -39,10 +39,6 @@ scale = optimal
 position = center
 # Anti-aliasing mode (none/box/bilinear/bicubic/mks13)
 antialiasing = mks13
-# Run slideshow at startup (yes/no)
-slideshow = no
-# Slideshow image display time (seconds)
-slideshow_time = 3
 # Number of previously viewed images to store in cache
 history = 1
 # Number of preloaded images (read ahead)
@@ -79,7 +75,7 @@ Down = prev_file
 Equal = thumb +20
 Minus = thumb -20
 Plus = thumb +20
-Shift+Delete = exec trash-put '%' && echo "File trashed: %"; skip_file
+Delete = exec trash-put '%' && echo "File trashed: %"; skip_file
 Shift+e = zoom height
 Shift+g = last_file
 Up = next_file
@@ -93,11 +89,25 @@ q = exit
 r = reload
 return = mode
 y = exec $HOME/.config/swayimg/copy_img.sh "%"
+# Mouse related
+ScrollLeft = step_right 5
+ScrollRight = step_left 5
+ScrollUp = step_up 5
+ScrollDown = step_down 5
+Ctrl+ScrollUp = zoom +10
+Ctrl+ScrollDown = zoom -10
+ScrollUp = prev_file
+ScrollDown = next_file
+Alt+ScrollUp = prev_frame
+Alt+ScrollDown = next_frame
+MouseLeft = drag
+MouseSide = prev_file
+MouseExtra = next_file
 ################################################################################
 # Gallery mode key binding configuration: key = action [parameters]
 ################################################################################
 [keys.gallery]
-Shift+Delete = exec trash-put '%' && echo "File trashed: %"; skip_file
+Delete = exec trash-put '%' && echo "File trashed: %"; skip_file
 Shift+g = last_file
 b = exec setbg "%"
 f = fullscreen
@@ -115,8 +125,6 @@ y = exec $HOME/.config/swayimg/copy_img.sh "%"
 [list]
 # Default order (none/alpha/reverse/random)
 order = alpha
-# Looping list of images (yes/no)
-loop = yes
 # Read directories recursively (yes/no)
 recursive = no
 # Open all files in the directory of the specified file (yes/no)
