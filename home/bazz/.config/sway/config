@@ -30,12 +30,12 @@ set $mail thunderbird
 
 # File management
 set $gfm thunar
-set $tuifm foot -e lf
+set $tuifm foot -T lf -e lf
 
 # Dmenu scripts
 set $clip ~/.local/bin/menu_scripts/menu_clipboard
 set $drun fuzzel
-set $editor foot -e nvim
+set $editor foot -T nvim -e nvim
 set $emojimenu ~/.local/bin/menu_scripts/menu_emoji
 set $killer ~/.local/bin/menu_scripts/menu_killer
 set $powermenu ~/.local/bin/menu_scripts/menu_power
@@ -43,8 +43,8 @@ set $screenshot ~/.local/bin/menu_scripts/menu_screenshot
 set $winmenu ~/.local/bin/menu_scripts/menu_sway_window
 
 # Xbps goodies
-set $xbps-intaller foot -a floatterm -e fuzzypkg
-set $xbps-updater foot -a floatterm -e popupgrade
+set $xbps-intaller foot -T fuzzypkg -a floatterm -e fuzzypkg
+set $xbps-updater foot -T Update -a floatterm -e popupgrade
 
 # Bar signals
 set $sig_1 pkill -SIGRTMIN+1 waybar
@@ -110,7 +110,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+d exec $drun
 bindsym $mod+e exec $tuifm
 bindsym $mod+m exec $mail
-bindsym $mod+n exec $term -e nvim ~/Documents/personal/notes/index.md
+bindsym $mod+n exec $term -T Notes -e nvim ~/Documents/personal/notes/index.md
 bindsym $mod+t exec ~/.local/bin/noti_date
 bindsym $mod+v exec $editor
 bindsym $mod+w exec $browser
@@ -137,9 +137,9 @@ bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
 bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -r
 bindsym $mod+shift+c exec $clip
-bindsym $mod+shift+delete exec $term -a floatterm -e htop
+bindsym $mod+shift+delete exec $term -T htop -a floatterm -e htop
 bindsym $mod+shift+e exec $gfm
-bindsym $mod+shift+n exec $term -a floatterm -e nvim ~/Documents/personal/notes/todo.md
+bindsym $mod+shift+n exec $term -T TODO -a floatterm -e nvim ~/Documents/personal/notes/todo.md
 bindsym $mod+shift+p exec $powermenu
 
 # Kill focused window
