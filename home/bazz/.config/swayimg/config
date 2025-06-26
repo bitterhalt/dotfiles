@@ -29,7 +29,7 @@ shadow = #000000a0
 ################################################################################
 [viewer]
 # Window background color (RGBA)
-window = #100F0Fff
+window = #000000D0
 # Background for transparent images (grid/RGBA)
 transparency = grid
 # Default image scale (optimal/fit/width/height/fill/real)
@@ -60,7 +60,7 @@ fill = yes
 # Anti-aliasing mode for thumbnails (none/box/bilinear/bicubic/mks13)
 antialiasing = mks13
 # Background color of the window (RGBA)
-window = #100F0Fff
+window = #000000D0
 # Background color of the tile (RGBA)
 background = #1C1B1Aff
 # Background color of the selected tile (RGBA)
