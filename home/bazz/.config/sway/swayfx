@@ -8,4 +8,3 @@ shadow_color #0000007F
 
 # Waybar
 layer_effects "waybar" shadows enable
-
