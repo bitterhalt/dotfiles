@@ -7,6 +7,7 @@ Thunar
 Vulkan-Tools
 Waybar
 acpi
+adwaita-fonts
 atool
 autotiling
 base-system
@@ -50,6 +51,7 @@ grub-i386-efi
 grub-x86_64-efi
 gtk-engine-murrine
 htop
+hyprpicker
 impala
 iwd
 jq
