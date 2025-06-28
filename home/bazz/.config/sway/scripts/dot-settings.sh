@@ -9,7 +9,7 @@ WAYBAR
 BASH
 NEOVIM
 "
-CHOICE=$(printf "$ARCHIVE" | fuzzel -d -a top --y 5 -w 30 -l 7 -p "Edit settings: ")
+CHOICE=$(printf "$ARCHIVE" | fuzzel -d -a top --y 4 -w 30 -l 7 -p "Edit settings: ")
 
 TERMCMD=("foot")
 
