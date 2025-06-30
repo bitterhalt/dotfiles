@@ -7,9 +7,7 @@
 @define-color bg-4 #343331;
 @define-color bg-5 #403E3C;
 @define-color text-1 #CECDC3;
-@define-color text-2 #B7B5AC;
-@define-color text-3 #9F9D96;
-@define-color text-4 #878580;
+@define-color text-2 #878580;
 @define-color red #AF3029;
 @define-color purple #A02F6F;
 @define-color cyan #24837B;
@@ -24,10 +22,11 @@
   box-shadow: none;
   transition: none;
 }
-button:hover {
+#workspaces button:hover {
   background: @bg-2;
   box-shadow: inset 0 0 0 1px @bg-3;
   border-radius: 6px;
+  margin: 2 0px;
 }
 
 /* -----------------------------------------------------
@@ -56,13 +55,13 @@ tooltip label {
  * ----------------------------------------------------- */
 #workspaces {
   background-color: @bg-1;
-  padding: 0px 5px;
+  margin: 0 4px;
 }
 #workspaces button {
-  color: @text-2;
+  color: @text-1;
   font-weight: normal;
-  padding: 0px 5px;
-  margin: 2px 0px;
+  padding: 0 5px;
+  margin: 2 0px;
 }
 #workspaces button.focused {
   color: @cyan;
@@ -77,20 +76,20 @@ tooltip label {
 #mode {
   color: @cyan;
   padding: 0 10px;
-  margin: 2px 0px;
+  margin: 2 0px;
   box-shadow: inset 0 0 0 1px @bg-3;
   border-radius: 6px;
 }
 #window {
-  color: @text-2;
+  color: @text-1;
   padding: 0 10px;
 }
 /* -----------------------------------------------------
  *                      Modules
  * ----------------------------------------------------- */
+#clock,
 #battery,
 #wireplumber,
-#custom-pipewire,
 #custom-mic,
 #custom-swayidle,
 #cpu,
@@ -98,11 +97,12 @@ tooltip label {
 #network {
   color: @text-1;
   padding: 0 10px;
+  margin: 2 2px;
 }
 #tray {
   background-color: @bg-2;
   padding: 0 10px;
-  margin: 2px 0px;
+  margin: 2px 2px;
   box-shadow: inset 0 0 0 1px @bg-3;
   border-radius: 6px;
 }
@@ -111,31 +111,32 @@ tooltip label {
   border: solid 1px @bg-3;
   border-radius: 6px;
 }
-#tray menu menuitem:hover {
+#wireplumber.muted {
+  color: @text-1;
   background-color: @bg-2;
-  border-radius: 6px;
   box-shadow: inset 0 0 0 1px @bg-3;
-  font-weight: bold;
+  border-radius: 6px;
 }
-
+#network:hover,
+#tray menu menuitem:hover,
+#wireplumber:hover {
+  background: @bg-2;
+  box-shadow: inset 0 0 0 1px @bg-3;
+  border-radius: 6px;
+}
 #custom-sep,
 #custom-markl,
 #custom-markr {
-  color: @text-3;
+  color: @text-2;
   padding: 0 4px;
-}
-#custom-clock,
-#clock {
-  color: @text-1;
-  padding: 0 10px;
 }
 #custom-power {
   color: @text-1;
   padding: 0 10px;
+  margin: 2 5px;
 }
 #custom-power:hover {
   background-color: @bg-2;
-  margin: 2px 0px;
   border-radius: 6px;
   box-shadow: inset 0 0 0 1px @bg-3;
 }
