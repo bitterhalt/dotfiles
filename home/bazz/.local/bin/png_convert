@@ -9,6 +9,8 @@ fi
 
 find "$dir" -name "*.jpg" -exec mogrify -format png {} \;
 find "$dir" -name "*.jpg" -exec rm {} \;
+find "$dir" -name "*.jpeg" -exec mogrify -format png {} \;
+find "$dir" -name "*.jpeg" -exec rm {} \;
 find "$dir" -name "*.webp" -exec mogrify -format png {} \;
 find "$dir" -name "*.webp" -exec rm {} \;
 find "$dir" -name "*.avif" -exec mogrify -format png {} \;
