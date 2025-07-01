@@ -13,7 +13,6 @@
 /home/bazz/.config/borgmatic/
 /home/bazz/.config/cron.weekly/
 /home/bazz/.config/fastfetch/
-/home/bazz/.config/sway/
 /home/bazz/.config/firefox/
 /home/bazz/.config/fnott/
 /home/bazz/.config/foot/
@@ -26,7 +25,6 @@
 /home/bazz/.config/kanshi/
 /home/bazz/.config/lf
 /home/bazz/.config/mimeapps.list
-/home/bazz/.config/swaynag/
 /home/bazz/.config/mpd/mpd.conf
 /home/bazz/.config/mpv/
 /home/bazz/.config/multitail/config
@@ -37,9 +35,12 @@
 /home/bazz/.config/shell/
 /home/bazz/.config/starship.toml
 /home/bazz/.config/swappy/
+/home/bazz/.config/swappy/
+/home/bazz/.config/sway/
 /home/bazz/.config/swayidle/
 /home/bazz/.config/swayimg/
 /home/bazz/.config/swaylock
+/home/bazz/.config/swaynag/
 /home/bazz/.config/user-dirs.dirs
 /home/bazz/.config/vesktop/themes
 /home/bazz/.config/waybar/
@@ -50,11 +51,11 @@
 /home/bazz/.local/share/Sounds/
 /home/bazz/.local/share/Sounds/
 /home/bazz/.local/share/applications/img.desktop
+/home/bazz/.local/share/applications/lf.desktop
 /home/bazz/.local/share/applications/mimeinfo.cache
 /home/bazz/.local/share/applications/pdf.desktop
 /home/bazz/.local/share/applications/text.desktop
 /home/bazz/.local/share/applications/video.desktop
-/home/bazz/.local/share/applications/lf.desktop
 /home/bazz/.local/share/bash-completion/
 /home/bazz/.local/share/dotlist
 /home/bazz/.local/share/fonts/
