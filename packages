@@ -16,6 +16,7 @@ bat
 bc
 bottom
 cargo
+cava
 chafa
 chrony
 cliphist
@@ -51,6 +52,7 @@ grub-i386-efi
 grub-x86_64-efi
 gtk-engine-murrine
 htop
+hyprpicker
 impala
 iwd
 jq
@@ -114,6 +116,7 @@ snooze
 socklog-void
 starship
 steam
+swappy
 swayfx
 swayidle
 swayimg
