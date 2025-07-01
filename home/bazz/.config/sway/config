@@ -44,7 +44,7 @@ set $winmenu ~/.local/bin/menu_scripts/menu_sway_window
 
 # Xbps goodies
 set $xbps-intaller foot -T fuzzypkg -a floatterm -e fuzzypkg
-set $xbps-updater foot -T Update -a floatterm -e popupgrade
+set $xbps-updater foot -T pop-upgrade -a floatterm -e popupgrade
 
 # Bar signals
 set $sig_1 pkill -SIGRTMIN+1 waybar
@@ -277,7 +277,8 @@ for_window [app_id="brave-calendar"] floating enable, resize set width 40 ppt he
 for_window [app_id="file-roller"] floating enable
 for_window [app_id="floating_shell_portrait"] floating enable, border pixel 1, sticky enable, resize set width 30 ppt height 40 ppt
 for_window [app_id="floatterm"] floating enable, resize set width 45 ppt height 60 ppt
-for_window [app_id="fuzzypkg"] floating enable, resize set width 60 ppt height 70 ppt
+for_window [title="fuzzypkg"] resize set width 100ppt, move position 0 0, resize set width 840px
+for_window [title="pop-upgrade"] resize set width 100ppt, move position 0 0, resize set width 840px
 for_window [app_id="gimp"] floating enable, border pixel 1
 for_window [app_id="imv"] floating enable
 for_window [app_id="mpv"] floating enable
@@ -285,7 +286,6 @@ for_window [app_id="net.lutris.Lutris"] floating enable
 for_window [app_id="nwg-look"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pcsx2"] floating enable
-for_window [app_id="popupgrade"] floating enable
 for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 840px
 for_window [app_id="signal"] floating enable
 for_window [app_id="vesktop"] floating enable
