@@ -9,4 +9,4 @@ export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_DESKTOP=sway
 
-exec sway >~/.local/state/swaylog 2>&1
+exec sway >~/.local/state/sway.log 2>&1
