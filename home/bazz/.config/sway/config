@@ -135,7 +135,7 @@ bindsym $mod+ctrl+u exec $xbps-updater
 bindsym $mod+ctrl+w exec ~/.local/bin/noti_weather
 bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
-bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -r
+bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
 bindsym $mod+shift+c exec $clip
 bindsym $mod+shift+delete exec $term -T htop -a floatterm -e htop
 bindsym $mod+shift+e exec $gfm
@@ -323,6 +323,7 @@ for_window [window_type="menu"] floating enable
 # Fix missing borders
 for_window [app_id="Firefox"] border pixel 2
 for_window [app_id="Thunderbird"] border pixel 2
+for_window [app_id="swappy"] border pixel 2
 
 # Inhibit idle
 for_window [app_id="Firefox"] inhibit_idle fullscreen

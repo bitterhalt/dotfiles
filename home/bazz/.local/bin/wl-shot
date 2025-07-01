@@ -24,6 +24,10 @@ region() {
   pw-play "$HOME/.local/share/Sounds/camera-shutter.oga"
 }
 
+region-edit() {
+  grim -g "$(slurp)" - | swappy -f -
+}
+
 timer() {
   sleep 5
   grim "$FILENAME"
@@ -45,6 +49,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
   -f | --fullscreen) fullscreen ;;
   -r | --region) region ;;
+  -re | --region-edit) region-edit ;;
   -t | --timer) timer ;;
   -h | --help) print_help ;;
   *)
