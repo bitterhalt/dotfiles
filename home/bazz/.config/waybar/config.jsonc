@@ -49,16 +49,6 @@
     "on-click": "foot -T impala -a floatterm -e impala",
     "on-click-right": "foot -T nethogs -a floatterm -e doas nethogs",
   },
-  "custom/pipewire": {
-    // A placeholder since I had some problems with default wireplumber module in past
-    "interval": "once",
-    "return-type": "json",
-    "format": "{}",
-    "exec": "~/.config/waybar/scripts/pipewire.sh",
-    "on-click-right": "pavucontrol",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "signal": 3,
-  },
   "wireplumber#sink": {
     "format": "{icon}",
     "format-icons": ["󰕿", "󰖀", "󰕾"],
