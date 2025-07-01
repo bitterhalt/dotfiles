@@ -139,7 +139,7 @@
   "group/sys": {
     "orientation": "horizontal",
     "drawer": {
-      "transition-duration": 600,
+      "transition-duration": 700,
       "transition-to-left": true,
       "click-to-reveal": true,
     },
@@ -148,7 +148,7 @@
   "group/sound": {
     "orientation": "horizontal",
     "drawer": {
-      "transition-duration": 600,
+      "transition-duration": 700,
       "transition-to-left": true,
     },
     "modules": ["wireplumber#sink", "wireplumber#source"],
