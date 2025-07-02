@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec hyprland >~/.local/state/sway.log 2>&1

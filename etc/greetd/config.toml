@@ -3,10 +3,15 @@
 # TTY
 vt = 7
 
-# Default greeter
+## Sway
 [default_session]
 command = "tuigreet -t -r -c sway-start --asterisks --power-shutdown 'doas poweroff' --power-reboot 'doas reboot'"
 user = "_greeter"
+
+### Hyprland
+#[default_session]
+#command = "tuigreet -t -r -c hyprland --asterisks --power-shutdown 'doas poweroff' --power-reboot 'doas reboot'"
+#user = "_greeter"
 
 # Autologin
 #[initial_session]
