@@ -18,7 +18,7 @@ mapfile -t entries < <(
 )
 
 # Show menu (only labels)
-selection=$(printf '%s\n' "${entries[@]}" | cut -d'|' -f1 | fuzzel -d -a top --y 4 -w 60 -l15 --placeholder "Windows")
+selection=$(printf '%s\n' "${entries[@]}" | cut -d'|' -f1 | fuzzel -d -a top --y 4 -w 60 -l15 -p "" --placeholder "Focus to window...")
 
 # Match selected label back to address
 if [ -n "$selection" ]; then
