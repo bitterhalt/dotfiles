@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#  From: https://codeberg.org/jorisvandijk/dotfiles-hyprland/src/branch/main/home/joris/.local/bin
+#  Dependencies: wofi, hyprctl, jq
+
+# Build menu entries and map them to addresses
+mapfile -t entries < <(
+  hyprctl clients -j | jq -r '
+    .[] |
+    select(.address and .class and .title) |
+    {
+      addr: .address,
+      label: (
+        (.class | ascii_downcase | "\(.[0:1] | ascii_upcase)\(.[1:])") + " " +
+        (if (.title | length) > 80 then .title[:67] + "..." else .title end)
+      )
+    } | "\(.label)|\(.addr)"
+  '
+)
+
+# Show menu (only labels)
+selection=$(printf '%s\n' "${entries[@]}" | cut -d'|' -f1 | fuzzel -d -a top --y 4 -w 60 -l15 --placeholder "Windows")
+
+# Match selected label back to address
+if [ -n "$selection" ]; then
+  address=$(printf '%s\n' "${entries[@]}" | grep -F "$selection" | cut -d'|' -f2)
+  [ -n "$address" ] && hyprctl dispatch focuswindow address:"$address"
+fi

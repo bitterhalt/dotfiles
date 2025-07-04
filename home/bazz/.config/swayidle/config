@@ -1,2 +1,2 @@
 timeout 1500 "swaylock -f"
-timeout 3600 "swaymsg 'output * power off'" resume "swaymsg 'output * power on'"
+timeout 3600 "hyprctl dispatch dpms off" resume "hyprctl dispatch dpms on"
