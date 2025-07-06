@@ -1,4 +1,4 @@
-# Hyprland configs
+# Hyprland confics
 
 - If you wan't to mimic this setup on Void please read install guide from: https://github.com/Makrennel/hyprland-void
 

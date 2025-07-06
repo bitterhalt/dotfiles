@@ -8,25 +8,25 @@ case $(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -
 "Shutdown")
   confirm=$(echo -e "Yes\nNo" | $CONFIRM)
   if [[ "$confirm" == "Yes" ]]; then
-    doas poweroff
+    loginctl poweroff
   fi
   ;;
 "Reboot")
   confirm=$(echo -e "Yes\nNo" | $CONFIRM)
   if [[ "$confirm" == "Yes" ]]; then
-    doas reboot
+    loginctl reboot
   fi
   ;;
 "Suspend")
   swaylock -f
   sleep 2 # Probably not needed, but I leave it because I had some issues with more complicated locker without this
-  doas zzz
+  loginctl suspend
   ;;
 "Lock")
   "$HOME/.config/river/scripts/locker.sh"
   ;;
 "Logout")
   # Bit dirty but makes sure that nothing lingers after user exits
-  pkill -u "$(id -u -n)"
+  loginctl terminate-user "$USER"
   ;;
 esac
