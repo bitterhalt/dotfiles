@@ -18,12 +18,10 @@ case $(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -
   fi
   ;;
 "Suspend")
-  swaylock -f
-  sleep 2 # Probably not needed, but I leave it because I had some issues with more complicated locker without this
   loginctl suspend
   ;;
 "Lock")
-  "$HOME/.config/river/scripts/locker.sh"
+  swaylock
   ;;
 "Logout")
   # Bit dirty but makes sure that nothing lingers after user exits
