@@ -83,7 +83,6 @@ alias rm="rm -vI"
 # Pacman
 alias cleanup="sudo pacman -Rns $(pacman -Qtdq)" # remove orphaned packages
 alias pacsyyu="sudo pacman -Syyu"                # synchronize with the repositories and update the system
-alias pacdifc="sudo DIFFPROG=meld pacdiff"       # merge or remove pacnew files
 alias pkglist="pacman -Qq > ~/Documents/projects/dotfiles/packages"
 # Doas
 #alias sudo="doas"
