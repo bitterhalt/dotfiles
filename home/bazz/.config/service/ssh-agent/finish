@@ -1,4 +1,0 @@
-#!/bin/sh
-
-rm -f "${XDG_DATA_HOME:-$HOME/.local/share}"/ssh-agent.sock
-exit 0

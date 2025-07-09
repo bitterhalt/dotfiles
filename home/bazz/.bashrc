@@ -80,8 +80,13 @@ alias grep="grep --color=auto"
 alias mkdir="mkdir -pv"
 alias mv="mv -iv"
 alias rm="rm -vI"
+# Pacman
+alias cleanup="sudo pacman -Rns $(pacman -Qtdq)" # remove orphaned packages
+alias pacsyyu="sudo pacman -Syyu"                # synchronize with the repositories and update the system
+alias pacdifc="sudo DIFFPROG=meld pacdiff"       # merge or remove pacnew files
+alias pkglist="pacman -Qq > ~/Documents/projects/dotfiles/packages"
 # Doas
-alias sudo="doas"
+#alias sudo="doas"
 # Vim
 alias vi="nvim"
 alias vim="nvim"
@@ -96,11 +101,18 @@ alias tpr="trash-restore"
 # Random
 alias hg="history | grep "
 alias nvm="sudo nvme smart-log /dev/nvme0"
+# Systemd Journal
+alias loger="journalctl -p 3 -xb"
+alias logf="journalctl -f"
+alias logr="sudo journalctl --rotate"
+alias logs="journalctl --disk-usage"
+alias logv="journalctl --verify"
+alias logw="sudo journalctl --vacuum-time=1s"
 # XBPS
-alias sva="vsv -d ~/.config/service/ ; doas vsv"
-alias svh="vsv -d ~/.config/service/"
-alias xbc="doas xbps-remove -Oo"
-alias xblist="xpkg -m > ~/Documents/projects/dotfiles/packages"
-alias xbq="xbps-query -Rs"
-alias xir="doas xbps-remove"
-alias xiu="doas xbps-install -Su"
+#alias sva="vsv -d ~/.config/service/ ; doas vsv"
+#alias svh="vsv -d ~/.config/service/"
+#alias xbc="doas xbps-remove -Oo"
+#alias xblist="xpkg -m > ~/Documents/projects/dotfiles/packages"
+#alias xbq="xbps-query -Rs"
+#alias xir="doas xbps-remove"
+#alias xiu="doas xbps-install -Su"

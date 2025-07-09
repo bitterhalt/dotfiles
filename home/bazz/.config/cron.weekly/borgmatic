@@ -1,2 +1,0 @@
-#!/bin/sh
-exec borgmatic --verbosity 1

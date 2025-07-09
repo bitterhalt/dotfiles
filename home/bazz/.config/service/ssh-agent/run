@@ -1,4 +1,0 @@
-#!/bin/sh
-
-exec >/dev/null
-exec chpst -e "$TURNSTILE_ENV_DIR" ssh-agent -Da "${XDG_DATA_HOME:-$HOME/.local/share}"/ssh-agent.sock

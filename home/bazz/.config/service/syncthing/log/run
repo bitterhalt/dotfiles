@@ -1,3 +1,0 @@
-#!/bin/sh
-
-vlogger -t syncthing-$(id -u) -p daemon

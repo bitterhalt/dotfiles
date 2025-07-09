@@ -26,11 +26,7 @@ export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
 export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
-export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-export SSH_AUTH_SOCK="$XDG_DATA_HOME/ssh-agent.sock"
+# export SSH_AUTH_SOCK="$XDG_DATA_HOME/ssh-agent.sock"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
-
-# Don't forget DBUS address
-export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"

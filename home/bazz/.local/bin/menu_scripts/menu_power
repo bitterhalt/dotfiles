@@ -8,20 +8,20 @@ case $(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -
 "Shutdown")
   confirm=$(echo -e "Yes\nNo" | $CONFIRM)
   if [[ "$confirm" == "Yes" ]]; then
-    loginctl poweroff
+    systemctl poweroff
   fi
   ;;
 "Reboot")
   confirm=$(echo -e "Yes\nNo" | $CONFIRM)
   if [[ "$confirm" == "Yes" ]]; then
-    loginctl reboot
+    systemctl reboot
   fi
   ;;
 "Suspend")
-  loginctl suspend
+  systemctl suspend
   ;;
 "Lock")
-  swaylock
+  hyprlock
   ;;
 "Logout")
   # Bit dirty but makes sure that nothing lingers after user exits

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# Nuke cliphist database
-rm /home/bazz/.cache/cliphist/db

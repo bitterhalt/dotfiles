@@ -1,4 +1,0 @@
-#!/bin/sh
-mkdir -p "$HOME/.var/snooze/"
-exec snooze -w 1 -s 7d -t "$HOME/.var/snooze/weekly" -- sh -c \
-  "test -d $HOME/.config/cron.weekly && run-parts --lsbsysinit $HOME/.config/cron.weekly; : > $HOME/.var/snooze/weekly"
