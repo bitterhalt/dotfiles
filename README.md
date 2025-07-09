@@ -9,10 +9,9 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 
 ### Software I use
 
-- Distro: [Void](https://voidlinux.org/)
+- Distro: **EndeavourOS**
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
 - WM: **Hyprland**
-- Cron daemon: [snooze](https://github.com/leahneukirchen/snooze)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - Fonts: JetBrains Mono
@@ -23,19 +22,10 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 - Media Player: [mpv](https://mpv.io/)
 - Notification daemon: [fnott](https://codeberg.org/dnkl/fnott)
 - Screenlocker: [swaylock](https://github.com/swaywm/swaylock)
-- Session and Seat management: [seatd](https://docs.voidlinux.org/config/session-management.html#seatd) and [turnstile](https://docs.voidlinux.org/config/session-management.html#turnstile)
 - Symbols and icons: [Nerd Font Symbols](https://www.nerdfonts.com/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
 
 ---
-
-## Note
-
-> If you have just installed Void and copied everything from here, you won't get working system just yet.
->
-> Check out but **Don't run** _/.local/bin/void/void_kickstart.sh_ to get the idea what services are needed
->
-> Good luck!
 
 #### Sources where I stole most of my cool stuff ⭐
 
