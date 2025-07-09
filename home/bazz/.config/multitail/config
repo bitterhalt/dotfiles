@@ -1,4 +1,0 @@
-statusline_ts_format:%d.%m/%Y %H:%M
-statusline_above_data:no
-statusline_attrs:black,cyan,reverse
-check_mail:0
