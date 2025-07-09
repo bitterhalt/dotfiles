@@ -47,6 +47,7 @@ bluez
 bluez-libs
 bluez-utils
 botan2
+bottom
 brotli
 btrfs-progs
 bubblewrap
@@ -106,7 +107,6 @@ eos-bash-shared
 eos-hooks
 eos-log-tool
 eos-packagelist
-eos-quickstart
 eos-rankmirrors
 eos-translations
 ethtool
@@ -247,6 +247,7 @@ iana-etc
 icu
 imagemagick
 imath
+impala
 inetutils
 inxi
 iproute2
@@ -936,6 +937,7 @@ vapoursynth
 vesktop-bin
 vi
 vid.stab
+vivaldi
 vmaf
 vpnc
 vte-common
