@@ -762,7 +762,6 @@ poppler-data
 poppler-glib
 popt
 portaudio
-power-profiles-daemon
 ppp
 pps-tools
 procps-ng
