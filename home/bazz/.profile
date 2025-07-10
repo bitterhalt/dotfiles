@@ -1,5 +1,6 @@
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin/personal/:$PATH"
 export PATH="$HOME/.local/share/cargo/bin/:$PATH"
 
 # Defaults
