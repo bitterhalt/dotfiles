@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+EXCLUDE_FILE="$HOME/.local/share/rsync-ignore.txt"
+DEST_ETC="/mnt/wd1tb/backup/host/etc"
+
+mkdir -p "$DEST_ETC"
+
+rsync -avu --delete --exclude-from="$EXCLUDE_FILE" /etc "$DEST_ETC/"

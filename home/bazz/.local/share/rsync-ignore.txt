@@ -12,6 +12,7 @@
 /etc/NetworkManager
 /etc/gshadow
 /etc/gshadow-
+/etc/ssl/private
 /etc/kernel.d
 /etc/libvirt
 /etc/passwd-
