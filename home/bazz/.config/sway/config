@@ -1,0 +1,369 @@
+#-----------------------------------------------------#
+#                      Sway settings                  #
+#-----------------------------------------------------#
+
+# Enable if you use Swayfx tweaks
+include ~/.config/sway/swayfx
+
+# Vim keys for moving
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Xcursor
+set $xcursor Bibata-Modern-Classic 24
+
+# Modifier
+set $mod Mod4
+set $alt Mod1
+
+# Terminal
+set $term footclient
+
+# Locker
+set $lock ~/.config/sway/scripts/screenlocker.sh
+
+# Browsing
+set $browser firefox
+set $mail thunderbird
+
+# File management
+set $gfm thunar
+set $tuifm foot -T lf -e lf
+
+# Dmenu scripts
+set $clip ~/.local/bin/menu_scripts/menu_clipboard
+set $drun fuzzel
+set $editor foot -T nvim -e nvim
+set $emojimenu ~/.local/bin/menu_scripts/menu_emoji
+set $killer ~/.local/bin/menu_scripts/menu_killer
+set $powermenu ~/.local/bin/menu_scripts/menu_power
+set $screenshot ~/.local/bin/menu_scripts/menu_screenshot
+set $winmenu ~/.local/bin/menu_scripts/menu_sway_window
+
+# Xbps goodies
+set $xbps-intaller foot -T fuzzypkg -a floatterm -e fuzzypkg
+set $xbps-updater foot -T pop-upgrade -a floatterm -e popupgrade
+
+# Bar signals
+set $sig_1 pkill -SIGRTMIN+1 waybar
+set $sig_2 pkill -SIGRTMIN+2 waybar
+set $sig_3 pkill -SIGRTMIN+3 waybar
+
+# Font
+font pango: JetBrains Mono 10
+
+# Titlebar
+title_align center
+titlebar_border_thickness 0
+
+# Border size
+default_border pixel 2
+
+# Gaps
+gaps inner 4
+gaps outer 0
+
+# Smart gaps/borders
+smart_borders off
+smart_gaps off
+
+# Xcursor settings
+seat seat0 {
+hide_cursor 15000
+xcursor_theme $xcursor
+}
+
+#-----------------------------------------------------#
+#                      Devices                        #
+#-----------------------------------------------------#
+# Display
+output DP-1 {
+    mode 1920x1080@60Hz
+}
+
+# Keyboard
+input type:keyboard {
+    xkb_layout fi
+    xkb_options grp:sclk_toggle,caps:escape
+}
+
+# Mouse
+input type:pointer {
+    accel_profile "flat"
+    pointer_accel 0
+}
+
+# Touchpad
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    middle_emulation enabled
+    natural_scroll enabled
+}
+
+#-----------------------------------------------------#
+#                      Binds                          #
+#-----------------------------------------------------#
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $drun
+bindsym $mod+e exec $tuifm
+bindsym $mod+m exec $mail
+bindsym $mod+n exec $term -T Notes -e nvim ~/Documents/personal/notes/index.md
+bindsym $mod+t exec ~/.local/bin/noti_date
+bindsym $mod+v exec $editor
+bindsym $mod+w exec $browser
+bindsym $mod+tab exec $winmenu
+bindsym $mod+F1 exec ~/.local/bin/noti_sysnfo
+bindsym $mod+F10 exec ~/.config/sway/scripts/mic-toggle.sh
+bindsym $mod+F11 exec ~/.config/sway/scripts/locker.sh
+bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
+bindsym $mod+F2 exec ~/.local/bin/noti_usage cpu
+bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed 's/bindsym / /' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
+bindsym $mod+F4 exec $killer
+bindsym $mod+F8 exec $screenshot
+bindsym $mod+Insert smart_gaps toggle
+bindsym $mod+Print exec ~/.local/bin/wl-shot -f
+bindsym $mod+ctrl+a exec ~/.config/sway/scripts/autotiling-toggle.sh
+bindsym $mod+ctrl+d exec fnottctl dismiss
+bindsym $mod+ctrl+e exec $emojimenu
+bindsym $mod+ctrl+i exec $xbps-intaller
+bindsym $mod+ctrl+p exec ~/.local/bin/wl-color-picker
+bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/menu_sound
+bindsym $mod+ctrl+u exec $xbps-updater
+bindsym $mod+ctrl+w exec ~/.local/bin/noti_weather
+bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
+bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
+bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
+bindsym $mod+shift+c exec $clip
+bindsym $mod+shift+delete exec $term -T htop -a htop -e htop
+bindsym $mod+shift+e exec $gfm
+bindsym $mod+shift+n exec $term -T TODO -a floatterm -e nvim ~/Documents/personal/notes/todo.md
+bindsym $mod+shift+p exec $powermenu
+
+# Kill focused window
+bindsym $mod+q kill
+
+# Hide/restart waybar
+bindsym $mod+b exec ~/.config/waybar/scripts/waybar-hider.sh
+
+# When the modifier key is held down, you may hold left click to move windows, and right click to resize them
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym $mod+ctrl+r reload
+
+# Move your focus with $mod + Vim keys
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# With $mod+arrows
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window
+bindsym $mod+shift+$left move left
+bindsym $mod+shift+$down move down
+bindsym $mod+shift+$up move up
+bindsym $mod+shift+$right move right
+# Same with arrow keys
+bindsym $mod+shift+Left move left
+bindsym $mod+shift+Down move down
+bindsym $mod+shift+Up move up
+bindsym $mod+shift+Right move right
+
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 [urgent=latest] focus
+# Move focused container to workspace
+bindsym $mod+shift+1 move container to workspace number 1
+bindsym $mod+shift+2 move container to workspace number 2
+bindsym $mod+shift+3 move container to workspace number 3
+bindsym $mod+shift+4 move container to workspace number 4
+bindsym $mod+shift+5 move container to workspace number 5
+bindsym $mod+shift+6 move container to workspace number 6
+bindsym $mod+shift+7 move container to workspace number 7
+bindsym $mod+shift+8 move container to workspace number 8
+bindsym $mod+shift+9 move container to workspace number 9
+
+# Layout stuff
+bindsym $mod+period splith
+bindsym $mod+comma splitv
+
+# Toggle the current container between split and tabbed layout
+bindsym $mod+shift+t layout toggle split tabbed
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+space floating toggle
+bindsym --whole-window $mod+button2 floating toggle
+
+# Show floating window in all workspaces
+bindsym $mod+y sticky toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+bindsym $mod+shift+a focus child
+
+# Scratchpads
+bindsym $mod+shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+shift+x exec pgrep -f '^foot -a scpterm' >/dev/null 2>&1 || foot -T Scratchpad  -a scpterm
+bindsym $mod+x [app_id="scpterm"] scratchpad show
+bindsym $mod+c [app_id="vesktop"] scratchpad show
+
+# Resizing containers
+bindsym $mod+ctrl+Right resize shrink width 10 px
+bindsym $mod+ctrl+Up resize grow height 10 px
+bindsym $mod+ctrl+Down resize shrink height 10 px
+bindsym $mod+ctrl+Left resize grow width 10 px
+# Same but vim keys
+bindsym $mod+ctrl+l resize shrink width 10 px
+bindsym $mod+ctrl+k resize grow height 10 px
+bindsym $mod+ctrl+j resize shrink height 10 px
+bindsym $mod+ctrl+h resize grow width 10 px
+
+# Media keys
+bindsym XF86AudioRaiseVolume exec ~/.config/sway/scripts/volume.sh up
+bindsym XF86AudioLowerVolume exec ~/.config/sway/scripts/volume.sh down
+bindsym ctrl+shift+Up exec ~/.config/sway/scripts/volume.sh up
+bindsym ctrl+shift+Down exec ~/.config/sway/scripts/volume.sh down
+bindsym XF86AudioMute exec ~/.config/sway/scripts/volume.sh mute
+bindsym XF86AudioMicMute exec ~/.config/sway/scripts/mic-toggle.sh
+bindsym XF86Calculator exec galculator
+bindsym XF86AudioPlay exec ~/.config/sway/scripts/mediactrl.sh --play
+bindsym XF86AudioStop exec ~/.config/sway/scripts/mediactrl.sh --stop
+bindsym XF86AudioNext exec ~/.config/sway/scripts/mediactrl.sh --nxt
+bindsym XF86AudioPrev exec ~/.config/sway/scripts/mediactrl.sh --prv
+bindsym $mod+ctrl+m exec ~/.config/sway/scripts/mediactrl.sh --noti
+
+# Brightness ctrl
+bindsym XF86MonBrightnessUp exec sh -c "brightnessctl set 5%+; ~/.config/sway/scripts/brightness.sh"
+bindsym XF86MonBrightnessDown exec sh -c "brightnessctl set 5%-; ~/.config/sway/scripts/brightness.sh"
+
+#-----------------------------------------------------#
+#                      Rules                          #
+#-----------------------------------------------------#
+# Assign workspaces
+assign [app_id="Firefox"] 2
+assign [app_id="LibreWolf"] 2
+assign [app_id="Thunderbird"] 3
+assign [class="Signal"] 3
+assign [app_id="com.transmissionbt.transmission_*"] 4
+assign [app_id="virt-manager"] 8
+assign [class="steam"] 5
+assign [app_id="net.lutris.Lutris"] 5
+assign [app_id="pcsx2"] 5
+
+# Floaters
+for_window [app_id="(?i)(?:blueman-manager|azote|gnome-disks|nwg-shell-config)"] floating enable
+for_window [app_id="(?i)(?:pavucontrol|nm-connection-editor|gsimplecal|galculator)"] floating enable
+for_window [app_id="blueman-manager"] floating enable, resize set width 40 ppt height 30 ppt
+for_window [app_id="brave-calendar"] floating enable, resize set width 40 ppt height 50 ppt
+for_window [app_id="file-roller"] floating enable
+for_window [app_id="floating_shell_portrait"] floating enable, border pixel 1, sticky enable, resize set width 30 ppt height 40 ppt
+for_window [app_id="floatterm"] floating enable, resize set width 45 ppt height 60 ppt
+for_window [title="fuzzypkg"] resize set width 100ppt, move position 0 0, resize set width 50ppt
+for_window [title="pop-upgrade"] resize set width 100ppt, move position 0 0, resize set width 50ppt
+for_window [app_id="gimp"] floating enable, border pixel 1
+for_window [app_id="imv"] floating enable
+for_window [app_id="mpv"] floating enable
+for_window [app_id="net.lutris.Lutris"] floating enable
+for_window [app_id="nwg-look"] floating enable, resize set width 40 ppt height 50 ppt
+for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt height 50 ppt
+for_window [app_id="pcsx2"] floating enable
+for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 45ppt
+for_window [app_id="signal"] floating enable
+for_window [app_id="vesktop"] floating enable
+for_window [app_id="virt-manager"] floating enable
+for_window [app_id="xdg-desktop-portal-gtk"] floating enable
+for_window [app_id="yad"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="Nsxiv"] floating enable, resize set width 60 ppt height 80 ppt
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Yad" instance="yad"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable, resize set width 60 ppt height 50 ppt
+for_window [class="steam" instance="steam"] floating enable
+for_window [instance="origin.exe"] floating enable
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
+for_window [title="About Mozilla Firefox"] floating enable
+for_window [title="Choose User Profile"] floating enable
+for_window [title="File Operation Progress"] floating enable, border pixel 1, resize set width 40 ppt height 30 ppt
+for_window [title="KeePassXC - Browser Access Request"] floating enable, move position center, focus
+for_window [title="KeePassXC - Passkey credentials"] floating enable, move position center, focus
+for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize set width 50ppt height 50ppt, move position 50ppt 0
+for_window [title="ProtonUp-Qt - Wine/Proton Installer"] floating enable
+for_window [title="modorganizer.exe"] floating enable
+for_window [window_role="About"] floating enable
+for_window [window_role="GtkFileChooserDialog"] move position center
+for_window [window_role="GtkFileChooserDialog"] resize set 590 340
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+# Fix missing borders
+for_window [app_id="Firefox"] border pixel 2
+for_window [app_id="Thunderbird"] border pixel 2
+for_window [app_id="swappy"] border pixel 2
+
+# Inhibit idle
+for_window [app_id="Firefox"] inhibit_idle fullscreen
+for_window [app_id="mpv"] inhibit_idle fullscreen
+for_window [app_id="pcsx2"] inhibit_idle fullscreen
+
+#-----------------------------------------------------#
+#                      Colors                         #
+#-----------------------------------------------------#
+set $bg1     #100F0F
+set $bg2     #282726
+set $bg3     #1c1b1a
+set $fg1     #CECDC3
+set $fg2     #6F6E69
+set $red     #AF3029
+set $cyan    #24837B
+
+set $black   #000000
+set $white   #ffffff
+
+# Class                 Border  Backgr. Text    Indigator Child border
+client.focused          $bg3    $bg3     $fg1    $cyan     $cyan
+client.focused_inactive $bg3    $bg3     $fg2    $bg2      $bg2
+client.unfocused        $bg1    $bg1     $fg2    $bg2      $bg2
+client.urgent           $bg2    $red    $white  $red      $red
+client.placeholder      $black  $black  $white  $black    $black
+client.background       $fg1
+
+#-----------------------------------------------------#
+#                      Auto start                     #
+#-----------------------------------------------------#
+exec swayidle -w
+exec autotiling -l 2
+exec swww-daemon
+exec foot --server
+exec wl-paste --watch cliphist store
+exec sleep 6 && transmission-gtk
+exec_always ~/.config/waybar/scripts/waybar-launcher.sh
+exec_always dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+# This line is for Arch users
+# https://wiki.archlinux.org/title/Sway#Configuration
+#include /etc/sway/config.d/*

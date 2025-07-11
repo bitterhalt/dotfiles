@@ -1,0 +1,10 @@
+# General tweaks to windows
+blur disable
+shadows disable
+shadows_on_csd disable
+corner_radius 8
+titlebar_separator disable
+shadow_color #0000007F
+
+# Waybar
+layer_effects "waybar" shadows enable
