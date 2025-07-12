@@ -9,9 +9,9 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 
 ### Software I use
 
-- Distro: **EndeavourOS**
+- Distro: [EndeavourOS](https://endeavouros.com)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
-- WM: **Hyprland**
+- WM: [Hyprland](https://hypr.land)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - Fonts: JetBrains Mono
