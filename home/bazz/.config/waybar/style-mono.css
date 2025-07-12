@@ -1,0 +1,141 @@
+/* -----------------------------------------------------
+ *                      Config
+ * ----------------------------------------------------- */
+@define-color bg-1 #100f0f;
+@define-color bg-2 #1C1B1A;
+@define-color bg-3 #282726;
+@define-color bg-4 #343331;
+@define-color bg-5 #403E3C;
+@define-color text-1 #CECDC3;
+@define-color text-2 #878580;
+@define-color red #AF3029;
+@define-color purple #A02F6F;
+@define-color cyan #24837B;
+
+* {
+  font-family:
+    JetBrains Mono,
+    Symbols Nerd Font Mono;
+  font-size: 14px;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  transition: none;
+}
+
+/* -----------------------------------------------------
+ *                      Bar
+ * ----------------------------------------------------- */
+window#waybar {
+  color: @text-1;
+  background-color: @bg-1;
+}
+
+/* -----------------------------------------------------
+ *                      Tooltip
+ * ----------------------------------------------------- */
+tooltip {
+  background: @bg-1;
+  border: solid 1px @bg-3;
+  border-radius: 6px;
+}
+
+tooltip label {
+  color: @text-1;
+}
+
+/* -----------------------------------------------------
+ *                  Hyprland workspaces
+ * ----------------------------------------------------- */
+#workspaces {
+  background-color: @bg-1;
+  margin: 0 4px;
+}
+#workspaces button {
+  color: @text-1;
+  font-weight: normal;
+  padding: 0 5px;
+  margin: 3px 0;
+}
+#workspaces button.active {
+  color: @text-1;
+  background-color: @bg-3;
+  font-weight: normal;
+  border-radius: 6px;
+}
+
+#workspaces button.urgent {
+  color: @purple;
+}
+#mode {
+  color: @cyan;
+  padding: 0 10px;
+  margin: 3px 2px;
+  border-radius: 6px;
+}
+#window {
+  color: @text-1;
+  padding: 0 10px;
+}
+/* -----------------------------------------------------
+ *                      Modules
+ * ----------------------------------------------------- */
+#clock,
+#battery,
+#wireplumber,
+#custom-mic,
+#custom-idle,
+#cpu,
+#memory,
+#network {
+  color: @text-1;
+  padding: 0 10px;
+  margin: 3px 2px;
+}
+#tray {
+  background-color: @bg-3;
+  padding: 0 10px;
+  margin: 3px 2px;
+  border-radius: 6px;
+}
+#tray menu {
+  background-color: @bg-1;
+  border: solid 1px @bg-3;
+  border-radius: 6px;
+}
+#wireplumber.muted {
+  color: @text-1;
+  background-color: @bg-3;
+  border-radius: 6px;
+}
+#network:hover,
+#tray menu menuitem:hover,
+#wireplumber:hover {
+  background: @bg-3;
+  border-radius: 6px;
+}
+#workspaces button:hover {
+  background: @bg-3;
+  border-radius: 6px;
+  margin: 3px 0;
+}
+#custom-swayidle {
+  color: @text-1;
+  background-color: @bg-3;
+  border-radius: 6px;
+}
+#custom-sep,
+#custom-markl,
+#custom-markr {
+  color: @text-2;
+  padding: 0 4px;
+}
+#custom-power {
+  color: @text-1;
+  padding: 0 10px;
+  margin: 3px 5px;
+}
+#custom-power:hover {
+  background-color: @bg-3;
+  border-radius: 6px;
+}
