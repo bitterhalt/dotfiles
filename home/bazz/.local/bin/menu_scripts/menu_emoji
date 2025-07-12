@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-chosen=$(cut -d ';' -f1 ~/.local/share/emoji/emoji | fuzzel -d -a top --y 4 -w 30 -l 15 -p "" --placeholder "Select emoji..." | sed "s/ .*//")
+chosen=$(cut -d ';' -f1 ~/.local/share/emoji/emoji | fuzzel -d -a top --y 4 -w 30 -l 15 -p "" --placeholder "Search..." | sed "s/ .*//")
 
 [ -z "$chosen" ] && exit
 
