@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-EXCLUDE_FILE="$HOME/.local/share/rsync-ignore.txt"
-DEST_HOME="/mnt/wd1tb/backup/host/home"
-DEST_ETC="/mnt/wd1tb/backup/host/etc"
+EXCLUDE_FILE="/home/bazz/.local/share/rsync-ignore.txt"
+TARGET="/etc/"
+BACKUP="/mnt/wd1tb/backup/host/etc"
 
-mkdir -p "$DEST_HOME"
-mkdir -p "$DEST_ETC"
-
-rsync -avu --delete --exclude-from="$EXCLUDE_FILE" "$HOME" "$DEST_HOME/"
-rsync -avu --delete --exclude-from="$EXCLUDE_FILE" /etc "$DEST_ETC/"
+mkdir -p "$BACKUP"
+rsync -avu --delete --exclude-from="$EXCLUDE_FILE" "$TARGET" "$BACKUP/"
+#chown -R bazz:bazz $BACKUP

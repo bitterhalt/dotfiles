@@ -105,7 +105,6 @@ endeavouros-keyring
 endeavouros-mirrorlist
 eos-bash-shared
 eos-hooks
-eos-log-tool
 eos-packagelist
 eos-rankmirrors
 eos-translations
@@ -155,7 +154,6 @@ gcr-4
 gdbm
 gdk-pixbuf2
 gdu
-geany
 gegl
 gettext
 giflib
@@ -496,6 +494,7 @@ libqrtr-glib
 libraqm
 libraw
 libraw1394
+librewolf-bin
 librsvg
 libsamplerate
 libsasl
@@ -937,7 +936,6 @@ vapoursynth
 vesktop-bin
 vi
 vid.stab
-vivaldi
 vmaf
 vpnc
 vte-common
