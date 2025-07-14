@@ -2,6 +2,7 @@
 Description=rsync-home
 
 [Timer]
+OnStartupSec=30m
 OnCalendar=weekly
 Persistent=true
 
