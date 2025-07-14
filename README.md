@@ -12,6 +12,7 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 - Distro: [EndeavourOS](https://endeavouros.com)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
 - WM: [Hyprland](https://hypr.land)
+- Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - Fonts: JetBrains Mono
