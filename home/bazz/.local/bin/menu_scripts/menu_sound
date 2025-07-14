@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Select audio sink node
-node=$(pw-dump Node | jq -r '.[]|select(.info.props|.["media.class"] == "Audio/Sink" and has("device.api"))|.info.props["node.description"]' | fuzzel -d -a top --y 4 -w 55 -l 4 -p "Switch audio device: ")
+node=$(pw-dump Node | jq -r '.[]|select(.info.props|.["media.class"] == "Audio/Sink" and has("device.api"))|.info.props["node.description"]' | fuzzel -d -a top --y 4 -w 55 -l 4 -p "" --placeholder "Switch audio device: ")
 [ -z "$node" ] && exit 0
 
 # Get object ID for selected node
