@@ -6,4 +6,4 @@ BACKUP="/mnt/wd1tb/backup/host/etc"
 
 mkdir -p "$BACKUP"
 rsync -avu --delete --exclude-from="$EXCLUDE_FILE" "$TARGET" "$BACKUP/"
-#chown -R bazz:bazz $BACKUP
+chown -R bazz:bazz $BACKUP

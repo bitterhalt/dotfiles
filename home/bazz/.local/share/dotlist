@@ -1,5 +1,9 @@
 /etc/amdfan.yml
 /etc/greetd/
+/etc/systemd/system/etc-backup.service
+/etc/systemd/system/etc-backup.timer
+/etc/systemd/system/timeshift-daily.service
+/etc/systemd/system/timeshift-daily.timer
 /home/bazz/.bash_profile
 /home/bazz/.bashrc
 /home/bazz/.config/MangoHud/
@@ -36,6 +40,8 @@
 /home/bazz/.config/swayimg/
 /home/bazz/.config/swaylock
 /home/bazz/.config/swaynag/
+/home/bazz/.config/systemd/user/rsync-home.service
+/home/bazz/.config/systemd/user/rsync-home.timer
 /home/bazz/.config/user-dirs.dirs
 /home/bazz/.config/vesktop/themes
 /home/bazz/.config/waybar/
