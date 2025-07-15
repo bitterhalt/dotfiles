@@ -1,6 +1,5 @@
 [Unit]
 Description=Weekly /etc/ directory backup
-# Ensure that the backup directory mount is available before running
 
 [Service]
 Type=oneshot
