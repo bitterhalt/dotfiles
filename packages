@@ -47,9 +47,11 @@ blas
 bluez
 bluez-libs
 bluez-utils
+boost-libs
 botan2
 bottom
 brotli
+btrfs-assistant
 btrfs-progs
 bubblewrap
 bzip2
@@ -67,7 +69,6 @@ chromaprint
 cliphist
 coreutils
 cpio
-cronie
 cryptsetup
 curl
 dav1d
@@ -416,13 +417,11 @@ libffi
 libfontenc
 libfreeaptx
 libgcrypt
-libgee
 libgexiv2
 libgirepository
 libgit2
 libglvnd
 libgme
-libgnomekbd
 libgpg-error
 libgsf
 libgtop
@@ -506,7 +505,6 @@ libqrtr-glib
 libraqm
 libraw
 libraw1394
-librewolf-bin
 librsvg
 libsamplerate
 libsasl
@@ -583,7 +581,6 @@ libxinerama
 libxkbcommon
 libxkbcommon-x11
 libxkbfile
-libxklavier
 libxml2
 libxmlb
 libxmu
@@ -662,6 +659,7 @@ mtdev
 mtools
 mujs
 mypaint-brushes1
+nano
 ncurses
 neon
 neovim
@@ -846,7 +844,6 @@ rsync
 rtkit
 rtmpdump
 rubberband
-run-parts
 s-nail
 sbc
 sd
@@ -866,6 +863,7 @@ simdjson
 slang
 slurp
 smartmontools
+snapper
 snappy
 sndio
 sof-firmware
@@ -905,7 +903,6 @@ texinfo
 thin-provisioning-tools
 thunar
 thunderbird
-timeshift
 tinysparql
 tldr
 tomlplusplus
@@ -949,8 +946,6 @@ vid.stab
 vmaf
 volume_key
 vpnc
-vte-common
-vte3
 vulkan-icd-loader
 vulkan-radeon
 wavpack
@@ -970,7 +965,6 @@ woff2
 wpa_supplicant
 x264
 x265
-xapp
 xbitmaps
 xcb-proto
 xcb-util
