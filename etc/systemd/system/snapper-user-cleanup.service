@@ -1,10 +1,13 @@
 [Unit]
-Description=Timeshift Snapshots
-Documentation=man:timeshift(1)
+Description=Daily Cleanup of Snapper Snapshots
+Documentation=man:snapper(8) man:snapper-configs(5)
+After=nss-user-lookup.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/timeshift --check --scripted
+ExecStart=/usr/lib/snapper/systemd-helper --cleanup
+IOSchedulingClass=idle
+CPUSchedulingPolicy=idle
 
 CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN CAP_FSETID CAP_SETFCAP CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK CAP_SYS_NICE
 LockPersonality=true

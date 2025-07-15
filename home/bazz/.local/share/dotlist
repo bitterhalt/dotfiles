@@ -2,8 +2,10 @@
 /etc/greetd/
 /etc/systemd/system/etc-backup.service
 /etc/systemd/system/etc-backup.timer
-/etc/systemd/system/timeshift-daily.service
-/etc/systemd/system/timeshift-daily.timer
+/etc/systemd/system/snapper-user-cleanup.service
+/etc/systemd/system/snapper-user-cleanup.timer
+/etc/systemd/system/snapper-user-timeline.service
+/etc/systemd/system/snapper-user-timeline.timer
 /home/bazz/.bash_profile
 /home/bazz/.bashrc
 /home/bazz/.config/MangoHud/
