@@ -118,7 +118,7 @@ tooltip label {
 #tray menu menuitem:hover,
 #wireplumber:hover,
 #workspaces button:hover {
-  background: @ui-2;
+  background: @ui-1;
   border-radius: 6px;
 }
 #custom-idle {
