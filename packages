@@ -162,7 +162,6 @@ giflib
 gimp
 girara
 git
-glances
 glew
 glfw
 glib-networking
@@ -774,7 +773,6 @@ psmisc
 pugixml
 pv
 python
-python-annotated-types
 python-argcomplete
 python-cairo
 python-certifi
@@ -797,15 +795,12 @@ python-markdown-it-py
 python-matplotlib
 python-mdurl
 python-numpy
-python-orjson
 python-packaging
 python-pillow
 python-pipx
 python-platformdirs
 python-psutil
 python-pyaml
-python-pydantic
-python-pydantic-core
 python-pygments
 python-pyparsing
 python-requests
@@ -814,8 +809,6 @@ python-shtab
 python-six
 python-termcolor
 python-tqdm
-python-typing-inspection
-python-typing_extensions
 python-urllib3
 python-userpath
 python-yaml
