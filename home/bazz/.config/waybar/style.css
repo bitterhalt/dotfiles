@@ -96,7 +96,7 @@ tooltip label {
   margin: 3px 2px;
 }
 #tray {
-  background-color: @ui-1;
+  background-color: @ui-2;
   border-radius: 6px;
 }
 #tray menu {
@@ -115,6 +115,7 @@ tooltip label {
  * ----------------------------------------------------- */
 #custom-power:hover,
 #network:hover,
+#tray:hover,
 #tray menu menuitem:hover,
 #wireplumber:hover,
 #workspaces button:hover {
