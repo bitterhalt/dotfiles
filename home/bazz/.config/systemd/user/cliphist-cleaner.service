@@ -1,0 +1,10 @@
+[Unit]
+Description=Delete cliphist cache on shutdown/reboot
+Before=shutdown.target reboot.target halt.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/sh -c "rm -rf %h/.cache/cliphist/"
+
+[Install]
+WantedBy=shutdown.target reboot.target halt.target
