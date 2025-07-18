@@ -823,6 +823,7 @@ qt6-declarative
 qt6-svg
 qt6-translations
 qt6-wayland
+qt6ct
 raptor
 rav1e
 re2
@@ -900,7 +901,7 @@ tinysparql
 tldr
 tomlplusplus
 tpm2-tss
-transmission-gtk
+transmission-qt
 trash-cli
 tree-sitter
 tree-sitter-c

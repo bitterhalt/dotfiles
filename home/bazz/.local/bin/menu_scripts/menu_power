@@ -21,7 +21,7 @@ case $(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -
   systemctl suspend
   ;;
 "Lock")
-  hyprlock
+  loginctl lock-session
   ;;
 "Logout")
   # Bit dirty but makes sure that nothing lingers after user exits
