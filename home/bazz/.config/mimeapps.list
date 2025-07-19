@@ -23,6 +23,7 @@ application/x-extension-html=userapp-Firefox-ZGQGT2.desktop
 application/x-extension-shtml=userapp-Firefox-ZGQGT2.desktop
 application/xhtml+xml=userapp-Firefox-ZGQGT2.desktop
 application/x-extension-xhtml=userapp-Firefox-ZGQGT2.desktop
+x-scheme-handler/betterdiscord=discord.desktop
 
 [Added Associations]
 image/x-xcf=gimp.desktop;
