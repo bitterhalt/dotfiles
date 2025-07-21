@@ -96,7 +96,7 @@ tooltip label {
   margin: 3px 2px;
 }
 #tray {
-  background-color: @ui-2;
+  background-color: @ui-1;
   border-radius: 6px;
 }
 #tray menu {
