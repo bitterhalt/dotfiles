@@ -3,5 +3,5 @@
 if pgrep -x "hypridle" >/dev/null; then
   echo ""
 else
-  echo "{\"text\": \"󰒳\", \"tooltip\": \"<b>Hypridle is disabled</b>\n click left or press  + F11 to enable\"}"
+  echo "{\"text\": \"󰒳\", \"tooltip\": \"<b>Hypridle is disabled</b>\n click left or press  + Shift + F11 to enable\"}"
 fi
