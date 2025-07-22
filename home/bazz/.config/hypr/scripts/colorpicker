@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if pgrep -x hyprpicker >/dev/null; then
+  exit 1
+fi
+
 color=$(hyprpicker)
 
 if [ -z "$color" ]; then
