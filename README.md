@@ -22,7 +22,6 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 - Login Manager: [tuigreet](https://github.com/apognu/tuigreet)
 - Media Player: [mpv](https://mpv.io/)
 - Notification daemon: [fnott](https://codeberg.org/dnkl/fnott)
-- Screenlocker: [swaylock](https://github.com/swaywm/swaylock)
 - Symbols and icons: [Nerd Font Symbols](https://www.nerdfonts.com/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
 
