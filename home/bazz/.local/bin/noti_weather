@@ -12,7 +12,6 @@ command -v curl >/dev/null 2>&1 || {
 # To use this script you need to create an API key: https://home.openweathermap.org
 APIKEY=$(cat "$HOME/Documents/credentials/open_weather_apikey")
 # Find your City ID here: https://openweathermap.org/
-# Search for your city and copy the ID from the URL inside the browser
 CITY_ID="643492"
 URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=metric&APPID=${APIKEY}"
 
@@ -23,6 +22,7 @@ CITY_NAME=$(echo "$WEATHER_RESPONSE" | jq '.name' | sed 's/"//g')
 WEATHER_CONDITION=$(echo "$WEATHER_RESPONSE" | jq '.weather[0].main' | sed 's/"//g')
 WEATHER_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.temp' | cut -d "." -f 1)
 FEELS_LIKE_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.feels_like' | cut -d "." -f 1)
+HUMIDITY=$(echo "$WEATHER_RESPONSE" | jq '.main.humidity')
 
 # Get sunrise and sunset times
 SUNRISE=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunrise')
@@ -44,16 +44,14 @@ case $WEATHER_CONDITION in
   ;;
 *)
   # Check if it's day or night
-  CURRENT_TIME=$(date +%s)
   if [ "$CURRENT_TIME" -ge "$SUNRISE" ] && [ "$CURRENT_TIME" -lt "$SUNSET" ]; then
-    # Daytime
     WEATHER_ICON="🌞"
   else
-    # Nighttime
     WEATHER_ICON="🌜"
   fi
   ;;
 esac
+
 notify-send -t 9000 -a Weather "Weather: ${CITY_NAME}" "$(
-  printf "$WEATHER_ICON $WEATHER_CONDITION $WEATHER_TEMP°C\n🌈 Feels like $FEELS_LIKE_TEMP\n🌞 Sunrise: $(date -d @"$SUNRISE" '+%H:%M')\n🌙 Sunset: $(date -d @"$SUNSET" '+%H:%M')"
+  printf "$WEATHER_ICON $WEATHER_CONDITION $WEATHER_TEMP°C\n🌈 Feels like $FEELS_LIKE_TEMP°C\n💧 Humidity: $HUMIDITY%%\n🌞 Sunrise: $(date -d @"$SUNRISE" '+%H:%M')\n🌙 Sunset: $(date -d @"$SUNSET" '+%H:%M')"
 )"
