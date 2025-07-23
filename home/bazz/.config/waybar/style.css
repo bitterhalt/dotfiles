@@ -95,22 +95,42 @@ tooltip label {
   padding: 0 10px;
   margin: 3px 2px;
 }
+
 #tray {
   background-color: @bg-2;
   box-shadow: inset 0 0 0 1px @ui-1;
   border-radius: 6px;
 }
+
 #tray menu {
   background-color: @bg-1;
   border: solid 1px @ui-1;
   border-radius: 6px;
 }
+
 #wireplumber.muted {
   color: @tx-1;
   background-color: @ui-2;
   border-radius: 6px;
 }
 
+#custom-idle {
+  color: @tx-1;
+  background-color: @ui-2;
+  border-radius: 6px;
+}
+
+#custom-sep,
+#custom-markl,
+#custom-markr {
+  color: @tx-3;
+  padding: 0 4px;
+}
+#custom-power {
+  color: @tx-1;
+  padding: 0 10px;
+  margin: 3px 5px;
+}
 /* -----------------------------------------------------
  *                      Hover candy
  * ----------------------------------------------------- */
@@ -122,20 +142,4 @@ tooltip label {
 #workspaces button:hover {
   background: @ui-1;
   border-radius: 6px;
-}
-#custom-idle {
-  color: @tx-1;
-  background-color: @ui-2;
-  border-radius: 6px;
-}
-#custom-sep,
-#custom-markl,
-#custom-markr {
-  color: @tx-3;
-  padding: 0 4px;
-}
-#custom-power {
-  color: @tx-1;
-  padding: 0 10px;
-  margin: 3px 5px;
 }
