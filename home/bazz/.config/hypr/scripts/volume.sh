@@ -36,7 +36,7 @@ vol="$(printf "%.0f" "$(split "$vol" ".")")"
 
 case 1 in
 $((vol >= 1))) text="Volume" ;;
-*) notify-send -i ~/.local/share/icons/feather/x.svg -t 5000 -a System "Volume" "muted" -h string:x-canonical-private-synchronous:volume && exit ;;
+*) notify-send -i ~/.local/share/icons/feather/x.svg -t 5000 -h string:x-canonical-private-synchronous:volume && exit ;;
 esac
 
 notify-send \
