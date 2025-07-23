@@ -21,7 +21,7 @@ esac
 vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
 
 # If muted, print "muted" and exit.
-[ "$vol" != "${vol%\[MUTED\]}" ] && notify-send -t 5000 -i ~/.local/share/icons/feather/x.svg "Volume" "muted" -h string:x-canonical-private-synchronous:volume && exit
+[ "$vol" != "${vol%\[MUTED\]}" ] && notify-send -t 5000 "Volume" "muted" -i ~/.local/share/icons/feather/x.svg -h string:x-canonical-private-synchronous:volume && exit
 
 vol="${vol#Volume: }"
 
@@ -36,7 +36,7 @@ vol="$(printf "%.0f" "$(split "$vol" ".")")"
 
 case 1 in
 $((vol >= 1))) text="Volume" ;;
-*) notify-send -i ~/.local/share/icons/feather/x.svg -t 5000 -h string:x-canonical-private-synchronous:volume && exit ;;
+*) notify-send -i ~/.local/share/icons/feather/x.svg -t 5000 "Volume" "muted" -h string:x-canonical-private-synchronous:volume && exit ;;
 esac
 
 notify-send \
