@@ -24,7 +24,6 @@ case $(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -
   loginctl lock-session
   ;;
 "Logout")
-  # Bit dirty but makes sure that nothing lingers after user exits
   loginctl terminate-user "$USER"
   ;;
 esac
