@@ -39,8 +39,6 @@ map D trash
 map E unarchive
 map N yank-basename
 map O &xdg-open $f
-map P paste-async
-map P pasteBig
 map V push :!nvim<space>
 map X $$f
 map ad mkdir
