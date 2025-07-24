@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+command -v jq >/dev/null 2>&1 || {
+  echo >&2 "Program 'jq' required but it is not installed. Aborting."
+  exit 1
+}
+command -v curl >/dev/null 2>&1 || {
+  echo >&2 "Program 'curl' required but is not installed. Aborting."
+  exit 1
+}
+
+# To use this script you need to create an API key: https://home.openweathermap.org
+APIKEY=$(cat "$HOME/Documents/credentials/open_weather_apikey")
+# Find your City ID here: https://openweathermap.org/
+CITY_ID="643492"
+URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=metric&APPID=${APIKEY}"
+
+# Fetch weather data
+WEATHER_RESPONSE=$(curl -s "${URL}")
+
+# Parse data
+CITY_NAME=$(echo "$WEATHER_RESPONSE" | jq -r '.name')
+WEATHER_CONDITION=$(echo "$WEATHER_RESPONSE" | jq -r '.weather[0].main')
+WEATHER_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.temp' | cut -d "." -f 1)
+FEELS_LIKE_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.feels_like' | cut -d "." -f 1)
+HUMIDITY=$(echo "$WEATHER_RESPONSE" | jq '.main.humidity')
+WIND_SPEED=$(echo "$WEATHER_RESPONSE" | jq '.wind.speed')
+WIND_DIR=$(echo "$WEATHER_RESPONSE" | jq '.wind.deg')
+SUNRISE=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunrise')
+SUNSET=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunset')
+CURRENT_TIME=$(date +%s)
+
+# Weather icon
+case $WEATHER_CONDITION in
+'Thunderstorm') WEATHER_ICON="⛈️" ;;
+'Clouds') WEATHER_ICON="☁️" ;;
+'Rain') WEATHER_ICON="☔" ;;
+'Snow') WEATHER_ICON="🌨️" ;;
+*)
+  if [ "$CURRENT_TIME" -ge "$SUNRISE" ] && [ "$CURRENT_TIME" -lt "$SUNSET" ]; then
+    WEATHER_ICON="🌞"
+  else
+    WEATHER_ICON="🌜"
+  fi
+  ;;
+esac
+
+# Convert wind direction degrees to cardinal direction
+get_wind_direction() {
+  deg=$1
+  dirs=(N NNE NE ENE E ESE SE SSE S SSW SW WSW W WNW NW NNW)
+  idx=$(echo "($deg + 11.25)/22.5" | bc)
+  echo "${dirs[$((idx % 16))]}"
+}
+WIND_CARDINAL=$(get_wind_direction "$WIND_DIR")
+
+# Format output
+OUTPUT=$(printf "%s %s %s°C\n🌈 Feels like %s°C\n💧 Humidity: %s%%\n🍃 Wind: %s m/s (%s)\n🌞 Sunrise: %s\n🌙 Sunset: %s" \
+  "$WEATHER_ICON" "$WEATHER_CONDITION" "$WEATHER_TEMP" "$FEELS_LIKE_TEMP" "$HUMIDITY" "$WIND_SPEED" "$WIND_CARDINAL" \
+  "$(date -d @"$SUNRISE" '+%H:%M')" "$(date -d @"$SUNSET" '+%H:%M')")
+
+# Output based on argument
+if [ "$1" = "-n" ]; then
+  notify-send -t 9000 -a Weather "Weather: ${CITY_NAME}" "$OUTPUT"
+else
+  echo -e "Weather: ${CITY_NAME}\n$OUTPUT"
+fi
