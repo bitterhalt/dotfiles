@@ -4,11 +4,11 @@ set -e
 
 get_options() {
   echo "Record Screen"
-  echo "Record Screen with audio"
+  echo "Record Screen (Audio)"
   echo "Record Region"
   echo "Screenshot Full"
   echo "Screenshot Region"
-  echo "Screenshot Full+delay"
+  echo "Screenshot Full (Delay)"
   echo "Stop Recording"
 }
 
@@ -24,7 +24,7 @@ main() {
   'Record Screen')
     wl-record -f
     ;;
-  'Record Screen with audio')
+  'Record Screen (Audio)')
     wl-record -fs
     ;;
   'Record Region')
@@ -36,7 +36,7 @@ main() {
   'Screenshot Region')
     wl-shot -r
     ;;
-  'Screenshot Full+delay')
+  'Screenshot Full (Delay)')
     wl-shot -t
     ;;
   'Stop Recording')
