@@ -17,10 +17,18 @@ fullscreen() {
   notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
 }
 
-# Get your own source with: "pactl list sources | grep Name"
 fullscreen_sound() {
+  # Get the default sink and then construct the monitor source name
+  DEFAULT_SINK=$(pactl info | grep "Default Sink" | awk '{print $3}')
+  if [ -z "$DEFAULT_SINK" ]; then
+    echo "Error: Could not determine default audio sink."
+    notify-send -t 3000 "Screen record" "Error: Could not determine default audio sink."
+    exit 1
+  fi
+  AUDIO_SOURCE="$DEFAULT_SINK.monitor"
+
   wf-recorder \
-    -a=alsa_output.usb-Kingston_Technology_Company_HyperX_Cloud_Flight_Wireless-00.analog-stereo.monitor \
+    -a="$AUDIO_SOURCE" \
     -c h264_vaapi \
     -f "$FILENAME"
   notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
