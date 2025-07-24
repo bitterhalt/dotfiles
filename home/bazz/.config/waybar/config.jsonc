@@ -106,7 +106,7 @@
     "format": "{}",
     "exec": "~/.config/waybar/scripts/idle.sh",
     "signal": 1,
-    "on-click": "~/.config/hypr/scripts/hypridle-toggle.sh; pkill -SIGRTMIN+1 waybar",
+    "on-click": "~/.config/hypr/scripts/hypridle-toggle.sh; pkill -RTMIN+2 waybar",
   },
   "custom/wf-recorder": {
     "interval": "once",
