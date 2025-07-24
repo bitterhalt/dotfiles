@@ -63,5 +63,9 @@ OUTPUT=$(printf "%s %s %s°C\n🌈 Feels like %s°C\n💧 Humidity: %s%%\n🍃 W
 if [ "$1" = "-n" ]; then
   notify-send -t 9000 -a Weather "Weather: ${CITY_NAME}" "$OUTPUT"
 else
-  echo -e "Weather: ${CITY_NAME}\n$OUTPUT"
+  INDENT="  "
+  echo -e "${INDENT}Weather: ${CITY_NAME}"
+  while IFS= read -r line; do
+    echo "${INDENT}${line}"
+  done <<<"$OUTPUT"
 fi

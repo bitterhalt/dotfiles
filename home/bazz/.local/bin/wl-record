@@ -17,6 +17,15 @@ fullscreen() {
   notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
 }
 
+# Get your own source with: "pactl list sources | grep Name"
+fullscreen_sound() {
+  wf-recorder \
+    -a=alsa_output.usb-Kingston_Technology_Company_HyperX_Cloud_Flight_Wireless-00.analog-stereo.monitor \
+    -c h264_vaapi \
+    -f "$FILENAME"
+  notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
+}
+
 region() {
   wf-recorder \
     -c libx264rgb \
@@ -32,15 +41,17 @@ kill() {
 print_help() {
   echo "Usage: wl-record [options]"
   echo "Options:"
-  echo "  -f, --fullscreen   Capture the fullscreen."
-  echo "  -r, --region       Select a region to capture."
-  echo "  -k, --kill         Kill record"
-  echo "  -h, --help         Show this help message."
+  echo "  -f,  --fullscreen   Capture the fullscreen."
+  echo "  -fs, --fullscreen_sound   Capture the fullscreen with sound."
+  echo "  -r,  --region       Select a region to capture."
+  echo "  -k,  --kill         Kill record"
+  echo "  -h,  --help         Show this help message."
 }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
   -f | --fullscreen) fullscreen ;;
+  -fs | --fullscreen_sound) fullscreen_sound ;;
   -r | --region) region ;;
   -k | --kill) kill ;;
   -h | --help) print_help ;;
