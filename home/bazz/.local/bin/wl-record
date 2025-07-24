@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Small helper script to record your desktop on sway
+# Small helper script to record your desktop on swa or any wl-root based WM
+# Video part is tested only with AMD gpu
 # Depends on: wf-recoder, slurp, vaapi
 # Github @ bitterhalt
 
