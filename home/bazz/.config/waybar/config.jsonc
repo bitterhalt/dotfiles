@@ -5,6 +5,7 @@
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
   "modules-right": [
+    "custom/wf-recorder",
     "group/sys",
     "tray",
     "network",
@@ -106,6 +107,15 @@
     "exec": "~/.config/waybar/scripts/idle.sh",
     "signal": 1,
     "on-click": "~/.config/hypr/scripts/hypridle-toggle.sh; pkill -SIGRTMIN+1 waybar",
+  },
+  "custom/wf-recorder": {
+    "interval": "once",
+    "return-type": "json",
+    "format": "{}",
+    "exec": "echo '{\"class\": \"recording\",\"text\":\"󰻂\",\"tooltip\":\"Click right to stop recording\"}'",
+    "exec-if": "pgrep wf-recorder",
+    "on-click": "~/.local/bin/wl-record -k",
+    "signal": 2,
   },
   "cpu": {
     "interval": 10,

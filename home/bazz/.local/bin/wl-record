@@ -14,7 +14,9 @@ FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
 fullscreen() {
   wf-recorder \
     -c h264_vaapi \
-    -f "$FILENAME"
+    -f "$FILENAME" &
+  pkill -RTMIN+2 waybar
+  wait %1
   notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
 }
 
@@ -31,20 +33,30 @@ fullscreen_sound() {
   wf-recorder \
     -a="$AUDIO_SOURCE" \
     -c h264_vaapi \
-    -f "$FILENAME"
+    -f "$FILENAME" &
+  pkill -RTMIN+2 waybar
+  wait %1
   notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
 }
 
 region() {
+  GEOM=$(slurp)
+  [ -z "$GEOM" ] && exit 1 # Exit if no region selected (e.g., Escape pressed)
   wf-recorder \
     -c libx264rgb \
-    -g "$(slurp)" \
-    -f "$FILENAME"
-  notify-send -t 3000 "Screen record" "File saved as $SAVEDIR" -i "$FILENAME"
+    -g "$GEOM" \
+    -f "$FILENAME" &
+  pkill -RTMIN+2 waybar
+  wait %1
+  notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
 }
 
 kill() {
   killall -s SIGINT wf-recorder
+  while pgrep -x wf-recorder >/dev/null; do
+    sleep 0.1
+  done
+  pkill -RTMIN+2 waybar
 }
 
 print_help() {
