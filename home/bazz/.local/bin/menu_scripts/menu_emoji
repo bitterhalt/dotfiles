@@ -9,5 +9,5 @@ if [ -n "$1" ]; then
   wl-copy "$chosen"
 else
   printf "$chosen" | wl-copy
-  notify-send "$chosen Copied to clipboard!" &
+  notify-send -t 3000 "$chosen Copied to clipboard!" &
 fi
