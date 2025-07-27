@@ -4,8 +4,6 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 
 <img src="home/bazz/.local/share/screenshots/screenshot.png" width="100%" />
 <img src="home/bazz/.local/share/screenshots/screenshot2.png" width="100%" />
-<img src="home/bazz/.local/share/screenshots/screenshot4.png" width="50%" />
-<img src="home/bazz/.local/share/screenshots/screenshot5.png" width="50%" />
 
 ### Software I use
 

@@ -117,15 +117,6 @@
     "on-click": "~/.local/bin/wl-record -k",
     "signal": 2,
   },
-  "group/sys": {
-    "orientation": "horizontal",
-    "drawer": {
-      "transition-duration": 700,
-      "transition-to-left": true,
-      "click-to-reveal": true,
-    },
-    "modules": ["custom/markl", "cpu", "memory"],
-  },
   "group/sound": {
     "orientation": "horizontal",
     "drawer": {
