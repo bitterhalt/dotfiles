@@ -143,11 +143,12 @@ tooltip label {
 /* -----------------------------------------------------
  *                      Hover candy
  * ----------------------------------------------------- */
+#custom-idle:hover,
 #custom-power:hover,
 #custom-wf-recorder:hover,
 #network:hover,
-#tray:hover,
 #tray menu menuitem:hover,
+#tray:hover,
 #wireplumber:hover,
 #workspaces button:hover {
   background: @ui-1;
