@@ -45,7 +45,7 @@
 /home/bazz/.config/swaynag/
 /home/bazz/.config/systemd/user/rsync-home.service
 /home/bazz/.config/systemd/user/rsync-home.timer
-/home/bazz/.config/systemd/user/cliphist-cleaner.service
+/home/bazz/.config/systemd/user/delete-cliphist-cache.service
 /home/bazz/.config/user-dirs.dirs
 /home/bazz/.config/vesktop/themes
 /home/bazz/.config/waybar/

@@ -1,0 +1,12 @@
+[Unit]
+Description=Remove cliphist cache on shutdown
+DefaultDependencies=no
+Before=shutdown.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rm -rf %h/.cache/cliphist
+
+[Install]
+WantedBy=default.target
+
