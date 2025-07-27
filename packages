@@ -69,6 +69,7 @@ chromaprint
 cliphist
 coreutils
 cpio
+cpu-x
 cryptsetup
 curl
 dav1d
@@ -85,6 +86,7 @@ desktop-file-utils
 device-mapper
 diffutils
 ding-libs
+discord
 dmidecode
 dmraid
 dnsmasq
@@ -93,13 +95,13 @@ dosfstools
 double-conversion
 downgrade
 dracut
+dragon-drop
 duf
 duktape
 e2fsprogs
 efibootmgr
 efitools
 efivar
-electron37-bin
 ell
 enchant
 endeavouros-branding
@@ -386,6 +388,7 @@ libcdio
 libcdio-paranoia
 libcloudproviders
 libcolord
+libcpuid
 libcups
 libdaemon
 libdatrie
@@ -901,7 +904,7 @@ tinysparql
 tldr
 tomlplusplus
 tpm2-tss
-transmission-qt
+transmission-gtk
 trash-cli
 tree-sitter
 tree-sitter-c
@@ -934,7 +937,6 @@ util-linux
 util-linux-libs
 v4l-utils
 vapoursynth
-vesktop-bin
 vi
 vid.stab
 vmaf
