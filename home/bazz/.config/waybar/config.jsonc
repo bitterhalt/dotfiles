@@ -6,7 +6,6 @@
   "modules-center": ["clock"],
   "modules-right": [
     "custom/wf-recorder",
-    "group/sys",
     "tray",
     "network",
     "group/sound",
@@ -118,16 +117,6 @@
     "on-click": "~/.local/bin/wl-record -k",
     "signal": 2,
   },
-  "cpu": {
-    "interval": 10,
-    "format": "󰘚 {usage}%",
-    "max-length": 10,
-  },
-  "memory": {
-    "interval": 30,
-    "format": "󰍛 {percentage}%",
-    "max-length": 10,
-  },
   "group/sys": {
     "orientation": "horizontal",
     "drawer": {
@@ -144,20 +133,5 @@
       "transition-to-left": true,
     },
     "modules": ["wireplumber#sink", "wireplumber#source"],
-  },
-  "custom/markr": {
-    "interval": "once",
-    "format": "",
-    "tooltip": false,
-  },
-  "custom/markl": {
-    "interval": "once",
-    "format": "",
-    "tooltip": false,
-  },
-  "custom/sep": {
-    "interval": "once",
-    "format": "|",
-    "tooltip": false,
   },
 }
