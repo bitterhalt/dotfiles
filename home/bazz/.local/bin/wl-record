@@ -52,7 +52,7 @@ region() {
 }
 
 kill() {
-  killall -s SIGINT wf-recorder
+  pkill -x wf-recorder
   while pgrep -x wf-recorder >/dev/null; do
     sleep 0.1
   done
