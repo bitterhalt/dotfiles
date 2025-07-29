@@ -1,0 +1,20 @@
+# APPEARANCE OPTIONS
+font=JetBrains Mono 10
+edge=top
+layer=overlay
+
+[warning]
+background=#161616
+border=#262626
+border-bottom-size=1
+button-border-size=1
+border-bottom=#262626
+button-background=#1b1b1b
+button-gap=10
+button-text=#cccccc
+dismiss-button=Cancel
+message-padding=10
+text=#cccccc
+button-margin-right=5
+button-dismiss-gap=20
+#dismiss-button=X
