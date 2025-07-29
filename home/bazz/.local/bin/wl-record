@@ -16,8 +16,6 @@ fullscreen() {
     -c h264_vaapi \
     -f "$FILENAME" &
   pkill -RTMIN+2 waybar
-  wait %1
-  notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
 }
 
 fullscreen_sound() {
@@ -35,8 +33,6 @@ fullscreen_sound() {
     -c h264_vaapi \
     -f "$FILENAME" &
   pkill -RTMIN+2 waybar
-  wait %1
-  notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
 }
 
 region() {
@@ -47,15 +43,12 @@ region() {
     -g "$GEOM" \
     -f "$FILENAME" &
   pkill -RTMIN+2 waybar
-  wait %1
-  notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
 }
 
 kill() {
-  pkill -x wf-recorder
-  while pgrep -x wf-recorder >/dev/null; do
-    sleep 0.1
-  done
+  killall -s SIGINT wf-recorder
+  notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
+  while [ ! -z $(pgrep -x wf-recorder) ]; do wait; done
   pkill -RTMIN+2 waybar
 }
 
