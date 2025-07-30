@@ -53,7 +53,7 @@
     "format": "{icon}",
     "format-icons": ["󰕿", "󰖀", "󰕾"],
     "tooltip-format": "{node_name}\nVolume: {volume}%",
-    "format-muted": "󰸈 mute",
+    "format-muted": "󰸈",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "pavucontrol",
   },

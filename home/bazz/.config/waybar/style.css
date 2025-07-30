@@ -89,6 +89,7 @@ tooltip label {
 #custom-mic,
 #custom-idle,
 #custom-wf-recorder,
+#custom-idle,
 #tray,
 #network {
   color: @tx-1;
@@ -105,18 +106,6 @@ tooltip label {
 #tray menu {
   background-color: @bg-1;
   border: solid 1px @ui-1;
-  border-radius: 6px;
-}
-
-#wireplumber.muted {
-  color: @tx-1;
-  background-color: @ui-2;
-  border-radius: 6px;
-}
-
-#custom-idle {
-  color: @tx-1;
-  background-color: @ui-2;
   border-radius: 6px;
 }
 
