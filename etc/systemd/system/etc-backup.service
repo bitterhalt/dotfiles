@@ -1,9 +1,0 @@
-[Unit]
-Description=Weekly /etc/ directory backup
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/bash -c "mkdir -p /mnt/wd1tb/backup/host/etc && rsync -au --exclude-from=\"/home/bazz/.local/share/rsync-ignore.txt\" /etc/ /mnt/wd1tb/backup/host/etc/ && chown -R bazz:bazz /mnt/wd1tb/backup/host/etc"
-
-[Install]
-WantedBy=multi-user.target
