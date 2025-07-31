@@ -6,6 +6,7 @@
 /etc/systemd/system/snapper-user-cleanup.timer
 /etc/systemd/system/snapper-user-timeline.service
 /etc/systemd/system/snapper-user-timeline.timer
+/etc/NetworkManager/conf.d/wifi_backend.conf
 /home/bazz/.bash_profile
 /home/bazz/.bashrc
 /home/bazz/.config/MangoHud/
