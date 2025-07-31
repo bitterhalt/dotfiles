@@ -1,3 +1,4 @@
+/etc/NetworkManager/conf.d/wifi_backend.conf
 /etc/amdfan.yml
 /etc/greetd/
 /etc/systemd/system/etc-backup.service
@@ -6,12 +7,10 @@
 /etc/systemd/system/snapper-user-cleanup.timer
 /etc/systemd/system/snapper-user-timeline.service
 /etc/systemd/system/snapper-user-timeline.timer
-/etc/NetworkManager/conf.d/wifi_backend.conf
 /home/bazz/.bash_profile
 /home/bazz/.bashrc
 /home/bazz/.config/MangoHud/
 /home/bazz/.config/bat/
-/home/bazz/.config/qt6ct/
 /home/bazz/.config/borgmatic/
 /home/bazz/.config/cron.weekly/
 /home/bazz/.config/fastfetch/
@@ -32,6 +31,7 @@
 /home/bazz/.config/mpv/
 /home/bazz/.config/multitail/config
 /home/bazz/.config/nvim/
+/home/bazz/.config/qt6ct/
 /home/bazz/.config/river/
 /home/bazz/.config/rmpc/
 /home/bazz/.config/service/
@@ -44,9 +44,9 @@
 /home/bazz/.config/swayimg/
 /home/bazz/.config/swaylock
 /home/bazz/.config/swaynag/
+/home/bazz/.config/systemd/user/delete-cliphist-cache.service
 /home/bazz/.config/systemd/user/rsync-home.service
 /home/bazz/.config/systemd/user/rsync-home.timer
-/home/bazz/.config/systemd/user/delete-cliphist-cache.service
 /home/bazz/.config/user-dirs.dirs
 /home/bazz/.config/vesktop/themes
 /home/bazz/.config/waybar/
@@ -73,3 +73,4 @@
 /home/bazz/.local/share/rsync-ignore.txt
 /home/bazz/.local/share/screenshots/
 /home/bazz/.profile
+/usr/local/bin/backup_host
