@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-EXCLUDE_FILE="/home/bazz/.local/share/rsync-ignore.txt"
-TARGET="/etc/"
-BACKUP="/mnt/wd1tb/backup/host/etc"
-
-mkdir -p "$BACKUP"
-sudo rsync -avu --delete --exclude-from="$EXCLUDE_FILE" "$TARGET" "$BACKUP/"
-sudo chown -R bazz:bazz $BACKUP
