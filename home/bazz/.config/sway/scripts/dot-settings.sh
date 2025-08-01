@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
 # Menu options
-ARCHIVE="SWAY
-FOOT
+ARCHIVE="BASH
 FNOTT
+FOOT
 FUZZEL
-WAYBAR
-BASH
 NEOVIM
+SWAY
+SWAYIDLE
+WAYBAR
 "
-CHOICE=$(printf "$ARCHIVE" | fuzzel -d -a top --y 4 -w 30 -l 7 -p "Edit settings: ")
+CHOICE=$(printf "$ARCHIVE" | fuzzel -d -a top --y 4 -w 30 -l 8 -p "Edit settings: ")
 
 TERMCMD=("foot")
 
@@ -20,5 +21,6 @@ FOOT) $TERMCMD -e nvim $HOME/.config/foot/foot.ini ;;
 FUZZEL) $TERMCMD -e nvim $HOME/.config/fuzzel/fuzzel.ini ;;
 NEOVIM) $TERMCMD -e nvim $HOME/.config/nvim/init.lua ;;
 SWAY) $TERMCMD -e nvim $HOME/.config/sway/config ;;
+SWAYIDLE) $TERMCMD -e nvim $HOME/.config/swayidle/config ;;
 WAYBAR) $TERMCMD -e nvim -p $HOME/.config/waybar/config.jsonc $HOME/.config/waybar/style.css ;;
 esac

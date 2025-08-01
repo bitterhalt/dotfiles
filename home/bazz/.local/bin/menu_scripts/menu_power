@@ -21,7 +21,7 @@ case $(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -
   systemctl suspend
   ;;
 "Lock")
-  loginctl lock-session
+  swaylock -f
   ;;
 "Logout")
   loginctl terminate-user "$USER"
