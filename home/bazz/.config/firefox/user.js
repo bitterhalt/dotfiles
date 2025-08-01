@@ -72,3 +72,8 @@ user_pref("browser.download.start_downloads_in_tmp_dir", true);
 user_pref("browser.helperApps.deleteTempFileOnExit", true);
 user_pref("browser.uitour.enabled", false);
 user_pref("privacy.globalprivacycontrol.enabled", true);
+
+/** FINGER PRINTING PROTECT ***/
+user_pref("privacy.fingerprintingProtection", true);
+user_pref("privacy.fingerprintingProtection.pbmode", true);
+user_pref("privacy.fingerprintingProtection.overrides", "+AllTargets,-CSSPrefersColorScheme");
