@@ -56,7 +56,7 @@ fill = yes
 # Anti-aliasing mode for thumbnails (none/box/bilinear/bicubic/mks13)
 antialiasing = mks13
 # Background color of the window (RGBA)
-window = #000000D0
+window = #000000aa
 # Background color of the tile (RGBA)
 background = #1C1B1Aff
 # Background color of the selected tile (RGBA)
