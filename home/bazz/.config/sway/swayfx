@@ -4,7 +4,7 @@ shadows enable
 shadows_on_csd disable
 corner_radius 8
 titlebar_separator disable
-shadow_color #0000007F
+shadow_color #000000ee
 
 # Waybar
 layer_effects "waybar" shadows enable
