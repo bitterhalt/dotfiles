@@ -3,7 +3,7 @@
 #-----------------------------------------------------#
 
 # Enable if you use Swayfx tweaks
-include ~/.config/sway/swayfx
+#include ~/.config/sway/swayfx
 
 # Vim keys for moving
 set $left h
@@ -133,7 +133,7 @@ bindsym $mod+ctrl+p exec ~/.local/bin/wl-color-picker
 bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/menu_sound
 bindsym $mod+ctrl+u exec $xbps-updater
 bindsym $mod+ctrl+w exec ~/.local/bin/noti_weather
-bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
+bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_3
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
 bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
 bindsym $mod+shift+c exec $clip
@@ -203,7 +203,7 @@ bindsym $mod+period splith
 bindsym $mod+comma splitv
 
 # Toggle the current container between split and tabbed layout
-bindsym $mod+shift+t layout toggle split tabbed
+bindsym $mod+g layout toggle split tabbed
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
@@ -224,7 +224,7 @@ bindsym $mod+shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+shift+x exec pgrep -f '^foot -a scpterm' >/dev/null 2>&1 || foot -T Scratchpad  -a scpterm
 bindsym $mod+x [app_id="scpterm"] scratchpad show
-bindsym $mod+c [app_id="vesktop"] scratchpad show
+bindsym $mod+c [app_id="vesktop|discord"] scratchpad show
 
 # Resizing containers
 bindsym $mod+ctrl+Right resize shrink width 10 px
@@ -288,12 +288,12 @@ for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt heigh
 for_window [app_id="pcsx2"] floating enable
 for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 45ppt
 for_window [app_id="signal"] floating enable
-for_window [app_id="vesktop"] floating enable
+for_window [app_id="vesktop|discord"] floating enable
 for_window [app_id="virt-manager"] floating enable
 for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 for_window [app_id="yad"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
-for_window [class="Gimp"] floating enable
+for_window [class="gimp"] floating enable
 for_window [class="Nsxiv"] floating enable, resize set width 60 ppt height 80 ppt
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Yad" instance="yad"] floating enable
@@ -307,6 +307,7 @@ for_window [title="File Operation Progress"] floating enable, border pixel 1, re
 for_window [title="KeePassXC - Browser Access Request"] floating enable, move position center, focus
 for_window [title="KeePassXC - Passkey credentials"] floating enable, move position center, focus
 for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize set width 50ppt height 50ppt, move position 50ppt 0
+for_window [title="ProtonUp-Qt - Wine/Proton Installer"] floating enable
 for_window [title="ProtonUp-Qt - Wine/Proton Installer"] floating enable
 for_window [title="modorganizer.exe"] floating enable
 for_window [window_role="About"] floating enable
