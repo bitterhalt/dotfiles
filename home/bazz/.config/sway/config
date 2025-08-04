@@ -359,8 +359,6 @@ exec wl-paste --watch cliphist store
 exec sleep 6 && transmission-gtk
 exec $waybar
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec_always dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
-# This line is for Arch users
 # https://wiki.archlinux.org/title/Sway#Configuration
-#include /etc/sway/config.d/*
+include /etc/sway/config.d/*
