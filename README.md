@@ -23,14 +23,13 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 - Symbols and icons: [Nerd Font Symbols](https://www.nerdfonts.com/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
 
----
+### Reminder ⚠️
+
+I don't have an installation script at the moment, so please be careful. I don't recommend blindly copying the entire repository, but rather taking bits and pieces from here and there.
 
 #### Sources where I stole most of my cool stuff ⭐
 
 - [SwayKh](https://github.com/SwayKh/dotfiles/tree/main) - Showed me how to configure River 😍
-- [Official install guide](https://docs.voidlinux.org/installation/index.html) - Helped me to setup Void 👍
-- [kennydodrill.com/blog](https://kennydodrill.com/blog/stable-void-linux-setup-guide/) - Helped me to setup Void 👍
-- [Mind's Forge](https://mindsforge.com/Notes/VoidInstall) - Helped me setup Wayland ⭐
 - [newmanls](https://github.com/newmanls/dotfiles) - Helped me with TONS of stuff ⭐
 - [classabbyamp](https://github.com/classabbyamp) - Helped me with TONS of stuff ⭐
 - [aellas](https://github.com/aellas) - For TONS of ideas and ispiration ⭐ ❤️ 🐐
