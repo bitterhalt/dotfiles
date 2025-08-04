@@ -21,6 +21,7 @@
     "max-length": 70,
     "icon": true,
     "icon-size": 20,
+    "tooltip": false,
   },
   "tray": {
     "icon-size": 16,
