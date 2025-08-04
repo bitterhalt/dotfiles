@@ -24,5 +24,5 @@ HYPRIDLE) $TERMCMD -e nvim $HOME/.config/hypr/hypridle.conf ;;
 HYPRLAND) $TERMCMD -e nvim $HOME/.config/hypr/hyprland.conf ;;
 HYPRLOCK) $TERMCMD -e nvim $HOME/.config/hypr/hyprlock.conf ;;
 NEOVIM) $TERMCMD -e nvim $HOME/.config/nvim/init.lua ;;
-WAYBAR) $TERMCMD -e nvim -p $HOME/.config/hypr/waybar/config.jsonc $HOME/.config/hypr/waybar/style.css ;;
+WAYBAR) $TERMCMD -e nvim $HOME/.config/hypr/waybar/config-hypr.jsonc ;;
 esac
