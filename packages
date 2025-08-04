@@ -51,6 +51,7 @@ logrotate 3.22.0-1
 man-db 2.13.1-1
 man-pages 6.15-1
 mangohud 0.8.1-1
+meld 3.22.3-1
 mesa-utils 9.0.0-7
 mpv 1:0.40.0-5
 nano 8.5-1
@@ -64,12 +65,14 @@ noto-fonts-emoji 1:2.048-1
 noto-fonts-extra 1:2025.08.01-1
 npm 11.5.2-1
 nwg-look 1.0.6-1
+pacman-contrib 1.12.0-1
 papirus-icon-theme 20250501-1
 pavucontrol 1:6.1-1
 pipewire 1:1.4.7-1
 pipewire-alsa 1:1.4.7-1
 pipewire-jack 1:1.4.7-1
 pipewire-pulse 1:1.4.7-1
+plocate 1.1.23-1
 polkit-gnome 0.105-11
 ps_mem 3.14-2
 python-pipx 1.7.1-2
