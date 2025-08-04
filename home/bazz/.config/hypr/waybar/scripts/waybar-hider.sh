@@ -7,5 +7,5 @@ if pgrep -x waybar >/dev/null; then
   notify-send -t 2000 -a System -i ~/.local/share/icons/feather/x.svg "Waybar" "disabled" -h string:x-canonical-private-synchronous:volume
 else
   # Launch Waybar
-  waybar -c ~/.config/hypr/waybar/config.jsonc -s ~/.config/hypr/waybar/style.css &
+  waybar -c ~/.config/hypr/waybar/config-hypr.jsonc -s ~/.config/hypr/waybar/style-hypr.css
 fi
