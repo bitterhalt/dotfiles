@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-EXCLUDE_FILE="/home/bazz/.local/share/rsync-ignore.txt"
-TARGET="/home/bazz/"
-BACKUP="/mnt/wd1tb/backup/host/home"
-
-mkdir -p "$BACKUP"
-rsync -avu --delete --exclude-from="$EXCLUDE_FILE" "$TARGET" "$BACKUP/"
