@@ -5,7 +5,7 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 <img src="home/bazz/.local/share/screenshots/screenshot.png" width="100%" />
 <img src="home/bazz/.local/share/screenshots/screenshot2.png" width="100%" />
 
-### Software I use
+#### Software I use
 
 - Distro: [EndeavourOS](https://endeavouros.com)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
@@ -23,9 +23,13 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 - Symbols and icons: [Nerd Font Symbols](https://www.nerdfonts.com/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
 
+---
+
 ### Reminder ⚠️
 
 I don't have an installation script at the moment, so please be careful. I don't recommend blindly copying the entire repository, but rather taking bits and pieces from here and there.
+
+---
 
 #### Sources where I stole most of my cool stuff ⭐
 
