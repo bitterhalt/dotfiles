@@ -4,14 +4,6 @@ set -euo pipefail
 
 CONFIRM="fuzzel -d -a top-right --x 4 --y 4 -w 10 -l2 -p Sure? "
 
-if [[ ${XDG_CURRENT_DESKTOP:-} == *Hyprland* ]]; then
-  LOGOUT_CMD="hyprctl dispatch exit 0"
-elif [[ ${XDG_CURRENT_DESKTOP:-} == *sway* || ${XDG_SESSION_DESKTOP:-} == *sway* ]]; then
-  LOGOUT_CMD="swaymsg exit"
-else
-  LOGOUT_CMD="loginctl terminate-user $USER"
-fi
-
 confirm_action() {
   [[ "$(echo -e "Yes\nNo" | $CONFIRM)" == "Yes" ]]
 }
@@ -34,6 +26,6 @@ case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d 
   swaylock -f
   ;;
 "Logout")
-  eval "$LOGOUT_CMD"
+  loginctl terminate-user "$USER"
   ;;
 esac

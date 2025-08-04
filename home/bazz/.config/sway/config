@@ -18,18 +18,12 @@ set $xcursor Bibata-Modern-Classic 24
 set $mod Mod4
 set $alt Mod1
 
-# Terminal
-set $term footclient
-
-# Locker
-set $lock ~/.config/sway/scripts/screenlocker.sh
-
-# Browsing
+# Defaults
 set $browser firefox
-set $mail thunderbird
-
-# File management
 set $gfm thunar
+set $locker swaylock -f
+set $mail thunderbird
+set $term footclient
 set $tuifm foot -T lf -e lf
 
 # Dmenu scripts
@@ -41,16 +35,14 @@ set $killer ~/.local/bin/menu_scripts/menu_killer
 set $powermenu ~/.local/bin/menu_scripts/menu_power
 set $screenshot ~/.local/bin/menu_scripts/menu_screenshot
 set $winmenu ~/.local/bin/menu_scripts/menu_sway_window
-set $locker swaylock -f
 
-# Xbps goodies
-set $xbps-intaller foot -T fuzzypkg -a floatterm -e fuzzypkg
+# Misc
+set $colorpicker ~/.config/sway/scripts/colorpicker
 set $updater foot -T pop-upgrade -a floatterm -e popupgrade
 
 # Bar signals
 set $sig_1 pkill -SIGRTMIN+1 waybar
 set $sig_2 pkill -SIGRTMIN+2 waybar
-set $sig_3 pkill -SIGRTMIN+3 waybar
 
 # Font
 font pango: JetBrains Mono 10
@@ -130,10 +122,10 @@ bindsym $mod+ctrl+a exec ~/.config/sway/scripts/autotiling-toggle.sh
 bindsym $mod+ctrl+d exec fnottctl dismiss
 bindsym $mod+ctrl+e exec $emojimenu
 bindsym $mod+ctrl+i exec $xbps-intaller
-bindsym $mod+ctrl+p exec ~/.local/bin/wl-color-picker
+bindsym $mod+ctrl+p exec $colorpicker
 bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/menu_sound
 bindsym $mod+ctrl+u exec $updater
-bindsym $mod+ctrl+w exec ~/.local/bin/noti_weather
+bindsym $mod+ctrl+w exec ~/.local/bin/weatherfetch -n
 bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
 bindsym $mod+ctrl+F8 exec ~/.local/bin/wl-record -k
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram

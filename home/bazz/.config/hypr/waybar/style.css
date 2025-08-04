@@ -58,7 +58,7 @@ tooltip label {
   margin: 2px 0;
   padding: 0 5px;
 }
-#workspaces button.focused {
+#workspaces button.active {
   color: @tx-2;
   font-weight: normal;
   background-color: @ui-2;

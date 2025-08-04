@@ -2,7 +2,7 @@
   "layer": "bottom",
   "position": "top",
   //"height": 28,
-  "modules-left": ["sway/workspaces", "sway/window"],
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
   "modules-right": [
     "custom/wf-recorder",
@@ -13,10 +13,10 @@
     "battery",
     "custom/power",
   ],
-  "sway/workspaces": {
+  "hyprland/workspaces": {
     "disable-scroll": true,
   },
-  "sway/window": {
+  "hyprland/window": {
     "format": "{}",
     "max-length": 70,
     "icon": true,
@@ -104,9 +104,9 @@
     "interval": "once",
     "return-type": "json",
     "format": "{}",
-    "exec": "~/.config/waybar/scripts/idle.sh",
+    "exec": "~/.config/hypr/waybar/scripts/idle.sh",
     "signal": 1,
-    "on-click": "~/.config/sway/scripts/swayidle-toggle.sh; pkill -RTMIN+2 waybar",
+    "on-click": "~/.config/hypr/scripts/hypridle-toggle.sh; pkill -RTMIN+2 waybar",
   },
   "custom/wf-recorder": {
     "interval": "once",

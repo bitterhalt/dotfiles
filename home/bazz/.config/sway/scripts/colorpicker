@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if pgrep -x hyprpicker >/dev/null; then
+  exit 1
+fi
+
+color=$(hyprpicker)
+
+if [ -z "$color" ]; then
+  notify-send -t 4000 "No color selected."
+  exit 1
+fi
+
+echo -n "$color" | wl-copy
+
+notify-send -t 8000 "Color" "$color"

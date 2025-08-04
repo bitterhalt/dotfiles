@@ -8,7 +8,7 @@ vt = 1
 
 # `agreety` is the bundled agetty/login-lookalike. You can replace `/bin/sh`
 # with whatever you want started, such as `sway`.
-command = "tuigreet -t -r -c hyprstarter --asterisks --power-shutdown 'systemctl poweroff' --power-reboot 'systemctl reboot'"
+command = "tuigreet -t -r -c sway-start --asterisks --power-shutdown 'systemctl poweroff' --power-reboot 'systemctl reboot'"
 
 
 # The user to run the command as. The privileges this user must have depends

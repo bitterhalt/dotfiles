@@ -1,1015 +1,115 @@
-7zip
-a52dec
-aalib
-abseil-cpp
-acl
-adw-gtk-theme
-adwaita-cursors
-adwaita-fonts
-adwaita-icon-theme
-adwaita-icon-theme-legacy
-alsa-card-profiles
-alsa-firmware
-alsa-lib
-alsa-plugins
-alsa-topology-conf
-alsa-ucm-conf
-alsa-utils
-amd-ucode
-amdfan
-amdgpu_top
-aom
-appstream
-appstream-glib
-aquamarine
-archlinux-keyring
-aspell
-at-spi2-core
-atkmm
-atool
-attr
-audit
-autoconf
-automake
-avahi
-b43-fwcutter
-babl
-base
-base-devel
-bash
-bash-completion
-bat
-bc
-bind
-binutils
-bison
-blas
-bluez
-bluez-libs
-bluez-utils
-boost-libs
-botan2
-bottom
-brotli
-btrfs-assistant
-btrfs-progs
-bubblewrap
-bzip2
-c-ares
-ca-certificates
-ca-certificates-mozilla
-ca-certificates-utils
-cairo
-cairomm
-cairomm-1.16
-cantarell-fonts
-cblas
-chafa
-chromaprint
-cliphist
-coreutils
-cpio
-cryptsetup
-curl
-dav1d
-db5.3
-dbus
-dbus-broker
-dbus-broker-units
-dbus-glib
-dbus-units
-dconf
-debugedit
-default-cursors
-desktop-file-utils
-device-mapper
-diffutils
-ding-libs
-discord
-dmidecode
-dmraid
-dnsmasq
-dnssec-anchors
-dosfstools
-double-conversion
-downgrade
-dracut
-dragon-drop
-duf
-duktape
-e2fsprogs
-efibootmgr
-efitools
-efivar
-ell
-enchant
-endeavouros-branding
-endeavouros-keyring
-endeavouros-mirrorlist
-eos-bash-shared
-eos-hooks
-eos-packagelist
-eos-rankmirrors
-eos-translations
-ethtool
-exfatprogs
-exiv2
-exo
-expac
-expat
-eza
-f2fs-tools
-faac
-faad2
-fakeroot
-fastfetch
-fcft
-fd
-ffmpeg
-fftw
-file
-filesystem
-findutils
-firefox
-flac
-flex
-fluidsynth
-fmt
-fnott
-fontconfig
-foot
-freeglut
-freetype2
-fribidi
-fuse-common
-fuse2
-fuse3
-fuzzel
-fzf
-galculator
-gamemode
-gamescope
-gawk
-gc
-gcc
-gcc-libs
-gcr-4
-gdbm
-gdk-pixbuf2
-gdu
-gegl
-gettext
-giflib
-gimp
-girara
-git
-glew
-glfw
-glib-networking
-glib2
-glibc
-glibmm
-glibmm-2.68
-glslang
-glu
-gmp
-gnulib-l10n
-gnupg
-gnutls
-gobject-introspection-runtime
-gparted
-gperftools
-gpgme
-gpgmepp
-gpm
-gpsd
-graphene
-graphite
-greetd
-greetd-agreety
-greetd-tuigreet
-grep
-grim
-groff
-gsettings-desktop-schemas
-gsettings-system-schemas
-gsm
-gspell
-gssdp
-gssproxy
-gst-libav
-gst-plugin-pipewire
-gst-plugins-bad
-gst-plugins-bad-libs
-gst-plugins-base-libs
-gst-plugins-ugly
-gstreamer
-gtest
-gtk-engine-murrine
-gtk-layer-shell
-gtk-update-icon-cache
-gtk2
-gtk3
-gtk4
-gtkmm-4.0
-gtkmm3
-gtksourceview3
-gtksourceview4
-guile
-gupnp
-gupnp-igd
-gzip
-harfbuzz
-harfbuzz-icu
-haveged
-hdparm
-hicolor-icon-theme
-hidapi
-highway
-htop
-hunspell
-hwdata
-hwdetect
-hwinfo
-hyphen
-hyprcursor
-hyprgraphics
-hypridle
-hyprland
-hyprland-qt-support
-hyprland-qtutils
-hyprlang
-hyprlock
-hyprpicker
-hyprutils
-hyprwayland-scanner
-iana-etc
-icu
-imagemagick
-imath
-impala
-inetutils
-inxi
-iproute2
-iptables-nft
-iputils
-iso-codes
-iwd
-jansson
-jasper
-jbigkit
-jemalloc
-jfsutils
-jq
-json-c
-json-glib
-jsoncpp
-kbd
-kernel-install-for-dracut
-keyutils
-kmod
-krb5
-l-smash
-lame
-lapack
-lcms2
-leancrypto
-lensfun
-less
-lf
-lib32-alsa-lib
-lib32-alsa-plugins
-lib32-audit
-lib32-brotli
-lib32-bzip2
-lib32-curl
-lib32-dbus
-lib32-e2fsprogs
-lib32-expat
-lib32-fontconfig
-lib32-freetype2
-lib32-gcc-libs
-lib32-glib2
-lib32-glibc
-lib32-harfbuzz
-lib32-icu
-lib32-json-c
-lib32-keyutils
-lib32-krb5
-lib32-libcap
-lib32-libdrm
-lib32-libelf
-lib32-libffi
-lib32-libgcrypt
-lib32-libglvnd
-lib32-libgpg-error
-lib32-libidn2
-lib32-libldap
-lib32-libnghttp2
-lib32-libnghttp3
-lib32-libnm
-lib32-libnsl
-lib32-libpciaccess
-lib32-libpipewire
-lib32-libpng
-lib32-libpsl
-lib32-libssh2
-lib32-libtasn1
-lib32-libtirpc
-lib32-libunistring
-lib32-libva
-lib32-libx11
-lib32-libxau
-lib32-libxcb
-lib32-libxcrypt
-lib32-libxcrypt-compat
-lib32-libxdmcp
-lib32-libxext
-lib32-libxfixes
-lib32-libxinerama
-lib32-libxml2
-lib32-libxshmfence
-lib32-libxss
-lib32-libxxf86vm
-lib32-llvm-libs
-lib32-lm_sensors
-lib32-mesa
-lib32-ncurses
-lib32-nspr
-lib32-nss
-lib32-openssl
-lib32-p11-kit
-lib32-pam
-lib32-pcre2
-lib32-pipewire
-lib32-spirv-tools
-lib32-sqlite
-lib32-systemd
-lib32-util-linux
-lib32-vulkan-icd-loader
-lib32-vulkan-radeon
-lib32-wayland
-lib32-xcb-util-keysyms
-lib32-xz
-lib32-zlib
-lib32-zstd
-libadwaita
-libaio
-libao
-libappindicator-gtk3
-libarchive
-libass
-libassuan
-libasyncns
-libatasmart
-libavc1394
-libavif
-libavtp
-libb2
-libb64
-libblockdev
-libblockdev-crypto
-libblockdev-fs
-libblockdev-loop
-libblockdev-mdraid
-libblockdev-nvme
-libblockdev-part
-libblockdev-swap
-libbluray
-libbpf
-libbs2b
-libbsd
-libbytesize
-libcanberra
-libcap
-libcap-ng
-libcdio
-libcdio-paranoia
-libcloudproviders
-libcolord
-libcups
-libdaemon
-libdatrie
-libdbusmenu-glib
-libdbusmenu-gtk3
-libdc1394
-libdca
-libde265
-libdecor
-libdeflate
-libdisplay-info
-libdovi
-libdrm
-libdv
-libdvdcss
-libdvdnav
-libdvdread
-libebur128
-libedit
-libei
-libelf
-libepoxy
-libevdev
-libevent
-libexif
-libfdk-aac
-libffi
-libfontenc
-libfreeaptx
-libgcrypt
-libgexiv2
-libgirepository
-libgit2
-libglvnd
-libgme
-libgpg-error
-libgsf
-libgtop
-libgudev
-libheif
-libice
-libid3tag
-libidn2
-libiec61883
-libimagequant
-libimobiledevice
-libimobiledevice-glue
-libinih
-libinput
-libinstpatch
-libisl
-libjpeg-turbo
-libjxl
-libksba
-liblc3
-libldac
-libldap
-libliftoff
-liblqr
-liblrdf
-libltc
-libluv
-libmad
-libmanette
-libmaxminddb
-libmd
-libmicrodns
-libmikmod
-libmm-glib
-libmms
-libmng
-libmnl
-libmodplug
-libmpc
-libmpcdec
-libmpdclient
-libmpeg2
-libmypaint
-libmysofa
-libnatpmp
-libndp
-libnetfilter_conntrack
-libnewt
-libnfnetlink
-libnfs
-libnftnl
-libnghttp2
-libnghttp3
-libngtcp2
-libnice
-libnl
-libnm
-libnma
-libnma-common
-libnotify
-libnsl
-libnvme
-libogg
-libopenmpt
-libopenraw
-libp11-kit
-libpcap
-libpciaccess
-libpgm
-libpipeline
-libpipewire
-libplacebo
-libplist
-libpng
-libproxy
-libpsl
-libpulse
-libraqm
-libraw
-libraw1394
-librsvg
-libsamplerate
-libsasl
-libseccomp
-libsecret
-libshout
-libsidplayfp
-libsigc++
-libsigc++-3.0
-libsixel
-libsm
-libsndfile
-libsodium
-libsoup3
-libsoxr
-libspiro
-libspng
-libsrtp
-libssh
-libssh2
-libstemmer
-libsynctex
-libsysprof-capture
-libtasn1
-libteam
-libthai
-libtheora
-libtiff
-libtirpc
-libtool
-libunibreak
-libunistring
-libunwind
-libupnp
-liburcu
-liburing
-libusb
-libusbmuxd
-libutempter
-libutf8proc
-libuv
-libva
-libvdpau
-libverto
-libvorbis
-libvpl
-libvpx
-libvterm
-libwacom
-libwebp
-libwireplumber
-libwmf
-libwnck3
-libx11
-libx86emu
-libxau
-libxaw
-libxcb
-libxcomposite
-libxcrypt
-libxcrypt-compat
-libxcursor
-libxcvt
-libxdamage
-libxdmcp
-libxext
-libxfce4ui
-libxfce4util
-libxfixes
-libxfont2
-libxft
-libxi
-libxinerama
-libxkbcommon
-libxkbcommon-x11
-libxkbfile
-libxml2
-libxmlb
-libxmu
-libxpm
-libxpresent
-libxrandr
-libxrender
-libxres
-libxshmfence
-libxslt
-libxss
-libxt
-libxtst
-libxv
-libxxf86vm
-libyaml
-libyuv
-libzip
-licenses
-lilv
-linux
-linux-api-headers
-linux-firmware
-linux-firmware-amdgpu
-linux-firmware-atheros
-linux-firmware-broadcom
-linux-firmware-cirrus
-linux-firmware-intel
-linux-firmware-mediatek
-linux-firmware-nvidia
-linux-firmware-other
-linux-firmware-radeon
-linux-firmware-realtek
-linux-firmware-whence
-llhttp
-llvm-libs
-lm_sensors
-lmdb
-logrotate
-lsb-release
-lsof
-lsscsi
-lua
-lua51-lpeg
-luajit
-luit
-lv2
-lvm2
-lz4
-lzo
-m4
-mailcap
-make
-man-db
-man-pages
-mangohud
-md4c
-mdadm
-meld
-mesa
-mesa-utils
-meson
-miniupnpc
-mjpegtools
-mobile-broadband-provider-info
-mpc
-mpd
-mpdecimal
-mpfr
-mpg123
-mpv
-msgpack-c
-mtdev
-mtools
-mujs
-mypaint-brushes1
-nano
-ncurses
-neon
-neovim
-net-tools
-netctl
-nethogs
-nettle
-networkmanager
-nfs-utils
-nfsidmap
-nftables
-nilfs-utils
-ninja
-nm-connection-editor
-node-gyp
-nodejs
-nodejs-nopt
-noto-fonts
-noto-fonts-cjk
-noto-fonts-emoji
-noto-fonts-extra
-npm
-npth
-nspr
-nss
-nss-mdns
-ntfs-3g
-ntp
-nvme-cli
-nwg-look
-ocl-icd
-oniguruma
-openal
-opencore-amr
-openexr
-openh264
-openjpeg2
-openssh
-openssl
-opus
-orc
-p11-kit
-pacman
-pacman-contrib
-pacman-mirrorlist
-pacutils
-pam
-pambase
-pango
-pangomm
-pangomm-2.48
-papirus-icon-theme
-parallel
-parted
-patch
-pavucontrol
-pciutils
-pcre
-pcre2
-pcsclite
-perl
-perl-clone
-perl-encode-locale
-perl-error
-perl-file-listing
-perl-html-parser
-perl-html-tagset
-perl-http-cookiejar
-perl-http-cookies
-perl-http-daemon
-perl-http-date
-perl-http-message
-perl-http-negotiate
-perl-io-html
-perl-libwww
-perl-lwp-mediatypes
-perl-mailtools
-perl-net-http
-perl-timedate
-perl-try-tiny
-perl-uri
-perl-www-robotrules
-perl-xml-parser
-perl-xml-writer
-pinentry
-pipewire
-pipewire-alsa
-pipewire-audio
-pipewire-jack
-pipewire-pulse
-pixman
-pkgconf
-pkgfile
-playerctl
-plocate
-polkit
-polkit-gnome
-poppler
-poppler-data
-poppler-glib
-popt
-portaudio
-ppp
-pps-tools
-procps-ng
-ps_mem
-psmisc
-pugixml
-pv
-python
-python-argcomplete
-python-cairo
-python-certifi
-python-charset-normalizer
-python-click
-python-colorama
-python-contourpy
-python-cycler
-python-dateutil
-python-dbus
-python-defusedxml
-python-distro
-python-docopt
-python-fonttools
-python-gobject
-python-idna
-python-keyutils
-python-kiwisolver
-python-markdown-it-py
-python-matplotlib
-python-mdurl
-python-numpy
-python-packaging
-python-pillow
-python-pipx
-python-platformdirs
-python-psutil
-python-pyaml
-python-pygments
-python-pyparsing
-python-requests
-python-rich
-python-shtab
-python-six
-python-termcolor
-python-tqdm
-python-urllib3
-python-userpath
-python-yaml
-qhull
-qrencode
-qt5-base
-qt5-declarative
-qt5-translations
-qt5-wayland
-qt6-base
-qt6-declarative
-qt6-svg
-qt6-translations
-qt6-wayland
-qt6ct
-raptor
-rav1e
-re2
-readline
-rebuild-detector
-reflector
-reflector-simple
-ripgrep
-rmpc
-rpcbind
-rsync
-rtkit
-rtmpdump
-rubberband
-s-nail
-sbc
-sd
-sdbus-cpp
-sdl2-compat
-sdl3
-seatd
-sed
-semver
-serd
-sg3_utils
-shaderc
-shadow
-shared-mime-info
-signal-desktop
-simdjson
-slang
-slurp
-smartmontools
-snapper
-snappy
-sndio
-sof-firmware
-sord
-sound-theme-freedesktop
-soundtouch
-spandsp
-spdlog
-speex
-speexdsp
-spirv-tools
-sqlite
-sratom
-srt
-starship
-startup-notification
-steam
-sudo
-suitesparse
-svt-av1
-svt-hevc
-swappy
-swayimg
-swaylock
-swww
-syncthing
-sysfsutils
-systemd
-systemd-libs
-systemd-resolvconf
-systemd-sysvcompat
-tar
-tcl
-tdb
-texinfo
-thin-provisioning-tools
-thunar
-thunderbird
-tinysparql
-tldr
-tomlplusplus
-tpm2-tss
-transmission-gtk
-trash-cli
-tree
-tree-sitter
-tree-sitter-c
-tree-sitter-lua
-tree-sitter-markdown
-tree-sitter-query
-tree-sitter-vim
-tree-sitter-vimdoc
-tslib
-ttf-bitstream-vera
-ttf-dejavu
-ttf-jetbrains-mono
-ttf-liberation
-ttf-nerd-fonts-symbols
-ttf-nerd-fonts-symbols-common
-ttf-nerd-fonts-symbols-mono
-ttf-opensans
-twolame
-tzdata
-uchardet
-udiskie
-udisks2
-unibilium
-unrar
-unzip
-upower
-usb_modeswitch
-usbutils
-util-linux
-util-linux-libs
-v4l-utils
-vapoursynth
-vi
-vid.stab
-vmaf
-volume_key
-vulkan-icd-loader
-vulkan-radeon
-wavpack
-waybar
-wayland
-wayland-protocols
-webkit2gtk-4.1
-webrtc-audio-processing-1
-wev
-wf-recorder
-wget
-which
-wildmidi
-wireplumber
-wl-clipboard
-wlr-randr
-woff2
-wpa_supplicant
-x264
-x265
-xbitmaps
-xcb-proto
-xcb-util
-xcb-util-cursor
-xcb-util-errors
-xcb-util-image
-xcb-util-keysyms
-xcb-util-renderutil
-xcb-util-wm
-xcur2png
-xdg-dbus-proxy
-xdg-desktop-portal
-xdg-desktop-portal-gtk
-xdg-desktop-portal-hyprland
-xdg-user-dirs
-xdg-utils
-xf86-input-libinput
-xf86-video-amdgpu
-xf86-video-ati
-xfconf
-xfsprogs
-xkeyboard-config
-xl2tpd
-xorg-fonts-encodings
-xorg-server
-xorg-server-common
-xorg-setxkbmap
-xorg-xauth
-xorg-xdpyinfo
-xorg-xhost
-xorg-xinit
-xorg-xinput
-xorg-xkbcomp
-xorg-xkill
-xorg-xmodmap
-xorg-xprop
-xorg-xrandr
-xorg-xrdb
-xorg-xset
-xorg-xwayland
-xorgproto
-xterm
-xvidcore
-xxhash
-xz
-yad
-yay
-yt-dlp
-yyjson
-zathura
-zathura-pdf-poppler
-zbar
-zenity
-zeromq
-zimg
-zix
-zlib
-zlib-ng
-zoxide
-zstd
-zvbi
-zxing-cpp
-zziplib
+7zip 24.09-3
+adw-gtk-theme 6.2-1
+amd-ucode 20250708-1
+amdgpu_top 0.10.5-1
+atool 0.39.0-10
+autotiling 1.9.3-3
+base 3-2
+base-devel 1-2
+bash-completion 2.16.0-1
+bc 1.08.2-1
+bluez 5.83-1
+bluez-utils 5.83-1
+btrfs-assistant 2.2-1
+btrfs-progs 6.15-1
+chafa 1.16.2-1
+cliphist 1:0.6.1-1
+discord 1:0.0.103-1
+duf 0.8.1-3
+efibootmgr 18-3
+eza 0.23.0-1
+fastfetch 2.49.0-1
+firefox 141.0-1
+fnott 1.8.0-1
+foot 1.23.1-1
+fuzzel 1.12.0-1
+fzf 0.65.0-1
+geany 2.1-1
+git 2.50.1-3
+gparted 1.7.0-1
+greetd-tuigreet 0.9.1-1
+grim 1.5.0-1
+grub 2:2.12.r292.g73d1c959-1
+gst-plugin-pipewire 1:1.4.7-1
+gtk-engine-murrine 0.98.2-4
+htop 3.4.1-1
+hyprpicker 0.4.5-4
+imagemagick 7.1.2.0-2
+impala 0.3.0-1
+iwd 3.9-1
+jq 1.8.1-1
+lf 36-1
+libpulse 17.0+r43+g3e2bb8a1e-1
+libva-utils 2.22.0-1
+linux 6.15.9.arch1-1
+linux-firmware 20250708-1
+logrotate 3.22.0-1
+man-db 2.13.1-1
+man-pages 6.15-1
+mangohud 0.8.1-1
+mesa-utils 9.0.0-7
+mpv 1:0.40.0-5
+neovim 0.11.3-1
+network-manager-applet 1.36.0-1
+networkmanager 1.54.0-1
+noto-fonts-cjk 20240730-1
+noto-fonts-emoji 1:2.048-1
+noto-fonts-extra 1:2025.08.01-1
+npm 11.5.2-1
+nwg-look 1.0.6-1
+papirus-icon-theme 20250501-1
+pavucontrol 1:6.1-1
+pipewire 1:1.4.7-1
+pipewire-alsa 1:1.4.7-1
+pipewire-jack 1:1.4.7-1
+pipewire-pulse 1:1.4.7-1
+polkit-gnome 0.105-11
+ps_mem 3.14-2
+python-pipx 1.7.1-2
+qt6-wayland 6.9.1-1
+rsync 3.4.1-2
+signal-desktop 7.64.0-1
+slurp 1.5.0-1
+snapper 0.12.2-4
+starship 1.23.0-1
+steam 1.0.0.82-2
+swappy 1.5.1-2
+sway 1:1.11-1
+swayidle 1.8.0-2
+swayimg 4.5-1
+swaylock 1.8.2-1
+swww 0.10.3-1
+syncthing 1.30.0-1
+thunar 4.20.4-1
+thunderbird 141.0-1
+transmission-gtk 4.0.6-10
+trash-cli 0.24.5.26-2
+ttf-jetbrains-mono 2.304-2
+ttf-nerd-fonts-symbols 3.4.0-1
+ttf-nerd-fonts-symbols-mono 3.4.0-1
+udiskie 2.5.7-1
+unrar 1:7.1.10-1
+unzip 6.0-23
+vulkan-radeon 1:25.1.7-1
+waybar 0.13.0-3
+wf-recorder 0.5.0-2
+wireplumber 0.5.10-1
+wl-clipboard 1:2.2.1-3
+xdg-desktop-portal-gtk 1.15.3-1
+xdg-desktop-portal-wlr 0.7.1-1
+xdg-user-dirs 0.18-2
+xdg-utils 1.2.1-1
+xf86-video-amdgpu 23.0.0-2
+xf86-video-ati 1:22.0.0-2
+xorg-font-util 1.4.1-2
+xorg-server 21.1.18-2
+xorg-xev 1.2.6-1
+xorg-xhost 1.0.10-1
+xorg-xinit 1.4.4-1
+xorg-xwayland 24.1.8-1
+yay 12.5.0-1
+yay-debug 12.5.0-1
+zathura 0.5.12-1
+zathura-pdf-poppler 0.3.3-5
+zip 3.0-11
+zoxide 0.9.8-2
