@@ -15,6 +15,7 @@ add() {
 
   while IFS= read -r dotfile; do
     if [[ -f "$dotfile" ]]; then
+      pacman -Qe >~/Documents/projects/dotfiles/packages
       cp --parents "$dotfile" "$dotfiles_repo"
       echo "Copied file: $dotfile"
     elif [[ -d "$dotfile" ]]; then
