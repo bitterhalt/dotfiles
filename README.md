@@ -7,7 +7,7 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 
 #### Software I use
 
-- Distro: [EndeavourOS](https://endeavouros.com)
+- Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
 - WM: **Hyprland** or **Sway** Trying to decide my end game
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
