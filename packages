@@ -1,129 +1,129 @@
-7zip 24.09-3
-adw-gtk-theme 6.2-1
-amd-ucode 20250708-1
-amdgpu_top 0.10.5-1
-atool 0.39.0-10
-autotiling 1.9.3-3
-base 3-2
-base-devel 1-2
-bash-completion 2.16.0-1
-bat 0.25.0-4
-bc 1.08.2-1
-bluez 5.83-1
-bluez-utils 5.83-1
-btrfs-assistant 2.2-1
-btrfs-progs 6.15-1
-chafa 1.16.2-1
-cliphist 1:0.6.1-1
-discord 1:0.0.104-1
-duf 0.8.1-3
-efibootmgr 18-3
-eza 0.23.0-1
-fastfetch 2.49.0-1
-firefox 141.0-1
-fnott 1.8.0-1
-foot 1.23.1-1
-fuzzel 1.12.0-1
-fzf 0.65.1-1
-geany 2.1-1
-git 2.50.1-3
-gparted 1.7.0-1
-greetd-tuigreet 0.9.1-1
-grim 1.5.0-1
-grub 2:2.12.r292.g73d1c959-1
-gst-plugin-pipewire 1:1.4.7-1
-gtk-engine-murrine 0.98.2-4
-htop 3.4.1-1
-hypridle 0.1.6-6
-hyprland 0.50.1-1
-hyprlock 0.9.1-1
-hyprpaper 0.7.5-3
-hyprpicker 0.4.5-4
-imagemagick 7.1.2.0-2
-impala 0.3.0-1
-iwd 3.9-1
-jq 1.8.1-1
-lf 36-1
-libpulse 17.0+r43+g3e2bb8a1e-1
-libva-utils 2.22.0-1
-linux 6.15.9.arch1-1
-linux-firmware 20250708-1
-logrotate 3.22.0-1
-man-db 2.13.1-1
-man-pages 6.15-1
-mangohud 0.8.1-1
-meld 3.22.3-1
-mesa-utils 9.0.0-7
-mpv 1:0.40.0-5
-nano 8.5-1
-neovim 0.11.3-1
-net-tools 2.10-3
-nethogs 0.8.8-2
-network-manager-applet 1.36.0-1
-networkmanager 1.54.0-1
-noto-fonts-cjk 20240730-1
-noto-fonts-emoji 1:2.048-1
-noto-fonts-extra 1:2025.08.01-1
-npm 11.5.2-1
-nwg-look 1.0.6-1
-pacman-contrib 1.12.0-1
-papirus-icon-theme 20250501-1
-pavucontrol 1:6.1-1
-pipewire 1:1.4.7-1
-pipewire-alsa 1:1.4.7-1
-pipewire-jack 1:1.4.7-1
-pipewire-pulse 1:1.4.7-1
-plocate 1.1.23-1
-polkit-gnome 0.105-11
-ps_mem 3.14-2
-python-pipx 1.7.1-2
-qt6-wayland 6.9.1-1
-qt6ct 0.10-4
-rate-mirrors-bin 0.20.0-1
-ripgrep 14.1.1-1
-rsync 3.4.1-2
-signal-desktop 7.64.0-1
-slurp 1.5.0-1
-snapper 0.12.2-4
-starship 1.23.0-1
-steam 1.0.0.82-2
-swappy 1.5.1-2
-sway 1:1.11-1
-swayidle 1.8.0-2
-swayimg 4.5-1
-swaylock 1.8.3-1
-syncthing 1.30.0-1
-thunar 4.20.4-1
-thunderbird 141.0-1
-transmission-gtk 4.0.6-10
-trash-cli 0.24.5.26-2
-ttf-jetbrains-mono 2.304-2
-ttf-nerd-fonts-symbols 3.4.0-1
-ttf-nerd-fonts-symbols-mono 3.4.0-1
-udiskie 2.5.7-1
-unrar 1:7.1.10-1
-unzip 6.0-23
-vulkan-radeon 1:25.1.7-1
-waybar 0.13.0-3
-wf-recorder 0.5.0-2
-wget 1.25.0-2
-wireplumber 0.5.10-1
-wl-clipboard 1:2.2.1-3
-xdg-desktop-portal-gtk 1.15.3-1
-xdg-desktop-portal-wlr 0.7.1-1
-xdg-user-dirs 0.18-2
-xdg-utils 1.2.1-1
-xf86-video-amdgpu 23.0.0-2
-xf86-video-ati 1:22.0.0-2
-xorg-font-util 1.4.1-2
-xorg-server 21.1.18-2
-xorg-xev 1.2.6-1
-xorg-xhost 1.0.10-1
-xorg-xinit 1.4.4-1
-xorg-xwayland 24.1.8-1
-yay 12.5.0-1
-yt-dlp 2025.07.21-1
-zathura 0.5.12-1
-zathura-pdf-poppler 0.3.3-5
-zip 3.0-11
-zoxide 0.9.8-2
+7zip
+adw-gtk-theme
+amd-ucode
+amdgpu_top
+atool
+autotiling
+base
+base-devel
+bash-completion
+bat
+bc
+bluez
+bluez-utils
+btrfs-assistant
+btrfs-progs
+chafa
+cliphist
+discord
+duf
+efibootmgr
+eza
+fastfetch
+firefox
+fnott
+foot
+fuzzel
+fzf
+geany
+git
+gparted
+greetd-tuigreet
+grim
+grub
+gst-plugin-pipewire
+gtk-engine-murrine
+htop
+hypridle
+hyprland
+hyprlock
+hyprpaper
+hyprpicker
+imagemagick
+impala
+iwd
+jq
+lf
+libpulse
+libva-utils
+linux
+linux-firmware
+logrotate
+man-db
+man-pages
+mangohud
+meld
+mesa-utils
+mpv
+nano
+neovim
+net-tools
+nethogs
+network-manager-applet
+networkmanager
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
+npm
+nwg-look
+pacman-contrib
+papirus-icon-theme
+pavucontrol
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+plocate
+polkit-gnome
+ps_mem
+python-pipx
+qt6-wayland
+qt6ct
+rate-mirrors-bin
+ripgrep
+rsync
+signal-desktop
+slurp
+snapper
+starship
+steam
+swappy
+sway
+swayidle
+swayimg
+swaylock
+syncthing
+thunar
+thunderbird
+transmission-gtk
+trash-cli
+ttf-jetbrains-mono
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono
+udiskie
+unrar
+unzip
+vulkan-radeon
+waybar
+wf-recorder
+wget
+wireplumber
+wl-clipboard
+xdg-desktop-portal-gtk
+xdg-desktop-portal-wlr
+xdg-user-dirs
+xdg-utils
+xf86-video-amdgpu
+xf86-video-ati
+xorg-font-util
+xorg-server
+xorg-xev
+xorg-xhost
+xorg-xinit
+xorg-xwayland
+yay
+yt-dlp
+zathura
+zathura-pdf-poppler
+zip
+zoxide
