@@ -353,7 +353,7 @@ client.background       $fg1
 #-----------------------------------------------------#
 exec swayidle -w
 exec autotiling -l 2
-exec swww-daemon
+exec hyprpaper
 exec foot --server
 exec wl-paste --watch cliphist store
 exec sleep 6 && transmission-gtk
