@@ -23,9 +23,9 @@ fastfetch
 firefox
 fnott
 foot
+fuse2
 fuzzel
 fzf
-geany
 git
 gparted
 greetd-tuigreet
@@ -39,6 +39,7 @@ hyprland
 hyprlock
 hyprpaper
 hyprpicker
+hyprpolkitagent
 imagemagick
 impala
 iwd
@@ -74,7 +75,6 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 plocate
-polkit-gnome
 ps_mem
 python-pipx
 qt6-wayland
@@ -91,7 +91,6 @@ swappy
 sway
 swayidle
 swayimg
-swaylock
 syncthing
 thunar
 thunderbird

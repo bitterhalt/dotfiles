@@ -23,7 +23,7 @@ set $alt Mod1
 # Defaults
 set $browser firefox
 set $gfm thunar
-set $locker swaylock -f
+set $locker hyprlock
 set $mail thunderbird
 set $term footclient
 set $tuifm foot -T lf -e lf
@@ -358,7 +358,7 @@ exec foot --server
 exec wl-paste --watch cliphist store
 exec sleep 6 && transmission-gtk
 exec $waybar
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec /usr/lib/hyprpolkitagent/hyprpolkitagent
 
 # https://wiki.archlinux.org/title/Sway#Configuration
 include /etc/sway/config.d/*
