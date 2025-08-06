@@ -28,7 +28,6 @@ Videos
 cargo
 flatpak
 go
-icons
 lutris
 mime
 net.lutris.Lutris
