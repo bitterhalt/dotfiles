@@ -26,6 +26,7 @@ foot
 fuse2
 fuzzel
 fzf
+gimp
 git
 gparted
 greetd-tuigreet
@@ -66,6 +67,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
 npm
+nvme-cli
 nwg-look
 pacman-contrib
 papirus-icon-theme
@@ -84,6 +86,7 @@ ripgrep
 rsync
 signal-desktop
 slurp
+smartmontools
 snapper
 starship
 steam
@@ -99,6 +102,7 @@ trash-cli
 ttf-jetbrains-mono
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
+tumbler
 udiskie
 unrar
 unzip
