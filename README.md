@@ -17,7 +17,7 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 - GTK-theme: [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
 - Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
-- Login Manager: [tuigreet](https://github.com/apognu/tuigreet)
+- Login Manager: **greetd** with [tuigreet](https://github.com/apognu/tuigreet)
 - Media Player: [mpv](https://mpv.io/)
 - Notification daemon: [fnott](https://codeberg.org/dnkl/fnott)
 - Symbols and icons: [Nerd Font Symbols](https://www.nerdfonts.com/)
