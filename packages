@@ -20,6 +20,7 @@ duf
 efibootmgr
 eza
 fastfetch
+ffmpegthumbnailer
 firefox
 fnott
 foot
@@ -99,6 +100,7 @@ thunar
 thunderbird
 transmission-gtk
 trash-cli
+tree
 ttf-jetbrains-mono
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono

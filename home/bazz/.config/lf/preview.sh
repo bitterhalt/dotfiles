@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-
+mkdir -p "$HOME/.cache/lf"
 image() {
   # geometry="$(($2 - 2))x$3"
   #
