@@ -82,10 +82,7 @@ alias mv="mv -iv"
 alias rm="rm -vI"
 # Pacman
 alias cleanup="sudo pacman -Rns $(pacman -Qtdq)" # remove orphaned packages
-alias pacsyyu="sudo pacman -Syyu"                # synchronize with the repositories and update the system
 alias pkglist="pacman -Qe > ~/Documents/projects/dotfiles/packages"
-# Doas
-#alias sudo="doas"
 # Vim
 alias vi="nvim"
 alias vim="nvim"
