@@ -33,7 +33,7 @@ I don't have an installation script at the moment, so please be careful. I don't
 
 #### Sources where I stole most of my cool stuff ⭐
 
-- [SwayKh](https://github.com/SwayKh/dotfiles/tree/main) - Showed me how to configure River 😍
+- [SwayKh](https://github.com/SwayKh/dotfiles/tree/main) - For TONS of ideas and ispiration 😍
 - [newmanls](https://github.com/newmanls/dotfiles) - Helped me with TONS of stuff ⭐
 - [classabbyamp](https://github.com/classabbyamp) - Helped me with TONS of stuff ⭐
 - [aellas](https://github.com/aellas) - For TONS of ideas and ispiration ⭐ ❤️ 🐐
