@@ -16,6 +16,7 @@ btrfs-progs
 chafa
 cliphist
 discord
+doas-sudo-shim
 duf
 efibootmgr
 eza
@@ -70,6 +71,7 @@ noto-fonts-extra
 npm
 nvme-cli
 nwg-look
+opendoas
 pacman-contrib
 papirus-icon-theme
 pavucontrol

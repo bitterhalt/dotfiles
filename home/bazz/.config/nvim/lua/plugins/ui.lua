@@ -36,7 +36,7 @@ return {
           enabled = false,
           highlight = "WinBarNC",
           icons = true, -- whether to dim the icons
-          name = true, -- whether to dim the name
+          name = true,  -- whether to dim the name
         },
         exclude_if = nil,
         filetype_exclude = {
