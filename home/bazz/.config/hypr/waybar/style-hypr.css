@@ -55,7 +55,7 @@ tooltip label {
 #workspaces button {
   color: @tx-1;
   font-weight: normal;
-  margin: 2px 0;
+  margin: 2px 1px;
   padding: 0 5px;
 }
 #workspaces button.active {
@@ -71,7 +71,7 @@ tooltip label {
 #mode {
   color: @tx-2;
   padding: 0 10px;
-  margin: 2px 2px;
+  margin: 2px 1px;
   background-color: @bg-2;
   box-shadow: inset 0 0 0 1px @ui-1;
   border-radius: 6px;
@@ -94,7 +94,7 @@ tooltip label {
 #network {
   color: @tx-1;
   padding: 0 10px;
-  margin: 2px 2px;
+  margin: 2px 1px;
 }
 
 #tray {
@@ -119,7 +119,7 @@ tooltip label {
 #custom-power {
   color: @tx-1;
   padding: 0 10px;
-  margin: 2px 5px;
+  margin: 2px 4px;
 }
 /* -----------------------------------------------------
  *                      Hover candy
