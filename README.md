@@ -25,6 +25,14 @@ List of configs to my keyboard-driven system. My point was to get light weight s
 
 ---
 
+#### Hotkeys
+
+There are lots of them so I don't list them here
+
+- Tip: press: **Super** + **F3** 😉
+
+---
+
 ### Reminder ⚠️
 
 I don't have an installation script at the moment, so please be careful. I don't recommend blindly copying the entire repository, but rather taking bits and pieces from here and there.
