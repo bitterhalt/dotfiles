@@ -12,7 +12,7 @@ set $up k
 set $right l
 
 # Bar
-set $waybar -c ~/.config/sway/waybar/config-sway.jsonc -s ~/.config/sway/waybar/style-sway.css
+set $waybar -c ~/.config/sway/waybar/config.jsonc -s ~/.config/sway/waybar/style.css
 # Xcursor
 set $xcursor Bibata-Modern-Classic 24
 
