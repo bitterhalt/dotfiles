@@ -68,7 +68,7 @@
   },
   "clock": {
     "format": "{:%H:%M}",
-    "format-alt": "{:%d.%m %H:%M | W%V}",
+    "format-alt": "{:%d.%m - %H:%M}",
     "tooltip-format": "<span color='#CECDC3'><tt>{calendar}</tt></span>",
     "calendar": {
       "mode-mon-col": 3,
