@@ -1,6 +1,7 @@
 /etc/NetworkManager/conf.d/wifi_backend.conf
 /etc/amdfan.yml
 /etc/greetd/
+/etc/doas.conf
 /etc/systemd/system/host-backup.service
 /etc/systemd/system/host-backup.timer
 /etc/systemd/system/snapper-user-cleanup.service
