@@ -22,5 +22,5 @@ FUZZEL) $TERMCMD -e nvim $HOME/.config/fuzzel/fuzzel.ini ;;
 NEOVIM) $TERMCMD -e nvim $HOME/.config/nvim/init.lua ;;
 SWAY) $TERMCMD -e nvim $HOME/.config/sway/config ;;
 SWAYIDLE) $TERMCMD -e nvim $HOME/.config/swayidle/config ;;
-WAYBAR) $TERMCMD -e nvim $HOME/.config/sway/waybar/config-sway.jsonc ;;
+WAYBAR) $TERMCMD -e nvim $HOME/.config/sway/waybar/config.jsonc ;;
 esac
