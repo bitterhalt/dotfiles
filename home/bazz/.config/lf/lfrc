@@ -27,7 +27,7 @@ map . set hidden!
 map <c-c> clear
 map <c-n> %dragon-drop -i -x $fx # dragon-drop needs to be installed
 map <c-r> reload
-map <c-t> $setsid -f $TERMINAL >/dev/null 2>&1
+map T $setsid -f $TERMINAL >/dev/null 2>&1
 map <c-z> push :&apack<space>''<space>$fx<left><left><left><left><left> #  Archive
 map <delete> trash
 map <enter> open
