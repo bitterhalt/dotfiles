@@ -104,3 +104,5 @@ alias logr="sudo journalctl --rotate"
 alias logs="journalctl --disk-usage"
 alias logv="journalctl --verify"
 alias logw="sudo journalctl --vacuum-time=1s"
+# Grub
+alias grub-update="sudo grub-mkconfig -o /boot/grub/grub.cfg"
