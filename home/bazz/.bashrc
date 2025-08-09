@@ -80,8 +80,6 @@ alias grep="grep --color=auto"
 alias mkdir="mkdir -pv"
 alias mv="mv -iv"
 alias rm="rm -vI"
-# Doas
-alias sudo="doas"
 # Pacman
 alias cleanup="sudo pacman -Rns $(pacman -Qtdq)" # remove orphaned packages
 alias pkglist="pacman -Qe > ~/Documents/projects/dotfiles/packages"
