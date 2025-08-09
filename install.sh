@@ -38,41 +38,37 @@ sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs
 # ==============================================================================
 
 echo "Installing yay..."
-YAY_DIR="${HOME}/.tmp/yay"
-mkdir -p "$YAY_DIR"
-git clone https://aur.archlinux.org/yay.git "$YAY_DIR"
-
-# Build and install yay. makepkg is run from the directory of the PKGBUILD.
-makepkg -si --noconfirm --syncdeps --noprogressbar --install --clean --cleanbuild --force --noconfirm --rmdeps --skippgpcheck --skipchecksums --skipfilechecks --skipmd5sums --skippgpcheck --skipchecksums --skipfilechecks --skipmd5sums --cleanbuild --noprogressbar --install --syncdeps --noconfirm --clean --force
-rm -rf "$YAY_DIR"
+mkdir -p "$HOME/.tmp"
+cd "$HOME/.tmp"
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si --noconfirm
+cd -
+rm -rf "$HOME/.tmp/yay"
 
 # ==============================================================================
 # 4. CLONE AND SYNC DOTFILES
 # ==============================================================================
 
-DOTFILES_REPO="https://github.com/bitterhalt/dotfiles"
-DOTFILES_DIR="${HOME}/dotfiles"
-
-echo "Cloning dotfiles from $DOTFILES_REPO"
-rm -rf "$DOTFILES_DIR"
-git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
-
-echo "Syncing dotfiles to home directory..."
-rsync -avhu --update --exclude='.git' --exclude='install.sh' "$DOTFILES_DIR/" "$HOME/"
+echo "Cloning dotfiles"
+git clone https://github.com/bitterhalt/dotfiles "${HOME}/dotfiles"
+cd ~/dotfiles
+rsync -avhu home/bazz/ ~/
+sleep 1 && clear
 
 # ==============================================================================
 # 5. INSTALL PACKAGES FROM THE DOTFILES LIST
 # ==============================================================================
 
-PACKAGE_LIST="${DOTFILES_DIR}/packages"
-
-if [[ -f "$PACKAGE_LIST" ]]; then
-  echo "Installing programs from '$PACKAGE_LIST'..."
-  yay -S --needed --noconfirm --batch --no-confirm --noprogressbar --quiet --batch --noprogressbar --quiet --needed --noconfirm --batch --no-confirm --noprogressbar --quiet --batch --noprogressbar --quiet - <"$PACKAGE_LIST"
+# Install packages
+if [[ -f packages ]]; then
+  echo "Installing programs..."
+  yay -S --needed - <packages
 else
-  echo "Error: 'packages' file not found at '$PACKAGE_LIST'!"
+  echo "Error: 'packages' file not found!"
   exit 1
 fi
+sleep 1 && clear
 
 # ==============================================================================
 # 6. PREPARE XDG USER FOLDERS
