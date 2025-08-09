@@ -1,6 +1,7 @@
 # Dotfiles
 
-List of configs to my keyboard-driven system. My point was to get light weight system without useless annoyances.
+My point was to get light weight system without useless annoyances.
+I don't use fancy desktop shell's like AGS because I wan't my system to be fast and responsive.
 
 <img src="home/bazz/.local/share/screenshots/screenshot.png" width="100%" />
 <img src="home/bazz/.local/share/screenshots/screenshot2.png" width="100%" />
