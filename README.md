@@ -52,7 +52,7 @@ There are lots of them so I don't list them here
 
 ### Reminder ⚠️
 
-I don't have an installation script at the moment, so please be careful. I don't recommend blindly copying the entire repository, but rather taking bits and pieces from here and there.
+Installation script is still WIP, so please be careful. I don't recommend blindly copying the entire repository, but rather taking bits and pieces from here and there.
 
 ---
 
