@@ -3,9 +3,6 @@
 My point was to get light weight system without useless annoyances.
 I don't use fancy desktop shell's like AGS because I wan't my system to be fast and responsive.
 
-<img src="home/bazz/.local/share/screenshots/screenshot.png" width="100%" />
-<img src="home/bazz/.local/share/screenshots/screenshot2.png" width="100%" />
-
 #### Software I use
 
 - Distro: [Arch](https://archlinux.org)
@@ -23,6 +20,25 @@ I don't use fancy desktop shell's like AGS because I wan't my system to be fast 
 - Notification daemon: [fnott](https://codeberg.org/dnkl/fnott)
 - Symbols and icons: [Nerd Font Symbols](https://www.nerdfonts.com/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
+
+### Screenshots
+
+<img src="home/bazz/.local/share/screenshots/screenshot.png" width="100%" />
+<img src="home/bazz/.local/share/screenshots/screenshot2.png" width="100%" />
+
+Some fuzzel menus
+
+> Settings
+>
+> <img src="home/bazz/.local/share/screenshots/fuzzel-settings.png" width="50%" />
+>
+> Clipboard
+>
+> <img src="home/bazz/.local/share/screenshots/fuzzel-clipboard.png" width="50%" />
+>
+> Emoji
+>
+> <img src="home/bazz/.local/share/screenshots/fuzzel-emoji.png" width="50%" />
 
 ---
 
