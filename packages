@@ -21,6 +21,7 @@ efibootmgr
 eza
 fastfetch
 ffmpegthumbnailer
+file-roller
 firefox
 fnott
 foot
@@ -100,6 +101,7 @@ swayidle
 swayimg
 syncthing
 thunar
+thunar-archive-plugin
 thunderbird
 transmission-gtk
 trash-cli
