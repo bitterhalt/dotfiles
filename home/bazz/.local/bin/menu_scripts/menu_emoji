@@ -1,13 +1,37 @@
 #!/usr/bin/env bash
 set -e
 
-chosen=$(cut -d ';' -f1 ~/.local/share/emoji/emoji | fuzzel -d -a top --y 4 -w 30 -l 15 -p "" --placeholder "Search..." | sed "s/ .*//")
+EMOJI_DIR="$HOME/.local/share/emoji"
+EMOJI_FILE="$EMOJI_DIR/emoji"
+
+mkdir -p "$EMOJI_DIR"
+
+# Download and parse emoji list if file doesn't exist
+if [ ! -s "$EMOJI_FILE" ]; then
+  notify-send -t 5000 "Emoji picker" "Downloading emoji list..."
+
+  TMP_FILE="$(mktemp)"
+  if curl -sSL "https://unicode.org/Public/emoji/latest/emoji-test.txt" |
+    sed -ne 's/^.*; fully-qualified.*# \(\S*\) \S* \(.*$\)/\1 \2/p' \
+      >"$TMP_FILE" && [ -s "$TMP_FILE" ]; then
+    mv "$TMP_FILE" "$EMOJI_FILE"
+  else
+    rm -f "$TMP_FILE"
+    notify-send -t 5000 "Emoji picker" "Download failed"
+    exit 1
+  fi
+fi
+
+# Show menu and get selection
+chosen=$(cut -d ';' -f1 "$EMOJI_FILE" |
+  fuzzel -d -a top --y 4 -w 30 -l 15 -p "" --placeholder "Search..." |
+  sed "s/ .*//")
 
 [ -z "$chosen" ] && exit
 
 if [ -n "$1" ]; then
   wl-copy "$chosen"
 else
-  printf "$chosen" | wl-copy
+  printf "%s" "$chosen" | wl-copy
   notify-send -t 3000 "$chosen Copied to clipboard!" &
 fi
