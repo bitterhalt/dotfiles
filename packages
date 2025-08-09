@@ -16,7 +16,6 @@ btrfs-progs
 chafa
 cliphist
 discord
-doas-sudo-shim
 duf
 efibootmgr
 eza
@@ -94,6 +93,7 @@ smartmontools
 snapper
 starship
 steam
+sudo
 swappy
 sway
 swayidle
