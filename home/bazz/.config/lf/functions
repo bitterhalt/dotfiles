@@ -13,7 +13,7 @@ cmd open ${{
 	  video/*) setsid -f mpv "$f" -quiet >/dev/null 2>&1 ;;
     image/*) setsid -f swayimg >/dev/null 2>&1 "$f" ;;
     text/*) $EDITOR "$f" ;;
-    *) xdg-open "$f" ;;
+    *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
   esac
 }}
 

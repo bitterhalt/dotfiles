@@ -20,6 +20,7 @@ duf
 efibootmgr
 eza
 fastfetch
+fd
 ffmpegthumbnailer
 file-roller
 firefox
@@ -99,6 +100,7 @@ sway
 swayidle
 swayimg
 syncthing
+tealdeer
 thunar
 thunar-archive-plugin
 thunderbird
