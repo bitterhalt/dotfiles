@@ -4,12 +4,12 @@
 
 PS1='[\u@\h \W]\$ ' # Default prompt
 
-export HISTCONTROL="ignoredups:erasedups"         # No duplicate entries
-export HISTFILESIZE="5000"                        # History file size
-export HISTIGNORE="ls:ll:exit:clear:rm*:history*" # Ignore commands
-export HISTSIZE="5000"                            # History size
-export LC_COLLATE="C"                             # Collation order
-export MANPAGER="nvim +Man!"                      # Nvim as manpager
+export HISTCONTROL="ignoreboth:erasedups"                      # No duplicate entries
+export HISTFILESIZE="5000"                                     # History file size
+export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*" # Ignore commands
+export HISTSIZE="5000"                                         # History size
+export LC_COLLATE="C"                                          # Collation order
+export MANPAGER="nvim +Man!"                                   # Nvim as manpager
 
 set -o vi # vi mode
 bind -m vi-command "Control-l: clear-screen"
