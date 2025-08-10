@@ -21,7 +21,7 @@ shopt -s checkwinsize            # Checks term size when bash regains control
 shopt -s histappend              # Do not overwrite history
 shopt -s no_empty_cmd_completion # Do not TAB expand empty lines
 
-bind "set show-all-if-ambiguous on"     # Lis available options in tab-menu
+bind "set show-all-if-ambiguous on"     # List available options in tab-menu
 bind "set completion-ignore-case on"    # Ignore upper and lowercase in TAB-completion
 bind "set colored-completion-prefix on" # Enable completion coloring
 bind "TAB:menu-complete"                # Better tab-completion
@@ -32,43 +32,15 @@ eval "$(fzf --bash)"                          # CTRL-t = fzf select | CTRL-r = f
 eval "$(starship init bash)"                  # Load prompt
 eval "$(zoxide init --cmd cd bash)"           # Use zoxide to cd
 
-# Extract helper
-function ex {
-  if [ -z "$1" ]; then
-    echo "Usage: ex <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
-  else
-    for n in "$@"; do
-      if [ -f "$n" ]; then
-        case "${n%,}" in
-        *.cbt | *.tar.bz2 | *.tar.gz | *.tar.xz | *.tbz2 | *.tgz | *.txz | *.tar)
-          tar xvf "$n"
-          ;;
-        *.lzma) unlzma ./"$n" ;;
-        *.bz2) bunzip2 ./"$n" ;;
-        *.cbr | *.rar) unrar x -ad ./"$n" ;;
-        *.gz) gunzip ./"$n" ;;
-        *.cbz | *.epub | *.zip) unzip ./"$n" ;;
-        *.z) uncompress ./"$n" ;;
-        *.7z | *.arj | *.cab | *.cb7 | *.chm | *.deb | *.dmg | *.iso | *.lzh | *.msi | *.pkg | *.rpm | *.udf | *.wim | *.xar)
-          7z x ./"$n"
-          ;;
-        *.xz) unxz ./"$n" ;;
-        *.exe) cabextract ./"$n" ;;
-        *.cpio) cpio -id <./"$n" ;;
-        *.cba | *.ace) unace x ./"$n" ;;
-        *)
-          echo "ex: '$n' - unknown archive method"
-          return 1
-          ;;
-        esac
-      else
-        echo "'$n' - file does not exist"
-        return 1
-      fi
-    done
-  fi
-}
+# Cleaner titles
+case ${TERM} in
+st* | alacritty | foot | xterm* | rxvt* | kitty | kterm | gnome*)
+  PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }printf '\033]0;%s\007' \"${PWD/#$HOME/\~}\""
+  ;;
+tmux* | screen*)
+  PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }printf '\033]0;%s\007' \"tmux: ${PWD/#$HOME/\~}\""
+  ;;
+esac
 
 # Aliases
 alias ..="cd .."
@@ -98,6 +70,7 @@ alias tpr="trash-restore"
 # Random
 alias hg="history | grep "
 alias nvm="sudo nvme smart-log /dev/nvme0"
+alias ex="extrac_helper"
 # Systemd Journal
 alias loger="journalctl -p 3 -xb"
 alias logf="journalctl -f"
