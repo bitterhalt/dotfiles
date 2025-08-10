@@ -4,11 +4,12 @@
 
 PS1='[\u@\h \W]\$ ' # Default prompt
 
-export MANPAGER="nvim +Man!"                      # Nvim as manpager
-export HISTFILESIZE="5000"                        # History file size
-export HISTSIZE="5000"                            # History size
 export HISTCONTROL="ignoredups:erasedups"         # No duplicate entries
+export HISTFILESIZE="5000"                        # History file size
 export HISTIGNORE="ls:ll:exit:clear:rm*:history*" # Ignore commands
+export HISTSIZE="5000"                            # History size
+export LC_COLLATE="C"                             # Collation order
+export MANPAGER="nvim +Man!"                      # Nvim as manpager
 
 set -o vi # vi mode
 bind -m vi-command "Control-l: clear-screen"
@@ -26,9 +27,10 @@ bind "set colored-completion-prefix on" # Enable completion coloring
 bind "TAB:menu-complete"                # Better tab-completion
 bind '"\e[Z": menu-complete-backward'   # Shift-Tab cycle backwards
 
-eval "$(fzf --bash)"                # CTRL-t = fzf select | CTRL-r = fzf history |  ALT-c  = fzf cd
-eval "$(starship init bash)"        # Load prompt
-eval "$(zoxide init --cmd cd bash)" # Use zoxide to cd
+eval "$(dircolors ~/.config/shell/dircolors)" # Load dircolors
+eval "$(fzf --bash)"                          # CTRL-t = fzf select | CTRL-r = fzf history |  ALT-c  = fzf cd
+eval "$(starship init bash)"                  # Load prompt
+eval "$(zoxide init --cmd cd bash)"           # Use zoxide to cd
 
 # Extract helper
 function ex {
@@ -86,10 +88,9 @@ alias pkglist="pacman -Qe > ~/Documents/projects/dotfiles/packages"
 # Vim
 alias vi="nvim"
 alias vim="nvim"
-# Dir / eza
-alias la="eza -a --group-directories-first --color=always"
-alias ll="eza -l --group-directories-first --color=always"
-alias ls="eza -al --group-directories-first --color=always"
+# ls
+alias ls="ls -ho --group-directories-first --color=auto"
+alias la="ls -laho --group-directories-first --color=auto"
 # Trash-cli
 alias tp="trash-put"
 alias tpe="trash-empty"
