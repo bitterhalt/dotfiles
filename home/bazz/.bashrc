@@ -45,7 +45,6 @@ esac
 # Aliases
 alias ..="cd .."
 alias cp="cp -iv"
-alias df="df -h"
 alias duf="duf --hide special -theme ansi"
 alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"

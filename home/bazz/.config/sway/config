@@ -11,8 +11,6 @@ set $down j
 set $up k
 set $right l
 
-# Bar
-set $waybar -c ~/.config/sway/waybar/config.jsonc -s ~/.config/sway/waybar/style.css
 # Xcursor
 set $xcursor Bibata-Modern-Classic 24
 
@@ -357,7 +355,7 @@ exec hyprpaper
 exec foot --server
 exec wl-paste --watch cliphist store
 exec sleep 6 && transmission-gtk
-exec $waybar
+exec waybar -c ~/.config/sway/waybar/config.jsonc -s ~/.config/sway/waybar/style.css
 exec /usr/lib/hyprpolkitagent/hyprpolkitagent
 
 # https://wiki.archlinux.org/title/Sway#Configuration
