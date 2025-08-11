@@ -104,7 +104,7 @@
     "interval": "once",
     "return-type": "json",
     "format": "{}",
-    "exec": "~/.config/waybar/scripts/idle.sh",
+    "exec": "~/.config/sway/waybar/scripts/idle.sh",
     "signal": 1,
     "on-click": "~/.config/sway/scripts/swayidle-toggle.sh; pkill -RTMIN+2 waybar",
   },
