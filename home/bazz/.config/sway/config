@@ -356,7 +356,7 @@ exec foot --server
 exec wl-paste --watch cliphist store
 exec sleep 6 && transmission-gtk
 exec waybar -c ~/.config/sway/waybar/config.jsonc -s ~/.config/sway/waybar/style.css
-exec /usr/lib/hyprpolkitagent/hyprpolkitagent
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # https://wiki.archlinux.org/title/Sway#Configuration
 include /etc/sway/config.d/*
