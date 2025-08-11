@@ -36,7 +36,6 @@ eval "$(zoxide init --cmd cd bash)"           # Use zoxide to cd
 case ${TERM} in
 st* | alacritty | foot | xterm* | rxvt* | kitty | kterm | gnome*)
   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s\007" "${PWD/#$HOME/\~}"'
-  export COLORTERM=truecolor
   ;;
 tmux* | screen*)
   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s\007" "tmux: ${PWD/#$HOME/\~}"'
