@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  From: https://codeberg.org/jorisvandijk/dotfiles-hyprland/src/branch/main/home/joris/.local/bin
-#  Dependencies: wofi, hyprctl, jq
+#  Dependencies: fuzzel, hyprctl, jq
 
 # Build menu entries and map them to addresses
 mapfile -t entries < <(
