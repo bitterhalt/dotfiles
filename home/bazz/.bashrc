@@ -62,6 +62,7 @@ alias tpr="trash-restore"
 alias hg="history | grep "
 alias nvm="sudo nvme smart-log /dev/nvme0"
 alias ex="extrac_helper"
+alias fzi="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 # Systemd Journal
 alias loger="journalctl -p 3 -xb"
 alias logf="journalctl -f"
