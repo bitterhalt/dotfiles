@@ -4,5 +4,5 @@ set -euo pipefail
 
 prefix="$PASSWORD_STORE_DIR"
 passwords=$(find "$prefix" -type f -name "*.gpg" ! -path "$prefix/.git/*" | sed "s|^$prefix/||;s/\.gpg$//")
-password=$(echo "$passwords" | sort | fuzzel -d -p "" -a top --y 4 -w 50 -l15 --placeholder "Search paswords:") || exit 0
-pass -c "$password" >/dev/null 2>&1 && notify-send "Copied" "$password"
+password=$(echo "$passwords" | sort | fuzzel -d -p "" -a top --y 4 -w 50 -l15 --placeholder "Search passwords:") || exit 0
+pass -c "$password" >/dev/null 2>&1 && notify-send -t 10000 "Copied" "$password"
