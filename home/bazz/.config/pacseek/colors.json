@@ -5,11 +5,9 @@
   "SearchBar": "282726",
   "PackagelistSourceRepository": "66800B",
   "PackagelistSourceAUR": "205EA6",
-  "PackagelistHeader": "ffff00",
+  "PackagelistHeader": "D0A215",
   "SettingsFieldBackground": "205EA6",
   "SettingsFieldText": "ffffff",
   "SettingsFieldLabel": "AD8301",
-  "SettingsDropdownNotSelected": "24837B",
-  "StylePKGBUILD": "dracula",
-  "Comments": "Examples for StylePKGBUILD can be found here: https://xyproto.github.io/splash/docs/all.html"
+  "SettingsDropdownNotSelected": "24837B"
 }

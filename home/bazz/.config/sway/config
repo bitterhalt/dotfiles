@@ -140,7 +140,7 @@ bindsym $mod+shift+p exec $powermenu
 bindsym $mod+q kill
 
 # Hide/restart waybar
-bindsym $mod+b exec ~/.config/sway/waybar/scripts/waybar-hider.sh
+bindsym $mod+b exec ~/.config/sway/waybar/waybar.sh toggle
 
 # When the modifier key is held down, you may hold left click to move windows, and right click to resize them
 floating_modifier $mod normal
@@ -355,7 +355,7 @@ exec hyprpaper
 exec foot --server
 exec wl-paste --watch cliphist store
 exec sleep 6 && transmission-gtk
-exec waybar -c ~/.config/sway/waybar/config.jsonc -s ~/.config/sway/waybar/style.css
+exec ~/.config/sway/waybar/waybar.sh start
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # https://wiki.archlinux.org/title/Sway#Configuration

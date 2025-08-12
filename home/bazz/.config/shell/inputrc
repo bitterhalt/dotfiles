@@ -1,9 +1,10 @@
 $include /etc/inputrc
 
-# Tab-completion settings
+# Completion settings
 set show-all-if-ambiguous on
 set completion-ignore-case on
 set colored-completion-prefix on
+set bell-style none
 
 # vi-mode
 set editing-mode vi
