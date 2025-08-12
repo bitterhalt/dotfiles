@@ -1,1 +1,24 @@
 $include /etc/inputrc
+
+# Tab-completion settings
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set colored-completion-prefix on
+
+# vi-mode
+set editing-mode vi
+
+# Keybindings (apply to all modes)
+TAB: menu-complete
+"\e[Z": menu-complete-backward
+
+#  vi-mode specific keybindings
+$if mode=vi
+  set keymap vi-command
+  "\C-l": clear-screen
+  "\C-a": beginning-of-line
+
+  set keymap vi-insert
+  "\C-l": clear-screen
+  "\C-a": beginning-of-line
+$endif

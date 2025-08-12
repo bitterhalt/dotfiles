@@ -11,21 +11,11 @@ export HISTSIZE="5000"                                         # History size
 export LC_COLLATE="C"                                          # Collation order
 export MANPAGER="nvim +Man!"                                   # Nvim as manpager
 
-set -o vi # vi mode
-bind -m vi-command "Control-l: clear-screen"
-bind -m vi-insert "Control-l: clear-screen"
-
 shopt -s autocd                  # Change to named directory
 shopt -s cdspell                 # Autocorrects cd misspellings
 shopt -s checkwinsize            # Checks term size when bash regains control
 shopt -s histappend              # Do not overwrite history
 shopt -s no_empty_cmd_completion # Do not TAB expand empty lines
-
-bind "set show-all-if-ambiguous on"     # List available options in tab-menu
-bind "set completion-ignore-case on"    # Ignore upper and lowercase in TAB-completion
-bind "set colored-completion-prefix on" # Enable completion coloring
-bind "TAB:menu-complete"                # Better tab-completion
-bind '"\e[Z": menu-complete-backward'   # Shift-Tab cycle backwards
 
 eval "$(dircolors ~/.config/shell/dircolors)" # Load dircolors
 eval "$(fzf --bash)"                          # CTRL-t = fzf select | CTRL-r = fzf history |  ALT-c  = fzf cd
