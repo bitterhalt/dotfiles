@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Define the lengths for each column
 ws_length=2
 app_id_length=14
