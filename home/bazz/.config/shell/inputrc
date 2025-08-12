@@ -17,8 +17,12 @@ $if mode=vi
   set keymap vi-command
   "\C-l": clear-screen
   "\C-a": beginning-of-line
+  "\C-e": end-of-line
+  "\C-w": kill-word
 
   set keymap vi-insert
   "\C-l": clear-screen
   "\C-a": beginning-of-line
+  "\C-e": end-of-line
+  "\C-w": kill-word
 $endif
