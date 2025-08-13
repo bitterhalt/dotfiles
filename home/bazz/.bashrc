@@ -4,10 +4,10 @@
 
 PS1='[\u@\h \W]\$ ' # Default prompt
 
-export HISTCONTROL="ignoreboth:erasedups"                      # No duplicate entries
-export HISTFILESIZE="5000"                                     # History file size
-export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*" # Ignore commands
 export HISTSIZE="5000"                                         # History size
+export HISTFILESIZE="${HISTSIZE}"                              # History file size
+export HISTCONTROL="ignoreboth:erasedups"                      # No duplicate entries
+export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*" # Ignore commands
 export LC_COLLATE="C"                                          # Collation order
 export MANPAGER="nvim +Man!"                                   # Nvim as manpager
 
@@ -38,6 +38,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias cp="cp -iv"
 alias duf="duf --hide special -theme ansi"
+alias df="df -hT --total"
 alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias free="free -m"

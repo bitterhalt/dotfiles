@@ -4,10 +4,13 @@ export PATH="$HOME/.local/bin/personal/:$PATH"
 export PATH="$HOME/.local/share/cargo/bin/:$PATH"
 
 # Defaults
-export EDITOR="nvim"
-export VISUAL="nvim"
-export TERMINAL="foot"
+export BAT_PAGER="never"
+export BAT_STYLE="plain"
+export BAT_THEME="ansi"
 export BROWSER="firefox"
+export EDITOR="nvim"
+export TERMINAL="foot"
+export VISUAL="nvim"
 
 # XDG Base Directory
 export XDG_CONFIG_HOME="$HOME/.config"
