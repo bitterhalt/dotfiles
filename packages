@@ -12,6 +12,7 @@ bat
 bc
 bluez
 bluez-utils
+borgmatic
 btrfs-assistant
 btrfs-progs
 chafa
@@ -32,6 +33,7 @@ fzf
 galculator
 gamemode
 gamescope
+gdu
 gimp
 git
 gparted
