@@ -22,8 +22,6 @@ exclude_if_present:
 exclude_patterns:
   - "*.pyc"
   - "*/.vim*.tmp"
-  - "- [Cc]ache"
-  - "- [Tt]rash"
   - /etc/audit/audit
   - /etc/credstore
   - /etc/credstore.encrypted
@@ -37,10 +35,12 @@ exclude_patterns:
   - /home/*/.cache
   - /home/*/.dbus
   - /home/*/.grsync
+  - /home/*/discord
   - /home/*/.lesshst
   - /home/*/.local/share/Steam
   - /home/*/.local/share/Trash
-  - /home/*/.local/share/libvirt
+  - /home/*/.local/share/libirt
+  - /home/*/.local/share/nvim
   - /home/*/.npm
   - /home/*/.nv
   - /home/*/.nvidia-settings-rc
@@ -66,7 +66,6 @@ exclude_patterns:
   - /home/*/baloo
   - /home/*/dropbox
   - /home/*/gdrive
-  - /home/*/icons
   - /home/*/onedrive
   - /home/*/public
   - /home/*/recentdocuments

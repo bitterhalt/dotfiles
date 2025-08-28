@@ -28,6 +28,7 @@ firefox
 fnott
 foot
 fuse2
+fuse2fs
 fuzzel
 fzf
 galculator
@@ -88,6 +89,7 @@ pipewire-pulse
 plocate
 polkit-gnome
 ps_mem
+python-llfuse
 python-pipx
 qt6-wayland
 qt6ct
