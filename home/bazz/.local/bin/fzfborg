@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Small helper script to borgmatic
+
+set -e
+
+if [[ ! -d ~/temp ]]; then
+  mkdir ~/temp >/dev/null 2>&1
+fi
+
+umount_temp() {
+  if mountpoint -q ~/temp; then
+    borgmatic umount --mount-point $HOME/temp
+  fi
+}
+
+options=("Take snapshot" "Mount latest snapshot" "Mount all archives" "Umount snapshot")
+selected=$(printf '%s\n' "${options[@]}" | fzf)
+
+if [[ -n "$selected" ]]; then
+  case "$selected" in
+  "Take snapshot")
+    umount_temp
+    notify-send -t 8000 -a center_notify "Borg is taking backup" "This could take a while.."
+    borgmatic --verbosity -1 --syslog-verbosity 1
+    notify-send "Borg snapshot ready" "$(date '+%d.%m-%H:%M')"
+    ;;
+  "Mount latest snapshot")
+    borgmatic mount --archive latest --mount-point $HOME/temp
+    notify-send -t 8000 -a center_notify "Borg" "Latest snapshot mounted at $HOME/temp/"
+    ;;
+  "Mount all archives")
+    borgmatic mount --mount-point $HOME/temp
+    notify-send -t 8000 -a center_notify "Borg" "Snapshots mounted at $HOME/temp/"
+    ;;
+  "Umount snapshot")
+    borgmatic umount --mount-point $HOME/temp
+    notify-send -t 8000 -a center_notify "Borg" "Umount complete!"
+    ;;
+  esac
+fi
