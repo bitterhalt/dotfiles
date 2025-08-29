@@ -8,7 +8,7 @@ confirm_action() {
   [[ "$(echo -e "Yes\nNo" | $CONFIRM)" == "Yes" ]]
 }
 
-case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -a top-right --x 4 --y 4 -l5 -w 10 -p "" --placeholder "Select:")" in
+case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -a top-right --x 4 --y 4 -l5 -w 10 --hide-prompt)" in
 "Shutdown")
   if confirm_action; then
     systemctl poweroff

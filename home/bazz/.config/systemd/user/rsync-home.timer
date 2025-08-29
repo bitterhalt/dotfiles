@@ -1,9 +1,0 @@
-[Unit]
-Description=rsync-home
-
-[Timer]
-OnCalendar=weekly
-Persistent=true
-
-[Install]
-WantedBy=timers.target

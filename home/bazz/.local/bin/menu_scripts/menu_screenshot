@@ -14,7 +14,7 @@ get_options() {
 
 main() {
 
-  choice=$( (get_options) | fuzzel -d -a top --y 4 -w 22 -l 7 -p "" --placeholder "Select:")
+  choice=$( (get_options) | fuzzel -d -a top --y 4 -w 22 -l 7 --hide-prompt)
 
   if [[ -z "${choice// /}" ]]; then
     exit 1

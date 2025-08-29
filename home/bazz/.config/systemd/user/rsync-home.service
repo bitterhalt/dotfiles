@@ -1,6 +1,0 @@
-[Unit]
-Description=Rsync my home dir weekly
-
-[Service]
-Type=oneshot
-ExecStart=/home/bazz/.local/bin/backup_home
