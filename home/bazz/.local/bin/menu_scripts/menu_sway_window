@@ -23,7 +23,7 @@ formatted_output=$(swaymsg -t get_tree | jq -r --arg ws_length "$ws_length" --ar
     | "\($asterisk)[\($ws.name | lpad($ws_length | tonumber; " "))]\((.app_id // "xwayland") | lpad($app_id_length | tonumber; " ")): \(.name | rpad($name_length | tonumber; " ")) (\(.id))"
 ')
 
-row=$(echo "$formatted_output" | fuzzel -d -a top --y 4 -w 80 -l 10)
+row=$(echo "$formatted_output" | fuzzel -d -a top --minimal-lines --y 4 -w 80)
 
 # Get the container ID from the selection and focus the container
 if [ -n "$row" ]; then
