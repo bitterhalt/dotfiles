@@ -25,11 +25,15 @@ style = 'bold green'
 disabled = false
 
 [git_status]
-ahead = ' ⇡ ${count}'
-diverged = '⇕ ⇡ ${ahead_count} ⇣ ${behind_count}'
+style = 'purple'
+ahead = '⇡ ${count}'
 behind = '⇣ ${count}'
-format = '([\[$all_status$ahead_behind\]]($style) )'
-style = 'cyan'
+deleted = 'x'
+diverged = '⇕ ⇡ ${ahead_count} ⇣ ${behind_count}'
+modified   = '!!'
+renamed = 'r'
+untracked  = '?'
+up_to_date = ' '
 
 [cmd_duration]
 disabled = false
