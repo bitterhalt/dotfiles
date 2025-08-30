@@ -3,7 +3,9 @@ encryption_passcommand: sh -c "cat ~/Documents/credentials/.borg-passphrase"
 
 # List of source directories to backup.
 source_directories:
-  - /home
+  - /home/bazz/.config/
+  - /home/bazz/.local/bin/
+  - /home/bazz/Documents/
 
 # Paths of local or remote repositories to backup to.
 repositories:
