@@ -105,8 +105,8 @@ bindsym $mod+F10 exec ~/.config/sway/scripts/mic-toggle.sh
 bindsym $mod+F11 exec $locker
 bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
 bindsym $mod+F2 exec ~/.local/bin/noti_usage cpu
-bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed 's/bindsym / /' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
 bindsym $mod+F4 exec $killer
+bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed -e 's/bindsym / /' -e 's/\$mod/Super/g' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
 bindsym $mod+F7 exec ~/.local/bin/menu_scripts/menu_passmenu
 bindsym $mod+F8 exec $screenshot
 bindsym $mod+Insert smart_gaps toggle
@@ -305,25 +305,20 @@ for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize s
 for_window [title="ProtonUp-Qt - Wine/Proton Installer"] floating enable
 for_window [title="modorganizer.exe"] floating enable
 for_window [window_role="About"] floating enable
-for_window [window_role="GtkFileChooserDialog"] move position center
-for_window [window_role="GtkFileChooserDialog"] resize set 590 340
+for_window [window_role="GtkFileChooserDialog"] move position center, resize set 590 340
 for_window [window_role="Preferences"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="dialog"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
 # Fix missing borders
-for_window [app_id="firefox"] border pixel 2
-for_window [app_id="thunderbird"] border pixel 2
-for_window [app_id="swappy"] border pixel 2
+for_window [app_id="firefox|thunderbird|swappy"] border pixel 2
 
 # Inhibit idle
 for_window [app_id="firefox"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
-for_window [app_id="pcsx2"] inhibit_idle fullscreen
 
 #-----------------------------------------------------#
 #                      Colors                         #

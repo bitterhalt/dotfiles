@@ -2,13 +2,13 @@
 # https://github.com/bitterhalt
 set -euo pipefail
 
-CONFIRM="fuzzel -d -a top-right --x 4 --y 4 -w 10 -l2 -p Sure? "
+CONFIRM="fuzzel -d -a top-right --minimal-lines --x 4 --y 4 -w 10 -p Sure? "
 
 confirm_action() {
   [[ "$(echo -e "Yes\nNo" | $CONFIRM)" == "Yes" ]]
 }
 
-case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -a top-right --x 4 --y 4 -l5 -w 10 --hide-prompt)" in
+case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -a top-right --x 4 --y 4 -w 10 --minimal-lines --hide-prompt)" in
 "Shutdown")
   if confirm_action; then
     systemctl poweroff

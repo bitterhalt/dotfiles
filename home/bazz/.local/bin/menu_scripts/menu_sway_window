@@ -1,33 +1,42 @@
 #!/usr/bin/env bash
+#
+# Author: Adrien Le Guillou
+# License: MIT
+#
+set -e # error if a command as non 0 exit
+set -u # error if undefined variable
 
-set -e
+FORMAT="W:%W | %A - %T"
 
-# Define the lengths for each column
-ws_length=2
-app_id_length=14
-name_length=50
+# FORMAT as a `jq` concatenation string
+FORMAT="$FORMAT (%I)"
+FORMAT=$(echo "$FORMAT" |
+  sed 's/%O/" + .output + "/
+              s/%W/" + .workspace + "/
+              s/%A/" + .app_id + "/
+              s/%T/" + .name + "/
+              s/%I/" + .id + "/
+              s/"/\"/
+              s/\(.*\)/\"\1\"/')
 
-# Fetch the data from swaymsg and format it
-formatted_output=$(swaymsg -t get_tree | jq -r --arg ws_length "$ws_length" --arg app_id_length "$app_id_length" --arg name_length "$name_length" '
-  def lpad($len; $char):
-    if (.|length) > $len then $char * ($len - (.|length)) +.[:$len-1] + "\u2026" else $char * ($len - (.|length)) +. end;
-  def rpad($len; $char):
-    if (.|length) > $len then.[:$len-1] + "\u2026" else. + $char * ($len - (.|length)) end;
-..
-    | objects
-    | select(.type == "workspace") as $ws
-    |..
-    | objects
-    | select(has("app_id"))
-    | (if.focused then "*" else " " end) as $asterisk
-    | "\($asterisk)[\($ws.name | lpad($ws_length | tonumber; " "))]\((.app_id // "xwayland") | lpad($app_id_length | tonumber; " ")): \(.name | rpad($name_length | tonumber; " ")) (\(.id))"
-')
+# Get the container ID from the node tree
+CON_ID=$(swaymsg -t get_tree |
+  jq -r ".nodes[]
+        | {output: .name, content: .nodes[]}
+        | {output: .output, workspace: .content.name,
+          apps: .content
+            | ..
+            | {id: .id?|tostring, name: .name?, app_id: .app_id?, shell: .shell?}
+            | select(.app_id != null or .shell != null)}
+        | {output: .output, workspace: .workspace,
+           id: .apps.id, app_id: .apps.app_id, name: .apps.name }
+        | $FORMAT
+        | tostring" |
+  fuzzel -p "" -d -a top --minimal-lines --y 4 -w 80 --placeholder "Focus to window:")
 
-row=$(echo "$formatted_output" | fuzzel -p "" -d -a top --minimal-lines --y 4 -w 80 --placeholder "Focus to window:")
+# Requires the actual `id` to be at the end and between paretheses
+CON_ID=${CON_ID##*(}
+CON_ID=${CON_ID%)}
 
-# Get the container ID from the selection and focus the container
-if [ -n "$row" ]; then
-  winid="${row##*(}"
-  winid="${winid%%)*}"
-  swaymsg "[con_id=$winid] focus"
-fi
+# Focus on the chosen window
+swaymsg [con_id=$CON_ID] focus
