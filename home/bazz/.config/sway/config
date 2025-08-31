@@ -348,7 +348,7 @@ client.background       $fg1
 #                      Auto start                     #
 #-----------------------------------------------------#
 exec swayidle -w
-exec autotiling -l 2
+exec autotiling -l 2 -sw 0.95
 exec swww-daemon
 exec foot --server
 exec wl-paste --watch cliphist store
