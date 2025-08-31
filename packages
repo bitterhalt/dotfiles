@@ -44,9 +44,6 @@ grub
 gst-plugin-pipewire
 gtk-engine-murrine
 htop
-hypridle
-hyprland
-hyprlock
 hyprpicker
 imagemagick
 impala
@@ -131,7 +128,7 @@ wireplumber
 wl-clipboard
 wtype
 xdg-desktop-portal-gtk
-xdg-desktop-portal-hyprland
+xdg-desktop-portal-wlr
 xdg-user-dirs
 xdg-utils
 xf86-video-amdgpu

@@ -3,7 +3,7 @@ vt = 1
 
 # Tuigreet
 [default_session]
-command = "tuigreet -t -r -c hyprstarter --asterisks --power-shutdown 'systemctl poweroff' --power-reboot 'systemctl reboot'"
+command = "tuigreet -t -r -c sway-start --asterisks --power-shutdown 'systemctl poweroff' --power-reboot 'systemctl reboot'"
 user = "greeter"
 
 

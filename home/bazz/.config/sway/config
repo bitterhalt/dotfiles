@@ -38,7 +38,8 @@ set $winmenu ~/.local/bin/menu_scripts/menu_sway_window
 
 # Misc
 set $colorpicker ~/.config/sway/scripts/colorpicker
-set $updater foot -T pop-upgrade -a floatterm -e popupgrade
+set $updater foot -T pop-upgrade -a popupgrade -e popupgrade
+set $pac-installer foot -T pacseek -a pacseek -e pacseek
 
 # Bar signals
 set $sig_1 pkill -SIGRTMIN+1 waybar
@@ -99,15 +100,6 @@ input type:touchpad {
 #-----------------------------------------------------#
 #                      Binds                          #
 #-----------------------------------------------------#
-bindsym $mod+Return exec $term
-bindsym $mod+d exec $drun
-bindsym $mod+e exec $tuifm
-bindsym $mod+m exec $mail
-bindsym $mod+n exec $term -T Notes -e nvim ~/Documents/personal/notes/index.md
-bindsym $mod+t exec ~/.local/bin/noti_date
-bindsym $mod+v exec $editor
-bindsym $mod+w exec $browser
-bindsym $mod+tab exec $winmenu
 bindsym $mod+F1 exec ~/.local/bin/noti_sysnfo
 bindsym $mod+F10 exec ~/.config/sway/scripts/mic-toggle.sh
 bindsym $mod+F11 exec $locker
@@ -115,26 +107,35 @@ bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
 bindsym $mod+F2 exec ~/.local/bin/noti_usage cpu
 bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed 's/bindsym / /' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
 bindsym $mod+F4 exec $killer
+bindsym $mod+F7 exec ~/.local/bin/menu_scripts/menu_passmenu
 bindsym $mod+F8 exec $screenshot
 bindsym $mod+Insert smart_gaps toggle
 bindsym $mod+Print exec ~/.local/bin/wl-shot -f
+bindsym $mod+Return exec $term
+bindsym $mod+ctrl+F8 exec ~/.local/bin/wl-record -k
 bindsym $mod+ctrl+a exec ~/.config/sway/scripts/autotiling-toggle.sh
+bindsym $mod+ctrl+c exec $clip
 bindsym $mod+ctrl+d exec fnottctl dismiss
 bindsym $mod+ctrl+e exec $emojimenu
-bindsym $mod+ctrl+i exec $xbps-intaller
+bindsym $mod+ctrl+i exec $pac-installer
 bindsym $mod+ctrl+p exec $colorpicker
 bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/menu_sound
 bindsym $mod+ctrl+u exec $updater
 bindsym $mod+ctrl+w exec ~/.local/bin/weatherfetch -n
+bindsym $mod+d exec $drun
+bindsym $mod+e exec $tuifm
+bindsym $mod+m exec $mail
+bindsym $mod+n exec $term -a noterm -T Notes -e nvim -p ~/Documents/personal/notes/todo.md ~/Documents/personal/notes/index.md
 bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
-bindsym $mod+ctrl+F8 exec ~/.local/bin/wl-record -k
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
 bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
-bindsym $mod+shift+c exec $clip
-bindsym $mod+shift+delete exec $term -T htop -a htop -e htop
+bindsym $mod+shift+delete exec $term -T htop -a floatterm -e htop
 bindsym $mod+shift+e exec $gfm
-bindsym $mod+shift+n exec $term -T TODO -a floatterm -e nvim ~/Documents/personal/notes/todo.md
 bindsym $mod+shift+p exec $powermenu
+bindsym $mod+t exec ~/.local/bin/noti_date
+bindsym $mod+tab exec $winmenu
+bindsym $mod+v exec $editor
+bindsym $mod+w exec $browser
 
 # Kill focused window
 bindsym $mod+q kill
@@ -269,9 +270,9 @@ for_window [app_id="blueman-manager"] floating enable, resize set width 40 ppt h
 for_window [app_id="brave-calendar"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="file-roller"] floating enable
 for_window [app_id="floating_shell_portrait"] floating enable, border pixel 1, sticky enable, resize set width 30 ppt height 40 ppt
-for_window [app_id="floatterm"] floating enable, resize set width 45 ppt height 60 ppt
+for_window [app_id="floatterm"] floating enable, resize set width 50 ppt height 60 ppt
 for_window [title="fuzzypkg"] resize set width 100ppt, move position 0 0, resize set width 50ppt
-for_window [title="pop-upgrade"] resize set width 100ppt, move position 0 0, resize set width 50ppt
+for_window [title="pop-upgrade|pacseek"] floating enable, resize set width 100ppt, move position 0 0, resize set width 50ppt
 for_window [app_id="gimp"] floating enable, border pixel 1
 for_window [app_id="imv"] floating enable
 for_window [app_id="mpv"] floating enable
@@ -279,7 +280,8 @@ for_window [app_id="net.lutris.Lutris"] floating enable
 for_window [app_id="nwg-look"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pcsx2"] floating enable
-for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 45ppt
+for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 60ppt
+for_window [app_id="noterm"] floating enable, resize set width 100ppt height 70 ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="signal"] floating enable
 for_window [app_id="vesktop|discord"] floating enable
 for_window [app_id="virt-manager"] floating enable
