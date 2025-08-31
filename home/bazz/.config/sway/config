@@ -21,7 +21,7 @@ set $alt Mod1
 # Defaults
 set $browser firefox
 set $gfm thunar
-set $locker hyprlock
+set $locker swaylock
 set $mail thunderbird
 set $term footclient
 set $tuifm foot -T lf -e lf
@@ -350,7 +350,7 @@ client.background       $fg1
 #-----------------------------------------------------#
 exec swayidle -w
 exec autotiling -l 2
-exec hyprpaper
+exec swww-daemon
 exec foot --server
 exec wl-paste --watch cliphist store
 exec sleep 6 && transmission-gtk

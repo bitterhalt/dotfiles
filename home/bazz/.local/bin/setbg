@@ -17,5 +17,8 @@ if [ "${1:-}" ]; then
   esac
 fi
 
-pidof hyprpaper && pkill hyprpaper
-nohup hyprpaper >/dev/null 2>&1 &
+swww img "${bg}" \
+  --transition-type=any \
+  --transition-step=60 \
+  --transition-fps=60 \
+  --transition-duration=.7
