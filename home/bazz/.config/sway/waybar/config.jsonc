@@ -25,6 +25,10 @@
   "tray": {
     "icon-size": 16,
     "spacing": 12,
+    // Override some ugly icons
+    "icons": {
+      "discord": "discord",
+    },
   },
   "battery": {
     "bat": "BAT0",

@@ -263,6 +263,9 @@ assign [class="steam"] 5
 assign [app_id="net.lutris.Lutris"] 5
 assign [app_id="pcsx2"] 5
 
+# Move scratchpad
+for_window [app_id="vesktop|discord"] move scratchpad
+
 # Floaters
 for_window [app_id="(?i)(?:blueman-manager|azote|gnome-disks|nwg-shell-config)"] floating enable
 for_window [app_id="(?i)(?:pavucontrol|nm-connection-editor|gsimplecal|galculator)"] floating enable
@@ -283,7 +286,6 @@ for_window [app_id="pcsx2"] floating enable
 for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="noterm"] floating enable, resize set width 100ppt height 70 ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="signal"] floating enable
-for_window [app_id="vesktop|discord"] floating enable
 for_window [app_id="virt-manager"] floating enable
 for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 for_window [app_id="yad"] floating enable
