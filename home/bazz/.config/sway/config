@@ -301,7 +301,6 @@ for_window [title="KeePassXC - Browser Access Request"] floating enable, move po
 for_window [title="KeePassXC - Passkey credentials"] floating enable, move position center, focus
 for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize set width 30ppt height 30ppt, move position 70ppt 10
 for_window [title="ProtonUp-Qt - Wine/Proton Installer"] floating enable
-for_window [title="ProtonUp-Qt - Wine/Proton Installer"] floating enable
 for_window [title="modorganizer.exe"] floating enable
 for_window [window_role="About"] floating enable
 for_window [window_role="GtkFileChooserDialog"] move position center
