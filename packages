@@ -44,6 +44,9 @@ grub
 gst-plugin-pipewire
 gtk-engine-murrine
 htop
+hyprland
+hyprland-qtutils
+hyprlock
 hyprpicker
 imagemagick
 impala
