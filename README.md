@@ -7,7 +7,7 @@ I don't use fancy desktop shell's like AGS because I wan't my system to be fast 
 
 - Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
-- WM: **Hyprland** or **Sway** Trying to decide my end game
+- WM: [Hyprland](https://github.com/hyprwm/Hyprland) or [Sway](https://github.com/swaywm/sway) both have almost same workflow
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
