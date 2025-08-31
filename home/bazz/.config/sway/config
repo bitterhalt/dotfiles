@@ -193,9 +193,8 @@ bindsym $mod+shift+7 move container to workspace number 7
 bindsym $mod+shift+8 move container to workspace number 8
 bindsym $mod+shift+9 move container to workspace number 9
 
-# Layout stuff
-bindsym $mod+period splith
-bindsym $mod+comma splitv
+# Toggle between horizontal and vertical splits
+bindsym $mod+period split toggle
 
 # Toggle the current container between split and tabbed layout
 bindsym $mod+g layout toggle split tabbed
