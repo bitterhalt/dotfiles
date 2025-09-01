@@ -3,11 +3,13 @@
 My point was to get light weight system without useless annoyances.
 I don't use fancy desktop shell's like AGS because I wan't my system to be fast and responsive.
 
+I have used two window managers: **Sway** and **Hyprland** Both have a similar workflow. I currently use Sway because it is lighter and offers a more stable user experience, while Hyprland is more of a test platform.
+
 #### Software I use
 
 - Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
-- WM: [Hyprland](https://github.com/hyprwm/Hyprland) or [Sway](https://github.com/swaywm/sway) both have almost same workflow
+- WM: [Hyprland](https://github.com/hyprwm/Hyprland) / [Sway](https://github.com/swaywm/sway)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
