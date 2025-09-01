@@ -350,7 +350,9 @@ exec swayidle -w
 exec autotiling -l 2 -sw 0.95
 exec swww-daemon
 exec foot --server
-exec wl-paste --watch cliphist store
+#exec wl-paste --watch cliphist store
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
 exec sleep 6 && transmission-gtk
 exec ~/.config/sway/waybar/waybar.sh start
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
