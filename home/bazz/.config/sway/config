@@ -276,26 +276,24 @@ for_window [app_id="brave-calendar"] floating enable, resize set width 40 ppt he
 for_window [app_id="file-roller"] floating enable
 for_window [app_id="floating_shell_portrait"] floating enable, border pixel 1, sticky enable, resize set width 30 ppt height 40 ppt
 for_window [app_id="floatterm"] floating enable, resize set width 50 ppt height 60 ppt
-for_window [title="fuzzypkg"] resize set width 100ppt, move position 0 0, resize set width 50ppt
-for_window [title="pop-upgrade|pacseek"] floating enable, resize set width 100ppt, move position 0 0, resize set width 50ppt
 for_window [app_id="gimp"] floating enable, border pixel 1
 for_window [app_id="imv"] floating enable
 for_window [app_id="mpv"] floating enable
 for_window [app_id="net.lutris.Lutris"] floating enable
+for_window [app_id="noterm"] floating enable, resize set width 100ppt height 70 ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="nwg-look"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pcsx2"] floating enable
 for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 60ppt
-for_window [app_id="noterm"] floating enable, resize set width 100ppt height 70 ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="signal"] floating enable
 for_window [app_id="virt-manager"] floating enable
 for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 for_window [app_id="yad"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
-for_window [class="gimp"] floating enable
 for_window [class="Nsxiv"] floating enable, resize set width 60 ppt height 80 ppt
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Yad" instance="yad"] floating enable
+for_window [class="gimp"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable, resize set width 60 ppt height 50 ppt
 for_window [class="steam" instance="steam"] floating enable
 for_window [instance="origin.exe"] floating enable
@@ -307,7 +305,10 @@ for_window [title="KeePassXC - Browser Access Request"] floating enable, move po
 for_window [title="KeePassXC - Passkey credentials"] floating enable, move position center, focus
 for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize set width 30ppt height 30ppt, move position 70ppt 10
 for_window [title="ProtonUp-Qt - Wine/Proton Installer"] floating enable
+for_window [title="Rename"] floating enable
+for_window [title="fuzzypkg"] resize set width 100ppt, move position 0 0, resize set width 50ppt
 for_window [title="modorganizer.exe"] floating enable
+for_window [title="pop-upgrade|pacseek"] floating enable, resize set width 100ppt, move position 0 0, resize set width 50ppt
 for_window [window_role="About"] floating enable
 for_window [window_role="GtkFileChooserDialog"] move position center, resize set 590 340
 for_window [window_role="Preferences"] floating enable

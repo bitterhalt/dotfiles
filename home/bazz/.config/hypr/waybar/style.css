@@ -46,7 +46,7 @@ tooltip label {
 }
 
 /* -----------------------------------------------------
- *                  Hyprland workspaces
+ *                  Workspaces
  * ----------------------------------------------------- */
 #workspaces {
   background-color: @bg-1;
@@ -59,8 +59,9 @@ tooltip label {
   padding: 0 5px;
 }
 #workspaces button.active {
-  color: @cyan;
-  box-shadow: inset 0 0 0 1px @ui-1;
+  color: @tx-2;
+  font-weight: normal;
+  background-color: @ui-2;
   border-radius: 6px;
 }
 
