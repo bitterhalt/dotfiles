@@ -34,3 +34,8 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
+
+# Wayland stuff
+export MOZ_ENABLE_WAYLAND="1"
+export QT_QPA_PLATFORM="wayland"
+export ELECTRON_OZONE_PLATFORM_HINT="wayland"
