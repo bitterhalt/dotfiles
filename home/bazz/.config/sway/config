@@ -5,6 +5,9 @@
 # Enable if you use Swayfx tweaks
 #include ~/.config/sway/swayfx
 
+# Set systemd user environment
+include ~/.config/sway/config.d/*
+
 # Vim keys for moving
 set $left h
 set $down j
@@ -357,6 +360,3 @@ exec wl-paste --type image --watch cliphist store
 exec sleep 6 && transmission-gtk
 exec ~/.config/sway/waybar/waybar.sh start
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-# https://wiki.archlinux.org/title/Sway#Configuration
-include /etc/sway/config.d/*
