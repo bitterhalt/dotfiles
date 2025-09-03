@@ -1,6 +1,6 @@
 # General tweaks to windows
 blur disable
-shadows enable
+shadows disable
 shadows_on_csd disable
 corner_radius 8
 titlebar_separator disable

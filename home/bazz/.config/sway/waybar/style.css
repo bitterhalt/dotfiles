@@ -53,6 +53,8 @@ tooltip label {
   margin: 0 4px;
 }
 #workspaces button {
+  min-height: 24px;
+  min-width: 16px;
   color: @tx-1;
   font-weight: normal;
   margin: 2px 1px;
