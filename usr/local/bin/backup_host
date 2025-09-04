@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
-EXCLUDE_FILE="/home/bazz/.local/share/rsync-ignore.txt"
+# Your user name here
+user="bazz"
+
+EXCLUDE_FILE="/home/$user/.local/share/rsync-ignore.txt"
 DEST_HOME="/mnt/wd1tb/backup/host/home"
 DEST_ETC="/mnt/wd1tb/backup/host/etc"
 
 mkdir -p "$DEST_HOME"
 mkdir -p "$DEST_ETC"
 
-rsync -avu --delete --exclude-from="$EXCLUDE_FILE" /home/bazz/ "$DEST_HOME/"
+rsync -avu --delete --exclude-from="$EXCLUDE_FILE" /home/"$user"/ "$DEST_HOME/"
 rsync -avu --delete --exclude-from="$EXCLUDE_FILE" /etc "$DEST_ETC/"
-chown -R bazz:bazz $DEST_HOME $DEST_ETC
+chown -R "$user":"$user" $DEST_HOME $DEST_ETC
