@@ -9,15 +9,13 @@ return {
     end,
   },
 
-  -- Mini-statusline
+  -- Lualine
   {
-    "echasnovski/mini.statusline",
-    event = "BufReadPre",
-    version = false,
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
     config = function()
-      require("mini.statusline").setup({
-        set_vim_settings = false,
-      })
+      require("lualine").setup({ options = { theme = "auto" } })
     end,
   },
 
