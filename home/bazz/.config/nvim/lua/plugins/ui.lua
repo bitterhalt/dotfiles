@@ -15,45 +15,8 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     config = function()
-      require("lualine").setup({ options = { theme = "auto" } })
-    end,
-  },
-
-  --Winbar
-  {
-    "ramilito/winbar.nvim",
-    event = "BufReadPre", -- Alternatively, BufReadPre if we don't care about the empty file when starting with 'nvim'
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("winbar").setup({
-        icons = true,
-        diagnostics = true,
-        buf_modified = true,
-        buf_modified_symbol = "Modified",
-        dim_inactive = {
-          enabled = false,
-          highlight = "WinBarNC",
-          icons = true, -- whether to dim the icons
-          name = true, -- whether to dim the name
-        },
-        exclude_if = nil,
-        filetype_exclude = {
-          "help",
-          "startify",
-          "dashboard",
-          "packer",
-          "neo-tree",
-          "neogitstatus",
-          "NvimTree",
-          "Trouble",
-          "alpha",
-          "lir",
-          "Outline",
-          "spectre_panel",
-          "toggleterm",
-          "TelescopePrompt",
-          "prompt",
-        },
+      require("lualine").setup({
+        options = { theme = "auto", section_separators = "", component_separators = "" },
       })
     end,
   },

@@ -5,7 +5,7 @@ I don't use fancy desktop shell's like AGS because I wan't my system to be fast 
 
 I have used two window managers: **Sway** and **Hyprland** Both have a similar workflow. I currently use Sway because it is lighter and offers a more stable user experience, while Hyprland is more of a test platform.
 
-#### Software I use
+### Software I use
 
 - Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
@@ -51,7 +51,7 @@ Some fuzzel menus
 
 ---
 
-#### Hotkeys
+### Hotkeys
 
 There are lots of them so I don't list them here
 
@@ -65,7 +65,7 @@ Installation script is still WIP, so please be careful. I don't recommend blindl
 
 ---
 
-#### Sources where I stole most of my cool stuff ⭐
+### Sources where I stole most of my cool stuff ⭐
 
 - [SwayKh](https://github.com/SwayKh/dotfiles/tree/main) - For TONS of ideas and ispiration 😍
 - [newmanls](https://github.com/newmanls/dotfiles) - Helped me with TONS of stuff ⭐
@@ -73,6 +73,6 @@ Installation script is still WIP, so please be careful. I don't recommend blindl
 - [aellas](https://github.com/aellas) - For TONS of ideas and ispiration ⭐ ❤️ 🐐
 - [Joris](https://codeberg.org/jorisvandijk) - For showing me how to manage my dots better ❤️ ⭐
 
-#### Special thanks ⭐
+### Special thanks ⭐
 
 - [fesowowako](https://github.com/fesowowako) and his commits from [My Sway-dotfiles](https://github.com/bitterhalt/dots-sway)
