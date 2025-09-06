@@ -11,7 +11,12 @@ success_symbol = '[\$](cyan)'
 error_symbol = '[\$](red)'
 vimcmd_symbol = '[\$](bold green)'
 
+#success_symbol = "[❯](cyan)"
+#error_symbol = "[❯](red)"
+#vimcmd_symbol = "[❮](green)"
+
 [directory]
+home_symbol = ''
 truncation_length = 8
 truncation_symbol = '…/'
 style ='white'
