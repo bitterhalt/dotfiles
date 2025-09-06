@@ -48,6 +48,11 @@ Some fuzzel menus
 > Emoji
 >
 > <img src="home/bazz/.local/share/screenshots/fuzzel-emoji.png" width="50%" />
+>
+> Fast neovim with LSP 🚀
+>
+> <img src="home/bazz/.local/share/screenshots/nvim.png" width="50%" />
+> <img src="home/bazz/.local/share/screenshots/nvim2.png" width="50%" />
 
 ---
 
