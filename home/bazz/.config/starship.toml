@@ -7,21 +7,24 @@ $character\
 $cmd_duration"""
 
 [character]
+# Bash style
 success_symbol = '[\$](cyan)'
 error_symbol = '[\$](red)'
 vimcmd_symbol = '[\$](bold green)'
 
+# Pure prompt style
 #success_symbol = "[❯](cyan)"
 #error_symbol = "[❯](red)"
 #vimcmd_symbol = "[❮](green)"
 
 [directory]
+# Hide home symbol
 home_symbol = ''
 truncation_length = 8
 truncation_symbol = '…/'
 style ='white'
-read_only = ' [!]'
-read_only_style = 'yellow'
+read_only = ' 󱓇 '
+read_only_style = 'purple'
 
 [git_branch]
 style = 'bold green'
