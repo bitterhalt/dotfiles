@@ -3,7 +3,7 @@ Description=Run weekly local backup
 
 [Timer]
 OnCalendar=weekly
-Persistent=true
+Persistent=false
 RandomizedDelaySec=10m
 
 [Install]

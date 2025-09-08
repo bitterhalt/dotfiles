@@ -82,6 +82,9 @@ tooltip label {
   color: @tx-1;
   padding: 0 10px;
 }
+window#waybar.empty #window {
+  background-color: transparent;
+}
 /* -----------------------------------------------------
  *                      Modules
  * ----------------------------------------------------- */

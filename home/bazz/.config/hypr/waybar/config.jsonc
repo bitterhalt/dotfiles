@@ -22,6 +22,7 @@
     "icon": true,
     "icon-size": 20,
     "tooltip": false,
+    "separate-outputs": true,
   },
   "tray": {
     "icon-size": 16,
