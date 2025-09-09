@@ -1,9 +1,7 @@
-# Dotfiles
+## Dotfiles
 
 My point was to get light weight system without useless annoyances.
-I don't use fancy desktop shell's like AGS because I wan't my system to be fast and responsive.
-
-I have used two window managers: **Sway** and **Hyprland** Both have a similar workflow. I currently use Sway because it is lighter and offers a more stable user experience, while Hyprland is more of a test platform.
+I have almost identical setups with both Sway and Hyprland, don’t ask me why both.
 
 ### Software I use
 
