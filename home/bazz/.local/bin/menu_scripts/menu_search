@@ -4,6 +4,7 @@
 # Usage: just type and press enter to search from google
 # Or specify search engine with letter <a> archwiki <b> brave <d> duckduckgo <y> youtube <w> wikipedia
 # example: "a pipewire" opens pipewire section from archwiki
+# To clear history_file type: "clear"
 
 history_file="$HOME/.cache/search_history"
 [ -f "$history_file" ] || touch "$history_file"
@@ -41,6 +42,13 @@ keyword=$(tac "$history_file" | fuzzel -d -p "" -l 1 --placeholder "Search from 
 # Handle empty input
 [ -z "$keyword" ] && exit 0
 
+# Word "clear" wipes history
+if [[ "$keyword" == "clear" ]]; then
+  rm "$history_file"
+  touch "$history_file" # Create a new empty file
+  notify-send -t 3000 "fuzzel" "Search history cleared"
+  exit 0
+fi
 # Don't safe duplicates
 if ! grep -Fxq "$keyword" "$history_file"; then
   echo "$keyword" >>"$history_file"
