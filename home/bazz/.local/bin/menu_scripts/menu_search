@@ -36,18 +36,14 @@ urlencode() {
 }
 
 # Prompt
-keyword=$(cat "$history_file" | fuzzel -d -p "" -l 5 --placeholder "Search from internet...")
+keyword=$(tac "$history_file" | fuzzel -d -p "" -l 2 --placeholder "Search from internet...")
 
 # Handle empty input
 [ -z "$keyword" ] && exit 0
 
-# Handle history
-if ! head -n1 "$history_file" | grep -Fxq "$keyword"; then
-  # Remove duplicates, then put new search at the top
-  grep -Fxv "$keyword" "$history_file" >"${history_file}.tmp"
-  printf '%s\n' "$keyword" >"$history_file"
-  cat "${history_file}.tmp" >>"$history_file"
-  rm -f "${history_file}.tmp"
+# Don't safe duplicates
+if ! grep -Fxq "$keyword" "$history_file"; then
+  echo "$keyword" >>"$history_file"
 fi
 
 search_engine="${keyword%% *}"
