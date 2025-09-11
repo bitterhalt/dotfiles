@@ -8,7 +8,7 @@ confirm_action() {
   [[ "$(echo -e "Yes\nNo" | $CONFIRM)" == "Yes" ]]
 }
 
-case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -a top-right --x 4 --y 4 -w 10 --minimal-lines --hide-prompt)" in
+case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Reboot to UEFI" "Shutdown" | fuzzel -d -a top-right --x 4 --y 4 -w 14 --minimal-lines --hide-prompt)" in
 "Shutdown")
   if confirm_action; then
     systemctl poweroff
@@ -19,11 +19,16 @@ case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d 
     systemctl reboot
   fi
   ;;
+"Reboot to UEFI")
+  if confirm_action; then
+    systemctl reboot --firmware-setup
+  fi
+  ;;
 "Suspend")
   systemctl suspend
   ;;
 "Lock")
-  swaylock -f
+  hyprlock
   ;;
 "Logout")
   loginctl terminate-user "$USER"
