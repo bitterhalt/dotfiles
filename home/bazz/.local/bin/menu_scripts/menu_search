@@ -36,7 +36,7 @@ urlencode() {
 }
 
 # Prompt
-keyword=$(tac "$history_file" | fuzzel -d -p "" -l 2 --placeholder "Search from internet...")
+keyword=$(tac "$history_file" | fuzzel -d -p "" -l 1 --placeholder "Search from internet...")
 
 # Handle empty input
 [ -z "$keyword" ] && exit 0
