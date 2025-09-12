@@ -2,9 +2,17 @@
 
 # Litle script to search from internet
 # Usage: just type and press enter to search from google
-# Or specify search engine with letter <a> archwiki <b> brave <d> duckduckgo <y> youtube <w> wikipedia
+#
+# Or specify search engine with letter:
+# <a> archwiki
+# <b> brave
+# <d> duckduckgo
+# <y> youtube
+# <w> wikipedia
+#
 # example: "a pipewire" opens pipewire section from archwiki
 # To clear history_file type: "clear"
+# Note: History part is not best so I only keep last 10 searches
 
 history_file="$HOME/.cache/search_history"
 [ -f "$history_file" ] || touch "$history_file"
@@ -15,7 +23,7 @@ browser="$BROWSER"
 # Search engines
 web_search="https://www.google.com/search?q="
 declare -A engines=(
-  [a]="https://wiki.archlinux.org/title/"
+  [a]="https://wiki.archlinux.org/index.php?search="
   [b]="https://search.brave.com/search?q="
   [d]="https://duckduckgo.com/?q="
   [w]="https://en.wikipedia.org/w/index.php?search="
@@ -49,10 +57,14 @@ if [[ "$keyword" == "clear" ]]; then
   notify-send -t 3000 "fuzzel" "Search history cleared"
   exit 0
 fi
-# Don't safe duplicates
-if ! grep -Fxq "$keyword" "$history_file"; then
-  echo "$keyword" >>"$history_file"
-fi
+
+# Update search history
+grep -Fxq "$keyword" "$history_file"
+echo "$keyword" >>"$history_file"
+
+# Keep on last 10 searches
+tail -n 10 "$history_file" >"$history_file.tmp"
+mv "$history_file.tmp" "$history_file"
 
 search_engine="${keyword%% *}"
 search_word="${keyword#* }"
