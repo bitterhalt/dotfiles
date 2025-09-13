@@ -63,8 +63,7 @@ tooltip label {
 #workspaces button.active {
   color: @tx-2;
   font-weight: normal;
-  background-color: @ui-2;
-  box-shadow: inset 0 0 0 1px @ui-3;
+  background-color: @ui-3;
   border-radius: 6px;
 }
 
@@ -139,7 +138,7 @@ window#waybar.empty #window {
 #tray:hover,
 #wireplumber:hover,
 #workspaces button:hover {
-  background: @ui-1;
+  background: @ui-2;
   border-radius: 6px;
   box-shadow: none;
 }
