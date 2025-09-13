@@ -34,6 +34,7 @@ set $clip ~/.local/bin/menu_scripts/menu_clipboard
 set $drun fuzzel
 set $editor foot -T nvim -e nvim
 set $emojimenu ~/.local/bin/menu_scripts/menu_emoji
+set $search ~/.local/bin/menu_scripts/menu_search
 set $killer ~/.local/bin/menu_scripts/menu_killer
 set $powermenu ~/.local/bin/menu_scripts/menu_power
 set $screenshot ~/.local/bin/menu_scripts/menu_screenshot
@@ -139,6 +140,7 @@ bindsym $mod+t exec ~/.local/bin/noti_date
 bindsym $mod+tab exec $winmenu
 bindsym $mod+v exec $editor
 bindsym $mod+w exec $browser
+bindsym $mod+s exec $search
 
 # Kill focused window
 bindsym $mod+q kill
