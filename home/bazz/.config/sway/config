@@ -30,15 +30,15 @@ set $term footclient
 set $tuifm foot -T lf -e lf
 
 # Dmenu scripts
-set $clip ~/.local/bin/menu_scripts/menu_clipboard
+set $clip ~/.local/bin/menu_scripts/fuzzel_clipboard
 set $drun fuzzel
 set $editor foot -T nvim -e nvim
-set $emojimenu ~/.local/bin/menu_scripts/menu_emoji
-set $search ~/.local/bin/menu_scripts/menu_search
-set $killer ~/.local/bin/menu_scripts/menu_killer
-set $powermenu ~/.local/bin/menu_scripts/menu_power
-set $screenshot ~/.local/bin/menu_scripts/menu_screenshot
-set $winmenu ~/.local/bin/menu_scripts/menu_sway_window
+set $emojimenu ~/.local/bin/menu_scripts/fuzzel_emoji
+set $search ~/.local/bin/menu_scripts/fuzzel_search
+set $killer ~/.local/bin/menu_scripts/fuzzel_killer
+set $powermenu ~/.local/bin/menu_scripts/fuzzel_power
+set $screenshot ~/.local/bin/menu_scripts/fuzzel_screenshot
+set $winmenu ~/.local/bin/menu_scripts/fuzzel_sway_window
 
 # Misc
 set $colorpicker ~/.config/sway/scripts/colorpicker
@@ -111,7 +111,7 @@ bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
 bindsym $mod+F2 exec ~/.local/bin/noti_usage cpu
 bindsym $mod+F4 exec $killer
 bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed -e 's/bindsym / /' -e 's/\$mod/Super/g' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
-bindsym $mod+F7 exec ~/.local/bin/menu_scripts/menu_passmenu
+bindsym $mod+F7 exec ~/.local/bin/menu_scripts/fuzzel_passmenu
 bindsym $mod+F8 exec $screenshot
 bindsym $mod+Insert smart_gaps toggle
 bindsym $mod+Print exec ~/.local/bin/wl-shot -f
@@ -123,7 +123,7 @@ bindsym $mod+ctrl+d exec fnottctl dismiss
 bindsym $mod+ctrl+e exec $emojimenu
 bindsym $mod+ctrl+i exec $pac-installer
 bindsym $mod+ctrl+p exec $colorpicker
-bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/menu_sound
+bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/fuzzel_sound
 bindsym $mod+ctrl+u exec $updater
 bindsym $mod+ctrl+w exec ~/.local/bin/weatherfetch -n
 bindsym $mod+d exec $drun
