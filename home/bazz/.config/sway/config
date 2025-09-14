@@ -251,8 +251,8 @@ bindsym XF86AudioPrev exec ~/.config/sway/scripts/mediactrl.sh --prv
 bindsym $mod+ctrl+m exec ~/.config/sway/scripts/mediactrl.sh --noti
 
 # Brightness ctrl
-bindsym XF86MonBrightnessUp exec sh -c "brightnessctl set 5%+; ~/.config/sway/scripts/brightness.sh"
-bindsym XF86MonBrightnessDown exec sh -c "brightnessctl set 5%-; ~/.config/sway/scripts/brightness.sh"
+bindsym XF86MonBrightnessUp exec  ~/.config/sway/scripts/brightness.sh up"
+bindsym XF86MonBrightnessDown exec ~/.config/sway/scripts/brightness.sh down"
 
 #-----------------------------------------------------#
 #                      Rules                          #
