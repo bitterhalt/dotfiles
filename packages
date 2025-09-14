@@ -92,7 +92,6 @@ pipewire-pulse
 plocate
 polkit-gnome
 popsicle-bin
-ps_mem
 python-llfuse
 python-pipx
 qt6-wayland
