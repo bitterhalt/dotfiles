@@ -105,7 +105,7 @@
     "interval": "once",
     "format": "󰐥",
     "tooltip": false,
-    "on-click": "~/.local/bin/menu_scripts/menu_power",
+    "on-click": "~/.local/bin/menu_scripts/fuzzel_power",
   },
   "custom/idle": {
     "interval": "once",
