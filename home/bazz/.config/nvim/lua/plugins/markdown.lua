@@ -10,15 +10,17 @@ return {
       { "<C-p>", "<CMD>MarkdownPreviewToggle<CR>", desc = "Toggle Markdown Preview" },
     },
   },
+
+  -- Render-markdown
   {
-    "OXY2DEV/markview.nvim",
+    "MeanderingProgrammer/render-markdown.nvim",
     ft = "markdown",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
     keys = {
-      { "<leader>mt", "<cmd>Markview<CR>", desc = "Toggle markview" },
+      { "<leader>mt", "<cmd>RenderMarkdown toggle<CR>", desc = "Toggle markview" },
     },
   },
 
