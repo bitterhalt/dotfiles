@@ -15,7 +15,7 @@
 
 * {
   font-family:
-    Inter,
+    Adwaita Sans,
     Symbols Nerd Font Mono;
   font-size: 11pt;
   border-radius: 0;
@@ -63,7 +63,7 @@ tooltip label {
 #workspaces button.focused {
   color: @tx-2;
   font-weight: normal;
-  background-color: @ui-2;
+  background-color: @ui-3;
   border-radius: 6px;
 }
 
@@ -81,6 +81,9 @@ tooltip label {
 #window {
   color: @tx-1;
   padding: 0 10px;
+}
+window#waybar.empty #window {
+  background-color: transparent;
 }
 /* -----------------------------------------------------
  *                      Modules
@@ -135,6 +138,7 @@ tooltip label {
 #tray:hover,
 #wireplumber:hover,
 #workspaces button:hover {
-  background: @ui-1;
+  background: @ui-2;
   border-radius: 6px;
+  box-shadow: none;
 }
