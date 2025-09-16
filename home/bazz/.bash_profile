@@ -3,6 +3,3 @@
 
 # Get exports from .profile (they are in .profile because greetd can't read bash profile)
 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
-
-# Get api keys
-[ -f "$HOME/Documents/credentials/api_key_exports.sh" ] && . "$HOME/Documents/credentials/api_key_exports.sh"

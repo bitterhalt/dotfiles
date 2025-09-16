@@ -38,5 +38,8 @@ export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
 # Wayland stuff
 export MOZ_ENABLE_WAYLAND="1"
-export QT_QPA_PLATFORM="wayland"
+export QT_QPA_PLATFORM="wayland;xcb"
 export ELECTRON_OZONE_PLATFORM_HINT="wayland"
+
+# Get api keys
+[ -f "$HOME/Documents/credentials/api_key_exports" ] && . "$HOME/Documents/credentials/api_key_exports"
