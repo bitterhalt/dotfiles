@@ -11,7 +11,7 @@ I have almost identical setups with both Sway and Hyprland, don’t ask me why b
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
-- Fonts: **Adwaita Sans**/**JetBrains Mono**
+- Fonts: **Adwaita Sans** / **Adwaita Mono**
 - GTK-theme: [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
 - Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
