@@ -13,14 +13,22 @@ add() {
     exit 1
   }
 
+  # Capture pacman package list once
+  pacman -Qe | awk '{print $1}' >"$dotfiles_repo/packages" || echo "Warning: Could not update pacman package list."
+
   while IFS= read -r dotfile; do
     if [[ -f "$dotfile" ]]; then
-      pacman -Qe | awk '{print $1}' >~/Documents/projects/dotfiles/packages
-      cp --parents "$dotfile" "$dotfiles_repo"
-      echo "Copied file: $dotfile"
+      if cp --parents "$dotfile" "$dotfiles_repo"; then
+        echo "Copied file: $dotfile"
+      else
+        echo "Failed to copy file: $dotfile"
+      fi
     elif [[ -d "$dotfile" ]]; then
-      cp --parents -r "$dotfile" "$dotfiles_repo"
-      echo "Copied directory: $dotfile"
+      if cp --parents -r "$dotfile" "$dotfiles_repo"; then
+        echo "Copied directory: $dotfile"
+      else
+        echo "Failed to copy directory: $dotfile"
+      fi
     else
       echo "Skipped: $dotfile (not found)"
     fi
