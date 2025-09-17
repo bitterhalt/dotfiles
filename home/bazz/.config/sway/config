@@ -292,6 +292,7 @@ for_window [app_id="virt-manager"] floating enable
 for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 for_window [app_id="yad"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="GParted"] floating enable
 for_window [class="Nsxiv"] floating enable, resize set width 60 ppt height 80 ppt
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Yad" instance="yad"] floating enable
