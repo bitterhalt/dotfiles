@@ -93,7 +93,6 @@ window#waybar.empty #window {
 #wireplumber,
 #custom-mic,
 #custom-idle,
-#custom-wf-recorder,
 #custom-idle,
 #tray,
 #network {
@@ -116,9 +115,25 @@ window#waybar.empty #window {
 
 #custom-wf-recorder {
   color: @red;
-  background-color: @bg-2;
-  box-shadow: inset 0 0 0 1px @ui-1;
+  padding: 0 10px;
+  margin: 2px 1px;
   border-radius: 6px;
+  animation: rec-blink 1.2s linear infinite;
+}
+/* Rec-animation */
+@keyframes rec-blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  51% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 #custom-power {
