@@ -47,6 +47,10 @@ Some fuzzel menus
 >
 > <img src="home/bazz/.local/share/screenshots/fuzzel-emoji.png" width="50%" />
 >
+> Window list
+>
+> <img src="home/bazz/.local/share/screenshots/fuzzel_window.png" width="80%" />
+>
 > Fast neovim with LSP 🚀
 >
 > <img src="home/bazz/.local/share/screenshots/nvim.png" width="50%" />
