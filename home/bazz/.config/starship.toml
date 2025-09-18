@@ -7,7 +7,6 @@ $character\
 $cmd_duration"""
 
 [character]
-# Bash style
 success_symbol = '[\$](cyan)'
 error_symbol = '[\$](red)'
 vimcmd_symbol = '[\$](bold green)'
