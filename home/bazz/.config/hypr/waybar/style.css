@@ -118,7 +118,7 @@ window#waybar.empty #window {
   padding: 0 10px;
   margin: 2px 1px;
   border-radius: 6px;
-  animation: rec-blink 1.2s linear infinite;
+  animation: rec-blink 1s linear infinite;
 }
 /* Rec-animation */
 @keyframes rec-blink {
@@ -128,7 +128,7 @@ window#waybar.empty #window {
   50% {
     opacity: 1;
   }
-  51% {
+  60% {
     opacity: 0;
   }
   100% {
