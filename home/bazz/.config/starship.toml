@@ -8,7 +8,7 @@ $cmd_duration"""
 
 [character]
 success_symbol = '[\$](cyan)'
-error_symbol = '[\$](red)'
+error_symbol = '[\$](bold red)'
 vimcmd_symbol = '[\$](bold green)'
 
 # Pure prompt style
@@ -22,8 +22,8 @@ home_symbol = ''
 truncation_length = 8
 truncation_symbol = '…/'
 style ='white'
-read_only = ' 󱓇 '
-read_only_style = 'purple'
+read_only = ' !'
+read_only_style = 'bold red'
 
 [git_branch]
 style = 'bold green'
