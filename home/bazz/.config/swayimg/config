@@ -6,10 +6,6 @@
 decoration = yes
 # Mode at startup (viewer/gallery)
 mode = viewer
-# Window position (parent or absolute coordinates, e.g. 100,200)
-position = parent
-# Window position (parent or absolute coordinates, e.g. 100,200)
-size = parent
 # Application ID and window class name
 app_id = swayimg
 ################################################################################
