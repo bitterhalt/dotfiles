@@ -7,9 +7,9 @@
 set -e
 
 SAVEDIR="${HOME}/Videos/Captures/"
-mkdir -p -- "$SAVEDIR"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
+mkdir -p -- "$SAVEDIR"
 
 fullscreen() {
   wf-recorder \
