@@ -1,19 +1,31 @@
 ################################################################################
 # General configuration
 ################################################################################
+
 [general]
-# Show border
-decoration = yes
-# Mode at startup (viewer/gallery)
+# Mode at startup (viewer/slideshow/gallery)
 mode = viewer
+# Window size (fullscreen/image, or absolute size)
+size = 1280,720
+# Sway/Hyprland only: Window position (auto or absolute coordinates, e.g. 10,20)
+position = auto
+# Sway/Hyprland only: create floating window above the currently focused one
+overlay = no
+# Use window decoration (yes/no)
+decoration = yes
+# Action performed by SIGUSR1 signal (same format as for key bindings)
+sigusr1 = reload
+# Action performed by SIGUSR2 signal (same format as for key bindings)
+sigusr2 = next_file
 # Application ID and window class name
 app_id = swayimg
+
 ################################################################################
 # Font
 ################################################################################
 [font]
 # Font name
-name = JetBrains Mono
+name = Adwaita Mono
 # Font size (pt)
 size = 11
 # Font color (RGBA)
