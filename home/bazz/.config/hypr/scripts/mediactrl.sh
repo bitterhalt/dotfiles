@@ -33,7 +33,8 @@ show_music_notification() {
   if [[ "$status" == "Playing" ]]; then
     song_title=$(playerctl metadata title)
     song_artist=$(playerctl metadata artist)
-    notify-send -t 5000 -a Playerctl "Playing" "$song_title\nby $song_artist" -h string:x-canonical-private-synchronous:volume
+    #notify-send -t 5000 -a Playerctl "Playing" "$song_title\nby $song_artist" -h string:x-canonical-private-synchronous:volume
+    notify-send -t 5000 -a Playerctl "Playing" "$song_title" -h string:x-canonical-private-synchronous:volume
   elif [[ "$status" == "Paused" ]]; then
     notify-send -t 5000 -a Playerctl "Playback Paused" -h string:x-canonical-private-synchronous:volume
   fi
