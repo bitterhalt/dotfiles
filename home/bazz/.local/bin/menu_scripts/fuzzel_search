@@ -45,7 +45,7 @@ urlencode() {
 }
 
 # Prompt
-keyword=$(tac "$history_file" | fuzzel -d -p "" -l 1 --placeholder "Search from internet...")
+keyword=$(tac "$history_file" | fuzzel -d -p "" -l 5 --placeholder "Search from internet...")
 
 # Handle empty input
 [ -z "$keyword" ] && exit 0
@@ -58,11 +58,12 @@ if [[ "$keyword" == "clear" ]]; then
   exit 0
 fi
 
-# Update search history
-grep -Fxq "$keyword" "$history_file"
-echo "$keyword" >>"$history_file"
+# Update search history (no duplicates, keep latest at bottom)
+if ! grep -Fxq "$keyword" "$history_file"; then
+  echo "$keyword" >>"$history_file"
+fi
 
-# Keep on last 10 searches
+# Keep only last 10 searches
 tail -n 10 "$history_file" >"$history_file.tmp"
 mv "$history_file.tmp" "$history_file"
 
