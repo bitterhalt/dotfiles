@@ -13,8 +13,7 @@ set -e
 
 # Check if the script is run as root. Exit if it is.
 if [[ $EUID -eq 0 ]]; then
-  echo "This script MUST NOT be run as root."
-  echo "Please run it as a regular user. Exiting..."
+  echo -e "This script MUST NOT be run as root.\nPlease run it as a regular user. Exiting..." >&2
   exit 1
 fi
 
@@ -22,7 +21,7 @@ fi
 echo "Authenticating user for package installation..."
 sudo -v
 if [[ $? -ne 0 ]]; then
-  echo "Failed to authenticate with sudo. Exiting."
+  echo "Failed to authenticate with sudo. Exiting." >&2
   exit 1
 fi
 
@@ -31,7 +30,7 @@ fi
 # ==============================================================================
 
 echo "Updating system and installing required tools: git, base-devel, rsync, xdg-user-dirs"
-sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs
+sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs | exit 1
 
 # ==============================================================================
 # 3. INSTALL YAY (AUR HELPER)
@@ -41,8 +40,7 @@ echo "Installing yay..."
 mkdir -p "$HOME/.tmp"
 cd "$HOME/.tmp"
 git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si --noconfirm
+cd yay && makepkg -si --noconfirm
 cd -
 rm -rf "$HOME/.tmp/yay"
 
@@ -65,7 +63,7 @@ if [[ -f packages ]]; then
   echo "Installing programs..."
   yay -S --needed - <packages
 else
-  echo "Error: 'packages' file not found!"
+  echo "Error: 'packages' file not found!" >&2
   exit 1
 fi
 sleep 1 && clear
