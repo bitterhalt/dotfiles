@@ -110,6 +110,7 @@
     "format": "󰐥",
     "tooltip": false,
     "on-click": "~/.local/bin/menu_scripts/fuzzel_power",
+    "on-click-right": "~/.local/bin/noti_sysnfo",
   },
   "custom/idle": {
     "interval": "once",
