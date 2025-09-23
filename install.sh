@@ -36,13 +36,12 @@ sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs | exit 
 # 3. INSTALL YAY (AUR HELPER)
 # ==============================================================================
 
+tmpdir="$(mktemp -d --tmpdir yay-build-XXXXXX)"
+trap 'rm -rf -- "$tmpdir"' EXIT # rm the tempdir if the script exits unexpectedly
 echo "Installing yay..."
-mkdir -p "$HOME/.tmp"
-cd "$HOME/.tmp"
-git clone https://aur.archlinux.org/yay.git
-cd yay && makepkg -si --noconfirm
-cd -
-rm -rf "$HOME/.tmp/yay"
+git clone https://aur.archlinux.org/yay.git "$tmpdir"
+cd "$tmpdir" && makepkg -si --noconfirm
+rm -rf -- "$tmpdir"
 
 # ==============================================================================
 # 4. CLONE AND SYNC DOTFILES
