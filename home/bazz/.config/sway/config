@@ -40,21 +40,30 @@ set $killer ~/.local/bin/menu_scripts/fuzzel_killer
 set $powermenu ~/.local/bin/menu_scripts/fuzzel_power
 set $screenshot ~/.local/bin/menu_scripts/fuzzel_screenshot
 set $winmenu ~/.local/bin/menu_scripts/fuzzel_sway_window
+set $pass ~/.local/bin/menu_scripts/fuzzel_passmenu
 
 # Misc
 set $colorpicker ~/.config/sway/scripts/colorpicker
 set $updater foot -T pop-upgrade -a popupgrade -e popupgrade
 set $pac-installer foot -T pacseek -a pacseek -e pacseek
+set $notes foot -a noterm -T Notes -e nvim -p ~/Documents/personal/notes/index.md
+set $todo foot -a noterm -T Notes -e nvim -p ~/Documents/personal/notes/todo.md
+set $bye loginctl terminate-user "$USER"
 
 # Bar signals
 set $sig_1 pkill -SIGRTMIN+1 waybar
 set $sig_2 pkill -SIGRTMIN+2 waybar
 
 # Mode
-set $mode_power "Power: [L]ock [Z]zzz [R]eboot [S]hutdown [E]xit [R]eload"
+set $mode_apps "APPS: [D]iscord [F]firefox [S]Steam [T]hunderbird [A]ll"
+set $mode_info "INFO: [I]info [C]pu [M]em [W]eather"
+set $mode_power "POWER: [L]ock [E]xit [R]eboot [S]hutdown [Z]zz"
+set $mode_rec "RECORD: [F]ulscreen [A]+audio [R]egion [S]top"
+set $mode_shot "SCREENSHOT: [F]ulscreen [R]egion [D]elay"
+set $mode_todo "NOTES: [N]ote [T]odo"
 
 # Font
-font pango: JetBrains Mono 10
+font pango: Adwaita Mono 11
 
 # Titlebar
 title_align center
@@ -108,15 +117,17 @@ input type:touchpad {
 #-----------------------------------------------------#
 #                      Binds                          #
 #-----------------------------------------------------#
-bindsym $mod+F1 exec ~/.local/bin/noti_sysnfo
+
+bindsym $mod+F1 exec galculator
 bindsym $mod+F10 exec ~/.config/sway/scripts/mic-toggle.sh
 bindsym $mod+F11 exec $locker
 bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
-bindsym $mod+F2 exec ~/.local/bin/noti_usage cpu
+bindsym $mod+F2 exec signal-desktop
 bindsym $mod+F4 exec $killer
+bindsym $mod+F5 exec $pass
+bindsym $mod+F6 mode $mode_shot
+bindsym $mod+F7 mode $mode_rec
 bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed -e 's/bindsym / /' -e 's/\$mod/Super/g' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
-bindsym $mod+F7 exec ~/.local/bin/menu_scripts/fuzzel_passmenu
-bindsym $mod+F8 exec $screenshot
 bindsym $mod+Insert smart_gaps toggle
 bindsym $mod+Print exec ~/.local/bin/wl-shot -f
 bindsym $mod+Return exec $term
@@ -130,11 +141,13 @@ bindsym $mod+ctrl+p exec $colorpicker
 bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/fuzzel_sound
 bindsym $mod+ctrl+u exec $updater
 bindsym $mod+ctrl+w exec ~/.local/bin/weatherfetch -n
-bindsym $mod+p     mode $mode_power
+bindsym $mod+p      mode $mode_power
+bindsym $mod+prior  mode $mode_apps
+bindsym $mod+i  mode $mode_info
 bindsym $mod+d exec $drun
 bindsym $mod+e exec $tuifm
 bindsym $mod+m exec $mail
-bindsym $mod+n exec $term -a noterm -T Notes -e nvim -p ~/Documents/personal/notes/todo.md ~/Documents/personal/notes/index.md
+bindsym $mod+n mode $mode_todo
 bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
 bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
@@ -263,21 +276,69 @@ bindsym XF86MonBrightnessDown exec ~/.config/sway/scripts/brightness.sh down"
 #                      Modes                          #
 #-----------------------------------------------------#
 
-#  Power
+# Power
 mode $mode_power {
-    bindsym l exec $locker,             mode default
-    bindsym d exec systemctl poweroff,  mode default
-    bindsym r exec systemctl reboot,    mode default
-    bindsym s exec systemctl suspend,   mode default
-    bindsym x exit
-    bindsym e reload
-    bindsym Return mode default
-    bindsym Escape mode default
+  bindsym s exec systemctl poweroff,         mode default
+  bindsym e exec $bye,                       mode default
+  bindsym l exec $locker,                    mode default
+  bindsym r exec systemctl reboot,           mode default
+  bindsym z exec systemctl suspend,          mode default
+  bindsym return mode default
+  bindsym escape mode default
+}
+
+# Aps
+mode $mode_apps {
+  bindsym d exec discord,                        mode default
+  bindsym f exec $browser,                       mode default
+  bindsym s exec steam,                          mode default
+  bindsym t exec thunderbird,                    mode default
+  bindsym a exec ~/.config/sway/scripts/apps.sh, mode default
+  bindsym return mode default
+  bindsym escape mode default
+}
+
+# Info
+mode $mode_info {
+  bindsym i exec ~/.local/bin/noti_sysnfo,       mode default
+  bindsym c exec ~/.local/bin/noti_usage cpu,    mode default
+  bindsym m exec ~/.local/bin/noti_usage ram,    mode default
+  bindsym w exec ~/.local/bin/weatherfetch -n,   mode default
+  bindsym return mode default
+  bindsym escape mode default
+}
+
+# Notes
+mode $mode_todo {
+  bindsym n exec $notes,                         mode default
+  bindsym t exec $todo,                          mode default
+  bindsym return mode default
+  bindsym escape mode default
+}
+
+# Shot
+mode $mode_shot {
+  bindsym f exec wl-shot -f,                     mode default
+  bindsym r exec wl-shot -re,                    mode default
+  bindsym d exec wl-shot -t,                     mode default
+  bindsym return mode default
+  bindsym escape mode default
+}
+
+# Rec
+mode $mode_rec {
+  bindsym f exec wl-record -f,                   mode default
+  bindsym r exec wl-record -r,                   mode default
+  bindsym a exec wl-record -fs,                  mode default
+  bindsym s exec wl-record -k,                   mode default
+  bindsym return mode default
+  bindsym escape mode default
 }
 
 #-----------------------------------------------------#
 #                      Rules                          #
 #-----------------------------------------------------#
+
 # Assign workspaces
 assign [app_id="firefox"] 2
 assign [app_id="thunderbird"] 3
@@ -287,10 +348,8 @@ assign [app_id="virt-manager"] 8
 assign [class="steam"] 5
 assign [app_id="net.lutris.Lutris"] 5
 assign [app_id="pcsx2"] 5
-
 # Move scratchpad
 for_window [app_id="vesktop|discord"] move scratchpad
-
 # Floaters
 for_window [app_id="(?i)(?:blueman-manager|azote|gnome-disks|nwg-shell-config)"] floating enable
 for_window [app_id="(?i)(?:pavucontrol|nm-connection-editor|gsimplecal|galculator)"] floating enable
@@ -300,16 +359,15 @@ for_window [app_id="file-roller"] floating enable
 for_window [app_id="floating_shell_portrait"] floating enable, border pixel 1, sticky enable, resize set width 30 ppt height 40 ppt
 for_window [app_id="floatterm"] floating enable, resize set width 50 ppt height 60 ppt
 for_window [app_id="gimp"] floating enable, border pixel 1
-for_window [app_id="imv"] floating enable
-for_window [app_id="mpv"] floating enable
+for_window [app_id="mpv|mpv"] floating enable
 for_window [app_id="net.lutris.Lutris"] floating enable
-for_window [app_id="noterm"] floating enable, resize set width 100ppt height 70 ppt, move position 0 0, resize set width 60ppt
+for_window [app_id="noterm"] floating enable, resize set width 100 ppt height 70 ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="nwg-look"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pcsx2"] floating enable
-for_window [app_id="swayimg"] floating enable, resize set width 90 ppt height 90 ppt
-for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 60ppt
+for_window [app_id="scpterm"] floating enable, resize set width 100 ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="signal"] floating enable
+for_window [app_id="swayimg"] floating enable, resize set width 90 ppt height 90 ppt
 for_window [app_id="virt-manager"] floating enable
 for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 for_window [app_id="yad"] floating enable
@@ -328,12 +386,12 @@ for_window [title="Choose User Profile"] floating enable
 for_window [title="File Operation Progress"] floating enable, border pixel 1, resize set width 40 ppt height 30 ppt
 for_window [title="KeePassXC - Browser Access Request"] floating enable, move position center, focus
 for_window [title="KeePassXC - Passkey credentials"] floating enable, move position center, focus
-for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize set width 30ppt height 30ppt, move position 70ppt 10
+for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize set width 30 ppt height 30ppt, move position 70ppt 10
 for_window [title="ProtonUp-Qt - Wine/Proton Installer"] floating enable
 for_window [title="Rename"] floating enable
-for_window [title="fuzzypkg"] resize set width 100ppt, move position 0 0, resize set width 50ppt
+for_window [title="fuzzypkg"] resize set width 100 ppt, move position 0 0, resize set width 50ppt
 for_window [title="modorganizer.exe"] floating enable
-for_window [title="pop-upgrade|pacseek"] floating enable, resize set width 100ppt, move position 0 0, resize set width 50ppt
+for_window [title="pop-upgrade|pacseek"] floating enable, resize set width 100 ppt, move position 0 0, resize set width 50 ppt
 for_window [window_role="About"] floating enable
 for_window [window_role="GtkFileChooserDialog"] move position center, resize set 590 340
 for_window [window_role="Preferences"] floating enable
@@ -342,10 +400,8 @@ for_window [window_role="dialog"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_type="menu"] floating enable
-
 # Fix missing borders
 for_window [app_id="firefox|thunderbird|swappy"] border pixel 2
-
 # Inhibit idle
 for_window [app_id="firefox"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
@@ -353,6 +409,7 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 #-----------------------------------------------------#
 #                      Colors                         #
 #-----------------------------------------------------#
+
 set $bg1     #100F0F
 set $bg2     #282726
 set $bg3     #1c1b1a
@@ -375,12 +432,11 @@ client.background       $fg1
 #-----------------------------------------------------#
 #                      Auto start                     #
 #-----------------------------------------------------#
+
 exec swayidle -w
-# Autotiling imitates master and stack layout
 exec autotiling -l 2 -sw 0.95
 exec swww-daemon
 exec foot --server
-#exec wl-paste --watch cliphist store
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
 exec sleep 6 && transmission-gtk
