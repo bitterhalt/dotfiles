@@ -6,4 +6,7 @@ vt = 1
 command = "tuigreet -t -r --remember-session  --asterisks --power-shutdown 'systemctl poweroff' --power-reboot 'systemctl reboot' -s /etc/greetd/sessions/:/usr/share/wayland-sessions/"
 user = "greeter"
 
-
+# Auto login
+#[initial_session]
+#command = "Hyprland"
+#user = "bazz"

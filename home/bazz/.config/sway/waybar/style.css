@@ -116,7 +116,6 @@ window#waybar.empty #window {
 
 #custom-wf-recorder {
   color: @red;
-  padding: 0 10px;
   margin: 2px 1px;
   border-radius: 6px;
   animation: rec-blink 1s linear infinite;

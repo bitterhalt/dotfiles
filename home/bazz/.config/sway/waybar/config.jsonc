@@ -3,9 +3,8 @@
   "position": "top",
   //"height": 28,
   "modules-left": ["sway/workspaces", "sway/window"],
-  "modules-center": ["clock"],
+  "modules-center": ["clock", "custom/wf-recorder"],
   "modules-right": [
-    "custom/wf-recorder",
     "tray",
     "network",
     "group/sound",

@@ -28,6 +28,7 @@ set $locker swaylock
 set $mail thunderbird
 set $term footclient
 set $tuifm foot -T lf -e lf
+set $wallpaper swayimg -g ~/Pictures/wallpaper/
 
 # Dmenu scripts
 set $clip ~/.local/bin/menu_scripts/fuzzel_clipboard
@@ -135,6 +136,7 @@ bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
 bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
 bindsym $mod+shift+delete exec $term -T htop -a floatterm -e htop
 bindsym $mod+shift+e exec $gfm
+bindsym $mod+shift+w exec $wallpaper
 bindsym $mod+shift+p exec $powermenu
 bindsym $mod+t exec ~/.local/bin/noti_date
 bindsym $mod+tab exec $winmenu
@@ -146,7 +148,7 @@ bindsym $mod+s exec $search
 bindsym $mod+q kill
 
 # Hide/restart waybar
-bindsym $mod+b exec ~/.config/sway/waybar/waybar.sh toggle
+bindsym $mod+b exec ~/.config/sway/waybar.sh toggle
 
 # When the modifier key is held down, you may hold left click to move windows, and right click to resize them
 floating_modifier $mod normal
@@ -286,6 +288,7 @@ for_window [app_id="noterm"] floating enable, resize set width 100ppt height 70 
 for_window [app_id="nwg-look"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pcsx2"] floating enable
+for_window [app_id="swayimg"] floating enable, resize set width 90 ppt height 90 ppt
 for_window [app_id="scpterm"] floating enable, resize set width 100ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="signal"] floating enable
 for_window [app_id="virt-manager"] floating enable
@@ -362,5 +365,5 @@ exec foot --server
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
 exec sleep 6 && transmission-gtk
-exec ~/.config/sway/waybar/waybar.sh start
+exec ~/.config/sway/waybar.sh start
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
