@@ -123,11 +123,11 @@ bindsym $mod+F10 exec ~/.config/sway/scripts/mic-toggle.sh
 bindsym $mod+F11 exec $locker
 bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
 bindsym $mod+F2 exec signal-desktop
+bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed -e 's/bindsym / /' -e 's/\$mod/Super/g' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
 bindsym $mod+F4 exec $killer
 bindsym $mod+F5 exec $pass
 bindsym $mod+F6 mode $mode_shot
 bindsym $mod+F7 mode $mode_rec
-bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed -e 's/bindsym / /' -e 's/\$mod/Super/g' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
 bindsym $mod+Insert smart_gaps toggle
 bindsym $mod+Print exec ~/.local/bin/wl-shot -f
 bindsym $mod+Return exec $term
@@ -141,13 +141,14 @@ bindsym $mod+ctrl+p exec $colorpicker
 bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/fuzzel_sound
 bindsym $mod+ctrl+u exec $updater
 bindsym $mod+ctrl+w exec ~/.local/bin/weatherfetch -n
-bindsym $mod+p      mode $mode_power
-bindsym $mod+prior  mode $mode_apps
-bindsym $mod+i  mode $mode_info
 bindsym $mod+d exec $drun
 bindsym $mod+e exec $tuifm
+bindsym $mod+i  mode $mode_info
 bindsym $mod+m exec $mail
 bindsym $mod+n mode $mode_todo
+bindsym $mod+p      mode $mode_power
+bindsym $mod+prior  mode $mode_apps
+bindsym $mod+s exec $search
 bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
 bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
@@ -158,7 +159,6 @@ bindsym $mod+t exec ~/.local/bin/noti_date
 bindsym $mod+tab exec $winmenu
 bindsym $mod+v exec $editor
 bindsym $mod+w exec $browser
-bindsym $mod+s exec $search
 
 # Kill focused window
 bindsym $mod+q kill
