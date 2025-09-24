@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Hyprland-custom
+Comment=An intelligent dynamic tiling Wayland compositor
+Exec=wl-restart hyprland >/home/bazz/.local/state/hyprland.log>&1
+Type=Application
+DesktopNames=Hyprland
+Keywords=tiling;wayland;compositor;

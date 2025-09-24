@@ -60,7 +60,6 @@ libpulse
 libva-utils
 linux
 linux-firmware
-localsend-bin
 logrotate
 man-db
 man-pages
@@ -136,6 +135,7 @@ wf-recorder
 wget
 wireplumber
 wl-clipboard
+wl-restart-git
 wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-wlr
