@@ -24,7 +24,7 @@ set $alt Mod1
 # Defaults
 set $browser firefox
 set $gfm thunar
-set $locker swaylock
+set $locker hyprlock
 set $mail thunderbird
 set $term footclient
 set $tuifm foot -T lf -e lf
@@ -49,6 +49,9 @@ set $pac-installer foot -T pacseek -a pacseek -e pacseek
 # Bar signals
 set $sig_1 pkill -SIGRTMIN+1 waybar
 set $sig_2 pkill -SIGRTMIN+2 waybar
+
+# Mode
+set $mode_power "Power: [L]ock [Z]zzz [R]eboot [S]hutdown [E]xit [R]eload"
 
 # Font
 font pango: JetBrains Mono 10
@@ -127,6 +130,7 @@ bindsym $mod+ctrl+p exec $colorpicker
 bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/fuzzel_sound
 bindsym $mod+ctrl+u exec $updater
 bindsym $mod+ctrl+w exec ~/.local/bin/weatherfetch -n
+bindsym $mod+p     mode $mode_power
 bindsym $mod+d exec $drun
 bindsym $mod+e exec $tuifm
 bindsym $mod+m exec $mail
@@ -137,7 +141,6 @@ bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
 bindsym $mod+shift+delete exec $term -T htop -a floatterm -e htop
 bindsym $mod+shift+e exec $gfm
 bindsym $mod+shift+w exec $wallpaper
-bindsym $mod+shift+p exec $powermenu
 bindsym $mod+t exec ~/.local/bin/noti_date
 bindsym $mod+tab exec $winmenu
 bindsym $mod+v exec $editor
@@ -255,6 +258,22 @@ bindsym $mod+ctrl+m exec ~/.config/sway/scripts/mediactrl.sh --noti
 # Brightness ctrl
 bindsym XF86MonBrightnessUp exec  ~/.config/sway/scripts/brightness.sh up"
 bindsym XF86MonBrightnessDown exec ~/.config/sway/scripts/brightness.sh down"
+
+#-----------------------------------------------------#
+#                      Modes                          #
+#-----------------------------------------------------#
+
+#  Power
+mode $mode_power {
+    bindsym l exec $locker,             mode default
+    bindsym d exec systemctl poweroff,  mode default
+    bindsym r exec systemctl reboot,    mode default
+    bindsym s exec systemctl suspend,   mode default
+    bindsym x exit
+    bindsym e reload
+    bindsym Return mode default
+    bindsym Escape mode default
+}
 
 #-----------------------------------------------------#
 #                      Rules                          #
