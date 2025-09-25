@@ -4,14 +4,6 @@ set -e
 CFG="$HOME/.config/sway/waybar"
 
 start() {
-  pidof waybar || waybar -c "$CFG/config.jsonc" -s "$CFG/style.css" &
-}
-
-#!/usr/bin/env bash
-set -e
-CFG="$HOME/.config/sway/waybar"
-
-start() {
   if ! pgrep -x waybar >/dev/null; then
     waybar -c "$CFG/config.jsonc" -s "$CFG/style.css" &
   fi
