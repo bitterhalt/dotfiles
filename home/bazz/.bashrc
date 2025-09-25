@@ -60,6 +60,7 @@ alias tp="trash-put"
 alias tpe="trash-empty"
 alias tpr="trash-restore"
 # Random
+alias amdgpu_top="amdgpu_top --smi"
 alias hg="history | grep "
 alias nvm="sudo nvme smart-log /dev/nvme0"
 alias ex="extrac_helper"
