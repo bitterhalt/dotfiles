@@ -28,8 +28,8 @@
  *                      Bar
  * ----------------------------------------------------- */
 window#waybar {
-  color: @tx-1;
   background-color: @bg-1;
+  color: @tx-1;
 }
 
 /* -----------------------------------------------------
@@ -37,8 +37,8 @@ window#waybar {
  * ----------------------------------------------------- */
 tooltip {
   background: @bg-1;
-  border: solid 1px @ui-1;
   border-radius: 6px;
+  border: solid 1px @ui-1;
 }
 
 tooltip label {
@@ -53,30 +53,30 @@ tooltip label {
   margin: 0 4px;
 }
 #workspaces button {
-  min-height: 24px;
-  min-width: 16px;
   color: @tx-1;
   font-weight: normal;
   margin: 2px 1px;
+  min-height: 24px;
+  min-width: 16px;
   padding: 0 5px;
 }
 #workspaces button.focused {
-  color: @tx-2;
-  font-weight: normal;
   background-color: @ui-3;
   border-radius: 6px;
+  color: @tx-2;
+  font-weight: normal;
 }
 
 #workspaces button.urgent {
   color: @magenta;
 }
 #mode {
-  color: @tx-2;
   background-color: @bg-2;
-  padding: 0 10px;
-  margin: 1px 1px;
-  box-shadow: inset 0 0 0 1px @ui-1;
   border-radius: 6px;
+  box-shadow: inset 0 0 0 1px @ui-1;
+  color: @tx-2;
+  margin: 1px 1px;
+  padding: 0 10px;
 }
 #window {
   color: @tx-1;
@@ -88,37 +88,37 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  *                      Modules
  * ----------------------------------------------------- */
-#clock,
 #battery,
-#wireplumber,
+#clock,
+#custom-idle,
+#custom-idle,
 #custom-mic,
-#custom-idle,
 #custom-wf-recorder,
-#custom-idle,
+#network,
 #tray,
-#network {
+#wireplumber {
   color: @tx-1;
-  padding: 0 10px;
   margin: 2px 1px;
+  padding: 0 10px;
 }
 
 #tray {
   background-color: @bg-2;
-  box-shadow: inset 0 0 0 1px @ui-1;
   border-radius: 6px;
+  box-shadow: inset 0 0 0 1px @ui-1;
 }
 
 #tray menu {
   background-color: @bg-1;
-  border: solid 1px @ui-1;
   border-radius: 6px;
+  border: solid 1px @ui-1;
 }
 
 #custom-wf-recorder {
+  animation: rec-blink 1s linear infinite;
+  border-radius: 6px;
   color: @red;
   margin: 2px 1px;
-  border-radius: 6px;
-  animation: rec-blink 1s linear infinite;
 }
 /* Rec-animation */
 @keyframes rec-blink {
@@ -138,8 +138,8 @@ window#waybar.empty #window {
 
 #custom-power {
   color: @tx-1;
-  padding: 0 10px;
   margin: 2px 5px;
+  padding: 0 10px;
 }
 /* -----------------------------------------------------
  *                      Hover candy
