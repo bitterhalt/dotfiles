@@ -24,7 +24,7 @@ set $alt Mod1
 # Defaults
 set $browser firefox
 set $gfm thunar
-set $locker hyprlock
+set $locker swaylock
 set $mail thunderbird
 set $term footclient
 set $tuifm foot -T lf -e lf
@@ -63,12 +63,12 @@ set $mode_shot "SCREENSHOT: [F]ulscreen [R]egion [D]elay"
 set $mode_todo "NOTES: [N]ote [T]odo"
 
 # Font
-font pango: Adwaita Mono 11
+font Adwaita Mono 11
 
 # Titlebar
 title_align center
-titlebar_padding 3
-titlebar_border_thickness 0
+titlebar_padding 1
+titlebar_border_thickness 1
 
 # Border size
 default_border pixel 2
@@ -228,7 +228,7 @@ bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+space floating toggle
-bindsym --whole-window $mod+button2 floating toggle
+bindsym --whole-window $mod+button8 floating toggle
 
 # Show floating window in all workspaces
 bindsym $mod+y sticky toggle
@@ -343,42 +343,31 @@ mode $mode_rec {
 # Assign workspaces
 assign [app_id="firefox"] 2
 assign [app_id="thunderbird"] 3
-assign [class="Signal"] 3
 assign [app_id="com.transmissionbt.transmission_*"] 4
 assign [app_id="virt-manager"] 8
+assign [app_id="net.lutris.Lutris|pcsx2"] 5
 assign [class="steam"] 5
-assign [app_id="net.lutris.Lutris"] 5
-assign [app_id="pcsx2"] 5
 # Move scratchpad
 for_window [app_id="vesktop|discord"] move scratchpad
 # Floaters
-for_window [app_id="(?i)(?:blueman-manager|azote|gnome-disks|nwg-shell-config)"] floating enable
-for_window [app_id="(?i)(?:pavucontrol|nm-connection-editor|gsimplecal|galculator)"] floating enable
-for_window [app_id="blueman-manager"] floating enable, resize set width 40 ppt height 30 ppt
-for_window [app_id="brave-calendar"] floating enable, resize set width 40 ppt height 50 ppt
+for_window [app_id="(?i)(?:blueman-manager|nwg-shell-config|nm-connection-editor|gsimplecal|galculator)"] floating enable
 for_window [app_id="file-roller"] floating enable
 for_window [app_id="floating_shell_portrait"] floating enable, border pixel 1, sticky enable, resize set width 30 ppt height 40 ppt
 for_window [app_id="floatterm"] floating enable, resize set width 50 ppt height 60 ppt
-for_window [app_id="gimp"] floating enable, border pixel 1
-for_window [app_id="mpv|mpv"] floating enable
-for_window [app_id="net.lutris.Lutris"] floating enable
+for_window [app_id="gimp"] floating enable, border pixel 2
+for_window [app_id="mpv"] floating enable
+for_window [app_id="net.lutris.Lutris|pcsx2"] floating enable
 for_window [app_id="noterm"] floating enable, resize set width 100 ppt height 70 ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="nwg-look"] floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt height 50 ppt
-for_window [app_id="pcsx2"] floating enable
+for_window [app_id="qt6ct"] floating enable, resize set width 60 ppt height 50 ppt
 for_window [app_id="scpterm"] floating enable, resize set width 100 ppt, move position 0 0, resize set width 60ppt
 for_window [app_id="signal"] floating enable
 for_window [app_id="swayimg"] floating enable, resize set width 90 ppt height 90 ppt
 for_window [app_id="virt-manager"] floating enable
 for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 for_window [app_id="yad"] floating enable
-for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="GParted"] floating enable
-for_window [class="Nsxiv"] floating enable, resize set width 60 ppt height 80 ppt
-for_window [class="Xsane" instance="xsane"] floating enable
-for_window [class="Yad" instance="yad"] floating enable
-for_window [class="gimp"] floating enable
-for_window [class="qt5ct" instance="qt5ct"] floating enable, resize set width 60 ppt height 50 ppt
 for_window [class="steam" instance="steam"] floating enable
 for_window [instance="origin.exe"] floating enable
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
@@ -403,6 +392,8 @@ for_window [window_role="task_dialog"] floating enable
 for_window [window_type="menu"] floating enable
 # Fix missing borders
 for_window [app_id="firefox|thunderbird|swappy"] border pixel 2
+# No borders
+for_window [app_id="dragon-drop"] border pixel 0
 # Inhibit idle
 for_window [app_id="firefox"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
@@ -424,9 +415,9 @@ set $black   #000000
 set $white   #ffffff
 
 # Class                 Border  Backgr. Text    Indigator Child border
-client.focused          $bg4    $bg4     $fg1    $cyan     $cyan
-client.focused_inactive $bg4    $bg4     $fg2    $bg2      $bg2
-client.unfocused        $bg3    $bg3     $fg2    $bg2      $bg2
+client.focused          $bg2    $bg4     $fg1    $cyan     $cyan
+client.focused_inactive $bg2    $bg4     $fg2    $bg2      $bg2
+client.unfocused        $bg2    $bg3     $fg2    $bg2      $bg2
 client.urgent           $bg2    $red    $white  $red      $red
 client.placeholder      $black  $black  $white  $black    $black
 client.background       $fg1

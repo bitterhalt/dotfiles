@@ -1,13 +1,10 @@
-# indicator
-# no-unlock-indicator
-# daemonize
 color=#000000
 indicator-caps-lock
 show-failed-attempts
-image=$HOME/.config/swaylock/lock.png
+image=$HOME/.local/share/wall/bg
 scaling=fill
-font=JetBrains Mono
-font-size=20
+font=Adwaita Mono
+font-size=16
 indicator-radius=100
 bs-hl-color=#AF3029
 inside-color=#000000af
@@ -20,7 +17,7 @@ line-clear-color=#000000
 line-caps-lock-color=#000000
 line-ver-color=#000000
 line-wrong-color=#000000
-ring-color=#1C1B1A
+ring-color=#000000af
 ring-clear-color=#AD8301
 ring-ver-color=#24837B
 ring-wrong-color=#AF3029
