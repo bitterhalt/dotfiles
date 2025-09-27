@@ -75,6 +75,7 @@ tooltip label {
   border-radius: 6px;
   box-shadow: inset 0 0 0 1px @ui-1;
   color: @tx-2;
+  font-family: Cascadia Code SemiLight;
   margin: 1px 1px;
   padding: 0 10px;
 }
