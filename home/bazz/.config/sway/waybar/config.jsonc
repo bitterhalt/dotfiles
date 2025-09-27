@@ -54,7 +54,7 @@
   },
   "wireplumber#sink": {
     "format": "{icon}",
-    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "format-icons": ["󰕿", "󰖀", "󰕾", "󰕾"],
     "tooltip-format": "{node_name}\nVolume: {volume}%",
     "format-muted": "󰸈",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -71,7 +71,7 @@
   },
   "clock": {
     "format": "{:%H:%M}",
-    "format-alt": "{:%d.%m.%Y : %H:%M}",
+    "format-alt": "{:%d.%m %H:%M}",
     "tooltip-format": "<span color='#CECDC3'><tt>{calendar}</tt></span>",
     "calendar": {
       "mode-mon-col": 3,
