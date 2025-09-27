@@ -20,7 +20,8 @@ WEATHER_RESPONSE=$(curl -s "${URL}")
 
 # Parse data
 CITY_NAME=$(echo "$WEATHER_RESPONSE" | jq -r '.name')
-WEATHER_CONDITION=$(echo "$WEATHER_RESPONSE" | jq -r '.weather[0].main')
+WEATHER_MAIN=$(echo "$WEATHER_RESPONSE" | jq -r '.weather[0].main')
+WEATHER_DESC=$(echo "$WEATHER_RESPONSE" | jq -r '.weather[0].description')
 WEATHER_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.temp' | cut -d "." -f 1)
 FEELS_LIKE_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.feels_like' | cut -d "." -f 1)
 HUMIDITY=$(echo "$WEATHER_RESPONSE" | jq '.main.humidity')
@@ -30,19 +31,32 @@ SUNRISE=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunrise')
 SUNSET=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunset')
 CURRENT_TIME=$(date +%s)
 
-# Weather icon
-case $WEATHER_CONDITION in
+# Weather icon selection
+case $WEATHER_MAIN in
 'Thunderstorm') WEATHER_ICON="⛈️" ;;
-'Clouds') WEATHER_ICON="☁️" ;;
+'Drizzle') WEATHER_ICON="🌦️" ;;
 'Rain') WEATHER_ICON="☔" ;;
 'Snow') WEATHER_ICON="🌨️" ;;
-*)
+'Mist' | 'Smoke' | 'Haze' | 'Dust' | 'Fog' | 'Sand' | 'Ash') WEATHER_ICON="🌫️" ;;
+'Squall') WEATHER_ICON="💨" ;;
+'Tornado') WEATHER_ICON="🌪️" ;;
+'Clear')
   if [ "$CURRENT_TIME" -ge "$SUNRISE" ] && [ "$CURRENT_TIME" -lt "$SUNSET" ]; then
-    WEATHER_ICON="🌞"
+    WEATHER_ICON="☀️"
   else
-    WEATHER_ICON="🌜"
+    WEATHER_ICON="🌙"
   fi
   ;;
+'Clouds')
+  case $WEATHER_DESC in
+  "few clouds"*) WEATHER_ICON="🌤️" ;;
+  "scattered clouds"*) WEATHER_ICON="⛅" ;;
+  "broken clouds"*) WEATHER_ICON="🌥️" ;;
+  "overcast clouds"*) WEATHER_ICON="☁️" ;;
+  *) WEATHER_ICON="☁️" ;;
+  esac
+  ;;
+*) WEATHER_ICON="❓" ;;
 esac
 
 # Convert wind direction degrees to cardinal direction
@@ -55,8 +69,8 @@ get_wind_direction() {
 WIND_CARDINAL=$(get_wind_direction "$WIND_DIR")
 
 # Format output
-OUTPUT=$(printf "%s %s %s°C\n🌈 Feels like %s°C\n💧 Humidity: %s%%\n🍃 Wind: %s m/s (%s)\n🌞 Sunrise: %s\n🌙 Sunset: %s" \
-  "$WEATHER_ICON" "$WEATHER_CONDITION" "$WEATHER_TEMP" "$FEELS_LIKE_TEMP" "$HUMIDITY" "$WIND_SPEED" "$WIND_CARDINAL" \
+OUTPUT=$(printf "%s %s (%s°C)\n🌈 Feels like %s°C\n💧 Humidity: %s%%\n🌬️ Wind: %s m/s (%s)\n🌞 Sunrise: %s\n🌙 Sunset: %s" \
+  "$WEATHER_ICON" "$WEATHER_DESC" "$WEATHER_TEMP" "$FEELS_LIKE_TEMP" "$HUMIDITY" "$WIND_SPEED" "$WIND_CARDINAL" \
   "$(date -d @"$SUNRISE" '+%H:%M')" "$(date -d @"$SUNSET" '+%H:%M')")
 
 # Output based on argument
