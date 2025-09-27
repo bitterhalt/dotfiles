@@ -62,7 +62,7 @@
   },
   "wireplumber#sink": {
     "format": "{icon}",
-    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "format-icons": ["󰕿", "󰖀", "󰕾", "󰕾"],
     "tooltip-format": "{node_name}\nVolume: {volume}%",
     "format-muted": "󰸈",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -80,14 +80,14 @@
   "clock": {
     "format": "{:%H:%M}",
     "format-alt": "{:%d.%m.%Y : %H:%M}",
-    "tooltip-format": "<span color='#CECDC3'><tt>{calendar}</tt></span>",
+    "tooltip-format": "<span color='#FFFCF0'><tt>{calendar}</tt></span>",
     "calendar": {
       "mode-mon-col": 3,
       "on-scroll": 1,
       "on-click-right": "mode",
       "format": {
         "months": "<span color='#CECDC3'><b>{}</b></span>",
-        "weekdays": "<span color='#24837B'><b>{}</b></span>",
+        "weekdays": "<span color='#878580'><b>{}</b></span>",
         "today": "<span color='#24837B'><b>{}</b></span>",
       },
     },
