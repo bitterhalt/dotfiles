@@ -40,3 +40,4 @@ application/x-extension-xhtml=userapp-Firefox-ZGQGT2.desktop;
 image/png=gimp.desktop;
 application/x-bittorrent=transmission-qt.desktop;
 image/jpeg=gimp.desktop;
+image/avif=gimp.desktop;
