@@ -14,9 +14,6 @@
 @define-color red #AF3029;
 
 * {
-  font-family:
-    Cascadia Code,
-    Symbols Nerd Font Mono;
   font-size: 11pt;
   border-radius: 0;
   border: none;
@@ -28,8 +25,11 @@
  *                      Bar
  * ----------------------------------------------------- */
 window#waybar {
-  background-color: @bg-1;
   color: @tx-1;
+  background-color: @bg-1;
+  font-family:
+    Cascadia Code,
+    Symbols Nerd Font Mono;
 }
 
 /* -----------------------------------------------------
@@ -39,6 +39,7 @@ tooltip {
   background: @bg-1;
   border-radius: 6px;
   border: solid 1px @ui-1;
+  font-family: Cascadia Code SemiLight;
 }
 
 tooltip label {
@@ -64,7 +65,7 @@ tooltip label {
 #workspaces button.focused {
   background-color: @ui-3;
   color: @tx-2;
-  font-weight: 500;
+  font-family: Cascadia Code SemiBold;
 }
 
 #workspaces button.urgent {
@@ -148,7 +149,6 @@ window#waybar.empty #window {
 #clock:hover,
 #custom-idle:hover,
 #custom-power:hover,
-#custom-wf-recorder:hover,
 #network:hover,
 #tray menu menuitem:hover,
 #tray:hover,
