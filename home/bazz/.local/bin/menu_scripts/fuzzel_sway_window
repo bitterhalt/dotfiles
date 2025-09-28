@@ -32,7 +32,7 @@ CON_ID=$(swaymsg -t get_tree |
            id: .apps.id, app_id: .apps.app_id, name: .apps.name }
         | $FORMAT
         | tostring" |
-  fuzzel -p "" -d -a top --minimal-lines --y 4 -w 80 --placeholder "Focus to window:")
+  fuzzel -p "" -d -a top --minimal-lines --y 4 -w 60 --placeholder "Focus to window:")
 
 # Requires the actual `id` to be at the end and between paretheses
 CON_ID=${CON_ID##*(}

@@ -12,7 +12,7 @@ while read -r i; do
 done <<<$(hyprctl clients -j | jq -r '.[] | [ .address, .class, .title ] | "\""+join ("\" \"")+"\""')
 
 result=$(printf "%b\n" "${window_titles[@]}" |
-  fuzzel -d -a top --y 4 -w 80 -p "" --minimal-lines --index --placeholder "Focus to window:")
+  fuzzel -d -a top --y 4 -w 60 -p "" --minimal-lines --index --placeholder "Focus to window:")
 
 if [ "x$result" != "x" ] && [ "$result" != -1 ]; then
   hyprctl dispatch focuswindow address:"${window_ids[result]}"
