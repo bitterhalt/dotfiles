@@ -1,7 +1,6 @@
 ################################################################################
 # General configuration
 ################################################################################
-
 [general]
 # Mode at startup (viewer/slideshow/gallery)
 mode = viewer
@@ -19,7 +18,6 @@ sigusr1 = reload
 sigusr2 = next_file
 # Application ID and window class name
 app_id = swayimg
-
 ################################################################################
 # Font
 ################################################################################
@@ -27,11 +25,11 @@ app_id = swayimg
 # Font name
 name = Cascadia Mono
 # Font size (pt)
-size = 13
+size = 14
 # Font color (RGBA)
-color = #ccccccff
+color = #CCCCCCFF
 # Shadow color (RGBA)
-shadow = #000000a0
+shadow = #000000A0
 ################################################################################
 # Viewer mode configuration
 ################################################################################
@@ -72,7 +70,7 @@ select = #403E3CFF
 # Border color of the selected tile (RGBA)
 border = #A02F6FFF
 # Shadow color of the selected tile (RGBA)
-shadow = #000000FF
+shadow = #000000EE
 # Persistent cache
 pstore = yes
 ################################################################################
