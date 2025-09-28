@@ -64,15 +64,15 @@ fill = yes
 # Anti-aliasing mode for thumbnails (none/box/bilinear/bicubic/mks13)
 antialiasing = mks13
 # Background color of the window (RGBA)
-window = #000000aa
+window = #000000AA
 # Background color of the tile (RGBA)
-background = #1C1B1Aff
+background = #1C1B1AFF
 # Background color of the selected tile (RGBA)
-select = #403E3Cff
+select = #403E3CFF
 # Border color of the selected tile (RGBA)
-border = #A02F6Fff
+border = #A02F6FFF
 # Shadow color of the selected tile (RGBA)
-shadow = #000000ff
+shadow = #000000FF
 # Persistent cache
 pstore = yes
 ################################################################################
