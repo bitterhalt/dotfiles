@@ -361,11 +361,11 @@ for_window [app_id="vesktop|discord"] move scratchpad
 for_window [app_id="(?i)(blueman-manager|nm-connection-editor|gsimplecal|galculator)"] floating enable
 for_window [app_id="file-roller"]                                                      floating enable
 for_window [app_id="gimp|mpv|net.lutris.Lutris|pcsx2"]                                 floating enable
-for_window [app_id="signal"]                                                           floating enable
+for_window [app_id="Signal"]                                                           floating enable
 for_window [app_id="virt-manager"]                                                     floating enable
 for_window [app_id="xdg-desktop-portal-gtk"]                                           floating enable
 for_window [app_id="yad"]                                                              floating enable
-for_window [class="GParted"]                                                           floating enable
+for_window [class="GParted|Signal"]                                                    floating enable
 for_window [class="steam" instance="steam"]                                            floating enable
 for_window [instance="origin.exe"]                                                     floating enable
 
