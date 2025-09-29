@@ -67,7 +67,7 @@ font Cascadia Code 11
 
 # Titlebar
 title_align center
-titlebar_padding 1
+titlebar_padding 3
 titlebar_border_thickness 1
 
 # Border size
@@ -129,7 +129,6 @@ bindsym $mod+F4 exec $killer
 bindsym $mod+F5 exec $pass
 bindsym $mod+F6 mode $mode_shot
 bindsym $mod+F7 mode $mode_rec
-bindsym $mod+Insert smart_gaps toggle
 bindsym $mod+Print exec ~/.local/bin/wl-shot -f
 bindsym $mod+Return exec $term
 bindsym $mod+ctrl+F8 exec ~/.local/bin/wl-record -k
@@ -137,6 +136,7 @@ bindsym $mod+ctrl+a exec ~/.config/sway/scripts/autotiling-toggle.sh
 bindsym $mod+ctrl+c exec $clip
 bindsym $mod+ctrl+d exec fnottctl dismiss
 bindsym $mod+ctrl+e exec $emojimenu
+bindsym $mod+ctrl+g smart_gaps toggle
 bindsym $mod+ctrl+i exec $pac-installer
 bindsym $mod+ctrl+p exec $colorpicker
 bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/fuzzel_sound
@@ -153,14 +153,13 @@ bindsym $mod+s exec $search
 bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
 bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
-bindsym $mod+shift+delete exec $term -T htop -a floatterm -e htop
+bindsym $mod+shift+delete exec $term -T htop -a floattop -e htop
 bindsym $mod+shift+e exec $gfm
 bindsym $mod+shift+w exec $wallpaper
 bindsym $mod+t exec ~/.local/bin/noti_date
 bindsym $mod+tab exec $winmenu
 bindsym $mod+v exec $editor
 bindsym $mod+w exec $browser
-
 # Kill focused window
 bindsym $mod+q kill
 
@@ -232,6 +231,9 @@ bindsym --whole-window $mod+button8 floating toggle
 
 # Show floating window in all workspaces
 bindsym $mod+y sticky toggle
+
+# Quick Mark'n'Swap container
+bindsym $mod+z mark swap, focus left, swap container with mark swap
 
 # Move focus to the parent container
 bindsym $mod+a focus parent
@@ -361,7 +363,7 @@ for_window [app_id="vesktop|discord"] move scratchpad
 for_window [app_id="(?i)(blueman-manager|nm-connection-editor|gsimplecal|galculator)"] floating enable
 for_window [app_id="file-roller"]                                                      floating enable
 for_window [app_id="gimp|mpv|net.lutris.Lutris|pcsx2"]                                 floating enable
-for_window [app_id="Signal"]                                                           floating enable
+for_window [app_id="Signal|discord"]                                                   floating enable, move position center
 for_window [app_id="virt-manager"]                                                     floating enable
 for_window [app_id="xdg-desktop-portal-gtk"]                                           floating enable
 for_window [app_id="yad"]                                                              floating enable
@@ -377,7 +379,7 @@ for_window [app_id="nwg-look"]                floating enable, resize set width 
 for_window [app_id="pavucontrol"]             floating enable, resize set width 40 ppt height 50 ppt
 for_window [app_id="qt6ct"]                   floating enable, resize set width 60 ppt height 50 ppt
 for_window [app_id="scpterm"]                 floating enable, resize set width 100 ppt, move position 0 0, resize set width 60ppt
-for_window [app_id="swayimg"]                 floating enable, resize set width 90 ppt height 90 ppt
+for_window [app_id="swayimg|floattop"]        floating enable, resize set width 90 ppt height 90 ppt
 
 # Title-based floaters
 for_window [title="(?:Open|Save) (?:File|Folder|As)"]     floating enable

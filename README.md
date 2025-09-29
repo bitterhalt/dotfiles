@@ -1,13 +1,13 @@
 ## Dotfiles
 
 My point was to get light weight system without useless annoyances.
-I have almost identical setups with both Sway and Hyprland, don’t ask me why both.
+I have almost identical setups with both Sway and Hyprland.
 
 ### Software I use
 
 - Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
-- WM: [Hyprland](https://github.com/hyprwm/Hyprland) / [Sway](https://github.com/swaywm/sway)
+- WM: [Sway](https://github.com/swaywm/sway) / [Hyprland](https://github.com/hyprwm/Hyprland)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
