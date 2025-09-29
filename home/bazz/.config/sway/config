@@ -74,7 +74,7 @@ titlebar_border_thickness 1
 default_border pixel 2
 
 # Gaps
-gaps inner 4
+gaps inner 6
 gaps outer 0
 
 # Smart gaps/borders
