@@ -90,24 +90,16 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  *                      Modules
  * ----------------------------------------------------- */
-#clock,
 #battery,
-#wireplumber,
+#clock,
 #custom-expand-right,
 #custom-idle,
-#custom-idle,
+#tray,
+#wireplumber,
 #network {
   color: @tx-1;
-  margin: 2px 2px;
-  padding: 0 10px;
-}
-
-#tray {
-  background-color: @bg-2;
-  border-radius: 6px;
-  box-shadow: inset 0 0 0 1px @ui-1;
   margin: 2px 4px;
-  padding: 0 10px;
+  padding: 0 8px;
 }
 
 #tray menu {
@@ -120,7 +112,7 @@ window#waybar.empty #window {
   animation: rec-blink 1s linear infinite;
   border-radius: 6px;
   color: @red;
-  margin: 2px 1px;
+  margin: 2px 2px;
 }
 /* Rec-animation */
 @keyframes rec-blink {
