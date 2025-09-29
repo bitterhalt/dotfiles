@@ -37,9 +37,11 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
 # Wayland stuff
+export ELECTRON_OZONE_PLATFORM_HINT="wayland"
 export MOZ_ENABLE_WAYLAND="1"
 export QT_QPA_PLATFORM="wayland;xcb"
-export ELECTRON_OZONE_PLATFORM_HINT="wayland"
+export QT_QPA_PLATFORMTHEME="qt6ct"
+export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 
 # Get api keys
 [ -f "$HOME/Documents/credentials/api_key_exports" ] && . "$HOME/Documents/credentials/api_key_exports"
