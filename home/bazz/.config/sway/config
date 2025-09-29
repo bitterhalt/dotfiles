@@ -283,7 +283,7 @@ bindsym XF86MonBrightnessDown exec ~/.config/sway/scripts/brightness.sh down"
 mode $mode_power {
   bindsym s exec systemctl poweroff,         mode default
   bindsym e exec $bye,                       mode default
-  bindsym l exec $locker &,                    mode default
+  bindsym l exec $locker,                    mode default
   bindsym r exec systemctl reboot,           mode default
   bindsym z exec systemctl suspend,          mode default
   bindsym return mode default

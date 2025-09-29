@@ -10,16 +10,16 @@ toggle() {
   else
     notify-send -i "$icons"/eye-off.svg "Swayidle" "Enabled" -t 1500 -h string:x-canonical-private-synchronous:volume
     swayidle -w \
-      timeout 1700 "pidof $locker >/dev/null || $locker" &
-    timeout 1800 "swaymsg 'output * power off'" resume "swaymsg 'output * power on'" \
+      timeout 1700 "pidof $locker >/dev/null || $locker &" \
+      timeout 1800 "swaymsg 'output * power off'" resume "swaymsg 'output * power on'" \
       before-sleep "$locker" &
   fi
 }
 
 start() {
   swayidle -w \
-    timeout 1700 "pidof $locker >/dev/null || $locker" &
-  timeout 1800 "swaymsg 'output * power off'" resume "swaymsg 'output * power on'" \
+    timeout 1700 "pidof $locker >/dev/null || $locker &" \
+    timeout 1800 "swaymsg 'output * power off'" resume "swaymsg 'output * power on'" \
     before-sleep "$locker" &
 }
 
