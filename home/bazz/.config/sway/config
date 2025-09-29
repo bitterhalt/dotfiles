@@ -150,7 +150,7 @@ bindsym $mod+n mode $mode_todo
 bindsym $mod+p      mode $mode_power
 bindsym $mod+prior  mode $mode_apps
 bindsym $mod+s exec $search
-bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
+bindsym $mod+shift+F11 exec ~/.config/sway/scripts/idle-daemon.sh --toggle && $sig_1
 bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
 bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
 bindsym $mod+shift+delete exec $term -T htop -a floattop -e htop
@@ -440,7 +440,7 @@ client.background       $fg1
 #                      AUTO START                     #
 #-----------------------------------------------------#
 
-exec swayidle -w
+exec ~/.config/sway/scripts/idle-daemon.sh
 exec autotiling -l 2 -sw 0.95
 exec swww-daemon
 exec foot --server
