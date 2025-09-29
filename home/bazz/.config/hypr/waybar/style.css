@@ -93,13 +93,13 @@ window#waybar.empty #window {
 #clock,
 #battery,
 #wireplumber,
-#custom-mic,
+#custom-expand-right,
 #custom-idle,
 #custom-idle,
 #tray,
 #network {
   color: @tx-1;
-  margin: 2px 1px;
+  margin: 2px 2px;
   padding: 0 10px;
 }
 
@@ -136,21 +136,14 @@ window#waybar.empty #window {
     opacity: 0;
   }
 }
-
-#custom-power {
-  color: @tx-1;
-  margin: 2px 4px;
-  padding: 0 10px;
-}
 /* -----------------------------------------------------
  *                      Hover candy
  * ----------------------------------------------------- */
 #clock:hover,
+#custom-expand-right:hover,
 #custom-idle:hover,
-#custom-power:hover,
 #network:hover,
 #tray menu menuitem:hover,
-#tray:hover,
 #wireplumber:hover,
 #workspaces button:hover {
   background: @ui-2;

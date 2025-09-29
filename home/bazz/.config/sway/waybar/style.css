@@ -90,17 +90,16 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  *                      Modules
  * ----------------------------------------------------- */
-#battery,
 #clock,
+#battery,
+#wireplumber,
+#custom-expand-right,
 #custom-idle,
 #custom-idle,
-#custom-mic,
-#custom-wf-recorder,
-#network,
 #tray,
-#wireplumber {
+#network {
   color: @tx-1;
-  margin: 2px 1px;
+  margin: 2px 2px;
   padding: 0 10px;
 }
 
@@ -138,15 +137,11 @@ window#waybar.empty #window {
   }
 }
 
-#custom-power {
-  color: @tx-1;
-  margin: 2px 5px;
-  padding: 0 10px;
-}
 /* -----------------------------------------------------
  *                      Hover candy
  * ----------------------------------------------------- */
 #clock:hover,
+#custom-expand-right:hover,
 #custom-idle:hover,
 #custom-power:hover,
 #network:hover,

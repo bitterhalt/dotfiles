@@ -5,12 +5,11 @@
   "modules-left": ["sway/workspaces", "sway/window"],
   "modules-center": ["clock", "custom/wf-recorder", "sway/mode"],
   "modules-right": [
-    "tray",
     "network",
     "group/sound",
     "custom/idle",
     "battery",
-    "custom/power",
+    "group/expand-right",
   ],
   "sway/workspaces": {
     "disable-scroll": true,
@@ -97,9 +96,8 @@
     "interval": 60,
     "on-click": "~/.local/bin/noti_cal",
   },
-  "custom/power": {
-    "interval": "once",
-    "format": "󰐥",
+  "custom/expand-right": {
+    "format": "",
     "tooltip": false,
     "on-click": "~/.local/bin/menu_scripts/fuzzel_power",
   },
@@ -127,5 +125,14 @@
       "transition-to-left": true,
     },
     "modules": ["wireplumber#sink", "wireplumber#source"],
+  },
+  "group/expand-right": {
+    "orientation": "inherit",
+    "drawer": {
+      "click-to-reveal": false,
+      "transition-duration": 700,
+      "transition-to-left": true,
+    },
+    "modules": ["custom/expand-right", "tray"],
   },
 }
