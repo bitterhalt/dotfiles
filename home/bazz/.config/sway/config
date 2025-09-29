@@ -24,7 +24,7 @@ set $alt Mod1
 # Defaults
 set $browser firefox
 set $gfm thunar
-set $locker swaylock
+set $locker hyprlock
 set $mail thunderbird
 set $term footclient
 set $tuifm foot -T lf -e lf
@@ -283,7 +283,7 @@ bindsym XF86MonBrightnessDown exec ~/.config/sway/scripts/brightness.sh down"
 mode $mode_power {
   bindsym s exec systemctl poweroff,         mode default
   bindsym e exec $bye,                       mode default
-  bindsym l exec $locker,                    mode default
+  bindsym l exec $locker &,                    mode default
   bindsym r exec systemctl reboot,           mode default
   bindsym z exec systemctl suspend,          mode default
   bindsym return mode default
