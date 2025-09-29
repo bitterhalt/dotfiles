@@ -4,8 +4,8 @@ locker="hyprlock"
 icons="$HOME/.local/share/icons/feather/"
 
 toggle() {
-  if pgrep swayidle >/dev/null; then
-    pkill swayidle
+  if pgrep -x swayidle >/dev/null; then
+    pkill -x swayidle
     notify-send -i "$icons"/eye.svg "Swayidle" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
   else
     notify-send -i "$icons"/eye-off.svg "Swayidle" "Enabled" -t 1500 -h string:x-canonical-private-synchronous:volume

@@ -7,10 +7,9 @@ FOOT
 FUZZEL
 NEOVIM
 SWAY
-SWAYIDLE
 WAYBAR
 "
-CHOICE=$(printf "$ARCHIVE" | fuzzel -d -a top --y 4 -w 30 -l 8 -p "Edit settings: ")
+CHOICE=$(printf "$ARCHIVE" | fuzzel -d -a top --y 4 -w 30 --minimal-lines -p "Edit settings: ")
 
 TERMCMD=("foot")
 
@@ -21,6 +20,5 @@ FOOT) exec $TERMCMD -e nvim $HOME/.config/foot/foot.ini ;;
 FUZZEL) exec $TERMCMD -e nvim $HOME/.config/fuzzel/fuzzel.ini ;;
 NEOVIM) exec $TERMCMD -e nvim $HOME/.config/nvim/init.lua ;;
 SWAY) exec $TERMCMD -e nvim $HOME/.config/sway/config ;;
-SWAYIDLE) exec $TERMCMD -e nvim $HOME/.config/swayidle/config ;;
 WAYBAR) exec $TERMCMD -e nvim $HOME/.config/sway/waybar/config.jsonc $HOME/.config/sway/waybar/style.css ;;
 esac
