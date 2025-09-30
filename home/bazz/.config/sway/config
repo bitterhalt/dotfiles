@@ -351,9 +351,6 @@ assign [app_id="net.lutris.Lutris|pcsx2"]           5
 assign [class="steam"]                              5
 assign [app_id="virt-manager"]                      8
 
-# Scratchpad
-#for_window [app_id="vesktop|discord"] move scratchpad
-
 #----------------------#
 #       FLOATERS       #
 #----------------------#
