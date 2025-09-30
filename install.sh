@@ -44,11 +44,9 @@ cd "$tmpdir" && makepkg -si --noconfirm
 rm -rf -- "$tmpdir"
 
 # ==============================================================================
-# 4. CLONE AND SYNC DOTFILES
+# 4. SYNC DOTFILES
 # ==============================================================================
 
-echo "Cloning dotfiles"
-git clone https://github.com/bitterhalt/dotfiles "${HOME}/dotfiles"
 cd ~/dotfiles
 rsync -avhu home/bazz/ ~/
 sleep 1 && clear
