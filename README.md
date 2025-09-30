@@ -25,36 +25,36 @@ I have almost identical setups with both Sway and Hyprland.
 
 > Busy
 >
-> <img src="home/bazz/.local/share/screenshots/screenshot.png" width="100%" />
+> <img src=".assets/screenshots/screenshot.png" width="100%" />
 > Fuzzel
 >
-> <img src="home/bazz/.local/share/screenshots/screenshot2.png" width="100%" />
+> <img src=".assets/screenshots/screenshot2.png" width="100%" />
 > Lockscreen
 >
-> <img src="home/bazz/.local/share/screenshots/hyprlock.png" width="100%" />
+> <img src=".assets/screenshots/hyprlock.png" width="100%" />
 
 Some fuzzel menus
 
 > Settings
 >
-> <img src="home/bazz/.local/share/screenshots/fuzzel-settings.png" width="50%" />
+> <img src=".assets/screenshots/fuzzel-settings.png" width="50%" />
 >
 > Clipboard
 >
-> <img src="home/bazz/.local/share/screenshots/fuzzel-clipboard.png" width="50%" />
+> <img src=".assets/screenshots/fuzzel-clipboard.png" width="50%" />
 >
 > Emoji
 >
-> <img src="home/bazz/.local/share/screenshots/fuzzel-emoji.png" width="50%" />
+> <img src=".assets/screenshots/fuzzel-emoji.png" width="50%" />
 >
 > Window list
 >
-> <img src="home/bazz/.local/share/screenshots/fuzzel_window.png" width="80%" />
+> <img src=".assets/screenshots/fuzzel_window.png" width="80%" />
 >
 > Fast neovim with LSP 🚀
 >
-> <img src="home/bazz/.local/share/screenshots/nvim.png" width="50%" />
-> <img src="home/bazz/.local/share/screenshots/nvim2.png" width="50%" />
+> <img src=".assets/screenshots/nvim.png" width="50%" />
+> <img src=".assets/screenshots/nvim2.png" width="50%" />
 
 ---
 
@@ -66,12 +66,12 @@ There are lots of them so I don't list them here
 
 ---
 
-### Installation 
+### Installation
 
 > ⚠️ Installation script is still WIP, so please be careful. I don't recommend blindly copying the entire repository, but rather taking bits and pieces from here and there.
 
 ```bash
-bash <(curl -L https://codeberg.org/bt-halt/dotfiles/raw/branch/main/curl.sh)
+bash <(curl -L https://codeberg.org/bt-halt/dotfiles/raw/branch/main/.assets/curl.sh)
 ```
 
 ---
