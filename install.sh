@@ -30,7 +30,7 @@ fi
 # ==============================================================================
 
 echo "Updating system and installing required tools: git, base-devel, rsync, xdg-user-dirs"
-sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs | exit 1
+sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs || exit 1
 
 # ==============================================================================
 # 3. INSTALL YAY (AUR HELPER)
