@@ -88,3 +88,4 @@ bash <(curl -L https://codeberg.org/bt-halt/dotfiles/raw/branch/main/curl.sh)
 ### Special thanks ⭐
 
 - [fesowowako](https://github.com/fesowowako) and his commits from [My Sway-dotfiles](https://github.com/bitterhalt/dots-sway)
+- [NihaAlGhul](https://codeberg.org/NihaAlGhul) For making installation script to actually work ❤️
