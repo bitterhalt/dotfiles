@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+#!/usr/bin/env bash
+
+swaymsg -t get_tree | jq -r '.. |  select(.pid?) | "\nname:\t\t\(.name)\napp id:\t\t\(.app_id)\ntitle:\t\t\(.window_properties.title)\nclass:\t\t\(.window_properties.class)\ninstance:\t\(.window_properties.instance)"'

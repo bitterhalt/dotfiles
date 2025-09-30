@@ -370,7 +370,7 @@ for_window [class="steam" instance="steam"]                                     
 for_window [instance="origin.exe"]                                                     floating enable
 
 # Tweaked floaters
-for_window [app_id="Signal|discord"]           floating enable, move position center
+for_window [app_id="Signal|discord"]          floating enable, move position center
 for_window [app_id="floating_shell_portrait"] floating enable, border pixel 2, sticky enable, resize set width 30 ppt height 40 ppt
 for_window [app_id="floatterm"]               floating enable, resize set width 50 ppt height 60 ppt
 for_window [app_id="noterm"]                  floating enable, resize set width 100 ppt height 70 ppt, move position 0 0, resize set width 60ppt
@@ -381,6 +381,8 @@ for_window [app_id="scpterm"]                 floating enable, resize set width 
 for_window [app_id="swayimg|floattop"]        floating enable, resize set width 90 ppt height 90 ppt
 
 # Title-based floaters
+for_window [app_id="^thunderbird$" title="^Edit Item$"]   floating enable
+for_window [app_id="^thunderbird$" title="^Write:(.*)$"]  floating enable
 for_window [title="(?:Open|Save) (?:File|Folder|As)"]     floating enable
 for_window [title="About Mozilla Firefox"]                floating enable
 for_window [title="Choose User Profile"]                  floating enable
