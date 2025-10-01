@@ -9,17 +9,17 @@
 include ~/.config/sway/config.d/*
 
 # Vim keys for moving
-set $left h
 set $down j
-set $up k
+set $left h
 set $right l
+set $up k
 
 # Xcursor
 set $xcursor Bibata-Modern-Classic 24
 
 # Modifier
-set $mod Mod4
 set $alt Mod1
+set $mod Mod4
 
 # Defaults
 set $browser firefox
@@ -35,20 +35,21 @@ set $clip ~/.local/bin/menu_scripts/fuzzel_clipboard
 set $drun fuzzel
 set $editor foot -T nvim -e nvim
 set $emojimenu ~/.local/bin/menu_scripts/fuzzel_emoji
-set $search ~/.local/bin/menu_scripts/fuzzel_search
 set $killer ~/.local/bin/menu_scripts/fuzzel_killer
+set $pass ~/.local/bin/menu_scripts/fuzzel_passmenu
 set $powermenu ~/.local/bin/menu_scripts/fuzzel_power
 set $screenshot ~/.local/bin/menu_scripts/fuzzel_screenshot
+set $search ~/.local/bin/menu_scripts/fuzzel_search
+set $sound ~/.local/bin/menu_scripts/fuzzel_sound
 set $winmenu ~/.local/bin/menu_scripts/fuzzel_sway_window
-set $pass ~/.local/bin/menu_scripts/fuzzel_passmenu
 
 # Misc
-set $colorpicker ~/.config/sway/scripts/colorpicker
-set $updater foot -T pop-upgrade -a popupgrade -e popupgrade
-set $pac-installer foot -T pacseek -a pacseek -e pacseek
-set $notes foot -a noterm -T Notes -e nvim -p ~/Documents/personal/notes/index.md
-set $todo foot -a noterm -T Notes -e nvim -p ~/Documents/personal/notes/todo.md
 set $bye loginctl terminate-user "$USER"
+set $colorpicker ~/.config/sway/scripts/colorpicker
+set $notes foot -a noterm -T Notes -e nvim -p ~/Documents/personal/notes/index.md
+set $pac-installer foot -T pacseek -a pacseek -e pacseek
+set $todo foot -a noterm -T Notes -e nvim -p ~/Documents/personal/notes/todo.md
+set $updater foot -T pop-upgrade -a popupgrade -e popupgrade
 
 # Bar signals
 set $sig_1 pkill -SIGRTMIN+1 waybar
@@ -67,8 +68,8 @@ font Cascadia Code 11
 
 # Titlebar
 title_align center
-titlebar_padding 3
 titlebar_border_thickness 1
+titlebar_padding 3
 
 # Border size
 default_border pixel 2
@@ -119,47 +120,53 @@ input type:touchpad {
 #                      BINDS                          #
 #-----------------------------------------------------#
 
+# Essentials
 bindsym $mod+F1 exec galculator
+bindsym $mod+F2 exec signal-desktop
+bindsym $mod+Return exec $term
+bindsym $mod+e exec $tuifm
+bindsym $mod+m exec $mail
+bindsym $mod+shift+delete exec $term -T htop -a floattop -e htop
+bindsym $mod+shift+e exec $gfm
+bindsym $mod+v exec $editor
+bindsym $mod+w exec $browser
+
+# System
 bindsym $mod+F10 exec ~/.config/sway/scripts/mic-toggle.sh
 bindsym $mod+F11 exec $locker
+bindsym $mod+Print exec ~/.local/bin/wl-shot -f
+bindsym $mod+ctrl+F8 exec ~/.local/bin/wl-record -k
+bindsym $mod+ctrl+d exec fnottctl dismiss
+bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
+bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
+bindsym $mod+shift+w exec $wallpaper
+
+# Helpers
+bindsym $mod+ctrl+i exec $pac-installer
+bindsym $mod+ctrl+p exec $colorpicker
+bindsym $mod+ctrl+u exec $updater
+bindsym $mod+t exec ~/.local/bin/noti_date
+
+# Menus
 bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
-bindsym $mod+F2 exec signal-desktop
 bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed -e 's/bindsym / /' -e 's/\$mod/Super/g' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
 bindsym $mod+F4 exec $killer
 bindsym $mod+F5 exec $pass
+bindsym $mod+ctrl+c exec $clip
+bindsym $mod+ctrl+e exec $emojimenu
+bindsym $mod+ctrl+s exec $sound
+bindsym $mod+d exec $drun
+bindsym $mod+s exec $search
+bindsym $mod+tab exec $winmenu
+
+# Modes
 bindsym $mod+F6 mode $mode_shot
 bindsym $mod+F7 mode $mode_rec
-bindsym $mod+Print exec ~/.local/bin/wl-shot -f
-bindsym $mod+Return exec $term
-bindsym $mod+ctrl+F8 exec ~/.local/bin/wl-record -k
-bindsym $mod+ctrl+a exec ~/.config/sway/scripts/autotiling-toggle.sh
-bindsym $mod+ctrl+c exec $clip
-bindsym $mod+ctrl+d exec fnottctl dismiss
-bindsym $mod+ctrl+e exec $emojimenu
-bindsym $mod+ctrl+g smart_gaps toggle
-bindsym $mod+ctrl+i exec $pac-installer
-bindsym $mod+ctrl+p exec $colorpicker
-bindsym $mod+ctrl+s exec ~/.local/bin/menu_scripts/fuzzel_sound
-bindsym $mod+ctrl+u exec $updater
-bindsym $mod+ctrl+w exec ~/.local/bin/weatherfetch -n
-bindsym $mod+d exec $drun
-bindsym $mod+e exec $tuifm
-bindsym $mod+i  mode $mode_info
-bindsym $mod+m exec $mail
+bindsym $mod+i mode $mode_info
 bindsym $mod+n mode $mode_todo
-bindsym $mod+p      mode $mode_power
+bindsym $mod+p mode $mode_power
 bindsym $mod+prior  mode $mode_apps
-bindsym $mod+s exec $search
-bindsym $mod+shift+F11 exec ~/.config/sway/scripts/swayidle-toggle.sh && $sig_1
-bindsym $mod+shift+F2 exec ~/.local/bin/noti_usage ram
-bindsym $mod+shift+Print exec ~/.local/bin/wl-shot -re
-bindsym $mod+shift+delete exec $term -T htop -a floattop -e htop
-bindsym $mod+shift+e exec $gfm
-bindsym $mod+shift+w exec $wallpaper
-bindsym $mod+t exec ~/.local/bin/noti_date
-bindsym $mod+tab exec $winmenu
-bindsym $mod+v exec $editor
-bindsym $mod+w exec $browser
+
 # Kill focused window
 bindsym $mod+q kill
 
@@ -173,26 +180,26 @@ floating_modifier $mod normal
 bindsym $mod+ctrl+r reload
 
 # Move your focus with $mod + Vim keys
-bindsym $mod+$left focus left
 bindsym $mod+$down focus down
-bindsym $mod+$up focus up
+bindsym $mod+$left focus left
 bindsym $mod+$right focus right
+bindsym $mod+$up focus up
 # With $mod+arrows
-bindsym $mod+Left focus left
 bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Left focus left
 bindsym $mod+Right focus right
+bindsym $mod+Up focus up
 
 # Move the focused window
-bindsym $mod+shift+$left move left
 bindsym $mod+shift+$down move down
-bindsym $mod+shift+$up move up
+bindsym $mod+shift+$left move left
 bindsym $mod+shift+$right move right
+bindsym $mod+shift+$up move up
 # Same with arrow keys
-bindsym $mod+shift+Left move left
 bindsym $mod+shift+Down move down
-bindsym $mod+shift+Up move up
+bindsym $mod+shift+Left move left
 bindsym $mod+shift+Right move right
+bindsym $mod+shift+Up move up
 
 # Switch to workspace
 bindsym $mod+1 workspace number 1
@@ -215,6 +222,12 @@ bindsym $mod+shift+6 move container to workspace number 6
 bindsym $mod+shift+7 move container to workspace number 7
 bindsym $mod+shift+8 move container to workspace number 8
 bindsym $mod+shift+9 move container to workspace number 9
+
+# Toggle autotiling
+bindsym $mod+ctrl+a exec ~/.config/sway/scripts/autotiling-toggle.sh
+
+# Toggle smart gaps
+bindsym $mod+ctrl+g smart_gaps toggle
 
 # Toggle between horizontal and vertical splits
 bindsym $mod+period split toggle
@@ -247,29 +260,29 @@ bindsym $mod+x [app_id="scpterm"] scratchpad show
 bindsym $mod+c [app_id="vesktop|discord"] scratchpad show
 
 # Resizing containers
-bindsym $mod+ctrl+Right resize shrink width 10 px
-bindsym $mod+ctrl+Up resize grow height 10 px
 bindsym $mod+ctrl+Down resize shrink height 10 px
 bindsym $mod+ctrl+Left resize grow width 10 px
+bindsym $mod+ctrl+Right resize shrink width 10 px
+bindsym $mod+ctrl+Up resize grow height 10 px
 # Same but vim keys
-bindsym $mod+ctrl+l resize shrink width 10 px
-bindsym $mod+ctrl+k resize grow height 10 px
-bindsym $mod+ctrl+j resize shrink height 10 px
 bindsym $mod+ctrl+h resize grow width 10 px
+bindsym $mod+ctrl+j resize shrink height 10 px
+bindsym $mod+ctrl+k resize grow height 10 px
+bindsym $mod+ctrl+l resize shrink width 10 px
 
 # Media keys
-bindsym XF86AudioRaiseVolume exec ~/.config/sway/scripts/volume.sh up
-bindsym XF86AudioLowerVolume exec ~/.config/sway/scripts/volume.sh down
-bindsym ctrl+shift+Up exec ~/.config/sway/scripts/volume.sh up
-bindsym ctrl+shift+Down exec ~/.config/sway/scripts/volume.sh down
-bindsym XF86AudioMute exec ~/.config/sway/scripts/volume.sh mute
-bindsym XF86AudioMicMute exec ~/.config/sway/scripts/mic-toggle.sh
-bindsym XF86Calculator exec galculator
-bindsym XF86AudioPlay exec ~/.config/sway/scripts/mediactrl.sh --play
-bindsym XF86AudioStop exec ~/.config/sway/scripts/mediactrl.sh --stop
-bindsym XF86AudioNext exec ~/.config/sway/scripts/mediactrl.sh --nxt
-bindsym XF86AudioPrev exec ~/.config/sway/scripts/mediactrl.sh --prv
 bindsym $mod+ctrl+m exec ~/.config/sway/scripts/mediactrl.sh --noti
+bindsym XF86AudioLowerVolume exec ~/.config/sway/scripts/volume.sh down
+bindsym XF86AudioMicMute exec ~/.config/sway/scripts/mic-toggle.sh
+bindsym XF86AudioMute exec ~/.config/sway/scripts/volume.sh mute
+bindsym XF86AudioNext exec ~/.config/sway/scripts/mediactrl.sh --nxt
+bindsym XF86AudioPlay exec ~/.config/sway/scripts/mediactrl.sh --play
+bindsym XF86AudioPrev exec ~/.config/sway/scripts/mediactrl.sh --prv
+bindsym XF86AudioRaiseVolume exec ~/.config/sway/scripts/volume.sh up
+bindsym XF86AudioStop exec ~/.config/sway/scripts/mediactrl.sh --stop
+bindsym XF86Calculator exec galculator
+bindsym ctrl+shift+Down exec ~/.config/sway/scripts/volume.sh down
+bindsym ctrl+shift+Up exec ~/.config/sway/scripts/volume.sh up
 
 # Brightness ctrl
 bindsym XF86MonBrightnessUp exec  ~/.config/sway/scripts/brightness.sh up"
@@ -362,7 +375,7 @@ for_window [app_id="gimp|mpv|net.lutris.Lutris|pcsx2"] floating enable
 for_window [app_id="virt-manager"] floating enable
 for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 for_window [app_id="yad"] floating enable
-for_window [class="GParted|Signal"] floating enable
+for_window [class="GParted|Signal|Pinentry-gtk"] floating enable
 for_window [class="steam" instance="steam"] floating enable
 for_window [instance="origin.exe"] floating enable
 
