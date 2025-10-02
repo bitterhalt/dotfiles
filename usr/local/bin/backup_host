@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+###############################################################################
+# WARNING: THIS SCRIPT IS FOR PERSONAL USE ONLY (USER: bazz)
+# DO NOT RUN THIS SCRIPT UNCHANGED ON ANOTHER SYSTEM!
+# - It contains hardcoded paths (/mnt/wd1tb/backup/host)
+# - It assumes a user named "bazz"
+# - It will overwrite and delete files (--delete in rsync)
+#
+# If you want to reuse it, EDIT all paths, usernames, and options
+# before running. Using it as-is may cause DATA LOSS!
+###############################################################################
+
 # Your user name here
 user="bazz"
 
@@ -10,6 +21,16 @@ DEST_ETC="/mnt/wd1tb/backup/host/etc"
 mkdir -p "$DEST_HOME"
 mkdir -p "$DEST_ETC"
 
-rsync -avu --delete --exclude-from="$EXCLUDE_FILE" /home/"$user"/ "$DEST_HOME/"
+# 1. General backup (preserve original permissions)
+rsync -avu --delete --exclude-from="$EXCLUDE_FILE" \
+  /home/"$user"/ "$DEST_HOME/"
+
 rsync -avu --delete --exclude-from="$EXCLUDE_FILE" /etc "$DEST_ETC/"
-chown -R "$user":"$user" $DEST_HOME $DEST_ETC
+
+# 2. Special sync for photo imports (force user read/write)
+rsync -avu --delete \
+  --chmod=Du=rwx,Fu=rw \
+  /home/"$user"/Pictures/Puhelin/ "$DEST_HOME/Pictures/Puhelin/"
+
+# 3. Fix ownership (so user "bazz" owns everything in backup)
+chown -R "$user":"$user" "$DEST_HOME" "$DEST_ETC"

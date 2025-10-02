@@ -55,6 +55,7 @@ imagemagick
 impala
 iwd
 jq
+keepassxc
 lf
 libpulse
 libva-utils
@@ -93,6 +94,7 @@ polkit-gnome
 popsicle-bin
 python-llfuse
 python-pipx
+qt5-wayland
 qt6-wayland
 qt6ct
 rate-mirrors-bin
