@@ -36,10 +36,11 @@ sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs || exit
 # 3. INSTALL YAY (AUR HELPER)
 # ==============================================================================
 
-tmpdir="$(mktemp -d --tmpdir yay-build-XXXXXX)"
+helper="$(head -n 1 pkg.list)"
+tmpdir="$(mktemp -d --tmpdir ${helper%%:*}-build-XXXXXX)"
 trap 'rm -rf -- "$tmpdir"' EXIT # rm the tempdir if the script exits unexpectedly
-echo "Installing yay..."
-git clone https://aur.archlinux.org/yay.git "$tmpdir"
+echo "Installing ${helper%%:*}..."
+git clone https://aur.archlinux.org/${helper##*:}.git "$tmpdir"
 cd "$tmpdir" && makepkg -si --noconfirm
 rm -rf -- "$tmpdir"
 
@@ -56,11 +57,11 @@ sleep 1 && clear
 # ==============================================================================
 
 # Install packages
-if [[ -f packages ]]; then
+if [[ -f pkg.list ]]; then
   echo "Installing programs..."
-  yay -S --needed - <packages
+  yay -S --needed $(tail pkg.list -n +2)
 else
-  echo "Error: 'packages' file not found!" >&2
+  echo "Error: './pkg.list' file not found!" >&2
   exit 1
 fi
 sleep 1 && clear
