@@ -42,6 +42,7 @@ trap 'rm -rf -- "$tmpdir"' EXIT # rm the tempdir if the script exits unexpectedl
 echo "Installing ${helper%%:*}..."
 git clone https://aur.archlinux.org/${helper##*:}.git "$tmpdir"
 cd "$tmpdir" && makepkg -si --noconfirm
+cd $OLDPWD
 rm -rf -- "$tmpdir"
 
 # ==============================================================================
@@ -51,6 +52,7 @@ rm -rf -- "$tmpdir"
 cd ~/dotfiles
 rsync -avhu home/bazz/ ~/
 sleep 1 && clear
+cd $OLDPWD
 
 # ==============================================================================
 # 5. INSTALL PACKAGES FROM THE DOTFILES LIST
