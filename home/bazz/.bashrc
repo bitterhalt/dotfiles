@@ -48,6 +48,7 @@ alias mv="mv -iv"
 alias rm="rm -vI"
 # Pacman
 alias cleanup="sudo pacman -Rns $(pacman -Qtdq)" # remove orphaned packages
+alias pacdiff="sudo DIFFPROG=nvim pacdiff"
 alias pkglist="pacman -Qe > ~/Documents/projects/dotfiles/packages"
 # Vim
 alias vi="nvim"
