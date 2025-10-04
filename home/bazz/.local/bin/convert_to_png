@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# Converts one or more image files to PNG format using ImageMagick.
+# Automatically deletes the original files after successful conversion.
+# Usage: ./convert_to_png.sh <image1> [image2 ...]
+
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <image_file1> [image_file2 ...]"
+  exit 1
+fi
+
+for input in "$@"; do
+  if [ ! -f "$input" ]; then
+    echo "Skipping: '$input' (file not found)"
+    continue
+  fi
+
+  if [[ "$input" == *.png ]]; then
+    echo "Skipping: '$input' (already PNG)"
+    continue
+  fi
+
+  base="${input%.*}"
+  output="${base}.png"
+
+  magick "$input" "$output"
+
+  if [ $? -eq 0 ]; then
+    echo "Converted: $output"
+    rm "$input"
+    echo "Deleted original: $input"
+  else
+    echo "Failed to convert: $input"
+  fi
+done
