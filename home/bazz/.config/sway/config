@@ -57,7 +57,7 @@ set $sig_1 pkill -SIGRTMIN+1 waybar
 set $sig_2 pkill -SIGRTMIN+2 waybar
 
 # Mode
-set $mode_apps "APPS: [D]iscord [F]firefox [S]Steam [T]hunderbird [A]ll"
+set $mode_apps "APPS: [D]iscord [F]irefox [S]steam [T]hunderbird [A]ll"
 set $mode_info "INFO: [I]info [C]pu [M]em [W]eather"
 set $mode_power "POWER: [L]ock [E]xit [R]eboot [S]hutdown [Z]zz"
 set $mode_rec "RECORD: [F]ulscreen [A]+audio [R]egion [S]top"
