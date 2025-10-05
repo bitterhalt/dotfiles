@@ -286,8 +286,8 @@ bindsym ctrl+shift+Down exec ~/.config/sway/scripts/volume.sh down
 bindsym ctrl+shift+Up exec ~/.config/sway/scripts/volume.sh up
 
 # Brightness ctrl
-bindsym XF86MonBrightnessUp exec  ~/.config/sway/scripts/brightness.sh up"
-bindsym XF86MonBrightnessDown exec ~/.config/sway/scripts/brightness.sh down"
+bindsym XF86MonBrightnessUp exec  ~/.config/sway/scripts/brightness.sh up
+bindsym XF86MonBrightnessDown exec ~/.config/sway/scripts/brightness.sh down
 
 #-----------------------------------------------------#
 #                      MODES                          #
