@@ -122,7 +122,7 @@
     "return-type": "json",
     "format": "{}",
     "exec": "echo '{\"class\": \"recording\",\"text\":\"󰻂\",\"tooltip\":\"Click right to stop recording\"}'",
-    "exec-if": "pgrep wf-recorder",
+    "exec-if": "pgrep wl-screenrec",
     "on-click": "~/.local/bin/wl-record -k",
     "signal": 2,
   },

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Small helper script to record your desktop on sway or any wl-roots based WM
 # Video part is tested only with AMD gpu
-# Depends on: wf-recoder, slurp, vaapi
+# Depends on: wl-screenrec, slurp, vaapi
 # Github @ bitterhalt
 
 set -e
@@ -12,8 +12,7 @@ FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
 mkdir -p -- "$SAVEDIR"
 
 fullscreen() {
-  wf-recorder \
-    -c h264_vaapi \
+  wl-screenrec \
     -f "$FILENAME" &
   pkill -RTMIN+2 waybar
 }
@@ -28,9 +27,9 @@ fullscreen_sound() {
   fi
   AUDIO_SOURCE="$DEFAULT_SINK.monitor"
 
-  wf-recorder \
-    -a="$AUDIO_SOURCE" \
-    -c h264_vaapi \
+  wl-screenrec \
+    --audio \
+    --audio-device "$AUDIO_SOURCE" \
     -f "$FILENAME" &
   pkill -RTMIN+2 waybar
 }
@@ -38,17 +37,16 @@ fullscreen_sound() {
 region() {
   GEOM=$(slurp)
   [ -z "$GEOM" ] && exit 1 # Exit if no region selected (e.g., Escape pressed)
-  wf-recorder \
-    -c libx264rgb \
+  wl-screenrec \
     -g "$GEOM" \
     -f "$FILENAME" &
   pkill -RTMIN+2 waybar
 }
 
 kill() {
-  killall -s SIGINT wf-recorder
+  killall -s SIGINT wl-screenrec
   notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
-  while [ ! -z $(pgrep -x wf-recorder) ]; do wait; done
+  while [ ! -z $(pgrep -x wl-screenrec) ]; do wait; done
   pkill -RTMIN+2 waybar
 }
 
