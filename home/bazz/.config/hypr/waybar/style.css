@@ -70,6 +70,7 @@ tooltip label {
 
 #workspaces button.urgent {
   color: @magenta;
+  font-family: Cascadia Code SemiBold;
 }
 #submap {
   background-color: @bg-2;
