@@ -14,7 +14,6 @@ mkdir -p -- "$SAVEDIR"
 fullscreen() {
   wl-screenrec \
     -f "$FILENAME" &
-  pkill -RTMIN+2 waybar
 }
 
 fullscreen_sound() {
@@ -31,7 +30,6 @@ fullscreen_sound() {
     --audio \
     --audio-device "$AUDIO_SOURCE" \
     -f "$FILENAME" &
-  pkill -RTMIN+2 waybar
 }
 
 region() {
@@ -40,14 +38,12 @@ region() {
   wl-screenrec \
     -g "$GEOM" \
     -f "$FILENAME" &
-  pkill -RTMIN+2 waybar
 }
 
 kill() {
   killall -s SIGINT wl-screenrec
   notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
   while [ ! -z $(pgrep -x wl-screenrec) ]; do wait; done
-  pkill -RTMIN+2 waybar
 }
 
 print_help() {

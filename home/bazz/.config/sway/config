@@ -344,10 +344,10 @@ mode $mode_shot {
 
 # Rec
 mode $mode_rec {
-  bindsym f exec wl-record -f,                   mode default
-  bindsym r exec wl-record -r,                   mode default
-  bindsym a exec wl-record -fs,                  mode default
-  bindsym s exec wl-record -k,                   mode default
+  bindsym f exec wl-record -f && $sig_2,                   mode default
+  bindsym r exec wl-record -r && $sig_2,                   mode default
+  bindsym a exec wl-record -fs && $sig_2,                  mode default
+  bindsym s exec wl-record -k && $sig_2,                   mode default
   bindsym return mode default
   bindsym escape mode default
 }
