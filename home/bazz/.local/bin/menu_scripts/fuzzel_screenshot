@@ -12,8 +12,14 @@ get_options() {
   echo "Stop Recording"
 }
 
-main() {
+# Ping waybar
+sig() {
+  if pgrep -x waybar >/dev/null 2>&1; then
+    pkill -SIGRTMIN+2 waybar
+  fi
+}
 
+main() {
   choice=$( (get_options) | fuzzel -d -a top --y 4 -w 22 -l 7 --hide-prompt)
 
   if [[ -z "${choice// /}" ]]; then
@@ -22,13 +28,13 @@ main() {
 
   case $choice in
   'Record Screen')
-    wl-record -f
+    wl-record -f && sig
     ;;
   'Record Screen (Audio)')
-    wl-record -fs
+    wl-record -fs && sig
     ;;
   'Record Region')
-    wl-record -r
+    wl-record -r && sig
     ;;
   'Screenshot Full')
     wl-shot -f
@@ -40,11 +46,10 @@ main() {
     wl-shot -t
     ;;
   'Stop Recording')
-    wl-record -k
+    wl-record -k && sig
     ;;
   esac
 }
 
 main &
-
 exit 0
