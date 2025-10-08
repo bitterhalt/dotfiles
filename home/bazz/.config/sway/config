@@ -57,8 +57,6 @@ set $sig_2 pkill -SIGRTMIN+2 waybar
 set $mode_apps "APPS: [D]iscord [F]irefox [S]steam [T]hunderbird [A]ll"
 set $mode_info "INFO: [I]info [C]pu [M]em [W]eather"
 set $mode_power "POWER: [L]ock [E]xit [R]eboot [S]hutdown [Z]zz"
-set $mode_rec "RECORD: [F]ulscreen [A]+audio [R]egion [S]top"
-set $mode_shot "SCREENSHOT: [F]ulscreen [R]egion [D]elay"
 set $mode_todo "NOTES: [N]ote [T]odo"
 
 # Font
@@ -150,6 +148,7 @@ bindsym $mod+F12 exec ~/.config/sway/scripts/dot-settings.sh
 bindsym $mod+F3 exec cat ~/.config/sway/config | grep 'bindsym' | grep -v '^\s*#' | sed -e 's/bindsym / /' -e 's/\$mod/Super/g' | fuzzel -d -a top --y 4 -w 50 -l 25 -p "Search: "
 bindsym $mod+F4 exec $killer
 bindsym $mod+F5 exec $pass
+bindsym $mod+F8 exec $screenshot
 bindsym $mod+ctrl+c exec $clip
 bindsym $mod+ctrl+e exec $emojimenu
 bindsym $mod+ctrl+s exec $sound
@@ -158,8 +157,6 @@ bindsym $mod+s exec $search
 bindsym $mod+tab exec $winmenu
 
 # Modes
-bindsym $mod+F6 mode $mode_shot
-bindsym $mod+F7 mode $mode_rec
 bindsym $mod+i mode $mode_info
 bindsym $mod+n mode $mode_todo
 bindsym $mod+p mode $mode_power
@@ -326,25 +323,6 @@ mode $mode_info {
 mode $mode_todo {
   bindsym n exec $notes,                         mode default
   bindsym t exec $todo,                          mode default
-  bindsym return mode default
-  bindsym escape mode default
-}
-
-# Shot
-mode $mode_shot {
-  bindsym f exec wl-shot -f,                     mode default
-  bindsym r exec wl-shot -re,                    mode default
-  bindsym d exec wl-shot -t,                     mode default
-  bindsym return mode default
-  bindsym escape mode default
-}
-
-# Rec
-mode $mode_rec {
-  bindsym f exec wl-record -f && $sig_2,                   mode default
-  bindsym r exec wl-record -r && $sig_2,                   mode default
-  bindsym a exec wl-record -fs && $sig_2,                  mode default
-  bindsym s exec wl-record -k && $sig_2,                   mode default
   bindsym return mode default
   bindsym escape mode default
 }
