@@ -4,6 +4,7 @@
 # Locations
 dotfiles_repo=~/Documents/projects/dotfiles
 dotfiles_list=~/.local/share/dotlist
+exclude_path="$HOME/.local/bin/personal"
 
 # Add new dotfiles
 add() {
@@ -16,11 +17,10 @@ add() {
   # Capture pacman package list once
   pacman -Qe | awk '{print $1}' >"$dotfiles_repo/packages" || echo "Warning: Could not update pacman package list."
 
-  # First, clean up the repo for entries that no longer exist
-  echo "[*] Syncing files (including deletions)..."
+  echo "[*] Syncing files (including deletions, excluding $exclude_path)..."
   while IFS= read -r dotfile; do
     if [[ -e "$dotfile" ]]; then
-      if rsync -a --relative --delete "$dotfile" "$dotfiles_repo"/; then
+      if rsync -a --relative --delete --exclude "$exclude_path" "$dotfile" "$dotfiles_repo"/; then
         echo "Synced: $dotfile"
       else
         echo "Failed to sync: $dotfile"
