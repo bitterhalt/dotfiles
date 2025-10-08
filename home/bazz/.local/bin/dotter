@@ -16,21 +16,20 @@ add() {
   # Capture pacman package list once
   pacman -Qe | awk '{print $1}' >"$dotfiles_repo/packages" || echo "Warning: Could not update pacman package list."
 
+  # First, clean up the repo for entries that no longer exist
+  echo "[*] Syncing files (including deletions)..."
   while IFS= read -r dotfile; do
-    if [[ -f "$dotfile" ]]; then
-      if cp --parents "$dotfile" "$dotfiles_repo"; then
-        echo "Copied file: $dotfile"
+    if [[ -e "$dotfile" ]]; then
+      if rsync -a --relative --delete "$dotfile" "$dotfiles_repo"/; then
+        echo "Synced: $dotfile"
       else
-        echo "Failed to copy file: $dotfile"
-      fi
-    elif [[ -d "$dotfile" ]]; then
-      if cp --parents -r "$dotfile" "$dotfiles_repo"; then
-        echo "Copied directory: $dotfile"
-      else
-        echo "Failed to copy directory: $dotfile"
+        echo "Failed to sync: $dotfile"
       fi
     else
-      echo "Skipped: $dotfile (not found)"
+      echo "Missing locally, ensuring deletion in repo: $dotfile"
+      # Compute relative path and delete it from repo if it exists
+      rel_path=$(realpath --relative-to=/ "$dotfile")
+      find "$dotfiles_repo" -path "*/$rel_path" -exec rm -rf {} \; 2>/dev/null
     fi
   done <"$dotfiles_list"
 
