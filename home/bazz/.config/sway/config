@@ -3,11 +3,8 @@
 #                      SWAY SETTINGS                  #
 #-----------------------------------------------------#
 
-# Enable if you use Swayfx tweaks
-#include ~/.config/sway/swayfx
-
-# Set systemd user environment
-include ~/.config/sway/config.d/*
+# Set systemd environment
+include /etc/sway/config.d/*
 
 # Vim keys for moving
 set $down j
