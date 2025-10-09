@@ -61,6 +61,7 @@ libpulse
 libva-utils
 linux
 linux-firmware
+localsend-bin
 logrotate
 man-db
 man-pages
