@@ -9,8 +9,8 @@ CYAN="\033[0;36m"
 RESET="\033[0m"
 
 # Locations / excludes
-dotfiles_repo=$HOME/Documents/projects/dotfiles
-dotfiles_list=$HOME/.local/share/dotlist
+dotfiles_repo="$HOME/Documents/projects/dotfiles"
+dotfiles_list="$HOME/.local/share/dotlist"
 exclude_path="$HOME/.local/bin/personal"
 
 # Add new dotfiles

@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 
-printf "Beginning upgrade.\\n"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+CYAN="\033[0;36m"
+RESET="\033[0m"
 
-yay -Syu
+echo -e "${CYAN}[*] Beginning system upgrade...${RESET}"
 
-printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
+if yay -Syu; then
+  echo -e "\n${GREEN}[✓] Upgrade complete!${RESET}"
+else
+  echo -e "\n${RED}[x] Upgrade failed! Check the errors above.${RESET}"
+fi
+
+echo -e "\n${YELLOW}Press <Enter> to exit this window.${RESET}\n"
 read -r _
