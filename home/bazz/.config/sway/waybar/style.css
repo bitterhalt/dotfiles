@@ -54,6 +54,7 @@ tooltip label {
   background-color: @bg-1;
   margin: 0 4px;
 }
+
 #workspaces button {
   border-radius: 6px;
   color: @tx-1;
@@ -63,6 +64,7 @@ tooltip label {
   min-width: 16px;
   padding: 0 5px;
 }
+
 #workspaces button.focused {
   background-color: @ui-3;
   color: @tx-2;
@@ -73,6 +75,7 @@ tooltip label {
   color: @magenta;
   font-family: Cascadia Code SemiBold;
 }
+
 #mode {
   background-color: @bg-2;
   border-radius: 6px;
@@ -82,10 +85,12 @@ tooltip label {
   margin: 1px 1px;
   padding: 0 10px;
 }
+
 #window {
   color: @tx-1;
   padding: 0 10px;
 }
+
 window#waybar.empty #window {
   background-color: transparent;
 }
