@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if pgrep -x "swayidle" >/dev/null; then
-  echo ""
+if pgrep -x "hypridle" >/dev/null; then
+  echo "{\"text\": \"󰤄\", \"tooltip\": \"<b>Hypridle is enabled</b>\n click left or press  + Shift + F11 to disable\"}"
 else
-  echo "{\"text\": \"󰒳\", \"tooltip\": \"<b>Idle timer is disabled</b>\n click left or press  +Control+F11 to enable\"}"
+  echo "{\"text\": \"󰠠\", \"tooltip\": \"<b>Hypridle is disabled</b>\n click left or press  + Shift + F11 to enable\"}"
 fi
