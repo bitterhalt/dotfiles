@@ -12,6 +12,7 @@
 @define-color cyan #24837B;
 @define-color magenta #A02F6F;
 @define-color red #AF3029;
+@define-color yellow #D0A215;
 
 * {
   font-size: 11pt;
@@ -101,6 +102,10 @@ window#waybar.empty #window {
   color: @tx-1;
   margin: 2px 4px;
   padding: 0 8px;
+}
+
+#custom-idle.disabled {
+  color: @yellow;
 }
 
 #tray menu {
