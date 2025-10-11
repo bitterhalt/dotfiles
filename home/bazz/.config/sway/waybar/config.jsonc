@@ -99,7 +99,11 @@
   "custom/expand-right": {
     "format": "",
     "tooltip": false,
-    "on-click": "~/.local/bin/menu_scripts/fuzzel_power",
+  },
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "exec ~/.local/bin/menu_scripts/fuzzel_power",
+    "tooltip": false,
   },
   "custom/idle": {
     "interval": "once",
@@ -129,10 +133,10 @@
   "group/expand-right": {
     "orientation": "inherit",
     "drawer": {
-      "click-to-reveal": false,
+      "click-to-reveal": true,
       "transition-duration": 700,
       "transition-to-left": true,
     },
-    "modules": ["custom/expand-right", "tray"],
+    "modules": ["custom/expand-right", "tray", "custom/power"],
   },
 }
