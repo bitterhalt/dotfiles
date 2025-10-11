@@ -102,10 +102,10 @@ rate-mirrors-bin
 ripgrep
 rsync
 sassc
-signal-desktop
 slurp
 smartmontools
 snapper
+socat
 starship
 steam
 sudo
