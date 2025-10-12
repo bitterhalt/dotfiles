@@ -6,6 +6,8 @@ FNOTT
 FOOT
 FUZZEL
 HYPRLAND
+HYPRLOCK
+HYPRIDLE
 NEOVIM
 WAYBAR
 "
@@ -18,7 +20,9 @@ BASH) exec $TERMCMD -e nvim $HOME/.bashrc ;;
 FNOTT) exec $TERMCMD -e nvim $HOME/.config/fnott/fnott.ini ;;
 FOOT) exec $TERMCMD -e nvim $HOME/.config/foot/foot.ini ;;
 FUZZEL) exec $TERMCMD -e nvim $HOME/.config/fuzzel/fuzzel.ini ;;
-HYPRLAND) exec $TERMCMD -e nvim $HOME/.config/hypr/hyprland.conf $HOME/.config/hypr/hyprlock.conf $HOME/.config/hypr/hypridle.conf ;;
+HYPRLAND) exec $TERMCMD -e nvim $HOME/.config/hypr/modules/* ;;
+HYPRLOCK) exec $TERMCMD -e nvim $HOME/.config/hypr/hyprlock.conf ;;
+HYPRIDLE) exec $TERMCMD -e nvim $HOME/.config/hypr/hypridle.conf ;;
 NEOVIM) exec $TERMCMD -e nvim $HOME/.config/nvim/init.lua ;;
 WAYBAR) exec $TERMCMD -e nvim $HOME/.config/hypr/waybar/config.jsonc $HOME/.config/hypr/waybar/style.css ;;
 esac
