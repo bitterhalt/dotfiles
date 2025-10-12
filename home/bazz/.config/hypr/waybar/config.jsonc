@@ -140,7 +140,7 @@
   "group/expand-right": {
     "orientation": "inherit",
     "drawer": {
-      "click-to-reveal": true,
+      "click-to-reveal": false,
       "transition-duration": 700,
       "transition-to-left": true,
     },
