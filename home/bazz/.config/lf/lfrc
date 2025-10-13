@@ -27,7 +27,6 @@ map . set hidden!
 map <c-c> clear
 map <c-n> %dragon-drop -i -x $fx # dragon-drop needs to be installed
 map <c-r> reload
-map T $setsid -f $TERMINAL >/dev/null 2>&1
 map <c-z> push :&apack<space>''<space>$fx<left><left><left><left><left> #  Archive
 map <delete> trash
 map <enter> open
@@ -39,11 +38,14 @@ map D trash
 map E unarchive
 map N yank-basename
 map O &xdg-open $f
+map T $setsid -f $TERMINAL >/dev/null 2>&1
 map V push :!nvim<space>
 map X $$f
 map ad mkdir
 map af mkfile
+map c
 map cm chmod
+map d
 map e $$EDITOR "$f"
 map f search
 map o open
@@ -51,8 +53,6 @@ map p :paste; clear
 map x cut
 map y copy
 map z zi
-map d
-map c
 
 #-----------------------------------------------------#
 #                      Jump                           #
