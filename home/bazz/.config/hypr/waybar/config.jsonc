@@ -4,13 +4,7 @@
   //"height": 28,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock", "custom/wf-recorder", "hyprland/submap"],
-  "modules-right": [
-    "network",
-    "group/sound",
-    "custom/idle",
-    "battery",
-    "group/expand-right",
-  ],
+  "modules-right": ["network", "group/sound", "custom/idle", "battery"],
   "hyprland/workspaces": {
     "disable-scroll": true,
   },
@@ -26,14 +20,6 @@
     "icon-size": 20,
     "tooltip": false,
     "separate-outputs": true,
-  },
-  "tray": {
-    "icon-size": 16,
-    "spacing": 12,
-    // Override some ugly icons
-    "icons": {
-      "discord": "discord",
-    },
   },
   "battery": {
     "bat": "BAT0",
@@ -103,15 +89,6 @@
     "interval": 60,
     "on-click": "~/.local/bin/noti_cal",
   },
-  "custom/expand-right": {
-    "format": "",
-    "tooltip": false,
-  },
-  "custom/power": {
-    "format": "⏻",
-    "on-click": "exec ~/.local/bin/menu_scripts/fuzzel_power",
-    "tooltip": false,
-  },
   "custom/idle": {
     "interval": "once",
     "return-type": "json",
@@ -119,6 +96,7 @@
     "exec": "~/.config/hypr/waybar/scripts/idle.sh",
     "signal": 1,
     "on-click": "~/.config/hypr/scripts/hypridle-toggle.sh; pkill -RTMIN+2 waybar",
+    "on-click-right": "~/.local/bin/menu_scripts/fuzzel_power",
   },
   "custom/wf-recorder": {
     "interval": "once",
@@ -136,14 +114,5 @@
       "transition-to-left": true,
     },
     "modules": ["wireplumber#sink", "wireplumber#source"],
-  },
-  "group/expand-right": {
-    "orientation": "inherit",
-    "drawer": {
-      "click-to-reveal": false,
-      "transition-duration": 700,
-      "transition-to-left": true,
-    },
-    "modules": ["custom/expand-right", "tray", "custom/power"],
   },
 }

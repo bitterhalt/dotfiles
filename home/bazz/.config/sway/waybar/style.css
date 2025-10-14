@@ -8,7 +8,7 @@
 @define-color ui-3 #403E3C;
 @define-color tx-1 #CECDC3;
 @define-color tx-2 #F2F0E5;
-@define-color tx-3 #878580;
+@define-color tx-3 #9F9D96;
 @define-color cyan #24837B;
 @define-color magenta #A02F6F;
 @define-color red #AF3029;
@@ -40,7 +40,7 @@ tooltip {
   background: @bg-1;
   border-radius: 6px;
   border: solid 1px @ui-1;
-  font-family: Cascadia Code SemiLight;
+  font-family: Cascadia Code;
 }
 
 tooltip label {
@@ -98,10 +98,6 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 #battery,
 #clock,
-#custom-power,
-#custom-expand-right,
-#custom-idle,
-#tray,
 #wireplumber,
 #network {
   color: @tx-1;
@@ -109,14 +105,14 @@ window#waybar.empty #window {
   padding: 0 10px;
 }
 
-#custom-idle.disabled {
-  color: @yellow;
+#custom-idle {
+  color: @tx-1;
+  margin: 2 4 2 2px;
+  padding: 0 10px;
 }
 
-#tray menu {
-  background-color: @bg-1;
-  border-radius: 6px;
-  border: solid 1px @ui-1;
+#custom-idle.disabled {
+  color: @yellow;
 }
 
 #custom-wf-recorder {
@@ -145,8 +141,6 @@ window#waybar.empty #window {
  *                      Hover candy
  * ----------------------------------------------------- */
 #clock:hover,
-#custom-power:hover,
-#custom-expand-right:hover,
 #custom-idle:hover,
 #custom-power:hover,
 #network:hover,

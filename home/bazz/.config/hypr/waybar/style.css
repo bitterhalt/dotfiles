@@ -40,7 +40,7 @@ tooltip {
   background: @bg-1;
   border-radius: 6px;
   border: solid 1px @ui-1;
-  font-family: Cascadia Code SemiLight;
+  font-family: Cascadia Code;
 }
 
 tooltip label {
@@ -98,10 +98,6 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 #battery,
 #clock,
-#custom-expand-right,
-#custom-idle,
-#custom-power,
-#tray,
 #wireplumber,
 #network {
   color: @tx-1;
@@ -109,21 +105,20 @@ window#waybar.empty #window {
   padding: 0 10px;
 }
 
-#custom-idle.disabled {
-  color: @yellow;
+#custom-idle {
+  color: @tx-1;
+  margin: 2 4 2 2px;
+  padding: 0 10px;
 }
 
-#tray menu {
-  background-color: @bg-1;
-  border-radius: 6px;
-  border: solid 1px @ui-1;
+#custom-idle.disabled {
+  color: @yellow;
 }
 
 #custom-wf-recorder {
   animation: rec-blink 1s linear infinite;
   border-radius: 6px;
   color: @red;
-  margin: 2px 2px;
 }
 /* Rec-animation */
 @keyframes rec-blink {
@@ -145,10 +140,8 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 #clock:hover,
 #custom-power:hover,
-#custom-expand-right:hover,
 #custom-idle:hover,
 #network:hover,
-#tray menu menuitem:hover,
 #wireplumber:hover,
 #workspaces button:hover {
   color: @tx-2;
