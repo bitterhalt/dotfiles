@@ -50,6 +50,7 @@ alias rm="rm -vI"
 alias cleanup="sudo pacman -Rns $(pacman -Qtdq)" # remove orphaned packages
 alias pacdiff="sudo DIFFPROG=nvim pacdiff"
 alias pkglist="pacman -Qe > ~/Documents/projects/dotfiles/packages"
+alias rate-mirrors="rate-mirrors --protocol https --entry-country FI --country-test-mirrors-per-country 10 --country-neighbors-per-country 3 arch --max-delay=90 | sudo tee /etc/pacman.d/mirrorlist"
 # Vim
 alias vi="nvim"
 alias vim="nvim"
