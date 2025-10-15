@@ -1,7 +1,8 @@
 ## Dotfiles
 
-My point was to get light weight system without useless annoyances.
-I have almost identical setups with both Sway and Hyprland.
+These are the dotfiles of my keyboard-driven environment. I prefer fuction over eyecandy so I'm trying to keep thinks pretty minimal.
+
+At the moment I use Hyprland as my main WM and Sway is there for backup, they both have pretty much the same workflow.
 
 ### Software I use
 
