@@ -21,16 +21,8 @@ DEST_ETC="/mnt/wd1tb/backup/host/etc"
 mkdir -p "$DEST_HOME"
 mkdir -p "$DEST_ETC"
 
-# 1. General backup (preserve original permissions)
 rsync -avu --delete --exclude-from="$EXCLUDE_FILE" \
   /home/"$user"/ "$DEST_HOME/"
 
 rsync -avu --delete --exclude-from="$EXCLUDE_FILE" /etc "$DEST_ETC/"
-
-# 2. Special sync for photo imports (force user read/write)
-rsync -avu --delete \
-  --chmod=Du=rwx,Fu=rw \
-  /home/"$user"/Pictures/Puhelin/ "$DEST_HOME/Pictures/Puhelin/"
-
-# 3. Fix ownership (so user "bazz" owns everything in backup)
 chown -R "$user":"$user" "$DEST_HOME" "$DEST_ETC"
