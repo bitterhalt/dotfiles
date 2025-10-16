@@ -82,7 +82,6 @@ bash <(curl -L https://codeberg.org/bt-halt/dotfiles/raw/branch/main/.assets/cur
 - [classabbyamp](https://github.com/classabbyamp) - Helped me with TONS of stuff ⭐
 - [aellas](https://github.com/aellas) - For TONS of ideas and ispiration ⭐ ❤️ 🐐
 - [Joris](https://codeberg.org/jorisvandijk) - For showing me how to manage my dots better ❤️ ⭐
-- [omarchy](https://github.com/basecamp/omarchy/) - I've been eyeballing this project for a while. Best Hyprland starter-kit if you ask me ⭐
 
 ### Special thanks ⭐
 
