@@ -2,6 +2,6 @@
 
 # This launches all essentials from WM
 discord &
-firefox &
+$BROWSER &
 thunderbird &
 sleep 6 && transmission-gtk &

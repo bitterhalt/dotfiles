@@ -4,7 +4,7 @@
   //"height": 28,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock", "custom/wf-recorder", "hyprland/submap"],
-  "modules-right": ["network", "group/sound", "custom/idle", "battery"],
+  "modules-right": ["network", "group/sound", "battery", "custom/idle"],
   "hyprland/workspaces": {
     "disable-scroll": true,
   },
@@ -95,8 +95,8 @@
     "format": "{}",
     "exec": "~/.config/hypr/waybar/scripts/idle.sh",
     "signal": 1,
-    "on-click": "~/.config/hypr/scripts/hypridle-toggle.sh; pkill -RTMIN+2 waybar",
-    "on-click-right": "~/.local/bin/menu_scripts/fuzzel_power",
+    "on-click": "~/.local/bin/menu_scripts/fuzzel_power",
+    "on-click-right": "~/.config/hypr/scripts/hypridle-toggle.sh; pkill -RTMIN+2 waybar",
   },
   "custom/wf-recorder": {
     "interval": "once",

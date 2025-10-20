@@ -4,11 +4,11 @@ export PATH="$HOME/.local/bin/menu_scripts/:$PATH"
 export PATH="$HOME/.local/bin/personal/:$PATH"
 export PATH="$HOME/.local/share/cargo/bin/:$PATH"
 
-# Defaults
+# Variables
 export BAT_PAGER="never"
 export BAT_STYLE="plain"
 export BAT_THEME="ansi"
-export BROWSER="firefox"
+export BROWSER="zen-browser"
 export EDITOR="nvim"
 export TERMINAL="foot"
 export VISUAL="nvim"
