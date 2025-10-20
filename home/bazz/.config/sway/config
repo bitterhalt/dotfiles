@@ -37,7 +37,6 @@ set $killer ~/.local/bin/menu_scripts/fuzzel_killer
 set $pass ~/.local/bin/menu_scripts/fuzzel_passmenu
 set $powermenu ~/.local/bin/menu_scripts/fuzzel_power
 set $screenshot ~/.local/bin/menu_scripts/fuzzel_screenshot
-set $search ~/.local/bin/menu_scripts/fuzzel_search
 set $sound ~/.local/bin/menu_scripts/fuzzel_sound
 set $winmenu ~/.local/bin/menu_scripts/fuzzel_sway_window
 
@@ -153,7 +152,6 @@ bindsym $mod+ctrl+c exec $clip
 bindsym $mod+ctrl+e exec $emojimenu
 bindsym $mod+ctrl+s exec $sound
 bindsym $mod+d exec $drun
-bindsym $mod+s exec $search
 bindsym $mod+tab exec $winmenu
 
 # Modes
