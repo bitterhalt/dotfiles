@@ -5,39 +5,17 @@ set -e
 #
 #  • When disabling Waybar:
 #      - Kills existing Waybar.
-#      - Starts a background listener that sends notifications when workspaces changes
+#      - Starts a background listener that sends notifications when workspace changes.
 #
 #  • When enabling Waybar:
-#      - Restarts Waybar
-#      - Stops the listener (and its socat subprocess)
-#
-#  Requires: socat, jq, notify-send
+#      - Restarts Waybar.
+#      - Stops the listener (and its socat subprocess).
 
 CFG="$HOME/.config/hypr/waybar"
-SOCKET_PATH="/run/user/$UID/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+LISTENER="$HOME/.config/hypr/scripts/workspace-listener.sh"
 PIDFILE="/tmp/workspace-listener.pid"
 
-# Listener
-
-start_listener() {
-  if [ ! -S "$SOCKET_PATH" ]; then
-    notify-send "Hyprland" "Error: cannot find socket2 at expected location."
-    exit 1
-  fi
-
-  setsid bash -c "
-    socat -u UNIX-CONNECT:'$SOCKET_PATH' - |
-      while read -r line; do
-        if [[ \$line == *'workspace>>'* ]]; then
-          workspace=\$(hyprctl activeworkspace -j | jq -r '.name // .id')
-          notify-send -t 1500 -h string:x-canonical-private-synchronous:notification \"󰍹 Workspace: \$workspace\"
-        fi
-      done
-  " &
-
-  echo $! >"$PIDFILE"
-}
-
+# Kill the entire process group (listener + socat)
 stop_listener() {
   if [ -f "$PIDFILE" ]; then
     PID=$(cat "$PIDFILE")
@@ -49,14 +27,11 @@ stop_listener() {
   fi
 }
 
-# Toggle Waybar and manage listener
-
 if pgrep -x waybar >/dev/null; then
-  # Waybar is running → disable it and start listener
   killall -q waybar
-  start_listener
+  sleep 0.3
+  "$LISTENER"
 else
-  # Waybar is not running → enable it and stop listener
   stop_listener
   waybar -c "$CFG/config.jsonc" -s "$CFG/style.css" &
 fi
