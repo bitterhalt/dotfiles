@@ -18,10 +18,7 @@ echo $$ >"$PIDFILE"
 trap 'rm -f "$PIDFILE"' EXIT
 
 notify_submap() {
-  local line="$1"
-  local submap="${line#submap>>}"
-  submap="$(echo "$submap" | xargs)"
-
+  submap="$(hyprctl submap)"
   if [[ -z "$submap" || "$submap" == "default" ]]; then
     if [[ -f "$STATUS" ]]; then
       fnottctl dismiss all
@@ -30,12 +27,12 @@ notify_submap() {
     return
   fi
 
-  notify-send "$submap"
+  notify-send "Submap" "$submap"
   touch "$STATUS"
 }
 
 socat -U - UNIX-CONNECT:"$SOCKET" | while read -r line; do
   case "$line" in
-  submap*) notify_submap "$line" ;;
+  submap*) notify_submap ;;
   esac
 done
