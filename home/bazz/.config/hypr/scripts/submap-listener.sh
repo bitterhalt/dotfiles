@@ -28,7 +28,7 @@ notify_submap() {
     return
   fi
 
-  notify-send "Submap" "$submap"
+  notify-send "$submap"
   touch "$STATUS"
 }
 
