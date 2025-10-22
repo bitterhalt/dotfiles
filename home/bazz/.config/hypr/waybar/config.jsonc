@@ -3,7 +3,7 @@
   "position": "top",
   //"height": 28,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock", "custom/wf-recorder", "hyprland/submap"],
+  "modules-center": ["clock", "custom/wf-recorder"],
   "modules-right": ["network", "group/sound", "battery", "custom/idle"],
   "hyprland/workspaces": {
     "disable-scroll": true,

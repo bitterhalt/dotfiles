@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 # This script toggles Waybar on/off in Hyprland
 #

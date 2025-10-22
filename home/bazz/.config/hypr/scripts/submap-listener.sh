@@ -10,6 +10,7 @@ if [[ ! -S "$SOCKET" ]]; then
   exit 1
 fi
 
+# Only one instance
 if [[ -e "$PIDFILE" ]] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
   echo "Already running (PID $(cat "$PIDFILE"))"
   exit 0
