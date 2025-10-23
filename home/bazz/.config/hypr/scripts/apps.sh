@@ -5,4 +5,4 @@ discord &
 $BROWSER &
 thunderbird &
 steam &
-sleep 6 && transmission-gtk &
+transmission-gtk &
