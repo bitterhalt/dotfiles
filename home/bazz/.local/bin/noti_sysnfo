@@ -66,4 +66,4 @@ body=$(printf "%s\n%s\n%s\n%s\n%s\n" \
   "$bat" \
   "$upt")
 
-notify-send "System Status" "$body"
+notify-send -t 10000 "System Status" "$body"
