@@ -2,15 +2,52 @@
 # This small script shows system info with libnotify
 # check your sensors and edit grep value according to your temp sensor
 
-CPUTemp=$(sensors | grep 'Tctl:' | awk '{print $2}')
-CPUTemp2=$(sensors | grep 'Tccd1:' | awk '{print $2}')
-GPUTemp=$(sensors | grep 'edge:' | awk '{print $2}')
-upt="$(uptime --pretty | sed -e 's/up //g' -e 's/ days/d/g' -e 's/ day/d/g' -e 's/ hours/h/g' -e 's/ hour/h/g' -e 's/ minutes/m/g' -e 's/, / /g')"
-notify-send -t 8000 -a System "System status" "$(
-  free -m | awk 'NR==2{printf "Ram: %.2f/%.2fGB \n", $3/1024, $2/1024, $3*100/$2 }'
-  top -bn1 | grep load | awk '{printf "Load: %.2f\n", $(NF-2)}'
-  printf "CPU Tctl: $CPUTemp\n"
-  printf "CPU Tccd1: $CPUTemp2\n"
-  printf "GPU temp: $GPUTemp\n"
-  printf "Up: $upt"
-)"
+# CPU Usage
+cpu_val=$(top -bn1 | awk -F'load average:' '/load average/ {printf "%.2f", $2}')
+cpu="CPU    $cpu_val"
+
+# Memory Usage
+mem_val=$(free -m | awk 'NR==2{printf "%.2f/%.2fGB", $3/1024, $2/1024}')
+mem="MEM    $mem_val"
+
+# Uptime
+upt_val=$(uptime --pretty | sed -e 's/up //g' \
+  -e 's/ day[s]*/d/g' \
+  -e 's/ hour[s]*/h/g' \
+  -e 's/ minute[s]*/m/g' \
+  -e 's/,//g')
+upt="UP     $upt_val"
+
+# Network Status
+if nmcli -t -f NAME,DEVICE connection show --active >/dev/null 2>&1; then
+  active_conn=$(nmcli -t -f NAME,DEVICE connection show --active | head -n1)
+  conn_name="${active_conn%%:*}"
+  device_name="${active_conn##*:}"
+
+  if [ -z "$conn_name" ]; then
+    net="NET    offline"
+  else
+    if [[ "$device_name" =~ ^wl ]]; then
+      wifi_strength=$(nmcli -t -f IN-USE,SSID,SIGNAL dev wifi | awk -F: '/^\*/ {print $3}')
+      if [ -n "$wifi_strength" ]; then
+        net="NET    (WiFi) $conn_name ${wifi_strength}%"
+      else
+        net="NET    (WiFi) $conn_name"
+      fi
+    elif [[ "$device_name" =~ ^en ]]; then
+      net="NET    (ETH) $conn_name"
+    else
+      net="NET    $conn_name"
+    fi
+  fi
+else
+  net="NET    offline"
+fi
+
+body=$(printf "%s\n%s\n%s\n%s\n" \
+  "$cpu" \
+  "$mem" \
+  "$net" \
+  "$upt")
+
+notify-send -t 10000 "System Status" "$body"
