@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-# CPU
+# CPU Usage
 cpu_val=$(top -bn1 | awk -F'load average:' '/load average/ {printf "%.2f", $2}')
 cpu="CPU    $cpu_val"
 
-# MEMORY
+# Memory Usage
 mem_val=$(free -m | awk 'NR==2{printf "%.2f/%.2fGB", $3/1024, $2/1024}')
 mem="MEM    $mem_val"
 
-# UPTIME
+# Uptime
 upt_val=$(uptime --pretty | sed -e 's/up //g' \
   -e 's/ day[s]*/d/g' \
   -e 's/ hour[s]*/h/g' \
@@ -16,24 +16,7 @@ upt_val=$(uptime --pretty | sed -e 's/up //g' \
   -e 's/,//g')
 upt="UP     $upt_val"
 
-# BATTERY
-battery=""
-for dev in /sys/class/power_supply/*; do
-  [ -d "$dev" ] || continue
-  case "$(basename "$dev")" in
-  BAT* | bat*) battery="$dev" && break ;;
-  esac
-done
-
-if [ -n "$battery" ]; then
-  bat_percent=$(cat "$battery/capacity" 2>/dev/null)
-  bat_state=$(cat "$battery/status" 2>/dev/null)
-  bat="BAT    ${bat_percent}% (${bat_state})"
-else
-  bat="BAT    n/a"
-fi
-
-# NETWORK
+# Network Status
 if nmcli -t -f NAME,DEVICE connection show --active >/dev/null 2>&1; then
   active_conn=$(nmcli -t -f NAME,DEVICE connection show --active | head -n1)
   conn_name="${active_conn%%:*}"
@@ -59,11 +42,10 @@ else
   net="NET    offline"
 fi
 
-body=$(printf "%s\n%s\n%s\n%s\n%s\n" \
+body=$(printf "%s\n%s\n%s\n%s\n" \
   "$cpu" \
   "$mem" \
   "$net" \
-  "$bat" \
   "$upt")
 
-notify-send -t 10000 "System Status" "$body"
+notify-send "System Status" "\n$body"
