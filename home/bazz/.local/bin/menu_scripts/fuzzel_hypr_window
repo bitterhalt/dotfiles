@@ -1,15 +1,42 @@
-#!/bin/bash
-
-# Dirty fork off: https://github.com/armerpunkt/niri-fuzzel-switcher/blob/main/niri_fuzzel_switcher
+#!/usr/bin/env bash
 
 window_ids=()
 window_titles=()
 
 while read -r i; do
   declare -a line_array="($i)"
-  window_ids+=("${line_array[0]}")
-  window_titles+=("${line_array[1]} - ${line_array[2]} \0icon\x1f${line_array[1]}")
-done <<<$(hyprctl clients -j | jq -r '.[] | [ .address, .class, .title ] | "\""+join ("\" \"")+"\""')
+  win_id="${line_array[0]}"
+  win_class="${line_array[1]}"
+  win_title="${line_array[2]}"
+  win_ws_id="${line_array[3]}"
+  win_ws_name="${line_array[4]}"
+
+  # Detect special workspace by name
+  if [[ "$win_ws_name" == special* ]]; then
+    if [[ "$win_ws_name" == *:* ]]; then
+      ws_label="[${win_ws_name#special:}]"
+    else
+      ws_label="[special]"
+    fi
+  else
+    ws_label="[${win_ws_id}]"
+  fi
+
+  window_ids+=("$win_id")
+  window_titles+=("${ws_label} ${win_class} - ${win_title} \0icon\x1f${win_class}")
+
+done <<<"$(
+  hyprctl clients -j |
+    jq -r '.[] |
+      [
+        .address,
+        .class,
+        .title,
+        (.workspace.id|tostring),
+        .workspace.name
+      ]
+      | "\""+join ("\" \"")+"\""'
+)"
 
 result=$(printf "%b\n" "${window_titles[@]}" |
   fuzzel -d -a top --y 4 -w 60 -p "" --minimal-lines --index --placeholder "Focus to window:")

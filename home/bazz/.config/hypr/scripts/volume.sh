@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-icons="$HOME/.local/share/icons/feather/"
 
 case "${1:-}" in
 up)
@@ -20,7 +19,7 @@ esac
 vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
 
 # If muted, print "muted" and exit.
-[ "$vol" != "${vol%\[MUTED\]}" ] && notify-send -i "$icons/x.svg" -t 5000 "Volume" "muted" -h string:x-canonical-private-synchronous:volume && exit
+[ "$vol" != "${vol%\[MUTED\]}" ] && notify-send -t 5000 "Vol: muted" -h string:x-canonical-private-synchronous:volume && exit
 
 vol="${vol#Volume: }"
 
@@ -34,13 +33,11 @@ split() {
 vol="$(printf "%.0f" "$(split "$vol" ".")")"
 
 case 1 in
-$((vol >= 1))) text="Volume" ;;
-*) notify-send -i "$icons/x.svg" -t 5000 "Volume" "muted" -h string:x-canonical-private-synchronous:volume && exit ;;
+$((vol >= 1))) text="Vol:" ;;
+*) notify-send -t 5000 "Vol: muted" -h string:x-canonical-private-synchronous:volume && exit ;;
 esac
 
 notify-send \
-  -i "$icons/headphones.svg" \
   -t 1000 \
-  "$text" \
-  "$vol%" \
+  "$text $vol%" \
   -h string:x-canonical-private-synchronous:volume
