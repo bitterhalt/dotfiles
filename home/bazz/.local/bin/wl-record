@@ -13,6 +13,7 @@ mkdir -p -- "$SAVEDIR"
 
 fullscreen() {
   wl-screenrec \
+    --ffmpeg-encoder-options="-c:v libx265 -crf 28" \
     -f "$FILENAME" &
 }
 
@@ -27,6 +28,7 @@ fullscreen_sound() {
   AUDIO_SOURCE="$DEFAULT_SINK.monitor"
 
   wl-screenrec \
+    --ffmpeg-encoder-options="-c:v libx265 -crf 28" \
     --audio \
     --audio-device "$AUDIO_SOURCE" \
     -f "$FILENAME" &
