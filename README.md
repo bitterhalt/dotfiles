@@ -6,7 +6,7 @@ These are the dotfiles of my keyboard-driven environment. I prefer fuction over 
 
 - Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
-- WM: [Sway](https://github.com/swaywm/sway) / [Hyprland](https://github.com/hyprwm/Hyprland)
+- WM: [Hyprland](https://github.com/hyprwm/Hyprland)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
@@ -49,19 +49,96 @@ Some fuzzel menus
 > Window list
 >
 > <img src=".assets/screenshots/fuzzel_window.png" width="80%" />
->
-> Fast neovim with LSP 🚀
->
-> <img src=".assets/screenshots/nvim.png" width="50%" />
-> <img src=".assets/screenshots/nvim2.png" width="50%" />
 
 ---
 
-### Hotkeys
+### ⌨️ Hotkeys
 
-There are lots of them so I don't list them here
+🚀 Applications & Scripts
 
-- Tip: press: **Super** + **F3** 😉
+| Keys                  | Action                                       |
+| --------------------- | -------------------------------------------- |
+| Super + Ctrl + C      | Clipboard menu                               |
+| Super + Ctrl + D      | Dismiss notifications                        |
+| Super + Ctrl + E      | Emoji menu                                   |
+| Super + Ctrl + F8     | Start/stop screen recording & refresh Waybar |
+| Super + Ctrl + P      | Color picker                                 |
+| Super + Ctrl + S      | Sound settings                               |
+| Super + D             | App launcher (dmenu)                         |
+| Super + E             | TUI file manager                             |
+| Super + F1            | Calculator                                   |
+| Super + F11           | Screen lock                                  |
+| Super + F12           | Dotfile settings                             |
+| Super + F2            | LocalSend                                    |
+| Super + F3            | Show keybinds                                |
+| Super + F4            | Force kill                                   |
+| Super + F5            | Password manager                             |
+| Super + F8            | Screenshot                                   |
+| Super + M             | Mail                                         |
+| Super + Print         | Screenshot (full)                            |
+| Super + Shift + Del   | Open htop                                    |
+| Super + Shift + E     | File manager                                 |
+| Super + Shift + F11   | Toggle hypridle + refresh Waybar             |
+| Super + Shift + F12   | Gamemode                                     |
+| Super + Shift + P     | App launcher (pmenu)                         |
+| Super + Shift + Print | Screenshot (region + edit)                   |
+| Super + Shift + W     | Wallpaper changer                            |
+| Super + T             | Show date notification                       |
+| Super + Tab           | Window list                                  |
+| Super + V             | Editor                                       |
+| Super + W             | Browser                                      |
+
+🖥️ Hyprland Controls
+
+| Keys                    | Action                   |
+| ----------------------- | ------------------------ |
+| Super + B               | Toggle barless mode      |
+| Super + Ctrl + R        | Reload Hyprland config   |
+| Super + Return          | Open terminal            |
+| Super + Q               | Close active window      |
+| Super + Space           | Toggle floating          |
+| Super + F               | Fullscreen               |
+| Super + Shift + F       | Maximize window          |
+| Super + Ctrl + G        | Toggle gaps              |
+| Super + Z               | Swap with master         |
+| Super + Y               | Pin window               |
+| Super + , / .           | Add / remove master      |
+| Super + ↑ ↓ ← →         | Move focus               |
+| Super + H J K L         | Move focus (Vim)         |
+| Super + Shift + ↑ ↓ ← → | Swap windows             |
+| Super + Shift + H J K L | Swap windows (Vim)       |
+| Super + Ctrl + ↑ ↓ ← →  | Resize window            |
+| Super + Ctrl + H J K L  | Resize window (Vim)      |
+| Super + 1–9             | Switch to workspace      |
+| Super + 0               | Urgent / last workspace  |
+| Super + Shift + 1–9     | Move window to workspace |
+| Super + C               | Toggle special:chat      |
+| Super + Shift + C       | Move to special:chat     |
+| Super + X               | Toggle special:zen       |
+| Super + Shift + X       | Move to special:zen      |
+
+⌨️ Submaps
+| Keys | Submap |
+| ------------ | ---------------- |
+| Alt + M | Monitor controls |
+| Alt + Z | Zoom |
+| Super + I | Info |
+| Super + N | Notes |
+| Super + P | Power |
+| Super + PgUp | Apps |
+| Super + U | System |
+
+I may change the keyboard layout time to time so this list might be out-of-date!
+
+---
+
+### Barless mode
+
+> ⌨️ SUPER+B
+
+I use my bar less and less, so recently I made this "barless mode" to launch workspace listener that shows your current workspace.
+
+TODO: Replace Waybar and listener notifications with some minimal shell like AGS?
 
 ---
 
