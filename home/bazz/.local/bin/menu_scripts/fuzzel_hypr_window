@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
 
-window_ids=()
-window_titles=()
+# Window switcher for Hyprland. Marks special workspaces with ⭐
 
-while read -r i; do
-  declare -a line_array="($i)"
-  win_id="${line_array[0]}"
-  win_class="${line_array[1]}"
-  win_title="${line_array[2]}"
-  win_ws_id="${line_array[3]}"
-  win_ws_name="${line_array[4]}"
+reverse=0
 
-  # Detect special workspace by name
-  if [[ "$win_ws_name" == special* ]]; then
-    if [[ "$win_ws_name" == *:* ]]; then
-      ws_label="[${win_ws_name#special:}]"
-    else
-      ws_label="[special]"
-    fi
+# Parse flags
+for arg in "$@"; do
+  case "$arg" in
+  --reverse) reverse=1 ;;
+  esac
+done
+
+entries=()
+ids=()
+
+# Collect windows from Hyprland
+while IFS=$'\t' read -r id class title ws_id ws_name; do
+  if [[ $ws_name == special* ]]; then
+    label="[⭐] $ws_name" # Mark special workspaces
+    sortkey=1
   else
-    ws_label="[${win_ws_id}]"
+    label="[$ws_id]" # Normal workspace label
+    sortkey=0
   fi
-
-  window_ids+=("$win_id")
-  window_titles+=("${ws_label} ${win_class} - ${win_title} \0icon\x1f${win_class}")
-
-done <<<"$(
+  # Store sortable line: sortkey, id, label, description
+  entries+=("$sortkey	$id	$label	$class - $title")
+done < <(
   hyprctl clients -j |
     jq -r '.[] |
       [
@@ -33,14 +33,33 @@ done <<<"$(
         .class,
         .title,
         (.workspace.id|tostring),
-        .workspace.name
-      ]
-      | "\""+join ("\" \"")+"\""'
-)"
+        (.workspace.name // "")
+      ] | @tsv'
+)
 
-result=$(printf "%b\n" "${window_titles[@]}" |
-  fuzzel -d -a top --y 4 -w 60 -p "" --minimal-lines --index --hide-prompt)
+# Sort entries (normal first, or reverse)
+if ((reverse)); then
+  mapfile -t entries < <(printf '%s\n' "${entries[@]}" | sort -t $'\t' -k1,1r)
+else
+  mapfile -t entries < <(printf '%s\n' "${entries[@]}" | sort -t $'\t' -k1,1)
+fi
 
-if [ "x$result" != "x" ] && [ "$result" != -1 ]; then
-  hyprctl dispatch focuswindow address:"${window_ids[result]}"
+labels=()
+
+# Build fuzzel output lines
+for e in "${entries[@]}"; do
+  tmp="${e#*$'\t'}"
+  id="${tmp%%$'\t'*}"
+  tmp="${tmp#*$'\t'}"
+  label="${tmp%%$'\t'*}"
+  body="${tmp#*$'\t'}"
+  labels+=("$label $body")
+  ids+=("$id")
+done
+
+result=$(printf '%s\n' "${labels[@]}" |
+  fuzzel -d -a top --y 4 -w 62 -p "" --minimal-lines --index --hide-prompt)
+
+if [[ -n $result && $result != "-1" ]]; then
+  hyprctl dispatch focuswindow address:"${ids[result]}"
 fi

@@ -8,14 +8,6 @@ cpu="CPU    $cpu_val"
 mem_val=$(free -m | awk 'NR==2{printf "%.2f/%.2fGB", $3/1024, $2/1024}')
 mem="MEM    $mem_val"
 
-# Uptime
-upt_val=$(uptime --pretty | sed -e 's/up //g' \
-  -e 's/ day[s]*/d/g' \
-  -e 's/ hour[s]*/h/g' \
-  -e 's/ minute[s]*/m/g' \
-  -e 's/,//g')
-upt="UP     $upt_val"
-
 # Network Status
 if nmcli -t -f NAME,DEVICE connection show --active >/dev/null 2>&1; then
   active_conn=$(nmcli -t -f NAME,DEVICE connection show --active | head -n1)
@@ -42,10 +34,31 @@ else
   net="NET    offline"
 fi
 
-body=$(printf "%s\n%s\n%s\n%s\n" \
+# Hypridle / Swayidle Status with Source
+idle_sources=()
+
+pgrep -x hypridle >/dev/null 2>&1 && idle_sources+=("hypridle")
+pgrep -x swayidle >/dev/null 2>&1 && idle_sources+=("swayidle")
+
+if [ ${#idle_sources[@]} -gt 0 ]; then
+  idle="IDLE   on (${idle_sources[*]})"
+else
+  idle="IDLE   off"
+fi
+
+# Uptime
+upt_val=$(uptime --pretty | sed -e 's/up //g' \
+  -e 's/ day[s]*/d/g' \
+  -e 's/ hour[s]*/h/g' \
+  -e 's/ minute[s]*/m/g' \
+  -e 's/,//g')
+upt="UP     $upt_val"
+
+body=$(printf "%s\n%s\n%s\n%s\n%s\n" \
   "$cpu" \
   "$mem" \
   "$net" \
+  "$idle" \
   "$upt")
 
 notify-send -t 10000 "System Status" "$body"
