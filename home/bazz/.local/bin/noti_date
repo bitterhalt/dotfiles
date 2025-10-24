@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-notify-send -a System -t 10000 "Date  Time" "$(date '+%d.%m %H:%M')"
+case "$1" in "" | clock) notify-send -t 10000 "󰸗 $(date '+%d.%m  󰥔 %H:%M')" ;;
+cal)
+  DAY=$(date '+%-d')
+  CAL=$(cal)
+  notify-send -t 15000 "$(head -n1 <<<"$CAL")" "$(tail -n7 <<<"$CAL" | sed -z "s/\b$DAY\b/<u><b>$DAY<\/b><\/u>/")"
+  ;;
+*) echo "Usage: $0 [clock|cal]" ;; esac
