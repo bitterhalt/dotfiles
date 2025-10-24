@@ -6,6 +6,11 @@
 PIDFILE="/tmp/workspace-listener.pid"
 SOCKET_PATH="/run/user/$UID/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
 
+# Run only without Waybar
+if pgrep -x "waybar" >/dev/null; then
+  echo "Waybar is running — workspace listener will not start."
+  exit 0
+fi
 # Check if socket exists
 if [ ! -S "$SOCKET_PATH" ]; then
   notify-send "Hyprland" "Error: cannot find socket2 at expected location."
