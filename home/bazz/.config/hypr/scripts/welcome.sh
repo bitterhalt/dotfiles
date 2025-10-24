@@ -8,9 +8,9 @@ if ! pgrep -x "waybar" >/dev/null; then
   clock=$(date '+%H:%M')
 
   body=$(printf "%s\n%s\n\n%s" \
-    "Today is $day" \
-    "Time is $clock" \
-    "Tip: press SUPER+B to enable bar")
+    "Today is, $day" \
+    "$clock" \
+    "Tip: ⭐ press SUPER+B to enable bar")
 
   notify-send -t 15000 "Welcome back $user ❤️" "\n$body"
 fi
