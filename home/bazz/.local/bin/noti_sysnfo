@@ -48,4 +48,4 @@ body=$(printf "%s\n%s\n%s\n%s\n" \
   "$net" \
   "$upt")
 
-notify-send "System Status" "\n$body"
+notify-send -t 10000 "System Status" "$body"
