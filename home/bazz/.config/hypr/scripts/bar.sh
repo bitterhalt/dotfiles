@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Waybar controller:
+# - no arguments = starts Waybar
+# - "less" = starts with listener only (barless mode)
+# - "toggle" = toggles Waybar or listener
+
 CFG="$HOME/.config/hypr/waybar"
 LISTENER="$HOME/.config/hypr/scripts/workspace-listener.sh"
 PIDFILE="/tmp/workspace-listener.pid"
@@ -18,7 +23,7 @@ stop_listener() {
 case "$1" in
 less)
   stop_listener
-  "$LISTENER" &
+  "$LISTENER"
   ;;
 toggle)
   if pgrep -x waybar >/dev/null; then
