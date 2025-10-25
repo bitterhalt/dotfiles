@@ -61,4 +61,4 @@ body=$(printf "%s\n%s\n%s\n%s\n%s\n" \
   "$idle" \
   "$upt")
 
-notify-send -t 10000 "System Status" "$body"
+notify-send -t 10000 "System" "\n$body"
