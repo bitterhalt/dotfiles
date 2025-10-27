@@ -2,16 +2,17 @@
 
 SESSION="system"
 
-# If session already exists, notify and exit
+# If session already exists, just attach to it
 if tmux has-session -t "$SESSION" 2>/dev/null; then
-  notify-send "System Monitor" "Session exists. Run: tmux attach -t $SESSION"
-  exit 0
+  exec tmux attach-session -t "$SESSION"
 fi
 
-# Create tmux session only if it doesn't exist
-tmux new-session -d -s "$SESSION" -n system "journalctl -f"
-tmux split-window -h -t "$SESSION" "amdgpu_top --smi"
-tmux split-window -v -t "$SESSION" "htop"
+# Create session with journalctl in the first window
+tmux new-session -d -s "$SESSION" -n logs "journalctl -f"
+
+# Create second window for GPU + system monitoring
+tmux new-window -t "$SESSION" -n monitor "amdgpu_top --smi"
+tmux split-window -h -t "$SESSION:monitor" "htop"
 
 # Attach session
 exec tmux attach-session -t "$SESSION"
