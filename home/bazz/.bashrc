@@ -68,7 +68,7 @@ alias fzi="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo
 alias hg="history | grep "
 alias nvm="sudo nvme smart-log /dev/nvme0"
 alias tma="tmux attach-session -t"
-alias tmd="tmux new-session -As Terminal"
+alias tmd="tmux new-session -As Zen"
 # Systemd Journal
 alias loger="journalctl -p 3 -xb"
 alias logf="journalctl -f"
