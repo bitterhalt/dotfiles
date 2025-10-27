@@ -4,7 +4,7 @@ SESSION="system"
 
 # If session already exists, just attach to it
 if tmux has-session -t "$SESSION" 2>/dev/null; then
-  exec tmux attach-session -t "$SESSION"
+  exec tmux new-session -As "$SESSION"
 fi
 
 # Create session with journalctl in the first window
