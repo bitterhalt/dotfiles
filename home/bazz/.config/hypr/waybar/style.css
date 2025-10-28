@@ -115,7 +115,7 @@ window#waybar.empty #window {
   color: @yellow;
 }
 
-#custom-wf-recorder {
+#custom-record {
   animation: rec-blink 1s linear infinite;
   border-radius: 6px;
   color: @red;

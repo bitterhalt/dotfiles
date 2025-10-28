@@ -3,7 +3,7 @@
   "position": "top",
   //"height": 28,
   "modules-left": ["sway/workspaces", "sway/window"],
-  "modules-center": ["clock", "custom/wf-recorder", "sway/mode"],
+  "modules-center": ["clock", "custom/record", "sway/mode"],
   "modules-right": ["network", "group/sound", "battery", "custom/idle"],
   "sway/workspaces": {
     "disable-scroll": true,
@@ -95,12 +95,12 @@
     "on-click": "~/.local/bin/menu_scripts/fuzzel_power",
     "on-click-right": "~/.config/hypr/scripts/hypridle-toggle.sh; pkill -RTMIN+2 waybar",
   },
-  "custom/wf-recorder": {
+  "custom/record": {
     "interval": "once",
     "return-type": "json",
     "format": "{}",
     "exec": "echo '{\"class\": \"recording\",\"text\":\"󰻂\",\"tooltip\":\"Click right to stop recording\"}'",
-    "exec-if": "pgrep wl-screenrec",
+    "exec-if": "bash -c '[ -f /tmp/gpu-recorder.pid ]'",
     "on-click": "~/.local/bin/wl-record -k",
     "signal": 2,
   },

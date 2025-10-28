@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Prompt
+input=$(fuzzel -d -l 1 -w 30 -p "Set time: " --placeholder "(e.g. 5s, 2m, 1h)")
+
+# Extract numeric value and suffix
+number=${input%[smh]}
+unit=${input#"$number"}
+
+# Convert to seconds
+case "$unit" in
+s | "") seconds=$((number)) ;;
+m) seconds=$((number * 60)) ;;
+h) seconds=$((number * 3600)) ;;
+*)
+  notify-send "⏰ Timer Error" "Invalid time format! Use s, m, or h."
+  exit 1
+  ;;
+esac
+
+if [ "$seconds" -ge 1 ]; then
+  message=$(fuzzel -d -l 1 -w 35 -p "Message: " --placeholder "(e.g. brush your teeth!)")
+  [ -z "$message" ] && message="⏰ $input timer has expired!"
+  sleep "$seconds" && notify-send "⏰ Timer" "\n$message"
+else
+  exit 2
+fi

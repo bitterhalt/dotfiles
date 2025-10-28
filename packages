@@ -44,6 +44,7 @@ gimp
 git
 go
 gparted
+gpu-screen-recorder
 greetd-tuigreet
 grim
 grub
@@ -141,7 +142,6 @@ wget
 wireplumber
 wl-clipboard
 wl-restart-git
-wl-screenrec
 wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland

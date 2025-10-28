@@ -4,7 +4,6 @@ set -e
 
 get_options() {
   echo "Record Screen"
-  echo "Record Screen (Audio)"
   echo "Record Region"
   echo "Screenshot Full"
   echo "Screenshot Region"
@@ -20,7 +19,7 @@ sig() {
 }
 
 main() {
-  choice=$( (get_options) | fuzzel -d -a top --y 4 -w 22 -l 7 --hide-prompt)
+  choice=$( (get_options) | fuzzel -d -a top --y 4 -w 22 -l 7 --hide-prompt --minimal-lines)
 
   if [[ -z "${choice// /}" ]]; then
     exit 1
@@ -29,9 +28,6 @@ main() {
   case $choice in
   'Record Screen')
     wl-record -f && sig
-    ;;
-  'Record Screen (Audio)')
-    wl-record -fs && sig
     ;;
   'Record Region')
     wl-record -r && sig

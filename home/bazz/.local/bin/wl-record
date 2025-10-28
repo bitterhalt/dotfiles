@@ -1,56 +1,55 @@
 #!/usr/bin/env bash
-# Small helper script to record your desktop on sway or any wl-roots based WM
-# Video part is tested only with AMD gpu
-# Depends on: wl-screenrec, slurp, vaapi
+
+# Small helper script to record your desktop using gpu-screen-recorder
+# Depends on: gpu-screen-recorder, slurp
+# More info https://git.dec05eba.com/gpu-screen-recorder/about/
 # Github @ bitterhalt
 
 set -e
 
+PIDFILE="/tmp/gpu-recorder.pid"
 SAVEDIR="${HOME}/Videos/Captures/"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
 mkdir -p -- "$SAVEDIR"
 
 fullscreen() {
-  wl-screenrec \
-    -f "$FILENAME" &
-}
-
-fullscreen_sound() {
-  # Get the default sink and then construct the monitor source name
-  DEFAULT_SINK=$(pactl info | grep "Default Sink" | awk '{print $3}')
-  if [ -z "$DEFAULT_SINK" ]; then
-    echo "Error: Could not determine default audio sink."
-    notify-send -t 3000 "Screen record" "Error: Could not determine default audio sink."
-    exit 1
-  fi
-  AUDIO_SOURCE="$DEFAULT_SINK.monitor"
-
-  wl-screenrec \
-    --audio \
-    --audio-device "$AUDIO_SOURCE" \
-    -f "$FILENAME" &
+  pidof -q gpu-screen-recorder && {
+    notify-send -t 3000 "Screen record" "Recording already in progress"
+    exit 0
+  }
+  gpu-screen-recorder -w screen -f 60 -a default_output -o "$FILENAME" &
+  echo $! >"$PIDFILE"
 }
 
 region() {
-  GEOM=$(slurp)
-  [ -z "$GEOM" ] && exit 1 # Exit if no region selected (e.g., Escape pressed)
-  wl-screenrec \
-    -g "$GEOM" \
-    -f "$FILENAME" &
+  pidof -q gpu-screen-recorder && {
+    notify-send -t 3000 "Screen record" "Recording already in progress"
+    exit 0
+  }
+  gpu-screen-recorder -w region -region "$(slurp -f "%wx%h+%x+%y")" -o "$FILENAME" &
+  echo $! >"$PIDFILE"
 }
 
-kill() {
-  killall -s SIGINT wl-screenrec
-  notify-send -t 3000 "Screen record" "File saved as $SAVEDIR"
-  while [ ! -z $(pgrep -x wl-screenrec) ]; do wait; done
+stop_recording() {
+  if [ -f "$PIDFILE" ]; then
+    PID=$(cat "$PIDFILE")
+    if ps -p "$PID" >/dev/null 2>&1; then
+      # Send SIGINT to stop gracefully
+      kill -SIGINT "$PID" 2>/dev/null || kill "$PID"
+      sleep 1
+    fi
+    rm -f "$PIDFILE"
+    notify-send -t 3000 "Screen record" "Recording stopped and saved to $SAVEDIR"
+  else
+    notify-send -t 3000 "Screen record" "No active recording"
+  fi
 }
 
 print_help() {
   echo "Usage: wl-record [options]"
   echo "Options:"
   echo "  -f,  --fullscreen   Capture the fullscreen."
-  echo "  -fs, --fullscreen_sound   Capture the fullscreen with sound."
   echo "  -r,  --region       Select a region to capture."
   echo "  -k,  --kill         Kill record"
   echo "  -h,  --help         Show this help message."
@@ -59,9 +58,8 @@ print_help() {
 while [[ $# -gt 0 ]]; do
   case "$1" in
   -f | --fullscreen) fullscreen ;;
-  -fs | --fullscreen_sound) fullscreen_sound ;;
   -r | --region) region ;;
-  -k | --kill) kill ;;
+  -k | --kill) stop_recording ;;
   -h | --help) print_help ;;
   *)
     echo "Unknown option: $1"
