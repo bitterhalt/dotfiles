@@ -1,49 +1,49 @@
 add_newline = false
 format = """
+$username\
+$hostname\
 $directory\
 $git_branch\
+$git_state\
 $git_status\
-$character\
-$cmd_duration"""
-
-[character]
-success_symbol = '[\$](cyan)'
-error_symbol = '[\$](red)'
-vimcmd_symbol = '[\$](green)'
-
-# Fancy style
-#success_symbol = "[❯](cyan)"
-#error_symbol = "[❯](red)"
-#vimcmd_symbol = "[❮](green)"
+$cmd_duration\
+$line_break\
+$python\
+$character"""
 
 [directory]
-home_symbol = ''
-truncation_length = 8
-truncation_symbol = '…/'
-style ='white'
-read_only = ' !'
-read_only_style = 'bold red'
+style = "blue"
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
 
 [git_branch]
-symbol = 'Git:'
-style = 'bold green'
-
-[git_metrics]
-disabled = false
+format = "[$branch]($style)"
+style = "bright-black"
 
 [git_status]
-style = 'purple'
-ahead = '⇡ ${count}(fg:red)'
-behind = '⇣ ${count}(fg:red)'
-deleted = 'x'
-diverged = '⇡⇕ ${ahead_count} ⇣ ${behind_count}(fg:purple)'
-modified   = '!!'
-renamed = 'r'
-untracked  = '?'
-up_to_date = 'v'
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
 
 [cmd_duration]
-disabled = false
-format = '[$duration]($style) '
-style = 'yellow'
-min_time = 6000
+format = "[$duration]($style) "
+style = "yellow"
+
+[python]
+format = "[$virtualenv]($style) "
+style = "bright-black"
+detect_extensions = []
+detect_files = []
