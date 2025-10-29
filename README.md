@@ -1,6 +1,8 @@
 ## Dotfiles
 
-These are the dotfiles of my keyboard-driven environment. I prefer fuction over eyecandy so I'm trying to keep thinks pretty minimal. At the moment I use Hyprland as my main WM and Sway is there for backup, they both have pretty much the same workflow.
+> **Hello friend!**
+>
+> These are the dotfiles of my keyboard-driven environment. I prefer fuction over eyecandy so I'm trying to keep thinks pretty minimal. At the moment I use Hyprland as my main WM and Sway is there for backup, they both have pretty much the same workflow.
 
 ### Software I use
 
@@ -32,27 +34,33 @@ These are the dotfiles of my keyboard-driven environment. I prefer fuction over 
 >
 > <img src=".assets/screenshots/hyprlock.png" width="100%" />
 
-Some fuzzel menus
+> Some fuzzel menus
 
-> Settings
->
-> <img src=".assets/screenshots/fuzzel-settings.png" width="50%" />
->
-> Clipboard
->
-> <img src=".assets/screenshots/fuzzel-clipboard.png" width="50%" />
->
-> Emoji
->
-> <img src=".assets/screenshots/fuzzel-emoji.png" width="50%" />
->
-> Window list
->
-> <img src=".assets/screenshots/fuzzel_window.png" width="80%" />
+<details>
+<summary><b>Settings</b></summary><br>
+ <img src=".assets/screenshots/fuzzel-settings.png" width="50%" />
+</details>
+
+<details>
+<summary><b>Clipboard</b></summary><br>
+<img src=".assets/screenshots/fuzzel-clipboard.png" width="50%" />
+</details>
+
+<details>
+<summary><b>Emoji</b></summary><br>
+<img src=".assets/screenshots/fuzzel-emoji.png" width="50%" />
+</details>
+<details>
+<summary><b>Window list</b></summary><br>
+<img src=".assets/screenshots/fuzzel_window.png" width="80%" />
+</details>
 
 ---
 
 ### ⌨️ Hotkeys
+
+<details>
+<summary><b> Click to see 👈 </b></summary><br>
 
 🚀 Applications & Scripts
 
@@ -128,17 +136,13 @@ Some fuzzel menus
 | Super + PgUp | Apps |
 | Super + U | System |
 
-I may change the keyboard layout time to time so this list might be out-of-date!
-
----
+</details>
 
 ### Barless mode
 
-> ⌨️ SUPER+B
+⌨️ SUPER+B
 
 I use my bar less and less, so recently I made this "barless mode" to launch workspace listener that shows your current workspace.
-
-TODO: Replace Waybar and listener notifications with some minimal shell like AGS?
 
 ---
 
