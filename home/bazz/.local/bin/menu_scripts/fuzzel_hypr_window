@@ -51,7 +51,6 @@ labels=()
 # Fuzzel output
 for e in "${entries[@]}"; do
   tmp="${e#*$'\t'}"
-  ws="${tmp%%$'\t'*}"
   tmp="${tmp#*$'\t'}"
   id="${tmp%%$'\t'*}"
   tmp="${tmp#*$'\t'}"
