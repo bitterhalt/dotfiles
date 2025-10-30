@@ -17,14 +17,16 @@ ids=()
 # Collect windows from Hyprland
 while IFS=$'\t' read -r id class title ws_id ws_name; do
   if [[ $ws_name == special* ]]; then
-    label="[⭐:$ws_name" # ⭐ = special
+    label="[⭐:$ws_name]" # ⭐ = special workspace
     sortkey=1
+    sort_ws=9999
   else
-    label="[$ws_id]" # Normal workspace label
+    label="[$ws_id]"
     sortkey=0
+    sort_ws=$ws_id
   fi
-  # Store sortable line: sortkey, id, label, description
-  entries+=("$sortkey	$id	$label	$class - $title")
+
+  entries+=("$sortkey	$sort_ws	$id	$label	$class - $title")
 done < <(
   hyprctl clients -j |
     jq -r '.[] |
@@ -37,18 +39,20 @@ done < <(
       ] | @tsv'
 )
 
-# Sort entries (normal first, or reverse)
+# Sort entries:
 if ((reverse)); then
-  mapfile -t entries < <(printf '%s\n' "${entries[@]}" | sort -t $'\t' -k1,1r)
+  mapfile -t entries < <(printf '%s\n' "${entries[@]}" | sort -t $'\t' -k1,1r -k2,2n)
 else
-  mapfile -t entries < <(printf '%s\n' "${entries[@]}" | sort -t $'\t' -k1,1)
+  mapfile -t entries < <(printf '%s\n' "${entries[@]}" | sort -t $'\t' -k1,1 -k2,2n)
 fi
 
 labels=()
 
-# Build fuzzel output lines
+# Fuzzel output
 for e in "${entries[@]}"; do
   tmp="${e#*$'\t'}"
+  ws="${tmp%%$'\t'*}"
+  tmp="${tmp#*$'\t'}"
   id="${tmp%%$'\t'*}"
   tmp="${tmp#*$'\t'}"
   label="${tmp%%$'\t'*}"
