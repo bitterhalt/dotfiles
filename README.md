@@ -59,6 +59,8 @@
 
 ### ⌨️ Hotkeys
 
+> These are from hyprland but they are mostle the same with Sway
+
 <details>
 <summary><b> Click to see 👈 </b></summary><br>
 
