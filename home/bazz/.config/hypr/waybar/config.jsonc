@@ -47,7 +47,7 @@
   "wireplumber#sink": {
     "format": "{icon}",
     "format-icons": ["󰕿", "󰖀", "󰕾", "󰕾"],
-    "tooltip-format": "{node_name}\nVolume: {volume}%",
+    "tooltip-format": "{node_name}\n\nVolume: {volume}%",
     "format-muted": "󰸈",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "pavucontrol",
@@ -56,7 +56,7 @@
     "node-type": "Audio/Source",
     "format": "󰍬",
     "format-muted": "󰍭",
-    "tooltip-format": "{node_name}\nVolume: {volume}%",
+    "tooltip-format": "{node_name}\n\nVolume: {volume}%",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "on-click-right": "pavucontrol",
     "scroll-step": 5,
@@ -64,21 +64,14 @@
   "clock": {
     "format": "{:%H:%M}",
     "format-alt": "{:%d.%m %H:%M}",
+    "on-click-right": "~/.local/bin/weatherfetch -n",
     "tooltip-format": "<span color='#FFFCF0'><tt>{calendar}</tt></span>",
     "calendar": {
-      "mode-mon-col": 3,
-      "on-scroll": 1,
-      "on-click-right": "mode",
       "format": {
         "months": "<span color='#CECDC3'><b>{}</b></span>",
         "weekdays": "<span color='#878580'><b>{}</b></span>",
         "today": "<span color='#24837B'><b>{}</b></span>",
       },
-    },
-    "actions": {
-      "on-click-right": "mode",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down",
     },
   },
   // "in case tzdata update fucks up your clock",

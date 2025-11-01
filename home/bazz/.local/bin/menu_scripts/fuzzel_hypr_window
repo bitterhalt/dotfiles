@@ -1,5 +1,4 @@
-ggVG
-
+#!/usr/bin/env bash
 # Window switcher for Hyprland. Marks special workspaces with ⭐
 
 reverse=0
