@@ -22,7 +22,7 @@ add() {
   }
 
   # Capture pacman package list once
-  pacman -Qe | awk '{print $1}' >"$dotfiles_repo/packages" &&
+  pacman -Qe | awk '{print $1}' >"$dotfiles_repo/pkg.list" &&
     echo -e "${GREEN}[✓] Updated package list.${RESET}" ||
     echo -e "${YELLOW}[!] Warning: Could not update pacman package list.${RESET}"
 
