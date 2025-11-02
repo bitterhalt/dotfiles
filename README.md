@@ -140,11 +140,16 @@
 
 </details>
 
-### Barless mode
+### 🍫 Barless mode
 
 ⌨️ SUPER+B
 
 I use my bar less and less, so recently I made this "barless mode" to launch workspace listener that shows your current workspace.
+
+<details>
+<summary><b>Screenshot</b></summary><br>
+<img src=".assets/screenshots/barless.png" width="100%" />
+</details>
 
 ---
 
