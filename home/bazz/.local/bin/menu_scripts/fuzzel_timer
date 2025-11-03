@@ -32,9 +32,22 @@ if [ "$seconds" -ge 1 ]; then
   message=$(fuzzel -d -l 1 -w 35 -p "Message:" --placeholder "(e.g. brush your teeth!)")
   [ -z "$message" ] && message="⏰ Timer ($input) expired!"
 
+  # Short summary after timer is set
+  h=$((seconds / 3600))
+  m=$(((seconds % 3600) / 60))
+  s=$((seconds % 60))
+
+  # Format readable duration
+  human_time=""
+  ((h > 0)) && human_time+="${h}h "
+  ((m > 0)) && human_time+="${m}m "
+  ((s > 0 && h == 0)) && human_time+="${s}s"
+
+  notify-send "⏳ Timer Set" "Time: $human_time\nMessage: $message"
+
   sleep "$seconds"
 
-  # Popup
+  # Popup when finished
   zenity --info --title="⏰ Timer Finished" --text="$message" --width=250 &
   pw-play .local/share/Sounds/complete.oga
 
