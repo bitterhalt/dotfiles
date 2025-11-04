@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Sway-custom
-Comment=An i3-compatible Wayland compositor
-Exec=sway >/home/bazz/.local/state/sway.log>&1
-Type=Application
-DesktopNames=sway;wlroots
