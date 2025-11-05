@@ -1,0 +1,17 @@
+[Unit]
+Description=Personal Timer Daemon
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/timer_daemon.sh
+Restart=on-failure
+RestartSec=5
+# Environment ensures GUI notifications work
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/%U
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus
+
+[Install]
+WantedBy=default.target
+
