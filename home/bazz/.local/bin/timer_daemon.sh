@@ -7,24 +7,25 @@
 # - pipewire
 # - zenity
 
-QUEUE_DIR="$HOME/.local/share/timers"
-QUEUE="$QUEUE_DIR/queue"
-LOCK="$QUEUE_DIR/daemon.lock"
+queue="$HOME/.local/share/timers/queue"
+lock="/tmp/timer_daemon.lock"
 
-IDLE_SLEEP=$((60 * 60)) # Sleep when no timers (1 hour)
-MIN_SLEEP=5             # Minimum sleep time (seconds)
+idle_sleep=$((60 * 60))         # Sleep when no timers (1 hour)
+min_sleep=5                     # Minimum sleep time (seconds)
+expire_seconds=$((4 * 60 * 60)) # Remove timers older than 4 hours
 
-mkdir -p "$QUEUE_DIR"
+mkdir -p "$(dirname "$queue")"
+touch "$queue"
 
 # Prevent multiple instances
-if [[ -e "$LOCK" ]]; then
+if [[ -e "$lock" ]]; then
   echo "Timer daemon already running."
   exit 1
 fi
-echo $$ >"$LOCK"
+echo $$ >"$lock"
 
 cleanup() {
-  rm -f "$LOCK"
+  rm -f "$lock"
   exit 0
 }
 trap cleanup EXIT SIGINT SIGTERM
@@ -35,33 +36,37 @@ while true; do
   tmp=$(mktemp)
 
   # Timer queue
-  if [[ -f "$QUEUE" ]]; then
+  if [[ -f "$queue" ]]; then
     while IFS="|" read -r id fire_at message; do
       [[ -z "$id" ]] && continue
 
       if ((fire_at <= now)); then
-        zenity --info --title="⏰ Timer Finished" --text="$message" --width=250 &
-        pw-play ~/.local/share/Sounds/complete.oga &
+        # If expired less than 4 hours ago → notify
+        if ((now - fire_at < expire_seconds)); then
+          zenity --info --title="⏰ Timer Finished" --text="$message" --width=250 &
+          pw-play ~/.local/share/Sounds/complete.oga &
+        fi
+        # Otherwise silently drop (old entry)
       else
         echo "$id|$fire_at|$message" >>"$tmp"
         if [[ -z "$next_fire_at" || "$fire_at" -lt "$next_fire_at" ]]; then
           next_fire_at="$fire_at"
         fi
       fi
-    done <"$QUEUE"
+    done <"$queue"
   fi
 
-  mv "$tmp" "$QUEUE"
+  mv "$tmp" "$queue"
 
-  # Compute Sleep Duration
+  # Compute sleep duration
   if [[ -z "$next_fire_at" ]]; then
-    sleep_time=$IDLE_SLEEP
+    sleep_time=$idle_sleep
   else
     now=$(date +%s)
     sleep_time=$((next_fire_at - now))
-    ((sleep_time < MIN_SLEEP)) && sleep_time=$MIN_SLEEP
+    ((sleep_time < min_sleep)) && sleep_time=$min_sleep
   fi
 
-  #  Wait for File Update or Timeout
-  inotifywait -qq -t "$sleep_time" -e modify "$QUEUE" 2>/dev/null
+  # Wait for file Update or timeout
+  inotifywait -qq -t "$sleep_time" -e modify "$queue" 2>/dev/null
 done
