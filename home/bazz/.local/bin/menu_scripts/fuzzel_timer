@@ -1,67 +1,171 @@
 #!/usr/bin/env bash
 
 notify="notify-send -t 5000"
-menu="fuzzel -d -l 1 -w 35 -p"
+menu="fuzzel -d -l 3 -w 35 -p"
+queue="$HOME/.local/share/timers/queue"
 
-# Prompt
-input=$($menu "Set time:" --placeholder "(e.g. 5m, 1h, or 13:05)")
+mkdir -p "$(dirname "$queue")"
+touch "$queue"
 
-# If format is HH:MM (absolute future time)
-if [[ "$input" =~ ^([0-9]{1,2}):([0-9]{2})$ ]]; then
-  hour=${BASH_REMATCH[1]}
-  minute=${BASH_REMATCH[2]}
-
-  target=$(date -d "$(date +%F) $hour:$minute" +%s)
+# Human-friendly "time remaining"
+format_remaining() {
+  local now fire diff
   now=$(date +%s)
+  fire="$1"
+  diff=$((fire - now))
 
-  ((target <= now)) && target=$(date -d "tomorrow $hour:$minute" +%s)
-  seconds=$((target - now))
+  if ((diff <= 0)); then
+    echo "Expired"
+    return
+  fi
 
-# Check relative format N + optional unit (s/m/h)
-elif [[ "$input" =~ ^([0-9]+)([smh]?)$ ]]; then
-  number="${BASH_REMATCH[1]}"
-  unit="${BASH_REMATCH[2]}"
+  local d=$((diff / 86400))
+  local h=$(((diff % 86400) / 3600))
+  local m=$(((diff % 3600) / 60))
+  local s=$((diff % 60))
 
-  case "$unit" in
-  "" | s) seconds=$((number)) ;;
-  m) seconds=$((number * 60)) ;;
-  h) seconds=$((number * 3600)) ;;
-  *)
-    $notify "⏰ Timer Error" "Invalid unit. Allowed: s, m, h or HH:MM"
-    exit 1
+  local out=""
+  ((d > 0)) && out+="${d}d "
+  ((h > 0)) && out+="${h}h "
+  ((m > 0)) && out+="${m}m "
+  ((s > 0 && d == 0 && h == 0)) && out+="${s}s "
+
+  echo "$out"
+}
+
+# Manage timers
+manage_timers() {
+
+  if [ ! -s "$queue" ]; then
+    $notify "⏰ Timer Manager" "No timers currently set."
+    return 0
+  fi
+
+  list_data_tmp=$(mktemp)
+
+  sort -t'|' -k2,2n "$queue" | while IFS="|" read -r id fire_at message; do
+    human=$(date -d "@$fire_at" "+%H:%M:%S on %d-%m-%Y")
+    remaining=$(format_remaining "$fire_at")
+    echo -e "FALSE\n$id\n$human\n$remaining\n$message" >>"$list_data_tmp"
+  done
+
+  ACTION=$(
+    yad --list \
+      --title="Manage Timers" \
+      --text="Select timers to delete." \
+      --width=720 --height=350 --center \
+      --column="✓":CHK \
+      --column="ID":H \
+      --column="Fire At" \
+      --column="Remaining" \
+      --column="Message" \
+      --button="Delete:10" \
+      --button="Close:1" \
+      --multiple \
+      --no-markup \
+      --search-column=3 \
+      --print-all \
+      <"$list_data_tmp"
+  )
+
+  YAD_EXIT_CODE=$?
+  rm -f "$list_data_tmp"
+
+  case $YAD_EXIT_CODE in
+  10)
+    SELECTED_IDS=$(echo "$ACTION" | awk -F"|" '$1=="TRUE"{print $2}')
+
+    if [ -z "$SELECTED_IDS" ]; then
+      $notify "No Selection" "No timers selected."
+      return 0
+    fi
+
+    if yad --question --title="Confirm" --text="Delete selected timers?" --button="No:1" --button="Yes:0"; then
+      tmp=$(mktemp)
+      while IFS="|" read -r id fire_at message; do
+        if ! grep -q "^$id$" <<<"$SELECTED_IDS"; then
+          echo "$id|$fire_at|$message" >>"$tmp"
+        fi
+      done <"$queue"
+      mv "$tmp" "$queue"
+      $notify "Deleted" "Timers removed."
+      manage_timers
+    fi
     ;;
+  *) return 0 ;;
   esac
+}
 
-# Otherwise reject input
-else
-  $notify "⏰ Timer Error" "Invalid format.\nUse: 5m, 1h, 30s or HH:MM"
-  exit 1
+# Menu
+choice=$(
+  $menu "> " <<EOF
+Set new timer
+Manage timers
+EOF
+)
+
+[ -z "$choice" ] && exit 0
+
+if [[ "$choice" == "Manage timers" ]]; then
+  manage_timers
+  exit 0
 fi
 
-# Must be positive seconds
-if [ "$seconds" -lt 1 ]; then
-  $notify "⏰ Timer Error" "Time must be greater than zero."
-  exit 1
+# Set new timer
+if [[ "$choice" == "Set new timer" ]]; then
+
+  if ! pgrep -f "timer_daemon.sh" >/dev/null; then
+    $notify "⏰ Timer Daemon Not Running" "Timers will not ring."
+  fi
+
+  default_time=$(date +%R)
+  default_date_dm=$(date +%d-%m)
+  default_year=$(date +%Y)
+
+  read -r -d '' YAD_CMD <<EOF
+yad --form \
+  --title="Set New Timer" \
+  --text="Enter time, date, year, and message." \
+  --width=400 --center \
+  --field="Time (HH:MM):" "$default_time" \
+  --field="Date (DD-MM):" "$default_date_dm" \
+  --field="Year (YYYY):" "$default_year" \
+  --field="Message:" "" \
+  --button="Cancel:1" \
+  --button="Set Timer:0"
+EOF
+
+  IFS='|' read -r time_input date_dm_input year_input message_input <<<"$(eval "$YAD_CMD")"
+  YAD_EXIT_CODE=$?
+
+  [[ $YAD_EXIT_CODE -ne 0 ]] && exit 0
+  [[ -z "$time_input" || -z "$date_dm_input" || -z "$year_input" ]] && exit 0
+
+  target_datetime="$year_input-$(echo "$date_dm_input" | cut -d'-' -f2)-$(echo "$date_dm_input" | cut -d'-' -f1) $time_input"
+  fire_at=$(date -d "$target_datetime" +%s 2>/dev/null)
+
+  if [ -z "$fire_at" ]; then
+    $notify "❌ Timer Error" "Invalid date/time."
+    exit 1
+  fi
+
+  now=$(date +%s)
+  if ((fire_at <= now)); then
+    next_day_fire_at=$(date -d "$target_datetime + 1 day" +%s 2>/dev/null)
+    if ((next_day_fire_at > now)); then
+      fire_at="$next_day_fire_at"
+      $notify "Time Rolled" "Time was past — set for tomorrow."
+    else
+      $notify "❌ Timer Error" "Still invalid."
+      exit 1
+    fi
+  fi
+
+  [[ -z "$message_input" ]] && message_input="⏰ Timer expired!"
+
+  id=$(date +%s%N)
+  echo "$id|$fire_at|$message_input" >>"$queue"
+
+  human=$(date -d "@$fire_at" "+%H:%M on %d-%m-%Y")
+  $notify "Added Timer" "$message_input @ $human"
 fi
-
-# Ask message
-message=$($menu "Message:" --placeholder "(e.g. brush your teeth!)")
-[ -z "$message" ] && message="⏰ Timer ($input) expired!"
-
-# Short summary after timer is set
-h=$((seconds / 3600))
-m=$(((seconds % 3600) / 60))
-s=$((seconds % 60))
-
-human_time=""
-((h > 0)) && human_time+="${h}h "
-((m > 0)) && human_time+="${m}m "
-((s > 0 && h == 0)) && human_time+="${s}s"
-
-$notify "⏳ Timer set" "Time: $human_time\nMessage: $message"
-
-sleep "$seconds"
-
-# Popup
-zenity --info --title="⏰ Timer Finished" --text="$message" --width=250 &
-pw-play ~/.local/share/Sounds/complete.oga
