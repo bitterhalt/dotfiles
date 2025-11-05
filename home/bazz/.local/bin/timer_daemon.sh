@@ -5,8 +5,9 @@
 # - inotify-tools
 # - libnotify
 # - pipewire
-# - zenity
+# - yad
 
+notify="notify-send -t 15000"
 queue="$HOME/.local/share/timers/queue"
 lock="/tmp/timer_daemon.lock"
 
@@ -14,15 +15,31 @@ idle_sleep=$((60 * 60))         # Sleep when no timers (1 hour)
 min_sleep=5                     # Minimum sleep time (seconds)
 expire_seconds=$((4 * 60 * 60)) # Remove timers older than 4 hours
 
+# YAD popup
+yad_notify() {
+  yad --info \
+    --title="Timer Finished" \
+    --text="<big><b>⏰ Timer Done</b></big>\n\n$1" \
+    --width=300 \
+    --button="Close:0"
+}
+
 mkdir -p "$(dirname "$queue")"
 touch "$queue"
 
-# Prevent multiple instances
-if [[ -e "$lock" ]]; then
-  echo "Timer daemon already running."
-  exit 1
+# Lock file
+if [[ -f "$lock" ]]; then
+  oldpid=$(cat "$lock")
+  if ps -p "$oldpid" >/dev/null 2>&1; then
+    echo "Timer daemon already running."
+    exit 1
+  else
+    echo "Stale lock detected — cleaning."
+    echo $$ >"$lock"
+  fi
+else
+  echo $$ >"$lock"
 fi
-echo $$ >"$lock"
 
 cleanup() {
   rm -f "$lock"
@@ -35,20 +52,20 @@ while true; do
   next_fire_at=""
   tmp=$(mktemp)
 
-  # Timer queue
   if [[ -f "$queue" ]]; then
     while IFS="|" read -r id fire_at message; do
       [[ -z "$id" ]] && continue
 
       if ((fire_at <= now)); then
-        # If expired less than 4 hours ago → notify
+        # Notify only if timer not too old
         if ((now - fire_at < expire_seconds)); then
-          zenity --info --title="⏰ Timer Finished" --text="$message" --width=250 &
+          $notify "⏰ Timer Done" "$message" &
+          yad_notify "$message" &
           pw-play ~/.local/share/Sounds/complete.oga &
         fi
-        # Otherwise silently drop (old entry)
       else
         echo "$id|$fire_at|$message" >>"$tmp"
+
         if [[ -z "$next_fire_at" || "$fire_at" -lt "$next_fire_at" ]]; then
           next_fire_at="$fire_at"
         fi
@@ -58,7 +75,6 @@ while true; do
 
   mv "$tmp" "$queue"
 
-  # Compute sleep duration
   if [[ -z "$next_fire_at" ]]; then
     sleep_time=$idle_sleep
   else
@@ -67,6 +83,5 @@ while true; do
     ((sleep_time < min_sleep)) && sleep_time=$min_sleep
   fi
 
-  # Wait for file Update or timeout
   inotifywait -qq -t "$sleep_time" -e modify "$queue" 2>/dev/null
 done
