@@ -59,7 +59,8 @@ manage_timers() {
       --column="Fire At" \
       --column="Remaining" \
       --column="Message" \
-      --button="Delete:10" \
+      --button="✏️ Edit:20" \
+      --button="🗑️ Delete:10" \
       --button="Close:1" \
       --multiple \
       --no-markup \
@@ -72,6 +73,7 @@ manage_timers() {
   rm -f "$list_data_tmp"
 
   case $YAD_EXIT_CODE in
+  # Delete timers
   10)
     SELECTED_IDS=$(echo "$ACTION" | awk -F"|" '$1=="TRUE"{print $2}')
 
@@ -91,6 +93,61 @@ manage_timers() {
       $notify "Deleted" "Timers removed."
       manage_timers
     fi
+    ;;
+
+  # Edit timer
+  20)
+    SELECTED_ID=$(echo "$ACTION" | awk -F"|" '$1=="TRUE"{print $2}' | head -n1)
+
+    if [ -z "$SELECTED_ID" ]; then
+      $notify "No Selection" "Select a single timer to edit."
+      return 0
+    fi
+
+    OLD_ENTRY=$(grep "^$SELECTED_ID|" "$queue")
+    fire_at=$(echo "$OLD_ENTRY" | cut -d'|' -f2)
+    message=$(echo "$OLD_ENTRY" | cut -d'|' -f3-)
+
+    time_str=$(date -d "@$fire_at" +%R)
+    date_str=$(date -d "@$fire_at" +%d-%m)
+    year_str=$(date -d "@$fire_at" +%Y)
+
+    EDIT_OUTPUT=$(yad --form \
+      --title="Edit Timer" \
+      --text="Modify timer values:" \
+      --width=400 --center \
+      --field="Time (HH:MM):" "$time_str" \
+      --field="Date (DD-MM):" "$date_str" \
+      --field="Year (YYYY):" "$year_str" \
+      --field="Message:" "$message" \
+      --button="Cancel:1" \
+      --button="Save:0")
+
+    [[ $? -ne 0 ]] && return 0
+
+    IFS='|' read -r new_time new_date new_year new_msg <<<"$EDIT_OUTPUT"
+    [[ -z "$new_time" || -z "$new_date" || -z "$new_year" ]] && return 0
+
+    target_datetime="$new_year-$(echo "$new_date" | cut -d'-' -f2)-$(echo "$new_date" | cut -d'-' -f1) $new_time"
+    new_fire_at=$(date -d "$target_datetime" +%s 2>/dev/null)
+
+    if [ -z "$new_fire_at" ] || ((new_fire_at <= $(date +%s))); then
+      $notify "❌ Edit Error" "Invalid or past time."
+      return 1
+    fi
+
+    tmp=$(mktemp)
+    while IFS="|" read -r id fa msg; do
+      if [[ "$id" == "$SELECTED_ID" ]]; then
+        echo "$id|$new_fire_at|$new_msg" >>"$tmp"
+      else
+        echo "$id|$fa|$msg" >>"$tmp"
+      fi
+    done <"$queue"
+    mv "$tmp" "$queue"
+
+    $notify "✏️ Timer Updated" "Timer modified successfully."
+    manage_timers
     ;;
   *) return 0 ;;
   esac
