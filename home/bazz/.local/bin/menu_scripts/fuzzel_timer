@@ -52,7 +52,7 @@ manage_timers() {
   ACTION=$(
     yad --list \
       --title="Manage Timers" \
-      --text="Select timers to delete." \
+      --text="List of Timers" \
       --width=720 --height=350 --center \
       --column="✓":CHK \
       --column="ID":H \
@@ -99,20 +99,20 @@ manage_timers() {
 # Menu
 choice=$(
   $menu "> " <<EOF
-Set new timer
-Manage timers
+⏰ Set timer
+🗒️ Show timers
 EOF
 )
 
 [ -z "$choice" ] && exit 0
 
-if [[ "$choice" == "Manage timers" ]]; then
+if [[ "$choice" == *"Show timers" ]]; then
   manage_timers
   exit 0
 fi
 
 # Set new timer
-if [[ "$choice" == "Set new timer" ]]; then
+if [[ "$choice" == *"Set timer" ]]; then
 
   if ! pgrep -f "timer_daemon.sh" >/dev/null; then
     $notify "⏰ Timer Daemon Not Running" "Timers will not ring."
