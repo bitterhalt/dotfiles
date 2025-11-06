@@ -1,13 +1,27 @@
 #!/usr/bin/env bash
 
 notify="notify-send -t 5000"
-menu="fuzzel -d -l 3 -w 35 -p"
+menu="fuzzel -d -l 5 -w 35 -p"
 queue="$HOME/.local/share/timers/queue"
+daemon="$HOME/.local/bin/timer_daemon.sh"
 
 mkdir -p "$(dirname "$queue")"
 touch "$queue"
 
-# Human-friendly "time remaining"
+# Helper: Check daemon status
+daemon_status() {
+  if [[ -f /tmp/timer_daemon.lock ]]; then
+    pid=$(cat /tmp/timer_daemon.lock)
+    if ps -p "$pid" >/dev/null 2>&1; then
+      echo "running"
+      return 0
+    fi
+  fi
+  echo "stopped"
+  return 1
+}
+
+# Helper: Human-friendly "time remaining"
 format_remaining() {
   local now fire diff
   now=$(date +%s)
@@ -23,19 +37,16 @@ format_remaining() {
   local h=$(((diff % 86400) / 3600))
   local m=$(((diff % 3600) / 60))
   local s=$((diff % 60))
-
   local out=""
   ((d > 0)) && out+="${d}d "
   ((h > 0)) && out+="${h}h "
   ((m > 0)) && out+="${m}m "
   ((s > 0 && d == 0 && h == 0)) && out+="${s}s "
-
   echo "$out"
 }
 
 # Manage timers
 manage_timers() {
-
   if [ ! -s "$queue" ]; then
     $notify "⏰ Timer Manager" "No timers currently set."
     return 0
@@ -76,7 +87,6 @@ manage_timers() {
   # Delete timers
   10)
     SELECTED_IDS=$(echo "$ACTION" | awk -F"|" '$1=="TRUE"{print $2}')
-
     if [ -z "$SELECTED_IDS" ]; then
       $notify "No Selection" "No timers selected."
       return 0
@@ -94,11 +104,9 @@ manage_timers() {
       manage_timers
     fi
     ;;
-
   # Edit timer
   20)
     SELECTED_ID=$(echo "$ACTION" | awk -F"|" '$1=="TRUE"{print $2}' | head -n1)
-
     if [ -z "$SELECTED_ID" ]; then
       $notify "No Selection" "Select a single timer to edit."
       return 0
@@ -124,7 +132,6 @@ manage_timers() {
       --button="Save:0")
 
     [[ $? -ne 0 ]] && return 0
-
     IFS='|' read -r new_time new_date new_year new_msg <<<"$EDIT_OUTPUT"
     [[ -z "$new_time" || -z "$new_date" || -z "$new_year" ]] && return 0
 
@@ -154,15 +161,51 @@ manage_timers() {
 }
 
 # Menu
+status=$(daemon_status)
+if [[ "$status" == "running" ]]; then
+  daemon_entry="🛑 Stop daemon"
+else
+  daemon_entry="▶️ Start daemon"
+fi
+
 choice=$(
   $menu "> " <<EOF
 ⏰ Set timer
 🗒️ Show timers
+$daemon_entry
 EOF
 )
 
 [ -z "$choice" ] && exit 0
 
+# Daemon start/stop
+if [[ "$choice" == *"Start daemon" ]]; then
+  if daemon_status >/dev/null; then
+    $notify "Timer Daemon" "Already running."
+  else
+    nohup "$daemon" >/dev/null 2>&1 &
+    sleep 0.2
+    if daemon_status >/dev/null; then
+      $notify "Timer Daemon" "Started successfully."
+    else
+      $notify "Timer Daemon" "Failed to start."
+    fi
+  fi
+  exit 0
+fi
+
+if [[ "$choice" == *"Stop daemon" ]]; then
+  if daemon_status >/dev/null; then
+    "$daemon" kill >/dev/null 2>&1
+    sleep 0.3
+    $notify "Timer Daemon" "Stopped."
+  else
+    $notify "Timer Daemon" "Not running."
+  fi
+  exit 0
+fi
+
+# Show timers
 if [[ "$choice" == *"Show timers" ]]; then
   manage_timers
   exit 0
@@ -170,8 +213,7 @@ fi
 
 # Set new timer
 if [[ "$choice" == *"Set timer" ]]; then
-
-  if ! pgrep -f "timer_daemon.sh" >/dev/null; then
+  if ! daemon_status >/dev/null; then
     $notify "⏰ Timer Daemon Not Running" "Timers will not ring."
   fi
 
@@ -194,32 +236,26 @@ EOF
 
   IFS='|' read -r time_input date_dm_input year_input message_input <<<"$(eval "$YAD_CMD")"
   YAD_EXIT_CODE=$?
-
   [[ $YAD_EXIT_CODE -ne 0 ]] && exit 0
   [[ -z "$time_input" || -z "$date_dm_input" || -z "$year_input" ]] && exit 0
 
   target_datetime="$year_input-$(echo "$date_dm_input" | cut -d'-' -f2)-$(echo "$date_dm_input" | cut -d'-' -f1) $time_input"
   fire_at=$(date -d "$target_datetime" +%s 2>/dev/null)
-
-  if [ -z "$fire_at" ]; then
+  [[ -z "$fire_at" ]] && {
     $notify "❌ Timer Error" "Invalid date/time."
     exit 1
-  fi
+  }
 
   now=$(date +%s)
   if ((fire_at <= now)); then
     next_day_fire_at=$(date -d "$target_datetime + 1 day" +%s 2>/dev/null)
-    if ((next_day_fire_at > now)); then
-      fire_at="$next_day_fire_at"
-      $notify "Time Rolled" "Time was past — set for tomorrow."
-    else
+    ((next_day_fire_at > now)) && fire_at="$next_day_fire_at" && $notify "Time Rolled" "Time was past — set for tomorrow." || {
       $notify "❌ Timer Error" "Still invalid."
       exit 1
-    fi
+    }
   fi
 
   [[ -z "$message_input" ]] && message_input="⏰ Timer expired!"
-
   id=$(date +%s%N)
   echo "$id|$fire_at|$message_input" >>"$queue"
 
