@@ -16,7 +16,7 @@ ids=()
 # Collect windows from Hyprland
 while IFS=$'\t' read -r id class title ws_id ws_name; do
   if [[ $ws_name == special* ]]; then
-    label="[⭐:$ws_name]" # ⭐ = special workspace
+    label="[⭐]$ws_name" # ⭐ = special workspace
     sortkey=1
     sort_ws=9999
   else
