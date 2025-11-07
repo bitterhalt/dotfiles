@@ -8,10 +8,7 @@ $line_break\
 $character"""
 
 [character]
-#success_symbol = '[\$](cyan)'
-#error_symbol = '[\$](red)'
-#vimcmd_symbol = '[\$](green)'
-success_symbol = "[❯](cyan)"
+success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
 
