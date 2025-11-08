@@ -5,7 +5,6 @@
 # Config
 queue="$HOME/.local/share/timers/queue.json"
 daemon="$HOME/.local/bin/timer_daemon.sh"
-waybar_signal=3
 
 # Icons (Nerd Font md-variants)
 icon_new="󰔛"
@@ -16,8 +15,11 @@ icon_stop="󰅗"
 
 # Helpers
 notify() { notify-send -t 2500 "$@"; }
-signal_waybar() { pkill -RTMIN+$waybar_signal waybar 2>/dev/null; }
-
+signal_waybar() {
+  if pgrep -x "waybar" >/dev/null; then
+    pkill -RTMIN+3 waybar 2>/dev/null
+  fi
+}
 # Setup
 mkdir -p "$(dirname "$queue")"
 [[ ! -f "$queue" ]] && echo "[]" >"$queue"
