@@ -20,7 +20,7 @@ if [[ -f "$queue" ]] && [[ $(jq length "$queue" 2>/dev/null) -gt 0 ]]; then
         date_label=$(date -d "@$fire_at" "+%d.%m")
       fi
       # Tooltip always shows time and message
-      tooltip="<b>Next task</b>\n\n📅 $date_label\n⏰ $(date -d "@$fire_at" +%H:%M)\n\n$msg"
+      tooltip="<b>Next task</b>\n\n📅 $date_label ⏰ <b>$(date -d "@$fire_at" +%H:%M)</b>\n\n$msg"
     fi
   fi
 fi
