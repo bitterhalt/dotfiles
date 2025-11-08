@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Timer daemon
-# Dependencies: inotify-tools, libnotify, pipewire, yad, jq
+# Timer daemon for notifications and Waybar integration
+# Dependencies: jq, yad, notify-send, pw-play (optional), inotify-tools
 
 queue="$HOME/.local/share/timers/queue.json"
 lock="/tmp/timer_daemon.lock"
-notify="notify-send -t 15000"
+notify_cmd="notify-send -t 15000"
 
-idle_sleep=$((60 * 60))         # Sleep when no timers (1 hour)
-min_sleep=5                     # Minimum sleep (seconds)
+idle_sleep=$((60 * 60))         # Sleep 1 hour if no timers
+min_sleep=5                     # Minimum sleep between checks (seconds)
 expire_seconds=$((4 * 60 * 60)) # Drop timers older than 4 hours
 
 # Command mode: stop daemon
@@ -18,25 +18,21 @@ if [[ "$1" == "kill" ]]; then
       echo "Stopping timer daemon (PID $pid)..."
       kill "$pid"
       sleep 0.3
-      if ps -p "$pid" >/dev/null 2>&1; then
-        echo "Force killing daemon..."
-        kill -9 "$pid"
-      fi
-      rm -f "$lock"
-      echo "Timer daemon stopped."
-      exit 0
-    else
-      echo "Stale lock detected — removing."
-      rm -f "$lock"
-      exit 1
+      [[ $(
+        ps -p "$pid" >/dev/null 2>&1
+        echo $?
+      ) -eq 0 ]] && kill -9 "$pid"
     fi
+    rm -f "$lock"
+    echo "Timer daemon stopped."
+    exit 0
   else
-    echo "No lock file found — daemon not running."
+    echo "Daemon not running."
     exit 1
   fi
 fi
 
-# Popup with YAD
+# Functions
 yad_notify() {
   yad --info \
     --title="Timer Finished" \
@@ -44,7 +40,7 @@ yad_notify() {
     --width=300 --button="Close:0"
 }
 
-# Init
+# Ensure queue exists
 mkdir -p "$(dirname "$queue")"
 [[ ! -f "$queue" ]] && echo "[]" >"$queue"
 
@@ -62,15 +58,13 @@ fi
 echo $$ >"$lock"
 [[ -t 1 ]] && echo "Timer daemon started (PID $$)"
 
-# Cleanup on exit
+# Cleanup
 cleanup() {
   [[ -n "$INOTIFY_PID" ]] && kill "$INOTIFY_PID" 2>/dev/null
   rm -f "$lock"
   exit 0
 }
 trap cleanup INT TERM EXIT
-
-# Wait until Waybar is ready
 
 # Main loop
 while true; do
@@ -85,11 +79,16 @@ while true; do
     message=$(jq -r '.message' <<<"$timer")
 
     if ((fire_at <= now)); then
-      # Timer reached or expired
       if ((now - fire_at < expire_seconds)); then
-        $notify "Timer Done" "$message" &
+        # Notify user
+        $notify_cmd "Timer Done" "$message" &
         yad_notify "$message" &
         command -v pw-play >/dev/null && pw-play ~/.local/share/Sounds/complete.oga &
+
+        # Signal Waybar only if running
+        if pgrep -x "waybar" >/dev/null; then
+          pkill -RTMIN+3 waybar 2>/dev/null
+        fi
       fi
     else
       # Keep pending timers
@@ -103,7 +102,7 @@ while true; do
   # Write back updated queue
   echo "$new_list" >"$queue"
 
-  # Sleep time calculation
+  # Calculate sleep time
   if [[ -z "$next_fire_at" ]]; then
     sleep_time=$idle_sleep
   else
@@ -112,7 +111,7 @@ while true; do
     ((sleep_time < min_sleep)) && sleep_time=$min_sleep
   fi
 
-  # Wait for queue change or next timer
+  # Wait for queue modification or next timer
   inotifywait -qq -t "$sleep_time" -e modify "$queue" 2>/dev/null &
   INOTIFY_PID=$!
   wait "$INOTIFY_PID" 2>/dev/null
