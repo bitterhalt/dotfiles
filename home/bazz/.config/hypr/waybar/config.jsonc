@@ -4,7 +4,13 @@
   //"height": 28,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock", "custom/record"],
-  "modules-right": ["network", "group/sound", "battery", "custom/idle"],
+  "modules-right": [
+    "custom/timer",
+    "network",
+    "group/sound",
+    "battery",
+    "custom/idle",
+  ],
   "hyprland/workspaces": {
     "disable-scroll": true,
   },
@@ -81,6 +87,14 @@
     "exec": "date +'%b %d %H:%M'",
     "interval": 60,
     "on-click": "~/.local/bin/noti_cal",
+  },
+  "custom/timer": {
+    "exec": "~/.config/hypr/waybar/scripts/timer_next.sh",
+    "signal": 3,
+    "interval": "once",
+    "return-type": "json",
+    "tooltip": true,
+    "on-click": "~/.local/bin/menu_scripts/fuzzel_timer",
   },
   "custom/idle": {
     "interval": "once",
