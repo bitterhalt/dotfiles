@@ -70,6 +70,15 @@ cleanup() {
   exit 0
 }
 trap cleanup INT TERM EXIT
+# Wait until Waybar is ready
+for _ in {1..20}; do
+  if pgrep -x waybar >/dev/null; then
+    echo "Waybar detected, starting timer daemon..."
+    break
+  fi
+  echo "Waiting for Waybar to start..."
+  sleep 1
+done
 
 # Main loop
 while true; do
