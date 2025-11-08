@@ -4,7 +4,6 @@
 
 queue="$HOME/.local/share/timers/queue.json"
 lock="/tmp/timer_daemon.lock"
-waybar_signal=3
 notify="notify-send -t 15000"
 
 idle_sleep=$((60 * 60))         # Sleep when no timers (1 hour)
@@ -70,15 +69,8 @@ cleanup() {
   exit 0
 }
 trap cleanup INT TERM EXIT
+
 # Wait until Waybar is ready
-for _ in {1..20}; do
-  if pgrep -x waybar >/dev/null; then
-    echo "Waybar detected, starting timer daemon..."
-    break
-  fi
-  echo "Waiting for Waybar to start..."
-  sleep 1
-done
 
 # Main loop
 while true; do
@@ -110,9 +102,6 @@ while true; do
 
   # Write back updated queue
   echo "$new_list" >"$queue"
-
-  # Notify Waybar
-  pkill -RTMIN+$waybar_signal waybar 2>/dev/null
 
   # Sleep time calculation
   if [[ -z "$next_fire_at" ]]; then
