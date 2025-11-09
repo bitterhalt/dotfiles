@@ -94,7 +94,7 @@
     "interval": "once",
     "return-type": "json",
     "tooltip": true,
-    "on-click": "~/.local/bin/menu_scripts/fuzzel_task.py",
+    "on-click": "~/.local/bin/menu_scripts/fuzzel_timer",
   },
   "custom/idle": {
     "interval": "once",
