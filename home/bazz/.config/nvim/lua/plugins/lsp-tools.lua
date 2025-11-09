@@ -71,21 +71,6 @@ return {
     },
   },
 
-  {
-    "nvimtools/none-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      local null_ls = require("null-ls")
-
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.completion.spell,
-        },
-      })
-    end,
-    lazy = true,
-  },
-
   -- Conform (Formatter)
   {
     "stevearc/conform.nvim",
@@ -167,13 +152,6 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
-    init = function()
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        callback = function()
-          vim.lsp.buf.format()
-        end,
-      })
-    end,
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     keys = {
       {
