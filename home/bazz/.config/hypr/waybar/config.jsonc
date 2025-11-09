@@ -4,13 +4,7 @@
   //"height": 28,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock", "custom/record"],
-  "modules-right": [
-    "custom/timer",
-    "network",
-    "group/sound",
-    "battery",
-    "custom/idle",
-  ],
+  "modules-right": ["custom/timer", "network", "group/sound", "battery"],
   "hyprland/workspaces": {
     "disable-scroll": true,
   },

@@ -10,8 +10,8 @@ import signal
 import sys
 import time
 from datetime import datetime
-from subprocess import DEVNULL, PIPE, Popen, run
 from pathlib import Path
+from subprocess import DEVNULL, PIPE, Popen, run
 
 # === Configuration ===
 QUEUE_FILE = Path("~/.local/share/timers/queue.json").expanduser()
