@@ -34,15 +34,15 @@ ICON_SAVE = "󰏫 Save"
 # === Helper Functions ===
 def notify(title: str, message: str) -> None:
     """Send a desktop notification."""
-    try:  # Normal notify
+    try:
         run(["notify-send", "-t", "3000", title, message], check=False, stderr=DEVNULL)
     except Exception:
         pass
 
 
 def fire_notify(title: str, message: str) -> None:
-    """Send a desktop notification."""
-    try:  # Timer notification is critical and annoying
+    """Send a critical timer notification."""
+    try:
         run(
             ["notify-send", "-u", "critical", title, message],
             check=False,
@@ -139,10 +139,20 @@ class TimerManager:
             self.save_timers()
 
     def save_timers(self) -> None:
-        """Save current queue to disk and notify Waybar."""
-        with QUEUE_FILE.open("w", encoding="utf-8") as f:
-            json.dump(self.queue, f, indent=2)
-        signal_waybar()
+        """Safely save current queue to disk and notify Waybar."""
+        tmp_file = QUEUE_FILE.with_suffix(".tmp")
+        backup_file = QUEUE_FILE.with_suffix(".bak")
+
+        try:
+            with tmp_file.open("w", encoding="utf-8") as f:
+                json.dump(self.queue, f, indent=2)
+            tmp_file.replace(QUEUE_FILE)
+            with backup_file.open("w", encoding="utf-8") as f:
+                json.dump(self.queue, f, indent=2)
+        except Exception as e:
+            notify("Timer Error", f"Failed to save timers: {e}")
+        finally:
+            signal_waybar()
 
     def add_timer(self, fire_at: int, message: str) -> None:
         """Add a new timer entry."""
@@ -178,9 +188,8 @@ class TimerManager:
                 return True
         return False
 
-    # === Timer checking ===
     def _check_and_process_timers(self) -> int:
-        """Check due timers and send notifications (notify + sound)."""
+        """Check due timers and send notifications."""
         now = int(time.time())
         next_fire = None
         pending = []
@@ -206,7 +215,6 @@ class TimerManager:
 
         return max(MIN_SLEEP, next_fire - now) if next_fire else MAX_SLEEP
 
-    # === Daemon loop ===
     def run_daemon(self) -> None:
         """Main loop that monitors and fires timers."""
         if not acquire_lock():
@@ -220,7 +228,6 @@ class TimerManager:
         try:
             while True:
                 try:
-                    # Use .stat().st_mtime from Path object
                     mtime = QUEUE_FILE.stat().st_mtime
                 except FileNotFoundError:
                     mtime = 0
@@ -242,10 +249,19 @@ class TimerManager:
             print("[Daemon] Stopped.")
 
     def start_daemon(self) -> None:
-        """Start as background daemon."""
+        """Start as background daemon if not already running."""
+        if LOCK_FILE.exists():
+            try:
+                with LOCK_FILE.open("r", encoding="utf-8") as f:
+                    pid = int(f.read().strip())
+                if os.path.exists(f"/proc/{pid}"):
+                    notify("Timer Daemon", "Already running.")
+                    return
+            except Exception:
+                pass
+
         try:
             script_path = os.path.abspath(__file__)
-            # Popen call without explicit env=... is clean and sufficient for notify-send
             Popen(
                 ["setsid", sys.executable, script_path, "daemon"],
                 stdout=DEVNULL,
@@ -297,10 +313,9 @@ def handle_new_timer(manager: TimerManager) -> None:
 
     fire_at = int(dt.timestamp())
 
-    # --- Cancel if time is in the past
     if fire_at <= int(time.time()):
         notify("Invalid", "Cannot set time in the past. Timer canceled.")
-        return  # EXIT if invalid
+        return
 
     manager.add_timer(fire_at, msg)
     notify("Timer Set", f"{msg or 'Reminder'} at {dt:%H:%M %d-%m-%Y}")
@@ -357,11 +372,39 @@ def handle_edit_timers(manager: TimerManager) -> None:
     notify("Timer Updated", new_m)
 
 
+# === CLI Mode ===
+def cli_mode(manager: TimerManager, args: list[str]) -> None:
+    """Minimal CLI mode for scripting: add/list/delete."""
+    if args[0] == "list":
+        for t in manager.queue:
+            dt = datetime.fromtimestamp(t["fire_at"])
+            print(f"{t['id']} | {dt:%Y-%m-%d %H:%M} | {t['message']}")
+    elif args[0] == "add" and len(args) >= 3:
+        try:
+            dt = datetime.strptime(args[1], "%Y-%m-%d %H:%M")
+        except ValueError:
+            print("Invalid datetime format. Use YYYY-MM-DD HH:MM")
+            return
+        manager.add_timer(int(dt.timestamp()), " ".join(args[2:]))
+        print("Timer added.")
+    elif args[0] == "clear":
+        manager.clear_all()
+        print("All timers cleared.")
+    elif args[0] == "delete" and len(args) == 2:
+        if manager.delete_timer(args[1]):
+            print("Timer deleted.")
+        else:
+            print("Timer not found.")
+    else:
+        print("Usage: fuzzel_task.py [list|add|delete|clear]")
+
+
+# === Main Menu ===
 def main_menu(manager: TimerManager) -> None:
     menu = f"{ICON_NEW} New Timer\n{ICON_EDIT} Edit Timers\n{ICON_CLEAR} Clear All"
     menu += (
         f"\n{ICON_STOP} Stop Daemon"
-        if LOCK_FILE.exists()  # Use Path.exists()
+        if LOCK_FILE.exists()
         else f"\n{ICON_START} Start Daemon"
     )
 
@@ -393,4 +436,6 @@ if __name__ == "__main__":
         if cmd == "kill":
             manager.stop_daemon()
             sys.exit(0)
+        cli_mode(manager, sys.argv[1:])
+        sys.exit(0)
     main_menu(manager)
