@@ -4,7 +4,7 @@
 
 PS1='[\u@\h \W]\$ ' # Default prompt
 
-export HISTSIZE="10000"                                        # History size
+export HISTSIZE="50000"                                        # History size
 export HISTFILESIZE="${HISTSIZE}"                              # History file size
 export HISTCONTROL="ignoreboth:erasedups"                      # No duplicate entries
 export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*" # Ignore commands
