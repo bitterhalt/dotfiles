@@ -19,6 +19,7 @@ btrfs-progs
 cava
 chafa
 cliphist
+dart-sass
 discord
 downgrade
 dragon-drop
@@ -55,6 +56,7 @@ hypridle
 hyprland
 hyprlock
 hyprpicker
+ignis-gvc-git
 imagemagick
 impala
 inotify-tools
@@ -98,6 +100,7 @@ pipewire-pulse
 plocate
 polkit-gnome
 popsicle-bin
+python-ignis-git
 python-llfuse
 python-pipx
 qt5-wayland
