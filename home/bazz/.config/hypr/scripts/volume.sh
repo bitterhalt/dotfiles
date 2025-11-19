@@ -15,29 +15,3 @@ mute)
   wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
   ;;
 esac
-
-vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
-
-# If muted, print "muted" and exit.
-[ "$vol" != "${vol%\[MUTED\]}" ] && notify-send -t 5000 "Vol: muted" -h string:x-canonical-private-synchronous:volume && exit
-
-vol="${vol#Volume: }"
-
-split() {
-  # For ommiting the . without calling and external program.
-  IFS=$2
-  set -- $1
-  printf '%s' "$@"
-}
-
-vol="$(printf "%.0f" "$(split "$vol" ".")")"
-
-case 1 in
-$((vol >= 1))) text="Vol:" ;;
-*) notify-send -t 5000 "Vol: muted" -h string:x-canonical-private-synchronous:volume && exit ;;
-esac
-
-notify-send \
-  -t 1000 \
-  "$text $vol%" \
-  -h string:x-canonical-private-synchronous:volume

@@ -31,7 +31,6 @@ fd
 ffmpegthumbnailer
 file-roller
 firefox
-fnott
 foot
 foot-terminfo
 fuse2
@@ -44,6 +43,7 @@ gamescope
 gdu
 gimp
 git
+gnome-bluetooth-3.0
 go
 gparted
 gpu-screen-recorder
@@ -56,6 +56,7 @@ hypridle
 hyprland
 hyprlock
 hyprpicker
+ignis-gvc-git
 imagemagick
 impala
 inotify-tools
@@ -132,6 +133,7 @@ transmission-gtk
 trash-cli
 tree
 ttf-jetbrains-mono
+ttf-material-symbols-variable-git
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 tty-clock
