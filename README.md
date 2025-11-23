@@ -151,7 +151,7 @@ bash <(curl -L https://codeberg.org/bt-halt/dotfiles/raw/branch/main/.assets/cur
 
 > Note: atm, you can get my ignis shell and componens [here](https://github.com/bitterhalt/comfy-shell)
 >
-> After main installation scrip clone my ignis repo and ignis directory ~/.config/
+> After main installation scrip clone my ignis repo and move ignis directory ~/.config/
 
 ```bash
 ignis init -c ~/.config/ignis/config.py
