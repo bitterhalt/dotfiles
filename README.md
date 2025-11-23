@@ -7,7 +7,7 @@
 ### Software I use
 
 - Distro: [Arch](https://archlinux.org)
-- Bar: [Waybar](https://github.com/Alexays/Waybar)
+- Shell: [ignis](https://github.com/ignis-sh/ignis?tab=readme-ov-file)
 - WM: [Hyprland](https://github.com/hyprwm/Hyprland)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
@@ -18,7 +18,6 @@
 - Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
 - Login Manager: **greetd** with [tuigreet](https://github.com/apognu/tuigreet)
 - Media Player: [mpv](https://mpv.io/)
-- Notification daemon: [fnott](https://codeberg.org/dnkl/fnott)
 - Symbols and icons: [Nerd Font Symbols](https://www.nerdfonts.com/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
 
@@ -30,29 +29,18 @@
 > Fuzzel
 >
 > <img src=".assets/screenshots/screenshot2.png" width="100%" />
-> Lockscreen
->
-> <img src=".assets/screenshots/hyprlock.png" width="100%" />
-
-> Some fuzzel menus
 
 <details>
-<summary><b>Settings</b></summary><br>
- <img src=".assets/screenshots/fuzzel-settings.png" width="50%" />
-</details>
-
-<details>
-<summary><b>Clipboard</b></summary><br>
-<img src=".assets/screenshots/fuzzel-clipboard.png" width="50%" />
-</details>
-
-<details>
-<summary><b>Emoji</b></summary><br>
-<img src=".assets/screenshots/fuzzel-emoji.png" width="50%" />
+<summary><b>Lockscreen</b></summary><br>
+<img src=".assets/screenshots/hyprlock.png" width="100%" />
 </details>
 <details>
-<summary><b>Window list</b></summary><br>
-<img src=".assets/screenshots/fuzzel_window.png" width="80%" />
+<summary><b>Notification Center</b></summary><br>
+<img src=".assets/screenshots/noti.png" width="50%" />
+</details>
+<details>
+<summary><b>Task list</b></summary><br>
+<img src=".assets/screenshots/task.png" width="80%" />
 </details>
 
 ---
@@ -160,6 +148,16 @@ I use my bar less and less, so recently I made this "barless mode" to launch wor
 ```bash
 bash <(curl -L https://codeberg.org/bt-halt/dotfiles/raw/branch/main/.assets/curl.sh)
 ```
+
+> Note: atm, you can get my ignis shell and componens [here](https://github.com/bitterhalt/comfy-shell)
+>
+> After main installation scrip clone my ignis repo and ignis directory ~/.config/
+
+```bash
+ignis init -c ~/.config/ignis/config.py
+```
+
+> Note this is not recomended daily driving atm, since it WIP and bugs may happen.
 
 ---
 
