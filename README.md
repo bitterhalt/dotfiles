@@ -26,7 +26,6 @@
 > Busy
 >
 > <img src=".assets/screenshots/screenshot.png" width="100%" />
-> Fuzzel
 >
 > <img src=".assets/screenshots/screenshot2.png" width="100%" />
 
