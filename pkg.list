@@ -104,6 +104,7 @@ popsicle-bin
 python-ignis-git
 python-llfuse
 python-pipx
+python-watchdog
 qt5-wayland
 qt6-wayland
 qt6ct
