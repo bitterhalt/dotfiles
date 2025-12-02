@@ -3,7 +3,7 @@
 if pgrep -x "ignis" >/dev/null; then
   pkill ignis
   sleep 1
-  ignis init &
+  ignis init >~/.local/state/ignis.log 2>&1 &
 else
-  ignis init &
+  ignis init >~/.local/state/ignis.log 2>&1 &
 fi
