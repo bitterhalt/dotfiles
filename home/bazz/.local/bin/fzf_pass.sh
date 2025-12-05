@@ -3,31 +3,22 @@ set -euo pipefail
 
 PASSWORD_STORE_DIR="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
 
-# List all entries
 passwords=$(find "$PASSWORD_STORE_DIR" -type f -name "*.gpg" ! -path "$PASSWORD_STORE_DIR/.git/*" |
   sed "s|^$PASSWORD_STORE_DIR/||;s/\.gpg$//" |
   sort)
 
-# Show menu
 selection=$(
   printf "%s\n" "$passwords" |
-    fzf --ansi \
-      --prompt="Passwords > " \
+    fzf --border-label="Passwords" \
       --border=rounded \
-      --height=40% \
       --layout=reverse \
       --with-nth=1 \
       --preview='echo ":: " {}' \
-      --preview-window=down:1:wrap \
-      --bind "change:reload(
-            printf \"%s\n\" \"$passwords\" | fzf --filter \"{q}\"
-        )"
+      --preview-window=down:1:wrap
 )
 
-# user aborted
 [[ -z "${selection:-}" ]] && exit 0
 
-# Copy password
 if pass -c "$selection" >/dev/null 2>&1; then
   notify-send -t 10000 "Copied password" "$selection"
 fi

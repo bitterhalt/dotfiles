@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Safe wrapper around cliphist list to avoid empty lines
 cliphist list | {
   while IFS=$'\t' read -r id content || [[ -n "${id:-}" ]]; do
-    # Skip empty lines
     [[ -z "${id:-}" ]] && continue
 
-    # Detect binary or text
     if [[ "${content:-}" =~ binary\ data ]]; then
-      icon=" "
+      icon="  "
     else
-      icon=" "
+      icon="  "
     fi
 
     printf "%s\t%s%s\n" "$id" "$icon" "${content:-}"
