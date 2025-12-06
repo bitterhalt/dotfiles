@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Usage: project.sh <path>
+set -euo pipefail
+
+START_DIR="$1"
+
+if [[ -z "$START_DIR" ]]; then
+  echo "Error: Missing project path." >&2
+  echo "Usage: $0 <path>" >&2
+  exit 1
+fi
+
+if [[ ! -d "$START_DIR" ]]; then
+  echo "Error: Directory '$START_DIR' does not exist." >&2
+  exit 1
+fi
+
+# FILTERING
+find "$START_DIR" -type f \
+  -not -path '*/__pycache__/*' \
+  -not -path '*/.git/*' \
+  -not -path '*/.svn/*' \
+  -not -path '*/.vscode/*' \
+  -not -path '*/node_modules/*' \
+  -not -path '*/dist/*' \
+  -not -path '*/build/*' \
+  -not -path '*/vendor/*' \
+  -not -path '*/assets/*' \
+  -not -path '*/.assets/*' \
+  -not -path '*/images/*' \
+  -not -path '*/img/*' \
+  -not -path '*/icons/*' \
+  -not -path '*/fonts/*' \
+  -not -path '*/videos/*' \
+  -not -name '__init__.py' \
+  -not -name '.gitignore' \
+  -not -name '.DS_Store' \
+  -not -name 'package-lock.json' \
+  -not -name 'yarn.lock' \
+  -not -name 'npm-debug.log' \
+  -not -regex '.*\.\(jpg\|jpeg\|png\|gif\|svg\|ico\|webp\|mp4\|mov\|avi\|woff\|woff2\|ttf\|otf\)$' \
+  -print0 | xargs -0 nvim
