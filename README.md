@@ -2,23 +2,23 @@
 
 > **Hello friend!**
 >
-> These are the dotfiles of my keyboard-driven environment. I prefer fuction over eyecandy so I'm trying to keep thinks pretty minimal. At the moment I use Hyprland as my main WM and Sway is there for backup, they both have pretty much the same workflow.
+> These are the dotfiles of my keyboard-driven environment. I prefer fuction over eyecandy so I'm trying to keep thinks pretty minimal. At the moment I use Hyprland as my main WM and Sway is there for backup
+>
+> At the moment, Sway uses Waybar and shell scripts instead of ignis, but this might change in future
 
 ### Software I use
 
 - Distro: [Arch](https://archlinux.org)
-- Shell: [ignis](https://github.com/ignis-sh/ignis?tab=readme-ov-file)
+- Shell and widgets: [ignis](https://github.com/ignis-sh/ignis?tab=readme-ov-file)
 - WM: [Hyprland](https://github.com/hyprwm/Hyprland)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
-- Fonts: **Adwaita Sans** / **Cascadia Mono**
 - GTK-theme: [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
-- Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
+- Launcher: [ignis](https://github.com/ignis-sh/ignis?tab=readme-ov-file)
 - Login Manager: **greetd** with [tuigreet](https://github.com/apognu/tuigreet)
 - Media Player: [mpv](https://mpv.io/)
-- Symbols and icons: [Nerd Font Symbols](https://www.nerdfonts.com/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
 
 ### Screenshots
@@ -47,6 +47,8 @@
 ### ⌨️ Hotkeys
 
 > These are from hyprland but they are mostle the same with Sway
+>
+> **NOTE:** Bit outdated but mostly accurate, check the WM configs
 
 <details>
 <summary><b> Click to see 👈 </b></summary><br>
@@ -155,8 +157,6 @@ bash <(curl -L https://codeberg.org/bt-halt/dotfiles/raw/branch/main/.assets/cur
 ```bash
 ignis init -c ~/.config/ignis/config.py
 ```
-
-> Note this is not recomended daily driving atm, since it WIP and bugs may happen.
 
 ---
 
