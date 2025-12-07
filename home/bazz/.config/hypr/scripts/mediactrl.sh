@@ -1,24 +1,48 @@
 #!/usr/bin/env bash
 
-# Playerctl
-# From https://github.com/JaKooLit
+is_player_running() {
+  playerctl --list-all >/dev/null 2>&1
+  return $?
+}
+
+ignis_osd() {
+  if command -v ignis >/dev/null 2>&1; then
+    ignis toggle-window ignis_MEDIA_OSD
+  else
+    show_fallback_notification
+  fi
+}
+
+show_fallback_notification() {
+  if ! is_player_running; then
+    return 0
+  fi
+
+  status=$(playerctl status 2>/dev/null || echo "Unknown")
+  if [[ "$status" == "Playing" ]]; then
+    song_title=$(playerctl metadata title 2>/dev/null || echo "Unknown Title")
+    notify-send -t 5000 -a Playerctl "Playing" "$song_title" -h string:x-canonical-private-synchronous:volume
+  elif [[ "$status" == "Paused" ]]; then
+    notify-send -t 5000 -a Playerctl "Playback Paused" -h string:x-canonical-private-synchronous:volume
+  fi
+}
 
 # Play the next track
 play_next() {
   playerctl next
-  show_music_notification
+  ignis_osd
 }
 
 # Play the previous track
 play_previous() {
   playerctl previous
-  show_music_notification
+  ignis_osd
 }
 
 # Toggle play/pause
 toggle_play_pause() {
   playerctl play-pause
-  show_music_notification
+  ignis_osd
 }
 
 # Stop playback
@@ -27,20 +51,6 @@ stop_playback() {
   notify-send -e -u low "Playback Stopped"
 }
 
-# Display notification with song information
-show_music_notification() {
-  status=$(playerctl status)
-  if [[ "$status" == "Playing" ]]; then
-    song_title=$(playerctl metadata title)
-    song_artist=$(playerctl metadata artist)
-    #notify-send -t 5000 -a Playerctl "Playing" "$song_title\nby $song_artist" -h string:x-canonical-private-synchronous:volume
-    notify-send -t 5000 -a Playerctl "Playing" "$song_title" -h string:x-canonical-private-synchronous:volume
-  elif [[ "$status" == "Paused" ]]; then
-    notify-send -t 5000 -a Playerctl "Playback Paused" -h string:x-canonical-private-synchronous:volume
-  fi
-}
-
-# Get media control action from command line argument
 case "$1" in
 "--nxt")
   play_next
@@ -55,7 +65,7 @@ case "$1" in
   stop_playback
   ;;
 "--noti")
-  show_music_notification
+  ignis_osd
   ;;
 *)
   echo "Usage: $0 [--noti|--nxt|--prv|--play|--stop]"
