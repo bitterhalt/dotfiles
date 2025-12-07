@@ -11,7 +11,7 @@ NEOVIM
 "
 CHOICE=$(printf "$ARCHIVE" | fuzzel -d --minimal-lines -a top --y 4 -w 30 -p "" --placeholder "Edit settings: ")
 TERMCMD=("foot")
-OPENER=("vim_open")
+OPENER=("vopen")
 
 case $CHOICE in
 BASH) exec $TERMCMD -e nvim "$HOME"/.bashrc ;;

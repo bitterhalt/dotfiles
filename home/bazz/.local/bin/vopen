@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Usage: project.sh <path>
+# Usage: project.sh <path>/
 set -euo pipefail
 
 START_DIR="$1"
@@ -39,4 +39,4 @@ find "$START_DIR" -type f \
   -not -name 'yarn.lock' \
   -not -name 'npm-debug.log' \
   -not -regex '.*\.\(jpg\|jpeg\|png\|gif\|svg\|ico\|webp\|mp4\|mov\|avi\|woff\|woff2\|ttf\|otf\)$' \
-  -print0 | xargs -0 nvim
+  -print0 | sort -z | xargs -0 nvim
