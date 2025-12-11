@@ -9,6 +9,7 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
 fi
 
 tmux new-session -d -s "$SESSION" -n logs "journalctl -f"
+tmux split-window -h -t "$SESSION:" tail -f ~/.cache/ignis.log
 tmux new-window -t "$SESSION" -n monitor "amdgpu_top --smi"
 tmux split-window -h -t "$SESSION:monitor" "htop"
 

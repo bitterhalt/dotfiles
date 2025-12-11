@@ -23,9 +23,9 @@ app_id = swayimg
 ################################################################################
 [font]
 # Font name
-name = Cascadia Mono
+name = Adwaita Mono
 # Font size (pt)
-size = 14
+size = 11
 # Font color (RGBA)
 color = #CCCCCCFF
 # Shadow color (RGBA)
