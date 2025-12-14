@@ -1,23 +1,59 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
-bg="${HOME}/.local/share/wall/bg"
+SRC="${1:?no image}"
+SRC=$(readlink -f "$SRC")
 
-if [ "${1:-}" ]; then
-  file=$(readlink -f "${1}")
+DIR="$HOME/.local/share/wall/"
+OUT="$DIR/wallpaper.png"
+mkdir -p "$DIR"
 
-  case $(file --mime-type --brief "${file}") in
-  image/*)
-    cp -f "${file}" "${bg}"
-    ;;
-  *)
-    exit 1
-    ;;
-  esac
+# Detect resolution
+
+if command -v hyprctl >/dev/null 2>&1; then
+  # Hyprland
+  read -r W H < <(
+    hyprctl -j monitors |
+      jq -r '.[] | select(.focused) | "\(.width) \(.height)"'
+  )
+
+elif command -v swaymsg >/dev/null 2>&1; then
+  # Sway
+  read -r W H < <(
+    swaymsg -t get_outputs -r |
+      jq -r '.[] | select(.focused) | "\(.current_mode.width) \(.current_mode.height)"'
+  )
+
+elif command -v wlr-randr >/dev/null 2>&1; then
+  # wlroots (niri, river, etc.)
+  read -r W H < <(
+    wlr-randr |
+      awk '
+      /^[A-Za-z0-9-]+/ { out=$1 }
+      /\*/ {
+        split($1, r, "x")
+        print r[1], r[2]
+        exit
+      }'
+  )
+
+else
+  echo "No supported compositor / output tool found" >&2
+  exit 1
 fi
 
-swww img "${bg}" \
+[[ -n "${W:-}" && -n "${H:-}" ]] || {
+  echo "Failed to detect resolution" >&2
+  exit 1
+}
+
+# Scale with vips
+vipsthumbnail "$SRC" \
+  --size "${W}x${H}" \
+  --output "$OUT"
+
+# Apply
+swww img "$OUT" \
   --transition-type=any \
   --transition-step=60 \
   --transition-fps=60 \

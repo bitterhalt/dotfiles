@@ -9,17 +9,18 @@ SAVEDIR="${HOME}/Pictures/Screenshots"
 mkdir -p -- "$SAVEDIR"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FILENAME="$SAVEDIR/${TIMESTAMP}_screenshot.png"
+NOTI="notify-send -a wl-shot -t 5000 -i"
 
 fullscreen() {
   grim "$FILENAME"
-  notify-send -t 5000 -i "$FILENAME" "Screenshot" "File saved as $FILENAME"
+  $NOTI "$FILENAME" "Screenshot" "File saved as $FILENAME"
   wl-copy <"$FILENAME"
   pw-play "$HOME/.local/share/Sounds/camera-shutter.oga"
 }
 
 region() {
   grim -g "$(slurp)" "$FILENAME"
-  notify-send -t 5000 -i "$FILENAME" "Screenshot" "File saved as $FILENAME"
+  $NOTI "$FILENAME" "Screenshot" "File saved as $FILENAME"
   wl-copy <"$FILENAME"
   pw-play "$HOME/.local/share/Sounds/camera-shutter.oga"
 }
@@ -31,7 +32,7 @@ region-edit() {
 timer() {
   sleep 5
   grim "$FILENAME"
-  notify-send -t 5000 -i "$FILENAME" "Screenshot" "File saved as $FILENAME"
+  $NOTI "$FILENAME" "Screenshot" "File saved as $FILENAME"
   wl-copy <"$FILENAME"
   pw-play "$HOME/.local/share/Sounds/camera-shutter.oga"
 }

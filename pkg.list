@@ -67,6 +67,7 @@ jq
 lf
 libpulse
 libva-utils
+libvips
 linux
 linux-firmware
 localsend-bin
