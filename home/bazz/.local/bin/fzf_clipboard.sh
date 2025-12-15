@@ -21,7 +21,7 @@ CLIP_SELECTION=$(
       --layout=reverse \
       --ansi \
       --bind "alt-0:execute-silent(rm -f ~/.cache/cliphist/db)+abort" \
-      --preview-window='down:40%:wrap' \
+      --preview-window='40%:wrap' \
       --preview '
             ID=$(echo {} | cut -f1)
             ROW=$(echo {})

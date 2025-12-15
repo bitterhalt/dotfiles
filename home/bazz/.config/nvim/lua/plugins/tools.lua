@@ -1,6 +1,6 @@
 return {
 
-  -- fzfm
+  -- Tfm (file manager)
   {
     "rolv-apneseth/tfm.nvim",
     cmd = "Tfm",
@@ -25,9 +25,10 @@ return {
     },
   },
 
-  --Which-key
+  -- Which-key
   {
     "folke/which-key.nvim",
+    event = "VeryLazy",
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -39,7 +40,6 @@ return {
         group = "+",
       },
     },
-    event = "VeryLazy",
   },
 
   -- Noice
@@ -48,60 +48,41 @@ return {
     event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      config = function()
-        require("noice").setup({
-          routes = {
-            {
-              filter = {
-                event = { "" },
-                kind = "",
-                find = "written",
-              },
-              opts = { skip = true },
-            },
-          },
-        })
-      end,
     },
+    config = function()
+      require("noice").setup({
+        routes = {
+          {
+            filter = {
+              event = "msg_show",
+              find = "written",
+            },
+            opts = { skip = true },
+          },
+        },
+      })
+    end,
   },
 
   -- FzfLua
   {
     "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = "FzfLua",
-    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("fzf-lua").setup({
+        winopts = {
+          fullscreen = true,
+        },
+      })
+    end,
     keys = {
-      {
-        "<leader>ff",
-        "<Cmd>FzfLua files<CR>",
-        desc = "Search files",
-      },
-      {
-        "<leader>fd",
-        "<Cmd>FzfLua diagnostics_document<CR>",
-        desc = "Show diagnostics",
-      },
-      {
-        "<leader><tab>",
-        "<Cmd>FzfLua buffers<CR>",
-        desc = "Search buffers",
-      },
-      {
-        "<leader>fw",
-        "<Cmd>FzfLua live_grep<CR>",
-        desc = "Search for a pattern",
-      },
-      {
-        "<leader>fr",
-        "<Cmd>FzfLua oldfiles<CR>",
-        desc = "Search recnt files",
-      },
-      {
-        "<leader>fz",
-        "<Cmd>FzfLua zoxide<CR>",
-        desc = "List recent directories",
-      },
+      { "<leader>ff", "<Cmd>FzfLua files<CR>", desc = "Search files" },
+      { "<leader>fd", "<Cmd>FzfLua diagnostics_document<CR>", desc = "Show diagnostics" },
+      { "<leader><tab>", "<Cmd>FzfLua buffers<CR>", desc = "Search buffers" },
+      { "<leader>fw", "<Cmd>FzfLua live_grep<CR>", desc = "Search for a pattern" },
+      { "<leader>fr", "<Cmd>FzfLua oldfiles<CR>", desc = "Search recent files" },
+      { "<leader>fz", "<Cmd>FzfLua zoxide<CR>", desc = "List recent directories" },
     },
   },
 
@@ -114,14 +95,14 @@ return {
       {
         "<leader>ss",
         function()
-          return require("persistence").load()
+          require("persistence").load()
         end,
-        desc = "Restore the last session",
+        desc = "Restore last session",
       },
       {
         "<leader>sl",
         function()
-          return require("persistence").select()
+          require("persistence").select()
         end,
         desc = "Select session",
       },
