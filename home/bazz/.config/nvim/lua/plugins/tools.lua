@@ -72,7 +72,7 @@ return {
     config = function()
       require("fzf-lua").setup({
         winopts = {
-          fullscreen = true,
+          fullscreen = false,
         },
       })
     end,
