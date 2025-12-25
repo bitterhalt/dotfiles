@@ -33,5 +33,4 @@ if [ -n "$1" ]; then
   wl-copy "$chosen"
 else
   printf "%s" "$chosen" | wl-copy
-  notify-send -t 3000 "$chosen Copied to clipboard!" &
 fi
