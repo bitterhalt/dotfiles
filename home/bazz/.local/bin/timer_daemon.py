@@ -1,1 +1,0 @@
-/home/bazz/Documents/projects/ignis/scripts/timer_daemon.py

@@ -1,0 +1,14 @@
+[Unit]
+Description=Clipboard history manager for wayland
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+ExecStart=/usr/bin/wl-paste --watch cliphist store
+Slice=session.slice
+TimeoutStopSec=5sec
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

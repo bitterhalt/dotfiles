@@ -42,3 +42,4 @@ application/x-bittorrent=transmission-qt.desktop;
 image/jpeg=gimp.desktop;
 image/avif=gimp.desktop;
 application/x-extension-xht=zen.desktop;firefox.desktop;
+application/json=text.desktop;
