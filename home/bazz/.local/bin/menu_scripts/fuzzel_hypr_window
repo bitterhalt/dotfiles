@@ -60,7 +60,7 @@ for e in "${entries[@]}"; do
 done
 
 result=$(printf '%s\n' "${labels[@]}" |
-  fuzzel -d -a top --y 4 -w 62 -p "" --minimal-lines --index --hide-prompt)
+  fuzzel -d -a top --y 4 -w 62 -p "" --minimal-lines --line-height 26 --index --hide-prompt)
 
 if [[ -n $result && $result != "-1" ]]; then
   hyprctl dispatch focuswindow address:"${ids[result]}"

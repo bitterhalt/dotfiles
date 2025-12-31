@@ -64,6 +64,7 @@ impala
 inotify-tools
 iwd
 jq
+lazygit
 lf
 libpulse
 libva-utils
