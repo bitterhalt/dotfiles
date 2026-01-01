@@ -23,8 +23,6 @@ return {
         ensure_installed = {
           "prettier", -- prettier formatter
           "stylua", -- lua formatter
-          "isort", -- python formatter
-          "black", -- python formatter
           "eslint_d", -- js linter
           "shfmt", -- Shell formatter
           "shellcheck",
@@ -95,7 +93,7 @@ return {
           markdown = { "prettier" },
           graphql = { "prettier" },
           lua = { "stylua" },
-          python = { "isort", "black" },
+          python = { "ruff_format" },
           sh = { "shfmt" },
         },
         format_on_save = {
