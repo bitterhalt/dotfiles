@@ -7,18 +7,18 @@ connect() {
   connect=$(bluetoothctl info | grep Connected: | awk '{print $2}')
   MAC=$(bluetoothctl devices | grep "$choose" | cut -c 8-24)
   [[ $connect = yes ]] && disconnect
-  notify-send "Attempting to connect to $choose"
-  bluetoothctl connect $MAC || notify-send --urgency=critical "Failed to Connect"
+  notify-send "BT: Attempting to connect to $choose"
+  bluetoothctl connect $MAC || notify-send --urgency=critical "BT: Failed to Connect"
 }
 
 disconnect() {
   device_con=$(bluetoothctl info | head -n 1 | cut -d ' ' -f2)
   [[ $(bluetoothctl info | sed '5!d' | cut -d' ' -f2) == "audio"* ]] &&
-    bluetoothctl disconnect $device_con && notify-send --urgency=low "Disconnected $device_con"
+    bluetoothctl disconnect $device_con && notify-send --urgency=low "BT: Disconnected $device_con"
   # &&>.bluetooth_his
 }
 
-choose=$(bluetoothctl devices | cut -c 26- | tr "\n" "#" | sed "s/$/Disconnect/" | tr "#" "\n" | fuzzel -d -a top --y 4 -w 50 -p "Select")
+choose=$(bluetoothctl devices | cut -c 26- | tr "\n" "#" | sed "s/$/Disconnect/" | tr "#" "\n" | fuzzel -d -a top --y 4 -w 25 --minimal-lines --placeholder "Connect or disconnect device...")
 [[ -z "$choose" ]] && exit 1
 case $choose in
 Disconnect) disconnect ;;
