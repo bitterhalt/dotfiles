@@ -18,7 +18,7 @@ disconnect() {
   # &&>.bluetooth_his
 }
 
-choose=$(bluetoothctl devices | cut -c 26- | tr "\n" "#" | sed "s/$/Disconnect/" | tr "#" "\n" | fuzzel -d -a top --y 4 -w 25 --minimal-lines --placeholder "Connect or disconnect device...")
+choose=$(bluetoothctl devices | cut -c 26- | tr "\n" "#" | sed "s/$/Disconnect/" | tr "#" "\n" | fuzzel -d -a top-right --y 6 --x 6 -w 25 --minimal-lines --placeholder "Connect or disconnect device...")
 [[ -z "$choose" ]] && exit 1
 case $choose in
 Disconnect) disconnect ;;
