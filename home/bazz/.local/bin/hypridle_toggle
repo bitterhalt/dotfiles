@@ -1,9 +1,1 @@
-#!/usr/bin/env bash
-
-if pgrep hypridle >/dev/null; then
-  pkill hypridle
-  notify-send "Hypridle" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
-else
-  notify-send "Hypridle" "Enabled" -t 1500 -h string:x-canonical-private-synchronous:volume
-  hypridle &
-fi
+/home/bazz/Documents/projects/ignis/scripts/hypridle_toggle
