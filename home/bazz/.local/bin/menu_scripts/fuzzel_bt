@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-bzmenu -l custom --launcher-command "fuzzel -d -a top-right --y 6 --x 6 -w 25 --minimal-lines --placeholder 'Bt-menu'"
+bzmenu -l custom --launcher-command "fuzzel -d --hide-prompt -a top-right --y 6 --x 6 -w 25 --minimal-lines"
