@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+fuzzel -l 4 \
+  --placeholder "Search..." \
+  --line-height 26 \
+  --width 25 \
+  --list-executables-in-path
