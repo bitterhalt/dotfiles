@@ -26,21 +26,17 @@
 
 > Busy
 >
-> <img src=".assets/screenshots/screenshot.png" width="100%" />
+> <img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/empty.png" width="100%" />
 >
-> <img src=".assets/screenshots/screenshot2.png" width="100%" />
+> <img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/barless.png" width="100%" />
 
 <details>
-<summary><b>Lockscreen</b></summary><br>
-<img src=".assets/screenshots/hyprlock.png" width="100%" />
-</details>
-<details>
 <summary><b>Notification Center</b></summary><br>
-<img src=".assets/screenshots/noti.png" width="50%" />
+<img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/center.png" width="50%" />
 </details>
 <details>
-<summary><b>Task list</b></summary><br>
-<img src=".assets/screenshots/task.png" width="80%" />
+<summary><b>Quick setting</b></summary><br>
+<img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/quick_settings.png" width="50%" />
 </details>
 
 ---
