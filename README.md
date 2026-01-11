@@ -37,7 +37,7 @@
 </details>
 <details>
 <summary><b>Quick setting</b></summary><br>
-<img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/quick_settings.png" width="50%" />
+<img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/quick_settings.png" width="100%" />
 </details>
 
 ---
