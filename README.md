@@ -28,6 +28,7 @@
 >
 > <img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/empty.png" width="100%" />
 >
+> Zen
 > <img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/barless.png" width="100%" />
 
 <details>
