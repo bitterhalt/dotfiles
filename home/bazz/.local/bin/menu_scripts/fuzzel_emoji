@@ -24,7 +24,7 @@ fi
 
 # Show menu and get selection
 chosen=$(cut -d ';' -f1 "$EMOJI_FILE" |
-  fuzzel -d -a top --y 4 -w 30 -l 15 -p "" --placeholder "Search..." |
+  fuzzel -d -a top --y 4 -w 30 -l 15 --placeholder "Search..." |
   sed "s/ .*//")
 
 [ -z "$chosen" ] && exit

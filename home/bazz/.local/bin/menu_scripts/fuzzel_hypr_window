@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# Window switcher for Hyprland. Marks special workspaces with ⭐
 
 reverse=0
 
-# Parse flags
 for arg in "$@"; do
   case "$arg" in
   --reverse) reverse=1 ;;
@@ -13,14 +11,13 @@ done
 entries=()
 ids=()
 
-# Collect windows from Hyprland
 while IFS=$'\t' read -r id class title ws_id ws_name; do
   if [[ $ws_name == special* ]]; then
-    label="[⭐]$ws_name" # ⭐ = special workspace
+    label="⭐" # ⭐ = special workspace
     sortkey=1
     sort_ws=9999
   else
-    label="[$ws_id]"
+    label="[ $ws_id ] "
     sortkey=0
     sort_ws=$ws_id
   fi
@@ -38,7 +35,6 @@ done < <(
       ] | @tsv'
 )
 
-# Sort entries:
 if ((reverse)); then
   mapfile -t entries < <(printf '%s\n' "${entries[@]}" | sort -t $'\t' -k1,1r -k2,2n)
 else
@@ -47,7 +43,6 @@ fi
 
 labels=()
 
-# Fuzzel output
 for e in "${entries[@]}"; do
   tmp="${e#*$'\t'}"
   tmp="${tmp#*$'\t'}"
@@ -60,7 +55,14 @@ for e in "${entries[@]}"; do
 done
 
 result=$(printf '%s\n' "${labels[@]}" |
-  fuzzel -d -a top --y 4 -w 62 -p "" --minimal-lines --line-height 26 --index --hide-prompt)
+  fuzzel -d \
+    -a top \
+    -w 50 \
+    --y 4 \
+    --line-height 24 \
+    --minimal-lines \
+    --index \
+    --hide-prompt)
 
 if [[ -n $result && $result != "-1" ]]; then
   hyprctl dispatch focuswindow address:"${ids[result]}"
