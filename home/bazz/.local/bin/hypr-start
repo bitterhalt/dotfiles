@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# Start Hyprland and redirect stdout
-exec hyprland >~/.local/state/hyprland.log 2>&1
