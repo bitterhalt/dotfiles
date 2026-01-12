@@ -72,3 +72,7 @@ ignis init -c ~/.config/ignis/config.py
 
 - [fesowowako](https://github.com/fesowowako) and his commits from [My Sway-dotfiles](https://github.com/bitterhalt/dots-sway)
 - [NihaAlGhul](https://codeberg.org/NihaAlGhul) For making installation script to actually work ❤️
+
+### User reviews
+
+<imsrc=".assets/screenshots/review.png" width="100%" />

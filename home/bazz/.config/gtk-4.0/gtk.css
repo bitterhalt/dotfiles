@@ -1,6 +1,6 @@
 /* Taken from : https://github.com/kepano/flexoki/blob/main/gtk/gtk-4.0/gtk-dark.css */
-@define-color accent_color #4385be;
-@define-color accent_bg_color #205ea6;
+@define-color accent_color #3AA99F;
+@define-color accent_bg_color #24837B;
 @define-color accent_fg_color #cecdc3;
 @define-color destructive_color #af3029;
 @define-color destructive_bg_color #d14d41;
