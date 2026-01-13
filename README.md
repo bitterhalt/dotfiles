@@ -10,14 +10,13 @@
 
 - Distro: [Arch](https://archlinux.org)
 - Shell and widgets: [ignis](https://github.com/ignis-sh/ignis?tab=readme-ov-file)
-- Launcher: **fuzzel**
 - WM: [Hyprland](https://github.com/hyprwm/Hyprland)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - GTK-theme: [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
-- Launcher: [ignis](https://github.com/ignis-sh/ignis?tab=readme-ov-file)
+- Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
 - Login Manager: **greetd** with [tuigreet](https://github.com/apognu/tuigreet)
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
