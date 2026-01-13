@@ -17,7 +17,7 @@
 - GTK-theme: [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
 - Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
-- Login Manager: **greetd** with [tuigreet](https://github.com/apognu/tuigreet)
+- Login Manager: [ly](https://github.com/fairyglade/ly)
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
 
@@ -73,4 +73,5 @@ ignis init -c ~/.config/ignis/config.py
 - [NihaAlGhul](https://codeberg.org/NihaAlGhul) For making installation script to actually work ❤️
 
 ### User reviews ❤️
+
 > <img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/review.png" width="40%" />
