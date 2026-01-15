@@ -100,6 +100,7 @@ pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
+playerctl
 plocate
 polkit-gnome
 popsicle-bin
@@ -112,6 +113,7 @@ qt6-wayland
 qt6ct
 rate-mirrors-bin
 ripgrep
+rofi
 rsync
 sassc
 screenkey
