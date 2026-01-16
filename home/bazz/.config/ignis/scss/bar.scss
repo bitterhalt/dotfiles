@@ -1,0 +1,66 @@
+.bar {
+  background-color: $bg-1;
+  color: $tx-1;
+  margin: 2px 4px;
+}
+
+.ws-btn {
+  min-width: 16px;
+  border-radius: 6px;
+  padding: 6px;
+  margin: 0 2px;
+  background: transparent;
+  color: $tx-1;
+}
+
+.ws-btn.active {
+  background: $ui-3;
+  color: $tx-1;
+  font-weight: bold;
+}
+
+.window-title {
+  all: unset;
+}
+
+.clock,
+.clock-button {
+  padding: 0px 6px;
+  border-radius: 6px;
+}
+
+.recording-icon {
+  border-radius: 6px;
+  color: $red;
+  animation: blink 1s infinite;
+}
+
+.system-indicator-button {
+  color: $tx-1;
+  padding: 0px 6px;
+  border-radius: 8px;
+}
+
+.clock-notif-dot {
+  font-size: 10px;
+  line-height: 1;
+  margin-left: -2px;
+}
+
+.clock-notif-dot.normal {
+  color: $cyan;
+}
+
+.clock-notif-dot.critical {
+  color: $red;
+}
+
+.audio-widget:hover,
+.clock-button:hover,
+.clock:hover,
+.system-indicator-button:hover,
+.ws-btn:hover,
+.network-box:hover {
+  background: $bg-2;
+  color: $tx-2;
+}

@@ -49,14 +49,6 @@
 bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 ```
 
-> Note: atm, you can get my ignis shell and components [here](https://github.com/bitterhalt/comfy-shell)
->
-> After main installation scrip clone my ignis repo and move ignis directory ~/.config/
-
-```bash
-ignis init -c ~/.config/ignis/config.py
-```
-
 ---
 
 ### Inspiration of my cool stuff ⭐

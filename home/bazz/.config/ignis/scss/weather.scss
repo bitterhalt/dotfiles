@@ -1,0 +1,137 @@
+.weather-window {
+  background: unset;
+  border: unset;
+}
+
+.weather-overlay {
+  background: unset;
+  border: unset;
+}
+
+.weather-container {
+  margin: 10px;
+  border: unset;
+  revealer {
+    box-shadow: $box-shadow;
+    border-radius: 8px;
+  }
+}
+
+.weather-popup {
+  background: $bg-1;
+  border: unset;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   HEADER
+   ─────────────────────────────────────────────────────────────── */
+
+.weather-header {
+  padding-bottom: 10px;
+}
+
+.weather-main-icon {
+  padding-right: 6px;
+}
+
+.weather-city {
+  font-size: 18px;
+  font-weight: 600;
+  color: $tx-1;
+}
+
+.weather-temp {
+  font-size: 18px;
+  font-weight: 600;
+  color: $tx-1;
+  margin-left: 8px;
+}
+
+.weather-desc {
+  padding-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: $tx-1;
+}
+
+.weather-extra {
+  margin-top: 2px;
+  font-size: 14px;
+  color: $tx-3;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   FORECAST ROW
+   ─────────────────────────────────────────────────────────────── */
+
+.weather-forecast-row {
+  padding-top: 4px;
+}
+
+.weather-forecast-item {
+  margin: 0 10px;
+}
+
+.weather-forecast-time {
+  font-size: 13px;
+  color: $tx-3;
+  padding-bottom: 2px;
+}
+
+.weather-forecast-icon {
+  margin: 4px 0;
+  opacity: 0.95;
+}
+
+.weather-forecast-temp {
+  font-size: 13px;
+  font-weight: 500;
+  color: $tx-1;
+}
+
+.weather-weekly-toggle {
+  font-size: 12px;
+  color: $tx-1;
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.weekly-arrow {
+  color: $tx-1;
+  transition: transform 200ms ease;
+}
+.weather-weekly-day {
+  font-size: 14px;
+  color: $tx-3;
+}
+.weather-weekly-temp {
+  color: $tx-1;
+}
+
+.weather-weekly-toggle-btn {
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-bottom: -6px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.weather-weekly-toggle {
+  font-size: 12px;
+  color: $tx-1;
+}
+/* ───────────────────────────────────────────────
+   MOON EMOJI
+   ─────────────────────────────────────────────── */
+
+.weather-moon-emoji {
+  font-size: 30px;
+  margin-left: 12px;
+  margin-right: 4px;
+  opacity: 0.9;
+  filter: brightness(1.1);
+}

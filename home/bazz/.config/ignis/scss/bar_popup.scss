@@ -1,0 +1,287 @@
+/* ───────────────────────────────────────────────
+   POPUP MENU
+   ─────────────────────────────────────────────── */
+
+.system-menu-container {
+  margin: 10px;
+  revealer {
+    box-shadow: $box-shadow;
+    border-radius: 8px;
+  }
+}
+
+.system-menu {
+  color: $tx-1;
+  border: unset;
+  background-color: $bg-1;
+  padding: 10px;
+}
+
+.sys-top-row {
+  margin: 0 0 4px 0;
+}
+
+.sys-top-btn {
+  color: $tx-1;
+  background: $bg-2;
+  border: none;
+  border-radius: 8px;
+  padding: 6px;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background: $ui-3;
+  }
+
+  image {
+    opacity: 0.9;
+  }
+}
+
+.sys-top-btn-active {
+  border: none;
+
+  &:hover {
+    background: $ui-3;
+  }
+}
+
+.sys-top-btn-active icon {
+  color: $bg-1;
+}
+
+.sys-pill {
+  color: $tx-1;
+  padding: 12px;
+  background-color: $bg-2;
+  border: unset;
+  border-radius: 8px;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+
+.sys-pill:hover {
+  background-color: $ui-2;
+}
+
+.sys-middle-row {
+  margin-top: 4px;
+}
+.sys-network-pill {
+  margin: 4px 0px;
+}
+.net-wifi-item,
+.net-ethernet-item,
+.net-vpn-item {
+  color: $tx-1;
+  border-radius: 8px;
+  padding: 8px;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+
+.net-wifi-item:hover,
+.net-ethernet-item:hover,
+.net-vpn-item:hover {
+  background-color: $ui-2;
+}
+
+.sys-net-details {
+  margin-top: 8px;
+}
+.system-info-widget {
+  background: $bg-2;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 4px;
+}
+.network-settings-btn {
+  color: $tx-1;
+  background: $ui-1;
+  border-radius: 8px;
+  padding: 4px;
+  transition: background 0.15s;
+
+  &:hover {
+    background: $ui-2;
+  }
+}
+
+.network-settings-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sys-audio-pill {
+  background: $bg-2;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.pill-audio-mute-btn {
+  border-radius: 6px;
+  padding: 6px;
+  background: transparent;
+  transition: background 0.15s;
+
+  &:hover {
+    background: $ui-2;
+  }
+}
+.sys-audio-details {
+  margin-top: 4px;
+}
+.pill-audio-scale {
+  min-width: 180px;
+}
+
+.pill-audio-scale trough {
+  background: $ui-2;
+  border-radius: 6px;
+  min-height: 8px;
+}
+
+.pill-audio-scale trough highlight {
+  background: $cyan;
+  border-radius: 6px;
+}
+
+.pill-audio-scale slider {
+  background: $tx-2;
+  border-radius: 50%;
+  min-width: 16px;
+  min-height: 16px;
+  margin: -4px;
+}
+
+.pill-audio-expand-btn {
+  background: unset;
+  border-radius: 6px;
+  padding: 4px;
+
+  &:hover {
+    background: $ui-2;
+  }
+}
+.sys-audio-details {
+  margin-top: 4px;
+}
+.audio-device-item {
+  color: $tx-1;
+  border: unset;
+  border-radius: 8px;
+  padding: 8px;
+
+  &:hover {
+    background: $ui-2;
+  }
+}
+
+.sys-audio-separator {
+  background: $ui-1;
+  min-height: 1px;
+  margin: 4px 0;
+}
+
+.system-info-bar {
+  min-width: 120px;
+}
+
+.system-info-bar trough {
+  background: $ui-1;
+  border-radius: 6px;
+  min-height: 8px;
+}
+
+.system-info-bar trough highlight {
+  border-radius: 6px;
+}
+
+.cpu-bar trough highlight {
+  background: $cyan;
+}
+
+.ram-bar trough highlight {
+  background: $magenta;
+}
+
+.system-info-bar slider {
+  background: transparent;
+}
+
+.system-info-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: $tx-2;
+  min-width: 40px;
+}
+
+.system-info-percent {
+  font-size: 13px;
+  font-weight: 600;
+  color: $tx-2;
+  min-width: 36px;
+}
+
+.system-info-details {
+  padding-top: 8px;
+}
+
+.system-info-text {
+  font-size: 12px;
+  color: $tx-3;
+}
+
+.sys-bluetooth-pill {
+  background: $bg-2;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 4px 0px;
+}
+
+.sys-bluetooth-details {
+  margin-top: 8px;
+}
+
+.bluetooth-device-item {
+  color: $tx-1;
+  border-radius: 8px;
+  padding: 8px;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background-color: $ui-2;
+  }
+}
+.bluetooth-battery {
+  font-size: 12px;
+  color: $tx-3;
+  font-weight: 500;
+}
+
+.bluetooth-empty-label {
+  color: $tx-3;
+  font-size: 13px;
+  padding: 16px;
+}
+.bluetooth-settings-btn {
+  background: $ui-1;
+  border-radius: 8px;
+  padding: 4px;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background: $ui-2;
+  }
+}
+
+.bluetooth-settings-label {
+  font-size: 13px;
+  color: $tx-1;
+}

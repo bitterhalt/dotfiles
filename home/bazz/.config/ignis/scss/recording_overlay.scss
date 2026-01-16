@@ -1,0 +1,106 @@
+/* ═══════════════════════════════════════════════════════════════
+   RECORDING OVERLAY
+   ═══════════════════════════════════════════════════════════════ */
+
+.recording-overlay-window {
+  background: unset;
+  border: unset;
+}
+
+.overlay-background {
+  all: unset;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.recording-overlay {
+  background: $bg-1;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: $box-shadow;
+}
+
+.overlay-buttons {
+  padding: 8px;
+}
+
+.overlay-btn {
+  all: unset;
+  color: $tx-1;
+  background: $bg-2;
+  border: 1px solid $ui-1;
+  border-radius: 8px;
+  padding: 24px 20px;
+  min-width: 140px;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.1s;
+
+  &:hover {
+    background: $ui-2;
+    border-color: $ui-3;
+    transform: translateY(-4px);
+  }
+
+  &:focus {
+    background: $ui-2;
+    border: 1px solid $ui-3;
+    transform: translateY(-4px);
+  }
+
+  &:active {
+    transform: translateY(-2px) scale(0.98);
+  }
+}
+
+.overlay-btn-stop {
+  all: unset;
+  background: $tx-1;
+  border: 3px solid $red;
+  border-radius: 8px;
+  padding: 24px 20px;
+  min-width: 140px;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.1s;
+
+  &:focus,
+  &:hover {
+    background: lighten($red, 10%);
+    border-color: lighten($red, 10%);
+    transform: translateY(-4px);
+  }
+
+  &:active {
+    transform: translateY(-2px) scale(0.98);
+  }
+}
+
+.overlay-btn-stop image {
+  color: $red;
+}
+
+.overlay-btn-stop .overlay-label {
+  color: $bg-1;
+  font-weight: 600;
+}
+
+.overlay-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: $tx-1;
+}
+
+.screenshot-icon {
+  color: $cyan;
+}
+
+.record-region-icon,
+.screenshot-region-icon {
+  color: $yellow;
+}
+
+.record-icon {
+  color: $red;
+}

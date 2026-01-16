@@ -1,0 +1,158 @@
+/* ═══════════════════════════════════════════════════════════════
+   VOL OSD
+   ═══════════════════════════════════════════════════════════════ */
+.vol-window {
+  padding: 26px;
+}
+
+.vol-container {
+  background: $bg-1;
+  padding: 16px;
+  border-radius: 8px;
+  min-width: 260px;
+  box-shadow: $box-shadow;
+}
+
+.vol-icon {
+  color: $tx-2;
+}
+
+.vol-track trough {
+  background: $ui-2;
+  border-radius: 8px;
+  min-height: 12px;
+}
+
+.vol-track trough highlight {
+  background: $cyan;
+  border-radius: 8px;
+  min-height: 12px;
+}
+
+.vol-track slider {
+  all: unset;
+  background: transparent;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WORKSPACE OSD
+   ═══════════════════════════════════════════════════════════════ */
+
+.workspace-osd-window {
+  background: transparent;
+  border-radius: 8px;
+  border: none;
+}
+
+.workspace-osd {
+  background: $bg-1;
+  border: none;
+  border-radius: 8px;
+  margin: 26px;
+  padding: 16px;
+  box-shadow: $box-shadow;
+}
+
+.workspace-osd-icon {
+  color: $cyan;
+}
+
+.workspace-osd-label {
+  font-weight: 600;
+  color: $tx-1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEDIA OSD
+   ═══════════════════════════════════════════════════════════════ */
+.media-osd-header {
+  color: $tx-1;
+}
+.media-osd-window {
+  background: transparent;
+  border: none;
+  padding: 26px;
+}
+
+.media-osd {
+  background: $bg-1;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: $box-shadow;
+  min-width: 400px;
+}
+
+.media-osd-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: $tx-1;
+}
+
+.media-osd-artist {
+  font-size: 14px;
+  color: $tx-3;
+  margin-top: 2px;
+}
+.media-osd-app-icon {
+  border-radius: 8px;
+  color: $tx-1;
+}
+.media-osd-status-icon {
+  color: $tx-3;
+}
+
+.media-osd-controls {
+  color: $tx-1;
+  margin-top: 27px;
+}
+
+.media-osd-control {
+  padding: 6px;
+  border-radius: 999px;
+  background: transparent;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BARLESS CLOCK
+   ═══════════════════════════════════════════════════════════════ */
+
+.barless-clock-window {
+  background: transparent;
+  border: none;
+  padding: 26px;
+}
+
+.barless-clock {
+  background: $osd-bg;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: $box-shadow;
+}
+
+.barless-clock-callable {
+  background: $bg-1;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: $box-shadow;
+}
+
+.barless-clock-time {
+  font-size: 32px;
+  font-weight: 700;
+  color: $tx-1;
+  letter-spacing: 0.05em;
+}
+
+.barless-clock-date {
+  font-size: 14px;
+  font-weight: 500;
+  color: $tx-3;
+  margin-top: 4px;
+}

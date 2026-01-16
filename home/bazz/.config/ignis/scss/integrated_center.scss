@@ -1,0 +1,338 @@
+/* ═══════════════════════════════════════════════════════════════
+   INTEGRATED NOTIFICATION & TASK CENTER
+   ═══════════════════════════════════════════════════════════════ */
+
+.center-window {
+  background: unset;
+  border: unset;
+}
+
+.center-overlay {
+  all: unset;
+  background: unset;
+}
+
+.center-container {
+  margin: 10px;
+  revealer {
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
+  }
+}
+.integrated-center {
+  background: $bg-1;
+  border: unset;
+  min-height: 572px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   TWO COLUMN LAYOUT
+   ─────────────────────────────────────────────────────────────── */
+
+.left-column {
+  min-width: 416px;
+  border-right: 1px solid $ui-1;
+  padding: 12px 0;
+}
+
+.right-column {
+  padding: 12px 0;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   HEADER ACTION
+   ─────────────────────────────────────────────────────────────── */
+
+.header-action-btn {
+  color: $tx-3;
+  margin-right: 22px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.header-action-btn:hover {
+  color: $red;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   DND TOGGLE
+   ─────────────────────────────────────────────────────────────── */
+
+.dnd-box {
+  padding: 8px 0 0 16px;
+}
+
+.dnd-label {
+  color: $tx-1;
+  font-size: 15px;
+}
+
+.dnd-box switch {
+  all: unset;
+  background: $ui-1;
+  border-radius: 10px;
+  padding: 0 6px;
+  min-height: 24px;
+}
+
+.dnd-box switch trough {
+  all: unset;
+  background: $ui-2;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.dnd-box switch slider {
+  all: unset;
+  background: $bg-1;
+  border-radius: 10px;
+  margin: 4px 0;
+  transition: transform 0.2s;
+}
+
+.dnd-box switch:checked {
+  background: $red;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   WEATHER
+   ─────────────────────────────────────────────────────────────── */
+
+.weather-compact {
+  padding: 8px 16px;
+  margin: 0 12px;
+  background: $bg-2;
+  border-radius: 8px;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background: $ui-2;
+  }
+}
+
+.weather-temp-compact {
+  font-size: 17px;
+  font-weight: 600;
+  color: $tx-1;
+  min-width: 48px;
+}
+
+.weather-desc-compact {
+  font-size: 13px;
+  color: $tx-3;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   MEDIA WIDGET
+   ─────────────────────────────────────────────────────────────── */
+
+.media-center-wrapper {
+  padding: 0 12px;
+  margin-bottom: 8px;
+}
+
+.media-pill {
+  background: $bg-2;
+  border-radius: 8px;
+  padding: 12px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $ui-2;
+  }
+}
+
+.media-pill-icon {
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.media-pill-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: $tx-1;
+}
+
+.media-pill-artist {
+  font-size: 13px;
+  color: $tx-3;
+  margin-top: 2px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   NOTIFICATIONS
+   ─────────────────────────────────────────────────────────────── */
+
+.content-list {
+  padding: 0 12px;
+}
+
+.notif-history-item {
+  background: $bg-2;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $ui-2;
+    border-color: $ui-3;
+  }
+}
+
+.notif-history-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: $tx-2;
+
+  &.critical {
+    color: $red;
+  }
+}
+
+.notif-history-body {
+  font-size: 13px;
+  color: $tx-3;
+}
+.notif-timestamp {
+  font-size: 11px;
+  color: $tx-3;
+  opacity: 0.9;
+  margin-top: 1px;
+  margin-bottom: 2px;
+  font-weight: 400;
+}
+
+.notif-history-item:hover .notif-timestamp {
+  opacity: 0.8;
+}
+
+.empty-state {
+  color: $tx-3;
+  font-size: 13px;
+  padding: 20px;
+}
+
+/* ─────────────────────────────────────────────
+   SCREENSHOT HISTORY
+   ───────────────────────────────────────────── */
+
+.screenshot-history-item {
+  background: $bg-2;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $ui-2;
+  }
+}
+
+.screenshot-preview-small {
+  border-radius: 6px;
+  background: $bg-1;
+  border: 1px solid $ui-1;
+}
+
+.screenshot-preview-large {
+  border-radius: 8px;
+  background: $bg-1;
+  border: 1px solid $ui-1;
+  margin-top: 8px;
+}
+
+.screenshot-filename {
+  font-size: 14px;
+  font-weight: 600;
+  color: $tx-2;
+}
+
+.screenshot-timestamp {
+  font-size: 12px;
+  color: $tx-3;
+  opacity: 0.9;
+}
+
+.screenshot-action-btn {
+  padding: 6px;
+  border-radius: 6px;
+  color: $tx-3;
+  transition:
+    background 0.15s,
+    color 0.15s;
+
+  &:hover {
+    background: $ui-3;
+    color: $tx-1;
+  }
+}
+
+.screenshot-delete-btn:hover {
+  background: $red;
+  color: $bg-1;
+}
+
+/* ─────────────────────────────────────────────
+   EXPANDABLE NORMAL NOTIFICATIONS
+   ───────────────────────────────────────────── */
+
+.notif-history-body-expanded {
+  all: unset;
+  font-size: 13px;
+  color: $tx-2;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CALENDAR
+   ═══════════════════════════════════════════════════════════════ */
+
+.center-calendar {
+  all: unset;
+  background: $bg-2;
+  border-radius: 8px;
+  padding: 6px;
+  margin: 12px;
+
+  header {
+    color: $tx-2;
+    margin-bottom: 6px;
+
+    button {
+      all: unset;
+      padding: 6px;
+      margin: 4px;
+      color: $tx-3;
+      border-radius: 4px;
+
+      &:hover {
+        color: $tx-2;
+        background: $ui-1;
+      }
+    }
+  }
+}
+.center-calendar .day-name {
+  color: $tx-3;
+  font-weight: 600;
+}
+.center-calendar .day-number {
+  all: unset;
+  color: $tx-1;
+}
+
+.center-calendar .today {
+  color: $cyan;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+.center-calendar .other-month {
+  all: unset;
+  color: $tx-3;
+  opacity: 0.5;
+}

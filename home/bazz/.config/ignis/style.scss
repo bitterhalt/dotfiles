@@ -1,0 +1,17 @@
+@import "scss/themes/flexoki";
+@import "scss/constants";
+
+@import "scss/bar";
+@import "scss/bar_popup";
+@import "scss/integrated_center";
+@import "scss/notifications";
+@import "scss/osd";
+@import "scss/power_overlay";
+@import "scss/recording_overlay";
+@import "scss/weather";
+
+* {
+  font-family:
+    "Adwaita Sans",
+    Symbols Nerd Font Mono;
+}

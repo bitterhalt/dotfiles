@@ -1,0 +1,98 @@
+# ══════════════════════════════════════════════════════════════
+# WEATHER
+# ══════════════════════════════════════════════════════════════
+[weather]
+api_key = ""                       # or OPEN_WEATHER_APIKEY
+city_id = "643492"                 # or OPEN_WEATHER_CITY_ID
+cache_ttl = 600
+use_12h_format = false
+icon_base_path = "~/.config/ignis/assets/icons/weather"
+
+# ══════════════════════════════════════════════════════════════
+# UI · MONITORS
+# ══════════════════════════════════════════════════════════════
+[ui.monitors]
+primary = 0
+bar = 0
+osd = 0
+notifications = 0
+recording_overlay = 0
+weather = 0
+power_overlay = 0
+system_menu = 0
+integrated_center = 0
+# ══════════════════════════════════════════════════════════════
+# SYSTEM
+# ══════════════════════════════════════════════════════════════
+[system]
+# Bluetooth manager
+bluetooth_manager = "fuzzel_bt"
+# ══════════════════════════════════════════════════════════════
+# OSD · TIMEOUTS (milliseconds)
+# ══════════════════════════════════════════════════════════════
+[ui.timeouts]
+osd = 2000
+volume_osd = 2000
+media_osd = 5000
+time_osd = 5000
+workspace_osd = 1500
+
+# ══════════════════════════════════════════════════════════════
+# UI · BAR
+# ══════════════════════════════════════════════════════════════
+# Remember bar state after re-start
+[ui.bar]
+remember_state = true
+
+# Apps that show window title instead of app class
+window_title_exceptions = [
+  "firefox",
+  "zen",
+]
+
+# ══════════════════════════════════════════════════════════════
+# UI · NOTIFICATIONS
+# ══════════════════════════════════════════════════════════════
+[ui.notifications]
+max_history = 10
+popup_timeout = 5000 # Milliseconds
+
+#  Hide useless stuff from history (My personal preference, you probably wan't to remove these)
+filter_keywords = [
+  "Hyprland config",
+  "Color-picker",
+  "Smart-gaps",
+  "Hyprpicker",
+  "Hypridle",
+  "BT: Attempting to connect to",
+  "BT: Failed to Connect",
+  "BT: Disconnected",
+  "Bluez Menu",
+  "TMUX",
+]
+
+# ══════════════════════════════════════════════════════════════
+# RECORDER
+# ══════════════════════════════════════════════════════════════
+[recorder]
+audio_device = "default_output"
+video_format = "mp4"
+
+# ══════════════════════════════════════════════════════════════
+# BATTERY
+# ══════════════════════════════════════════════════════════════
+[battery]
+critical_threshold = 15
+warning_threshold = 30
+
+# ══════════════════════════════════════════════════════════════
+# ANIMATIONS
+# ══════════════════════════════════════════════════════════════
+[animations]
+revealer_duration = 300
+# ══════════════════════════════════════════════════════════════
+# PATHS
+# ══════════════════════════════════════════════════════════════
+[paths]
+recordings_dir = "~/Videos/Captures"
+screenshots_dir = "~/Pictures/Screenshots"
