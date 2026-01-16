@@ -23,20 +23,20 @@
 
 ### Screenshots
 
-> Busy
+> With bar
 >
-> <img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/empty.png" width="100%" />
+> <img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/empty.png" width="100%" />
 >
-> Zen
-> <img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/barless.png" width="100%" />
+> Zen aka barless mode
+> <img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/barless.png" width="100%" />
 
 <details>
 <summary><b>Notification Center</b></summary><br>
-<img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/center.png" width="50%" />
+<img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/center.png" width="50%" />
 </details>
 <details>
 <summary><b>Quick setting</b></summary><br>
-<img src="https://github.com/bitterhalt/comfy-shell/blob/main/assets/screenshots/quick_settings.png" width="100%" />
+<img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/quick_settings.png" width="100%" />
 </details>
 
 ---
