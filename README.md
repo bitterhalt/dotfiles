@@ -2,7 +2,7 @@
 
 > **Hello friend!**
 >
-> These are the dotfiles of my keyboard-driven environment. I prefer fuction over eyecandy so I'm trying to keep thinks pretty minimal. At the moment I use Hyprland as my main WM and Sway is there for backup
+> These are the dotfiles of my keyboard-driven environment. I prefer fuction over eyecandy so I'm trying to keep things pretty minimal. At the moment I use Hyprland as my main WM and Sway is there for backup
 >
 > At the moment, Sway uses Waybar and shell scripts instead of ignis, but this might change in future
 
