@@ -1,1 +1,1 @@
-/home/bazz/Documents/projects/ignis/scripts/ignis-start.sh
+/home/bazz/.config/ignis/scripts/ignis-start.sh
