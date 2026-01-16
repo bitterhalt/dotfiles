@@ -1,78 +1,109 @@
 ################################################################################
 # General configuration
+# Default config: https://github.com/artemsen/swayimg/blob/master/extra/swayimgrc
 ################################################################################
 [general]
-# Mode at startup (viewer/slideshow/gallery)
 mode = viewer
-# Window size (fullscreen/image, or absolute size)
 size = 1280,720
-# Sway/Hyprland only: Window position (auto or absolute coordinates, e.g. 10,20)
 position = auto
-# Sway/Hyprland only: create floating window above the currently focused one
 overlay = no
-# Use window decoration (yes/no)
 decoration = yes
-# Action performed by SIGUSR1 signal (same format as for key bindings)
 sigusr1 = reload
-# Action performed by SIGUSR2 signal (same format as for key bindings)
 sigusr2 = next_file
-# Application ID and window class name
 app_id = swayimg
+
 ################################################################################
-# Font
+# DRM mode settings
 ################################################################################
-[font]
-# Font name
-name = Adwaita Mono
-# Font size (pt)
-size = 11
-# Font color (RGBA)
-color = #CCCCCCFF
-# Shadow color (RGBA)
-shadow = #000000A0
+[drm]
+path = auto
+connector = auto
+mode = auto
+
 ################################################################################
 # Viewer mode configuration
 ################################################################################
 [viewer]
-# Window background color (RGBA)
 window = #000000D0
-# Background for transparent images (grid/RGBA)
 transparency = grid
-# Default image scale (optimal/fit/width/height/fill/real)
 scale = optimal
-# Initial image position on the window
-# (top/center/bottom/left/right/topleft/topright/bottomleft/bottomright/free)
 position = center
-# Anti-aliasing mode (none/box/bilinear/bicubic/mks13)
 antialiasing = mks13
-# Number of previously viewed images to store in cache
 history = 1
-# Number of preloaded images (read ahead)
 preload = 1
+
+################################################################################
+# Slideshow mode configuration
+################################################################################
+[slideshow]
+time = 3
+window = auto
+transparency = #000000ff
+scale = fit
+position = center
+antialiasing = mks13
+
 ################################################################################
 # Gallery mode configuration
 ################################################################################
 [gallery]
-# Max size of the thumbnail (pixels)
 size = 180
-# Max number of thumbnails in cache, 0 to unlimit
 cache = 100
-# Fill the entire tile with thumbnail (yes/no)
 fill = yes
-# Anti-aliasing mode for thumbnails (none/box/bilinear/bicubic/mks13)
 antialiasing = mks13
-# Background color of the window (RGBA)
 window = #000000AA
-# Background color of the tile (RGBA)
 background = #1C1B1AFF
-# Background color of the selected tile (RGBA)
 select = #403E3CFF
-# Border color of the selected tile (RGBA)
 border = #A02F6FFF
-# Shadow color of the selected tile (RGBA)
 shadow = #000000EE
-# Persistent cache
 pstore = yes
+
+################################################################################
+# Image list configuration
+################################################################################
+[list]
+order = alpha
+reverse = no
+recursive = no
+all = no
+fsmon = yes
+
+################################################################################
+# Font
+################################################################################
+[font]
+name = Adwaita Mono
+size = 13
+color = #CCCCCCFF
+shadow = #000000A0
+
+################################################################################
+# Image meta info scheme (format, size, EXIF, etc.)
+################################################################################
+[info]
+show = yes
+padding = 10
+info_timeout = 5
+status_timeout = 3
+
+[info.viewer]
+top_left = +name,+format,+filesize,+imagesize,+exif
+top_right = index
+bottom_left = scale,frame
+bottom_right = status
+
+[info.slideshow]
+top_left = none
+top_right = none
+bottom_left = none
+bottom_right = dir,status
+
+[info.gallery]
+top_left = none
+top_right = index
+bottom_left = none
+bottom_right = name,status
+
 ################################################################################
 # Viewer mode key binding configuration: key = action [parameters]
 ################################################################################
@@ -96,7 +127,7 @@ q = exit
 r = reload
 return = mode
 y = exec $HOME/.config/swayimg/copy_img.sh "%"
-# Mouse related
+# Mouse
 ScrollLeft = step_right 5
 ScrollRight = step_left 5
 ScrollUp = step_up 5
@@ -110,6 +141,8 @@ Alt+ScrollDown = next_frame
 MouseLeft = drag
 MouseSide = prev_file
 MouseExtra = next_file
+
+
 ################################################################################
 # Gallery mode key binding configuration: key = action [parameters]
 ################################################################################
@@ -127,13 +160,3 @@ l = step_right
 q = exit
 return = mode
 y = exec $HOME/.config/swayimg/copy_img.sh "%"
-################################################################################
-# Image list configuration
-################################################################################
-[list]
-# Default order (none/alpha/reverse/random)
-order = alpha
-# Read directories recursively (yes/no)
-recursive = no
-# Open all files in the directory of the specified file (yes/no)
-all = yes
