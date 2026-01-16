@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-fuzzel -l 4 \
+fuzzel -l 5 \
   --placeholder "Search..." \
   --line-height 26 \
   --width 25 \
