@@ -41,7 +41,9 @@
 
 ### Installation
 
-> ⚠️ Installation script is still WIP, so please be careful. I don't recommend blindly copying the entire repository, but rather taking bits and pieces from here and there.
+> ⚠️ **Warning installation script is still WIP, so be careful! Also some basic knowledge of Linux and common sense is required**
+>
+> I don't recommend blindly running scripts here or anywhere from internet, but rather taking bits here and there so you get the idea how things are working
 
 ```bash
 bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
