@@ -1,7 +1,24 @@
 #!/usr/bin/env bash
 
-fuzzel -l 5 \
-  --placeholder "Search..." \
-  --line-height 26 \
-  --width 25 \
-  --list-executables-in-path
+set -e
+
+menu="fuzzel -l 5 --placeholder Search... --line-height 26 --width 25"
+
+# Just .desktop files
+fuzzeld() {
+  $menu
+}
+
+# Combined .desktop + binary files
+fuzzeldb() {
+  $menu --list-executables-in-path
+}
+
+case "$1" in
+"b")
+  fuzzeldb
+  ;;
+*)
+  fuzzeld
+  ;;
+esac

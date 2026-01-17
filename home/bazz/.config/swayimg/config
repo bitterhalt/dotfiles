@@ -65,7 +65,7 @@ pstore = yes
 order = alpha
 reverse = no
 recursive = no
-all = no
+all = yes
 fsmon = yes
 
 ################################################################################
