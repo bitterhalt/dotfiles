@@ -17,7 +17,6 @@ return {
         enable = true,
       },
     },
-    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
   },
 
   -- NvChad/nvim-colorizer

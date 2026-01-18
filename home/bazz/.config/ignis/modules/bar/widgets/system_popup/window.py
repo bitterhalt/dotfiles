@@ -86,6 +86,7 @@ class SystemPopup(widgets.Window):
         self._bluetooth_section = bluetooth_section
 
         system_info = SystemInfoWidget()
+        self._system_info = system_info
 
         panel = widgets.Box(
             vertical=True,
@@ -157,6 +158,10 @@ class SystemPopup(widgets.Window):
             self._bluetooth_section._device_list.visible = False
             self._bluetooth_section._arrow.set_css_classes(["expand-arrow"])
             self._bluetooth_section._stop_scan()
+
+        if self._system_info._details_box.visible:
+            self._system_info._details_box.visible = False
+            self._system_info._arrow.set_css_classes(["expand-arrow"])
 
     def _on_visible_change(self, *_):
         if self.visible:

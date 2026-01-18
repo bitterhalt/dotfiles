@@ -45,15 +45,34 @@ class SystemInfoWidget(widgets.Box):
             ],
         )
 
+        self._arrow = widgets.Icon(
+            image="pan-down-symbolic",
+            pixel_size=16,
+            css_classes=["expand-arrow"],
+        )
+
+        expand_btn = widgets.Button(
+            css_classes=["sys-info-expand-btn", "unset"],
+            child=self._arrow,
+            on_click=lambda *_: self._toggle_details(),
+        )
+
+        main_section = widgets.Box(
+            vertical=True,
+            spacing=10,
+            child=[cpu_box, ram_box, expand_btn],
+        )
+
         self._os_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
         self._cpu_model_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
         self._mem_total_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
         self._uptime_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
 
-        info_box = widgets.Box(
+        self._details_box = widgets.Box(
             vertical=True,
             spacing=4,
             css_classes=["system-info-details"],
+            visible=False,
             child=[
                 self._os_label,
                 self._cpu_model_label,
@@ -66,7 +85,7 @@ class SystemInfoWidget(widgets.Box):
             vertical=True,
             spacing=10,
             css_classes=["system-info-widget"],
-            child=[cpu_box, ram_box, info_box],
+            child=[main_section, self._details_box],
         )
 
         self._last_cpu_total = None
@@ -85,6 +104,12 @@ class SystemInfoWidget(widgets.Box):
 
         self.connect("destroy", self._cleanup)
 
+    def _toggle_details(self):
+        """Toggle visibility of detailed system info"""
+        new_state = not self._details_box.visible
+        self._details_box.visible = new_state
+        self._arrow.set_css_classes(["expand-arrow", "rotated"] if new_state else ["expand-arrow"])
+
     def _cleanup(self, *_):
         for p in (self._poll_cpu, self._poll_ram, self._poll_info):
             if p:
@@ -102,7 +127,7 @@ class SystemInfoWidget(widgets.Box):
             return None, None
 
         values = list(map(int, parts[1:]))
-        idle = values[3] + values[4]  # idle + iowait
+        idle = values[3] + values[4]
         total = sum(values)
         return total, idle
 
@@ -143,12 +168,10 @@ class SystemInfoWidget(widgets.Box):
     def _update_info(self, *_):
         self._os_label.label = f"SYS: {fetch.os_name or 'Unknown'}"
         cpu = fetch.cpu or "Unknown"
-        # Shorten CPU name if too long
         if len(cpu) > 40:
             cpu = cpu[:37] + "..."
         self._cpu_model_label.label = f"CPU: {cpu}"
 
-        # Add total memory
         mem_total = fetch.mem_total or 0
         if mem_total > 0:
             mem_gb = mem_total / (1024 * 1024)  # Convert KB to GB
