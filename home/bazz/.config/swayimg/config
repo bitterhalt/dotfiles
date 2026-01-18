@@ -49,14 +49,14 @@ antialiasing = mks13
 [gallery]
 size = 180
 cache = 100
-fill = yes
 antialiasing = mks13
 window = #000000AA
 background = #1C1B1AFF
 select = #403E3CFF
-border = #A02F6FFF
-shadow = #000000EE
+border_color = #24837Bff
+border_width = 2
 pstore = yes
+padding = 5
 
 ################################################################################
 # Image list configuration
@@ -72,10 +72,11 @@ fsmon = yes
 # Font
 ################################################################################
 [font]
-name = Adwaita Mono
-size = 13
+name = monospace
+size = 11
 color = #CCCCCCFF
-shadow = #000000A0
+shadow = #000000d0
+background = #00000000
 
 ################################################################################
 # Image meta info scheme (format, size, EXIF, etc.)
