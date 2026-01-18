@@ -3,6 +3,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/nvim-treesitter-context" },
+    branch = "master", -- TODO: MOVE TO MAIN BRANCH https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file
     main = "nvim-treesitter.configs",
     build = ":TSUpdate",
     opts = {
