@@ -64,6 +64,7 @@ class SystemInfoWidget(widgets.Box):
         )
 
         self._os_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
+        self._kernel_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
         self._cpu_model_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
         self._mem_total_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
         self._uptime_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
@@ -75,6 +76,7 @@ class SystemInfoWidget(widgets.Box):
             visible=False,
             child=[
                 self._os_label,
+                self._kernel_label,
                 self._cpu_model_label,
                 self._mem_total_label,
                 self._uptime_label,
@@ -167,6 +169,7 @@ class SystemInfoWidget(widgets.Box):
 
     def _update_info(self, *_):
         self._os_label.label = f"SYS: {fetch.os_name or 'Unknown'}"
+        self._kernel_label.label = f"KER: {fetch.kernel or 'Unknown'}"
         cpu = fetch.cpu or "Unknown"
         if len(cpu) > 40:
             cpu = cpu[:37] + "..."
