@@ -73,7 +73,7 @@ fsmon = yes
 ################################################################################
 [font]
 name = monospace
-size = 11
+size = 13
 color = #CCCCCCFF
 shadow = #000000d0
 background = #00000000
