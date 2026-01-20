@@ -1,4 +1,6 @@
-from modules.notifications.widgets.notification_items import (
+from .weather_pill import WeatherPill
+from .media_pill import MediaPill
+from .notification_items import (
     NormalHistoryItem,
     NotificationHistoryItem,
     ScreenshotHistoryItem,
@@ -6,6 +8,8 @@ from modules.notifications.widgets.notification_items import (
 )
 
 __all__ = [
+    "MediaPill",
+    "WeatherPill",
     "NotificationHistoryItem",
     "ScreenshotHistoryItem",
     "NormalHistoryItem",

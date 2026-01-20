@@ -100,5 +100,5 @@ class MediaCenterWidget(widgets.Button):
         self._pill_content.child = [MediaPill(player)]
 
     def _open_media_osd(self):
-        wm.close_window("ignis_INTEGRATED_CENTER")
+        wm.close_window("ignis_NOTIFICATION_CENTER")
         wm.open_window("ignis_MEDIA_OSD")

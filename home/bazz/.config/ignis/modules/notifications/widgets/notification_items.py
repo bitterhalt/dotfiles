@@ -170,7 +170,7 @@ class ScreenshotHistoryItem(widgets.Box):
     def _open_screenshot(self, notification):
         if notification.icon:
             asyncio.create_task(utils.exec_sh_async(f"xdg-open '{notification.icon}'"))
-            wm.close_window("ignis_INTEGRATED_CENTER")
+            wm.close_window("ignis_NOTIFICATION_CENTER")
 
     def _copy_screenshot(self, notification):
         if notification.icon:

@@ -20,7 +20,7 @@ recording_overlay = 0
 weather = 0
 power_overlay = 0
 system_menu = 0
-integrated_center = 0
+notification_center = 0
 # ══════════════════════════════════════════════════════════════
 # SYSTEM
 # ══════════════════════════════════════════════════════════════

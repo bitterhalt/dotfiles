@@ -18,26 +18,22 @@ def moon_phase_accurate(date: datetime) -> float:
     synodic_month = 29.53058867
     days_diff = (date - known_new_moon).total_seconds() / 86400.0
     phase = (days_diff % synodic_month) / synodic_month
-
     return phase
 
 
 def moon_illumination(date: datetime) -> float:
     phase = moon_phase_accurate(date)
     illumination = (1 - math.cos(phase * 2 * math.pi)) / 2 * 100
-
     return illumination
 
 
 def days_until_full_moon(date: datetime) -> float:
     phase = moon_phase_accurate(date)
     synodic_month = 29.53058867
-
     if phase < 0.5:
         days_until = (0.5 - phase) * synodic_month
     else:
         days_until = (1.0 - phase + 0.5) * synodic_month
-
     return days_until
 
 
@@ -82,7 +78,6 @@ def moon_emoji(date: datetime) -> str:
 
     index = moon_phase_index(date)
     phase_key = phase_map[index]
-
     return MOON_EMOJIS[phase_key]
 
 
@@ -113,7 +108,6 @@ def moon_tooltip(date: datetime) -> str:
             tooltip += f"New moon in {days * 24:.1f} hours"
         else:
             tooltip += f"New moon in {days:.1f} days"
-
     return tooltip
 
 

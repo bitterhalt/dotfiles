@@ -2,6 +2,7 @@ import asyncio
 from gi.repository import Gdk
 from ignis import utils, widgets
 from ignis.services.recorder import RecorderService
+from modules.utils.recorder import is_recording
 from ignis.window_manager import WindowManager
 from settings import config
 
@@ -198,8 +199,6 @@ class RecordingOverlay(widgets.Window):
             self._record_screen_btn.add_css_class("overlay-btn")
 
     def _is_recording(self):
-        from modules.recorder.recorder import is_recording
-
         return is_recording()
 
     def toggle(self):

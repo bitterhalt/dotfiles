@@ -1,15 +1,15 @@
 from ignis import utils, widgets
 from ignis.options import options
 from ignis.window_manager import WindowManager
-from modules.notifications.integrated_center_notifications import NotificationList
-from modules.notifications.integrated_center_weather import WeatherPill
-from modules.notifications.media import MediaCenterWidget
+from .notification_center_notifications import NotificationList
+from .widgets.weather_pill import WeatherPill
+from .widgets.media_pill import MediaCenterWidget
 from settings import config
 
 wm = WindowManager.get_default()
 
 
-class IntegratedCenter(widgets.Window):
+class NotificationCenter(widgets.Window):
     def __init__(self):
         self._media_pill = MediaCenterWidget()
         self._notification_list = NotificationList()
@@ -68,7 +68,7 @@ class IntegratedCenter(widgets.Window):
         )
 
         two_columns = widgets.Box(
-            css_classes=["integrated-center"],
+            css_classes=["notification-center"],
             child=[left_column, right_column],
         )
 
@@ -84,7 +84,7 @@ class IntegratedCenter(widgets.Window):
             hexpand=True,
             can_focus=False,
             css_classes=["center-overlay", "unset"],
-            on_click=lambda x: wm.close_window("ignis_INTEGRATED_CENTER"),
+            on_click=lambda x: wm.close_window("ignis_NOTIFICATION_CENTER"),
         )
 
         root_overlay = widgets.Overlay(
@@ -100,12 +100,12 @@ class IntegratedCenter(widgets.Window):
         )
 
         super().__init__(
-            monitor=config.ui.integrated_center_monitor,
+            monitor=config.ui.notification_center_monitor,
             visible=False,
             popup=True,
             anchor=["top", "bottom", "left", "right"],
             layer="top",
-            namespace="ignis_INTEGRATED_CENTER",
+            namespace="ignis_NOTIFICATION_CENTER",
             css_classes=["center-window"],
             child=root_overlay,
             kb_mode="on_demand",

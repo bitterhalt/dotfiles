@@ -1,5 +1,4 @@
 import datetime
-
 from ignis import utils, widgets
 from settings import config
 

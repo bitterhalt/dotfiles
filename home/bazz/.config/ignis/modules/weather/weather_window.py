@@ -1,12 +1,10 @@
 import asyncio
 from datetime import datetime
 from typing import List, Optional
-
 from ignis import utils, widgets
 from ignis.window_manager import WindowManager
 from settings import config
-
-from .weather_data import fetch_weather_async, format_time_hm, icon_path
+from .data.weather_data import fetch_weather_async, format_time_hm, icon_path
 
 wm = WindowManager.get_default()
 CACHE_TTL = config.weather.cache_ttl
@@ -149,11 +147,8 @@ class WeatherPopup(widgets.Window):
         self._last_data: Optional[dict] = None
         self._update_task = None
         self._refresh_poll = None
-
         self.connect("notify::visible", self._on_visible_change)
-
         self._refresh_poll = utils.Poll(CACHE_TTL * 1000, lambda *_: self._update_weather())
-
         self.connect("destroy", self._cleanup)
 
     def _cleanup(self, *_):
@@ -163,7 +158,6 @@ class WeatherPopup(widgets.Window):
             except:
                 pass
             self._refresh_poll = None
-
         if self._update_task:
             try:
                 self._update_task.cancel()
@@ -193,12 +187,9 @@ class WeatherPopup(widgets.Window):
     def _toggle_weekly(self):
         current = self._weekly_box.visible
         new_state = not current
-
         self._weekly_box.visible = new_state
-
         label = "Hide weekly forecast" if new_state else "Show weekly forecast"
         self._weekly_toggle.child.child[0].label = label
-
         self._weekly_arrow.set_css_classes(["expand-arrow", "rotated"] if new_state else ["expand-arrow"])
 
     def _update_weather(self):
@@ -212,7 +203,6 @@ class WeatherPopup(widgets.Window):
             return
 
         self._last_data = data
-
         self._icon_label.image = data["icon"]
         self._city_label.label = data["city"]
         self._temp_label.label = f"{data['temp']}°C"
@@ -249,7 +239,6 @@ class WeatherPopup(widgets.Window):
                     ],
                 )
             )
-
         sunrise = format_time_hm(datetime.fromtimestamp(data["sunrise"]))
         sunset = format_time_hm(datetime.fromtimestamp(data["sunset"]))
 

@@ -4,7 +4,7 @@ from settings import config
 from .widgets.battery import BatteryWidget
 from .widgets.clock import ClockWidget
 from .widgets.focused_window import WindowTitleWidget
-from .widgets.recorder import RecordingIndicator
+from .widgets.recorder_indicator import RecordingIndicator
 from .widgets.system_indicator import SystemIndicatorWidget
 from .widgets.workspaces import WorkspaceWidget
 
@@ -15,7 +15,7 @@ from .widgets.workspaces import WorkspaceWidget
 
 def left_section(monitor_name: str):
     return widgets.Box(
-        spacing=18,
+        spacing=12,
         child=[
             WorkspaceWidget.create(monitor_name),
             WindowTitleWidget.create(monitor_name),
@@ -25,14 +25,14 @@ def left_section(monitor_name: str):
 
 def center_section():
     return widgets.Box(
-        spacing=12,
+        spacing=4,
         child=[ClockWidget()],
     )
 
 
 def right_section():
     return widgets.Box(
-        spacing=12,
+        spacing=4,
         child=[
             RecordingIndicator(),
             SystemIndicatorWidget(),

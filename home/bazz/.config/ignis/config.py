@@ -7,7 +7,7 @@ from ignis.css_manager import CssInfoPath, CssManager
 from ignis.options import options
 from modules.bar import Bar, register_bar, toggle_bars
 from modules.bar.widgets import SystemPopup
-from modules.notifications import IntegratedCenter, init_notifications
+from modules.notifications import NotificationCenter, init_notifications
 from modules.osd import (
     MediaOsdWindow,
     VolumeOSD,
@@ -20,7 +20,7 @@ from modules.osd import (
 )
 from modules.osd.workspace_osd import _osd_window
 from modules.overlays import PowerOverlay, RecordingOverlay
-from modules.recorder import register_recorder_commands
+from modules.utils.recorder import register_recorder_commands
 from modules.weather import WeatherPopup
 from settings import config
 
@@ -90,7 +90,7 @@ WeatherPopup()
 PowerOverlay()
 RecordingOverlay()
 SystemPopup()
-IntegratedCenter()
+NotificationCenter()
 
 # Register custom commands
 command_manager.add_command("toggle-bar", toggle_bars)

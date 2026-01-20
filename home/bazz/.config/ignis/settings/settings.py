@@ -121,7 +121,7 @@ class MonitorConfig:
     weather: int = 0
     power_overlay: int = 0
     system_menu: int = 0
-    integrated_center: int = 0
+    notification_center: int = 0
 
     def __post_init__(self):
         """Validate monitor IDs and fallback to 0 if invalid"""
@@ -260,8 +260,8 @@ class UIConfig:
         return self.monitors.system_menu
 
     @property
-    def integrated_center_monitor(self):
-        return self.monitors.integrated_center
+    def notification_center_monitor(self):
+        return self.monitors.notification_center
 
     @property
     def osd_timeout(self):

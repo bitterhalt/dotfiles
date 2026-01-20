@@ -13,7 +13,6 @@ class NotificationList:
         self._signals = SignalManager()
         self._item_signals = {}
         self._notif_list = widgets.Box(vertical=True, css_classes=["content-list"])
-
         self._notif_empty = widgets.Label(
             label="No notifications",
             css_classes=["empty-state"],
@@ -49,18 +48,15 @@ class NotificationList:
         for notif in items:
             item = NotificationHistoryItem(notif)
             self._notif_list.append(item)
-
             sig_manager = SignalManager()
             sig_manager.connect(notif, "closed", lambda *_: self._on_notification_closed())
             self._item_signals[id(notif)] = sig_manager
-
         self._update_empty_state()
 
     def _clear_items(self):
         for sig_manager in self._item_signals.values():
             sig_manager.disconnect_all()
         self._item_signals.clear()
-
         self._notif_list.child = []
 
     def _on_notified(self, _, notif):
@@ -72,7 +68,6 @@ class NotificationList:
         sig_manager = SignalManager()
         sig_manager.connect(notif, "closed", lambda *_: self._on_notification_closed())
         self._item_signals[id(notif)] = sig_manager
-
         visible_count = len([n for n in notifications.notifications if self._should_show_notification(n)])
 
         if visible_count > MAX_NOTIFICATIONS:

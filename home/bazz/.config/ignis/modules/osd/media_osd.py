@@ -13,7 +13,6 @@ class MediaOsdWindow(widgets.Window):
         self._timeout = None
         self._bound_player = None
         self._signals = SignalManager()
-
         self._app_icon = widgets.Icon(
             image=MediaPlayerConfig.PLAYER_ICONS[None],
             pixel_size=20,
@@ -204,7 +203,6 @@ class MediaOsdWindow(widgets.Window):
 
         self._app_icon.image = MediaPlayerInfo.get_player_icon(player)
         self._app_name.label = MediaPlayerInfo.get_player_name(player)
-
         self._title_label.label = player.title or "Unknown Title"
         self._artist_label.label = player.artist or "Unknown Artist"
         self._album_art.image = player.art_url or "folder-music-symbolic"

@@ -62,10 +62,8 @@ async def _curl_json_async(url: str) -> Optional[dict]:
 def _map_icon(code: str) -> str:
     if not code:
         return icon_path("not-available")
-
     base = code[:2]
     day = code.endswith("d")
-
     if base == "01":
         return icon_path("clear-day" if day else "clear-night")
     if base == "02":
@@ -82,46 +80,36 @@ def _map_icon(code: str) -> str:
         return icon_path("snow")
     if base == "50":
         return icon_path("fog")
-
     return icon_path("not-available")
 
 
 async def fetch_weather_async() -> Optional[Dict[str, Any]]:
     cached = _load_cache()
     now = int(time.time())
-
     if cached and now - cached.get("timestamp", 0) < CACHE_TTL:
         return cached["data"]
-
     url_now = _build_url("weather")
     url_fc = _build_url("forecast")
-
     if not url_now or not url_fc:
         return cached["data"] if cached else None
-
     now_json, fc_json = await asyncio.gather(
         _curl_json_async(url_now),
         _curl_json_async(url_fc),
     )
-
     if not now_json or not fc_json:
         return cached["data"] if cached else None
-
     try:
         main = now_json["main"]
         weather0 = now_json["weather"][0]
         wind = now_json.get("wind", {})
-
         temp = round(main["temp"])
         feels = round(main["feels_like"])
         humidity = int(main["humidity"])
         wind_speed = float(wind.get("speed", 0.0))
-
         sunrise = now_json["sys"]["sunrise"]
         sunset = now_json["sys"]["sunset"]
         desc = weather0["description"].title()
         icon_code = weather0["icon"]
-
         forecast_list = fc_json["list"][:4]
         forecast = []
         for entry in forecast_list:
@@ -136,7 +124,6 @@ async def fetch_weather_async() -> Optional[Dict[str, Any]]:
             )
 
         current_date = datetime.now()
-
         data = {
             "city": now_json["name"],
             "temp": temp,
@@ -158,17 +145,13 @@ async def fetch_weather_async() -> Optional[Dict[str, Any]]:
             dt = datetime.fromtimestamp(entry["dt"])
             date_key = dt.date()
             daily_map.setdefault(date_key, []).append(entry)
-
         weekly = []
         today = datetime.now().date()
-
         for date_key, items in daily_map.items():
             if date_key == today:
                 continue
-
             best = min(items, key=lambda e: abs(datetime.fromtimestamp(e["dt"]).hour - 12))
             w0 = best["weather"][0]
-
             weekly.append(
                 {
                     "day": date_key.strftime("%a"),
@@ -176,12 +159,9 @@ async def fetch_weather_async() -> Optional[Dict[str, Any]]:
                     "icon": _map_icon(w0["icon"]),
                 }
             )
-
         weekly = weekly[:5]
         data["weekly"] = weekly
-
         _save_cache({"timestamp": int(time.time()), "data": data})
         return data
-
     except:
         return cached["data"] if cached else None

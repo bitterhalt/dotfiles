@@ -1,7 +1,7 @@
 import asyncio
 from ignis import utils, widgets
 from ignis.window_manager import WindowManager
-from modules.weather.weather_data import fetch_weather_async
+from modules.weather.data.weather_data import fetch_weather_async
 
 wm = WindowManager.get_default()
 
@@ -73,7 +73,7 @@ class WeatherPill:
 
     def _open_weather_popup(self):
         try:
-            wm.close_window("ignis_INTEGRATED_CENTER")
+            wm.close_window("ignis_NOTIFICATION_CENTER")
         except Exception:
             pass
 

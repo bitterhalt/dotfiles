@@ -4,8 +4,6 @@ from ignis.services.network import EthernetDevice, VpnConnection, WifiAccessPoin
 
 
 class WifiNetworkItem(widgets.Button):
-    """Individual WiFi network item in network list"""
-
     def __init__(self, ap: WifiAccessPoint):
         super().__init__(
             css_classes=["net-wifi-item", "unset"],
@@ -27,8 +25,6 @@ class WifiNetworkItem(widgets.Button):
 
 
 class VpnNetworkItem(widgets.Button):
-    """Individual VPN connection item in network list"""
-
     def __init__(self, conn: VpnConnection):
         super().__init__(
             css_classes=["net-vpn-item", "unset"],
@@ -49,8 +45,6 @@ class VpnNetworkItem(widgets.Button):
 
 
 class EthernetItem(widgets.Button):
-    """Individual Ethernet device item in network list"""
-
     def __init__(self, dev: EthernetDevice):
         super().__init__(
             css_classes=["net-ethernet-item", "unset"],
