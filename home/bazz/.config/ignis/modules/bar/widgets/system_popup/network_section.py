@@ -80,7 +80,7 @@ class NetworkSection(widgets.Box):
         )
 
         pill_content = widgets.Box(
-            spacing=6,
+            spacing=16,
             child=[self._icon, self._label, self._percent, self._arrow],
         )
 
