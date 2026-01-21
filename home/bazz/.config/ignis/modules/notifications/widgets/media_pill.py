@@ -20,7 +20,7 @@ class MediaPill(widgets.Box):
         self._player = player
         self._icon = widgets.Icon(
             image=MediaPlayerInfo.get_player_icon(player),
-            pixel_size=28,
+            pixel_size=22,
             css_classes=["media-pill-icon"],
         )
 

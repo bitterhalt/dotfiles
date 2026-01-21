@@ -137,6 +137,7 @@ tmux
 transmission-gtk
 trash-cli
 tree
+tree-sitter-cli
 ttf-jetbrains-mono
 ttf-material-symbols-variable-git
 ttf-nerd-fonts-symbols
