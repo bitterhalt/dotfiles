@@ -86,7 +86,6 @@ class AudioSection(widgets.Box):
         )
 
         row = widgets.Box(
-            spacing=2,
             child=[mute_btn, slider, arrow_btn],
         )
 
