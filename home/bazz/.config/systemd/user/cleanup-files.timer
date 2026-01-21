@@ -1,0 +1,9 @@
+[Unit]
+Description=Weekly clean-up of the Downloads folder
+
+[Timer]
+OnCalendar=weekly
+RandomizedDelaySec=3h
+
+[Install]
+WantedBy=timers.target

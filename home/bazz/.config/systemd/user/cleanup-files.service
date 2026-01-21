@@ -1,0 +1,12 @@
+[Unit]
+Description=Clean-up of the Downloads folder
+
+[Service]
+Type=oneshot
+ExecStart=find %h/Downloads/ -mindepth 1 -maxdepth 1 -exec trash-put {} +
+ExecStart=trash-empty -f
+
+IOSchedulingClass=idle
+Slice=background.slice
+
+
