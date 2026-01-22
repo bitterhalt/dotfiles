@@ -1,7 +1,8 @@
 from ignis import widgets
 from ignis.services.mpris import MprisPlayer, MprisService
 from ignis.window_manager import WindowManager
-from modules.utils.media_utils import MediaPlayerInfo
+from modules.utils.media_utils import MediaPlayerInfo, MediaPlayerControls
+from modules.utils.signal_manager import SignalManager
 
 mpris = MprisService.get_default()
 wm = WindowManager.get_default()
@@ -10,65 +11,144 @@ wm = WindowManager.get_default()
 class MediaPill(widgets.Box):
     def __init__(self, player: MprisPlayer):
         super().__init__(
+            vertical=True,
             spacing=12,
-            css_classes=["media-pill"],
+            css_classes=["media-pill-nc"],
             halign="fill",
             valign="center",
             hexpand=True,
         )
 
         self._player = player
+        self._signals = SignalManager()
+
         self._icon = widgets.Icon(
             image=MediaPlayerInfo.get_player_icon(player),
             pixel_size=22,
-            css_classes=["media-pill-icon"],
+            css_classes=["media-pill-nc-icon"],
         )
-
-        player.connect("notify::desktop-entry", lambda *_: self._update_icon())
-        player.connect("notify:: track-id", lambda *_: self._update_icon())
 
         title = widgets.Label(
             label=player.bind("title", lambda t: t or "Unknown"),
             ellipsize="end",
-            max_width_chars=30,
-            css_classes=["media-pill-title"],
+            max_width_chars=32,
+            css_classes=["media-pill-nc-title"],
             halign="start",
         )
 
         artist = widgets.Label(
             label=player.bind("artist", lambda a: a or "Unknown Artist"),
             ellipsize="end",
-            max_width_chars=30,
-            css_classes=["media-pill-artist"],
-            halign="start",
+            max_width_chars=25,
+            css_classes=["media-pill-nc-artist"],
+            halign="center",
+        )
+
+        title_row = widgets.Box(
+            spacing=8,
+            halign="center",
+            child=[
+                self._icon,
+                title,
+            ],
         )
 
         text_box = widgets.Box(
             vertical=True,
             spacing=2,
-            child=[title, artist],
+            hexpand=True,
+            child=[
+                title_row,
+                artist,
+            ],
         )
 
-        self.child = [self._icon, text_box]
+        # Playback controls
+        self._btn_prev = widgets.Button(
+            css_classes=["media-pill-nc-control"],
+            on_click=lambda *_: MediaPlayerControls.previous(),
+            child=widgets.Icon(
+                image="media-skip-backward-symbolic",
+                pixel_size=18,
+            ),
+        )
+
+        self._btn_play_icon = widgets.Icon(
+            image=MediaPlayerControls.get_play_pause_icon(player),
+            pixel_size=18,
+        )
+
+        self._btn_play = widgets.Button(
+            css_classes=["media-pill-nc-control", "primary"],
+            child=self._btn_play_icon,
+            on_click=lambda *_: MediaPlayerControls.play_pause(),
+        )
+
+        self._btn_next = widgets.Button(
+            css_classes=["media-pill-nc-control"],
+            on_click=lambda *_: MediaPlayerControls.next(),
+            child=widgets.Icon(
+                image="media-skip-forward-symbolic",
+                pixel_size=18,
+            ),
+        )
+
+        controls = widgets.Box(
+            spacing=4,
+            halign="center",
+            css_classes=["media-pill-nc-controls"],
+            child=[self._btn_prev, self._btn_play, self._btn_next],
+        )
+
+        content = widgets.Box(
+            spacing=10,
+            child=[text_box],
+        )
+
+        self.child = [content, controls]
+        self._bind_play_icon()
+        self._update_button_states()
+
+        player.connect("notify::desktop-entry", lambda *_: self._update_icon())
+        player.connect("notify::track-id", lambda *_: self._update_icon())
+        player.connect("notify::can-go-previous", lambda *_: self._update_button_states())
+        player.connect("notify::can-go-next", lambda *_: self._update_button_states())
+
+        self.connect("destroy", lambda *_: self._cleanup())
+
+    def _cleanup(self):
+        self._signals.disconnect_all()
+
+    def _bind_play_icon(self):
+        def update_icon(*_):
+            self._btn_play_icon.image = MediaPlayerControls.get_play_pause_icon(self._player)
+
+        self._signals.connect(self._player, "notify::playback-status", update_icon)
+        update_icon()
 
     def _update_icon(self):
         self._icon.image = MediaPlayerInfo.get_player_icon(self._player)
 
+    def _update_button_states(self):
+        self._btn_prev.set_sensitive(self._player.can_go_previous)
+        self._btn_next.set_sensitive(self._player.can_go_next)
 
-class MediaCenterWidget(widgets.Button):
+
+class MediaCenterWidget(widgets.Box):
     def __init__(self):
         self._current_player = None
         self._pill_content = widgets.Box()
         super().__init__(
-            css_classes=["media-center-wrapper", "unset"],
+            vertical=True,
+            css_classes=["media-center-nc-wrapper"],
             halign="fill",
-            valign="center",
-            on_click=lambda x: self._open_media_osd(),
-            child=self._pill_content,
+            valign="start",
+            visible=False,
+            child=[self._pill_content],
         )
 
         mpris.connect("player_added", self._on_player_added)
-        mpris.connect("notify:: players", lambda *_: self._refresh())
+        mpris.connect("notify::players", lambda *_: self._refresh())
 
         self._refresh()
 
@@ -98,7 +178,3 @@ class MediaCenterWidget(widgets.Button):
         self._current_player = player
         self.visible = True
         self._pill_content.child = [MediaPill(player)]
-
-    def _open_media_osd(self):
-        wm.close_window("ignis_NOTIFICATION_CENTER")
-        wm.open_window("ignis_MEDIA_OSD")

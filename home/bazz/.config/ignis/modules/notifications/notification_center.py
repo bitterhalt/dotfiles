@@ -39,7 +39,6 @@ class NotificationCenter(widgets.Window):
             vertical=True,
             css_classes=["left-column"],
             child=[
-                self._media_pill,
                 self._notification_list.scroll,
                 widgets.Box(
                     spacing=8,
@@ -64,6 +63,7 @@ class NotificationCenter(widgets.Window):
             child=[
                 self._weather_pill.button,
                 self._calendar,
+                self._media_pill,
             ],
         )
 
