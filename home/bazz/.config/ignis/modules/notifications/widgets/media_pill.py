@@ -33,7 +33,6 @@ class MediaPill(widgets.Box):
             ellipsize="end",
             max_width_chars=22,
             css_classes=["media-pill-nc-title"],
-            halign="start",
         )
 
         artist = widgets.Label(
@@ -41,7 +40,6 @@ class MediaPill(widgets.Box):
             ellipsize="end",
             max_width_chars=22,
             css_classes=["media-pill-nc-artist"],
-            halign="center",
         )
 
         title_row = widgets.Box(
@@ -54,9 +52,10 @@ class MediaPill(widgets.Box):
         )
 
         text_box = widgets.Box(
-            vertical=True,
-            spacing=2,
+            halign="center",
             hexpand=True,
+            spacing=2,
+            vertical=True,
             child=[
                 title_row,
                 artist,
