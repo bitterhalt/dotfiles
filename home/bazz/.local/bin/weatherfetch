@@ -12,7 +12,7 @@ command -v curl >/dev/null 2>&1 || {
 # To use this script you need to create an API key: https://home.openweathermap.org and add it below or in your .profile
 APIKEY=$OPEN_WEATHER_APIKEY
 # Find your City ID here: https://openweathermap.org/
-CITY_ID="643492"
+CITY_ID=$OPEN_WEATHER_CITY_ID
 URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=metric&APPID=${APIKEY}"
 
 # Fetch weather data

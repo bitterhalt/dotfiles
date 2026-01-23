@@ -3,7 +3,7 @@
 # ══════════════════════════════════════════════════════════════
 [weather]
 api_key = ""                       # or OPEN_WEATHER_APIKEY
-city_id = "643492"                 # or OPEN_WEATHER_CITY_ID
+city_id = ""                       # or OPEN_WEATHER_CITY_ID
 cache_ttl = 600
 use_12h_format = false
 icon_base_path = "~/.config/ignis/assets/icons/weather"

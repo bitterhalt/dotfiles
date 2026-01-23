@@ -87,7 +87,7 @@ class PathConfig:
 @dataclass
 class WeatherConfig:
     api_key: str = ""
-    city_id: str = "643492"
+    city_id: str = ""
     cache_ttl: int = 600
     use_12h_format: bool = False
     icon_base_path: str = "~/.config/ignis/assets/icons/weather"
@@ -96,8 +96,11 @@ class WeatherConfig:
         if not self.api_key:
             self.api_key = os.getenv("OPEN_WEATHER_APIKEY", "")
 
-        if not self.city_id or self.city_id == "643492":
-            self.city_id = os.getenv("OPEN_WEATHER_CITY_ID", "643492")
+        if not self.city_id:
+            self.city_id = os.getenv("OPEN_WEATHER_CITY_ID", "")
+
+        if not self.city_id:
+            log_error("No weather city_id configured. Set it in config.toml or via OPEN_WEATHER_CITY_ID.")
 
         self.icon_base_path = os.path.expanduser(self.icon_base_path)
 
