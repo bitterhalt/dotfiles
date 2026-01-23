@@ -8,6 +8,8 @@ _bar_visible = True
 
 
 class BarlessClockWindow(widgets.Window):
+    """Togglable clock"""
+
     def __init__(self):
         self._time_label = widgets.Label(
             css_classes=["barless-clock-time"],
@@ -44,6 +46,8 @@ class BarlessClockWindow(widgets.Window):
 
 
 class BarlessClockOverlay(widgets.Window):
+    """Overlay clock that shows only in barless mode"""
+
     def __init__(self):
         self._timeout = None
         self._time_label = widgets.Label(
