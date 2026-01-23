@@ -100,7 +100,9 @@ class WeatherConfig:
             self.city_id = os.getenv("OPEN_WEATHER_CITY_ID", "")
 
         if not self.city_id:
-            log_error("No weather city_id configured. Set it in config.toml or via OPEN_WEATHER_CITY_ID.")
+            log_warning(
+                "No weather city_id configured. Weather will be disabled. Set it in config.toml or via OPEN_WEATHER_CITY_ID."
+            )
 
         self.icon_base_path = os.path.expanduser(self.icon_base_path)
 
