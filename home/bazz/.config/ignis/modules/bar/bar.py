@@ -63,6 +63,7 @@ class Bar(widgets.Window):
                 center_widget=center_section(),
                 end_widget=right_section(),
             ),
+            css_classes=["unset"],
         )
 
 

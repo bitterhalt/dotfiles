@@ -1,16 +1,16 @@
 .bar {
   background: $bg-1;
   color: $tx-1;
-  margin: 2px 4px;
+  padding: 0px 4px;
 }
 
 .ws-btn {
-  min-width: 16px;
-  border-radius: 6px;
-  padding: 6px;
-  margin: 0 2px;
   background: transparent;
+  border-radius: 6px;
   color: $tx-1;
+  margin: 2px 2px;
+  min-width: 16px;
+  padding: 6px;
 }
 
 .ws-btn.active {
@@ -25,21 +25,24 @@
 
 .clock,
 .clock-button {
-  padding: 0px 6px;
   border-radius: 6px;
+  margin: 2px 0px;
+  padding: 0px 6px;
 }
 
 .recording-icon {
-  padding: 0px 6px;
+  animation: blink 1s infinite;
   border-radius: 6px;
   color: $red;
-  animation: blink 1s infinite;
+  margin: 2px 0px;
+  padding: 0px 6px;
 }
 
 .system-indicator-button {
-  color: $tx-1;
-  padding: 0px 6px;
   border-radius: 8px;
+  color: $tx-1;
+  margin: 2px 0px;
+  padding: 0px 6px;
 }
 
 .clock-notif-dot {
