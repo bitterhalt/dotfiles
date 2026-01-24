@@ -13,7 +13,7 @@
 .system-menu {
   color: $tx-1;
   border: unset;
-  background-color: $bg-1;
+  background: $bg-1;
   padding: 10px;
 }
 
@@ -55,16 +55,16 @@
 .sys-pill {
   color: $tx-1;
   padding: 12px;
-  background-color: $bg-2;
+  background: $bg-2;
   border: unset;
   border-radius: 8px;
   transition:
-    background-color 0.15s,
+    background 0.15s,
     border-color 0.15s;
 }
 
 .sys-pill:hover {
-  background-color: $ui-2;
+  background: $ui-2;
 }
 
 .sys-middle-row {
@@ -80,14 +80,14 @@
   border-radius: 8px;
   padding: 8px;
   transition:
-    background-color 0.15s,
+    background 0.15s,
     border-color 0.15s;
 }
 
 .net-wifi-item:hover,
 .net-ethernet-item:hover,
 .net-vpn-item:hover {
-  background-color: $ui-2;
+  background: $ui-2;
 }
 
 .sys-net-details {
@@ -261,11 +261,11 @@
   border-radius: 8px;
   padding: 8px;
   transition:
-    background-color 0.15s,
+    background 0.15s,
     border-color 0.15s;
 
   &:hover {
-    background-color: $ui-2;
+    background: $ui-2;
   }
 }
 .bluetooth-battery {
@@ -283,7 +283,7 @@
   background: $ui-1;
   border-radius: 8px;
   padding: 4px;
-  transition: background-color 0.15s;
+  transition: background 0.15s;
 
   &:hover {
     background: $ui-2;
