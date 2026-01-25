@@ -1,3 +1,4 @@
+import asyncio
 from ignis import widgets
 from ignis.services.recorder import RecorderService
 from modules.utils.signal_manager import SignalManager
@@ -18,7 +19,7 @@ class RecordingIndicator(widgets.EventBox):
             css_classes=["recording-box"],
             visible=False,
             child=[self._icon],
-            on_click=lambda x: self._on_click(),
+            on_click=lambda x: asyncio.create_task(recorder.stop_recording()),
         )
 
         self._setup_signals()
@@ -28,10 +29,6 @@ class RecordingIndicator(widgets.EventBox):
     def _setup_signals(self):
         self._signals.connect(recorder, "recording_started", self._on_start)
         self._signals.connect(recorder, "recording_stopped", self._on_stop)
-
-    def _on_click(self):
-        if recorder.active:
-            recorder.stop_recording()
 
     def _on_start(self, *_):
         self._icon.set_label("󰻂")
