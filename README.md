@@ -7,7 +7,7 @@
 ### Software I use
 
 - Distro: [Arch](https://archlinux.org)
-- Shell and widgets: [ignis](https://github.com/ignis-sh/ignis?tab=readme-ov-file)
+- Bar and widgets: [ignis](https://github.com/ignis-sh/ignis?tab=readme-ov-file)
 - WM: [Hyprland](https://github.com/hyprwm/Hyprland)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
