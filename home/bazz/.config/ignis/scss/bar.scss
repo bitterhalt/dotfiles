@@ -59,6 +59,18 @@
   color: $red;
 }
 
+.idle-indicator {
+  color: $tx-1;
+  border-radius: 6px;
+  margin: 2px 0px;
+  padding: 0px 6px;
+}
+
+.idle-icon {
+  color: $tx-1;
+}
+
+.idle-indicator:hover,
 .audio-widget:hover,
 .clock-button:hover,
 .clock:hover,

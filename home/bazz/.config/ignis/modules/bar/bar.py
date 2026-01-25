@@ -7,6 +7,8 @@ from .widgets.focused_window import WindowTitleWidget
 from .widgets.recorder_indicator import RecordingIndicator
 from .widgets.system_indicator import SystemIndicatorWidget
 from .widgets.workspaces import WorkspaceWidget
+from .widgets.idle_indicator import IdleIndicatorWidget
+
 
 # ───────────────────────────────────────────────
 # LAYOUT
@@ -37,6 +39,7 @@ def right_section():
             RecordingIndicator(),
             SystemIndicatorWidget(),
             BatteryWidget(),
+            IdleIndicatorWidget(),
         ],
     )
 

@@ -1,6 +1,7 @@
 from .battery import BatteryWidget
 from .clock import ClockWidget
 from .focused_window import WindowTitleWidget
+from .idle_indicator import IdleIndicatorWidget  # Add this
 from .network_items import EthernetItem, VpnNetworkItem, WifiNetworkItem
 from .recorder_indicator import RecordingIndicator
 from .system_indicator import SystemIndicatorWidget
@@ -11,6 +12,7 @@ __all__ = [
     "BatteryWidget",
     "ClockWidget",
     "EthernetItem",
+    "IdleIndicatorWidget",  # Add this
     "RecordingIndicator",
     "SystemIndicatorWidget",
     "SystemPopup",
