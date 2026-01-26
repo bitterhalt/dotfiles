@@ -65,13 +65,11 @@
 /* ═══════════════════════════════════════════════════════════════
    MEDIA OSD
    ═══════════════════════════════════════════════════════════════ */
-.media-osd-header {
-  color: $tx-1;
-}
+
 .media-osd-window {
   background: transparent;
   border: none;
-  padding: 26px;
+  padding: 8px;
 }
 
 .media-osd {
@@ -80,31 +78,43 @@
   border-radius: 8px;
   padding: 16px;
   box-shadow: $box-shadow;
-  min-width: 400px;
+  min-width: 280px;
+  max-width: 320px;
+}
+
+.media-osd-header {
+  color: $tx-1;
+  padding: 0px 6px;
+}
+
+.media-osd-app-icon {
+  opacity: 0.9;
+}
+
+.media-osd-app-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: $tx-3;
+}
+
+.media-osd-art {
+  margin: 8px 0;
 }
 
 .media-osd-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: $tx-1;
 }
 
 .media-osd-artist {
-  font-size: 14px;
-  color: $tx-3;
-  margin-top: 2px;
-}
-.media-osd-app-icon {
-  border-radius: 8px;
-  color: $tx-1;
-}
-.media-osd-status-icon {
+  font-size: 13px;
   color: $tx-3;
 }
 
 .media-osd-controls {
   color: $tx-1;
-  margin-top: 27px;
+  margin: 6px;
 }
 
 .media-osd-control {
@@ -114,6 +124,19 @@
 
   &:hover {
     background: rgba(255, 255, 255, 0.08);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+.media-osd-control.primary {
+  background: $cyan;
+  color: $bg-1;
+
+  &:hover {
+    background: lighten($cyan, 10%);
   }
 }
 

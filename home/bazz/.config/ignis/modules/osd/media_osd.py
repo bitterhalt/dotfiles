@@ -13,6 +13,7 @@ class MediaOsdWindow(widgets.Window):
         self._timeout = None
         self._bound_player = None
         self._signals = SignalManager()
+
         self._app_icon = widgets.Icon(
             image=MediaPlayerConfig.PLAYER_ICONS[None],
             pixel_size=20,
@@ -50,7 +51,7 @@ class MediaOsdWindow(widgets.Window):
 
         self._album_art = widgets.Icon(
             image="folder-music-symbolic",
-            pixel_size=100,
+            pixel_size=200,
             css_classes=["media-osd-art"],
         )
 
@@ -59,6 +60,7 @@ class MediaOsdWindow(widgets.Window):
             ellipsize="end",
             max_width_chars=35,
             css_classes=["media-osd-title"],
+            halign="center",
         )
 
         self._artist_label = widgets.Label(
@@ -66,17 +68,19 @@ class MediaOsdWindow(widgets.Window):
             ellipsize="end",
             max_width_chars=35,
             css_classes=["media-osd-artist"],
+            halign="center",
         )
 
         labels = widgets.Box(
             vertical=True,
-            spacing=2,
+            spacing=4,
+            halign="center",
             child=[self._title_label, self._artist_label],
         )
 
         self._btn_prev = widgets.Button(
             css_classes=["media-osd-control"],
-            on_click=lambda *_: MediaPlayerControls.previous(),
+            on_click=lambda x: MediaPlayerControls.previous(),
             child=widgets.Icon(
                 image="media-skip-backward-symbolic",
                 pixel_size=22,
@@ -91,12 +95,12 @@ class MediaOsdWindow(widgets.Window):
         self._btn_play = widgets.Button(
             css_classes=["media-osd-control", "primary"],
             child=self._btn_play_icon,
-            on_click=lambda *_: MediaPlayerControls.play_pause(),
+            on_click=lambda x: MediaPlayerControls.play_pause(),
         )
 
         self._btn_next = widgets.Button(
             css_classes=["media-osd-control"],
-            on_click=lambda *_: MediaPlayerControls.next(),
+            on_click=lambda x: MediaPlayerControls.next(),
             child=widgets.Icon(
                 image="media-skip-forward-symbolic",
                 pixel_size=22,
@@ -105,29 +109,16 @@ class MediaOsdWindow(widgets.Window):
 
         controls = widgets.Box(
             spacing=6,
-            halign="end",
+            halign="center",
             css_classes=["media-osd-controls"],
             child=[self._btn_prev, self._btn_play, self._btn_next],
         )
 
-        text_column = widgets.Box(
-            vertical=True,
-            spacing=6,
-            hexpand=True,
-            valign="start",
-            child=[labels, controls],
-        )
-
-        main_row = widgets.Box(
-            spacing=12,
-            child=[self._album_art, text_column],
-        )
-
         pill = widgets.Box(
             vertical=True,
-            spacing=8,
+            spacing=12,
             css_classes=["media-osd"],
-            child=[header, main_row],
+            child=[header, self._album_art, labels, controls],
         )
 
         root = widgets.Box(
