@@ -9,6 +9,14 @@ niri = NiriService.get_default()
 
 class WindowInfoFormatter:
     @staticmethod
+    def sanitize_text(text: str) -> str:
+        """Remove problematic characters from window text"""
+        if not text:
+            return ""
+        text = text.replace("|", "-")  # replace pipe with dash
+        return text
+
+    @staticmethod
     def get_window_text(window, compositor: str) -> str:
         if not window:
             return ""
@@ -21,8 +29,8 @@ class WindowInfoFormatter:
             win_title = window.title or ""
 
             if win_class.lower() in config.ui.bar_window_title_exceptions:
-                return win_title
-            return win_class
+                return WindowInfoFormatter.sanitize_text(win_title)
+            return WindowInfoFormatter.sanitize_text(win_class)
 
         elif compositor == "niri":
             if not window.app_id:
@@ -32,8 +40,8 @@ class WindowInfoFormatter:
             win_title = window.title or ""
 
             if win_class.lower() in config.ui.bar_window_title_exceptions:
-                return win_title
-            return win_class
+                return WindowInfoFormatter.sanitize_text(win_title)
+            return WindowInfoFormatter.sanitize_text(win_class)
 
         return ""
 
@@ -144,7 +152,6 @@ class NiriWindowTitle(widgets.Box):
 class WindowTitleWidget:
     @staticmethod
     def create(monitor_name: str) -> widgets.Widget:
-        """Create window title widget for the current WM."""
         if hypr.is_available:
             return HyprlandWindowTitle()
         elif niri.is_available:
