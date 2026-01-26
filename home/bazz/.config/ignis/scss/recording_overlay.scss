@@ -55,8 +55,7 @@
 
 .overlay-btn-stop {
   all: unset;
-  background: $tx-1;
-  border: 3px solid $red;
+  background: lighten($red, 10%);
   border-radius: 8px;
   padding: 24px 20px;
   min-width: 140px;
