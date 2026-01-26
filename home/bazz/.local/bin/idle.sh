@@ -1,0 +1,1 @@
+/home/bazz/.config/ignis/scripts/idle.sh

@@ -10,22 +10,18 @@ start_hypridle() {
 stop_hypridle() {
   pkill hypridle
   rm -f "$PID_FILE"
-  notify-send -i caffeine "Hypridle" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
+  notify-send -i caffeine "Idle timer" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
 }
 
-if [ "$1" = "start" ]; then
-  if ! pgrep hypridle >/dev/null; then
-    start_hypridle
+if [ "$1" = "-t" ]; then
+  if pgrep hypridle >/dev/null; then
+    stop_hypridle
   else
-    if [ ! -f "$PID_FILE" ]; then
-      pgrep hypridle >"$PID_FILE"
-    fi
+    start_hypridle
   fi
   exit 0
 fi
 
-if pgrep hypridle >/dev/null; then
-  stop_hypridle
-else
+if ! pgrep hypridle >/dev/null; then
   start_hypridle
 fi
