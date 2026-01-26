@@ -10,7 +10,7 @@ start_hypridle() {
 stop_hypridle() {
   pkill hypridle
   rm -f "$PID_FILE"
-  notify-send "Hypridle" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
+  notify-send -i caffeine "Hypridle" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
 }
 
 if [ "$1" = "start" ]; then
