@@ -49,11 +49,10 @@ class MediaOsdWindow(widgets.Window):
             ],
         )
 
-        self._album_art = widgets.Icon(
-            image="folder-music-symbolic",
-            pixel_size=200,
+        self._album_art = widgets.Picture(
             css_classes=["media-osd-art"],
-            visible=False,
+            width=300,
+            height=200,
         )
 
         self._title_label = widgets.Label(
