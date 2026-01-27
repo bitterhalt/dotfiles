@@ -14,6 +14,7 @@ class MediaOsdWindow(widgets.Window):
         self._bound_player = None
         self._signals = SignalManager()
 
+        # Header with app icon and name
         self._app_icon = widgets.Icon(
             image=MediaPlayerConfig.PLAYER_ICONS[None],
             pixel_size=20,
@@ -49,12 +50,15 @@ class MediaOsdWindow(widgets.Window):
             ],
         )
 
+        # Large album art in center
         self._album_art = widgets.Icon(
             image="folder-music-symbolic",
             pixel_size=200,
             css_classes=["media-osd-art"],
+            visible=False,
         )
 
+        # Title and artist below art
         self._title_label = widgets.Label(
             label="No Title",
             ellipsize="end",
@@ -78,9 +82,10 @@ class MediaOsdWindow(widgets.Window):
             child=[self._title_label, self._artist_label],
         )
 
+        # Playback controls at bottom
         self._btn_prev = widgets.Button(
             css_classes=["media-osd-control"],
-            on_click=lambda x: MediaPlayerControls.previous(),
+            on_click=lambda *_: MediaPlayerControls.previous(),
             child=widgets.Icon(
                 image="media-skip-backward-symbolic",
                 pixel_size=22,
@@ -95,12 +100,12 @@ class MediaOsdWindow(widgets.Window):
         self._btn_play = widgets.Button(
             css_classes=["media-osd-control", "primary"],
             child=self._btn_play_icon,
-            on_click=lambda x: MediaPlayerControls.play_pause(),
+            on_click=lambda *_: MediaPlayerControls.play_pause(),
         )
 
         self._btn_next = widgets.Button(
             css_classes=["media-osd-control"],
-            on_click=lambda x: MediaPlayerControls.next(),
+            on_click=lambda *_: MediaPlayerControls.next(),
             child=widgets.Icon(
                 image="media-skip-forward-symbolic",
                 pixel_size=22,
@@ -114,6 +119,7 @@ class MediaOsdWindow(widgets.Window):
             child=[self._btn_prev, self._btn_play, self._btn_next],
         )
 
+        # Vertical layout: header -> art -> labels -> controls
         pill = widgets.Box(
             vertical=True,
             spacing=12,
@@ -186,7 +192,7 @@ class MediaOsdWindow(widgets.Window):
             self._app_name.label = "No Media"
             self._title_label.label = "No media playing"
             self._artist_label.label = ""
-            self._album_art.image = "folder-music-symbolic"
+            self._album_art.visible = False
             self._btn_play_icon.image = "media-playback-stop-symbolic"
             self._btn_prev.set_sensitive(False)
             self._btn_next.set_sensitive(False)
@@ -196,7 +202,13 @@ class MediaOsdWindow(widgets.Window):
         self._app_name.label = MediaPlayerInfo.get_player_name(player)
         self._title_label.label = player.title or "Unknown Title"
         self._artist_label.label = player.artist or "Unknown Artist"
-        self._album_art.image = player.art_url or "folder-music-symbolic"
+
+        # Show album art only if available
+        if player.art_url:
+            self._album_art.image = player.art_url
+            self._album_art.visible = True
+        else:
+            self._album_art.visible = False
 
         if self._bound_player != player:
             self._bind_play_icon(player)
