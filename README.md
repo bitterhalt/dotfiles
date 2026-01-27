@@ -1,8 +1,4 @@
-## Dotfiles
-
-> **Hello friend!**
->
-> These are the dotfiles of my keyboard-driven environment. I prefer function over eyecandy so I'm trying to keep things pretty minimal.
+# Dotfiles
 
 ### Software I use
 

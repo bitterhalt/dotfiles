@@ -21,12 +21,14 @@ weather = 0
 power_overlay = 0
 system_menu = 0
 notification_center = 0
+
 # ══════════════════════════════════════════════════════════════
 # SYSTEM
 # ══════════════════════════════════════════════════════════════
 [system]
 # Bluetooth manager
 bluetooth_manager = "fuzzel_bt"
+
 # ══════════════════════════════════════════════════════════════
 # OSD · TIMEOUTS (milliseconds)
 # ══════════════════════════════════════════════════════════════
@@ -59,16 +61,17 @@ popup_timeout = 5000 # Milliseconds
 
 #  Hide useless stuff from history (My personal preference, you probably wan't to remove these)
 filter_keywords = [
-  "Hyprland config",
-  "Color-picker",
-  "Smart-gaps",
-  "Hyprpicker",
-  "Hypridle",
   "BT: Attempting to connect to",
-  "BT: Failed to Connect",
   "BT: Disconnected",
+  "BT: Failed to Connect",
   "Bluez Menu",
-  "TMUX",
+  "Color-picker",
+  "Hypridle",
+  "Hyprland config",
+  "Hyprpicker",
+  "Idle timer",
+  "Smart-gaps",
+  "TMUX"
 ]
 
 # ══════════════════════════════════════════════════════════════
@@ -89,7 +92,8 @@ warning_threshold = 30
 # ANIMATIONS
 # ══════════════════════════════════════════════════════════════
 [animations]
-revealer_duration = 300
+revealer_duration = 300 # Use "0" to if don't want animation
+
 # ══════════════════════════════════════════════════════════════
 # PATHS
 # ══════════════════════════════════════════════════════════════
