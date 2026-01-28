@@ -32,7 +32,7 @@ class MediaOsdWindow(widgets.Window):
                 image="window-close-symbolic",
                 pixel_size=20,
             ),
-            css_classes=["notif-close-btn"],
+            css_classes=["close-btn"],
             halign="end",
             valign="center",
             on_click=lambda *_: self.set_visible(False),

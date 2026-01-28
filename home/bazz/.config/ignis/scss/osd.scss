@@ -69,7 +69,7 @@
 .media-osd-window {
   background: transparent;
   border: none;
-  padding: 8px;
+  padding: 10px;
 }
 
 .media-osd {
@@ -84,10 +84,6 @@
 .media-osd-header {
   color: $tx-1;
   padding: 0px 6px;
-}
-
-.media-osd-app-icon {
-  opacity: 0.9;
 }
 
 .media-osd-app-name {

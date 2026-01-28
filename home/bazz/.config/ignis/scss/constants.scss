@@ -3,36 +3,24 @@
   all: unset;
 }
 
-// Close/expand uttons
-.close-btn {
-  all: unset;
-  color: $tx-1;
-}
-.close-btn:hover {
-  all: unset;
-  color: $tx-3;
-}
-
 .expand-btn {
   all: unset;
   color: $accent;
 
   &:hover {
-    background: unset;
-    color: $tx-2;
+    color: $tx-1;
   }
 }
 
-.notif-close-btn {
+.close-btn {
   all: unset;
-  background: unset;
-  color: $tx-2;
+  color: $tx-1;
   border-radius: 50%;
-  padding: 4px;
 }
 
-.notif-close-btn:hover {
-  background: $ui-2;
+.close-btn:hover {
+  color: $tx-2;
+  background: $ui-3;
 }
 
 .expand-arrow {
