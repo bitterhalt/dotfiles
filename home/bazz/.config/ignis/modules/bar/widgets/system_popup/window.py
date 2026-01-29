@@ -16,7 +16,7 @@ def exec_async(cmd: str):
     asyncio.create_task(utils.exec_sh_async(cmd))
 
 
-class SystemPopup(widgets.Window):
+class SystemPopup(widgets.RevealerWindow):
     def __init__(self):
         record_btn = widgets.Button(
             css_classes=["sys-top-btn", "unset"],
@@ -101,7 +101,7 @@ class SystemPopup(widgets.Window):
             ],
         )
 
-        self._revealer = widgets.Revealer(
+        revealer = widgets.Revealer(
             child=panel,
             reveal_child=False,
             transition_type="slide_down",
@@ -116,28 +116,29 @@ class SystemPopup(widgets.Window):
             on_click=lambda x: wm.close_window("ignis_SYSTEM_MENU"),
         )
 
-        root = widgets.Overlay(
-            child=overlay_btn,
-            overlays=[
-                widgets.Box(
-                    valign="start",
-                    halign="end",
-                    css_classes=["system-menu-container"],
-                    child=[self._revealer],
-                )
-            ],
+        container = widgets.Box(
+            valign="start",
+            halign="end",
+            css_classes=["system-menu-container"],
+            child=[revealer],
         )
 
         super().__init__(
             monitor=config.ui.primary_monitor,
             visible=False,
-            anchor=["top", "bottom", "left", "right"],
+            anchor=["top", "right"],
             namespace="ignis_SYSTEM_MENU",
             layer="top",
             popup=True,
             css_classes=["system-menu-window", "unset"],
-            child=root,
             kb_mode="on_demand",
+            child=widgets.Box(
+                child=[
+                    overlay_btn,
+                    container,
+                ]
+            ),
+            revealer=revealer,
         )
 
         self.connect("notify::visible", self._on_visible_change)
@@ -164,10 +165,7 @@ class SystemPopup(widgets.Window):
             self._system_info._arrow.set_css_classes(["expand-arrow"])
 
     def _on_visible_change(self, *_):
-        if self.visible:
-            self._revealer.reveal_child = True
-        else:
-            self._revealer.reveal_child = False
+        if not self.visible:
             self._reset_expandables()
 
     def toggle(self):

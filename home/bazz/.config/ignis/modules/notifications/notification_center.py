@@ -1,4 +1,4 @@
-from ignis import utils, widgets
+from ignis import widgets
 from ignis.options import options
 from ignis.window_manager import WindowManager
 from .notification_center_notifications import NotificationList
@@ -9,7 +9,7 @@ from settings import config
 wm = WindowManager.get_default()
 
 
-class NotificationCenter(widgets.Window):
+class NotificationCenter(widgets.RevealerWindow):
     def __init__(self):
         self._media_pill = MediaCenterWidget()
         self._notification_list = NotificationList()
@@ -72,7 +72,7 @@ class NotificationCenter(widgets.Window):
             child=[left_column, right_column],
         )
 
-        self._revealer = widgets.Revealer(
+        revealer = widgets.Revealer(
             child=two_columns,
             reveal_child=False,
             transition_type="slide_down",
@@ -87,31 +87,31 @@ class NotificationCenter(widgets.Window):
             on_click=lambda x: wm.close_window("ignis_NOTIFICATION_CENTER"),
         )
 
-        root_overlay = widgets.Overlay(
-            child=overlay_button,
-            overlays=[
-                widgets.Box(
-                    valign="start",
-                    halign="center",
-                    css_classes=["center-container"],
-                    child=[self._revealer],
-                )
-            ],
+        container = widgets.Box(
+            valign="start",
+            halign="center",
+            css_classes=["center-container"],
+            child=[revealer],
         )
 
         super().__init__(
             monitor=config.ui.notification_center_monitor,
             visible=False,
             popup=True,
-            anchor=["top", "bottom", "left", "right"],
+            anchor=["top"],
             layer="top",
             namespace="ignis_NOTIFICATION_CENTER",
             css_classes=["center-window"],
-            child=root_overlay,
             kb_mode="on_demand",
+            child=widgets.Box(
+                child=[
+                    overlay_button,
+                    container,
+                ]
+            ),
+            revealer=revealer,
         )
 
-        self.connect("notify::visible", self._on_visible_change)
         self.connect("destroy", self._cleanup)
 
     def _cleanup(self, *_):
@@ -120,9 +120,3 @@ class NotificationCenter(widgets.Window):
                 self._weather_pill.destroy()
             except:
                 pass
-
-    def _on_visible_change(self, *_):
-        if self.visible:
-            utils.Timeout(10, lambda: setattr(self._revealer, "reveal_child", True))
-        else:
-            self._revealer.reveal_child = False

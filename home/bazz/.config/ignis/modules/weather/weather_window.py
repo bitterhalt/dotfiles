@@ -10,7 +10,7 @@ wm = WindowManager.get_default()
 CACHE_TTL = config.weather.cache_ttl
 
 
-class WeatherPopup(widgets.Window):
+class WeatherPopup(widgets.RevealerWindow):
     def __init__(self):
         self._icon_label = widgets.Icon(
             image=icon_path("cloudy"),
@@ -105,43 +105,42 @@ class WeatherPopup(widgets.Window):
             ],
         )
 
-        self._revealer = widgets.Revealer(
+        revealer = widgets.Revealer(
             child=popup_box,
-            reveal_child=False,
+            reveal_child=True,
             transition_type="slide_down",
             transition_duration=config.animations.revealer_duration,
-        )
-
-        container = widgets.Box(
-            valign="start",
-            halign="center",
-            css_classes=["weather-container"],
-            child=[self._revealer],
         )
 
         overlay_btn = widgets.Button(
             vexpand=True,
             hexpand=True,
             can_focus=False,
-            css_classes=["weather-overlay"],
+            css_classes=["weather-overlay", "unset"],
             on_click=lambda x: wm.close_window("ignis_WEATHER"),
-        )
-
-        root_overlay = widgets.Overlay(
-            child=overlay_btn,
-            overlays=[container],
         )
 
         super().__init__(
             monitor=config.ui.weather_monitor,
             visible=False,
-            anchor=["top", "left", "right", "bottom"],
+            anchor=["top"],
             namespace="ignis_WEATHER",
             layer="top",
             popup=True,
             kb_mode="on_demand",
             css_classes=["weather-window"],
-            child=root_overlay,
+            child=widgets.Box(
+                child=[
+                    overlay_btn,
+                    widgets.Box(
+                        valign="start",
+                        halign="center",
+                        css_classes=["weather-container"],
+                        child=[revealer],
+                    ),
+                ]
+            ),
+            revealer=revealer,
         )
 
         self._last_data: Optional[dict] = None
@@ -167,9 +166,8 @@ class WeatherPopup(widgets.Window):
 
     def _on_visible_change(self, *_):
         if self.visible:
-            utils.Timeout(10, lambda: setattr(self._revealer, "reveal_child", True))
+            self._update_weather()
         else:
-            self._revealer.reveal_child = False
             self._weekly_box.visible = False
             self._weekly_arrow.set_css_classes(["weekly-arrow"])
             self._weekly_toggle.child.child[0].label = "Show weekly forecast"

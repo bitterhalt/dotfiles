@@ -48,7 +48,7 @@ class SystemIndicatorWidget(widgets.Button):
         super().__init__(
             css_classes=["system-indicator-button", "unset"],
             child=inner,
-            on_click=lambda *_: wm.open_window("ignis_SYSTEM_MENU"),
+            on_click=lambda x: wm.toggle_window("ignis_SYSTEM_MENU"),
         )
 
         self._setup_signals()
