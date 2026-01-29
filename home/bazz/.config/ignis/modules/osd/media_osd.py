@@ -8,7 +8,7 @@ TIMEOUT = config.ui.media_osd_timeout
 mpris = MprisService.get_default()
 
 
-class MediaOsdWindow(widgets.Window):
+class MediaOsdWindow(widgets.RevealerWindow):
     def __init__(self):
         self._timeout = None
         self._bound_player = None
@@ -121,10 +121,17 @@ class MediaOsdWindow(widgets.Window):
             child=[header, self._album_art, labels, controls],
         )
 
+        revealer = widgets.Revealer(
+            child=pill,
+            reveal_child=True,
+            transition_type="slide_down",
+            transition_duration=300,
+        )
+
         root = widgets.Box(
             halign="center",
             valign="start",
-            child=[pill],
+            child=[revealer],
         )
 
         super().__init__(
@@ -135,6 +142,7 @@ class MediaOsdWindow(widgets.Window):
             visible=False,
             css_classes=["media-osd-window"],
             child=root,
+            revealer=revealer,
         )
 
         self.connect("notify::visible", self._on_visible_changed)

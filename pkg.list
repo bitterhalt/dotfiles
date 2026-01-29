@@ -106,7 +106,9 @@ plocate
 polkit-gnome
 popsicle-bin
 python-ignis-git
+python-jinja
 python-llfuse
+python-materialyoucolor-git
 python-pipx
 python-watchdog
 qt5-wayland

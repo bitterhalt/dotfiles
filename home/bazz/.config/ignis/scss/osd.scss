@@ -69,7 +69,6 @@
 .media-osd-window {
   background: transparent;
   border: none;
-  padding: 10px;
 }
 
 .media-osd {
@@ -77,6 +76,7 @@
   border: none;
   border-radius: 8px;
   padding: 16px;
+  margin: 10px;
   box-shadow: $box-shadow;
   min-width: 280px;
 }

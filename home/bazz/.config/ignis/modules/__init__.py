@@ -1,10 +1,10 @@
-from . import bar, notifications, osd, overlays, utils, weather
+from . import bar, notifications, osd, menus, utils, weather
 
 __all__ = [
     "bar",
     "notifications",
     "osd",
-    "overlays",
+    "menus",
     "utils",
     "weather",
 ]
