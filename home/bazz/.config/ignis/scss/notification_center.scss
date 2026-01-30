@@ -51,7 +51,7 @@
 }
 
 .header-action-btn:hover {
-  color: $red;
+  color: $warning;
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -91,7 +91,7 @@
 }
 
 .dnd-box switch:checked {
-  background: $red;
+  background: $warning;
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -185,11 +185,11 @@
 }
 
 .media-pill-nc-control.primary {
-  background: $cyan;
+  background: $accent;
   color: $bg-1;
 
   &:hover {
-    background: lighten($cyan, 10%);
+    background: lighten($accent, 10%);
   }
 }
 
@@ -220,7 +220,7 @@
   color: $tx-2;
 
   &.critical {
-    color: $red;
+    color: $warning;
   }
 }
 
@@ -303,7 +303,7 @@
 }
 
 .screenshot-delete-btn:hover {
-  background: $red;
+  background: $warning;
   color: $bg-1;
 }
 
@@ -358,7 +358,7 @@
 }
 
 .center-calendar .today {
-  color: $cyan;
+  color: $accent;
   font-weight: 600;
   border-radius: 20px;
 }

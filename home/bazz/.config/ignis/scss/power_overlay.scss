@@ -21,7 +21,7 @@
 
 .power-overlay-btn {
   all: unset;
-  color: $cyan;
+  color: $accent;
   background: $bg-2;
   border: 1px solid $ui-1;
   border-radius: 8px;
@@ -147,14 +147,14 @@
 }
 
 .confirm-dialog-confirm {
-  background: $red;
+  background: $warning;
   color: $bg-1;
 
   &:hover {
-    background: lighten($red, 10%);
+    background: lighten($warning, 10%);
   }
 }
 
 .power-warning-icon {
-  color: $red;
+  color: $warning;
 }

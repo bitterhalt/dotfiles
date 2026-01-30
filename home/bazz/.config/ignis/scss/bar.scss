@@ -26,6 +26,7 @@
 .clock,
 .clock-button {
   border-radius: 6px;
+  font-weight: 600;
   margin: 2px 0px;
   padding: 0px 6px;
 }
@@ -33,13 +34,13 @@
 .recording-icon {
   animation: blink 2s infinite;
   border-radius: 6px;
-  color: $red;
+  color: $warning;
   margin: 2px 0px;
   padding: 0px 6px;
 }
 
 .system-indicator-button {
-  border-radius: 8px;
+  border-radius: 6px;
   color: $tx-1;
   margin: 2px 0px;
   padding: 0px 6px;
@@ -52,11 +53,11 @@
 }
 
 .clock-notif-dot.normal {
-  color: $cyan;
+  color: $accent;
 }
 
 .clock-notif-dot.critical {
-  color: $red;
+  color: $warning;
 }
 
 .idle-indicator {

@@ -24,7 +24,7 @@
 }
 
 .vol-track trough highlight {
-  background: $cyan;
+  background: $accent;
   border-radius: 8px;
   min-height: 12px;
 }
@@ -54,7 +54,7 @@
 }
 
 .workspace-osd-icon {
-  color: $cyan;
+  color: $accent;
 }
 
 .workspace-osd-label {
@@ -127,11 +127,11 @@
 }
 
 .media-osd-control.primary {
-  background: $cyan;
+  background: $accent;
   color: $bg-1;
 
   &:hover {
-    background: lighten($cyan, 10%);
+    background: lighten($accent, 10%);
   }
 }
 
@@ -145,16 +145,9 @@
   padding: 26px;
 }
 
-.barless-clock {
-  background: $osd-bg;
-  border: none;
-  border-radius: 8px;
-  padding: 16px 20px;
-  box-shadow: $box-shadow;
-}
-
+.barless-clock,
 .barless-clock-callable {
-  background: $bg-1;
+  background: $osd-bg;
   border: none;
   border-radius: 8px;
   padding: 16px 20px;

@@ -55,7 +55,7 @@
 
 .overlay-btn-stop {
   all: unset;
-  background: lighten($red, 10%);
+  background: lighten($warning, 10%);
   border-radius: 8px;
   padding: 24px 20px;
   min-width: 140px;
@@ -66,8 +66,8 @@
 
   &:focus,
   &:hover {
-    background: lighten($red, 10%);
-    border-color: lighten($red, 10%);
+    background: lighten($warning, 10%);
+    border-color: lighten($warning, 10%);
     transform: translateY(-4px);
   }
 
@@ -77,7 +77,7 @@
 }
 
 .overlay-btn-stop image {
-  color: $red;
+  color: $warning;
 }
 
 .overlay-btn-stop .overlay-label {
@@ -92,7 +92,7 @@
 }
 
 .screenshot-icon {
-  color: $cyan;
+  color: $accent;
 }
 
 .record-region-icon,
@@ -101,5 +101,5 @@
 }
 
 .record-icon {
-  color: $red;
+  color: $warning;
 }
