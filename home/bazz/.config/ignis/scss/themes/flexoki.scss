@@ -17,10 +17,9 @@ $magenta: #a02f6f;
 $red: #af3029;
 $yellow: #d0a215;
 
-/* note: in future, make other styles use these for sake of consistensy */
-$border: $ui-1;
-$foreground: $tx-1;
 $background: $bg-1;
-$accent: $ui-3;
-$hover-bg: $ui-2;
-$hover-bg2: $ui-3;
+$border: $ui-1;
+$highligh: $cyan;
+$bright: $tx-2;
+$text: $tx-1;
+$warning: $red;
