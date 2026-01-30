@@ -45,7 +45,7 @@ vipsthumbnail "$SRC" \
   --size "${W}x${H}" \
   --output "$OUT"
 
-swww img "$OUT" \
+awww img "$OUT" \
   --transition-type=any \
   --transition-step=60 \
   --transition-fps=60 \

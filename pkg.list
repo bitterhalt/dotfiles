@@ -6,6 +6,7 @@ amdfan
 amdgpu_top
 atool
 autotiling
+awww-bin
 base
 base-devel
 bash-completion
@@ -127,7 +128,6 @@ steam
 sudo
 swappy
 swayimg
-swww
 syncthing
 tealdeer
 thunar
