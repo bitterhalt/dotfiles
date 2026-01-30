@@ -49,10 +49,24 @@ def right_section():
 # ───────────────────────────────────────────────
 
 
-class Bar(widgets.Window):
+class Bar(widgets.RevealerWindow):
     def __init__(self, monitor_id: int = 0):
         monitor_name = utils.get_monitor(monitor_id).get_connector()
         initial_visible = load_bar_state()
+
+        bar_content = widgets.CenterBox(
+            css_classes=["bar"],
+            start_widget=left_section(monitor_name),
+            center_widget=center_section(),
+            end_widget=right_section(),
+        )
+
+        revealer = widgets.Revealer(
+            child=bar_content,
+            reveal_child=True,
+            transition_type="slide_down",
+            transition_duration=100,
+        )
 
         super().__init__(
             namespace=f"ignis_bar_{monitor_id}",
@@ -60,13 +74,9 @@ class Bar(widgets.Window):
             anchor=["left", "top", "right"],
             exclusivity="exclusive",
             visible=initial_visible,
-            child=widgets.CenterBox(
-                css_classes=["bar"],
-                start_widget=left_section(monitor_name),
-                center_widget=center_section(),
-                end_widget=right_section(),
-            ),
             css_classes=["unset"],
+            child=revealer,
+            revealer=revealer,
         )
 
 
