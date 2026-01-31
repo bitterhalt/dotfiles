@@ -4,7 +4,6 @@ from ignis.services.audio import AudioService
 from ignis.window_manager import WindowManager
 from settings import config
 from .audio_section import AudioSection
-from .bluetooth_section import BluetoothSection
 from .network_section import NetworkSection
 from .system_info_section import SystemInfoWidget
 
@@ -82,9 +81,6 @@ class SystemPopup(widgets.RevealerWindow):
             child=[network_section],
         )
 
-        bluetooth_section = BluetoothSection()
-        self._bluetooth_section = bluetooth_section
-
         system_info = SystemInfoWidget()
         self._system_info = system_info
 
@@ -96,7 +92,6 @@ class SystemPopup(widgets.RevealerWindow):
                 top_row,
                 audio_content,
                 network_content,
-                bluetooth_section,
                 system_info,
             ],
         )
@@ -153,12 +148,6 @@ class SystemPopup(widgets.RevealerWindow):
             self._network_section._list_visible = False
             self._network_section._device_list.visible = False
             self._network_section._arrow.set_css_classes(["expand-arrow"])
-
-        if self._bluetooth_section._list_visible:
-            self._bluetooth_section._list_visible = False
-            self._bluetooth_section._device_list.visible = False
-            self._bluetooth_section._arrow.set_css_classes(["expand-arrow"])
-            self._bluetooth_section._stop_scan()
 
         if self._system_info._details_box.visible:
             self._system_info._details_box.visible = False

@@ -71,7 +71,7 @@
   margin-top: 4px;
 }
 .sys-network-pill {
-  margin: 4px 0px;
+  margin-top: 4px;
 }
 .net-wifi-item,
 .net-ethernet-item,
@@ -243,54 +243,4 @@
   &:hover {
     background: $ui-2;
   }
-}
-
-.sys-bluetooth-pill {
-  background: $bg-2;
-  border-radius: 6px;
-  padding: 12px;
-  margin: 4px 0px;
-}
-
-.sys-bluetooth-details {
-  margin-top: 8px;
-}
-
-.bluetooth-device-item {
-  color: $tx-1;
-  border-radius: 6px;
-  padding: 8px;
-  transition:
-    background 0.15s,
-    border-color 0.15s;
-
-  &:hover {
-    background: $ui-2;
-  }
-}
-.bluetooth-battery {
-  font-size: 12px;
-  color: $tx-3;
-  font-weight: 500;
-}
-
-.bluetooth-empty-label {
-  color: $tx-3;
-  font-size: 13px;
-  padding: 16px;
-}
-.bluetooth-settings-btn {
-  background: $ui-1;
-  border-radius: 6px;
-  padding: 4px;
-  transition: background 0.15s;
-
-  &:hover {
-    background: $ui-2;
-  }
-}
-
-.bluetooth-settings-label {
-  font-size: 13px;
-  color: $tx-1;
 }
