@@ -16,7 +16,7 @@
   margin: 10px;
   revealer {
     box-shadow: $box-shadow;
-    border-radius: 8px;
+    border-radius: 6px;
   }
 }
 .notification-center {
@@ -46,7 +46,7 @@
 .header-action-btn {
   color: $tx-3;
   margin-right: 22px;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 13px;
 }
 
@@ -102,7 +102,7 @@
   padding: 8px 16px;
   margin: 0 12px;
   background: $bg-2;
-  border-radius: 8px;
+  border-radius: 6px;
   transition:
     background 0.15s,
     border-color 0.15s;
@@ -135,7 +135,7 @@
 
 .media-pill-nc {
   background: $bg-2;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 12px;
   transition: background 0.2s;
 }
@@ -203,7 +203,7 @@
 
 .notif-history-item {
   background: $bg-2;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 12px;
   margin-bottom: 8px;
   transition: background 0.2s;
@@ -254,7 +254,7 @@
 .screenshot-history-item {
   background: $bg-2;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 6px;
   margin-bottom: 8px;
   transition: background 0.2s;
 
@@ -270,7 +270,7 @@
 }
 
 .screenshot-preview-large {
-  border-radius: 8px;
+  border-radius: 6px;
   background: $bg-1;
   border: 1px solid $ui-1;
   margin-top: 8px;
@@ -326,7 +326,7 @@
 .center-calendar {
   all: unset;
   background: $bg-2;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 6px;
   margin: 12px;
 

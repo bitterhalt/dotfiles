@@ -8,7 +8,7 @@
 .vol-container {
   background: $bg-1;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 6px;
   min-width: 260px;
   box-shadow: $box-shadow;
 }
@@ -19,13 +19,13 @@
 
 .vol-track trough {
   background: $ui-2;
-  border-radius: 8px;
+  border-radius: 6px;
   min-height: 12px;
 }
 
 .vol-track trough highlight {
   background: $accent;
-  border-radius: 8px;
+  border-radius: 6px;
   min-height: 12px;
 }
 
@@ -40,14 +40,14 @@
 
 .workspace-osd-window {
   background: transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
 }
 
 .workspace-osd {
   background: $bg-1;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   margin: 26px;
   padding: 16px;
   box-shadow: $box-shadow;
@@ -74,7 +74,7 @@
 .media-osd {
   background: $bg-1;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 16px;
   margin: 10px;
   box-shadow: $box-shadow;
@@ -149,7 +149,7 @@
 .barless-clock-callable {
   background: $osd-bg;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 16px 20px;
   box-shadow: $box-shadow;
 }

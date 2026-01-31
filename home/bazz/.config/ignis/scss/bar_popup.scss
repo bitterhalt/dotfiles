@@ -6,7 +6,7 @@
   margin: 10px;
   revealer {
     box-shadow: $box-shadow;
-    border-radius: 8px;
+    border-radius: 6px;
   }
 }
 
@@ -25,7 +25,7 @@
   color: $tx-1;
   background: $bg-2;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 6px;
   transition:
     background 0.15s,
@@ -57,7 +57,7 @@
   padding: 12px;
   background: $bg-2;
   border: unset;
-  border-radius: 8px;
+  border-radius: 6px;
   transition:
     background 0.15s,
     border-color 0.15s;
@@ -77,7 +77,7 @@
 .net-ethernet-item,
 .net-vpn-item {
   color: $tx-1;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 8px;
   transition:
     background 0.15s,
@@ -95,14 +95,14 @@
 }
 .system-info-widget {
   background: $bg-2;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 12px;
   margin-top: 4px;
 }
 .network-settings-btn {
   color: $tx-1;
   background: $ui-1;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 4px;
   transition: background 0.15s;
 
@@ -118,7 +118,7 @@
 
 .sys-audio-pill {
   background: $bg-2;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 12px;
 }
 
@@ -173,7 +173,7 @@
 .audio-device-item {
   color: $tx-1;
   border: unset;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 8px;
 
   &:hover {
@@ -247,7 +247,7 @@
 
 .sys-bluetooth-pill {
   background: $bg-2;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 12px;
   margin: 4px 0px;
 }
@@ -258,7 +258,7 @@
 
 .bluetooth-device-item {
   color: $tx-1;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 8px;
   transition:
     background 0.15s,
@@ -281,7 +281,7 @@
 }
 .bluetooth-settings-btn {
   background: $ui-1;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 4px;
   transition: background 0.15s;
 

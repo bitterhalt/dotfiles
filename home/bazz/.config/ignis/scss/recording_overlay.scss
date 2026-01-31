@@ -14,7 +14,7 @@
 
 .recording-overlay {
   background: $bg-1;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 32px;
   box-shadow: $box-shadow;
 }
@@ -28,7 +28,7 @@
   color: $tx-1;
   background: $bg-2;
   border: 1px solid $ui-1;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 24px 20px;
   min-width: 140px;
   transition:
@@ -56,7 +56,7 @@
 .overlay-btn-stop {
   all: unset;
   background: lighten($warning, 10%);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 24px 20px;
   min-width: 140px;
   transition:

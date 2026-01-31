@@ -10,17 +10,15 @@
 
 .weather-container {
   margin: 10px;
-  border: unset;
   revealer {
     box-shadow: $box-shadow;
-    border-radius: 8px;
+    border-radius: 6px;
   }
 }
 
 .weather-popup {
   background: $bg-1;
   border: unset;
-  border-radius: 8px;
   padding: 18px;
 }
 
@@ -95,7 +93,7 @@
   font-size: 12px;
   color: $tx-1;
   padding: 4px 6px;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .weekly-arrow {
@@ -112,7 +110,7 @@
 
 .weather-weekly-toggle-btn {
   padding: 4px 8px;
-  border-radius: 8px;
+  border-radius: 6px;
   margin-bottom: -6px;
 
   &:hover {
