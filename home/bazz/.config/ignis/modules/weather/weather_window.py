@@ -112,14 +112,6 @@ class WeatherPopup(widgets.RevealerWindow):
             transition_duration=config.animations.revealer_duration,
         )
 
-        overlay_btn = widgets.Button(
-            vexpand=True,
-            hexpand=True,
-            can_focus=False,
-            css_classes=["weather-overlay", "unset"],
-            on_click=lambda x: wm.close_window("ignis_WEATHER"),
-        )
-
         super().__init__(
             monitor=config.ui.weather_monitor,
             visible=False,
@@ -131,7 +123,6 @@ class WeatherPopup(widgets.RevealerWindow):
             css_classes=["weather-window"],
             child=widgets.Box(
                 child=[
-                    overlay_btn,
                     widgets.Box(
                         valign="start",
                         halign="center",

@@ -79,14 +79,6 @@ class NotificationCenter(widgets.RevealerWindow):
             transition_duration=config.animations.revealer_duration,
         )
 
-        overlay_button = widgets.Button(
-            vexpand=True,
-            hexpand=True,
-            can_focus=False,
-            css_classes=["center-overlay", "unset"],
-            on_click=lambda x: wm.close_window("ignis_NOTIFICATION_CENTER"),
-        )
-
         container = widgets.Box(
             valign="start",
             halign="center",
@@ -105,7 +97,6 @@ class NotificationCenter(widgets.RevealerWindow):
             kb_mode="on_demand",
             child=widgets.Box(
                 child=[
-                    overlay_button,
                     container,
                 ]
             ),
