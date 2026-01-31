@@ -28,7 +28,7 @@ class ClockWidget(widgets.Button):
         super().__init__(
             child=clock_content,
             css_classes=["clock-button", "unset"],
-            on_click=lambda x: wm.open_window("ignis_NOTIFICATION_CENTER"),
+            on_click=lambda x: wm.toggle_window("ignis_NOTIFICATION_CENTER"),
         )
 
         self._setup_clock()
