@@ -7,7 +7,7 @@ is_player_running() {
 
 ignis_osd() {
   if command -v ignis >/dev/null 2>&1; then
-    goignis open-window ignis_MEDIA_OSD
+    goignis toggle-window ignis_MEDIA_OSD
   else
     show_fallback_notification
   fi

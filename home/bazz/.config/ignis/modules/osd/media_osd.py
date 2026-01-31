@@ -27,17 +27,6 @@ class MediaOsdWindow(widgets.RevealerWindow):
             css_classes=["media-osd-app-name"],
         )
 
-        close_btn = widgets.Button(
-            child=widgets.Icon(
-                image="window-close-symbolic",
-                pixel_size=20,
-            ),
-            css_classes=["close-btn"],
-            halign="end",
-            valign="center",
-            on_click=lambda *_: self.set_visible(False),
-        )
-
         header = widgets.Box(
             spacing=8,
             css_classes=["media-osd-header"],
@@ -45,7 +34,6 @@ class MediaOsdWindow(widgets.RevealerWindow):
                 self._app_icon,
                 self._app_name,
                 widgets.Box(hexpand=True),
-                close_btn,
             ],
         )
 
