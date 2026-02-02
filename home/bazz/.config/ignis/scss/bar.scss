@@ -67,8 +67,8 @@
 }
 
 .idle-indicator {
-  color: $tx-1;
   border-radius: 6px;
+  color: $tx-1;
   margin: 2px 0px;
   padding: 0px 6px;
 }
@@ -77,10 +77,28 @@
   color: $tx-1;
 }
 
-.idle-indicator:hover,
+.battery {
+  background: transparent;
+  border-radius: 6px;
+  color: $tx-1;
+  margin: 2px 0px;
+  padding: 0px 6px;
+  transition: background 0.15s;
+}
+
+.battery.warning {
+  color: $yellow;
+}
+
+.battery.critical {
+  animation: blink 2s infinite;
+  color: $warning;
+}
+
 .audio-widget:hover,
 .clock-button:hover,
 .clock:hover,
+.idle-indicator:hover,
 .system-indicator-button:hover,
 .ws-btn:hover,
 .network-box:hover {
