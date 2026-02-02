@@ -136,7 +136,6 @@ class MonitorConfig:
             monitors = utils.get_monitors()
             monitor_count = len(monitors)
 
-            # Check each monitor assignment
             for field_name in self.__dataclass_fields__:
                 monitor_id = getattr(self, field_name)
 
@@ -178,6 +177,7 @@ class TimeoutConfig:
 class BarConfig:
     remember_state: bool = True
     window_title_exceptions: list[str] | None = None
+    show_system_tray: bool = True
 
     def __post_init__(self):
         if self.window_title_exceptions is None:
@@ -200,7 +200,6 @@ class NotificationConfig:
     def __post_init__(self):
         if self.filter_keywords is None:
             self.filter_keywords = []
-        # Convert to lowercase for case-insensitive matching
         self.filter_keywords = [kw.lower() for kw in self.filter_keywords]
 
     def should_filter(self, notification) -> bool:
@@ -295,6 +294,10 @@ class UIConfig:
     @property
     def bar_window_title_exceptions(self):
         return self.bar.window_title_exceptions
+
+    @property
+    def bar_show_system_tray(self):
+        return self.bar.show_system_tray
 
     @property
     def max_notifications(self):

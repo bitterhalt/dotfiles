@@ -35,9 +35,11 @@ workspace_osd = 1500
 # ══════════════════════════════════════════════════════════════
 # UI · BAR
 # ══════════════════════════════════════════════════════════════
-# Remember bar state after re-start
 [ui.bar]
+# Remember bar state after re-start
 remember_state = true
+# Enable/disable system tray
+show_system_tray = false
 
 # Apps that show window title instead of app class
 window_title_exceptions = [
