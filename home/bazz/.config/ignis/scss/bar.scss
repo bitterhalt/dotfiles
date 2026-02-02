@@ -63,19 +63,9 @@
 .system-tray {
   border-radius: 6px;
   margin: 2px 0px;
+  padding: 0 6px;
 }
 
-.tray-item {
-  border-radius: 6px;
-  color: $tx-1;
-  margin: 0px 2px;
-  padding: 4px 6px;
-  transition: background 0.15s;
-}
-
-.tray-icon {
-  opacity: 0.9;
-}
 .idle-indicator {
   color: $tx-1;
   border-radius: 6px;
@@ -87,7 +77,6 @@
   color: $tx-1;
 }
 
-.tray-item:hover,
 .idle-indicator:hover,
 .audio-widget:hover,
 .clock-button:hover,

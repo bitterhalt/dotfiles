@@ -32,7 +32,7 @@ class SystemTrayWidget(widgets.Box):
     def __init__(self):
         super().__init__(
             css_classes=["system-tray"],
-            spacing=4,
+            spacing=10,
         )
 
         for item in system_tray.items:
