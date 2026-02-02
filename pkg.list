@@ -73,6 +73,7 @@ linux
 linux-firmware
 localsend-bin
 logrotate
+lutris
 ly
 man-db
 man-pages
@@ -150,6 +151,8 @@ unzip
 vulkan-radeon
 wev
 wget
+wine
+winetricks
 wireplumber
 wl-clipboard
 wl-restart-git

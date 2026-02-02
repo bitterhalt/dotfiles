@@ -71,22 +71,18 @@ return {
       "nvim-lua/plenary.nvim",
     },
     opts = function()
-      -- Default directory, if no path is provided
       local default_dir = vim.fn.expand("$HOME/Documents/personal/notes")
       local daily_notes_dir = default_dir .. "/daily_note"
       local templates_dir = default_dir .. "/templates"
 
-      -- Check if the default directory exists, if not, create it
       if vim.fn.isdirectory(default_dir) == 0 then
         vim.fn.mkdir(default_dir, "p")
       end
 
-      -- Check if the daily notes directory exists, if not, create it
       if vim.fn.isdirectory(daily_notes_dir) == 0 then
         vim.fn.mkdir(daily_notes_dir, "p")
       end
 
-      -- Check if the templates directory exists, if not, create it
       if vim.fn.isdirectory(templates_dir) == 0 then
         vim.fn.mkdir(templates_dir, "p")
       end
@@ -94,9 +90,7 @@ return {
       return {
         workspaces = {
           {
-            -- Default to this directory, if no path is provided by the user
             name = "personal",
-            -- Replace the default_dir, if you want to use different path
             path = default_dir,
           },
         },
@@ -113,7 +107,6 @@ return {
           time_format = "%H:%M",
         },
         ui = {
-          -- Let markview.nvim handle syntax
           enable = false,
         },
       }
