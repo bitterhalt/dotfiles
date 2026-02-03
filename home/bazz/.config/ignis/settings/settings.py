@@ -179,10 +179,6 @@ class BarConfig:
     window_title_exceptions: list[str] | None = None
     show_system_tray: bool = True
 
-    def __post_init__(self):
-        if self.window_title_exceptions is None:
-            self.window_title_exceptions = ["firefox", "zen"]
-
     @classmethod
     def from_dict(cls, data: Dict) -> "BarConfig":
         return cls(**{k: v for k, v in data.items() if k in cls.__annotations__})
