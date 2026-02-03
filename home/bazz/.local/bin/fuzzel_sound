@@ -5,7 +5,7 @@ node=$(pw-dump Node | jq -r '
   .[]
   | select(.info.props["media.class"] == "Audio/Sink")
   | .info.props["node.description"]
-' | fuzzel -d -a top --y 4 -w 55 -l 6 -p "" --placeholder "Switch audio device: ")
+' | fuzzel -d -a top --y 4 -w 55 -l 6 --minimal-lines --placeholder "Switch the audio device: ")
 
 [ -z "$node" ] && exit 0
 
