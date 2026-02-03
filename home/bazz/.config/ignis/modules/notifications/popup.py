@@ -22,7 +22,7 @@ class NotificationWidget(widgets.Box):
         if notification.icon:
             icon_widget = widgets.Icon(
                 image=notification.icon,
-                pixel_size=32,
+                pixel_size=48,
                 halign="start",
                 valign="start",
                 css_classes=["notif-popup-icon"],
