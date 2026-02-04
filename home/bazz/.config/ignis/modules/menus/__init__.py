@@ -1,10 +1,7 @@
-from .power_overlay import ConfirmDialog, PowerOverlay, confirm_dialog
-from .recording_overlay import RecordingOverlay, toggle_recording_overlay
+from .power_overlay import PowerOverlay
+from .recording_overlay import RecordingOverlay
 
 __all__ = [
     "PowerOverlay",
-    "ConfirmDialog",
-    "confirm_dialog",
     "RecordingOverlay",
-    "toggle_recording_overlay",
 ]

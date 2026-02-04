@@ -1,21 +1,5 @@
-from .battery import BatteryWidget
-from .clock import ClockWidget
-from .focused_window import WindowTitleWidget
-from .idle_indicator import IdleIndicatorWidget
-from .recorder_indicator import RecordingIndicator
-from .system_indicator import SystemIndicatorWidget
 from .system_popup import SystemPopup
-from .system_tray import SystemTrayWidget
-from .workspaces import WorkspaceWidget
 
 __all__ = [
-    "BatteryWidget",
-    "ClockWidget",
-    "IdleIndicatorWidget",
-    "RecordingIndicator",
-    "SystemIndicatorWidget",
     "SystemPopup",
-    "SystemTrayWidget",
-    "WindowTitleWidget",
-    "WorkspaceWidget",
 ]
