@@ -42,7 +42,7 @@ class SystemIndicatorWidget(widgets.Button):
         inner = widgets.Box(
             css_classes=["system-indicator"],
             spacing=14,
-            child=[self._speaker_icon, self._mic_icon, self._net_icon, self._bt_icon],
+            child=[self._speaker_icon, self._mic_icon, self._bt_icon, self._net_icon],
         )
 
         super().__init__(
