@@ -66,6 +66,27 @@
   padding: 0 6px;
 }
 
+.tray-toggle-btn {
+  border-radius: 6px;
+  padding: 0px 2px;
+  transition: background 0.15s;
+}
+
+.tray-arrow {
+  color: $tx-1;
+  transition: all 200ms ease;
+}
+
+.tray-items {
+  transition: opacity 150ms ease;
+}
+
+.tray-item {
+  border-radius: 6px;
+  margin: 0px 6px;
+  transition: background 0.15s;
+}
+
 .idle-indicator {
   border-radius: 6px;
   color: $tx-1;
@@ -95,6 +116,7 @@
   color: $warning;
 }
 
+.tray-toggle-btn:hover,
 .audio-widget:hover,
 .clock-button:hover,
 .clock:hover,

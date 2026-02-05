@@ -1,4 +1,5 @@
 [general]
+copy-command = "wl-copy"
 output-filename = "~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S.png"
 fullscreen = false
 early-exit = true
