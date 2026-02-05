@@ -26,7 +26,7 @@ region() {
 }
 
 region-edit() {
-  grim -g "$(slurp)" - | swappy -f -
+  grim -g "$(slurp)" - | satty --disable-notifications -f - --output-filename "$FILENAME"
 }
 
 timer() {

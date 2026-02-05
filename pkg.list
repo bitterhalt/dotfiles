@@ -118,6 +118,7 @@ ripgrep
 rofi
 rsync
 sassc
+satty
 screenkey
 slurp
 smartmontools
@@ -127,7 +128,6 @@ socat
 starship
 steam
 sudo
-swappy
 swayimg
 syncthing
 tealdeer
