@@ -28,22 +28,21 @@ def left_section(monitor_name: str):
 
 def center_section():
     return widgets.Box(
-        spacing=4,
-        child=[ClockWidget()],
+        child=[
+            RecordingIndicator(),
+            ClockWidget(),
+        ],
     )
 
 
 def right_section():
     widgets_list = []
 
-    # Show tray if enabled
     if config.ui.bar_show_system_tray:
         widgets_list.append(SystemTrayWidget())
 
-    # Other widgets
     widgets_list.extend(
         [
-            RecordingIndicator(),
             SystemIndicatorWidget(),
             BatteryWidget(),
             IdleIndicatorWidget(),
@@ -51,7 +50,6 @@ def right_section():
     )
 
     return widgets.Box(
-        spacing=4,
         child=widgets_list,
     )
 
