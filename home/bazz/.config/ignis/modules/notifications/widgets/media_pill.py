@@ -1,7 +1,7 @@
 from ignis import widgets
 from ignis.services.mpris import MprisPlayer, MprisService
 from ignis.window_manager import WindowManager
-from modules.utils.media_utils import MediaPlayerInfo, MediaPlayerControls
+from modules.utils.media_utils import MediaPlayerControls
 from modules.utils.signal_manager import SignalManager
 
 mpris = MprisService.get_default()
@@ -22,12 +22,6 @@ class MediaPill(widgets.Box):
         self._player = player
         self._signals = SignalManager()
 
-        self._icon = widgets.Icon(
-            image=MediaPlayerInfo.get_player_icon(player),
-            pixel_size=22,
-            css_classes=["media-pill-nc-icon"],
-        )
-
         title = widgets.Label(
             label=player.bind("title", lambda t: t or "Unknown"),
             ellipsize="end",
@@ -42,27 +36,17 @@ class MediaPill(widgets.Box):
             css_classes=["media-pill-nc-artist"],
         )
 
-        title_row = widgets.Box(
-            spacing=8,
-            halign="center",
-            child=[
-                self._icon,
-                title,
-            ],
-        )
-
         text_box = widgets.Box(
             halign="center",
             hexpand=True,
             spacing=2,
             vertical=True,
             child=[
-                title_row,
+                title,
                 artist,
             ],
         )
 
-        # Playback controls
         self._btn_prev = widgets.Button(
             css_classes=["media-pill-nc-control"],
             on_click=lambda *_: MediaPlayerControls.previous(),
@@ -108,8 +92,6 @@ class MediaPill(widgets.Box):
         self._bind_play_icon()
         self._update_button_states()
 
-        player.connect("notify::desktop-entry", lambda *_: self._update_icon())
-        player.connect("notify::track-id", lambda *_: self._update_icon())
         player.connect("notify::can-go-previous", lambda *_: self._update_button_states())
         player.connect("notify::can-go-next", lambda *_: self._update_button_states())
 
@@ -124,9 +106,6 @@ class MediaPill(widgets.Box):
 
         self._signals.connect(self._player, "notify::playback-status", update_icon)
         update_icon()
-
-    def _update_icon(self):
-        self._icon.image = MediaPlayerInfo.get_player_icon(self._player)
 
     def _update_button_states(self):
         self._btn_prev.set_sensitive(self._player.can_go_previous)
