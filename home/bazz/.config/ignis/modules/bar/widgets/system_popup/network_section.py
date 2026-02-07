@@ -25,6 +25,7 @@ class WifiNetworkItem(widgets.Button):
                     widgets.Label(label=ap.ssid or "Unknown", ellipsize="end"),
                     widgets.Icon(
                         image="object-select-symbolic",
+                        pixel_size=16,
                         visible=ap.bind("is_connected"),
                         hexpand=True,
                         halign="end",

@@ -13,16 +13,17 @@ class AudioDeviceItem(widgets.Button):
             child=widgets.Box(
                 spacing=4,
                 child=[
-                    widgets.Icon(
-                        image="object-select-symbolic",
-                        pixel_size=16,
-                        visible=stream.bind("is_default"),
-                        hexpand=False,
-                    ),
                     widgets.Label(
                         label=stream.description,
                         ellipsize="end",
-                        max_width_chars=22,
+                        max_width_chars=30,
+                        halign="start",
+                    ),
+                    widgets.Icon(
+                        image="object-select-symbolic",
+                        halign="end",
+                        pixel_size=16,
+                        visible=stream.bind("is_default"),
                         hexpand=True,
                     ),
                 ],
@@ -74,7 +75,7 @@ class AudioSection(widgets.Box):
         self._signals.connect(stream, "notify::volume", lambda *_: self._update_icon(mute_icon))
 
         self._arrow = widgets.Arrow(
-            pixel_size=18,
+            pixel_size=16,
             rotated=False,
             css_classes=["pill-audio-arrow"],
         )
