@@ -8,7 +8,7 @@ start_hypridle() {
 }
 
 stop_hypridle() {
-  pkill hypridle
+  pkill -x hypridle
   rm -f "$PID_FILE"
   notify-send -i caffeine "Idle timer" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
 }
