@@ -54,7 +54,7 @@ class NotificationCenter(widgets.RevealerWindow):
         self._calendar = widgets.Calendar(
             css_classes=["center-calendar"],
             show_day_names=True,
-            show_heading=True,
+            show_heading=False,
         )
 
         right_column = widgets.Box(

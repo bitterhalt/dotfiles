@@ -31,6 +31,7 @@ class WeatherPill:
             on_click=lambda *_: self._open_weather_popup(),
             child=widgets.Box(
                 spacing=10,
+                halign="center",
                 child=[
                     self._weather_icon,
                     self._weather_temp,

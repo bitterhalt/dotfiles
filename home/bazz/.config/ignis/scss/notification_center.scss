@@ -313,25 +313,8 @@
   border-radius: 6px;
   padding: 6px;
   margin: 12px;
-
-  header {
-    color: $tx-2;
-    margin-bottom: 6px;
-
-    button {
-      all: unset;
-      padding: 6px;
-      margin: 4px;
-      color: $tx-3;
-      border-radius: 4px;
-
-      &:hover {
-        color: $tx-2;
-        background: $ui-1;
-      }
-    }
-  }
 }
+
 .center-calendar .day-name {
   color: $tx-3;
   font-weight: 600;
@@ -344,7 +327,6 @@
 .center-calendar .today {
   color: $accent;
   font-weight: 600;
-  border-radius: 20px;
 }
 
 .center-calendar .other-month {
