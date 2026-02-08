@@ -12,6 +12,7 @@ base-devel
 bash-completion
 bat
 bc
+blueman
 bluez
 bluez-utils
 btop
