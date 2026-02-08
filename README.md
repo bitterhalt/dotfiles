@@ -55,7 +55,7 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 - [classabbyamp](https://github.com/classabbyamp) - Helped me with TONS of stuff ⭐
 - [aellas](https://github.com/aellas) - For TONS of ideas and ispiration ⭐ ❤️ 🐐
 - [Joris](https://codeberg.org/jorisvandijk) - For showing me how to manage my dots better ❤️ ⭐
-- [linkfrg](https://github.com/linkfrg/dotfiles) - Everything for Ignis ❤️ ⭐
+- [linkfrg](https://github.com/linkfrg/dotfiles) - Everything related to Ignis ❤️ ⭐
 
 ### Special thanks ⭐
 
