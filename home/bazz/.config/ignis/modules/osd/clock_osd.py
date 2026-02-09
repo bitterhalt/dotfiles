@@ -28,7 +28,7 @@ class BarlessClockWindow(widgets.Window):
 
         super().__init__(
             monitor=config.ui.primary_monitor,
-            layer="background",
+            layer="bottom",
             anchor=["top", "right"],
             namespace="ignis_BARLESS_CLOCK",
             visible=False,
