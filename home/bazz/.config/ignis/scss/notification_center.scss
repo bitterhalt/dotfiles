@@ -316,17 +316,25 @@
 }
 
 .center-calendar .day-name {
+  all: unset;
   color: $tx-3;
   font-weight: 600;
 }
 .center-calendar .day-number {
   all: unset;
+  border-radius: 6px;
   color: $tx-1;
 }
 
 .center-calendar .today {
+  all: unset;
   color: $accent;
-  font-weight: 600;
+  border-radius: 6px;
+  font-weight: bold;
+}
+/* Sunday is the 7th day when starting from Monday */
+.center-calendar .day-number:nth-child(7n) {
+  color: $magenta;
 }
 
 .center-calendar .other-month {

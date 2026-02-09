@@ -27,11 +27,9 @@ class BatteryItem(widgets.Box):
         device.connect("notify::percentage", lambda *_: self._update_warning_class(device))
 
     def _setup_styles(self, device):
-        """Initial setup of warning classes"""
         self._update_warning_class(device)
 
     def _update_warning_class(self, device):
-        """Update CSS classes based on battery level"""
         percent = device.percentage
 
         if percent < config.battery.critical_threshold:
