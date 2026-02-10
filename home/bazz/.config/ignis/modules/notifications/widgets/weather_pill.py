@@ -30,7 +30,7 @@ class WeatherPill:
             css_classes=["weather-compact", "unset"],
             on_click=lambda *_: self._open_weather_popup(),
             child=widgets.Box(
-                spacing=10,
+                spacing=20,
                 halign="center",
                 child=[
                     self._weather_icon,

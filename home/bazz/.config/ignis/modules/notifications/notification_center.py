@@ -4,6 +4,7 @@ from ignis.window_manager import WindowManager
 from .notification_center_notifications import NotificationList
 from .widgets.weather_pill import WeatherPill
 from .widgets.media_pill import MediaCenterWidget
+from .widgets.date_pill import DatePill
 from settings import config
 
 wm = WindowManager.get_default()
@@ -51,18 +52,14 @@ class NotificationCenter(widgets.RevealerWindow):
         )
 
         self._weather_pill = WeatherPill()
-        self._calendar = widgets.Calendar(
-            css_classes=["center-calendar"],
-            show_day_names=True,
-            show_heading=False,
-        )
+        self._date_pill = DatePill()
 
         right_column = widgets.Box(
             vertical=True,
             css_classes=["right-column"],
             child=[
+                self._date_pill,
                 self._weather_pill.button,
-                self._calendar,
                 self._media_pill,
             ],
         )

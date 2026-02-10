@@ -17,7 +17,7 @@
 .notification-center {
   background: $bg-1;
   border: unset;
-  min-height: 572px;
+  min-height: 440px;
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -88,14 +88,53 @@
 .dnd-box switch:checked {
   background: $warning;
 }
+/* ───────────────────────────────────────────────────────────────
+   DATE PILL
+   ─────────────────────────────────────────────────────────────── */
 
+.date-pill {
+  padding: 12px;
+  margin: 0px 12px;
+  background: $bg-2;
+  border-radius: 6px;
+  min-width: 270px;
+}
+
+.date-pill-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: $tx-1;
+  letter-spacing: 0.02em;
+}
+
+.date-pill-day {
+  font-size: 32px;
+  font-weight: 700;
+  color: $accent;
+  letter-spacing: 0.02em;
+}
+
+.date-pill-month {
+  font-size: 12px;
+  font-weight: 600;
+  color: $tx-1;
+  letter-spacing: 0.08em;
+}
+
+.date-pill-year {
+  font-size: 11px;
+  font-weight: 500;
+  color: $tx-3;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
 /* ───────────────────────────────────────────────────────────────
    WEATHER
    ─────────────────────────────────────────────────────────────── */
 
 .weather-compact {
-  padding: 12px;
-  margin: 0 12px;
+  padding: 16px 12px;
+  margin: 8px 12px;
   background: $bg-2;
   border-radius: 6px;
   transition:
@@ -307,38 +346,38 @@
    CALENDAR
    ═══════════════════════════════════════════════════════════════ */
 
-.center-calendar {
-  all: unset;
-  background: $bg-2;
-  border-radius: 6px;
-  padding: 16px 4px;
-  margin: 12px;
-}
-
-.center-calendar .day-name {
-  all: unset;
-  color: $tx-3;
-  font-weight: 600;
-}
-.center-calendar .day-number {
-  all: unset;
-  border-radius: 6px;
-  color: $tx-1;
-}
-
-.center-calendar .today {
-  all: unset;
-  color: $accent;
-  border-radius: 6px;
-  font-weight: bold;
-}
-/* Sunday is the 7th day when starting from Monday */
-.center-calendar .day-number:nth-child(7n) {
-  color: $magenta;
-}
-
-.center-calendar .other-month {
-  all: unset;
-  color: $tx-3;
-  opacity: 0.5;
-}
+// .center-calendar {
+//   all: unset;
+//   background: $bg-2;
+//   border-radius: 6px;
+//   padding: 16px 4px;
+//   margin: 12px;
+// }
+//
+// .center-calendar .day-name {
+//   all: unset;
+//   color: $tx-3;
+//   font-weight: 600;
+// }
+// .center-calendar .day-number {
+//   all: unset;
+//   border-radius: 6px;
+//   color: $tx-1;
+// }
+//
+// .center-calendar .today {
+//   all: unset;
+//   color: $accent;
+//   border-radius: 6px;
+//   font-weight: bold;
+// }
+// /* Sunday is the 7th day when starting from Monday */
+// .center-calendar .day-number:nth-child(7n) {
+//   color: $magenta;
+// }
+//
+// .center-calendar .other-month {
+//   all: unset;
+//   color: $tx-3;
+//   opacity: 0.5;
+// }
