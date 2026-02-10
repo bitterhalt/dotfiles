@@ -69,7 +69,6 @@ class SystemTrayWidget(widgets.Box):
         self._update_visibility()
 
     def _on_item_added(self, item):
-        """Handle new tray item"""
         tray_item = TrayItem(item)
         self._items_box.append(tray_item)
 
