@@ -56,12 +56,14 @@ popup_timeout = 5000 # Milliseconds
 
 #  Hide useless stuff from history (My personal preference, you probably wan't to remove these)
 filter_keywords = [
+  "Audio notify",
   "BT: Attempting to connect to",
   "BT: Disconnected",
   "BT: Failed to Connect",
   "Bluez Menu",
   "Color-picker",
   "Hypridle",
+  "Hyprland",
   "Hyprland config",
   "Hyprpicker",
   "Idle timer",

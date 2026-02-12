@@ -12,9 +12,9 @@ border_size_current=$(hyprctl workspacerules -j | jq --arg rid "$rid" '[.[] | se
 if [ "$gaps_in_current" = "null" ] && [ "$gaps_out_current" = "null" ] && [ "$rounding_current" = "null" ] && [ "$border_size_current" = "null" ]; then
   hyprctl keyword workspace "$rid" f[1], gapsin:0, gapsout:0, rounding:0, border:0
   hyprctl keyword workspace "$rid" w[tv1], gapsin:0, gapsout:0, rounding:0, border:0
-  notify-send -t 1500 "Smart-gaps" "on"
+  notify-send -t 1500 "Hyprland" "Smart-gaps: on"
   exit
 fi
 
 hyprctl reload
-notify-send -t 1500 "Smart-gaps" "off"
+notify-send -t 1500 "Hyprland" "Smart-gaps: off"
