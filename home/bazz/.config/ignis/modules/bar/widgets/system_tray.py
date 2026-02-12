@@ -20,12 +20,24 @@ class TrayItem(widgets.Button):
                 ]
             ),
             tooltip_text=item.bind("tooltip"),
-            on_click=lambda x: asyncio.create_task(item.activate_async()),
+            on_click=lambda x: self._safe_activate(item),
             on_right_click=lambda x: menu.popup() if menu else None,
             css_classes=["tray-item", "unset"],
         )
 
         item.connect("removed", lambda x: self.unparent())
+
+    def _safe_activate(self, item):
+        async def activate():
+            try:
+                await item.activate_async()
+            except Exception as e:
+                try:
+                    item.secondary_activate()
+                except Exception:
+                    pass
+
+        asyncio.create_task(activate())
 
 
 class SystemTrayWidget(widgets.Box):
