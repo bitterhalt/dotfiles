@@ -52,6 +52,7 @@ gparted
 gpu-screen-recorder
 grim
 grub
+grub-btrfs
 gst-plugin-pipewire
 gtk-engine-murrine
 htop
