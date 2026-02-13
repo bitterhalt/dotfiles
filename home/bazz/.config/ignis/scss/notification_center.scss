@@ -88,16 +88,24 @@
 .dnd-box switch:checked {
   background: $warning;
 }
+
 /* ───────────────────────────────────────────────────────────────
-   DATE PILL
+   COMBINED DATE & WEATHER PILL
    ─────────────────────────────────────────────────────────────── */
 
-.date-pill {
-  padding: 12px;
-  margin: 0px 12px;
+.date-weather-pill {
+  padding: 16px 12px;
+  margin: 0px 12px 12px 12px;
   background: $bg-2;
   border-radius: 6px;
   min-width: 270px;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background: $ui-2;
+  }
 }
 
 .date-pill-name {
@@ -128,29 +136,11 @@
   letter-spacing: 0.05em;
   margin-top: 2px;
 }
-/* ───────────────────────────────────────────────────────────────
-   WEATHER
-   ─────────────────────────────────────────────────────────────── */
-
-.weather-compact {
-  padding: 16px 12px;
-  margin: 8px 12px;
-  background: $bg-2;
-  border-radius: 6px;
-  transition:
-    background 0.15s,
-    border-color 0.15s;
-
-  &:hover {
-    background: $ui-2;
-  }
-}
 
 .weather-temp-compact {
   font-size: 17px;
   font-weight: 600;
   color: $tx-1;
-  min-width: 48px;
 }
 
 .weather-desc-compact {
@@ -158,12 +148,19 @@
   color: $tx-3;
 }
 
+.date-pill-separator {
+  all: unset;
+  background: $ui-1;
+  min-height: 1px;
+  margin: 4px 0;
+}
+
 /* ───────────────────────────────────────────────────────────────
    MEDIA WIDGET
    ─────────────────────────────────────────────────────────────── */
 
 .media-center-nc-wrapper {
-  padding: 0 12px;
+  margin: 0 12px;
   margin-bottom: 8px;
 }
 
@@ -341,43 +338,3 @@
   margin-top: 4px;
   line-height: 1.5;
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   CALENDAR
-   ═══════════════════════════════════════════════════════════════ */
-
-// .center-calendar {
-//   all: unset;
-//   background: $bg-2;
-//   border-radius: 6px;
-//   padding: 16px 4px;
-//   margin: 12px;
-// }
-//
-// .center-calendar .day-name {
-//   all: unset;
-//   color: $tx-3;
-//   font-weight: 600;
-// }
-// .center-calendar .day-number {
-//   all: unset;
-//   border-radius: 6px;
-//   color: $tx-1;
-// }
-//
-// .center-calendar .today {
-//   all: unset;
-//   color: $accent;
-//   border-radius: 6px;
-//   font-weight: bold;
-// }
-// /* Sunday is the 7th day when starting from Monday */
-// .center-calendar .day-number:nth-child(7n) {
-//   color: $magenta;
-// }
-//
-// .center-calendar .other-month {
-//   all: unset;
-//   color: $tx-3;
-//   opacity: 0.5;
-// }

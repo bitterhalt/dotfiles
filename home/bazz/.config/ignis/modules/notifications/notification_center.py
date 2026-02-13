@@ -2,9 +2,8 @@ from ignis import widgets
 from ignis.options import options
 from ignis.window_manager import WindowManager
 from .notification_center_notifications import NotificationList
-from .widgets.weather_pill import WeatherPill
+from .widgets.date_pill import DateWeatherPill
 from .widgets.media_pill import MediaCenterWidget
-from .widgets.date_pill import DatePill
 from settings import config
 
 wm = WindowManager.get_default()
@@ -51,15 +50,13 @@ class NotificationCenter(widgets.RevealerWindow):
             ],
         )
 
-        self._weather_pill = WeatherPill()
-        self._date_pill = DatePill()
+        self._date_weather_pill = DateWeatherPill()
 
         right_column = widgets.Box(
             vertical=True,
             css_classes=["right-column"],
             child=[
-                self._date_pill,
-                self._weather_pill.button,
+                self._date_weather_pill,
                 self._media_pill,
             ],
         )
@@ -103,8 +100,4 @@ class NotificationCenter(widgets.RevealerWindow):
         self.connect("destroy", self._cleanup)
 
     def _cleanup(self, *_):
-        if hasattr(self, "_weather_pill") and self._weather_pill:
-            try:
-                self._weather_pill.destroy()
-            except:
-                pass
+        pass

@@ -123,8 +123,9 @@ class NiriWindowTitle(widgets.Box):
             ),
             visible=niri.bind(
                 "active_window",
-                transform=lambda win: WindowInfoFormatter.should_show_icon(win, "niri")
-                and niri.active_output == monitor_name,
+                transform=lambda win: (
+                    WindowInfoFormatter.should_show_icon(win, "niri") and niri.active_output == monitor_name
+                ),
             ),
         )
 
