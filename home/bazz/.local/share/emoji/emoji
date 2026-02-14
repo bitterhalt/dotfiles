@@ -83,6 +83,7 @@
 😯 hushed face
 😲 astonished face
 😳 flushed face
+🫪 distorted face
 🥺 pleading face
 🥹 face holding back tears
 😦 frowning face with open mouth
@@ -156,6 +157,7 @@
 💋 kiss mark
 💯 hundred points
 💢 anger symbol
+🫯 fight cloud
 💥 collision
 💫 dizzy
 💦 sweat droplets
@@ -1490,6 +1492,7 @@
 🧟‍♂️ man zombie
 🧟‍♀️ woman zombie
 🧌 troll
+🫈 hairy creature
 💆 person getting massage
 💆🏻 person getting massage: light skin tone
 💆🏼 person getting massage: medium-light skin tone
@@ -1760,6 +1763,12 @@
 🏃🏽‍♂️‍➡️ man running facing right: medium skin tone
 🏃🏾‍♂️‍➡️ man running facing right: medium-dark skin tone
 🏃🏿‍♂️‍➡️ man running facing right: dark skin tone
+🧑‍🩰 ballet dancer
+🧑🏻‍🩰 ballet dancer: light skin tone
+🧑🏼‍🩰 ballet dancer: medium-light skin tone
+🧑🏽‍🩰 ballet dancer: medium skin tone
+🧑🏾‍🩰 ballet dancer: medium-dark skin tone
+🧑🏿‍🩰 ballet dancer: dark skin tone
 💃 woman dancing
 💃🏻 woman dancing: light skin tone
 💃🏼 woman dancing: medium-light skin tone
@@ -1779,8 +1788,83 @@
 🕴🏾 person in suit levitating: medium-dark skin tone
 🕴🏿 person in suit levitating: dark skin tone
 👯 people with bunny ears
+👯🏻 people with bunny ears: light skin tone
+👯🏼 people with bunny ears: medium-light skin tone
+👯🏽 people with bunny ears: medium skin tone
+👯🏾 people with bunny ears: medium-dark skin tone
+👯🏿 people with bunny ears: dark skin tone
 👯‍♂️ men with bunny ears
+👯🏻‍♂️ men with bunny ears: light skin tone
+👯🏼‍♂️ men with bunny ears: medium-light skin tone
+👯🏽‍♂️ men with bunny ears: medium skin tone
+👯🏾‍♂️ men with bunny ears: medium-dark skin tone
+👯🏿‍♂️ men with bunny ears: dark skin tone
 👯‍♀️ women with bunny ears
+👯🏻‍♀️ women with bunny ears: light skin tone
+👯🏼‍♀️ women with bunny ears: medium-light skin tone
+👯🏽‍♀️ women with bunny ears: medium skin tone
+👯🏾‍♀️ women with bunny ears: medium-dark skin tone
+👯🏿‍♀️ women with bunny ears: dark skin tone
+🧑🏻‍🐰‍🧑🏼 people with bunny ears: light skin tone, medium-light skin tone
+🧑🏻‍🐰‍🧑🏽 people with bunny ears: light skin tone, medium skin tone
+🧑🏻‍🐰‍🧑🏾 people with bunny ears: light skin tone, medium-dark skin tone
+🧑🏻‍🐰‍🧑🏿 people with bunny ears: light skin tone, dark skin tone
+🧑🏼‍🐰‍🧑🏻 people with bunny ears: medium-light skin tone, light skin tone
+🧑🏼‍🐰‍🧑🏽 people with bunny ears: medium-light skin tone, medium skin tone
+🧑🏼‍🐰‍🧑🏾 people with bunny ears: medium-light skin tone, medium-dark skin tone
+🧑🏼‍🐰‍🧑🏿 people with bunny ears: medium-light skin tone, dark skin tone
+🧑🏽‍🐰‍🧑🏻 people with bunny ears: medium skin tone, light skin tone
+🧑🏽‍🐰‍🧑🏼 people with bunny ears: medium skin tone, medium-light skin tone
+🧑🏽‍🐰‍🧑🏾 people with bunny ears: medium skin tone, medium-dark skin tone
+🧑🏽‍🐰‍🧑🏿 people with bunny ears: medium skin tone, dark skin tone
+🧑🏾‍🐰‍🧑🏻 people with bunny ears: medium-dark skin tone, light skin tone
+🧑🏾‍🐰‍🧑🏼 people with bunny ears: medium-dark skin tone, medium-light skin tone
+🧑🏾‍🐰‍🧑🏽 people with bunny ears: medium-dark skin tone, medium skin tone
+🧑🏾‍🐰‍🧑🏿 people with bunny ears: medium-dark skin tone, dark skin tone
+🧑🏿‍🐰‍🧑🏻 people with bunny ears: dark skin tone, light skin tone
+🧑🏿‍🐰‍🧑🏼 people with bunny ears: dark skin tone, medium-light skin tone
+🧑🏿‍🐰‍🧑🏽 people with bunny ears: dark skin tone, medium skin tone
+🧑🏿‍🐰‍🧑🏾 people with bunny ears: dark skin tone, medium-dark skin tone
+👨🏻‍🐰‍👨🏼 men with bunny ears: light skin tone, medium-light skin tone
+👨🏻‍🐰‍👨🏽 men with bunny ears: light skin tone, medium skin tone
+👨🏻‍🐰‍👨🏾 men with bunny ears: light skin tone, medium-dark skin tone
+👨🏻‍🐰‍👨🏿 men with bunny ears: light skin tone, dark skin tone
+👨🏼‍🐰‍👨🏻 men with bunny ears: medium-light skin tone, light skin tone
+👨🏼‍🐰‍👨🏽 men with bunny ears: medium-light skin tone, medium skin tone
+👨🏼‍🐰‍👨🏾 men with bunny ears: medium-light skin tone, medium-dark skin tone
+👨🏼‍🐰‍👨🏿 men with bunny ears: medium-light skin tone, dark skin tone
+👨🏽‍🐰‍👨🏻 men with bunny ears: medium skin tone, light skin tone
+👨🏽‍🐰‍👨🏼 men with bunny ears: medium skin tone, medium-light skin tone
+👨🏽‍🐰‍👨🏾 men with bunny ears: medium skin tone, medium-dark skin tone
+👨🏽‍🐰‍👨🏿 men with bunny ears: medium skin tone, dark skin tone
+👨🏾‍🐰‍👨🏻 men with bunny ears: medium-dark skin tone, light skin tone
+👨🏾‍🐰‍👨🏼 men with bunny ears: medium-dark skin tone, medium-light skin tone
+👨🏾‍🐰‍👨🏽 men with bunny ears: medium-dark skin tone, medium skin tone
+👨🏾‍🐰‍👨🏿 men with bunny ears: medium-dark skin tone, dark skin tone
+👨🏿‍🐰‍👨🏻 men with bunny ears: dark skin tone, light skin tone
+👨🏿‍🐰‍👨🏼 men with bunny ears: dark skin tone, medium-light skin tone
+👨🏿‍🐰‍👨🏽 men with bunny ears: dark skin tone, medium skin tone
+👨🏿‍🐰‍👨🏾 men with bunny ears: dark skin tone, medium-dark skin tone
+👩🏻‍🐰‍👩🏼 women with bunny ears: light skin tone, medium-light skin tone
+👩🏻‍🐰‍👩🏽 women with bunny ears: light skin tone, medium skin tone
+👩🏻‍🐰‍👩🏾 women with bunny ears: light skin tone, medium-dark skin tone
+👩🏻‍🐰‍👩🏿 women with bunny ears: light skin tone, dark skin tone
+👩🏼‍🐰‍👩🏻 women with bunny ears: medium-light skin tone, light skin tone
+👩🏼‍🐰‍👩🏽 women with bunny ears: medium-light skin tone, medium skin tone
+👩🏼‍🐰‍👩🏾 women with bunny ears: medium-light skin tone, medium-dark skin tone
+👩🏼‍🐰‍👩🏿 women with bunny ears: medium-light skin tone, dark skin tone
+👩🏽‍🐰‍👩🏻 women with bunny ears: medium skin tone, light skin tone
+👩🏽‍🐰‍👩🏼 women with bunny ears: medium skin tone, medium-light skin tone
+👩🏽‍🐰‍👩🏾 women with bunny ears: medium skin tone, medium-dark skin tone
+👩🏽‍🐰‍👩🏿 women with bunny ears: medium skin tone, dark skin tone
+👩🏾‍🐰‍👩🏻 women with bunny ears: medium-dark skin tone, light skin tone
+👩🏾‍🐰‍👩🏼 women with bunny ears: medium-dark skin tone, medium-light skin tone
+👩🏾‍🐰‍👩🏽 women with bunny ears: medium-dark skin tone, medium skin tone
+👩🏾‍🐰‍👩🏿 women with bunny ears: medium-dark skin tone, dark skin tone
+👩🏿‍🐰‍👩🏻 women with bunny ears: dark skin tone, light skin tone
+👩🏿‍🐰‍👩🏼 women with bunny ears: dark skin tone, medium-light skin tone
+👩🏿‍🐰‍👩🏽 women with bunny ears: dark skin tone, medium skin tone
+👩🏿‍🐰‍👩🏾 women with bunny ears: dark skin tone, medium-dark skin tone
 🧖 person in steamy room
 🧖🏻 person in steamy room: light skin tone
 🧖🏼 person in steamy room: medium-light skin tone
@@ -1994,8 +2078,83 @@
 🤸🏾‍♀️ woman cartwheeling: medium-dark skin tone
 🤸🏿‍♀️ woman cartwheeling: dark skin tone
 🤼 people wrestling
+🤼🏻 people wrestling: light skin tone
+🤼🏼 people wrestling: medium-light skin tone
+🤼🏽 people wrestling: medium skin tone
+🤼🏾 people wrestling: medium-dark skin tone
+🤼🏿 people wrestling: dark skin tone
 🤼‍♂️ men wrestling
+🤼🏻‍♂️ men wrestling: light skin tone
+🤼🏼‍♂️ men wrestling: medium-light skin tone
+🤼🏽‍♂️ men wrestling: medium skin tone
+🤼🏾‍♂️ men wrestling: medium-dark skin tone
+🤼🏿‍♂️ men wrestling: dark skin tone
 🤼‍♀️ women wrestling
+🤼🏻‍♀️ women wrestling: light skin tone
+🤼🏼‍♀️ women wrestling: medium-light skin tone
+🤼🏽‍♀️ women wrestling: medium skin tone
+🤼🏾‍♀️ women wrestling: medium-dark skin tone
+🤼🏿‍♀️ women wrestling: dark skin tone
+🧑🏻‍🫯‍🧑🏼 people wrestling: light skin tone, medium-light skin tone
+🧑🏻‍🫯‍🧑🏽 people wrestling: light skin tone, medium skin tone
+🧑🏻‍🫯‍🧑🏾 people wrestling: light skin tone, medium-dark skin tone
+🧑🏻‍🫯‍🧑🏿 people wrestling: light skin tone, dark skin tone
+🧑🏼‍🫯‍🧑🏻 people wrestling: medium-light skin tone, light skin tone
+🧑🏼‍🫯‍🧑🏽 people wrestling: medium-light skin tone, medium skin tone
+🧑🏼‍🫯‍🧑🏾 people wrestling: medium-light skin tone, medium-dark skin tone
+🧑🏼‍🫯‍🧑🏿 people wrestling: medium-light skin tone, dark skin tone
+🧑🏽‍🫯‍🧑🏻 people wrestling: medium skin tone, light skin tone
+🧑🏽‍🫯‍🧑🏼 people wrestling: medium skin tone, medium-light skin tone
+🧑🏽‍🫯‍🧑🏾 people wrestling: medium skin tone, medium-dark skin tone
+🧑🏽‍🫯‍🧑🏿 people wrestling: medium skin tone, dark skin tone
+🧑🏾‍🫯‍🧑🏻 people wrestling: medium-dark skin tone, light skin tone
+🧑🏾‍🫯‍🧑🏼 people wrestling: medium-dark skin tone, medium-light skin tone
+🧑🏾‍🫯‍🧑🏽 people wrestling: medium-dark skin tone, medium skin tone
+🧑🏾‍🫯‍🧑🏿 people wrestling: medium-dark skin tone, dark skin tone
+🧑🏿‍🫯‍🧑🏻 people wrestling: dark skin tone, light skin tone
+🧑🏿‍🫯‍🧑🏼 people wrestling: dark skin tone, medium-light skin tone
+🧑🏿‍🫯‍🧑🏽 people wrestling: dark skin tone, medium skin tone
+🧑🏿‍🫯‍🧑🏾 people wrestling: dark skin tone, medium-dark skin tone
+👨🏻‍🫯‍👨🏼 men wrestling: light skin tone, medium-light skin tone
+👨🏻‍🫯‍👨🏽 men wrestling: light skin tone, medium skin tone
+👨🏻‍🫯‍👨🏾 men wrestling: light skin tone, medium-dark skin tone
+👨🏻‍🫯‍👨🏿 men wrestling: light skin tone, dark skin tone
+👨🏼‍🫯‍👨🏻 men wrestling: medium-light skin tone, light skin tone
+👨🏼‍🫯‍👨🏽 men wrestling: medium-light skin tone, medium skin tone
+👨🏼‍🫯‍👨🏾 men wrestling: medium-light skin tone, medium-dark skin tone
+👨🏼‍🫯‍👨🏿 men wrestling: medium-light skin tone, dark skin tone
+👨🏽‍🫯‍👨🏻 men wrestling: medium skin tone, light skin tone
+👨🏽‍🫯‍👨🏼 men wrestling: medium skin tone, medium-light skin tone
+👨🏽‍🫯‍👨🏾 men wrestling: medium skin tone, medium-dark skin tone
+👨🏽‍🫯‍👨🏿 men wrestling: medium skin tone, dark skin tone
+👨🏾‍🫯‍👨🏻 men wrestling: medium-dark skin tone, light skin tone
+👨🏾‍🫯‍👨🏼 men wrestling: medium-dark skin tone, medium-light skin tone
+👨🏾‍🫯‍👨🏽 men wrestling: medium-dark skin tone, medium skin tone
+👨🏾‍🫯‍👨🏿 men wrestling: medium-dark skin tone, dark skin tone
+👨🏿‍🫯‍👨🏻 men wrestling: dark skin tone, light skin tone
+👨🏿‍🫯‍👨🏼 men wrestling: dark skin tone, medium-light skin tone
+👨🏿‍🫯‍👨🏽 men wrestling: dark skin tone, medium skin tone
+👨🏿‍🫯‍👨🏾 men wrestling: dark skin tone, medium-dark skin tone
+👩🏻‍🫯‍👩🏼 women wrestling: light skin tone, medium-light skin tone
+👩🏻‍🫯‍👩🏽 women wrestling: light skin tone, medium skin tone
+👩🏻‍🫯‍👩🏾 women wrestling: light skin tone, medium-dark skin tone
+👩🏻‍🫯‍👩🏿 women wrestling: light skin tone, dark skin tone
+👩🏼‍🫯‍👩🏻 women wrestling: medium-light skin tone, light skin tone
+👩🏼‍🫯‍👩🏽 women wrestling: medium-light skin tone, medium skin tone
+👩🏼‍🫯‍👩🏾 women wrestling: medium-light skin tone, medium-dark skin tone
+👩🏼‍🫯‍👩🏿 women wrestling: medium-light skin tone, dark skin tone
+👩🏽‍🫯‍👩🏻 women wrestling: medium skin tone, light skin tone
+👩🏽‍🫯‍👩🏼 women wrestling: medium skin tone, medium-light skin tone
+👩🏽‍🫯‍👩🏾 women wrestling: medium skin tone, medium-dark skin tone
+👩🏽‍🫯‍👩🏿 women wrestling: medium skin tone, dark skin tone
+👩🏾‍🫯‍👩🏻 women wrestling: medium-dark skin tone, light skin tone
+👩🏾‍🫯‍👩🏼 women wrestling: medium-dark skin tone, medium-light skin tone
+👩🏾‍🫯‍👩🏽 women wrestling: medium-dark skin tone, medium skin tone
+👩🏾‍🫯‍👩🏿 women wrestling: medium-dark skin tone, dark skin tone
+👩🏿‍🫯‍👩🏻 women wrestling: dark skin tone, light skin tone
+👩🏿‍🫯‍👩🏼 women wrestling: dark skin tone, medium-light skin tone
+👩🏿‍🫯‍👩🏽 women wrestling: dark skin tone, medium skin tone
+👩🏿‍🫯‍👩🏾 women wrestling: dark skin tone, medium-dark skin tone
 🤽 person playing water polo
 🤽🏻 person playing water polo: light skin tone
 🤽🏼 person playing water polo: medium-light skin tone
@@ -2528,6 +2687,7 @@
 🐳 spouting whale
 🐋 whale
 🐬 dolphin
+🫍 orca
 🦭 seal
 🐟 fish
 🐠 tropical fish
@@ -2727,6 +2887,7 @@
 🧭 compass
 🏔️ snow-capped mountain
 ⛰️ mountain
+🛘 landslide
 🌋 volcano
 🗻 mount fuji
 🏕️ camping
@@ -3087,10 +3248,11 @@
 🎧 headphone
 📻 radio
 🎷 saxophone
+🎺 trumpet
+🪊 trombone
 🪗 accordion
 🎸 guitar
 🎹 musical keyboard
-🎺 trumpet
 🎻 violin
 🪕 banjo
 🥁 drum
@@ -3151,8 +3313,9 @@
 📑 bookmark tabs
 🔖 bookmark
 🏷️ label
-💰 money bag
 🪙 coin
+💰 money bag
+🪎 treasure chest
 💴 yen banknote
 💵 dollar banknote
 💶 euro banknote
