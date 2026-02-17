@@ -158,6 +158,7 @@ winetricks
 wireplumber
 wl-clipboard
 wl-restart-git
+wofi
 wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland

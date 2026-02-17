@@ -15,15 +15,27 @@ class BarlessClockWindow(widgets.Window):
             css_classes=["barless-clock-time"],
         )
 
-        self._date_label = widgets.Label(
+        self._day_name_label = widgets.Label(
             css_classes=["barless-clock-date"],
+        )
+
+        self._day_num_label = widgets.Label(
+            css_classes=["barless-clock-day-number"],
+        )
+
+        self._month_label = widgets.Label(
+            css_classes=["barless-clock-date"],
+        )
+
+        date_box = widgets.Box(
+            child=[self._day_name_label, self._day_num_label, self._month_label],
         )
 
         content = widgets.Box(
             vertical=True,
             spacing=8,
             css_classes=["barless-clock"],
-            child=[self._time_label, self._date_label],
+            child=[self._time_label, date_box],
         )
 
         super().__init__(
@@ -42,7 +54,9 @@ class BarlessClockWindow(widgets.Window):
     def update_time(self):
         now = datetime.datetime.now()
         self._time_label.label = now.strftime("%H:%M")
-        self._date_label.label = now.strftime("%A, %d %B")
+        self._day_name_label.label = now.strftime("%a, ")
+        self._day_num_label.label = now.strftime("%d")
+        self._month_label.label = now.strftime(" %B")
 
 
 class BarlessClockOverlay(widgets.Window):
@@ -96,7 +110,7 @@ class BarlessClockOverlay(widgets.Window):
     def _update_time(self):
         now = datetime.datetime.now()
         self._time_label.label = now.strftime("%H:%M")
-        self._date_label.label = now.strftime("%A, %d %B")
+        self._date_label.label = now.strftime("%a, %d %B")
 
     def show_overlay(self):
         self.set_visible(True)
