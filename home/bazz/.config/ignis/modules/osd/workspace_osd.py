@@ -87,13 +87,13 @@ class WorkspaceOSD(widgets.Window):
         if ws_name is None:
             return
 
-        self._label.set_label(f"Workspace: {ws_name}")
+        self._label.set_label(f"Workspace  {ws_name}")
         self.show_osd()
 
     def update_workspace_label(self):
         ws_name = WorkspaceNameFormatter.get_workspace_name()
         if ws_name:
-            self._label.set_label(f"Workspace: {ws_name}")
+            self._label.set_label(f"Workspace  {ws_name}")
 
 
 def init_workspace_osd():
