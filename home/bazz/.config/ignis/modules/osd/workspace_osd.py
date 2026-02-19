@@ -106,7 +106,3 @@ def init_workspace_osd():
 def set_bar_visibility(visible: bool):
     global _bar_visible
     _bar_visible = visible
-
-    if not visible and _osd_window:
-        _osd_window.update_workspace_label()
-        _osd_window.show_osd()
