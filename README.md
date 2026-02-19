@@ -27,7 +27,7 @@
 
 <details>
 <summary><b>Notification Center</b></summary><br>
-<img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/center.png" width="50%" />
+<img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/center.png" width="100%" />
 </details>
 <details>
 <summary><b>Quick setting</b></summary><br>
