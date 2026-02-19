@@ -10,10 +10,13 @@ processes=$(ps -u "$USER" -o pid=,comm=)
 # Select a process
 selection=$(
   printf "%s\n" "$processes" |
-    fzf --border-label="Kill process > " \
+    fzf --border-label=" Kill process! " \
+      --prompt=" !!! " \
       --with-nth=2.. \
       --layout=reverse \
       --border=rounded \
+      --color=border:#AF3029 \
+      --color=label:#AD8301 \
       --preview='echo PID: $(echo {} | awk "{print \$1}") ; echo CMD: $(echo {} | cut -d" " -f2-) ' \
       --preview-window=down:3:wrap
 )
@@ -26,11 +29,9 @@ cmd=$(echo "$selection" | cut -d" " -f2-)
 # Confirmation
 confirm=$(printf "No\nYes" |
   fzf --prompt="Kill $cmd (PID $pid)? > " \
-    --height=10 --border=rounded --layout=reverse)
+    --height=10 --border=rounded --layout=reverse --color=border:#AF3029 --color=label:#AD8301)
 
 [[ "$confirm" != "Yes" ]] && exit 0
 
 # Kill
 kill -9 "$pid" 2>/dev/null
-
-notify-send "Process killed" "$cmd (PID $pid)"
