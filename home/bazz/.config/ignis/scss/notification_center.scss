@@ -205,11 +205,10 @@
 }
 
 .media-pill-nc-control.primary {
-  background: $accent;
-  color: $bg-1;
+  color: $tx-1;
 
   &:hover {
-    background: lighten($accent, 10%);
+    background: $ui-2;
   }
 }
 
