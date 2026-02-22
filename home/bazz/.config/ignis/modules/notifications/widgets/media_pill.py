@@ -112,6 +112,39 @@ class MediaPill(widgets.Box):
         self._btn_next.set_sensitive(self._player.can_go_next)
 
 
+class NoMediaPill(widgets.Box):
+    def __init__(self):
+        icon = widgets.Icon(
+            image="folder-music-symbolic",
+            pixel_size=32,
+            css_classes=["media-pill-nc-icon"],
+            opacity=0.5,
+        )
+
+        title = widgets.Label(
+            label="No media playing",
+            css_classes=["media-pill-nc-title"],
+        )
+
+        content = widgets.Box(
+            vertical=True,
+            spacing=12,
+            halign="center",
+            valign="center",
+            child=[icon, title],
+        )
+
+        super().__init__(
+            vertical=True,
+            spacing=12,
+            css_classes=["media-pill-nc"],
+            halign="fill",
+            valign="center",
+            hexpand=True,
+            child=[content],
+        )
+
+
 class MediaCenterWidget(widgets.Box):
     def __init__(self):
         self._current_player = None
@@ -121,7 +154,7 @@ class MediaCenterWidget(widgets.Box):
             css_classes=["media-center-nc-wrapper"],
             halign="fill",
             valign="start",
-            visible=False,
+            visible=True,
             child=[self._pill_content],
         )
 
@@ -143,8 +176,7 @@ class MediaCenterWidget(widgets.Box):
         players = mpris.players
 
         if not players:
-            self.visible = False
-            self._pill_content.child = []
+            self._pill_content.child = [NoMediaPill()]
             self._current_player = None
             return
 
@@ -154,5 +186,4 @@ class MediaCenterWidget(widgets.Box):
             return
 
         self._current_player = player
-        self.visible = True
         self._pill_content.child = [MediaPill(player)]
