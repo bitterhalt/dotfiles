@@ -1,0 +1,39 @@
+/* ═══════════════════════════════════════════════════════════════
+   BARLESS CLOCK
+   ═══════════════════════════════════════════════════════════════ */
+
+.barless-clock-window {
+  background: transparent;
+  border: none;
+  padding: 26px;
+}
+
+.barless-clock,
+.barless-clock-callable {
+  background: $bg-1;
+  border: none;
+  border-radius: 6px;
+  padding: 16px 20px;
+  box-shadow: $box-shadow;
+}
+
+.barless-clock-time {
+  font-size: 32px;
+  font-weight: 700;
+  color: $tx-1;
+  letter-spacing: 0.05em;
+}
+
+.barless-clock-date {
+  font-size: 14px;
+  font-weight: 500;
+  color: $tx-3;
+  margin-top: 4px;
+}
+
+.barless-clock-day-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: $accent;
+  margin-top: 4px;
+}

@@ -1,0 +1,27 @@
+/* ═══════════════════════════════════════════════════════════════
+   WORKSPACE OSD
+   ═══════════════════════════════════════════════════════════════ */
+
+.workspace-osd-window {
+  background: transparent;
+  border-radius: 6px;
+  border: none;
+}
+
+.workspace-osd {
+  background: $bg-1;
+  border: none;
+  border-radius: 6px;
+  margin: 26px;
+  padding: 16px;
+  box-shadow: $box-shadow;
+}
+
+.workspace-osd-icon {
+  color: $accent;
+}
+
+.workspace-osd-label {
+  font-weight: 600;
+  color: $tx-1;
+}

@@ -1,0 +1,36 @@
+/* ═══════════════════════════════════════════════════════════════
+   VOL OSD
+   ═══════════════════════════════════════════════════════════════ */
+.vol-window {
+  margin: 20px;
+  padding: 6px;
+}
+
+.vol-container {
+  background: $osd-bg;
+  padding: 16px;
+  border-radius: 6px;
+  min-width: 260px;
+  box-shadow: $box-shadow;
+}
+
+.vol-icon {
+  color: $tx-1;
+}
+
+.vol-track trough {
+  background: $ui-2;
+  border-radius: 6px;
+  min-height: 12px;
+}
+
+.vol-track trough highlight {
+  background: $accent;
+  border-radius: 6px;
+  min-height: 12px;
+}
+
+.vol-track slider {
+  all: unset;
+  background: transparent;
+}
