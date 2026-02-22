@@ -4,6 +4,7 @@
 
 .dbus
 .local/state/nvim
+.local/games/
 .state
 .steampath
 .steampid
