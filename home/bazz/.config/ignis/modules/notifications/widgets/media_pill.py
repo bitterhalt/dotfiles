@@ -26,14 +26,14 @@ class MediaPill(widgets.Box):
             label=player.bind("title", lambda t: t or "Unknown"),
             ellipsize="end",
             max_width_chars=22,
-            css_classes=["media-pill-nc-title"],
+            css_classes=["media-pill-title"],
         )
 
         artist = widgets.Label(
             label=player.bind("artist", lambda a: a or "Unknown Artist"),
             ellipsize="end",
             max_width_chars=22,
-            css_classes=["media-pill-nc-artist"],
+            css_classes=["media-pill-artist"],
         )
 
         text_box = widgets.Box(

@@ -110,7 +110,6 @@ polkit-gnome
 popsicle-bin
 python-ignis-git
 python-llfuse
-python-pip
 python-pipx
 python-watchdog
 qt5-wayland
