@@ -1,5 +1,4 @@
 import os
-
 from ignis import utils
 from ignis.command_manager import CommandManager
 from ignis.config_manager import ConfigManager
@@ -29,8 +28,6 @@ css = CssManager.get_default()
 command_manager = CommandManager.get_default()
 config_manager = ConfigManager.get_default()
 bar = Bar(config.ui.primary_monitor)
-
-# Delete or set "True for auto-reload"
 config_manager.autoreload_config = False
 
 
@@ -49,11 +46,7 @@ css.apply_css(
     )
 )
 
-
-# Initialize notifications FIRST (must be before bars)
 init_notifications()
-
-# Initialize rest
 init_workspace_osd()
 init_barless_clock()
 init_barless_clock_overlay()
@@ -71,7 +64,6 @@ bar.connect("notify::visible", _on_visible_changed)
 
 
 def _handle_initial_bar_state():
-    """Show workspace OSD on startup if bar starts hidden"""
     if not bar.visible:
         set_bar_visibility(False)
         set_barless_clock_visibility(False)
@@ -83,7 +75,6 @@ def _handle_initial_bar_state():
 
 utils.Timeout(100, _handle_initial_bar_state)
 
-# Initialize components
 VolumeOSD()
 MediaOsdWindow()
 WeatherPopup()
@@ -92,7 +83,6 @@ RecordingOverlay()
 SystemPopup()
 NotificationCenter()
 
-# Register custom commands
 command_manager.add_command("toggle-bar", toggle_bars)
 command_manager.add_command("toggle-barless-clock", toggle_barless_clock_overlay)
 register_recorder_commands()
