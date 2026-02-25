@@ -25,6 +25,7 @@ text/x-csrc=text.desktop;
 text/x-java=text.desktop;
 text/x-makefile=text.desktop;
 text/x-moc=text.desktop;
+text/x-ms-regedit=wine-extension-reg.desktop;
 text/x-pascal=text.desktop;
 text/x-tcl=text.desktop;
 text/x-tex=text.desktop;
