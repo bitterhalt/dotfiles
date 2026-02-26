@@ -2,6 +2,5 @@
 
 $BROWSER &
 discord &
-thunderbird &
 steam &
 transmission-gtk &
