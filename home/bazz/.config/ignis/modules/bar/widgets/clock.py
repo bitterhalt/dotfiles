@@ -42,11 +42,15 @@ class ClockWidget(widgets.Button):
             child=clock_content,
             css_classes=["clock-button", "unset"],
             on_click=lambda x: wm.toggle_window("ignis_NOTIFICATION_CENTER"),
+            on_right_click=lambda x: self._toggle_dnd(),
         )
 
         self._setup_clock()
         self._setup_notifications()
         self.connect("destroy", self._cleanup)
+
+    def _toggle_dnd(self):
+        options.notifications.set_dnd(not options.notifications.dnd)
 
     def _setup_clock(self):
         self._clock_poll = utils.Poll(60000, lambda *_: self._update_time())
