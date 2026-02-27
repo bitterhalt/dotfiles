@@ -1,5 +1,6 @@
 import datetime
 from ignis import utils, widgets
+from ignis.options import options
 from ignis.services.notifications import NotificationService
 from ignis.window_manager import WindowManager
 from modules.utils.signal_manager import SignalManager
@@ -20,9 +21,21 @@ class ClockWidget(widgets.Button):
             visible=False,
         )
 
+        self._dnd_icon = widgets.Icon(
+            image="notification-disabled-symbolic",
+            pixel_size=22,
+            css_classes=["clock-dnd-icon"],
+            visible=options.notifications.bind("dnd"),
+        )
+
+        self._dnd_tracker = widgets.Label(
+            visible=options.notifications.bind("dnd"),
+        )
+        self._dnd_tracker.connect("notify::visible", lambda *_: self._update_notifications())
+
         clock_content = widgets.Box(
             spacing=6,
-            child=[self._clock_label, self._notif_dot],
+            child=[self._clock_label, self._dnd_icon, self._notif_dot],
         )
 
         super().__init__(
@@ -40,7 +53,6 @@ class ClockWidget(widgets.Button):
         self._clock_label.set_property("label", self._clock_poll.bind("output"))
 
     def _update_time(self):
-        """Update time display"""
         time_str = datetime.datetime.now().strftime("%H:%M")
 
         try:
@@ -65,6 +77,10 @@ class ClockWidget(widgets.Button):
         return not config.ui.notifications.should_filter(notif)
 
     def _update_notifications(self, *_):
+        if options.notifications.dnd:
+            self._notif_dot.visible = False
+            return
+
         all_notifs = notifications.notifications
         visible_notifs = [n for n in all_notifs if self._should_show_notification(n)]
         count = len(visible_notifs)
@@ -79,7 +95,6 @@ class ClockWidget(widgets.Button):
             self._notif_dot.visible = False
 
     def _watch_notification(self, nt):
-        """Watch a notification for changes"""
         self._signals.connect(nt, "closed", self._update_notifications)
         try:
             self._signals.connect(nt, "dismissed", self._update_notifications)
