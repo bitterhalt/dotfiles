@@ -113,7 +113,7 @@ class MediaOsdWindow(widgets.RevealerWindow):
             child=pill,
             reveal_child=True,
             transition_type="slide_down",
-            transition_duration=300,
+            transition_duration=config.animations.revealer_duration,
         )
 
         root = widgets.Box(
