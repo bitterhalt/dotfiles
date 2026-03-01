@@ -54,7 +54,7 @@ class BarlessClockWindow(widgets.Window):
     def update_time(self):
         now = datetime.datetime.now()
         self._time_label.label = now.strftime("%H:%M")
-        self._day_name_label.label = now.strftime("%a, ")
+        self._day_name_label.label = now.strftime("%A, ")
         self._day_num_label.label = now.strftime("%d")
         self._month_label.label = now.strftime(" %B")
 
@@ -110,7 +110,7 @@ class BarlessClockOverlay(widgets.Window):
     def _update_time(self):
         now = datetime.datetime.now()
         self._time_label.label = now.strftime("%H:%M")
-        self._date_label.label = now.strftime("%a, %d %B")
+        self._date_label.label = now.strftime("%A, %d %B")
 
     def show_overlay(self):
         self.set_visible(True)
