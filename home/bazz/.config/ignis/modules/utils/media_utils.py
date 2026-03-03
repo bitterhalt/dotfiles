@@ -1,6 +1,20 @@
+import shutil
 from ignis.services.mpris import MprisService, MprisPlayer
+from settings import config
 
 mpris = MprisService.get_default()
+
+
+def _clear_art_cache():
+    try:
+        if config.paths.art_url_cache_dir.exists():
+            shutil.rmtree(config.paths.art_url_cache_dir)
+            config.paths.art_url_cache_dir.mkdir(parents=True, exist_ok=True)
+    except Exception as e:
+        print(f"Failed to clear art cache: {e}")
+
+
+_clear_art_cache()
 
 
 class MediaPlayerConfig:
