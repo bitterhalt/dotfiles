@@ -179,14 +179,18 @@ class MediaOsdWindow(widgets.RevealerWindow):
         if not player:
             self._bound_player = None
             self._app_icon.image = MediaPlayerConfig.PLAYER_ICONS[None]
-            self._app_name.label = "No Media"
-            self._title_label.label = "No media playing"
-            self._artist_label.label = ""
+            self._app_name.label = ""
+            self._title_label.label = ""
+            self._artist_label.label = "No media playing"
             self._album_art.visible = False
-            self._btn_play_icon.image = "media-playback-stop-symbolic"
-            self._btn_prev.set_sensitive(False)
-            self._btn_next.set_sensitive(False)
+            self._btn_prev.visible = False
+            self._btn_play.visible = False
+            self._btn_next.visible = False
             return
+
+        self._btn_prev.visible = True
+        self._btn_play.visible = True
+        self._btn_next.visible = True
 
         self._app_icon.image = MediaPlayerInfo.get_player_icon(player)
         self._app_name.label = MediaPlayerInfo.get_player_name(player)
