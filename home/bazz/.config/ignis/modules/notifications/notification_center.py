@@ -23,8 +23,8 @@ class NotificationCenter(widgets.RevealerWindow):
             css_classes=["dnd-box"],
             hexpand=True,
             halign="start",
+            tooltip_text="Toggle between DND modes 🔔",
             child=[
-                widgets.Label(label="Do Not Disturb", css_classes=["dnd-label"]),
                 dnd_switch,
             ],
         )
