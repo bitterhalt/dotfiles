@@ -2,7 +2,6 @@
 
 # Menu options
 ARCHIVE="BASH
-FNOTT
 FOOT
 FUZZEL
 HYPRLAND
@@ -15,10 +14,9 @@ OPENER=("vopen")
 
 case $CHOICE in
 BASH) exec $TERMCMD -e nvim "$HOME"/.bashrc ;;
-FNOTT) exec $TERMCMD -e nvim "$HOME"/.config/fnott/fnott.ini ;;
 FOOT) exec $TERMCMD -e nvim "$HOME"/.config/foot/foot.ini ;;
-FUZZEL) exec $TERMCMD -e nvim "$HOME"/.config/fuzzel/fuzzel.ini ;;
-HYPRLAND) exec $TERMCMD -e $OPENER "$HOME"/.config/hypr/ ;;
-NEOVIM) exec $TERMCMD -e $OPENER "$HOME"/.config/nvim/ ;;
-IGNIS) exec $TERMCMD -e $OPENER "$HOME"/.config/ignis/ ;;
+FUZZEL) exec $TERMCMD sh -c "cd $HOME/.config/fuzzel && $OPENER ." ;;
+HYPRLAND) exec $TERMCMD sh -c "cd $HOME/.config/hypr && $OPENER ." ;;
+NEOVIM) exec $TERMCMD sh -c "cd $HOME/.config/nvim && $OPENER ." ;;
+IGNIS) exec $TERMCMD sh -c "cd $HOME/.config/ignis && $OPENER ." ;;
 esac
