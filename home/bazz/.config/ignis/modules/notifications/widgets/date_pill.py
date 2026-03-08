@@ -67,7 +67,6 @@ class DateWeatherPill(widgets.Button):
             ],
         )
 
-        # Combined layout - stacked vertically
         content_box = widgets.Box(
             vertical=True,
             spacing=12,

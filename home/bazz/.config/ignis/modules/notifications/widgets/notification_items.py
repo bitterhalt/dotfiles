@@ -72,8 +72,13 @@ class ScreenshotHistoryItem(widgets.Box):
             css_classes=["screenshot-filename"],
         )
 
+        self._expand_arrow = widgets.Icon(
+            image="pan-down-symbolic",
+            pixel_size=16,
+        )
+
         expand_btn = widgets.Button(
-            child=widgets.Icon(image="pan-down-symbolic", pixel_size=20),
+            child=self._expand_arrow,
             css_classes=["expand-btn"],
             tooltip_text="Expand preview",
             on_click=lambda *_: self._toggle_expand(),
@@ -156,10 +161,11 @@ class ScreenshotHistoryItem(widgets.Box):
 
     def _toggle_expand(self):
         self._expanded = not self._expanded
-        self._large_preview.visible = self._expanded
+        self._expand_arrow.image = "pan-up-symbolic" if self._expanded else "pan-down-symbolic"
 
         if self._expanded and self._large_preview not in self.child:
             self.append(self._large_preview)
+            self._large_preview.visible = True
         elif not self._expanded and self._large_preview in self.child:
             self._large_preview.unparent()
 
@@ -279,7 +285,7 @@ class NormalHistoryItem(widgets.Box):
 
         self._expand_arrow = widgets.Icon(
             image="pan-down-symbolic",
-            pixel_size=20,
+            pixel_size=16,
         )
 
         expand_btn = widgets.Button(
