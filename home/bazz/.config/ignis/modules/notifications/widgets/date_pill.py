@@ -90,7 +90,7 @@ class DateWeatherPill(widgets.Button):
 
     def _update_date(self):
         now = datetime.datetime.now()
-        self._name_label.label = now.strftime("%a")
+        self._name_label.label = now.strftime("%A")
         self._day_label.label = now.strftime("%d")
         self._month_label.label = now.strftime("%B")
         self._year_label.label = now.strftime("%Y")
