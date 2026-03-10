@@ -31,7 +31,7 @@ class RecordingIndicator(widgets.EventBox):
         self._signals.connect(recorder, "recording_stopped", self._on_stop)
 
     def _on_start(self, *_):
-        self._icon.set_label("󰻂")
+        self._icon.set_label("󰑋")
         self._icon.set_tooltip_text("Recording.. .\n\nClick to stop")
         self.set_visible(True)
 

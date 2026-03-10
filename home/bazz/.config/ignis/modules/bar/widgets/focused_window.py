@@ -10,7 +10,6 @@ niri = NiriService.get_default()
 class WindowInfoFormatter:
     @staticmethod
     def sanitize_text(text: str) -> str:
-        """Remove problematic characters from window text"""
         if not text:
             return ""
         text = text.replace("|", "-")  # replace pipe with dash
