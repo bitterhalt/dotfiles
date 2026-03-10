@@ -227,7 +227,6 @@ class NetworkSection(widgets.Box):
                 wifi_section,
                 ethernet_section,
                 vpn_section,
-                widgets.Separator(),
                 settings_button,
             ],
         )

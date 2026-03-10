@@ -140,7 +140,6 @@ class AudioSection(widgets.Box):
             item = AudioDeviceItem(s, self.device_type)
             self._device_list.append(item)
 
-        self._device_list.append(widgets.Separator())
         self._device_list.append(
             widgets.Button(
                 css_classes=["audio-settings-btn", "unset"],

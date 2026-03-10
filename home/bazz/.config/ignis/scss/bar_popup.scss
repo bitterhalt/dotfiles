@@ -71,14 +71,17 @@
   margin-top: 4px;
 }
 .sys-network-pill {
+  border-radius: 6px;
+  background: $bg-2;
   margin-top: 4px;
 }
+
 .net-wifi-item,
 .net-ethernet-item,
 .net-vpn-item {
   color: $tx-1;
   border-radius: 6px;
-  padding: 8px;
+  padding: 6px;
   transition:
     background 0.15s,
     border-color 0.15s;
@@ -91,24 +94,8 @@
 }
 
 .sys-net-details {
-  margin-top: 8px;
-}
-.system-info-widget {
-  background: $bg-2;
-  border-radius: 6px;
-  padding: 12px;
-  margin-top: 4px;
-}
-.network-settings-btn {
-  color: $tx-1;
-  background: $ui-1;
-  border-radius: 6px;
   padding: 6px;
-  transition: background 0.15s;
-
-  &:hover {
-    background: $ui-2;
-  }
+  margin: 0px 4px;
 }
 
 .network-settings-label {
@@ -116,6 +103,25 @@
   font-weight: 500;
 }
 
+.network-settings-btn {
+  color: $tx-1;
+  background: $ui-2;
+  border-radius: 6px;
+  padding: 6px;
+  margin: 6px;
+  transition: background 0.15s;
+
+  &:hover {
+    background: $ui-3;
+  }
+}
+
+.system-info-widget {
+  background: $bg-2;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 4px;
+}
 .sys-audio-pill {
   background: $bg-2;
   border-radius: 6px;
@@ -133,7 +139,7 @@
   }
 }
 .sys-audio-details {
-  margin-top: 4px;
+  margin: 4px;
 }
 .pill-audio-scale {
   min-width: 180px;
@@ -195,12 +201,6 @@
   &:hover {
     background: $ui-2;
   }
-}
-
-.sys-audio-separator {
-  background: $ui-1;
-  min-height: 1px;
-  margin: 4px 0;
 }
 
 .system-info-bar {
