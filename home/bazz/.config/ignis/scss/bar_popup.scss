@@ -103,7 +103,7 @@
   color: $tx-1;
   background: $ui-1;
   border-radius: 6px;
-  padding: 4px;
+  padding: 6px;
   transition: background 0.15s;
 
   &:hover {
@@ -139,6 +139,22 @@
   min-width: 180px;
 }
 
+.audio-settings-btn {
+  color: $tx-1;
+  background: $ui-2;
+  border-radius: 6px;
+  padding: 6px;
+  transition: background 0.15s;
+
+  &:hover {
+    background: $ui-3;
+  }
+}
+
+.audio-settings-label {
+  font-size: 13px;
+  font-weight: 500;
+}
 .pill-audio-scale trough {
   background: $ui-2;
   border-radius: 6px;

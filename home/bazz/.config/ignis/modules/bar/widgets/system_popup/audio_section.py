@@ -1,4 +1,5 @@
-from ignis import widgets
+import asyncio
+from ignis import utils, widgets
 from ignis.services.audio import AudioService
 from modules.utils.signal_manager import SignalManager
 
@@ -138,3 +139,25 @@ class AudioSection(widgets.Box):
         for s in streams:
             item = AudioDeviceItem(s, self.device_type)
             self._device_list.append(item)
+
+        self._device_list.append(widgets.Separator())
+        self._device_list.append(
+            widgets.Button(
+                css_classes=["audio-settings-btn", "unset"],
+                on_click=lambda *_: self._open_audio_settings(),
+                child=widgets.Box(
+                    spacing=8,
+                    halign="center",
+                    child=[
+                        widgets.Icon(image="emblem-system-symbolic", pixel_size=16),
+                        widgets.Label(
+                            label="Audio Settings",
+                            css_classes=["audio-settings-label"],
+                        ),
+                    ],
+                ),
+            )
+        )
+
+    def _open_audio_settings(self):
+        asyncio.create_task(utils.exec_sh_async("pavucontrol"))
