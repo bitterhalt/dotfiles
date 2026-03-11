@@ -13,9 +13,7 @@ from modules.osd import (
     init_workspace_osd,
     set_bar_visibility,
     init_barless_clock,
-    init_barless_clock_overlay,
     set_barless_clock_visibility,
-    toggle_barless_clock_overlay,
 )
 from modules.osd.workspace_osd import _osd_window
 from modules.menus import PowerOverlay, RecordingOverlay
@@ -49,7 +47,6 @@ css.apply_css(
 init_notifications()
 init_workspace_osd()
 init_barless_clock()
-init_barless_clock_overlay()
 register_bar(bar)
 
 
@@ -88,6 +85,5 @@ SystemPopup()
 NotificationCenter()
 
 command_manager.add_command("toggle-bar", toggle_bars)
-command_manager.add_command("toggle-barless-clock", toggle_barless_clock_overlay)
 command_manager.add_command("toggle-dnd", _toggle_dnd)
 register_recorder_commands()
