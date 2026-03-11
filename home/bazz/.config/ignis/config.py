@@ -73,6 +73,10 @@ def _handle_initial_bar_state():
             utils.Timeout(500, lambda: _osd_window.show_osd())
 
 
+def _toggle_dnd():
+    options.notifications.set_dnd(not options.notifications.dnd)
+
+
 utils.Timeout(100, _handle_initial_bar_state)
 
 VolumeOSD()
@@ -85,4 +89,5 @@ NotificationCenter()
 
 command_manager.add_command("toggle-bar", toggle_bars)
 command_manager.add_command("toggle-barless-clock", toggle_barless_clock_overlay)
+command_manager.add_command("toggle-dnd", _toggle_dnd)
 register_recorder_commands()
