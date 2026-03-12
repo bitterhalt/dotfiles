@@ -102,31 +102,6 @@ def _generic_net_label() -> str:
     return "Offline"
 
 
-def _net_signal_percent() -> str:
-    if wifi.is_connected and wifi.devices:
-        try:
-            ap = wifi.devices[0].ap
-            if ap is not None and ap.strength is not None:
-                return f"{ap.strength}%"
-        except Exception:
-            return "…"
-    if vpn.is_connected:
-        return "VPN"
-    if ethernet.is_connected:
-        return "LAN"
-    return ""
-
-
-def _primary_net_icon() -> str:
-    if vpn.is_connected:
-        return vpn.icon_name
-    if ethernet.is_connected:
-        return ethernet.icon_name
-    if wifi.is_connected:
-        return wifi.icon_name
-    return "network-offline-symbolic"
-
-
 # ───────────────────────────────────────────────
 # NETWORK SECTION
 # ───────────────────────────────────────────────
@@ -136,16 +111,11 @@ class NetworkSection(widgets.Box):
     def __init__(self):
         super().__init__(vertical=True, spacing=10)
         self._list_visible = False
-        self._icon = widgets.Icon(image=_primary_net_icon(), pixel_size=22)
+
         self._label = widgets.Label(
             label=_generic_net_label(),
             ellipsize="end",
             max_width_chars=16,
-        )
-
-        self._percent = widgets.Label(
-            label=_net_signal_percent(),
-            halign="end",
             hexpand=True,
         )
 
@@ -156,8 +126,12 @@ class NetworkSection(widgets.Box):
         )
 
         pill_content = widgets.Box(
-            spacing=22,
-            child=[self._icon, self._label, self._percent, self._arrow],
+            spacing=8,
+            child=[
+                widgets.Icon(image="wifi-radar", pixel_size=22),
+                self._label,
+                self._arrow,
+            ],
         )
 
         pill_button = widgets.Button(
@@ -227,6 +201,7 @@ class NetworkSection(widgets.Box):
                 wifi_section,
                 ethernet_section,
                 vpn_section,
+                widgets.Separator(),
                 settings_button,
             ],
         )
@@ -235,7 +210,6 @@ class NetworkSection(widgets.Box):
 
         for obj, prop in [
             (wifi, "is_connected"),
-            (wifi, "strength"),
             (wifi, "enabled"),
             (ethernet, "is_connected"),
             (vpn, "is_connected"),
@@ -245,9 +219,7 @@ class NetworkSection(widgets.Box):
         self._refresh()
 
     def _refresh(self):
-        self._icon.image = _primary_net_icon()
         self._label.label = _generic_net_label()
-        self._percent.label = _net_signal_percent()
 
     def _toggle_list(self):
         self._list_visible = not self._list_visible
