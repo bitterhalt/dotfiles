@@ -3,7 +3,7 @@
 ### Software I use
 
 - Distro: [Arch](https://archlinux.org)
-- Bar: [ignis](https://github.com/ignis-sh/ignis)
+- Bar + Basic widgets: [ignis](https://github.com/ignis-sh/ignis) (Compatible with Niri and Hyprland)
 - Notifications: [ignis](https://github.com/ignis-sh/ignis)
 - WM: [Hyprland](https://github.com/hyprwm/Hyprland)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
@@ -47,6 +47,10 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 ```
 
 ---
+
+### TODO
+- [ ] Add bluetooth pill + basic connect/disconnect settings in bar's system_popup
+- [ ] Add optional vertical bar 
 
 ### Inspiration of my cool stuff ⭐
 
