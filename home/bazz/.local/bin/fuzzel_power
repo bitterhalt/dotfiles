@@ -31,7 +31,6 @@ case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Reboot to UEFI" "Shutd
   hyprlock
   ;;
 "Logout")
-  # loginctl terminate-user "$USER"
-  loginctl kill-user "$USER"
+  loginctl terminate-user "$USER"
   ;;
 esac

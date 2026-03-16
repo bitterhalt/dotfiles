@@ -42,13 +42,11 @@ play_previous() {
 # Toggle play/pause
 toggle_play_pause() {
   playerctl play-pause
-  ignis_osd
 }
 
 # Stop playback
 stop_playback() {
   playerctl stop
-  notify-send -e -u low "Playback Stopped"
 }
 
 case "$1" in
