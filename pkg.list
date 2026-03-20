@@ -15,6 +15,7 @@ bc
 blueman
 bluez
 bluez-utils
+brightnessctl
 btop
 btrfs-assistant
 btrfs-progs
@@ -23,6 +24,7 @@ cava
 chafa
 cliphist
 dart-sass
+ddcutil
 discord
 downgrade
 dragon-drop
