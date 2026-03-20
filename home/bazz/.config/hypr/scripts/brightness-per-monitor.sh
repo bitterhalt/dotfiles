@@ -21,10 +21,13 @@ get_ddcutil_display() {
   "DP-1")
     echo "1"
     ;;
-  # Add more if needed:
-  # "DP-4")
-  #     echo "2"
-  #     ;;
+  "DP-2")
+    echo "2"
+    ;;
+  "DP-3")
+    echo "3"
+    ;;
+    # Add more if needed
   *)
     echo ""
     ;;
@@ -119,18 +122,6 @@ case "$COMMAND" in
     if [ "$current" -ne "$new_brightness" ]; then
       set_brightness "$MONITOR" "$new_brightness"
     fi
-  fi
-  ;;
-"right_click")
-  if [ "$current" != "?" ]; then
-    new_brightness=0
-    set_brightness "$MONITOR" "$new_brightness"
-  fi
-  ;;
-"left_click")
-  if [ "$current" != "?" ]; then
-    new_brightness=100
-    set_brightness "$MONITOR" "$new_brightness"
   fi
   ;;
 esac
