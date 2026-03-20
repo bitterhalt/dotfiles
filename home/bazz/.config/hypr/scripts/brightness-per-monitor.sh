@@ -3,12 +3,12 @@
 STEP=5
 STATE_FILE_PREFIX=~/.cache/brightness
 
-# Get monitor name - either from argument, env var, or focused monitor
+# Get monitor name from env var, or focused monitor
 get_monitor_name() {
   if [ -n "$1" ]; then
     echo "$1"
-  elif [ -n "$WAYBAR_OUTPUT_NAME" ]; then
-    echo "$WAYBAR_OUTPUT_NAME"
+  elif [ -n "$CURRENT_OUTPUT_NAME" ]; then
+    echo "$CURRENT_OUTPUT_NAME"
   else
     hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name'
   fi
@@ -19,25 +19,23 @@ get_ddcutil_display() {
   local monitor_name="$1"
   case "$monitor_name" in
   "DP-1")
-    echo "1" # LG ULTRAWIDE - ADJUST THIS FOR YOUR SETUP
+    echo "1"
     ;;
-  # Add more monitors here as needed:
+  # Add more if needed:
   # "DP-4")
   #     echo "2"
   #     ;;
   *)
-    echo "" # No DDC/CI support
+    echo ""
     ;;
   esac
 }
 
-# Get state file for this monitor
 get_state_file() {
   local monitor="$1"
   echo "${STATE_FILE_PREFIX}_${monitor}.tmp"
 }
 
-# Function to send DDC/CI command in background
 set_brightness_ddcutil() {
   local display_num="$1"
   local brightness="$2"
@@ -45,13 +43,11 @@ set_brightness_ddcutil() {
   (ddcutil --display "$display_num" setvcp 10 "$brightness") &
 }
 
-# Function to set laptop brightness
 set_brightness_laptop() {
   local brightness="$1"
   brightnessctl set "${brightness}%" >/dev/null 2>&1
 }
 
-# Get current brightness for a specific monitor
 get_current_brightness() {
   local monitor="$1"
   local state_file=$(get_state_file "$monitor")
@@ -86,15 +82,12 @@ set_brightness() {
   local display_num=$(get_ddcutil_display "$monitor")
 
   if [ "$monitor" = "eDP-1" ]; then
-    # Laptop display
     echo "$new_brightness" >"$state_file"
     set_brightness_laptop "$new_brightness"
   elif [ -n "$display_num" ]; then
-    # External monitor with DDC/CI
     echo "$new_brightness" >"$state_file"
     set_brightness_ddcutil "$display_num" "$new_brightness"
   else
-    # Unsupported monitor
     return
   fi
 
