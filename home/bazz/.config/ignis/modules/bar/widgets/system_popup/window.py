@@ -64,10 +64,10 @@ class SystemPopup(widgets.RevealerWindow):
 
         self._audio_sections = [speaker, mic]
 
-        audio_content = widgets.Box(
+        slider_content = widgets.Box(
             vertical=True,
             spacing=10,
-            css_classes=["sys-audio-pill"],
+            css_classes=["slider-pill"],
             child=[speaker, mic],
         )
 
@@ -90,7 +90,7 @@ class SystemPopup(widgets.RevealerWindow):
             css_classes=["system-menu", "unset"],
             child=[
                 top_row,
-                audio_content,
+                slider_content,
                 network_content,
                 system_info,
             ],

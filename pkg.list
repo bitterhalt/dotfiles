@@ -35,7 +35,6 @@ fastfetch
 fd
 ffmpegthumbnailer
 file-roller
-firefox
 foot
 foot-terminfo
 fuse2
@@ -64,6 +63,7 @@ hyprlock
 hyprpicker
 ignis-gvc-git
 imagemagick
+imv
 inotify-tools
 iwd
 iwmenu-git
