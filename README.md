@@ -54,6 +54,8 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 - [ ] Ignis: add optional vertical bar
 - [ ] Ignis: add brighness osd  + slider in bar's popup menu (easy but I currently don't have laptop)
 
+---
+
 ### Inspiration of my cool stuff ⭐
 
 - [SwayKh](https://github.com/SwayKh/dotfiles/tree/main) - For TONS of ideas and ispiration 😍
