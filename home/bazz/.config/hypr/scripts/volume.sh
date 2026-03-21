@@ -24,5 +24,6 @@ down)
   ;;
 mute)
   wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+  $NOTIFY
   ;;
 esac

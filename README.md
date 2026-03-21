@@ -49,8 +49,9 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 ---
 
 ### TODO
+
 - [ ] Add bluetooth pill + basic connect/disconnect settings in bar's system_popup
-- [ ] Add optional vertical bar 
+- [ ] Add optional vertical bar
 
 ### Inspiration of my cool stuff ⭐
 
