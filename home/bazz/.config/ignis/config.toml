@@ -90,7 +90,7 @@ warning_threshold = 30
 # ANIMATIONS
 # ══════════════════════════════════════════════════════════════
 [animations]
-revealer_duration = 300 # Use "0" to if don't want animation
+revealer_duration = 200 # Use "0" to if don't want animation
 
 # ══════════════════════════════════════════════════════════════
 # PATHS
