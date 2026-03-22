@@ -235,15 +235,6 @@ swayimg.viewer.on_mouse("MouseExtra", function()
 	swayimg.viewer.switch_image("next")
 end)
 
--- Alt+Scroll: frame navigation (animations)
-swayimg.viewer.on_mouse("Alt-ScrollUp", function()
-	swayimg.viewer.switch_frame("prev")
-end)
-
-swayimg.viewer.on_mouse("Alt-ScrollDown", function()
-	swayimg.viewer.switch_frame("next")
-end)
-
 --------------------------------------------------------------------------------
 -- Key bindings: Gallery mode
 --------------------------------------------------------------------------------
