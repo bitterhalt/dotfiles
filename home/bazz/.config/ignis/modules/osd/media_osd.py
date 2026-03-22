@@ -174,7 +174,6 @@ class MediaOsdWindow(widgets.RevealerWindow):
 
     def _on_track_changed(self, player: MprisPlayer):
         self._apply_player(player)
-        self.show_osd()
 
     def _apply_no_player(self):
         self._app_icon.image = MediaPlayerConfig.PLAYER_ICONS[None]
