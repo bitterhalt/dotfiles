@@ -144,16 +144,19 @@ swayimg.viewer.on_key("Shift-g", function()
 end)
 
 -- Zoom
-swayimg.viewer.on_key("equal", function()
-	swayimg.viewer.set_scale("zoom", 10)
-end)
 
 swayimg.viewer.on_key("plus", function()
-	swayimg.viewer.set_scale("zoom", 10)
+	local pos = swayimg.get_mouse_pos()
+	local scale = swayimg.viewer.get_scale()
+	scale = scale + scale / 10
+	swayimg.viewer.set_abs_scale(scale, pos.x, pos.y)
 end)
 
 swayimg.viewer.on_key("minus", function()
-	swayimg.viewer.set_scale("zoom", -10)
+	local pos = swayimg.get_mouse_pos()
+	local scale = swayimg.viewer.get_scale()
+	scale = scale + scale / -10
+	swayimg.viewer.set_abs_scale(scale, pos.x, pos.y)
 end)
 
 swayimg.viewer.on_key("Shift-equal", function()
@@ -293,9 +296,6 @@ swayimg.gallery.on_key("Delete", function()
 end)
 
 -- Thumbnail size adjust (Equal/Minus/Plus = thumb ±20)
-swayimg.gallery.on_key("Equal", function()
-	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() + 20)
-end)
 
 swayimg.gallery.on_key("Minus", function()
 	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() - 20)
