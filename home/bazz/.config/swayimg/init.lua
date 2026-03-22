@@ -155,16 +155,12 @@ end)
 swayimg.viewer.on_key("minus", function()
 	local pos = swayimg.get_mouse_pos()
 	local scale = swayimg.viewer.get_scale()
-	scale = scale + scale / -10
+	scale = scale - scale / 10
 	swayimg.viewer.set_abs_scale(scale, pos.x, pos.y)
 end)
 
 swayimg.viewer.on_key("Shift-equal", function()
 	swayimg.viewer.set_fix_scale("width")
-end)
-
-swayimg.viewer.on_key("Shift-e", function()
-	swayimg.viewer.set_fix_scale("height")
 end)
 
 -- External commands
