@@ -164,19 +164,6 @@ swayimg.viewer.on_key("Shift-e", function()
 	swayimg.viewer.set_fix_scale("height")
 end)
 
--- Thumbnail size adjust (Equal/Minus/Plus = thumb ±20)
-swayimg.viewer.on_key("Equal", function()
-	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() + 20)
-end)
-
-swayimg.viewer.on_key("Minus", function()
-	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() - 20)
-end)
-
-swayimg.viewer.on_key("Plus", function()
-	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() + 20)
-end)
-
 -- External commands
 swayimg.viewer.on_key("Delete", function()
 	local image = swayimg.viewer.get_image()
@@ -305,6 +292,18 @@ swayimg.gallery.on_key("Delete", function()
 	swayimg.text.set_status("File trashed: " .. image.path)
 end)
 
+-- Thumbnail size adjust (Equal/Minus/Plus = thumb ±20)
+swayimg.gallery.on_key("Equal", function()
+	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() + 20)
+end)
+
+swayimg.gallery.on_key("Minus", function()
+	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() - 20)
+end)
+
+swayimg.gallery.on_key("Plus", function()
+	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() + 20)
+end)
 swayimg.gallery.on_key("b", function()
 	local image = swayimg.gallery.get_image()
 	os.execute("setbg '" .. image.path .. "'")
