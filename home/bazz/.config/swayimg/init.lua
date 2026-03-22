@@ -107,7 +107,7 @@ swayimg.viewer.on_key("q", function()
 end)
 
 swayimg.viewer.on_key("f", function()
-	swayimg.fullscreen()
+	swayimg.toggle_fullscreen()
 end)
 
 swayimg.viewer.on_key("r", function()
@@ -267,7 +267,7 @@ swayimg.gallery.on_key("q", function()
 end)
 
 swayimg.gallery.on_key("f", function()
-	swayimg.fullscreen()
+	swayimg.toggle_fullscreen()
 end)
 
 swayimg.gallery.on_key("Return", function()
