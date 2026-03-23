@@ -5,6 +5,7 @@ swayimg.set_mode("viewer")
 swayimg.enable_antialiasing(true)
 swayimg.enable_decoration(true)
 swayimg.enable_overlay(false)
+swayimg.set_dnd_button("MouseRight") -- mouse drag and drop
 
 --------------------------------------------------------------------------------
 -- Image list
@@ -53,7 +54,6 @@ swayimg.gallery.set_text("bottomleft", {})
 --------------------------------------------------------------------------------
 swayimg.viewer.set_default_scale("optimal")
 swayimg.viewer.set_default_position("center")
-swayimg.viewer.set_drag_button("MouseLeft")
 swayimg.viewer.set_window_background(0xD0000000)
 swayimg.viewer.set_image_chessboard(20, 0xff333333, 0xff4c4c4c)
 swayimg.viewer.enable_centering(true)
@@ -78,17 +78,13 @@ swayimg.viewer.set_text("topright", {
 })
 
 -- bottom_left
-swayimg.viewer.set_text("bottomleft", {
-	-- add something
-})
-
--- bottom_right = status  (status messages appear here automatically)
+swayimg.viewer.set_text("bottomleft", {})
 swayimg.viewer.set_text("bottomright", {})
 
 --------------------------------------------------------------------------------
 -- Slideshow mode
 --------------------------------------------------------------------------------
-swayimg.slideshow.set_timeout(3) -- time = 3
+swayimg.slideshow.set_timeout(3)
 swayimg.slideshow.set_default_scale("fit")
 swayimg.slideshow.set_window_background("auto")
 
