@@ -27,6 +27,28 @@ swayimg.text.set_timeout(5)
 swayimg.text.set_status_timeout(3)
 
 --------------------------------------------------------------------------------
+-- Gallery mode
+--------------------------------------------------------------------------------
+swayimg.gallery.set_thumb_size(180)
+swayimg.gallery.set_padding_size(10)
+swayimg.gallery.set_border_size(2)
+swayimg.gallery.set_border_color(0xff24837B)
+swayimg.gallery.set_selected_color(0xff403E3C)
+swayimg.gallery.set_unselected_color(0xff1C1B1A)
+swayimg.gallery.set_window_color(0xAA000000)
+swayimg.gallery.limit_cache(100)
+swayimg.gallery.enable_preload(false)
+swayimg.gallery.enable_pstore(true)
+
+-- top_right = index
+swayimg.gallery.set_text("topright", { "{list.index} of {list.total}" })
+
+-- bottom_right = name,status
+swayimg.gallery.set_text("bottomright", { "{name}" })
+swayimg.gallery.set_text("topleft", {})
+swayimg.gallery.set_text("bottomleft", {})
+
+--------------------------------------------------------------------------------
 -- Viewer mode
 --------------------------------------------------------------------------------
 swayimg.viewer.set_default_scale("optimal")
@@ -55,7 +77,7 @@ swayimg.viewer.set_text("topright", {
 	"Scale: {scale}",
 })
 
--- bottom_left = scale,frame
+-- bottom_left
 swayimg.viewer.set_text("bottomleft", {
 	-- add something
 })
@@ -75,28 +97,6 @@ swayimg.slideshow.set_text("bottomright", { "{path}", "{status}" })
 swayimg.slideshow.set_text("topleft", {})
 swayimg.slideshow.set_text("topright", {})
 swayimg.slideshow.set_text("bottomleft", {})
-
---------------------------------------------------------------------------------
--- Gallery mode
---------------------------------------------------------------------------------
-swayimg.gallery.set_thumb_size(180)
-swayimg.gallery.set_padding_size(10)
-swayimg.gallery.set_border_size(2)
-swayimg.gallery.set_border_color(0xff24837B)
-swayimg.gallery.set_selected_color(0xff403E3C)
-swayimg.gallery.set_unselected_color(0xff1C1B1A)
-swayimg.gallery.set_window_color(0xAA000000)
-swayimg.gallery.limit_cache(100)
-swayimg.gallery.enable_preload(false)
-swayimg.gallery.enable_pstore(true)
-
--- top_right = index
-swayimg.gallery.set_text("topright", { "{list.index} of {list.total}" })
-
--- bottom_right = name,status
-swayimg.gallery.set_text("bottomright", { "{name}" })
-swayimg.gallery.set_text("topleft", {})
-swayimg.gallery.set_text("bottomleft", {})
 
 --------------------------------------------------------------------------------
 -- Key bindings: Viewer mode
