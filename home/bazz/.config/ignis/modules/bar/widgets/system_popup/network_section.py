@@ -1,12 +1,10 @@
 import asyncio
 from ignis import utils, widgets
-from ignis.services.network import NetworkService, EthernetDevice, VpnConnection, WifiAccessPoint
+from ignis.services.network import NetworkService, EthernetDevice, WifiAccessPoint
 
 net = NetworkService.get_default()
 wifi = net.wifi
 ethernet = net.ethernet
-vpn = net.vpn
-
 
 # ───────────────────────────────────────────────
 # NETWORK ITEMS
@@ -27,26 +25,6 @@ class WifiNetworkItem(widgets.Button):
                         image="object-select-symbolic",
                         pixel_size=16,
                         visible=ap.bind("is_connected"),
-                        hexpand=True,
-                        halign="end",
-                    ),
-                ],
-            ),
-        )
-
-
-class VpnNetworkItem(widgets.Button):
-    def __init__(self, conn: VpnConnection):
-        super().__init__(
-            css_classes=["net-vpn-item", "unset"],
-            on_click=lambda *_: asyncio.create_task(conn.toggle_connection()),
-            child=widgets.Box(
-                spacing=8,
-                child=[
-                    widgets.Icon(image="network-vpn-symbolic", pixel_size=22),
-                    widgets.Label(label=conn.name, ellipsize="end", max_width_chars=20),
-                    widgets.Label(
-                        label=conn.bind("is_connected", lambda c: "Disconnect" if c else "Connect"),
                         hexpand=True,
                         halign="end",
                     ),
@@ -85,17 +63,9 @@ class EthernetItem(widgets.Button):
 
 
 def _generic_net_label() -> str:
-    if vpn.is_connected:
-        return "VPN"
     if ethernet.is_connected:
         return "Ethernet"
     if wifi.is_connected and wifi.devices:
-        try:
-            ap = wifi.devices[0].ap
-            if ap and ap.ssid:
-                return ap.ssid
-        except Exception:
-            pass
         return "Wi-Fi"
     if not wifi.enabled:
         return "Airplane mode"
@@ -164,15 +134,6 @@ class NetworkSection(widgets.Box):
             child=ethernet.bind("devices", transform=lambda devs: [EthernetItem(d) for d in devs]),
         )
 
-        vpn_section = widgets.Box(
-            vertical=True,
-            spacing=4,
-            child=vpn.bind(
-                "connections",
-                transform=lambda conns: [VpnNetworkItem(c) for c in conns],
-            ),
-        )
-
         settings_button = widgets.Button(
             css_classes=["network-settings-btn", "unset"],
             on_click=lambda *_: self._open_network_settings(),
@@ -200,7 +161,6 @@ class NetworkSection(widgets.Box):
             child=[
                 wifi_section,
                 ethernet_section,
-                vpn_section,
                 widgets.Separator(),
                 settings_button,
             ],
@@ -212,7 +172,6 @@ class NetworkSection(widgets.Box):
             (wifi, "is_connected"),
             (wifi, "enabled"),
             (ethernet, "is_connected"),
-            (vpn, "is_connected"),
         ]:
             obj.connect(f"notify::{prop.replace('_', '-')}", lambda *_: self._refresh())
 
