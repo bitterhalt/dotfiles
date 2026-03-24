@@ -61,7 +61,8 @@ class SystemIndicatorWidget(widgets.Button):
         return audio.speaker.icon_name
 
     def _get_mic_visible(self):
-        return not audio.microphone.is_muted
+        has_mic = audio.microphone is not None and audio.microphone.description != ""
+        return has_mic and not audio.microphone.is_muted
 
     def _get_mic_icon(self):
         return (
@@ -96,6 +97,10 @@ class SystemIndicatorWidget(widgets.Button):
         self._signals.connect(audio.speaker, "notify::is-muted", self._refresh)
         self._signals.connect(audio.speaker, "notify::volume", self._refresh)
         self._signals.connect(audio.microphone, "notify::is-muted", self._refresh)
+
+        # Microphone device connection/disconnection signals
+        self._signals.connect(audio, "microphone-added", self._refresh)
+        self._signals.connect(audio, "notify::microphone", self._refresh)
 
         # Network signals
         self._signals.connect(wifi, "notify::is-connected", self._refresh)
