@@ -34,7 +34,7 @@ class ClockWidget(widgets.Button):
         self._dnd_tracker.connect("notify::visible", lambda *_: self._update_notifications())
 
         clock_content = widgets.Box(
-            spacing=6,
+            spacing=2,
             child=[self._clock_label, self._dnd_icon, self._notif_dot],
         )
 
