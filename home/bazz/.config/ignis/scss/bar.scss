@@ -28,7 +28,7 @@
   border-radius: 6px;
   font-weight: 600;
   margin: 2px 0px;
-  padding: 0px 6px;
+  padding: 0px 4px;
 }
 .clock-dnd-icon {
   color: $tx-1;
@@ -57,9 +57,7 @@
 }
 
 .clock-notif-dot {
-  font-size: 10px;
-  line-height: 1;
-  margin-left: -2px;
+  font-size: 8px;
 }
 
 .system-tray {
