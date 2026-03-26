@@ -24,7 +24,6 @@ cava
 chafa
 cliphist
 dart-sass
-ddcui
 ddcutil
 discord
 downgrade
@@ -86,6 +85,7 @@ mangohud
 meld
 mesa-utils
 mpv
+mpv-mpris
 neovim
 net-tools
 nethogs

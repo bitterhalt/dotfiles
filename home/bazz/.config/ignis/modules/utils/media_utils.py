@@ -23,14 +23,11 @@ _clear_art_cache()
 
 class MediaPlayerConfig:
     PLAYER_ICONS = {
-        "spotify": "spotify-symbolic",
+        "spotify": "spotify",
         "firefox": "firefox",
         "zen": "zen-browser",
-        "chromium": "chromium-browser-symbolic",
-        "chrome": "chrome-symbolic",
-        "vlc": "vlc-symbolic",
-        "mpv": "mpv-symbolic",
-        "rhythmbox": "rhythmbox-symbolic",
+        "vlc": "vlc",
+        "mpv": "mpv",
         None: "folder-music-symbolic",
     }
 
@@ -38,12 +35,9 @@ class MediaPlayerConfig:
         "spotify": "Spotify",
         "firefox": "Firefox",
         "zen": "Zen Browser",
-        "chromium": "Chromium",
-        "chrome": "Google Chrome",
         "vlc": "VLC",
         "mpv": "MPV",
-        "rhythmbox": "Rhythmbox",
-        None: "Media Player",
+        None: "Currently playing",
     }
 
 
@@ -54,17 +48,7 @@ class MediaPlayerInfo:
             return MediaPlayerConfig.PLAYER_ICONS[None]
 
         entry = player.desktop_entry
-        if entry in MediaPlayerConfig.PLAYER_ICONS:
-            return MediaPlayerConfig.PLAYER_ICONS[entry]
-
-        if player.track_id:
-            tid = player.track_id.lower()
-            if "chromium" in tid:
-                return MediaPlayerConfig.PLAYER_ICONS["chromium"]
-            if "chrome" in tid:
-                return MediaPlayerConfig.PLAYER_ICONS["chrome"]
-
-        return MediaPlayerConfig.PLAYER_ICONS[None]
+        return MediaPlayerConfig.PLAYER_ICONS.get(entry, MediaPlayerConfig.PLAYER_ICONS[None])
 
     @staticmethod
     def get_player_name(player: MprisPlayer | None) -> str:

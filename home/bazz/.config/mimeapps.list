@@ -43,6 +43,6 @@ image/jpeg=viewnior.desktop;pqiv.desktop;imv-dir.desktop;imv.desktop;gimp.deskto
 image/avif=gimp.desktop;
 application/x-extension-xht=zen.desktop;firefox.desktop;
 application/json=text.desktop;
-video/mp4=mpv.desktop;vlc.desktop;
+video/mp4=vlc.desktop;mpv.desktop;
 video/x-matroska=vlc.desktop;mpv.desktop;
 image/gif=imv-dir.desktop;
