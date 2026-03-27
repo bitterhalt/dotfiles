@@ -112,24 +112,33 @@ class WeatherPopup(widgets.RevealerWindow):
             transition_duration=config.animations.revealer_duration,
         )
 
+        container = widgets.Box(
+            valign="start",
+            halign="center",
+            css_classes=["weather-container"],
+            child=[revealer],
+        )
+
+        overlay_btn = widgets.Button(
+            vexpand=True,
+            hexpand=True,
+            can_focus=False,
+            css_classes=["unset"],
+            on_click=lambda x: wm.close_window("ignis_WEATHER"),
+        )
+
         super().__init__(
             monitor=config.ui.weather_monitor,
             visible=False,
-            anchor=["top"],
+            anchor=["top", "right", "bottom", "left"],
             namespace="ignis_WEATHER",
             layer="top",
             popup=True,
             kb_mode="on_demand",
             css_classes=["weather-window"],
-            child=widgets.Box(
-                child=[
-                    widgets.Box(
-                        valign="start",
-                        halign="center",
-                        css_classes=["weather-container"],
-                        child=[revealer],
-                    ),
-                ]
+            child=widgets.Overlay(
+                child=overlay_btn,
+                overlays=[container],
             ),
             revealer=revealer,
         )
@@ -145,13 +154,13 @@ class WeatherPopup(widgets.RevealerWindow):
         if self._refresh_poll:
             try:
                 self._refresh_poll.cancel()
-            except:
+            except Exception:
                 pass
             self._refresh_poll = None
         if self._update_task:
             try:
                 self._update_task.cancel()
-            except:
+            except Exception:
                 pass
             self._update_task = None
 
@@ -228,6 +237,7 @@ class WeatherPopup(widgets.RevealerWindow):
                     ],
                 )
             )
+
         sunrise = format_time_hm(datetime.fromtimestamp(data["sunrise"]))
         sunset = format_time_hm(datetime.fromtimestamp(data["sunset"]))
 
