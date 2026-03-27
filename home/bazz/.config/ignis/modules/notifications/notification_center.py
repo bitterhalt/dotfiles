@@ -13,6 +13,7 @@ class NotificationCenter(widgets.RevealerWindow):
     def __init__(self):
         self._media_pill = MediaCenterWidget()
         self._notification_list = NotificationList()
+
         dnd_switch = widgets.Switch(
             active=options.notifications.bind("dnd"),
             on_change=lambda _, s: options.notifications.set_dnd(s),
@@ -24,9 +25,7 @@ class NotificationCenter(widgets.RevealerWindow):
             hexpand=True,
             halign="start",
             tooltip_text="Toggle between DND modes 🔔",
-            child=[
-                dnd_switch,
-            ],
+            child=[dnd_switch],
         )
 
         clear_btn = widgets.Button(
@@ -80,19 +79,26 @@ class NotificationCenter(widgets.RevealerWindow):
             child=[revealer],
         )
 
+        overlay_btn = widgets.Button(
+            vexpand=True,
+            hexpand=True,
+            can_focus=False,
+            css_classes=["unset"],
+            on_click=lambda x: wm.close_window("ignis_NOTIFICATION_CENTER"),
+        )
+
         super().__init__(
             monitor=config.ui.notification_center_monitor,
             visible=False,
             popup=True,
-            anchor=["top"],
+            anchor=["top", "right", "bottom", "left"],
             layer="top",
             namespace="ignis_NOTIFICATION_CENTER",
             css_classes=["center-window"],
             kb_mode="on_demand",
-            child=widgets.Box(
-                child=[
-                    container,
-                ]
+            child=widgets.Overlay(
+                child=overlay_btn,
+                overlays=[container],
             ),
             revealer=revealer,
         )

@@ -121,17 +121,15 @@ class SystemPopup(widgets.RevealerWindow):
         super().__init__(
             monitor=config.ui.primary_monitor,
             visible=False,
-            anchor=["top", "right"],
+            anchor=["top", "right", "bottom", "left"],
             namespace="ignis_SYSTEM_MENU",
             layer="top",
             popup=True,
             css_classes=["system-menu-window", "unset"],
             kb_mode="on_demand",
-            child=widgets.Box(
-                child=[
-                    overlay_btn,
-                    container,
-                ]
+            child=widgets.Overlay(
+                child=overlay_btn,
+                overlays=[container],
             ),
             revealer=revealer,
         )
