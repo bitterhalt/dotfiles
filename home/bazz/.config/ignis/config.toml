@@ -45,6 +45,7 @@ show_system_tray = true
 window_title_exceptions = [
   "firefox",
   "zen",
+  "mpv"
 ]
 
 # ══════════════════════════════════════════════════════════════
