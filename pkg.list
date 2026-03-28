@@ -12,7 +12,7 @@ base-devel
 bash-completion
 bat
 bc
-blueman
+bluetui
 bluez
 bluez-utils
 brightnessctl
