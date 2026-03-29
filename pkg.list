@@ -55,7 +55,6 @@ grim
 grub
 grub-btrfs
 gst-plugin-pipewire
-gtk-engine-murrine
 htop
 hypridle
 hyprland
@@ -128,7 +127,6 @@ screenkey
 signal-desktop
 slurp
 smartmontools
-smem
 snapper
 stalker-gamma-cli-bin
 starship
@@ -146,7 +144,6 @@ trash-cli
 tree
 tree-sitter-cli
 ttf-jetbrains-mono
-ttf-material-symbols-variable-git
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 tty-clock
