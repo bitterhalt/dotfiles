@@ -180,6 +180,8 @@ class BarConfig:
     remember_state: bool = True
     window_title_exceptions: list[str] | None = None
     show_system_tray: bool = True
+    clock_format: str = "%H:%M"
+    clock_interval: int = 60000
 
     @classmethod
     def from_dict(cls, data: Dict) -> "BarConfig":
@@ -228,6 +230,14 @@ class UIConfig:
     timeouts: TimeoutConfig = field(default_factory=TimeoutConfig)
     bar: BarConfig = field(default_factory=BarConfig)
     notifications: NotificationConfig = field(default_factory=NotificationConfig)
+
+    @property
+    def bar_clock_format(self):
+        return self.bar.clock_format
+
+    @property
+    def bar_clock_interval(self):
+        return self.bar.clock_interval
 
     @property
     def primary_monitor(self):

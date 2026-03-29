@@ -53,11 +53,11 @@ class ClockWidget(widgets.Button):
         options.notifications.set_dnd(not options.notifications.dnd)
 
     def _setup_clock(self):
-        self._clock_poll = utils.Poll(60000, lambda *_: self._update_time())
+        self._clock_poll = utils.Poll(config.ui.bar_clock_interval, lambda *_: self._update_time())
         self._clock_label.set_property("label", self._clock_poll.bind("output"))
 
     def _update_time(self):
-        time_str = datetime.datetime.now().strftime("%H:%M")
+        time_str = datetime.datetime.now().strftime(config.ui.bar_clock_format)
 
         try:
             from modules.osd.clock_osd import update_barless_clock
