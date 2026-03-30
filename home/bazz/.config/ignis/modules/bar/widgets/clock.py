@@ -42,6 +42,7 @@ class ClockWidget(widgets.Button):
             child=clock_content,
             css_classes=["clock-button", "unset"],
             on_click=lambda x: wm.toggle_window("ignis_NOTIFICATION_CENTER"),
+            on_middle_click=lambda x: notifications.clear_all(),
             on_right_click=lambda x: self._toggle_dnd(),
         )
 
