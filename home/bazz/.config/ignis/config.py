@@ -8,7 +8,6 @@ from modules.bar import Bar, register_bar, toggle_bars
 from modules.bar.widgets import SystemPopup
 from modules.notifications import NotificationCenter, init_notifications
 from modules.osd import (
-    MediaOsdWindow,
     VolumeOSD,
     init_workspace_osd,
     set_bar_visibility,
@@ -77,7 +76,6 @@ def _toggle_dnd():
 utils.Timeout(100, _handle_initial_bar_state)
 
 VolumeOSD()
-MediaOsdWindow()
 WeatherPopup()
 PowerOverlay()
 RecordingOverlay()

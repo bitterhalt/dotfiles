@@ -3,7 +3,6 @@ from ignis.options import options
 from ignis.window_manager import WindowManager
 from .notifications import NotificationList
 from .widgets.date_pill import DateWeatherPill
-from .widgets.media_pill import MediaCenterWidget
 from settings import config
 
 wm = WindowManager.get_default()
@@ -11,7 +10,6 @@ wm = WindowManager.get_default()
 
 class NotificationCenter(widgets.RevealerWindow):
     def __init__(self):
-        self._media_pill = MediaCenterWidget()
         self._notification_list = NotificationList()
 
         dnd_switch = widgets.Switch(
@@ -56,7 +54,6 @@ class NotificationCenter(widgets.RevealerWindow):
             css_classes=["right-column"],
             child=[
                 self._date_weather_pill,
-                self._media_pill,
             ],
         )
 

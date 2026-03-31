@@ -28,7 +28,6 @@ notification_center = 0
 [ui.timeouts]
 osd = 2000
 volume_osd = 2000
-media_osd = 5000
 time_osd = 5000
 workspace_osd = 1500
 

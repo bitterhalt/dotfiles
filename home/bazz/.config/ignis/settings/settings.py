@@ -163,7 +163,6 @@ class MonitorConfig:
 class TimeoutConfig:
     osd: int = 2000
     volume_osd: int = 2000
-    media_osd: int = 5000
     time_osd: int = 8000
     workspace_osd: int = 1500
 
@@ -282,10 +281,6 @@ class UIConfig:
     @property
     def volume_osd_timeout(self):
         return self.timeouts.volume_osd
-
-    @property
-    def media_osd_timeout(self):
-        return self.timeouts.media_osd
 
     @property
     def time_osd_timeout(self):
