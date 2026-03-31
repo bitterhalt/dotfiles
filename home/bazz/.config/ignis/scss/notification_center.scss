@@ -97,7 +97,6 @@
   margin: 0px 12px 12px 12px;
   background: $bg-2;
   border-radius: 6px;
-  min-width: 270px;
   transition:
     background 0.15s,
     border-color 0.15s;
@@ -151,7 +150,6 @@
   all: unset;
   background: $ui-1;
   min-height: 1px;
-  margin: 4px 0;
 }
 
 /* ───────────────────────────────────────────────────────────────

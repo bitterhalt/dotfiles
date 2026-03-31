@@ -51,6 +51,7 @@ class NotificationList:
             sig_manager = SignalManager()
             sig_manager.connect(notif, "closed", lambda *_: self._on_notification_closed())
             self._item_signals[id(notif)] = sig_manager
+
         self._update_empty_state()
 
     def _clear_items(self):
@@ -81,14 +82,15 @@ class NotificationList:
         self._load_notifications()
 
     def _update_empty_state(self):
-        visible_notifs = [n for n in notifications.notifications if self._should_show_notification(n)]
-        has_notifications = len(visible_notifs) > 0
+        has_notifications = len(self._notif_list.child) > 0
         self._notif_empty.visible = not has_notifications
 
     def clear_all(self):
-        notifications.clear_all()
+        self._signals.disconnect_all()
         self._clear_items()
+        notifications.clear_all()
         self._update_empty_state()
+        self._signals.connect(notifications, "notified", self._on_notified)
 
     def _cleanup(self, *_):
         self._clear_items()

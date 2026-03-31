@@ -1,50 +1,25 @@
 #!/usr/bin/env bash
 
-is_player_running() {
-  playerctl --list-all >/dev/null 2>&1
-  return $?
-}
-
-ignis_osd() {
-  if command -v ignis >/dev/null 2>&1; then
-    goignis toggle-window ignis_MEDIA_OSD
-  else
-    show_fallback_notification
+notify_track() {
+  if playerctl status == "Playing"; then
+    title=$(playerctl metadata title 2>/dev/null || echo "Unknown Title")
+    artist=$(playerctl metadata artist 2>/dev/null || echo "")
+    notify-send -r 4992 -i media-playback-playing -t 5000 -a Playerctl "$artist" "$title"
   fi
 }
 
-show_fallback_notification() {
-  if ! is_player_running; then
-    return 0
-  fi
-
-  status=$(playerctl status 2>/dev/null || echo "Unknown")
-  if [[ "$status" == "Playing" ]]; then
-    song_title=$(playerctl metadata title 2>/dev/null || echo "Unknown Title")
-    notify-send -t 5000 -a Playerctl "Playing" "$song_title" -h string:x-canonical-private-synchronous:volume
-  elif [[ "$status" == "Paused" ]]; then
-    notify-send -t 5000 -a Playerctl "Playback Paused" -h string:x-canonical-private-synchronous:volume
-  fi
-}
-
-# Play the next track
 play_next() {
   playerctl next
-  ignis_osd
 }
 
-# Play the previous track
 play_previous() {
   playerctl previous
-  ignis_osd
 }
 
-# Toggle play/pause
 toggle_play_pause() {
   playerctl play-pause
 }
 
-# Stop playback
 stop_playback() {
   playerctl stop
 }
@@ -63,10 +38,10 @@ case "$1" in
   stop_playback
   ;;
 "--noti")
-  ignis_osd
+  notify_track
   ;;
 *)
-  echo "Usage: $0 [--noti|--nxt|--prv|--play|--stop]"
+  echo "Usage: $0 [--nxt|--prv|--play|--stop|--noti]"
   exit 1
   ;;
 esac
