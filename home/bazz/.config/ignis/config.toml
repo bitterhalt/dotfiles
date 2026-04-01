@@ -71,6 +71,7 @@ filter_keywords = [
   "Smart-gaps",
   "TMUX",
   "Clock is",
+  "Playerctl"
 ]
 
 # ══════════════════════════════════════════════════════════════
