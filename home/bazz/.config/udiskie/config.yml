@@ -1,8 +1,8 @@
 program_options:
-  tray: auto # Show tray icon
-  notify: true # Enable notifications
-  automount: true # Enable automatic mounting
-  file_manager: thunar # Program to open mounted directories
+  tray: false
+  notify: true
+  automount: true
+  file_manager: thunar
 
 notifications:
   timeout: 5
