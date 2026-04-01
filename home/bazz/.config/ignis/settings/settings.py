@@ -58,13 +58,10 @@ class PathConfig:
 
     recordings_dir: Path = Path.home() / "Videos" / "Captures"
     screenshots_dir: Path = Path.home() / "Pictures" / "Screenshots"
-    art_url_cache_dir: Path = field(init=False)
-
     weather_cache: Path = field(init=False)
 
     def __post_init__(self):
         self.weather_cache = self.cache_dir / "weather_cache.json"
-        self.art_url_cache_dir = self.cache_dir / "art_url"
 
         for directory in [
             self.cache_dir,
