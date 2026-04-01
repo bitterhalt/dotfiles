@@ -53,7 +53,7 @@ class NotificationWidget(widgets.Box):
         )
 
         close_btn = widgets.Button(
-            child=widgets.Icon(image="window-close-symbolic", pixel_size=20),
+            child=widgets.Icon(image="window-close-symbolic", pixel_size=22),
             halign="end",
             valign="start",
             hexpand=True,
@@ -152,7 +152,7 @@ class NotificationPopup(widgets.Window):
     def __init__(self, monitor: int = 0):
         self._popup_box = PopupBox(window=self)
         super().__init__(
-            anchor=["right", "top"],
+            anchor=["top"],
             monitor=monitor,
             namespace=f"ignis_NOTIFICATION_POPUP_{monitor}",
             layer="overlay",
