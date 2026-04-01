@@ -1,4 +1,4 @@
-from .notification_center import NotificationCenter
+from .history_window import NotificationCenter
 from .popup import init_notifications
 
 __all__ = [
