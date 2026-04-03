@@ -4,3 +4,12 @@ output-filename = "~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S.png"
 fullscreen = false
 early-exit = true
 disable-notifications = false
+
+[color-palette]
+palette = [
+    "#AF3029",
+    "#24837B",
+    "#A02F6F",
+    "#AD8301",
+    "#66800B",
+]
