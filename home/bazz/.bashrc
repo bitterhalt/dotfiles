@@ -55,8 +55,8 @@ alias rate-mirrors="rate-mirrors --protocol https --entry-country FI --country-t
 alias vi="nvim"
 alias vim="nvim"
 # ls
-alias ls="ls -ho --group-directories-first --color=auto"
-alias la="ls -laho --group-directories-first --color=auto"
+alias ls="eza  --group-directories-first"
+alias la="eza -la --group-directories-first"
 # Trash-cli
 alias tp="trash-put"
 alias tpe="trash-empty"
