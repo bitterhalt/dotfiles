@@ -203,7 +203,7 @@ class WeatherPopup(widgets.RevealerWindow):
         self._last_data = data
         self._icon_label.image = data["icon"]
         self._city_label.label = data["city"]
-        self._temp_label.label = f"{data['temp']}°"
+        self._temp_label.label = f"{data['temp']}°C"
         self._desc_label.label = data["desc"]
         self._extra_label.label = (
             f"Feels like {data['feels_like']}°C  •  Humidity {data['humidity']}%  •  Wind {data['wind']:.1f} m/s"

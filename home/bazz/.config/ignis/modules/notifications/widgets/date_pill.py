@@ -105,7 +105,7 @@ class DateWeatherPill(widgets.Button):
         if not data:
             return
 
-        self._weather_temp.label = f"{data['temp']}°"
+        self._weather_temp.label = f"{data['temp']}°C"
         self._weather_desc.label = data["desc"]
 
         tooltip = (
