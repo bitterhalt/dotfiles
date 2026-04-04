@@ -1,8 +1,10 @@
 import asyncio
 from ignis import utils, widgets
 from ignis.services.audio import AudioService
+from ignis.window_manager import WindowManager
 from modules.utils.signal_manager import SignalManager
 
+wm = WindowManager.get_default()
 audio = AudioService.get_default()
 
 
@@ -160,3 +162,4 @@ class AudioSection(widgets.Box):
 
     def _open_audio_settings(self):
         asyncio.create_task(utils.exec_sh_async("pavucontrol"))
+        wm.close_window("ignis_SYSTEM_MENU")

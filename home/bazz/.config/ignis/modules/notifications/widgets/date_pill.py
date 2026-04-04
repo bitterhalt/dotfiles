@@ -36,7 +36,7 @@ class DateWeatherPill(widgets.Button):
 
         date_box = widgets.Box(
             spacing=20,
-            halign="start",
+            halign="center",
             hexpand=True,
             child=[
                 self._name_label,

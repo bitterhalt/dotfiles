@@ -56,7 +56,6 @@ done
 
 result=$(printf '%s\n' "${labels[@]}" |
   fuzzel -d \
-    --border-width=2 \
     -w 50 \
     --line-height 24 \
     --minimal-lines \

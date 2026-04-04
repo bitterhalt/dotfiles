@@ -1,10 +1,12 @@
 import asyncio
 from ignis import utils, widgets
 from ignis.services.network import NetworkService, EthernetDevice, WifiAccessPoint
+from ignis.window_manager import WindowManager
 
 net = NetworkService.get_default()
 wifi = net.wifi
 ethernet = net.ethernet
+wm = WindowManager.get_default()
 
 # ───────────────────────────────────────────────
 # NETWORK ITEMS
@@ -193,3 +195,4 @@ class NetworkSection(widgets.Box):
 
     def _open_network_settings(self):
         asyncio.create_task(utils.exec_sh_async("nm-connection-editor"))
+        wm.close_window("ignis_SYSTEM_MENU")
