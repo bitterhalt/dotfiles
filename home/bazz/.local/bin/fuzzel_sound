@@ -7,7 +7,7 @@ while IFS=$'\t' read -r id desc is_bt; do
   if [[ "$is_bt" == "true" ]]; then
     display="󰂯 $desc"
   else
-    display="󰓃  $desc"
+    display="$desc"
   fi
   desc_to_id["$display"]="$id"
 done < <(pw-dump Node | jq -r '
