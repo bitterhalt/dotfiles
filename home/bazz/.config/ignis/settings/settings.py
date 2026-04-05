@@ -113,8 +113,6 @@ class WeatherConfig:
 # ───────────────────────────────────────────────────────────────
 # UI · MONITORS
 # ───────────────────────────────────────────────────────────────
-
-
 @dataclass
 class MonitorConfig:
     primary: int = 0
@@ -199,15 +197,14 @@ class NotificationConfig:
         self.filter_keywords = [kw.lower() for kw in self.filter_keywords]
 
     def should_filter(self, notification) -> bool:
-        """Check if notification should be filtered from history"""
         if not self.filter_keywords:
             return False
 
         summary = (notification.summary or "").lower()
-        body = (notification.body or "").lower()
+        app_name = (notification.app_name or "").lower()
 
         for keyword in self.filter_keywords:
-            if keyword in summary or keyword in body:
+            if keyword in summary or keyword in app_name:
                 return True
 
         return False
@@ -318,6 +315,24 @@ class UIConfig:
 
 
 # ───────────────────────────────────────────────────────────────
+# WORKSPACES
+# ───────────────────────────────────────────────────────────────
+@dataclass
+class WorkspacesConfig:
+    labels: list[str] = field(default_factory=lambda: [str(i) for i in range(1, 11)])
+
+    def get_label(self, idx: int) -> str:
+        try:
+            return self.labels[idx - 1]
+        except IndexError:
+            return str(idx)
+
+    @classmethod
+    def from_dict(cls, data: Dict) -> "WorkspacesConfig":
+        return cls(**{k: v for k, v in data.items() if k in cls.__annotations__})
+
+
+# ───────────────────────────────────────────────────────────────
 # SECTIONS
 # ───────────────────────────────────────────────────────────────
 @dataclass
@@ -361,12 +376,13 @@ class AnimationConfig:
 # ───────────────────────────────────────────────────────────────
 @dataclass
 class AppConfig:
-    paths: PathConfig = field(default_factory=PathConfig)
-    weather: WeatherConfig = field(default_factory=WeatherConfig)
-    ui: UIConfig = field(default_factory=UIConfig)
-    recorder: RecorderConfig = field(default_factory=RecorderConfig)
-    battery: BatteryConfig = field(default_factory=BatteryConfig)
     animations: AnimationConfig = field(default_factory=AnimationConfig)
+    battery: BatteryConfig = field(default_factory=BatteryConfig)
+    paths: PathConfig = field(default_factory=PathConfig)
+    recorder: RecorderConfig = field(default_factory=RecorderConfig)
+    ui: UIConfig = field(default_factory=UIConfig)
+    weather: WeatherConfig = field(default_factory=WeatherConfig)
+    workspaces: WorkspacesConfig = field(default_factory=WorkspacesConfig)
 
     @classmethod
     def from_file(cls, config_file: Path | None = None) -> "AppConfig":
@@ -401,12 +417,13 @@ class AppConfig:
             log_error(f"No valid config file found at {toml_config_file} or {json_config_file}")
 
         return cls(
-            paths=PathConfig.from_dict(data.get("paths", {})),
-            weather=WeatherConfig.from_dict(data.get("weather", {})),
-            ui=UIConfig.from_dict(data.get("ui", {})),
-            recorder=RecorderConfig.from_dict(data.get("recorder", {})),
-            battery=BatteryConfig.from_dict(data.get("battery", {})),
             animations=AnimationConfig.from_dict(data.get("animations", {})),
+            battery=BatteryConfig.from_dict(data.get("battery", {})),
+            paths=PathConfig.from_dict(data.get("paths", {})),
+            recorder=RecorderConfig.from_dict(data.get("recorder", {})),
+            ui=UIConfig.from_dict(data.get("ui", {})),
+            weather=WeatherConfig.from_dict(data.get("weather", {})),
+            workspaces=WorkspacesConfig.from_dict(data.get("workspaces", {})),
         )
 
 

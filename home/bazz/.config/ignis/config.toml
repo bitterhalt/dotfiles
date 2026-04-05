@@ -50,6 +50,10 @@ window_title_exceptions = [
   "zen",
   "mpv"
 ]
+# Workspace labels
+[workspaces]
+labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+#labels = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
 # ══════════════════════════════════════════════════════════════
 # UI · NOTIFICATIONS
@@ -71,7 +75,7 @@ filter_keywords = [
   "Smart-gaps",
   "TMUX",
   "Clock is",
-  "Playerctl"
+  "Playerctl",
 ]
 
 # ══════════════════════════════════════════════════════════════
