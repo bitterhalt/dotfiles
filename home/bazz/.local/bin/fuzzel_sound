@@ -1,24 +1,34 @@
 #!/usr/bin/env bash
 set -e
 
-node=$(pw-dump Node | jq -r '
+declare -A desc_to_id
+
+while IFS=$'\t' read -r id desc is_bt; do
+  if [[ "$is_bt" == "true" ]]; then
+    display="󰂯 $desc"
+  else
+    display="󰓃  $desc"
+  fi
+  desc_to_id["$display"]="$id"
+done < <(pw-dump Node | jq -r '
   .[]
   | select(.info.props["media.class"] == "Audio/Sink")
-  | .info.props["node.description"]
-' | fuzzel -d -a top --y 4 -w 55 -l 6 --minimal-lines --placeholder "Switch the audio device: ")
-
-[ -z "$node" ] && exit 0
-
-id=$(pw-dump Node | jq --arg desc "$node" -r '
-  .[]
-  | select(
-      .info.props["media.class"] == "Audio/Sink"
-      and .info.props["node.description"] == $desc
-    )
-  | .id
+  | [
+      (.id | tostring),
+      .info.props["node.description"],
+      (
+        (.info.props | keys | map(select(startswith("api.bluez5"))) | length > 0)
+        | tostring
+      )
+    ]
+  | @tsv
 ')
 
+selected=$(printf '%s\n' "${!desc_to_id[@]}" | fuzzel -d -a top --y 4 -w 55 -l 6 --minimal-lines --placeholder "Switch the audio device: ")
+[ -z "$selected" ] && exit 0
+
+id="${desc_to_id[$selected]}"
 [ -z "$id" ] && exit 0
 
 wpctl set-default "$id"
-notify-send -t 5000 -i audio-speakers "Audio notify" "Audio device changed to:\n$node"
+notify-send -t 5000 -i audio-speakers "Audio notify" "Audio device changed to:\n$selected"
