@@ -157,13 +157,12 @@ class NetworkSection(widgets.Box):
 
         self._device_list = widgets.Box(
             vertical=True,
-            spacing=6,
+            spacing=4,
             visible=False,
             css_classes=["sys-net-details"],
             child=[
                 wifi_section,
                 ethernet_section,
-                widgets.Separator(),
                 settings_button,
             ],
         )

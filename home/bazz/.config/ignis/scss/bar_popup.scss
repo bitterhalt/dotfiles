@@ -104,7 +104,7 @@
   background: $ui-2;
   border-radius: 6px;
   padding: 6px;
-  margin: 6px;
+  margin: 6px 0;
   transition: background 0.15s;
 
   &:hover {
@@ -147,6 +147,7 @@
   background: $ui-2;
   border-radius: 6px;
   padding: 6px;
+  margin: 6px 0;
   transition: background 0.15s;
 
   &:hover {
