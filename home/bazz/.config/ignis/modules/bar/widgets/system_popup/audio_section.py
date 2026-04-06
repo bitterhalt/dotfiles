@@ -19,7 +19,7 @@ class AudioDeviceItem(widgets.Button):
                     widgets.Label(
                         label=stream.description,
                         ellipsize="end",
-                        max_width_chars=30,
+                        max_width_chars=24,
                         halign="start",
                     ),
                     widgets.Icon(
