@@ -109,7 +109,7 @@ class DateWeatherPill(widgets.Button):
         self._weather_desc.label = data["desc"]
 
         tooltip = (
-            f"Weather @ {data['city']}\n\n"
+            f"Weather in {data['city']}\n\n"
             f"Feels like {data['feels_like']}°C\n"
             f"Humidity: {data['humidity']}%\n"
             f"Wind: {data['wind']:.1f} m/s\n"

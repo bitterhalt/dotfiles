@@ -19,7 +19,6 @@ class TrayItem(widgets.Button):
                     menu,
                 ]
             ),
-            tooltip_text=item.bind("tooltip"),
             on_click=lambda x: self._safe_activate(item),
             on_right_click=lambda x: menu.popup() if menu else None,
             css_classes=["tray-item", "unset"],
@@ -54,7 +53,6 @@ class SystemTrayWidget(widgets.Box):
             css_classes=["tray-toggle-btn", "unset"],
             child=self._arrow,
             on_click=lambda x: self._toggle_tray(),
-            tooltip_text="Show system tray",
         )
 
         self._items_box = widgets.Box(
@@ -96,7 +94,6 @@ class SystemTrayWidget(widgets.Box):
             self._expanded = False
             self._revealer.reveal_child = False
             self._arrow.image = "pan-start-symbolic"
-            self._toggle_btn.set_tooltip_text("Show system tray")
 
     def _toggle_tray(self):
         self._expanded = not self._expanded
@@ -104,7 +101,5 @@ class SystemTrayWidget(widgets.Box):
 
         if self._expanded:
             self._arrow.image = "pan-end-symbolic"
-            self._toggle_btn.set_tooltip_text("Hide system tray")
         else:
             self._arrow.image = "pan-start-symbolic"
-            self._toggle_btn.set_tooltip_text("Show system tray")
