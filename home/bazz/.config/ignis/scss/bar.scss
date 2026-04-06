@@ -11,7 +11,16 @@
   margin: 2px 0px;
   min-width: 16px;
   padding: 6px;
+  &:hover {
+    color: $cyan;
+  }
 }
+
+// .ws-btn.active {
+//   color: $cyan;
+//   font-weight: 600;
+//   border-radius: 0px;
+// }
 
 .ws-btn.active {
   background: $ui-3;
@@ -128,7 +137,6 @@
 .clock:hover,
 .idle-indicator:hover,
 .system-indicator-button:hover,
-.ws-btn:hover,
 .network-box:hover {
   background: $bg-2;
   color: $tx-2;
