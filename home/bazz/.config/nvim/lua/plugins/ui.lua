@@ -70,8 +70,36 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     config = function()
+      local function mode()
+        local mode_map = {
+          n = "N",
+          i = "I",
+          v = "V",
+          ["\22"] = "VB",
+          V = "VL",
+          c = "C",
+          no = "N",
+          s = "S",
+          S = "S",
+          ic = "I",
+          R = "R",
+          Rv = "R",
+          cv = "C",
+          ce = "C",
+          r = "R",
+          rm = "M",
+          ["r?"] = "?",
+          ["!"] = "!",
+          t = "T",
+        }
+        return mode_map[vim.fn.mode()] or "[UNKNOWN]"
+      end
+
       require("lualine").setup({
-        options = { theme = "auto", section_separators = "", component_separators = "" },
+        options = { theme = "auto", section_separators = " ", component_separators = " " },
+        sections = {
+          lualine_a = { mode },
+        },
       })
     end,
   },
