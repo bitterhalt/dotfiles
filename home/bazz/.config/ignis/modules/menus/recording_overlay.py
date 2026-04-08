@@ -33,7 +33,7 @@ class RecordingOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=24,
                 child=[self._screenshot_icon, self._screenshot_label],
             ),
         )
@@ -55,7 +55,7 @@ class RecordingOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=24,
                 child=[self._screenshot_region_icon, self._screenshot_region_label],
             ),
         )
@@ -77,7 +77,7 @@ class RecordingOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=24,
                 child=[self._record_screen_icon, self._record_screen_label],
             ),
         )
@@ -99,7 +99,7 @@ class RecordingOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=24,
                 child=[self._record_region_icon, self._record_region_label],
             ),
         )

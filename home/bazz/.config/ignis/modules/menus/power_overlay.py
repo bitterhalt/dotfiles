@@ -140,7 +140,7 @@ class PowerOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=16,
                 child=[
                     widgets.Icon(
                         image="system-lock-screen-symbolic",
@@ -160,7 +160,7 @@ class PowerOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=16,
                 child=[
                     widgets.Icon(
                         image="system-log-out-symbolic",
@@ -180,7 +180,7 @@ class PowerOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=16,
                 child=[
                     widgets.Icon(
                         image="media-playback-pause-symbolic",
@@ -200,7 +200,7 @@ class PowerOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=16,
                 child=[
                     widgets.Icon(
                         image="system-reboot-symbolic",
@@ -221,7 +221,7 @@ class PowerOverlay(widgets.Window):
             can_focus=True,
             child=widgets.Box(
                 vertical=True,
-                spacing=8,
+                spacing=16,
                 child=[
                     widgets.Icon(
                         image="system-shutdown-symbolic",
