@@ -19,7 +19,7 @@ class SystemInfoWidget(widgets.Box):
         cpu_box = widgets.Box(
             spacing=16,
             child=[
-                widgets.Icon(image="cpu-symbolic", pixel_size=22),
+                widgets.Label(label="CPU:", css_classes=["cpu-info-label"]),
                 self._cpu_bar,
                 self._cpu_label,
             ],
@@ -39,7 +39,7 @@ class SystemInfoWidget(widgets.Box):
         ram_box = widgets.Box(
             spacing=16,
             child=[
-                widgets.Icon(image="memory-symbolic", pixel_size=22),
+                widgets.Label(label="RAM:", css_classes=["ram-info-label"]),
                 self._ram_bar,
                 self._ram_label,
             ],

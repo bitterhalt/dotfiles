@@ -228,11 +228,16 @@
   background: transparent;
 }
 
+.cpu-info-label,
+.ram-info-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: $tx-1;
+}
 .system-info-label {
   font-size: 13px;
   font-weight: 600;
   color: $tx-2;
-  min-width: 40px;
 }
 
 .system-info-percent {
