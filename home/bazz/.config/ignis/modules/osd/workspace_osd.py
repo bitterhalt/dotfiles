@@ -20,16 +20,10 @@ class WorkspaceOSD(widgets.Window):
         self._signals = SignalManager()
         self._label = widgets.Label(css_classes=["workspace-osd-label"])
 
-        icon = widgets.Icon(
-            image="media-record-symbolic",
-            pixel_size=11,
-            css_classes=["workspace-osd-icon"],
-        )
-
         content = widgets.Box(
             css_classes=["workspace-osd"],
             spacing=12,
-            child=[icon, self._label],
+            child=[self._label],
         )
 
         super().__init__(
