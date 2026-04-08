@@ -23,13 +23,13 @@ class SystemPopup(widgets.RevealerWindow):
                 wm.open_window("ignis_RECORDING_OVERLAY"),
                 self.set_visible(False),
             ),
-            child=widgets.Icon(image="camera-photo-symbolic", pixel_size=22),
+            child=widgets.Icon(image="camera-photo-symbolic", pixel_size=18),
         )
 
         lock_btn = widgets.Button(
             css_classes=["sys-top-btn", "unset"],
             on_click=lambda x: (exec_async("hyprlock"), self.set_visible(False)),
-            child=widgets.Icon(image="system-lock-screen-symbolic", pixel_size=22),
+            child=widgets.Icon(image="system-lock-screen-symbolic", pixel_size=18),
         )
 
         power_btn = widgets.Button(
@@ -38,7 +38,7 @@ class SystemPopup(widgets.RevealerWindow):
                 wm.open_window("ignis_POWER_OVERLAY"),
                 self.set_visible(False),
             ),
-            child=widgets.Icon(image="system-shutdown-symbolic", pixel_size=22),
+            child=widgets.Icon(image="system-shutdown-symbolic", pixel_size=18),
         )
 
         top_row = widgets.Box(

@@ -22,7 +22,7 @@ class WorkspaceOSD(widgets.Window):
 
         icon = widgets.Icon(
             image="media-record-symbolic",
-            pixel_size=22,
+            pixel_size=11,
             css_classes=["workspace-osd-icon"],
         )
 

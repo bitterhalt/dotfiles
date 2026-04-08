@@ -22,8 +22,8 @@ class ClockWidget(widgets.Button):
         )
 
         self._dnd_icon = widgets.Icon(
-            image="notification-disabled-symbolic",
-            pixel_size=22,
+            image="notifications-disabled-symbolic",
+            pixel_size=config.ui.bar_icon_size,
             css_classes=["clock-dnd-icon"],
             visible=options.notifications.bind("dnd"),
         )

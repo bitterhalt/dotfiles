@@ -6,7 +6,7 @@ api_key = ""                       # or OPEN_WEATHER_APIKEY
 city_id = ""                       # or OPEN_WEATHER_CITY_ID
 cache_ttl = 600
 use_12h_format = false
-icon_base_path = "~/.config/ignis/assets/icons/weather"
+icon_base_path = "~/.config/ignis/assets/icons"
 
 # ══════════════════════════════════════════════════════════════
 # UI · MONITORS
@@ -38,7 +38,10 @@ workspace_osd = 1500
 # Clock format
 clock_format = "%H:%M"
 clock_interval = 60000  # Poll interval in milliseconds. Edit this to 1000 if you use seconds in format
-
+# Icon size
+icon_size = 16
+# Tray icon size
+tray_icon_size = 20
 # Remember bar state after re-start
 remember_state = true
 # Enable/disable system tray

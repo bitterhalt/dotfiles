@@ -53,7 +53,7 @@ class NotificationWidget(widgets.Box):
         )
 
         close_btn = widgets.Button(
-            child=widgets.Icon(image="window-close-symbolic", pixel_size=22),
+            child=widgets.Icon(image="window-close-symbolic", pixel_size=16),
             halign="end",
             valign="start",
             hexpand=True,

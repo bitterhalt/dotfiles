@@ -89,7 +89,7 @@ class WeatherConfig:
     city_id: str = ""
     cache_ttl: int = 600
     use_12h_format: bool = False
-    icon_base_path: str = "~/.config/ignis/assets/icons/weather"
+    icon_base_path: str = "~/.config/ignis/assets/icons"
 
     def __post_init__(self):
         if not self.api_key:
@@ -175,6 +175,8 @@ class BarConfig:
     window_title_exceptions: list[str] | None = None
     show_system_tray: bool = True
     clock_format: str = "%H:%M"
+    icon_size: int = 22
+    tray_icon_size: int = 22
     clock_interval: int = 60000
 
     @classmethod
@@ -287,6 +289,14 @@ class UIConfig:
     @property
     def bar_remember_state(self):
         return self.bar.remember_state
+
+    @property
+    def bar_icon_size(self):
+        return self.bar.icon_size
+
+    @property
+    def bar_tray_icon_size(self):
+        return self.bar.tray_icon_size
 
     @property
     def bar_window_title_exceptions(self):

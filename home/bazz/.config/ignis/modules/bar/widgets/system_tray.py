@@ -1,5 +1,6 @@
 import asyncio
 from ignis import widgets
+from settings import config
 from ignis.services.system_tray import SystemTrayService, SystemTrayItem
 
 system_tray = SystemTrayService.get_default()
@@ -15,7 +16,10 @@ class TrayItem(widgets.Button):
         super().__init__(
             child=widgets.Box(
                 child=[
-                    widgets.Icon(image=item.bind("icon"), pixel_size=22),
+                    widgets.Icon(
+                        image=item.bind("icon"),
+                        pixel_size=config.ui.bar_tray_icon_size,
+                    ),
                     menu,
                 ]
             ),
@@ -45,7 +49,7 @@ class SystemTrayWidget(widgets.Box):
 
         self._arrow = widgets.Icon(
             image="pan-start-symbolic",
-            pixel_size=16,
+            pixel_size=config.ui.bar_icon_size,
             css_classes=["tray-arrow"],
         )
 

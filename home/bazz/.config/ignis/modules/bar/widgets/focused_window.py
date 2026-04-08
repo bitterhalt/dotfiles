@@ -80,7 +80,7 @@ class WindowInfoFormatter:
 class HyprlandWindowTitle(widgets.Box):
     def __init__(self):
         self._icon = widgets.Icon(
-            pixel_size=22,
+            pixel_size=20,
             css_classes=["window-title-icon"],
             image=hypr.bind(
                 "active_window",
@@ -114,7 +114,7 @@ class NiriWindowTitle(widgets.Box):
         self._monitor_name = monitor_name
 
         self._icon = widgets.Icon(
-            pixel_size=22,
+            pixel_size=20,
             css_classes=["window-title-icon"],
             image=niri.bind(
                 "active_window",

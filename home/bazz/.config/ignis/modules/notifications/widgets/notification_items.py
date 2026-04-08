@@ -298,7 +298,7 @@ class NormalHistoryItem(widgets.Box):
         )
 
         close_btn = widgets.Button(
-            child=widgets.Icon(image="window-close-symbolic", pixel_size=22),
+            child=widgets.Icon(image="window-close-symbolic", pixel_size=16),
             css_classes=["close-btn"],
             valign="start",
             tooltip_text="Close",

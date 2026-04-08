@@ -2,6 +2,7 @@ import os
 import asyncio
 from pathlib import Path
 from ignis import utils, widgets
+from settings import config
 from modules.utils.signal_manager import SignalManager
 
 
@@ -17,8 +18,8 @@ class IdleIndicatorWidget(widgets.EventBox):
         self._pending_update = False
 
         self._icon = widgets.Icon(
-            image="my-caffeine-on-symbolic",
-            pixel_size=22,
+            image="view-reveal-symbolic",
+            pixel_size=config.ui.bar_icon_size,
             css_classes=["idle-icon"],
         )
 

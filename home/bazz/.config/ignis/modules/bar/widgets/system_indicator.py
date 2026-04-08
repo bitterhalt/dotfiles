@@ -4,6 +4,8 @@ from ignis.services.network import NetworkService
 from ignis.services.bluetooth import BluetoothService
 from ignis.window_manager import WindowManager
 from modules.utils.signal_manager import SignalManager
+from settings import config
+
 
 wm = WindowManager.get_default()
 audio = AudioService.get_default()
@@ -19,23 +21,23 @@ class SystemIndicatorWidget(widgets.Button):
         self._signals = SignalManager()
         self._speaker_icon = widgets.Icon(
             image=self._get_speaker_icon(),
-            pixel_size=22,
+            pixel_size=config.ui.bar_icon_size,
         )
 
         self._mic_icon = widgets.Icon(
             image=self._get_mic_icon(),
-            pixel_size=22,
             visible=self._get_mic_visible(),
+            pixel_size=config.ui.bar_icon_size,
         )
 
         self._net_icon = widgets.Icon(
             image=self._get_network_icon(),
-            pixel_size=22,
+            pixel_size=config.ui.bar_icon_size,
         )
 
         self._bt_icon = widgets.Icon(
             image=self._get_bluetooth_icon(),
-            pixel_size=22,
+            pixel_size=config.ui.bar_icon_size,
             visible=self._get_bluetooth_visible(),
         )
 

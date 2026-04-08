@@ -100,7 +100,7 @@ class NetworkSection(widgets.Box):
         pill_content = widgets.Box(
             spacing=8,
             child=[
-                widgets.Icon(image="wifi-radar", pixel_size=22),
+                widgets.Icon(image="network-wireless-symbolic", pixel_size=18),
                 self._label,
                 self._arrow,
             ],

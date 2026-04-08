@@ -46,16 +46,12 @@ class AudioSection(widgets.Box):
             image=stream.bind(
                 "is_muted",
                 lambda m: (
-                    (
-                        "microphone-sensitivity-muted-symbolic"
-                        if device_type == "microphone"
-                        else "audio-volume-muted-symbolic"
-                    )
+                    ("microphone-disabled-symbolic" if device_type == "microphone" else "audio-volume-muted-symbolic")
                     if m
                     else self._volume_icon(stream.volume)
                 ),
             ),
-            pixel_size=22,
+            pixel_size=18,
         )
 
         mute_btn = widgets.Button(
@@ -120,9 +116,7 @@ class AudioSection(widgets.Box):
     def _update_icon(self, icon_widget):
         if self.stream.is_muted:
             icon_widget.image = (
-                "microphone-sensitivity-muted-symbolic"
-                if self.device_type == "microphone"
-                else "audio-volume-muted-symbolic"
+                "microphone-disabled-symbolic" if self.device_type == "microphone" else "audio-volume-muted-symbolic"
             )
         else:
             icon_widget.image = self._volume_icon(self.stream.volume)

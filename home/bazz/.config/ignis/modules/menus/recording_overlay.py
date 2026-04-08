@@ -39,7 +39,7 @@ class RecordingOverlay(widgets.Window):
         )
 
         self._screenshot_region_icon = widgets.Icon(
-            image="image-crop-symbolic",
+            image="edit-cut",
             css_classes=["screenshot-region-icon"],
             pixel_size=48,
         )
