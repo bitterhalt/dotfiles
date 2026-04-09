@@ -1,6 +1,4 @@
 .weather-window {
-  background: unset;
-  border: unset;
 }
 
 .weather-container {
@@ -13,7 +11,7 @@
 
 .weather-popup {
   background: $bg-1;
-  border: unset;
+  border-radius: 6px;
   padding: 18px;
 }
 
