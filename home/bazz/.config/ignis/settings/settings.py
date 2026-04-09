@@ -89,7 +89,7 @@ class WeatherConfig:
     city_id: str = ""
     cache_ttl: int = 600
     use_12h_format: bool = False
-    icon_base_path: str = "~/.config/ignis/assets/icons"
+    icon_base_path: str = "~/.config/ignis/modules/weather/icons"
 
     def __post_init__(self):
         if not self.api_key:
