@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from typing import Optional
+from settings import config
 
 
 class BarStateManager:
@@ -49,8 +50,6 @@ def get_bar_state_manager() -> BarStateManager:
     global _state_manager
 
     if _state_manager is None:
-        from settings import config
-
         state_file = config.paths.data_dir / "bar_state.json"
         _state_manager = BarStateManager(state_file)
 
@@ -58,7 +57,6 @@ def get_bar_state_manager() -> BarStateManager:
 
 
 def save_bar_state(visible: bool):
-    from settings import config
 
     if not config.ui.bar_remember_state:
         return
@@ -67,8 +65,6 @@ def save_bar_state(visible: bool):
 
 
 def load_bar_state() -> bool:
-    from settings import config
-
     if not config.ui.bar_remember_state:
         return True
 
