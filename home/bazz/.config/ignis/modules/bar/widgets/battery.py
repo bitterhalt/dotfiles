@@ -14,7 +14,7 @@ class BatteryItem(widgets.Box):
             child=[
                 widgets.Icon(
                     image=device.bind("icon_name"),
-                    pixel_size=16,
+                    pixel_size=config.ui.bar_icon_size,
                 ),
                 widgets.Label(
                     label=device.bind("percentage", lambda p: f"{int(p)}%"),
