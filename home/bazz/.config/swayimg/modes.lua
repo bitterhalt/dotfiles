@@ -33,8 +33,8 @@ swayimg.viewer.set_text("topleft", {
 	"Format: {format}",
 	"File size: {sizehr}",
 	"Size: {frame.width}x{frame.height}",
-	"EXIF date: {meta.Exif.Photo.DateTimeOriginal}",
-	"EXIF camera: {meta.Exif.Image.Model}",
+	"{meta.Exif.Photo.DateTimeOriginal}",
+	"{meta.Exif.Image.Model}",
 })
 swayimg.viewer.set_text("topright", {
 	"Image: {list.index} of {list.total}",
