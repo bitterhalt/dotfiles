@@ -10,6 +10,7 @@ wm = WindowManager.get_default()
 
 class NotificationCenter(widgets.RevealerWindow):
     def __init__(self):
+        self._date_weather_pill = DateWeatherPill()
         self._notification_list = NotificationList()
 
         dnd_switch = widgets.Switch(
@@ -32,10 +33,11 @@ class NotificationCenter(widgets.RevealerWindow):
             on_click=lambda *_: self._notification_list.clear_all(),
         )
 
-        left_column = widgets.Box(
+        items = widgets.Box(
             vertical=True,
-            css_classes=["left-column"],
+            css_classes=["history-box"],
             child=[
+                self._date_weather_pill,
                 self._notification_list.scroll,
                 widgets.Box(
                     spacing=8,
@@ -47,23 +49,13 @@ class NotificationCenter(widgets.RevealerWindow):
             ],
         )
 
-        self._date_weather_pill = DateWeatherPill()
-
-        right_column = widgets.Box(
-            vertical=True,
-            css_classes=["right-column"],
-            child=[
-                self._date_weather_pill,
-            ],
-        )
-
-        two_columns = widgets.Box(
+        content = widgets.Box(
             css_classes=["notification-center"],
-            child=[left_column, right_column],
+            child=[items],
         )
 
         revealer = widgets.Revealer(
-            child=two_columns,
+            child=content,
             reveal_child=False,
             transition_type="slide_down",
             transition_duration=config.animations.revealer_duration,

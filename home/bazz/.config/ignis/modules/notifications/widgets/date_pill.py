@@ -25,27 +25,6 @@ class DateWeatherPill(widgets.Button):
             css_classes=["date-pill-month"],
         )
 
-        self._year_label = widgets.Label(
-            css_classes=["date-pill-year"],
-        )
-
-        self._separator = widgets.Separator(
-            css_classes=["date-pill-separator"],
-            vertical=True,
-        )
-
-        date_box = widgets.Box(
-            spacing=20,
-            halign="center",
-            hexpand=True,
-            child=[
-                self._name_label,
-                self._day_label,
-                self._month_label,
-                self._year_label,
-            ],
-        )
-
         self._weather_temp = widgets.Label(
             label="--°",
             css_classes=["weather-temp-compact"],
@@ -58,20 +37,36 @@ class DateWeatherPill(widgets.Button):
             max_width_chars=20,
         )
 
+        date_box = widgets.Box(
+            spacing=20,
+            child=[
+                self._name_label,
+                self._day_label,
+                self._month_label,
+            ],
+        )
+
+        separator = widgets.Separator(
+            vertical=True,
+        )
+
         weather_box = widgets.Box(
             spacing=20,
-            halign="center",
             child=[
-                self._weather_temp,
                 self._weather_desc,
+                self._weather_temp,
             ],
         )
 
         content_box = widgets.Box(
-            vertical=True,
-            spacing=12,
-            halign="fill",
-            child=[date_box, self._separator, weather_box],
+            spacing=20,
+            halign="center",
+            hexpand=True,
+            child=[
+                date_box,
+                separator,
+                weather_box,
+            ],
         )
 
         super().__init__(
@@ -93,7 +88,6 @@ class DateWeatherPill(widgets.Button):
         self._name_label.label = now.strftime("%A")
         self._day_label.label = now.strftime("%d")
         self._month_label.label = now.strftime("%B")
-        self._year_label.label = now.strftime("%Y")
         return True
 
     def _update_weather(self):
