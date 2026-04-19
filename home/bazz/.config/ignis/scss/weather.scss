@@ -24,13 +24,13 @@
 }
 
 .weather-city {
-  font-size: 18px;
+  font-size: 1.2em;
   font-weight: 600;
   color: $tx-1;
 }
 
 .weather-temp {
-  font-size: 18px;
+  font-size: 1.2em;
   font-weight: 600;
   color: $tx-1;
   margin-left: 8px;
@@ -38,14 +38,12 @@
 
 .weather-desc {
   padding-top: 8px;
-  font-size: 14px;
   font-weight: 500;
   color: $tx-1;
 }
 
 .weather-extra {
   margin-top: 2px;
-  font-size: 14px;
   color: $tx-3;
 }
 
@@ -58,7 +56,7 @@
 }
 
 .weather-forecast-time {
-  font-size: 13px;
+  font-size: 0.8em;
   color: $tx-3;
   padding-bottom: 2px;
 }
@@ -69,13 +67,13 @@
 }
 
 .weather-forecast-temp {
-  font-size: 13px;
+  font-size: 0.8em;
   font-weight: 500;
   color: $tx-1;
 }
 
 .weather-weekly-toggle {
-  font-size: 12px;
+  font-size: 0.8em;
   color: $tx-1;
   padding: 4px 6px;
   border-radius: 6px;
@@ -86,10 +84,11 @@
   transition: transform 200ms ease;
 }
 .weather-weekly-day {
-  font-size: 14px;
+  font-size: 0.8em;
   color: $tx-3;
 }
 .weather-weekly-temp {
+  font-size: 0.8em;
   color: $tx-1;
 }
 
@@ -104,12 +103,11 @@
 }
 
 .weather-weekly-toggle {
-  font-size: 12px;
   color: $tx-1;
 }
 
 .weather-moon-emoji {
-  font-size: 30px;
+  font-size: 2em;
   margin-left: 12px;
   margin-right: 4px;
   opacity: 0.9;

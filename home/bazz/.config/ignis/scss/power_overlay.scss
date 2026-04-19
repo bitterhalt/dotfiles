@@ -68,7 +68,6 @@
 }
 
 .power-overlay-label {
-  font-size: 15px;
   font-weight: 500;
   color: $tx-1;
 }
@@ -93,13 +92,11 @@
 }
 
 .confirm-dialog-title {
-  font-size: 17.6px;
   font-weight: 600;
   color: $tx-1;
 }
 
 .confirm-dialog-message {
-  font-size: 15px;
   color: $tx-2;
 }
 
@@ -107,7 +104,6 @@
   all: unset;
   padding: 10px 18px;
   border-radius: 6px;
-  font-size: 15px;
   font-weight: 500;
   transition:
     background 0.15s,

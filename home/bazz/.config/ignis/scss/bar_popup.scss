@@ -91,12 +91,13 @@
 }
 
 .sys-net-details {
+  font-size: 0.9em;
   padding: 6px;
   margin: 0px 4px;
 }
 
 .network-settings-label {
-  font-size: 13px;
+  font-size: 0.9em;
   font-weight: 500;
 }
 
@@ -136,9 +137,13 @@
     background: $ui-2;
   }
 }
+
 .sys-audio-details {
+  font-size: 0.9em;
+  font-weight: 600;
   margin: 4px;
 }
+
 .pill-audio-scale {
   min-width: 180px;
 }
@@ -157,7 +162,7 @@
 }
 
 .audio-settings-label {
-  font-size: 13px;
+  font-size: 0.9em;
   font-weight: 500;
 }
 .pill-audio-scale trough {
@@ -188,9 +193,7 @@
     background: $ui-2;
   }
 }
-.sys-audio-details {
-  margin-top: 4px;
-}
+
 .audio-device-item {
   color: $tx-1;
   border: unset;
@@ -231,18 +234,13 @@
 
 .cpu-info-label,
 .ram-info-label {
-  font-size: 13px;
+  font-size: 0.8em;
   font-weight: 500;
   color: $tx-3;
 }
-.system-info-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: $tx-2;
-}
 
 .system-info-percent {
-  font-size: 13px;
+  font-size: 0.8em;
   font-weight: 600;
   color: $tx-1;
   min-width: 36px;
@@ -253,7 +251,7 @@
 }
 
 .system-info-text {
-  font-size: 12px;
+  font-size: 0.8em;
   color: $tx-3;
 }
 .sys-info-expand-btn {

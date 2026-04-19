@@ -25,7 +25,7 @@
   color: $tx-3;
   margin-right: 22px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .header-action-btn:hover {
@@ -82,34 +82,28 @@
 }
 
 .date-pill-name {
-  font-size: 12px;
   font-weight: 700;
   color: $tx-1;
-  letter-spacing: 0.02em;
 }
 
 .date-pill-day {
-  font-size: 32px;
+  font-size: 1.6em;
   font-weight: 700;
   color: $accent;
-  letter-spacing: 0.02em;
 }
 
 .date-pill-month {
-  font-size: 12px;
   font-weight: 600;
   color: $tx-1;
-  letter-spacing: 0.08em;
 }
 
 .weather-temp-compact {
-  font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   color: $tx-1;
 }
 
 .weather-desc-compact {
-  font-size: 12px;
+  font-size: 0.9em;
   color: $tx-3;
 }
 
@@ -137,7 +131,6 @@
 }
 
 .notif-history-title {
-  font-size: 15px;
   font-weight: 600;
   color: $tx-2;
 
@@ -147,11 +140,11 @@
 }
 
 .notif-history-body {
-  font-size: 13px;
   color: $tx-3;
 }
+
 .notif-timestamp {
-  font-size: 11px;
+  font-size: 0.8em;
   color: $tx-3;
   opacity: 0.9;
   margin-top: 1px;
@@ -164,8 +157,8 @@
 }
 
 .empty-state {
+  font-size: 0.8em;
   color: $tx-3;
-  font-size: 13px;
   padding: 20px;
 }
 
@@ -195,13 +188,12 @@
 }
 
 .screenshot-filename {
-  font-size: 14px;
   font-weight: 600;
   color: $tx-2;
 }
 
 .screenshot-timestamp {
-  font-size: 12px;
+  font-size: 0.8em;
   color: $tx-3;
   opacity: 0.9;
 }
@@ -227,7 +219,6 @@
 
 .notif-history-body-expanded {
   all: unset;
-  font-size: 13px;
   color: $tx-2;
   margin-top: 4px;
   line-height: 1.5;
