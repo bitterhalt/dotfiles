@@ -1,5 +1,3 @@
-# Dotfiles
-
 ### Software I use
 
 - Distro: [Arch](https://archlinux.org)
