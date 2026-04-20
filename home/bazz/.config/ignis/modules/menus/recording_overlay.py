@@ -19,7 +19,7 @@ class RecordingOverlay(widgets.Window):
         self._screenshot_icon = widgets.Icon(
             image="camera-photo-symbolic",
             css_classes=["screenshot-icon"],
-            pixel_size=48,
+            pixel_size=32,
         )
 
         self._screenshot_label = widgets.Label(
@@ -41,7 +41,7 @@ class RecordingOverlay(widgets.Window):
         self._screenshot_region_icon = widgets.Icon(
             image="edit-cut",
             css_classes=["screenshot-region-icon"],
-            pixel_size=48,
+            pixel_size=32,
         )
 
         self._screenshot_region_label = widgets.Label(
@@ -63,7 +63,7 @@ class RecordingOverlay(widgets.Window):
         self._record_screen_icon = widgets.Icon(
             image="media-record-symbolic",
             css_classes=["record-icon"],
-            pixel_size=48,
+            pixel_size=32,
         )
 
         self._record_screen_label = widgets.Label(
@@ -85,7 +85,7 @@ class RecordingOverlay(widgets.Window):
         self._record_region_icon = widgets.Icon(
             image="edit-select-all-symbolic",
             css_classes=["record-region-icon"],
-            pixel_size=48,
+            pixel_size=32,
         )
 
         self._record_region_label = widgets.Label(

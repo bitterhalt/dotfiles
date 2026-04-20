@@ -144,7 +144,7 @@ class PowerOverlay(widgets.Window):
                 child=[
                     widgets.Icon(
                         image="system-lock-screen-symbolic",
-                        pixel_size=48,
+                        pixel_size=32,
                     ),
                     widgets.Label(
                         label="[L]ock",
@@ -164,7 +164,7 @@ class PowerOverlay(widgets.Window):
                 child=[
                     widgets.Icon(
                         image="system-log-out-symbolic",
-                        pixel_size=48,
+                        pixel_size=32,
                     ),
                     widgets.Label(
                         label="[E]xit",
@@ -184,7 +184,7 @@ class PowerOverlay(widgets.Window):
                 child=[
                     widgets.Icon(
                         image="media-playback-pause-symbolic",
-                        pixel_size=48,
+                        pixel_size=32,
                     ),
                     widgets.Label(
                         label="z[Z]zz",
@@ -205,7 +205,7 @@ class PowerOverlay(widgets.Window):
                     widgets.Icon(
                         image="system-reboot-symbolic",
                         css_classes=["power-warning-icon"],
-                        pixel_size=48,
+                        pixel_size=32,
                     ),
                     widgets.Label(
                         label="[R]eboot",
@@ -226,7 +226,7 @@ class PowerOverlay(widgets.Window):
                     widgets.Icon(
                         image="system-shutdown-symbolic",
                         css_classes=["power-warning-icon"],
-                        pixel_size=48,
+                        pixel_size=32,
                     ),
                     widgets.Label(
                         label="[S]hutdown",
