@@ -39,7 +39,7 @@ tooltip,
   background: $bg-2;
   border-radius: 6px;
   margin: 8px;
-  padding: 8px;
+  padding: 16px;
   border: solid 1px $ui-1;
 }
 
@@ -47,7 +47,7 @@ tooltip label,
 .tooltip label {
   all: unset;
   color: $tx-1;
-  font-size: 0.9em;
+  font-size: 0.95em;
   font-weight: 500;
 }
 
