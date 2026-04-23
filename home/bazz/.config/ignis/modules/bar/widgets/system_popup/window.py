@@ -19,10 +19,7 @@ class SystemPopup(widgets.RevealerWindow):
     def __init__(self):
         record_btn = widgets.Button(
             css_classes=["sys-top-btn", "unset"],
-            on_click=lambda x: (
-                wm.open_window("ignis_RECORDING_OVERLAY"),
-                self.set_visible(False),
-            ),
+            on_click=lambda x: (wm.open_window("ignis_RECORDING_OVERLAY"), self.set_visible(False)),
             child=widgets.Icon(image="camera-photo-symbolic", pixel_size=18),
         )
 
@@ -34,10 +31,7 @@ class SystemPopup(widgets.RevealerWindow):
 
         power_btn = widgets.Button(
             css_classes=["sys-top-btn", "unset"],
-            on_click=lambda x: (
-                wm.open_window("ignis_POWER_OVERLAY"),
-                self.set_visible(False),
-            ),
+            on_click=lambda x: (wm.open_window("ignis_POWER_OVERLAY"), self.set_visible(False)),
             child=widgets.Icon(image="system-shutdown-symbolic", pixel_size=18),
         )
 
