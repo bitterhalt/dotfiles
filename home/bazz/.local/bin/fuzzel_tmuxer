@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
-tmux list-sessions -F "#{session_name}" 2>/dev/null |
-  fuzzel -d -a top --y 6 --x 6 -w 25 --minimal-lines --placeholder "Choose session..." |
-  xargs -I{} "$TERMINAL" -e tmux attach-session -t {}
+sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
+
+if [ -z "$sessions" ]; then
+  echo "..." |
+    fuzzel -d -a top --y 6 --x 6 -w 25 --minimal-lines --placeholder "No sessions"
+else
+  echo "$sessions" |
+    fuzzel -d -a top --y 6 --x 6 -w 25 --minimal-lines --placeholder "Choose session..." |
+    xargs -r -I{} "$TERMINAL" -e tmux attach-session -t {}
+fi
