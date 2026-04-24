@@ -39,7 +39,7 @@ class RecordingOverlay(widgets.Window):
         )
 
         self._screenshot_region_icon = widgets.Icon(
-            image="edit-cut",
+            image="edit-select-all-symbolic",
             css_classes=["screenshot-region-icon"],
             pixel_size=32,
         )
@@ -61,9 +61,8 @@ class RecordingOverlay(widgets.Window):
         )
 
         self._record_screen_icon = widgets.Icon(
-            image="media-record-symbolic",
             css_classes=["record-icon"],
-            pixel_size=32,
+            pixel_size=38,
         )
 
         self._record_screen_label = widgets.Label(
@@ -193,7 +192,7 @@ class RecordingOverlay(widgets.Window):
             self._record_screen_btn.remove_css_class("overlay-btn")
             self._record_screen_btn.add_css_class("overlay-btn-stop")
         else:
-            self._record_screen_icon.image = "media-record-symbolic"
+            self._record_screen_icon.image = "camera-video-symbolic"
             self._record_screen_label.label = "[3] Record"
             self._record_screen_btn.remove_css_class("overlay-btn-stop")
             self._record_screen_btn.add_css_class("overlay-btn")
