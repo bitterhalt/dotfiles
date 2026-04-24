@@ -7,6 +7,7 @@ from settings import config
 
 wm = WindowManager.get_default()
 audio = AudioService.get_default()
+icon_size = config.ui.bar_icon_size
 
 
 class AudioDeviceItem(widgets.Button):
@@ -26,7 +27,7 @@ class AudioDeviceItem(widgets.Button):
                     widgets.Icon(
                         image="object-select-symbolic",
                         halign="end",
-                        pixel_size=config.ui.bar_icon_size,
+                        pixel_size=icon_size,
                         visible=stream.bind("is_default"),
                         hexpand=True,
                     ),
@@ -52,7 +53,7 @@ class AudioSection(widgets.Box):
                     else self._volume_icon(stream.volume)
                 ),
             ),
-            pixel_size=config.ui.bar_icon_size,
+            pixel_size=icon_size,
         )
 
         mute_btn = widgets.Button(
@@ -75,7 +76,7 @@ class AudioSection(widgets.Box):
         self._signals.connect(stream, "notify::volume", lambda *_: self._update_icon(mute_icon))
 
         self._arrow = widgets.Arrow(
-            pixel_size=config.ui.bar_icon_size,
+            pixel_size=icon_size,
             rotated=False,
             css_classes=["pill-audio-arrow"],
         )
@@ -145,7 +146,7 @@ class AudioSection(widgets.Box):
                     spacing=8,
                     halign="center",
                     child=[
-                        widgets.Icon(image="emblem-system-symbolic", pixel_size=config.ui.bar_icon_size),
+                        widgets.Icon(image="emblem-system-symbolic", pixel_size=icon_size),
                         widgets.Label(
                             label="Audio Settings",
                             css_classes=["audio-settings-label"],
