@@ -16,12 +16,14 @@
 }
 
 .vol-track trough {
+  all: unset;
   background: $ui-2;
   border-radius: 6px;
   min-height: 12px;
 }
 
 .vol-track trough highlight {
+  all: unset;
   background: $accent;
   border-radius: 6px;
   min-height: 12px;
