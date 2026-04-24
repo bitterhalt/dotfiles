@@ -2,11 +2,13 @@ import asyncio
 from ignis import utils, widgets
 from ignis.services.network import NetworkService, EthernetDevice, WifiAccessPoint
 from ignis.window_manager import WindowManager
+from settings import config
 
 net = NetworkService.get_default()
 wifi = net.wifi
 ethernet = net.ethernet
 wm = WindowManager.get_default()
+icon_size = config.ui.bar_icon_size
 
 # ───────────────────────────────────────────────
 # NETWORK ITEMS
@@ -93,14 +95,14 @@ class NetworkSection(widgets.Box):
 
         self._arrow = widgets.Icon(
             image="pan-down-symbolic",
-            pixel_size=16,
+            pixel_size=icon_size,
             css_classes=["expand-arrow"],
         )
 
         pill_content = widgets.Box(
             spacing=8,
             child=[
-                widgets.Icon(image="network-wireless-symbolic", pixel_size=18),
+                widgets.Icon(image="network-wireless-symbolic", pixel_size=icon_size),
                 self._label,
                 self._arrow,
             ],
@@ -145,7 +147,7 @@ class NetworkSection(widgets.Box):
                 child=[
                     widgets.Icon(
                         image="emblem-system-symbolic",
-                        pixel_size=16,
+                        pixel_size=icon_size,
                     ),
                     widgets.Label(
                         label="Network Settings",

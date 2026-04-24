@@ -3,6 +3,7 @@ from ignis import utils, widgets
 from ignis.services.audio import AudioService
 from ignis.window_manager import WindowManager
 from modules.utils.signal_manager import SignalManager
+from settings import config
 
 wm = WindowManager.get_default()
 audio = AudioService.get_default()
@@ -25,7 +26,7 @@ class AudioDeviceItem(widgets.Button):
                     widgets.Icon(
                         image="object-select-symbolic",
                         halign="end",
-                        pixel_size=16,
+                        pixel_size=config.ui.bar_icon_size,
                         visible=stream.bind("is_default"),
                         hexpand=True,
                     ),
@@ -51,7 +52,7 @@ class AudioSection(widgets.Box):
                     else self._volume_icon(stream.volume)
                 ),
             ),
-            pixel_size=18,
+            pixel_size=config.ui.bar_icon_size,
         )
 
         mute_btn = widgets.Button(
@@ -74,7 +75,7 @@ class AudioSection(widgets.Box):
         self._signals.connect(stream, "notify::volume", lambda *_: self._update_icon(mute_icon))
 
         self._arrow = widgets.Arrow(
-            pixel_size=16,
+            pixel_size=config.ui.bar_icon_size,
             rotated=False,
             css_classes=["pill-audio-arrow"],
         )
@@ -144,7 +145,7 @@ class AudioSection(widgets.Box):
                     spacing=8,
                     halign="center",
                     child=[
-                        widgets.Icon(image="emblem-system-symbolic", pixel_size=16),
+                        widgets.Icon(image="emblem-system-symbolic", pixel_size=config.ui.bar_icon_size),
                         widgets.Label(
                             label="Audio Settings",
                             css_classes=["audio-settings-label"],

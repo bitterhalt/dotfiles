@@ -14,6 +14,7 @@ wifi = net.wifi
 ethernet = net.ethernet
 vpn = net.vpn
 bluetooth = BluetoothService.get_default()
+icon_size = config.ui.bar_icon_size
 
 
 class SystemIndicatorWidget(widgets.Button):
@@ -21,23 +22,23 @@ class SystemIndicatorWidget(widgets.Button):
         self._signals = SignalManager()
         self._speaker_icon = widgets.Icon(
             image=self._get_speaker_icon(),
-            pixel_size=config.ui.bar_icon_size,
+            pixel_size=icon_size,
         )
 
         self._mic_icon = widgets.Icon(
             image=self._get_mic_icon(),
             visible=self._get_mic_visible(),
-            pixel_size=config.ui.bar_icon_size,
+            pixel_size=icon_size,
         )
 
         self._net_icon = widgets.Icon(
             image=self._get_network_icon(),
-            pixel_size=config.ui.bar_icon_size,
+            pixel_size=icon_size,
         )
 
         self._bt_icon = widgets.Icon(
             image=self._get_bluetooth_icon(),
-            pixel_size=config.ui.bar_icon_size,
+            pixel_size=icon_size,
             visible=self._get_bluetooth_visible(),
         )
 
