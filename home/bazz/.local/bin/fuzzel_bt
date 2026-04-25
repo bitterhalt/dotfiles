@@ -1,3 +1,124 @@
 #!/usr/bin/env bash
 
-bzmenu -i xdg -l custom --launcher-command "fuzzel -d --hide-prompt -a top --y 6 --x 6 -w 30 --minimal-lines"
+divider="---------"
+goback="Back"
+exit_cmd="Exit"
+check_icon="󰄬  "
+
+run_menu() {
+  fuzzel -d -a top --y 4 -w 30 -i --placeholder "$1" --minimal-lines
+}
+
+power_on() {
+  bluetoothctl show | grep -F -q "Powered: yes"
+}
+
+get_device_info() {
+  local mac=$1
+  local name=$2
+
+  if bluetoothctl info "$mac" | grep -F -q "Connected: yes"; then
+    local batt=$(bluetoothctl info "$mac" | grep "Battery Percentage" | awk -F '[()]' '{print $2}')
+
+    if [[ -n "$batt" ]]; then
+      echo "${check_icon}${name} ($batt%)"
+    else
+      echo "${check_icon}${name}"
+    fi
+  else
+    echo "$name"
+  fi
+}
+
+toggle_power() {
+  if power_on; then
+    bluetoothctl power off
+  else
+    rfkill unblock bluetooth 2>/dev/null
+    bluetoothctl power on
+  fi
+  show_menu
+}
+
+device_menu() {
+  local device="$1"
+  local device_name=$(echo "$device" | cut -d ' ' -f 3-)
+  local mac=$(echo "$device" | cut -d ' ' -f 2)
+
+  local connected="Connected: no"
+  bluetoothctl info "$mac" | grep -F -q "Connected: yes" && connected="Connected: yes"
+
+  local paired="Paired: no"
+  bluetoothctl info "$mac" | grep -F -q "Paired: yes" && paired="Paired: yes"
+
+  options="${connected}\n${paired}\n$divider\n$goback\n$exit_cmd"
+  chosen=$(echo -e "$options" | run_menu "$device_name")
+
+  case "$chosen" in
+  "$connected")
+    if [[ "$connected" == "Connected: yes" ]]; then
+      bluetoothctl disconnect "$mac"
+    else
+      bluetoothctl connect "$mac"
+    fi
+    show_menu
+    ;;
+  "$goback")
+    show_menu
+    ;;
+  *)
+    exit 0
+    ;;
+  esac
+}
+
+show_menu() {
+  if power_on; then
+    power="Power: ON"
+    devices_list=""
+    while read -r line; do
+      mac=$(echo "$line" | cut -d ' ' -f 2)
+      name=$(echo "$line" | cut -d ' ' -f 3-)
+      devices_list+="$(get_device_info "$mac" "$name")\n"
+    done < <(bluetoothctl devices)
+
+    scan="Scan: OFF"
+    bluetoothctl show | grep -F -q "Discovering: yes" && scan="Scan: ON"
+
+    options="${devices_list}$divider\n$power\n$scan\n$exit_cmd"
+  else
+    power="Power: OFF"
+    options="$power\n$exit_cmd"
+  fi
+
+  chosen=$(echo -e "$options" | run_menu "Bluetooth menu")
+
+  case "$chosen" in
+  "" | "$exit_cmd")
+    exit 0
+    ;;
+  "$power")
+    toggle_power
+    ;;
+  "$scan")
+    if bluetoothctl show | grep -F -q "Discovering: yes"; then
+      bluetoothctl scan off
+    else
+      bluetoothctl scan on &
+      sleep 2
+    fi
+    show_menu
+    ;;
+  *)
+
+    clean_name=$(echo "$chosen" | sed "s/^$check_icon//; s/ (.*)//")
+    device_line=$(bluetoothctl devices | grep -F "$clean_name")
+
+    if [[ -n "$device_line" ]]; then
+      device_menu "$device_line"
+    fi
+    ;;
+  esac
+}
+
+show_menu
