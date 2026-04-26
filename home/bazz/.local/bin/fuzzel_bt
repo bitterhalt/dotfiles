@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-divider="---------"
 goback="Back"
-exit_cmd="Exit"
 check_icon="󰄬  "
 
 run_menu() {
@@ -30,16 +28,6 @@ get_device_info() {
   fi
 }
 
-toggle_power() {
-  if power_on; then
-    bluetoothctl power off
-  else
-    rfkill unblock bluetooth 2>/dev/null
-    bluetoothctl power on
-  fi
-  show_menu
-}
-
 device_menu() {
   local device="$1"
   local device_name=$(echo "$device" | cut -d ' ' -f 3-)
@@ -51,7 +39,7 @@ device_menu() {
   local paired="Paired: no"
   bluetoothctl info "$mac" | grep -F -q "Paired: yes" && paired="Paired: yes"
 
-  options="${connected}\n${paired}\n$divider\n$goback\n$exit_cmd"
+  options="${connected}\n${paired}\n$goback"
   chosen=$(echo -e "$options" | run_menu "$device_name")
 
   case "$chosen" in
@@ -74,7 +62,6 @@ device_menu() {
 
 show_menu() {
   if power_on; then
-    power="Power: ON"
     devices_list=""
     while read -r line; do
       mac=$(echo "$line" | cut -d ' ' -f 2)
@@ -82,43 +69,21 @@ show_menu() {
       devices_list+="$(get_device_info "$mac" "$name")\n"
     done < <(bluetoothctl devices)
 
-    scan="Scan: OFF"
-    bluetoothctl show | grep -F -q "Discovering: yes" && scan="Scan: ON"
-
-    options="${devices_list}$divider\n$power\n$scan\n$exit_cmd"
+    options="${devices_list%\\n}"
   else
-    power="Power: OFF"
-    options="$power\n$exit_cmd"
+    options=""
   fi
 
-  chosen=$(echo -e "$options" | run_menu "Bluetooth menu")
+  chosen=$(echo -e "$options" | run_menu "Choose BT device")
 
-  case "$chosen" in
-  "" | "$exit_cmd")
-    exit 0
-    ;;
-  "$power")
-    toggle_power
-    ;;
-  "$scan")
-    if bluetoothctl show | grep -F -q "Discovering: yes"; then
-      bluetoothctl scan off
-    else
-      bluetoothctl scan on &
-      sleep 2
-    fi
-    show_menu
-    ;;
-  *)
-
+  if [[ -n "$chosen" ]]; then
     clean_name=$(echo "$chosen" | sed "s/^$check_icon//; s/ (.*)//")
     device_line=$(bluetoothctl devices | grep -F "$clean_name")
 
     if [[ -n "$device_line" ]]; then
       device_menu "$device_line"
     fi
-    ;;
-  esac
+  fi
 }
 
 show_menu
