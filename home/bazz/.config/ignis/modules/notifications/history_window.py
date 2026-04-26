@@ -43,7 +43,7 @@ class NotificationCenter(widgets.RevealerWindow):
                     spacing=8,
                     halign="fill",
                     valign="end",
-                    css_classes=["left-bottom-bar"],
+                    css_classes=["bottom-bar"],
                     child=[dnd_box, clear_btn],
                 ),
             ],

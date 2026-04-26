@@ -32,7 +32,7 @@
   color: $warning;
 }
 
-.dnd-box {
+.bottom-bar {
   padding: 8px 0 0 16px;
 }
 
@@ -43,6 +43,7 @@
 .dnd-box switch {
   all: unset;
   background: $ui-1;
+  opacity: 0.8;
   border-radius: 10px;
   padding: 0 6px;
   min-height: 24px;
@@ -65,6 +66,7 @@
 
 .dnd-box switch:checked {
   background: $warning;
+  opacity: 0.8;
 }
 
 .date-weather-pill {
