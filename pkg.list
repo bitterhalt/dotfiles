@@ -103,7 +103,6 @@ pacseek-bin
 papirus-icon-theme
 pass
 pavucontrol
-pcmanfm
 pipewire
 pipewire-alsa
 pipewire-jack
@@ -137,6 +136,8 @@ sudo
 swayimg
 syncthing
 tealdeer
+thunar
+thunar-archive-plugin
 thunderbird
 tmux
 transmission-gtk
