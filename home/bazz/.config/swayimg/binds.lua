@@ -53,16 +53,14 @@ swayimg.viewer.on_key("Shift-equal", function()
 end)
 
 -- External commands
-swayimg.viewer.on_key("Delete", function()
+swayimg.viewer.on_key("b", function()
 	local image = swayimg.viewer.get_image()
-	os.execute("trash-put '" .. image.path .. "'")
-	swayimg.text.set_status("File trashed: " .. image.path)
+	setbg(image.path)
 end)
 
 swayimg.viewer.on_key("b", function()
 	local image = swayimg.viewer.get_image()
-	os.execute("setbg '" .. image.path .. "'")
-	swayimg.text.set_status("Wallpaper set")
+	setbg(image.path)
 end)
 
 swayimg.viewer.on_key("e", function()
@@ -174,8 +172,7 @@ end)
 
 swayimg.gallery.on_key("b", function()
 	local image = swayimg.gallery.get_image()
-	os.execute("setbg '" .. image.path .. "'")
-	swayimg.text.set_status("Wallpaper set")
+	setbg(image.path)
 end)
 
 swayimg.gallery.on_key("e", function()
