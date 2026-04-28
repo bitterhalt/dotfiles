@@ -32,6 +32,8 @@
 <img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/quick_settings.png" width="100%" />
 </details>
 
+https://github.com/user-attachments/assets/b9a16046-4165-43f2-80da-c3e89093b11c
+
 ---
 
 ### Installation
