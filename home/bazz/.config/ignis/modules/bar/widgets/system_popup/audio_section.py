@@ -146,7 +146,6 @@ class AudioSection(widgets.Box):
                     spacing=8,
                     halign="center",
                     child=[
-                        widgets.Icon(image="emblem-system-symbolic", pixel_size=icon_size),
                         widgets.Label(
                             label="Audio Settings",
                             css_classes=["audio-settings-label"],
