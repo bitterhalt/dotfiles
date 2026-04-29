@@ -95,7 +95,7 @@ class NetworkSection(widgets.Box):
 
         self._arrow = widgets.Icon(
             image="pan-down-symbolic",
-            pixel_size=icon_size,
+            pixel_size=16,
             css_classes=["expand-arrow"],
         )
 
