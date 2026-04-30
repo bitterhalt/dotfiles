@@ -49,7 +49,9 @@ class NotificationList:
             item = NotificationHistoryItem(notif)
             self._notif_list.append(item)
             sig_manager = SignalManager()
-            sig_manager.connect(notif, "closed", lambda *_: self._on_notification_closed())
+            sig_manager.connect(
+                notif, "closed", lambda *_: self._on_notification_closed()
+            )
             self._item_signals[id(notif)] = sig_manager
 
         self._update_empty_state()
@@ -69,7 +71,13 @@ class NotificationList:
         sig_manager = SignalManager()
         sig_manager.connect(notif, "closed", lambda *_: self._on_notification_closed())
         self._item_signals[id(notif)] = sig_manager
-        visible_count = len([n for n in notifications.notifications if self._should_show_notification(n)])
+        visible_count = len(
+            [
+                n
+                for n in notifications.notifications
+                if self._should_show_notification(n)
+            ]
+        )
 
         if visible_count > MAX_NOTIFICATIONS:
             excess_item = self._notif_list.child[-1]

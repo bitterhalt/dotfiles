@@ -58,12 +58,18 @@ class WorkspaceWidget:
     def create_hyprland_widget() -> widgets.EventBox:
         return widgets.EventBox(
             css_classes=["workspaces"],
-            on_scroll_up=lambda *_: hypr.switch_to_workspace(hypr.active_workspace.id - 1),
-            on_scroll_down=lambda *_: hypr.switch_to_workspace(hypr.active_workspace.id + 1),
+            on_scroll_up=lambda *_: hypr.switch_to_workspace(
+                hypr.active_workspace.id - 1
+            ),
+            on_scroll_down=lambda *_: hypr.switch_to_workspace(
+                hypr.active_workspace.id + 1
+            ),
             child=hypr.bind_many(
                 ["workspaces", "active_workspace"],
                 transform=lambda ws, active: [
-                    WorkspaceButton.create(w) for w in ws if w.id >= 1 or w.name == "special: scratchpad"
+                    WorkspaceButton.create(w)
+                    for w in ws
+                    if w.id >= 1 or w.name == "special: scratchpad"
                 ],
             ),
         )
@@ -76,7 +82,9 @@ class WorkspaceWidget:
             on_scroll_down=lambda *_: WorkspaceWidget._scroll_niri(monitor_name, -1),
             child=niri.bind(
                 "workspaces",
-                transform=lambda ws: [WorkspaceButton.create(w) for w in ws if w.output == monitor_name],
+                transform=lambda ws: [
+                    WorkspaceButton.create(w) for w in ws if w.output == monitor_name
+                ],
             ),
         )
 

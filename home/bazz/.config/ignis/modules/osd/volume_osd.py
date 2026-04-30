@@ -20,7 +20,9 @@ class VolumeOSD(widgets.Window):
         slider = widgets.Scale(
             min=0,
             max=100,
-            value=speaker.bind("volume", lambda v: 0 if speaker.is_muted else int(v or 0)),
+            value=speaker.bind(
+                "volume", lambda v: 0 if speaker.is_muted else int(v or 0)
+            ),
             sensitive=False,
             hexpand=True,
             css_classes=["vol-track", "unset"],

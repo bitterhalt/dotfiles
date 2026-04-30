@@ -24,7 +24,9 @@ class BatteryItem(widgets.Box):
 
         device.connect("removed", lambda x: self.unparent())
 
-        device.connect("notify::percentage", lambda *_: self._update_warning_class(device))
+        device.connect(
+            "notify::percentage", lambda *_: self._update_warning_class(device)
+        )
 
     def _setup_styles(self, device):
         self._update_warning_class(device)
@@ -46,5 +48,7 @@ class BatteryItem(widgets.Box):
 class BatteryWidget(widgets.Box):
     def __init__(self):
         super().__init__(
-            setup=lambda self: upower.connect("battery-added", lambda x, device: self.append(BatteryItem(device))),
+            setup=lambda self: upower.connect(
+                "battery-added", lambda x, device: self.append(BatteryItem(device))
+            ),
         )

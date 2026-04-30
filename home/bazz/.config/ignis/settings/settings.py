@@ -53,7 +53,9 @@ class PathConfig:
     """File and directory paths"""
 
     cache_dir: Path = field(default_factory=lambda: Path.home() / ".cache" / "ignis")
-    data_dir: Path = field(default_factory=lambda: Path.home() / ".local" / "share" / "ignis")
+    data_dir: Path = field(
+        default_factory=lambda: Path.home() / ".local" / "share" / "ignis"
+    )
     config_dir: Path = field(default_factory=lambda: Path.home() / ".config" / "ignis")
 
     recordings_dir: Path = Path.home() / "Videos" / "Captures"
@@ -76,7 +78,9 @@ class PathConfig:
     def from_dict(cls, data: Dict) -> "PathConfig":
         return cls(
             recordings_dir=expand_path(data.get("recordings_dir", "~/Videos/Captures")),
-            screenshots_dir=expand_path(data.get("screenshots_dir", "~/Pictures/Screenshots")),
+            screenshots_dir=expand_path(
+                data.get("screenshots_dir", "~/Pictures/Screenshots")
+            ),
         )
 
 
@@ -144,7 +148,9 @@ class MonitorConfig:
                     setattr(self, field_name, 0)
 
         except Exception as e:
-            log_warning(f"Could not validate monitor configuration: {e}. All windows will default to primary monitor.")
+            log_warning(
+                f"Could not validate monitor configuration: {e}. All windows will default to primary monitor."
+            )
 
     @classmethod
     def from_dict(cls, data: Dict) -> "MonitorConfig":
@@ -411,7 +417,9 @@ class AppConfig:
                     data = tomllib.load(f)
                 log_info(f"Loaded config from {toml_config_file}")
             except Exception as e:
-                log_warning(f"Failed to parse TOML config {toml_config_file}: {e}. Trying JSON fallback.")
+                log_warning(
+                    f"Failed to parse TOML config {toml_config_file}: {e}. Trying JSON fallback."
+                )
 
         if data is None and json_config_file.exists():
             try:
@@ -419,12 +427,16 @@ class AppConfig:
 
                 with open(json_config_file) as f:
                     data = json.load(f)
-                log_warning(f"Loaded config from JSON fallback {json_config_file}. Consider migrating to TOML.")
+                log_warning(
+                    f"Loaded config from JSON fallback {json_config_file}. Consider migrating to TOML."
+                )
             except Exception as e:
                 log_error(f"Failed to parse JSON config {json_config_file}: {e}")
 
         if data is None:
-            log_error(f"No valid config file found at {toml_config_file} or {json_config_file}")
+            log_error(
+                f"No valid config file found at {toml_config_file} or {json_config_file}"
+            )
 
         return cls(
             animations=AnimationConfig.from_dict(data.get("animations", {})),

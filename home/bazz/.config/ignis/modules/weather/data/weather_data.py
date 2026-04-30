@@ -150,7 +150,9 @@ async def fetch_weather_async() -> Optional[Dict[str, Any]]:
         for date_key, items in daily_map.items():
             if date_key == today:
                 continue
-            best = min(items, key=lambda e: abs(datetime.fromtimestamp(e["dt"]).hour - 12))
+            best = min(
+                items, key=lambda e: abs(datetime.fromtimestamp(e["dt"]).hour - 12)
+            )
             w0 = best["weather"][0]
             weekly.append(
                 {

@@ -63,11 +63,21 @@ class SystemInfoWidget(widgets.Box):
             child=[cpu_box, ram_box, expand_btn],
         )
 
-        self._os_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
-        self._kernel_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
-        self._cpu_model_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
-        self._mem_total_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
-        self._uptime_label = widgets.Label(label="Loading…", halign="start", css_classes=["system-info-text"])
+        self._os_label = widgets.Label(
+            label="Loading…", halign="start", css_classes=["system-info-text"]
+        )
+        self._kernel_label = widgets.Label(
+            label="Loading…", halign="start", css_classes=["system-info-text"]
+        )
+        self._cpu_model_label = widgets.Label(
+            label="Loading…", halign="start", css_classes=["system-info-text"]
+        )
+        self._mem_total_label = widgets.Label(
+            label="Loading…", halign="start", css_classes=["system-info-text"]
+        )
+        self._uptime_label = widgets.Label(
+            label="Loading…", halign="start", css_classes=["system-info-text"]
+        )
 
         self._details_box = widgets.Box(
             vertical=True,
@@ -110,7 +120,9 @@ class SystemInfoWidget(widgets.Box):
         """Toggle visibility of detailed system info"""
         new_state = not self._details_box.visible
         self._details_box.visible = new_state
-        self._arrow.set_css_classes(["expand-arrow", "rotated"] if new_state else ["expand-arrow"])
+        self._arrow.set_css_classes(
+            ["expand-arrow", "rotated"] if new_state else ["expand-arrow"]
+        )
 
     def _cleanup(self, *_):
         for p in (self._poll_cpu, self._poll_ram, self._poll_info):

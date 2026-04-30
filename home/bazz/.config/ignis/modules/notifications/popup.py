@@ -117,7 +117,11 @@ class Popup(widgets.Revealer):
     def _cleanup(self):
         self.unparent()
 
-        visible_popups = [child for child in self._parent_box.child if child.get_visible() and child.get_mapped()]
+        visible_popups = [
+            child
+            for child in self._parent_box.child
+            if child.get_visible() and child.get_mapped()
+        ]
 
         if len(visible_popups) == 0:
             self._parent_box._window.visible = False

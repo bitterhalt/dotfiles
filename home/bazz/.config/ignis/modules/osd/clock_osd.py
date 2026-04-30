@@ -46,7 +46,9 @@ class BarlessClockWindow(widgets.Window):
         )
 
         self.update_time()
-        self.connect("notify::visible", lambda *_: self.update_time() if self.visible else None)
+        self.connect(
+            "notify::visible", lambda *_: self.update_time() if self.visible else None
+        )
 
     def update_time(self):
         now = datetime.datetime.now()

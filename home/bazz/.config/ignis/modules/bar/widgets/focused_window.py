@@ -84,11 +84,15 @@ class HyprlandWindowTitle(widgets.Box):
             css_classes=["window-title-icon"],
             image=hypr.bind(
                 "active_window",
-                transform=lambda win: WindowInfoFormatter.get_window_icon(win, "hyprland"),
+                transform=lambda win: WindowInfoFormatter.get_window_icon(
+                    win, "hyprland"
+                ),
             ),
             visible=hypr.bind(
                 "active_window",
-                transform=lambda win: WindowInfoFormatter.should_show_icon(win, "hyprland"),
+                transform=lambda win: WindowInfoFormatter.should_show_icon(
+                    win, "hyprland"
+                ),
             ),
         )
 
@@ -99,7 +103,9 @@ class HyprlandWindowTitle(widgets.Box):
             halign="start",
             label=hypr.bind(
                 "active_window",
-                transform=lambda win: WindowInfoFormatter.get_window_text(win, "hyprland"),
+                transform=lambda win: WindowInfoFormatter.get_window_text(
+                    win, "hyprland"
+                ),
             ),
         )
 
@@ -123,7 +129,8 @@ class NiriWindowTitle(widgets.Box):
             visible=niri.bind(
                 "active_window",
                 transform=lambda win: (
-                    WindowInfoFormatter.should_show_icon(win, "niri") and niri.active_output == monitor_name
+                    WindowInfoFormatter.should_show_icon(win, "niri")
+                    and niri.active_output == monitor_name
                 ),
             ),
         )

@@ -52,7 +52,9 @@ class EthernetItem(widgets.Button):
                     widgets.Icon(image="network-wired-symbolic"),
                     widgets.Label(label=dev.name or "Ethernet", ellipsize="end"),
                     widgets.Label(
-                        label=dev.bind("is_connected", lambda c: "Disconnect" if c else "Connect"),
+                        label=dev.bind(
+                            "is_connected", lambda c: "Disconnect" if c else "Connect"
+                        ),
                         hexpand=True,
                         halign="end",
                     ),
@@ -135,7 +137,9 @@ class NetworkSection(widgets.Box):
         ethernet_section = widgets.Box(
             vertical=True,
             spacing=4,
-            child=ethernet.bind("devices", transform=lambda devs: [EthernetItem(d) for d in devs]),
+            child=ethernet.bind(
+                "devices", transform=lambda devs: [EthernetItem(d) for d in devs]
+            ),
         )
 
         settings_button = widgets.Button(
@@ -182,7 +186,9 @@ class NetworkSection(widgets.Box):
     def _toggle_list(self):
         self._list_visible = not self._list_visible
         self._device_list.visible = self._list_visible
-        self._arrow.set_css_classes(["expand-arrow", "rotated"] if self._list_visible else ["expand-arrow"])
+        self._arrow.set_css_classes(
+            ["expand-arrow", "rotated"] if self._list_visible else ["expand-arrow"]
+        )
 
         if self._list_visible and wifi.devices:
             asyncio.create_task(wifi.devices[0].scan())

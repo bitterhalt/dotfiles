@@ -21,7 +21,10 @@ def is_screenshot(notification: Notification) -> bool:
     }
 
     return (
-        (notification.app_name.lower() in SCREENSHOT_APPS or notification.summary.lower() == "screenshot")
+        (
+            notification.app_name.lower() in SCREENSHOT_APPS
+            or notification.summary.lower() == "screenshot"
+        )
         and notification.icon
         and notification.icon.startswith("/")
         and notification.icon.endswith(".png")
@@ -145,7 +148,9 @@ class ScreenshotHistoryItem(widgets.Box):
         )
 
         self._poll = utils.Poll(60000, lambda *_: self._update_timestamp(notification))
-        self._signals.connect(notification, "closed", lambda *_: setattr(self, "visible", False))
+        self._signals.connect(
+            notification, "closed", lambda *_: setattr(self, "visible", False)
+        )
         self._signals.connect(self, "destroy", lambda *_: self.destroy())
 
     def destroy(self):
@@ -161,7 +166,9 @@ class ScreenshotHistoryItem(widgets.Box):
 
     def _toggle_expand(self):
         self._expanded = not self._expanded
-        self._expand_arrow.image = "pan-up-symbolic" if self._expanded else "pan-down-symbolic"
+        self._expand_arrow.image = (
+            "pan-up-symbolic" if self._expanded else "pan-down-symbolic"
+        )
 
         if self._expanded and self._large_preview not in self.child:
             self.append(self._large_preview)
@@ -281,7 +288,9 @@ class NormalHistoryItem(widgets.Box):
         )
 
         has_actions = len(notification.actions) > 0
-        has_expandable = (len(notification.body) > 80 or len(notification.summary) > 70) or has_actions
+        has_expandable = (
+            len(notification.body) > 80 or len(notification.summary) > 70
+        ) or has_actions
 
         self._expand_arrow = widgets.Icon(
             image="pan-down-symbolic",
@@ -327,14 +336,18 @@ class NormalHistoryItem(widgets.Box):
         )
 
         self._poll = utils.Poll(60000, lambda *_: self._update_timestamp(notification))
-        self._signals.connect(notification, "closed", lambda *_: setattr(self, "visible", False))
+        self._signals.connect(
+            notification, "closed", lambda *_: setattr(self, "visible", False)
+        )
         self._signals.connect(self, "destroy", lambda *_: self.destroy())
 
     def _toggle_expand(self):
         self._expanded = not self._expanded
         self._body_collapsed.visible = not self._expanded
         self._body_expanded.visible = self._expanded
-        self._expand_arrow.image = "pan-up-symbolic" if self._expanded else "pan-down-symbolic"
+        self._expand_arrow.image = (
+            "pan-up-symbolic" if self._expanded else "pan-down-symbolic"
+        )
 
         if self._expanded and len(self._notification.actions) > 0:
             if self._action_box not in self.child:

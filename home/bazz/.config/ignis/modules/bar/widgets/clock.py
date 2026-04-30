@@ -31,7 +31,9 @@ class ClockWidget(widgets.Button):
         self._dnd_tracker = widgets.Label(
             visible=options.notifications.bind("dnd"),
         )
-        self._dnd_tracker.connect("notify::visible", lambda *_: self._update_notifications())
+        self._dnd_tracker.connect(
+            "notify::visible", lambda *_: self._update_notifications()
+        )
 
         clock_content = widgets.Box(
             spacing=2,
@@ -54,7 +56,9 @@ class ClockWidget(widgets.Button):
         options.notifications.set_dnd(not options.notifications.dnd)
 
     def _setup_clock(self):
-        self._clock_poll = utils.Poll(config.ui.bar_clock_interval, lambda *_: self._update_time())
+        self._clock_poll = utils.Poll(
+            config.ui.bar_clock_interval, lambda *_: self._update_time()
+        )
         self._clock_label.set_property("label", self._clock_poll.bind("output"))
 
     def _update_time(self):

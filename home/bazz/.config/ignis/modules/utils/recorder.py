@@ -24,7 +24,10 @@ def record_screen():
         return
 
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    file_path = config.paths.recordings_dir / f"recording_{timestamp}.{config.recorder.video_format}"
+    file_path = (
+        config.paths.recordings_dir
+        / f"recording_{timestamp}.{config.recorder.video_format}"
+    )
 
     config.paths.recordings_dir.mkdir(parents=True, exist_ok=True)
 
@@ -54,7 +57,10 @@ async def _record_region_async():
         return
 
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    file_path = config.paths.recordings_dir / f"region_{timestamp}.{config.recorder.video_format}"
+    file_path = (
+        config.paths.recordings_dir
+        / f"region_{timestamp}.{config.recorder.video_format}"
+    )
 
     config.paths.recordings_dir.mkdir(parents=True, exist_ok=True)
 

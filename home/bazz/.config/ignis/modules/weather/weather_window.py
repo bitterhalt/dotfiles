@@ -147,7 +147,9 @@ class WeatherPopup(widgets.RevealerWindow):
         self._update_task = None
         self._refresh_poll = None
         self.connect("notify::visible", self._on_visible_change)
-        self._refresh_poll = utils.Poll(CACHE_TTL * 1000, lambda *_: self._update_weather())
+        self._refresh_poll = utils.Poll(
+            CACHE_TTL * 1000, lambda *_: self._update_weather()
+        )
         self.connect("destroy", self._cleanup)
 
     def _cleanup(self, *_):
@@ -188,7 +190,9 @@ class WeatherPopup(widgets.RevealerWindow):
         self._weekly_box.visible = new_state
         label = "Hide weekly forecast" if new_state else "Show weekly forecast"
         self._weekly_toggle.child.child[0].label = label
-        self._weekly_arrow.set_css_classes(["expand-arrow", "rotated"] if new_state else ["expand-arrow"])
+        self._weekly_arrow.set_css_classes(
+            ["expand-arrow", "rotated"] if new_state else ["expand-arrow"]
+        )
 
     def _update_weather(self):
         self._update_task = asyncio.create_task(self._update_weather_async())
@@ -205,9 +209,7 @@ class WeatherPopup(widgets.RevealerWindow):
         self._city_label.label = data["city"]
         self._temp_label.label = f"{data['temp']}°C"
         self._desc_label.label = data["desc"]
-        self._extra_label.label = (
-            f"Feels like {data['feels_like']}°C  •  Humidity {data['humidity']}%  •  Wind {data['wind']:.1f} m/s"
-        )
+        self._extra_label.label = f"Feels like {data['feels_like']}°C  •  Humidity {data['humidity']}%  •  Wind {data['wind']:.1f} m/s"
 
         if moon := data.get("moon_icon"):
             self._moon_label.label = moon
@@ -224,7 +226,9 @@ class WeatherPopup(widgets.RevealerWindow):
                     spacing=4,
                     css_classes=["weather-forecast-item"],
                     child=[
-                        widgets.Label(label=it["time"], css_classes=["weather-forecast-time"]),
+                        widgets.Label(
+                            label=it["time"], css_classes=["weather-forecast-time"]
+                        ),
                         widgets.Icon(
                             image=it["icon"],
                             pixel_size=40,
@@ -249,7 +253,9 @@ class WeatherPopup(widgets.RevealerWindow):
                     spacing=4,
                     css_classes=["weather-forecast-item"],
                     child=[
-                        widgets.Label(label=label, css_classes=["weather-forecast-time"]),
+                        widgets.Label(
+                            label=label, css_classes=["weather-forecast-time"]
+                        ),
                         widgets.Icon(
                             image=icon_path(icon),
                             pixel_size=40,
@@ -274,7 +280,9 @@ class WeatherPopup(widgets.RevealerWindow):
                     spacing=4,
                     css_classes=["weather-weekly-item"],
                     child=[
-                        widgets.Label(label=it["day"], css_classes=["weather-weekly-day"]),
+                        widgets.Label(
+                            label=it["day"], css_classes=["weather-weekly-day"]
+                        ),
                         widgets.Icon(
                             image=it["icon"],
                             pixel_size=32,

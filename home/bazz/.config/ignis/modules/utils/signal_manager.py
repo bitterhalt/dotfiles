@@ -6,7 +6,9 @@ class SignalManager:
     def __init__(self):
         self._connections: List[Tuple[GObject.Object, int]] = []
 
-    def connect(self, obj: GObject.Object, signal: str, handler: Callable, *args) -> int:
+    def connect(
+        self, obj: GObject.Object, signal: str, handler: Callable, *args
+    ) -> int:
         handler_id = obj.connect(signal, handler, *args)
         self._connections.append((obj, handler_id))
         return handler_id

@@ -48,7 +48,11 @@ class AudioSection(widgets.Box):
             image=stream.bind(
                 "is_muted",
                 lambda m: (
-                    ("microphone-disabled-symbolic" if device_type == "microphone" else "audio-volume-muted-symbolic")
+                    (
+                        "microphone-disabled-symbolic"
+                        if device_type == "microphone"
+                        else "audio-volume-muted-symbolic"
+                    )
                     if m
                     else self._volume_icon(stream.volume)
                 ),
@@ -73,7 +77,9 @@ class AudioSection(widgets.Box):
             css_classes=["pill-audio-scale"],
         )
 
-        self._signals.connect(stream, "notify::volume", lambda *_: self._update_icon(mute_icon))
+        self._signals.connect(
+            stream, "notify::volume", lambda *_: self._update_icon(mute_icon)
+        )
 
         self._arrow = widgets.Arrow(
             pixel_size=16,
@@ -100,8 +106,12 @@ class AudioSection(widgets.Box):
 
         self.child = [row, self._device_list]
         self._populate_devices()
-        self._signals.connect(audio, f"{device_type}-added", lambda *_: self._populate_devices())
-        self._signals.connect(audio, f"notify::{device_type}", lambda *_: self._populate_devices())
+        self._signals.connect(
+            audio, f"{device_type}-added", lambda *_: self._populate_devices()
+        )
+        self._signals.connect(
+            audio, f"notify::{device_type}", lambda *_: self._populate_devices()
+        )
         self.connect("destroy", lambda *_: self._signals.disconnect_all())
 
     def _volume_icon(self, vol: int):
@@ -118,7 +128,9 @@ class AudioSection(widgets.Box):
     def _update_icon(self, icon_widget):
         if self.stream.is_muted:
             icon_widget.image = (
-                "microphone-disabled-symbolic" if self.device_type == "microphone" else "audio-volume-muted-symbolic"
+                "microphone-disabled-symbolic"
+                if self.device_type == "microphone"
+                else "audio-volume-muted-symbolic"
             )
         else:
             icon_widget.image = self._volume_icon(self.stream.volume)
@@ -132,7 +144,9 @@ class AudioSection(widgets.Box):
         self._device_list.child = []
         streams = getattr(audio, f"{self.device_type}s", [])
         current = getattr(audio, self.device_type)
-        streams = sorted(streams, key=lambda s: (0 if s == current else 1, s.description.lower()))
+        streams = sorted(
+            streams, key=lambda s: (0 if s == current else 1, s.description.lower())
+        )
 
         for s in streams:
             item = AudioDeviceItem(s, self.device_type)
