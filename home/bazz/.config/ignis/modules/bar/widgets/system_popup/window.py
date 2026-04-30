@@ -6,6 +6,7 @@ from settings import config
 from .audio_section import AudioSection
 from .network_section import NetworkSection
 from .system_info_section import SystemInfoWidget
+from ..system_tray import SystemTrayWidget
 
 wm = WindowManager.get_default()
 audio = AudioService.get_default()
@@ -27,14 +28,6 @@ class SystemPopup(widgets.RevealerWindow):
             child=widgets.Icon(image="camera-photo-symbolic", pixel_size=icon_size),
         )
 
-        lock_btn = widgets.Button(
-            css_classes=["sys-top-btn", "unset"],
-            on_click=lambda x: (exec_async("hyprlock"), self.set_visible(False)),
-            child=widgets.Icon(
-                image="system-lock-screen-symbolic", pixel_size=icon_size
-            ),
-        )
-
         power_btn = widgets.Button(
             css_classes=["sys-top-btn", "unset"],
             on_click=lambda x: (
@@ -43,6 +36,8 @@ class SystemPopup(widgets.RevealerWindow):
             ),
             child=widgets.Icon(image="system-shutdown-symbolic", pixel_size=icon_size),
         )
+
+        system_tray = SystemTrayWidget()
 
         top_row = widgets.Box(
             spacing=8,
@@ -57,7 +52,7 @@ class SystemPopup(widgets.RevealerWindow):
                     spacing=8,
                     hexpand=True,
                     halign="end",
-                    child=[lock_btn, power_btn],
+                    child=[system_tray, power_btn],
                 ),
             ],
         )

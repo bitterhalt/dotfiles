@@ -6,7 +6,7 @@ from .widgets.clock import ClockWidget
 from .widgets.focused_window import WindowTitleWidget
 from .widgets.recorder_indicator import RecordingIndicator
 from .widgets.system_indicator import SystemIndicatorWidget
-from .widgets.system_tray import SystemTrayWidget
+
 from .widgets.workspaces import WorkspaceWidget
 from .widgets.idle_indicator import IdleIndicatorWidget
 
@@ -37,9 +37,6 @@ def center_section():
 
 def right_section():
     widgets_list = []
-
-    if config.ui.bar_show_system_tray:
-        widgets_list.append(SystemTrayWidget())
 
     widgets_list.extend(
         [

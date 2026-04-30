@@ -72,37 +72,6 @@
   padding: 0px 6px;
 }
 
-.clock-notif-dot {
-  font-size: 0.6em;
-}
-
-.system-tray {
-  border-radius: 6px;
-  margin: 2px 0px;
-  padding: 0 6px;
-}
-
-.tray-toggle-btn {
-  border-radius: 6px;
-  transition: background 0.15s;
-  padding: 0 6px;
-}
-
-.tray-arrow {
-  color: $tx-1;
-  transition: all 200ms ease;
-}
-
-.tray-items {
-  transition: opacity 150ms ease;
-}
-
-.tray-item {
-  border-radius: 6px;
-  margin: 0px 6px;
-  transition: background 0.15s;
-}
-
 .idle-indicator {
   border-radius: 6px;
   color: $tx-1;

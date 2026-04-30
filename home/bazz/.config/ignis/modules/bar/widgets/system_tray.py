@@ -7,7 +7,7 @@ system_tray = SystemTrayService.get_default()
 
 
 class TrayItem(widgets.Button):
-    def __init__(self, item: SystemTrayItem):
+    def __init__(self, item: SystemTrayItem, on_removed_callback=None):
         if item.menu:
             menu = item.menu.copy()
         else:
@@ -28,7 +28,12 @@ class TrayItem(widgets.Button):
             css_classes=["tray-item", "unset"],
         )
 
-        item.connect("removed", lambda x: self.unparent())
+        item.connect("removed", lambda x: self._on_removed(on_removed_callback))
+
+    def _on_removed(self, callback):
+        self.unparent()
+        if callback:
+            callback()
 
     def _safe_activate(self, item):
         async def activate():
@@ -45,65 +50,28 @@ class TrayItem(widgets.Button):
 
 class SystemTrayWidget(widgets.Box):
     def __init__(self):
-        self._expanded = False
-
-        self._arrow = widgets.Icon(
-            image="pan-start-symbolic",
-            pixel_size=config.ui.bar_icon_size,
-            css_classes=["tray-arrow"],
-        )
-
-        self._toggle_btn = widgets.Button(
-            css_classes=["tray-toggle-btn", "unset"],
-            child=self._arrow,
-            on_click=lambda x: self._toggle_tray(),
-        )
-
         self._items_box = widgets.Box(
             css_classes=["tray-items"],
-        )
-
-        self._revealer = widgets.Revealer(
-            child=self._items_box,
-            reveal_child=False,
-            transition_type="slide_left",
-            transition_duration=200,
+            spacing=14,
         )
 
         super().__init__(
             css_classes=["system-tray"],
-            child=[self._toggle_btn, self._revealer],
+            child=[self._items_box],
+            visible=False,
         )
 
         for item in system_tray.items:
-            self._items_box.append(TrayItem(item))
+            self._items_box.append(TrayItem(item, self._update_visibility))
 
         system_tray.connect("added", lambda x, item: self._on_item_added(item))
-
         self._update_visibility()
 
     def _on_item_added(self, item):
-        tray_item = TrayItem(item)
+        tray_item = TrayItem(item, self._update_visibility)
         self._items_box.append(tray_item)
-
-        item.connect("removed", lambda x: self._update_visibility())
-
         self._update_visibility()
 
     def _update_visibility(self):
         has_items = len(self._items_box.child) > 0
         self.visible = has_items
-
-        if not has_items and self._expanded:
-            self._expanded = False
-            self._revealer.reveal_child = False
-            self._arrow.image = "pan-start-symbolic"
-
-    def _toggle_tray(self):
-        self._expanded = not self._expanded
-        self._revealer.reveal_child = self._expanded
-
-        if self._expanded:
-            self._arrow.image = "pan-end-symbolic"
-        else:
-            self._arrow.image = "pan-start-symbolic"

@@ -179,7 +179,6 @@ class TimeoutConfig:
 class BarConfig:
     remember_state: bool = True
     window_title_exceptions: list[str] | None = None
-    show_system_tray: bool = True
     clock_format: str = "%H:%M"
     icon_size: int = 22
     tray_icon_size: int = 22
@@ -307,10 +306,6 @@ class UIConfig:
     @property
     def bar_window_title_exceptions(self):
         return self.bar.window_title_exceptions
-
-    @property
-    def bar_show_system_tray(self):
-        return self.bar.show_system_tray
 
     @property
     def max_notifications(self):
