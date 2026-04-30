@@ -15,7 +15,10 @@ class WorkspaceNameFormatter:
             return name
 
         if niri.is_available:
-            return str(niri.active_workspace.idx)
+            active_workspaces = [w for w in niri.workspaces if w.is_active]
+            if active_workspaces:
+                return str(active_workspaces[0].idx)
+            return None
 
         return None
 

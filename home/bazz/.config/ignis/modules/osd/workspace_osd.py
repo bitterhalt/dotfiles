@@ -43,9 +43,7 @@ class WorkspaceOSD(widgets.Window):
                 hypr, "notify::active-workspace", self._on_workspace_change
             )
         elif niri.is_available:
-            self._signals.connect(
-                niri, "notify::active-workspace", self._on_workspace_change
-            )
+            self._signals.connect(niri, "notify::workspaces", self._on_workspace_change)
 
         self.connect("destroy", self._cleanup)
 
