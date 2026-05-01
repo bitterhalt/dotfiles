@@ -49,12 +49,17 @@
   color: $red;
   opacity: 0.8;
 }
+
+.clock-notif-dot {
+  font-size: 0.5em;
+}
 .clock-notif-dot.normal {
   color: $accent;
 }
 
 .clock-notif-dot.critical {
   color: $warning;
+  opacity: 0.8;
 }
 
 .recording-icon {

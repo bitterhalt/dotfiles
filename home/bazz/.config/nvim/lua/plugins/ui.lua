@@ -1,13 +1,23 @@
 return {
   -- Theme
   {
-    "kepano/flexoki-neovim",
+    "RRethy/base16-nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd("colorscheme flexoki-dark")
+      vim.cmd("colorscheme base16-flexoki-dark")
     end,
   },
+
+  -- {
+  --   "kepano/flexoki-neovim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd("colorscheme flexoki-dark")
+  --   end,
+  -- },
+
   -- Vim-tmux-navigator
   {
     "christoomey/vim-tmux-navigator",
