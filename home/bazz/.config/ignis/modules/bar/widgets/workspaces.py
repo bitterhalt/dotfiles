@@ -10,7 +10,6 @@ niri = NiriService.get_default()
 class WorkspaceButton:
     @staticmethod
     def create_hyprland_button(ws: HyprlandWorkspace) -> widgets.Button:
-        """Create a button for a Hyprland workspace."""
         label_text = WorkspaceNameFormatter.format_hyprland_label(ws.name)
 
         btn = widgets.Button(
@@ -24,8 +23,8 @@ class WorkspaceButton:
 
     @staticmethod
     def create_niri_button(ws: NiriWorkspace) -> widgets.Button:
-        """Create a button for a Niri workspace."""
-        label_text = WorkspaceNameFormatter.format_niri_label(ws.idx)
+        ws_display = ws.name if hasattr(ws, "name") and ws.name else ws.idx
+        label_text = WorkspaceNameFormatter.format_niri_label(ws_display)
 
         btn = widgets.Button(
             css_classes=["ws-btn", "unset"],
@@ -48,7 +47,6 @@ class WorkspaceButton:
 class WorkspaceWidget:
     @staticmethod
     def _scroll_niri(output: str, delta: int):
-        """Handle scroll events for Niri workspaces."""
         active = [w for w in niri.workspaces if w.output == output and w.is_active]
         if not active:
             return

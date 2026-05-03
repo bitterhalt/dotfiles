@@ -326,24 +326,6 @@ class UIConfig:
 
 
 # ───────────────────────────────────────────────────────────────
-# WORKSPACES
-# ───────────────────────────────────────────────────────────────
-@dataclass
-class WorkspacesConfig:
-    labels: list[str] = field(default_factory=lambda: [str(i) for i in range(1, 11)])
-
-    def get_label(self, idx: int) -> str:
-        try:
-            return self.labels[idx - 1]
-        except IndexError:
-            return str(idx)
-
-    @classmethod
-    def from_dict(cls, data: Dict) -> "WorkspacesConfig":
-        return cls(**{k: v for k, v in data.items() if k in cls.__annotations__})
-
-
-# ───────────────────────────────────────────────────────────────
 # SECTIONS
 # ───────────────────────────────────────────────────────────────
 @dataclass
@@ -393,7 +375,6 @@ class AppConfig:
     recorder: RecorderConfig = field(default_factory=RecorderConfig)
     ui: UIConfig = field(default_factory=UIConfig)
     weather: WeatherConfig = field(default_factory=WeatherConfig)
-    workspaces: WorkspacesConfig = field(default_factory=WorkspacesConfig)
 
     @classmethod
     def from_file(cls, config_file: Path | None = None) -> "AppConfig":
@@ -440,7 +421,6 @@ class AppConfig:
             recorder=RecorderConfig.from_dict(data.get("recorder", {})),
             ui=UIConfig.from_dict(data.get("ui", {})),
             weather=WeatherConfig.from_dict(data.get("weather", {})),
-            workspaces=WorkspacesConfig.from_dict(data.get("workspaces", {})),
         )
 
 
