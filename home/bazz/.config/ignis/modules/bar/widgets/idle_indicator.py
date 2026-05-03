@@ -2,6 +2,8 @@ import os
 import asyncio
 from pathlib import Path
 from ignis import utils, widgets
+from ignis.services.hyprland import HyprlandService
+from ignis.services.niri import NiriService
 from settings import config
 from modules.utils.signal_manager import SignalManager
 
@@ -13,7 +15,12 @@ def exec_async(cmd: str):
 class IdleIndicatorWidget(widgets.EventBox):
     def __init__(self):
         self._signals = SignalManager()
-        self._pid_file = Path.home() / ".cache" / "hypridle.pid"
+        self._hypr = HyprlandService.get_default()
+        self._niri = NiriService.get_default()
+
+        self._idle_daemon = "hypridle" if self._hypr.is_available else "swayidle"
+
+        self._pid_file = Path.home() / ".cache" / "idle_daemon.pid"
         self._monitor = None
         self._pending_update = False
 
@@ -26,7 +33,7 @@ class IdleIndicatorWidget(widgets.EventBox):
         super().__init__(
             css_classes=["idle-indicator"],
             child=[self._icon],
-            on_click=lambda x: self._toggle_hypridle(),
+            on_click=lambda x: self._toggle_idle_daemon(),
         )
 
         self._pid_file.parent.mkdir(parents=True, exist_ok=True)
@@ -53,14 +60,15 @@ class IdleIndicatorWidget(widgets.EventBox):
         self._update_status()
 
     def _update_status(self):
-        is_running = self._is_hypridle_running()
+        is_running = self._is_idle_daemon_running()
 
         self.visible = not is_running
 
         if not is_running:
-            self.set_tooltip_text("Idle timer disabled\n\nClick to enable")
+            daemon_name = "Hypridle" if self._idle_daemon == "hypridle" else "Swayidle"
+            self.set_tooltip_text(f"{daemon_name} disabled\n\nClick to enable")
 
-    def _is_hypridle_running(self):
+    def _is_idle_daemon_running(self):
         if not self._pid_file.exists():
             return False
 
@@ -75,7 +83,8 @@ class IdleIndicatorWidget(widgets.EventBox):
                 os.kill(pid, 0)
                 cmdline_path = Path(f"/proc/{pid}/cmdline")
                 if cmdline_path.exists():
-                    return "hypridle" in cmdline_path.read_text()
+                    cmdline = cmdline_path.read_text()
+                    return self._idle_daemon in cmdline
                 return False
             except (OSError, ProcessLookupError):
                 return False
@@ -83,8 +92,8 @@ class IdleIndicatorWidget(widgets.EventBox):
         except (ValueError, FileNotFoundError):
             return False
 
-    def _toggle_hypridle(self):
-        exec_async(str(Path.home() / ".config/ignis/scripts/idle.sh"))
+    def _toggle_idle_daemon(self):
+        exec_async(str(Path.home() / ".config/ignis/scripts/idle.sh") + " -t")
 
     def _cleanup(self):
         self._signals.disconnect_all()
