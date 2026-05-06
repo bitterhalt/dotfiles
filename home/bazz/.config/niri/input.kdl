@@ -1,0 +1,33 @@
+input {
+    keyboard {
+        xkb {
+            layout "fi"
+            options "caps:escape "
+        }
+        numlock
+    }
+
+    touchpad {
+        tap
+        dwtp
+        natural-scroll
+        accel-speed 0.2
+        // scroll-method "two-finger"
+    }
+
+    mouse {
+         accel-speed 0.0
+         accel-profile "flat"
+    }
+
+    trackpoint {
+        // off
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "on-button-down"
+        // scroll-button 273
+        // scroll-button-lock
+        // middle-emulation
+    }
+  }

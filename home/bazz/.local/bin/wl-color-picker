@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
 set -e
-# Wayland color picker script that grabs color-code from image and pastes it to wl-clipboard with tiny notification
-# Inspiration: https://github.com/sdushantha/farge/blob/master/farge
-# Github: bitterhalt
 
 # Dependencies:
 check_dependencies() {
@@ -37,7 +34,7 @@ main() {
     magick $IMAGE -colors 1 txt: | awk 'NR==2 {print $3}'
   )
   magick $IMAGE -filter point -resize 96x96 $ICON
-  notify-send -a System -t 9000 -i $ICON "$HEXCODE"
+  notify-send -a wl-color-picker -t 9000 -i $ICON "$HEXCODE"
   wl-copy -n $HEXCODE
   rm -f $IMAGE $ICON
 }

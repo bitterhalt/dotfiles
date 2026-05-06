@@ -72,6 +72,7 @@ filter_keywords = [
   "TMUX",
   "Timecheck",
   "Playerctl",
+  "wl-color-picker"
 ]
 
 # ══════════════════════════════════════════════════════════════

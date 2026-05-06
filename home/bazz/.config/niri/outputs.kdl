@@ -1,0 +1,7 @@
+// Find more information on the wiki:
+// https://niri-wm.github.io/niri/Configuration:-Outputs
+output "DP-1" {
+    mode "1920x1080@60.000"
+    scale 1
+    transform "normal"
+}

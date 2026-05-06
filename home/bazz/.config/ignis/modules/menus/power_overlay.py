@@ -134,26 +134,6 @@ def confirm_dialog(title: str, message: str, on_confirm=None, on_cancel=None):
 
 class PowerOverlay(widgets.Window):
     def __init__(self):
-        lock_btn = widgets.Button(
-            css_classes=["power-overlay-btn"],
-            on_click=lambda *_: self._lock(),
-            can_focus=True,
-            child=widgets.Box(
-                vertical=True,
-                spacing=16,
-                child=[
-                    widgets.Icon(
-                        image="system-lock-screen-symbolic",
-                        pixel_size=32,
-                    ),
-                    widgets.Label(
-                        label="[L]ock",
-                        css_classes=["power-overlay-label"],
-                    ),
-                ],
-            ),
-        )
-
         logout_btn = widgets.Button(
             css_classes=["power-overlay-btn"],
             on_click=lambda x: self._logout(),
@@ -247,7 +227,6 @@ class PowerOverlay(widgets.Window):
                     halign="center",
                     css_classes=["power-overlay-buttons"],
                     child=[
-                        lock_btn,
                         logout_btn,
                         suspend_btn,
                         reboot_btn,
@@ -296,10 +275,6 @@ class PowerOverlay(widgets.Window):
 
         if keyname == "Escape":
             self.toggle()
-            return True
-
-        elif keyname.lower() == "l":
-            self._lock()
             return True
 
         elif keyname.lower() == "e":

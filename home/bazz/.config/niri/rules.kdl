@@ -1,0 +1,141 @@
+// Named workspaces
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+
+// Floaters
+window-rule {
+    match app-id="modorganizer.exe"
+    match app-id="org.pulseaudio.pavucontrol"
+    match app-id="org.pwmt.zathura"
+    match app-id="gimp"
+    match app-id="localsend_app"
+    match app-id="galculator"
+    match app-id="metadata-viewer"
+    match app-id="metadata-editor"
+    match app-id="mpv"
+    match app-id="bluetui"
+    match app-id="GParted"
+    match app-id="nwg-look"
+    match app-id="qt6ct"
+    match app-id="blueman-manager"
+    match app-id="btrfs-assistant"
+    match app-id="nm-connection-editor"
+    match app-id="yad"
+    match app-id="zenity"
+    match app-id="polkit-gnome-authentication-agent-1"
+    match app-id="xdg-desktop-portal-gtk"
+    match app-id="xdg-desktop-portal-gnome"
+    open-floating true
+}
+
+window-rule {
+    match app-id="steam" title="Steam Settings"
+    match app-id="steam" title="Friends List"
+    match app-id="steam" title="Special Offers"
+    match app-id="steam" title="System Information"
+    open-floating true
+    open-focused false
+}
+
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
+window-rule {
+  match app-id="firefox|zen$" title="^About"
+  open-floating true
+}
+
+window-rule {
+  match app-id="org.mozilla.Thunderbird$" title="Edit Item|^Write.*$"
+  open-floating true
+}
+
+window-rule {
+  match app-id="org.mozilla.Thunderbird$" title="^Calendar Reminders$"
+  open-floating true
+}
+
+window-rule {
+    match app-id="firefox|zen$" title="^Picture-in-Picture$"
+    open-floating true
+    default-column-width { proportion 0.30; }
+    default-window-height { proportion 0.30; }
+    default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+window-rule {
+    match app-id="htop"
+    match app-id="swayimg"
+    match app-id="noteterm"
+    open-floating true
+    default-column-width { proportion 0.80; }
+    default-window-height { proportion 0.80; }
+}
+
+// Top floaters
+window-rule {
+    match app-id="fzf-killer"
+    match app-id="pacseek"
+    match app-id="pop-upgrade"
+    open-floating true
+    default-column-width { proportion 0.50; }
+    default-window-height { proportion 0.60; }
+    default-floating-position x=10 y=10 relative-to="top"
+}
+
+// Workspace assignments
+window-rule {
+    match app-id="Sysmon" title="Sysmon"
+    open-on-workspace "1"
+    open-maximized true
+    open-focused false
+}
+
+window-rule {
+    match app-id="firefox"
+    match app-id="zen"
+    open-on-workspace "2"
+    open-focused false
+    open-maximized true
+}
+
+window-rule {
+  match app-id="com.transmissionbt.transmission"
+  match app-id="discord"
+  match app-id="org.mozilla.Thunderbird"
+  open-on-workspace "3"
+  open-focused false
+  default-column-width { proportion 0.95; }
+}
+
+window-rule {
+    match app-id="pcsx3-qt"
+    match app-id="steam"
+    match app-id="lutris"
+    open-on-workspace "4"
+    default-column-width { proportion 0.95; }
+    open-focused false
+    exclude title="Friends List"
+    exclude title="Special Offers"
+    exclude title="Steam Settings"
+    exclude title="System Information"
+}
+
+// Set rounded corners to all windows
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+}
+
+// Uncomment to show wallpaper on overview
+layer-rule {
+    // match namespace="^awww-daemon$"
+    // place-within-backdrop true
+}
+layout {
+    // background-color "transparent"
+}

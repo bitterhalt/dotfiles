@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+notify-send -a timecheck -i emoji-recent-symbolic -t 5000 "$(date +%H:%M:%S)" "$(date +%d.%m/%Y)"

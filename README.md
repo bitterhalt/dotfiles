@@ -3,7 +3,7 @@
 - Distro: [Arch](https://archlinux.org)
 - Bar: [ignis](https://github.com/ignis-sh/ignis) (Compatible with Niri and Hyprland)
 - Notifications: [ignis](https://github.com/ignis-sh/ignis)
-- WM: [Hyprland](https://github.com/hyprwm/Hyprland)
+- WM: [Niri](https://github.com/niri-wm/niri)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
@@ -52,7 +52,7 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 
 - [ ] Ignis: add bluetooth pill + basic connect/disconnect settings in bar's system_popup
 - [ ] Ignis: add optional vertical bar
-- [ ] Ignis: add brighness osd  + slider in bar's popup menu (easy but I currently don't have laptop)
+- [ ] Ignis: add brighness osd + slider in bar's popup menu (easy but I currently don't have laptop)
 
 ---
 

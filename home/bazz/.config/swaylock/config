@@ -1,7 +1,7 @@
 color=#000000
 indicator-caps-lock
 show-failed-attempts
-image=$HOME/.local/share/wall/bg
+image=$HOME/.local/share/wall/lockscreen.png
 scaling=fill
 font=Adwaita Mono
 font-size=16

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if pgrep -x hyprpicker >/dev/null; then
+  exit 1
+fi
+
+color=$(hyprpicker)
+
+if [ -z "$color" ]; then
+  exit 1
+fi
+
+echo -n "$color" | wl-copy
+notify-send -i color-select-symbolic -t 8000 "Hyprpicker" "$color"
