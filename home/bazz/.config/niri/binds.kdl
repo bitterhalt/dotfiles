@@ -27,24 +27,25 @@ binds {
     Mod+Shift+R hotkey-overlay-title="Re-load Ignis" { spawn-sh "ignis-start.sh"; }
 
     // Menus
+    Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn  "fuzzel_tmuxer"; }
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
     Mod+Ctrl+D hotkey-overlay-title="Toggle DND" { spawn-sh "goignis run-command toggle-dnd"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn-sh "fuzzel_emoji"; }
-    Mod+Ctrl+P hotkey-overlay-title="Color Picker" {spawn-sh "wl-color-picker";}
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn-sh "fuzzel_drun"; }
-    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "~/.config/niri/scripts/power.sh";}
+    Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "wl-color-picker"; }
+    Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel_drun"; }
+    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "~/.config/niri/scripts/power.sh"; }
     Mod+F1 hotkey-overlay-title="Wifi menu" { spawn-sh "fuzzel_wifi"; }
-    Mod+F12 hotkey-overlay-title="Edit Setting" { spawn-sh "~/.config/niri/scripts/dot-settings.sh";}
+    Mod+F12 hotkey-overlay-title="Edit Setting" { spawn-sh "~/.config/niri/scripts/dot-settings.sh"; }
     Mod+F2 hotkey-overlay-title="Bluetooth menu" { spawn-sh "fuzzel_bt"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
-    Mod+F4 hotkey-overlay-title="Kill apps" { spawn-sh "foot -a fzf-killer -e fzf_killer.sh"; }
+    Mod+F4 hotkey-overlay-title="Kill Apps" { spawn-sh "foot -a fzf-killer -e fzf_killer.sh"; }
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn-sh "fuzzel_passmenu"; }
-    Mod+Shift+D hotkey-overlay-title="Run an Binary: fuzzel" { spawn-sh "fuzzel_drun b"; }
+    Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_drun b"; }
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "swayimg -g ~/Pictures/wallpaper/"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "ignis run-command recorder-stop"; }
-    Mod+F8 hotkey-overlay-title="Open Screen Capture Menu" { spawn-sh "~/.config/niri/scripts/record.sh"; }
+    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "~/.config/niri/scripts/record.sh"; }
     Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { spawn-sh "wl-shot -f"; }
     Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "wl-shot -re"; }
 

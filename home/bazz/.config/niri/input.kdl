@@ -11,7 +11,7 @@ input {
         tap
         dwtp
         natural-scroll
-        accel-speed 0.2
+        accel-speed 0.0
         // scroll-method "two-finger"
     }
 

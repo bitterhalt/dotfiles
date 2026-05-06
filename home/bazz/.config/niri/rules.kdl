@@ -21,6 +21,7 @@ window-rule {
     match app-id="qt6ct"
     match app-id="blueman-manager"
     match app-id="btrfs-assistant"
+    match app-id="Pinentry-gtk"
     match app-id="nm-connection-editor"
     match app-id="yad"
     match app-id="zenity"
@@ -132,11 +133,11 @@ window-rule {
     clip-to-geometry true
 }
 
-// Uncomment to show wallpaper on overview
+// Show wallpaper on overview
 layer-rule {
-    // match namespace="^awww-daemon$"
-    // place-within-backdrop true
+    match namespace="^awww-daemon$"
+    place-within-backdrop true
 }
 layout {
-    // background-color "transparent"
+    background-color "transparent"
 }
