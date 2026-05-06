@@ -8,6 +8,12 @@ layout {
         proportion 0.66667
     }
 
+    tab-indicator {
+        active-color "#A02F6F"
+        inactive-color "#A02F6F80"
+        position "left"
+    }
+
     default-column-width { proportion 0.5; }
        focus-ring {
         on
@@ -19,6 +25,7 @@ layout {
     border {
       off
     }
+
 
     shadow {
      // on
