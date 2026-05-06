@@ -36,6 +36,7 @@ binds {
     Mod+F1 { spawn-sh "fuzzel_wifi"; }
     Mod+F12 {spawn-sh "~/.config/niri/scripts/dot-settings.sh";}
     Mod+F2 { spawn-sh "fuzzel_bt"; }
+    Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4 hotkey-overlay-title="Kill apps" { spawn-sh "foot -a fzf-killer -e fzf_killer.sh"; }
     Mod+F5 { spawn-sh "fuzzel_passmenu"; }
     Mod+Shift+D hotkey-overlay-title="Run an Binary: fuzzel" { spawn-sh "fuzzel_drun b"; }
