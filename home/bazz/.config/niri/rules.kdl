@@ -8,19 +8,13 @@ workspace "4"
 window-rule {
     match app-id="modorganizer.exe"
     match app-id="org.pulseaudio.pavucontrol"
-    match app-id="org.pwmt.zathura"
-    match app-id="gimp"
-    match app-id="localsend_app"
     match app-id="galculator"
-    match app-id="metadata-viewer"
-    match app-id="metadata-editor"
     match app-id="mpv"
     match app-id="bluetui"
     match app-id="GParted"
     match app-id="nwg-look"
     match app-id="qt6ct"
     match app-id="blueman-manager"
-    match app-id="btrfs-assistant"
     match app-id="Pinentry-gtk"
     match app-id="nm-connection-editor"
     match app-id="yad"
@@ -29,6 +23,12 @@ window-rule {
     match app-id="polkit-gnome-authentication-agent-1"
     match app-id="xdg-desktop-portal-gtk"
     match app-id="xdg-desktop-portal-gnome"
+    open-floating true
+}
+
+window-rule {
+    match app-id="^gimp"
+    match title="Toolbox|Tool Options|Layers|Brushes|Patterns|Fonts|Undo History|Preferences"
     open-floating true
 }
 
@@ -141,3 +141,24 @@ layer-rule {
 layout {
     background-color "transparent"
 }
+
+// Add shadow to Fuzzel
+// layer-rule {
+//     match namespace="^launcher$"
+//
+//     shadow {
+//         on
+//     }
+//
+//     // Set same as Fuzzel has
+//     geometry-corner-radius 6
+// }
+
+// Turn on shadows for floating windows.
+// window-rule {
+//     match is-floating=true
+//
+//     shadow {
+//         on
+//     }
+// }

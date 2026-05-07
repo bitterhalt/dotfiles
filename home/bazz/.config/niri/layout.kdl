@@ -28,11 +28,11 @@ layout {
 
 
     shadow {
-     // on
-      // softness 30
-      // spread 5
-      // offset x=0 y=5
-      // color "#000000ee"
+      // on
+       softness 30
+       spread 5
+       offset x=0 y=5
+       color "#00000070"
     }
     struts {
       // left 64
@@ -42,4 +42,25 @@ layout {
     }
   }
 
+recent-windows {
+    // off
+    debounce-ms 750
+    open-delay-ms 150
 
+    highlight {
+        active-color "#24837Bff"
+        urgent-color "#AF3029ff"
+        padding 30
+        corner-radius 6
+   }
+    binds {
+        Alt+Tab         { next-window     scope="output"; }
+        Alt+Shift+Tab   { previous-window scope="output"; }
+        Alt+grave       { next-window     scope="output" filter="app-id"; }
+        Alt+Shift+grave { previous-window scope="output" filter="app-id"; }
+    }
+    previews {
+        max-height 480
+        max-scale 0.5
+    }
+  }
