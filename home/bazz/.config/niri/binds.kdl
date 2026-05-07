@@ -5,6 +5,8 @@ binds {
     Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
     Mod+T hotkey-overlay-title="Show Time" { spawn-sh "noti_time"; }
     Mod+F11 hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
+    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "footclient -a noteterm -T Todo -e nvim -O ~/Documents/personal/notes/index.md ~/Documents/personal/notes/todo.md"; }
+    Mod+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
 
     // Install/Remove packages and upgrade system
     Mod+U hotkey-overlay-title="Upgrade System" { spawn-sh "foot -a pop-upgrade -e popupgrade"; }
