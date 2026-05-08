@@ -34,25 +34,7 @@ layout {
     }
   }
 
+// Off you go useless alt/tab clone
 recent-windows {
-    // off
-    debounce-ms 750
-    open-delay-ms 150
-
-    highlight {
-        active-color "#24837Bff"
-        urgent-color "#AF3029ff"
-        padding 30
-        corner-radius 6
-   }
-    binds {
-        Alt+Tab         { next-window     scope="output"; }
-        Alt+Shift+Tab   { previous-window scope="output"; }
-        Alt+grave       { next-window     scope="output" filter="app-id"; }
-        Alt+Shift+grave { previous-window scope="output" filter="app-id"; }
-    }
-    previews {
-        max-height 480
-        max-scale 0.5
-    }
+    off
   }
