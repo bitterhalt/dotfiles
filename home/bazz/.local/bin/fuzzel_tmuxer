@@ -7,6 +7,6 @@ if [ -z "$sessions" ]; then
     fuzzel -d -a top --y 6 --x 6 -w 25 --minimal-lines --placeholder "No sessions"
 else
   echo "$sessions" |
-    fuzzel -d -a top --y 6 --x 6 -w 25 --minimal-lines --placeholder "Choose session..." |
+    fuzzel -d -a top --y 6 --x 6 -w 25 --minimal-lines --placeholder "Choose session:" |
     xargs -r -I{} "$TERMINAL" -e tmux attach-session -t {}
 fi

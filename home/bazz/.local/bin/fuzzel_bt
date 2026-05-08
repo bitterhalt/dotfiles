@@ -74,7 +74,7 @@ show_menu() {
     options=""
   fi
 
-  chosen=$(echo -e "$options" | run_menu "Choose BT device")
+  chosen=$(echo -e "$options" | run_menu "Select device:")
 
   if [[ -n "$chosen" ]]; then
     clean_name=$(echo "$chosen" | sed "s/^$check_icon//; s/ (.*)//")

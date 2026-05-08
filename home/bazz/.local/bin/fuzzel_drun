@@ -2,7 +2,7 @@
 
 set -e
 
-menu="fuzzel -l 5 --placeholder Search... --line-height 26 --width 25"
+menu="fuzzel -l 5 --placeholder Run: --line-height 26 --width 25"
 
 # Just .desktop files
 fuzzeld() {
