@@ -48,7 +48,7 @@ swayimg.viewer.on_key("minus", function()
 	swayimg.viewer.set_abs_scale(scale - scale / 10, pos.x, pos.y)
 end)
 
-swayimg.viewer.on_key("Shift-equal", function()
+swayimg.viewer.on_key("c", function()
 	swayimg.viewer.set_fix_scale("width")
 end)
 
