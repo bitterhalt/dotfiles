@@ -1,10 +1,7 @@
 environment {
     DISPLAY ":0"
     XCURSOR_THEME "Bibata-Modern-Classic"
-    XDG_CURRENT_DESKTOP "Niri"
-    XDG_SESSION_DESKTOP "Niri"
     XDG_SESSION_TYPE "wayland"
-    DESKTOP_SESSION "niri"
     MOZ_ENABLE_WAYLAND "1"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
     QT_QPA_PLATFORM "wayland;xcb"

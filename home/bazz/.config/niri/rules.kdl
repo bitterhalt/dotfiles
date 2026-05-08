@@ -9,7 +9,6 @@ window-rule {
     match app-id="modorganizer.exe"
     match app-id="org.pulseaudio.pavucontrol"
     match app-id="galculator"
-    match app-id="mpv"
     match app-id="bluetui"
     match app-id="GParted"
     match app-id="nwg-look"
@@ -26,11 +25,10 @@ window-rule {
     open-floating true
 }
 
-window-rule {
-    match app-id="^gimp"
-    match title="Toolbox|Tool Options|Layers|Brushes|Patterns|Fonts|Undo History|Preferences"
-    open-floating true
-}
+// window-rule {
+//     match app-id="^gimp" title="Toolbox|Tool Options|Layers|Brushes|Patterns|Fonts|Undo History|Preferences"
+//     open-floating true
+// }
 
 window-rule {
     match app-id="steam" title="Steam Settings"

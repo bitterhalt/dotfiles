@@ -1,7 +1,5 @@
 layout {
     gaps 8
-    center-focused-column "never"
-
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
@@ -15,6 +13,7 @@ layout {
     }
 
     default-column-width { proportion 0.5; }
+
        focus-ring {
         on
         width 2
@@ -26,19 +25,12 @@ layout {
       off
     }
 
-
     shadow {
-      // on
+      // off
        softness 30
        spread 5
        offset x=0 y=5
        color "#00000070"
-    }
-    struts {
-      // left 64
-      // right 64
-      // top 64
-      // bottom 64
     }
   }
 
