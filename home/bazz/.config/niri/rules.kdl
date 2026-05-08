@@ -2,7 +2,6 @@
 workspace "1"
 workspace "2"
 workspace "3"
-workspace "4"
 
 // Floaters
 window-rule {
@@ -76,6 +75,11 @@ window-rule {
     default-window-height { proportion 0.80; }
 }
 
+window-rule {
+    match app-id="Sysmon" title="Sysmon"
+    open-maximized true
+}
+
 // Top floaters
 window-rule {
     match app-id="fzf-killer"
@@ -87,18 +91,13 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top"
 }
 
-// Workspace assignments
-window-rule {
-    match app-id="Sysmon" title="Sysmon"
-    open-on-workspace "1"
-    open-maximized true
-    open-focused false
-}
 
+
+// Workspace assignments
 window-rule {
     match app-id="firefox"
     match app-id="zen"
-    open-on-workspace "2"
+    open-on-workspace "1"
     open-focused false
     open-maximized true
 }
@@ -107,7 +106,7 @@ window-rule {
   match app-id="com.transmissionbt.transmission"
   match app-id="discord"
   match app-id="org.mozilla.Thunderbird"
-  open-on-workspace "3"
+  open-on-workspace "2"
   open-focused false
   default-column-width { proportion 0.95; }
 }
@@ -116,7 +115,7 @@ window-rule {
     match app-id="pcsx3-qt"
     match app-id="steam"
     match app-id="lutris"
-    open-on-workspace "4"
+    open-on-workspace "3"
     default-column-width { proportion 0.95; }
     open-focused false
     exclude title="Friends List"
