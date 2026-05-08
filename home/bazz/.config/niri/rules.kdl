@@ -7,6 +7,7 @@ workspace "3"
 window-rule {
     match app-id="modorganizer.exe"
     match app-id="org.pulseaudio.pavucontrol"
+    match app-id="org.gnome.FileRoller"
     match app-id="galculator"
     match app-id="bluetui"
     match app-id="GParted"
@@ -59,6 +60,11 @@ window-rule {
 }
 
 window-rule {
+  match app-id="thunar" title="^Rename|File Operation Progress"
+  open-floating true
+}
+
+window-rule {
     match app-id="firefox|zen$" title="^Picture-in-Picture$"
     open-floating true
     default-column-width { proportion 0.30; }
@@ -90,8 +96,6 @@ window-rule {
     default-window-height { proportion 0.60; }
     default-floating-position x=10 y=10 relative-to="top"
 }
-
-
 
 // Workspace assignments
 window-rule {
