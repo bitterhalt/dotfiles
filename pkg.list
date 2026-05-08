@@ -58,6 +58,7 @@ grim
 grub
 grub-btrfs
 gst-plugin-pipewire
+gvfs
 htop
 ignis-gvc-git
 imagemagick
@@ -83,7 +84,6 @@ meld
 mesa-utils
 mpv
 mpv-mpris
-nautilus
 neovim
 net-tools
 nethogs
@@ -136,6 +136,8 @@ swayimg
 swaylock
 syncthing
 tealdeer
+thunar
+thunar-volman
 thunderbird
 tmux
 transmission-gtk
@@ -158,7 +160,6 @@ wireplumber
 wl-clipboard
 wofi
 wtype
-xdg-desktop-portal-gnome
 xdg-desktop-portal-gtk
 xdg-user-dirs
 xdg-utils

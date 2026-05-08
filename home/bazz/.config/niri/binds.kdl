@@ -20,7 +20,7 @@ binds {
 
     // File managers
     Mod+E hotkey-overlay-title="Open TUI Filemanager" { spawn-sh "foot -T lf -e lf"; }
-    Mod+Shift+E hotkey-overlay-title="Open GUI Filemanager" { spawn "nautilus"; }
+    Mod+Shift+E hotkey-overlay-title="Open GUI Filemanager" { spawn "thunar"; }
 
     // Ignis
     Mod+B hotkey-overlay-title="Zen Mode" { spawn-sh "goignis run-command toggle-bar"; }
