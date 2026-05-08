@@ -34,7 +34,6 @@ layout {
     }
   }
 
-// Off you go useless alt/tab clone
 recent-windows {
     off
   }

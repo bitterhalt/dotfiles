@@ -165,11 +165,11 @@ binds {
     Mod+0 hotkey-overlay-title="Previous Workspace" { focus-workspace-previous; }
 
     // Column and Window Organization
-    Mod+Comma hotkey-overlay-title="Consume/Expel Window Left" { consume-or-expel-window-left; }
-    Mod+Period hotkey-overlay-title="Consume/Expel Window Right" { consume-or-expel-window-right; }
+    Mod+Comma hotkey-overlay-title="Consume Window into Column" { consume-window-into-column; }
+    Mod+Period hotkey-overlay-title="Expel Window from Column" { expel-window-from-column; }
 
-    Mod+Shift+Comma hotkey-overlay-title="Consume Window into Column" { consume-window-into-column; }
-    Mod+Shift+Period hotkey-overlay-title="Expel Window from Column" { expel-window-from-column; }
+    Mod+Shift+Comma hotkey-overlay-title="Consume/Expel Window Left" { consume-or-expel-window-left; }
+    Mod+Shift+Period hotkey-overlay-title="Consume/Expel Window Right" { consume-or-expel-window-right; }
 
     // Sizing and Layout
     Mod+R hotkey-overlay-title="Switch Preset Width" { switch-preset-column-width; }
@@ -178,6 +178,7 @@ binds {
 
     Mod+F hotkey-overlay-title="Maximize Column" { maximize-column; }
     Mod+Shift+F hotkey-overlay-title="Fullscreen Window" { fullscreen-window; }
+    Mod+Ctrl+Shift+F hotkey-overlay-title="Toggle Windowed Fullscreen" { toggle-windowed-fullscreen; }
 
     Mod+Ctrl+F hotkey-overlay-title="Maximize Window to Edges" { maximize-window-to-edges; }
     Mod+Ctrl+M hotkey-overlay-title="Expand Column Width" { expand-column-to-available-width; }
