@@ -52,23 +52,7 @@ local function setbg(path)
 
 	os.execute("mkdir -p '" .. dir .. "'")
 	os.execute("vipsthumbnail '" .. path .. "' --size " .. w .. "x" .. h .. " --output '" .. out .. "'")
-	os.execute(
-		"gm convert '"
-			.. out
-			.. "' "
-			.. "-resize "
-			.. w
-			.. "x"
-			.. h
-			.. "^ -gravity center -extent "
-			.. w
-			.. "x"
-			.. h
-			.. " "
-			.. "-blur 0x15 '"
-			.. lockscreen
-			.. "'"
-	)
+	os.execute("gm convert '" .. out .. "' -blur 0x15 '" .. lockscreen .. "'")
 
 	os.execute(
 		"awww img '"
@@ -77,7 +61,9 @@ local function setbg(path)
 			.. "--transition-type=any --transition-step=60 --transition-fps=60 --transition-duration=.7"
 	)
 
-	swayimg.text.set_status("Wallpaper and lockscreen images set!")
+	os.execute("awww img -n overview '" .. lockscreen .. "' --transition-type=none")
+
+	swayimg.text.set_status("Wallpaper and Overview updated!")
 end
 
 return setbg

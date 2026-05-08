@@ -30,10 +30,6 @@ gestures {
     }
 }
 
-clipboard {
-    disable-primary
-}
-
 overview {
     zoom 0.40
     backdrop-color "#1C1B1A"
