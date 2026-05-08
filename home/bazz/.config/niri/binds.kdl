@@ -44,7 +44,7 @@ binds {
     Mod+F4 hotkey-overlay-title="Kill Apps" { spawn-sh "foot -a fzf-killer -e fzf_killer.sh"; }
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn-sh "fuzzel_passmenu"; }
     Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_drun b"; }
-    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "swayimg -g ~/Pictures/wallpaper/"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "swayimg --class swayimg-setwall -g ~/Pictures/wallpaper/"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "ignis run-command recorder-stop"; }

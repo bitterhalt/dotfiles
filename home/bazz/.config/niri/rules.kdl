@@ -67,11 +67,17 @@ window-rule {
 }
 
 window-rule {
-    match app-id="htop"
     match app-id="swayimg"
+    open-floating true
+}
+
+// Swayimg wallpaper chooser
+window-rule {
+    match app-id="htop"
+    match app-id="swayimg-setwall"
     match app-id="noteterm"
     open-floating true
-    default-column-width { proportion 0.80; }
+    default-column-width { proportion 0.90; }
     default-window-height { proportion 0.80; }
 }
 
@@ -90,8 +96,6 @@ window-rule {
     default-window-height { proportion 0.60; }
     default-floating-position x=10 y=10 relative-to="top"
 }
-
-
 
 // Workspace assignments
 window-rule {
