@@ -8,38 +8,41 @@ local function read_cmd(cmd)
 	return out
 end
 
--- get resolution
+-- Get resolution and detect compositor
 local function get_resolution()
-	-- niri
+	local is_niri = false
+
+	-- Niri
 	if os.execute("command -v niri >/dev/null 2>&1") == 0 then
 		local cmd = "niri msg --json outputs | jq -r 'to_entries | .[0].value.logical | \"\\(.width) \\(.height)\"'"
 		local out = read_cmd(cmd)
 		if out then
 			local w, h = out:match("(%d+) (%d+)")
 			if w and h then
-				return w, h
+				is_niri = true
+				return w, h, is_niri
 			end
 		end
 	end
 
-	-- hyprland
+	-- Hyprland
 	if os.execute("command -v hyprctl >/dev/null 2>&1") == 0 then
 		local out = read_cmd("hyprctl -j monitors | jq -r '.[] | select(.focused) | \"\\(.width) \\(.height)\"'")
 		if out then
 			local w, h = out:match("(%d+) (%d+)")
 			if w and h then
-				return w, h
+				return w, h, false
 			end
 		end
 	end
 
-	return nil, nil
+	return nil, nil, false
 end
 
 local function setbg(path)
 	path = path:gsub("'", "'\\''")
 
-	local w, h = get_resolution()
+	local w, h, is_niri = get_resolution()
 	if not w or not h then
 		swayimg.text.set_status("setbg: failed to detect resolution")
 		return
@@ -52,11 +55,19 @@ local function setbg(path)
 
 	os.execute("mkdir -p '" .. dir .. "'")
 	os.execute("vipsthumbnail '" .. path .. "' --size " .. w .. "x" .. h .. " --output '" .. out .. "'")
-	os.execute("gm convert '" .. out .. "' -blur 0x15 '" .. lockscreen .. "'")
 
-	os.execute("awww img '" .. out .. "' " .. "--transition-type=none")
-	os.execute("awww img -n overview '" .. lockscreen .. "' --transition-type=none")
-	swayimg.text.set_status("Wallpapers updated (Default + Overview)")
+	-- Apply main wallpaper
+	os.execute("awww img '" .. out .. "' --transition-type=none")
+
+	-- Generate blurred overview and set namespace if Niri
+	if is_niri then
+		os.execute("gm convert '" .. out .. "' -blur 0x15 '" .. lockscreen .. "'")
+		os.execute("awww img -n overview '" .. lockscreen .. "' --transition-type=none")
+
+		swayimg.text.set_status("Updated: Default + Overview namespaces")
+	else
+		swayimg.text.set_status("Updated: Default wallpaper")
+	end
 end
 
 return setbg
