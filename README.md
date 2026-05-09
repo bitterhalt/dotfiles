@@ -18,18 +18,18 @@
 
 > With bar
 >
-> <img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/empty.png" width="100%" />
->
-> Zen aka barless mode
-> <img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/barless.png" width="100%" />
+> <img width="1920" height="1080" alt="2026-05-09-11-49-06_screenshot" src="https://github.com/user-attachments/assets/a1dc54fc-506c-40d8-974f-62ec3b88dcbd" />
+
+> Zen
+> <img width="1920" height="1080" alt="2026-05-09-11-50-54_screenshot" src="https://github.com/user-attachments/assets/3c69e12b-509e-4db3-a89f-49dbd7dad020" />
 
 <details>
-<summary><b>Notification Center</b></summary><br>
-<img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/center.png" width="100%" />
+<summary><b>Blurred overview</b></summary><br>
+<img width="1920" height="1080" alt="2026-05-09-11-49-23_screenshot" src="https://github.com/user-attachments/assets/a1dff4f2-d016-4964-b735-23533a50ef09" />
 </details>
 <details>
-<summary><b>Quick setting</b></summary><br>
-<img src="https://github.com/bitterhalt/dotfiles/blob/main/.assets/screenshots/quick_settings.png" width="100%" />
+<summary><b>Settings</b></summary><br>
+<img width="1920" height="1080" alt="2026-05-09-11-50-04_screenshot" src="https://github.com/user-attachments/assets/2aa5400c-f9e6-4300-a677-856ccf970918" />
 </details>
 
 https://github.com/user-attachments/assets/b9a16046-4165-43f2-80da-c3e89093b11c
