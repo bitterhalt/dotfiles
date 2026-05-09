@@ -54,12 +54,7 @@ local function setbg(path)
 	os.execute("vipsthumbnail '" .. path .. "' --size " .. w .. "x" .. h .. " --output '" .. out .. "'")
 	os.execute("gm convert '" .. out .. "' -blur 0x15 '" .. lockscreen .. "'")
 
-	os.execute(
-		"awww img '"
-			.. out
-			.. "' "
-			.. "--transition-type=any --transition-step=60 --transition-fps=60 --transition-duration=.7"
-	)
+	os.execute("awww img '" .. out .. "' " .. "--transition-type=none")
 	os.execute("awww img -n overview '" .. lockscreen .. "' --transition-type=none")
 	swayimg.text.set_status("Wallpapers updated (Default + Overview)")
 end
