@@ -134,7 +134,7 @@ window-rule {
     clip-to-geometry true
 }
 
-// Show wallpaper on overview
+// Show blurred wallpaper on overview.
 layer-rule {
     match namespace="overview"
     place-within-backdrop true

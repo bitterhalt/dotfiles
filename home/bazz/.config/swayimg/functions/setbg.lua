@@ -60,10 +60,8 @@ local function setbg(path)
 			.. "' "
 			.. "--transition-type=any --transition-step=60 --transition-fps=60 --transition-duration=.7"
 	)
-
 	os.execute("awww img -n overview '" .. lockscreen .. "' --transition-type=none")
-
-	swayimg.text.set_status("Wallpaper and Overview updated!")
+	swayimg.text.set_status("Wallpapers updated (Default + Overview)")
 end
 
 return setbg

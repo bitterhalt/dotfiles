@@ -6,7 +6,6 @@ amdfan
 amdgpu_top
 atool
 autotiling
-awww
 base
 base-devel
 bash-completion
@@ -120,6 +119,7 @@ rate-mirrors-bin
 ripgrep
 rofi
 rsync
+rust
 sassc
 satty
 screenkey
@@ -152,6 +152,7 @@ tumbler
 unrar
 unzip
 vulkan-radeon
+wayland-protocols
 wev
 wget
 wine
