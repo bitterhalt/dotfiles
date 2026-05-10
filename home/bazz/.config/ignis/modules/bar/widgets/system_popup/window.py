@@ -64,7 +64,7 @@ class SystemPopup(widgets.RevealerWindow):
 
         slider_content = widgets.Box(
             vertical=True,
-            spacing=10,
+            spacing=4,
             css_classes=["slider-pill"],
             child=[speaker, mic],
         )

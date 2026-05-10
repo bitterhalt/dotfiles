@@ -1,3 +1,14 @@
+// Named workspaces
+workspace "1"
+workspace "2"
+workspace "3"
+
+// Set rounded corners to all windows
+window-rule {
+    geometry-corner-radius 4
+    clip-to-geometry true
+}
+
 layout {
     gaps 8
     preset-column-widths {

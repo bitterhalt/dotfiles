@@ -49,7 +49,7 @@ class SystemInfoWidget(widgets.Box):
         super().__init__(
             vertical=True,
             spacing=14,
-            css_classes=["system-info-widget"],
+            css_classes=["system-info-pill"],
             child=[cpu_box, ram_box],
         )
 

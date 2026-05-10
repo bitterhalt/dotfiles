@@ -2,7 +2,7 @@
   margin: 16px;
   revealer {
     box-shadow: $box-shadow;
-    border-radius: 6px;
+    border-radius: 4px;
   }
 }
 
@@ -11,7 +11,7 @@
   border: unset;
   background: $bg-1;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .sys-top-row {
@@ -21,7 +21,7 @@
 .system-tray {
   background: $bg-2;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 8px;
 }
 
@@ -29,7 +29,7 @@
   color: $tx-1;
   background: $bg-2;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 8px;
   transition:
     background 0.15s,
@@ -61,7 +61,7 @@
   padding: 12px;
   background: $bg-2;
   border: unset;
-  border-radius: 6px;
+  border-radius: 4px;
   transition:
     background 0.15s,
     border-color 0.15s;
@@ -75,7 +75,7 @@
   margin-top: 4px;
 }
 .sys-network-pill {
-  border-radius: 6px;
+  border-radius: 4px;
   background: $bg-2;
   margin-top: 4px;
 }
@@ -84,7 +84,7 @@
 .net-ethernet-item,
 .net-vpn-item {
   color: $tx-1;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 6px;
   transition:
     background 0.15s,
@@ -111,7 +111,7 @@
 .network-settings-btn {
   color: $tx-1;
   background: $ui-2;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 6px;
   margin: 6px 0;
   transition: background 0.15s;
@@ -121,21 +121,21 @@
   }
 }
 
-.system-info-widget {
+.system-info-pill {
   background: $bg-2;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 12px;
   margin-top: 4px;
 }
 
 .slider-pill {
   background: $bg-2;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 12px;
 }
 
 .pill-audio-mute-btn {
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 6px;
   background: transparent;
   transition: background 0.15s;
@@ -158,7 +158,7 @@
 .audio-settings-btn {
   color: $tx-1;
   background: $ui-2;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 6px;
   margin: 6px 0;
   transition: background 0.15s;
@@ -175,14 +175,14 @@
 .pill-audio-scale trough {
   all: unset;
   background: $ui-2;
-  border-radius: 6px;
+  border-radius: 4px;
   min-height: 8px;
 }
 
 .pill-audio-scale trough highlight {
   all: unset;
   background: $accent;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .pill-audio-scale slider {
@@ -195,7 +195,7 @@
 
 .pill-audio-expand-btn {
   background: unset;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 4px;
 
   &:hover {
@@ -206,7 +206,7 @@
 .audio-device-item {
   color: $tx-1;
   border: unset;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 6px 8px;
 
   &:hover {
@@ -220,12 +220,12 @@
 
 .system-info-bar trough {
   background: $ui-1;
-  border-radius: 6px;
+  border-radius: 4px;
   min-height: 8px;
 }
 
 .system-info-bar trough highlight {
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .cpu-bar trough highlight {
@@ -264,7 +264,7 @@
   color: $tx-3;
 }
 .sys-info-expand-btn {
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 4px;
   margin-top: 4px;
 

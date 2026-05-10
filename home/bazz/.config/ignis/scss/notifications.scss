@@ -6,7 +6,7 @@
 .notif-box {
   background: $bg-1;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 15px;
   color: $tx-1;
   box-shadow: $box-shadow;
@@ -16,7 +16,7 @@
 
 .notif-low {
   background: $bg-1;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 15px;
   color: $tx-1;
   box-shadow: $box-shadow;
@@ -27,7 +27,7 @@
 .notif-critical {
   background: $bg-1;
   border: 2px solid $warning;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 15px;
   box-shadow: 0 0 4px 2px rgba(175, 48, 41, 0.5);
   min-width: 300px;
@@ -75,7 +75,7 @@
   all: unset;
   background: $accent;
   color: $bg-1;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 4px;
   transition: background 0.2s;
 }

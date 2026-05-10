@@ -1,8 +1,3 @@
-// Named workspaces
-workspace "1"
-workspace "2"
-workspace "3"
-
 // Floaters
 window-rule {
     match app-id="modorganizer.exe"
@@ -129,11 +124,7 @@ window-rule {
     exclude title="System Information"
 }
 
-// Set rounded corners to all windows
-window-rule {
-    geometry-corner-radius 6
-    clip-to-geometry true
-}
+
 
 // Show blurred wallpaper on overview.
 layer-rule {

@@ -40,7 +40,7 @@
 
 .clock,
 .clock-button {
-  border-radius: 6px;
+  border-radius: 4px;
   font-weight: 600;
   margin: 2px 0px;
   padding: 0px 6px;
@@ -64,21 +64,21 @@
 
 .recording-icon {
   animation: blink 2s infinite;
-  border-radius: 6px;
+  border-radius: 4px;
   color: $warning;
   padding: 0px 4px;
   margin: 2px 0px;
 }
 
 .system-indicator-button {
-  border-radius: 6px;
+  border-radius: 4px;
   color: $tx-1;
   margin: 2px 0px;
   padding: 0px 6px;
 }
 
 .idle-indicator {
-  border-radius: 6px;
+  border-radius: 4px;
   color: $tx-1;
   margin: 2px 0 2px 4px;
   padding: 0px 6px;
@@ -90,7 +90,7 @@
 
 .battery {
   background: transparent;
-  border-radius: 6px;
+  border-radius: 4px;
   color: $tx-1;
   margin: 2px 0px;
   padding: 0px 6px;
