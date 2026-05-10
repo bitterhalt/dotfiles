@@ -80,7 +80,7 @@ class Bar(widgets.RevealerWindow):
             monitor=monitor_id,
             anchor=["left", "top", "right"],
             exclusivity="exclusive",
-            layer="bottom",
+            layer="top",
             visible=initial_visible,
             css_classes=["unset"],
             child=revealer,
