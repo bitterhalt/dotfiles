@@ -1,2 +1,130 @@
 #!/usr/bin/env bash
-iwmenu -l custom --launcher-command "fuzzel -d -a top --y 6 --x 6 -w 25 --minimal-lines --placeholder '{hint}' {password_flag:--password}"
+# Stolen from: https://github.com/matthewlscarlson/iwd-dmenu
+
+NEWLINE='
+'
+
+fuzzel_iwd() {
+  main_menu() {
+    while :; do
+      interface="$(for dev in /sys/class/net/*; do
+        [ -d "${dev}/wireless/" ] && printf '%s\n' "${dev##*/}"
+      done | head -n 1)"
+
+      if ! show_menu 'Fuzzel iwd:' 'Connect' 'Disconnect' 'Forget'; then break; fi
+    done
+  }
+
+  connect() {
+    get_network_info "iwctl station ${interface} get-networks"
+
+    network="$(show_menu 'Connect' "${network_names}")"
+
+    case "${network}" in '> '*)
+      herbe 'Already connected to this network' &
+      return
+      ;;
+    esac
+
+    get_network_info 'iwctl known-networks list'
+
+    if printf '%s\n' "${network_info}" | awk -F '|' '{print $1}' | grep -iq "\<${network}\>"; then
+      iwctl station "${interface}" connect "${network}"
+      return
+    fi
+
+    get_network_info "iwctl station ${interface} get-networks"
+
+    case "$(printf '%s\n' "${network_info}" | grep -i "\<${network}\>" | awk -F '|' '{print $2}')" in
+    'wep' | 'psk' | '8021x') get_passphrase ;;
+    'open') iwctl station "${interface}" connect "${network}" ;;
+    esac
+
+    [ -n "${passphrase}" ] && iwctl --passphrase "${passphrase}" station "${interface}" connect "${network}"
+  }
+
+  disconnect() {
+    connected_network="$(iwctl station "${interface}" show | grep -i '\<Connected network\>' | awk '{ $1=""; $2=""; sub("  ", " "); { $1=$1; print } }')"
+    if [ -n "${connected_network}" ]; then
+      answer="$(show_menu "Disconnect from ${connected_network}?" 'Yes' 'No')"
+      case "$(printf '%s\n' "${answer}" | tr '[:upper:]' '[:lower:]')" in
+      'yes') iwctl station "${interface}" disconnect ;;
+      'no') return ;;
+      esac
+    fi
+  }
+
+  forget() {
+    get_network_info 'iwctl known-networks list'
+
+    if [ -n "${network_names}" ]; then
+      network="$(show_menu 'Forget' "${network_names}")"
+      [ -n "${network}" ] && answer="$(show_menu "Forget ${network}?" 'Yes' 'No')"
+      [ "${answer}" = 'Yes' ] && iwctl known-networks "${network}" forget
+    fi
+  }
+
+  get_network_column() {
+    printf '%s\n' "${info}" | awk -v var="${1}" 'BEGIN { FS = "open|wep|psk|8021x" } { print $var }' | sed 's/^[ \t]*//;s/[ \t]*$//'
+  }
+
+  get_network_info() {
+    iwctl station "${interface}" scan
+
+    printf '%s\n' "${1}"
+
+    info="$(eval "${1}" | grep '\s' | tail +3 | awk '{ $1 = $1 }; 1' | sed -e 's/\x1b\[[0-9;]*m//g')"
+
+    network_names="$(get_network_column '1')"
+    network_types="$(printf '%s\n' "${info}" | awk '{ for (i=1;i<=NF;i++){ if ($i ~ /open|wep|psk|8021x/) { print $i } } }')"
+    network_metas="$(get_network_column '2')"
+
+    i=1
+    network_info="$(printf '%s\n' "${network_names}" | (
+      while read -r name; do
+        type_field="$(printf '%s\n' "${network_types}" | sed -n ${i}p)"
+        meta_field="$(printf '%s\n' "${network_metas}" | sed -n ${i}p)"
+
+        if [ ${i} -eq 1 ]; then
+          network_info="${name}|${type_field}|${meta_field}"
+        else
+          network_info="${network_info}${NEWLINE}${name}|${type_field}|${meta_field}"
+        fi
+
+        i=$((i + 1))
+      done
+      printf '%s\n' "${network_info}"
+    ))"
+  }
+
+  get_passphrase() { passphrase="$(fuzzel -d -a top --y 4 -w 30 -i --minimal-lines --placeholder 'Passphrase:')"; }
+
+  show_menu() {
+    prompt="${1}"
+    shift
+
+    options="$(for option in "${@}"; do
+      printf '%s\n' "${option}"
+    done)"
+
+    if ! answer="$(printf '%s\n' "${options}" | fuzzel -d -a top --y 4 -w 30 -i --minimal-lines --placeholder "${prompt}")"; then return 1; fi
+
+    printf '%s\n' "${options}" | while read -r line; do
+      if [ "${line}" = "${answer}" ]; then
+        cmd="$(printf '%s\n' "${answer}" | tr '[:upper:]' '[:lower:]')"
+        if command -v "${cmd}" >/dev/null 2>&1 && [ "${cmd}" != 'yes' ]; then
+          "${cmd}"
+        else
+          printf '%s\n' "${answer}"
+        fi
+        break
+      fi
+    done
+  }
+
+  main_menu
+}
+
+main() { fuzzel_iwd; }
+
+main "${@}"
