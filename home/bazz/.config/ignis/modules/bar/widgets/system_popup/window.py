@@ -80,7 +80,6 @@ class SystemPopup(widgets.RevealerWindow):
         )
 
         system_info = SystemInfoWidget()
-        self._system_info = system_info
 
         panel = widgets.Box(
             vertical=True,
@@ -144,10 +143,6 @@ class SystemPopup(widgets.RevealerWindow):
             self._network_section._list_visible = False
             self._network_section._device_list.visible = False
             self._network_section._arrow.set_css_classes(["expand-arrow"])
-
-        if self._system_info._details_box.visible:
-            self._system_info._details_box.visible = False
-            self._system_info._arrow.set_css_classes(["expand-arrow"])
 
     def _on_visible_change(self, *_):
         if not self.visible:

@@ -183,6 +183,7 @@ class BarConfig:
     icon_size: int = 22
     tray_icon_size: int = 22
     clock_interval: int = 60000
+    workspace_focused_only: bool = False
 
     @classmethod
     def from_dict(cls, data: Dict) -> "BarConfig":
