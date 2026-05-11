@@ -3,19 +3,12 @@ binds {
   Mod+Shift+Delete hotkey-overlay-title="Open Btop" {spawn-sh "footclient -a btop -T poptop -e btop"; }
   Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t"; }
   Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
-  Mod+T hotkey-overlay-title="Show Time" { spawn-sh "noti_time"; }
   Mod+F11 hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
-  Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "footclient -a noteterm -T Todo -e nvim -O ~/Documents/personal/notes/index.md ~/Documents/personal/notes/todo.md"; }
   Mod+Shift+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
-
-  // Install/Remove packages and upgrade system
-  Mod+U hotkey-overlay-title="Upgrade System" { spawn-sh "foot -a pop-upgrade -e popupgrade"; }
-  Mod+I hotkey-overlay-title="Install/Remove packages" { spawn-sh "foot -a pacseek -T pacseek -e pacseek"; }
 
   // Www/Mail
   Mod+W hotkey-overlay-title="Web browser" { spawn "zen-browser"; }
   Mod+M hotkey-overlay-title="Open Email" { spawn "thunderbird";}
-  Mod+Shift+M  { spawn-sh "foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh";}
 
   // File managers
   Mod+E hotkey-overlay-title="Open TUI Filemanager" { spawn-sh "foot -T lf -e lf"; }
@@ -28,7 +21,6 @@ binds {
   Mod+Ctrl+W hotkey-overlay-title="Toggle Weather" { spawn-sh "goignis toggle-window ignis_WEATHER"; }
 
   // Menus
-  Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn  "fuzzel_tmuxer"; }
   Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
   Mod+Ctrl+D hotkey-overlay-title="Toggle DND" { spawn-sh "goignis run-command toggle-dnd"; }
   Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn-sh "fuzzel_emoji"; }
@@ -38,9 +30,17 @@ binds {
   Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
   Mod+F4 hotkey-overlay-title="Kill Apps" { spawn-sh "foot -a fzf-killer -e fzf_killer.sh"; }
   Mod+F5 hotkey-overlay-title="Passmenu" { spawn-sh "fuzzel_passmenu"; }
-  Mod+F12 hotkey-overlay-title="wlr-which-key" { spawn "wlr-which-key"; }
   Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_drun b"; }
+  Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn  "fuzzel_tmuxer"; }
   Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "swayimg --class swayimg-setwall -g ~/Pictures/wallpaper/"; }
+
+  // Submaps
+  Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key apps"; }
+  Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key connections"; }
+  Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key settings"; }
+  Mod+I hotkey-overlay-title="Install and remove packages" { spawn-sh  "wlr-which-key pacman"; }
+  Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key notes"; }
+  Mod+Shift+R hotkey-overlay-title="Restart shell" { spawn-sh "wlr-which-key ignis"; }
 
   // Screen Recording
   Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "ignis run-command recorder-stop"; }

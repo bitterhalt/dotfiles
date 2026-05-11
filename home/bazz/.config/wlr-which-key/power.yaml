@@ -1,0 +1,32 @@
+font: Adwaita Mono, Symbols Nerd Font Mono 13
+background: "#100F0F"
+color: "#CECDC3"
+border: "#24837B"
+separator: " ➜ "
+border_width: 2
+corner_r: 4
+padding: 20
+column_padding: 25
+
+anchor: top
+margin_right: 8
+margin_bottom: 8
+margin_left: 8
+margin_top: 8
+
+inhibit_compositor_keyboard_shortcuts: true
+auto_kbd_layout: true
+
+menu:
+  - key: "s"
+    desc: 󰐥 Shutdown
+    cmd: systemctl poweroff
+  - key: "r"
+    desc: 󰑐 Reboot
+    cmd: systemctl reboot
+  - key: "u"
+    desc: 󰘚 Reboot to UEFI
+    cmd: systemctl reboot --firmware-setup
+  - key: "l"
+    desc: 󰍃 Logout
+    cmd: loginctl terminate-user "$USER"

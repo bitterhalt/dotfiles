@@ -1,0 +1,55 @@
+font: Adwaita Mono 13
+background: "#100F0F"
+color: "#CECDC3"
+border: "#24837B"
+separator: " ➜ "
+border_width: 2
+corner_r: 4
+padding: 20
+
+anchor: top
+margin_right: 8
+margin_bottom: 8
+margin_left: 8
+margin_top: 8
+
+inhibit_compositor_keyboard_shortcuts: true
+auto_kbd_layout: true
+
+menu:
+  - key: "a"
+    desc: all
+    cmd: ~/.config/niri/scripts/apps.sh
+  - key: "b"
+    desc: Browser
+    cmd: zen-browser
+  - key: "d"
+    desc: Discord
+    cmd: discord
+  - key: "e"
+    desc: Email
+    cmd: thunderbird
+  - key: "l"
+    desc: Lutris
+    cmd: lutris
+  - key: "s"
+    desc: Steam
+    cmd: steam
+  - key: "t"
+    desc: Torrent
+    cmd: transmission-gtk
+  - key: "m"
+    desc: System Monitor
+    submenu:
+      - key: "a"
+        desc: Atop
+        cmd: foot -T atop -e amdgpu_top --smi
+      - key: "b"
+        desc: Btop
+        cmd: foot -a btop -e btop
+      - key: "m"
+        desc: Monitor
+        cmd: foot -T Sysmon -e ~/.local/bin/tmux-sysmon.sh
+      - key: "l"
+        desc: Logs
+        cmd: foot -a foot -T journalctl -e journalctl -f
