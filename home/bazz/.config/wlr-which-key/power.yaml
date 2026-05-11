@@ -1,7 +1,7 @@
 font: Adwaita Mono, Symbols Nerd Font Mono 13
 background: "#100F0F"
 color: "#CECDC3"
-border: "#24837B"
+border: "#ad8301"
 separator: " ➜ "
 border_width: 2
 corner_r: 4

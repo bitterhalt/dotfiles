@@ -24,7 +24,7 @@ binds {
   Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
   Mod+Ctrl+D hotkey-overlay-title="Toggle DND" { spawn-sh "goignis run-command toggle-dnd"; }
   Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn-sh "fuzzel_emoji"; }
-  Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | awk '/Hex:/ {print $NF}' | wl-copy"; }
+  Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | sed -n 's/^Hex: //p' | tr -d '\n' | wl-copy"; }
   Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel_drun"; }
   Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "~/.config/niri/scripts/power.sh"; }
   Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
