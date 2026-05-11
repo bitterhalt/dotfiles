@@ -1,43 +1,43 @@
 environment {
-    DISPLAY ":0"
-    XCURSOR_THEME "Bibata-Modern-Classic"
-    XDG_SESSION_TYPE "wayland"
-    MOZ_ENABLE_WAYLAND "1"
-    ELECTRON_OZONE_PLATFORM_HINT "wayland"
-    QT_QPA_PLATFORM "wayland;xcb"
-    QT_QPA_PLATFORMTHEME "qt6ct"
-    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
-    QT_SCALE_FACTOR "1"
-    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+  DISPLAY ":0"
+  XCURSOR_THEME "Bibata-Modern-Classic"
+  XDG_SESSION_TYPE "wayland"
+  MOZ_ENABLE_WAYLAND "1"
+  ELECTRON_OZONE_PLATFORM_HINT "wayland"
+  QT_QPA_PLATFORM "wayland;xcb"
+  QT_QPA_PLATFORMTHEME "qt6ct"
+  QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+  QT_SCALE_FACTOR "1"
+  QT_AUTO_SCREEN_SCALE_FACTOR "1"
 }
 
 cursor {
-    xcursor-theme "Bibata-Modern-Classic"
-    xcursor-size 24
-    hide-after-inactive-ms 10000
+  xcursor-theme "Bibata-Modern-Classic"
+  xcursor-size 24
+  hide-after-inactive-ms 10000
 }
 
 hotkey-overlay {
-     skip-at-startup
+  skip-at-startup
 }
 
 prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 gestures {
-    hot-corners {
-         off
-    }
+  hot-corners {
+    off
+  }
 }
 
 overview {
-    zoom 0.40
-    backdrop-color "#1C1B1A"
-    workspace-shadow {
-      color "#00000070"
-      softness 30
-      spread 5
-      offset x=0 y=5
-    }
+  zoom 0.40
+  backdrop-color "#1C1B1A"
+  workspace-shadow {
+    color "#00000070"
+    softness 30
+    spread 5
+    offset x=0 y=5
   }
+}
 

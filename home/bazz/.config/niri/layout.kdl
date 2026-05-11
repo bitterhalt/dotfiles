@@ -5,46 +5,46 @@ workspace "3"
 
 // Set rounded corners to all windows
 window-rule {
-    geometry-corner-radius 4
-    clip-to-geometry true
+  geometry-corner-radius 4
+  clip-to-geometry true
 }
 
 layout {
-    gaps 8
-    preset-column-widths {
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-    }
-
-    tab-indicator {
-        active-color "#A02F6F"
-        inactive-color "#A02F6F80"
-        position "left"
-    }
-
-    default-column-width { proportion 0.5; }
-
-       focus-ring {
-        on
-        width 1
-        active-color "#403E3C"
-        inactive-color "transparent"
-    }
-
-    border {
-      off
-    }
-
-    shadow {
-      // off
-       softness 30
-       spread 5
-       offset x=0 y=5
-       color "#00000070"
-    }
+  gaps 8
+  preset-column-widths {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
   }
 
-recent-windows {
+  tab-indicator {
+    active-color "#A02F6F"
+    inactive-color "#A02F6F80"
+    position "left"
+  }
+
+  default-column-width { proportion 0.5; }
+
+  focus-ring {
+    on
+    width 1
+    active-color "#403E3C"
+    inactive-color "transparent"
+  }
+
+  border {
     off
   }
+
+  shadow {
+    // off
+    softness 30
+    spread 5
+    offset x=0 y=5
+    color "#00000070"
+  }
+}
+
+recent-windows {
+  off
+}
