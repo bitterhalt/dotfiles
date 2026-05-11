@@ -1,0 +1,110 @@
+# Theming
+font: Adwaita Mono, Symbols Nerd Font Mono 13
+background: "#100F0F"
+color: "#CECDC3"
+border: "#24837B"
+separator: " ➜ "
+border_width: 3
+corner_r: 4
+padding: 20
+rows_per_column: 4
+column_padding: 25
+
+# Anchor and margin
+anchor: top # One of center, left, right, top, bottom, bottom-left, top-left, etc.
+margin_right: 8
+margin_bottom: 8
+margin_left: 8
+margin_top: 8
+
+inhibit_compositor_keyboard_shortcuts: true
+auto_kbd_layout: true
+
+menu:
+  - key: "a"
+    desc: Apps
+    submenu:
+      - key: "a"
+        desc: All
+        cmd: ~/.config/niri/scripts/apps.sh
+      - key: "b"
+        desc: Browser
+        cmd: zen-browser
+      - key: "d"
+        desc: Discord
+        cmd: discord
+      - key: "l"
+        desc: Lutris
+        cmd: lutris
+      - key: "s"
+        desc: Steam
+        cmd: steam
+      - key: "t"
+        desc: Torrent
+        cmd: transmission-gtk
+  - key: "s"
+    desc: Shell
+    submenu:
+      - key: "r"
+        desc: Reload
+        cmd: ignis-start.sh
+      - key: "s"
+        desc: Stop
+        cmd: ignis-start.sh stop
+  - key: "m"
+    desc: Monitor
+    submenu:
+      - key: "a"
+        desc: Atop
+        cmd: foot -T atop -e amdgpu_top --smi
+      - key: "b"
+        desc: Btop
+        cmd: foot -a btop -e btop
+      - key: "m"
+        desc: Monitor
+        cmd: foot -T Sysmon -e ~/.local/bin/tmux-sysmon.sh
+      - key: "l"
+        desc: Logs
+        cmd: foot -a foot -T journalctl -e journalctl -f
+  - key: "n"
+    desc: Notes
+    submenu:
+      - key: "n"
+        desc: Notes
+        cmd: footclient -a noteterm -T Notes -e nvim -p ~/Documents/personal/notes/index.md
+      - key: "t"
+        desc: TODO
+        cmd: footclient -a noteterm -T Todo -e nvim -p ~/Documents/personal/notes/todo.md
+  - key: "p"
+    desc: Packages
+    submenu:
+      - key: "i"
+        desc: Install
+        cmd: foot -a pacseek -T pacseek -e pacseek
+      - key: "u"
+        desc: Update
+        cmd: foot -a pop-upgrade -e popupgrade
+  - key: "e"
+    desc: Edit
+    submenu:
+      - key: "f"
+        desc: Foot
+        cmd: foot -e nvim ~/.config/foot/foot.ini
+      - key: "d"
+        desc: Fuzzel
+        cmd: foot -e nvim ~/.config/fuzzel/fuzzel.ini
+      - key: "i"
+        desc: Ignis
+        cmd: exec foot sh -c "cd ~/.config/ignis && vopen ."
+      - key: "v"
+        desc: Neovim
+        cmd: exec foot sh -c "cd ~/.config/nvim && vopen ."
+      - key: "n"
+        desc: Niri
+        cmd: exec foot sh -c "cd ~/.config/niri && vopen ."
+  - key: "w"
+    desc: 󰖩 Wi-Fi
+    cmd: fuzzel_wifi
+  - key: "b"
+    desc: 󰂯 Bluetooth
+    cmd: fuzzel_bt

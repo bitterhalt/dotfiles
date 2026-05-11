@@ -1,12 +1,11 @@
 binds {
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "footclient"; }
-    Mod+Shift+Delete hotkey-overlay-title="Open Htop" {spawn-sh "footclient -T htop -a htop -e htop"; }
+    Mod+Shift+Delete hotkey-overlay-title="Open Btop" {spawn-sh "footclient -a btop -T poptop -e btop"; }
     Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t"; }
     Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
     Mod+T hotkey-overlay-title="Show Time" { spawn-sh "noti_time"; }
     Mod+F11 hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "footclient -a noteterm -T Todo -e nvim -O ~/Documents/personal/notes/index.md ~/Documents/personal/notes/todo.md"; }
-    Mod+A hotkey-overlay-title="Select Audio Device" { spawn "fuzzel_sound"; }
     Mod+Shift+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
 
     // Install/Remove packages and upgrade system
@@ -27,22 +26,19 @@ binds {
     Mod+Ctrl+N hotkey-overlay-title="Open Notfication Center" { spawn-sh "goignis toggle-window ignis_NOTIFICATION_CENTER"; }
     Mod+Ctrl+S hotkey-overlay-title="Open Settings Menu" { spawn-sh "goignis toggle-window ignis_SYSTEM_MENU"; }
     Mod+Ctrl+W hotkey-overlay-title="Toggle Weather" { spawn-sh "goignis toggle-window ignis_WEATHER"; }
-    Mod+Shift+R hotkey-overlay-title="Re-load Ignis" { spawn-sh "ignis-start.sh"; }
 
     // Menus
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn  "fuzzel_tmuxer"; }
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
     Mod+Ctrl+D hotkey-overlay-title="Toggle DND" { spawn-sh "goignis run-command toggle-dnd"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn-sh "fuzzel_emoji"; }
-    Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "wl-color-picker"; }
+    Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | awk '/Hex:/ {print $NF}' | wl-copy"; }
     Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel_drun"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "~/.config/niri/scripts/power.sh"; }
-    Mod+F1 hotkey-overlay-title="Wifi menu" { spawn-sh "fuzzel_wifi"; }
-    Mod+F12 hotkey-overlay-title="Edit Setting" { spawn-sh "~/.config/niri/scripts/dot-settings.sh"; }
-    Mod+F2 hotkey-overlay-title="Bluetooth menu" { spawn-sh "fuzzel_bt"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4 hotkey-overlay-title="Kill Apps" { spawn-sh "foot -a fzf-killer -e fzf_killer.sh"; }
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn-sh "fuzzel_passmenu"; }
+    Mod+F12 hotkey-overlay-title="wlr-which-key" { spawn "wlr-which-key"; }
     Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_drun b"; }
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "swayimg --class swayimg-setwall -g ~/Pictures/wallpaper/"; }
 

@@ -69,7 +69,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="htop"
+    match app-id="btop" title="poptop"
     match app-id="swayimg-setwall"
     match app-id="noteterm"
     open-floating true
