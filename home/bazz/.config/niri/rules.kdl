@@ -50,7 +50,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id="firefox|zen$" title="^About"
+  match app-id="firefox|zen$" title="^About|Library"
   open-floating true
 }
 

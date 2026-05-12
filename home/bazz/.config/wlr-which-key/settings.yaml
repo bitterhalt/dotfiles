@@ -1,9 +1,9 @@
-font: Adwaita Mono 13
+font: Adwaita Sans 13
 background: "#100F0F"
 color: "#CECDC3"
 border: "#282726"
 separator: " ➜ "
-border_width: 2
+border_width: 1
 corner_r: 4
 padding: 20
 column_padding: 25
