@@ -65,7 +65,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id="thunar" title="^Rename|File Operation Progress"
+  match app-id="Thunar" title="Rename|File Operation Progress"
   open-floating true
 }
 
