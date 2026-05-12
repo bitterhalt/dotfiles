@@ -113,7 +113,6 @@ python-pipx
 python-watchdog
 qt5-wayland
 qt6-wayland
-qt6ct
 rate-mirrors-bin
 ripgrep
 rofi
