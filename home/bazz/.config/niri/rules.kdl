@@ -26,7 +26,12 @@ window-rule {
 //     match app-id="^gimp" title="Toolbox|Tool Options|Layers|Brushes|Patterns|Fonts|Undo History|Preferences"
 //     open-floating true
 // }
-
+window-rule  {
+  match app-id="io.missioncenter.MissionCenter"
+  open-floating true
+  default-column-width { proportion 0.80; }
+  default-window-height { proportion 0.80; }
+}
 window-rule {
   match app-id="steam" title="Steam Settings"
   match app-id="steam" title="Friends List"
