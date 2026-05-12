@@ -4,7 +4,7 @@ show-failed-attempts
 image=$HOME/.local/share/wall/lockscreen.png
 scaling=fill
 font=Adwaita Mono
-font-size=13
+font-size=14
 indicator-radius=80
 indicator-thickness=6
 bs-hl-color=#AF3029
