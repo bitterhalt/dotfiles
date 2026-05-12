@@ -6,6 +6,7 @@ binds {
   Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
   Mod+F11 hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
   Mod+Shift+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
+  Mod+T hotkey-overlay-title="Display Time" { spawn-sh "noti_time"; }
 
   // Www/Mail
   Mod+W hotkey-overlay-title="Web browser" { spawn "zen-browser"; }
