@@ -56,7 +56,9 @@ workspace_focused_only = false
 window_title_exceptions = [
   "firefox",
   "zen",
-  "mpv"
+  "mpv",
+  "foot",
+  "footclient",
 ]
 
 # ══════════════════════════════════════════════════════════════
