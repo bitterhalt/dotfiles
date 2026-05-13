@@ -29,7 +29,7 @@
 </details>
 <details>
 <summary><b>Settings</b></summary><br>
-<img width="1920" height="1080" alt="2026-05-09-11-50-04_screenshot" src="https://github.com/user-attachments/assets/2aa5400c-f9e6-4300-a677-856ccf970918" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c97ab779-c68a-461e-9083-0187a3199dcd" />
 </details>
 
 https://github.com/user-attachments/assets/b9a16046-4165-43f2-80da-c3e89093b11c
