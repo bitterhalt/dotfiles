@@ -10,7 +10,7 @@ api_key = ""                       # or OPEN_WEATHER_APIKEY
 city_id = ""                       # or OPEN_WEATHER_CITY_ID
 cache_ttl = 600
 use_12h_format = false
-# Format: F or "C" for Celsiu. NOTE: if you change this delete "~/.cache/ignis/weather_cache.json" before reloading ignis
+# Format: "F" for freedom units and "C" for normal humans. NOTE: if you change this delete "~/.cache/ignis/weather_cache.json" before reloading ignis
 temperature_unit = "C"
 
 # ══════════════════════════════════════════════════════════════
