@@ -71,3 +71,6 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 - [NihaAlGhul](https://codeberg.org/NihaAlGhul) For making installation script to actually work ❤️
 
 ### User reviews ❤️
+
+<img width="441" height="173" alt="image" src="https://github.com/user-attachments/assets/b9586fb7-f365-4df7-9c24-12f75099b301" />
+
