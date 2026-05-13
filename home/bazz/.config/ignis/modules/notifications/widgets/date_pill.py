@@ -53,7 +53,6 @@ class DateWeatherPill(widgets.Button):
         weather_box = widgets.Box(
             spacing=20,
             child=[
-                self._weather_desc,
                 self._weather_temp,
             ],
         )
@@ -103,11 +102,10 @@ class DateWeatherPill(widgets.Button):
         self._weather_desc.label = data["desc"]
 
         tooltip = (
-            f"Weather in {data['city']}\n\n"
+            f"{data['desc'].capitalize()}\n\n"
             f"Feels like {data['feels_like']}°C\n"
             f"Humidity: {data['humidity']}%\n"
-            f"Wind: {data['wind']:.1f} m/s\n"
-            "\nClick to open weather details"
+            f"Wind: {data['wind']:.1f} m/s"
         )
         self.set_tooltip_text(tooltip)
 
