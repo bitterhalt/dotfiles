@@ -3,8 +3,10 @@ import datetime
 from ignis import utils, widgets
 from ignis.window_manager import WindowManager
 from modules.weather.data.weather_data import fetch_weather_async
+from settings import config
 
 wm = WindowManager.get_default()
+TEMP_UNIT = config.weather.temperature_unit
 
 
 class DateWeatherPill(widgets.Button):
@@ -25,8 +27,12 @@ class DateWeatherPill(widgets.Button):
             css_classes=["date-pill-month"],
         )
 
+        self._year_label = widgets.Label(
+            css_classes=["date-pill-year"],
+        )
+
         self._weather_temp = widgets.Label(
-            label="--°",
+            label=f"--°{TEMP_UNIT}",
             css_classes=["weather-temp-compact"],
         )
 
@@ -43,6 +49,7 @@ class DateWeatherPill(widgets.Button):
                 self._name_label,
                 self._day_label,
                 self._month_label,
+                self._year_label,
             ],
         )
 
@@ -87,6 +94,7 @@ class DateWeatherPill(widgets.Button):
         self._name_label.label = now.strftime("%A")
         self._day_label.label = now.strftime("%d")
         self._month_label.label = now.strftime("%B")
+        self._year_label.label = now.strftime("%Y")
         return True
 
     def _update_weather(self):
@@ -98,12 +106,12 @@ class DateWeatherPill(widgets.Button):
         if not data:
             return
 
-        self._weather_temp.label = f"{data['temp']}°C"
+        self._weather_temp.label = f"{data['temp']}°{TEMP_UNIT}"
         self._weather_desc.label = data["desc"]
 
         tooltip = (
             f"{data['desc'].capitalize()}\n\n"
-            f"Feels like {data['feels_like']}°C\n"
+            f"Feels like {data['feels_like']}°{TEMP_UNIT}\n"
             f"Humidity: {data['humidity']}%\n"
             f"Wind: {data['wind']:.1f} m/s"
         )

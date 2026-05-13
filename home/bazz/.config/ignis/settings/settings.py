@@ -93,6 +93,7 @@ class WeatherConfig:
     city_id: str = ""
     cache_ttl: int = 600
     use_12h_format: bool = False
+    temperature_unit: str = "C"
     icon_base_path: str = "~/.config/ignis/modules/weather/icons"
 
     def __post_init__(self):
@@ -106,6 +107,12 @@ class WeatherConfig:
             log_warning(
                 "No weather city_id configured. Weather will be disabled. Set it in config.toml or via OPEN_WEATHER_CITY_ID."
             )
+
+        if self.temperature_unit not in ("C", "F"):
+            log_warning(
+                f"Invalid temperature_unit '{self.temperature_unit}'. Must be 'C' or 'F'. Defaulting to 'C'."
+            )
+            self.temperature_unit = "C"
 
         self.icon_base_path = os.path.expanduser(self.icon_base_path)
 

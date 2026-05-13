@@ -13,6 +13,7 @@ USE_12H = config.weather.use_12h_format
 ICON_BASE = config.weather.icon_base_path
 API_KEY = config.weather.api_key
 CITY_ID = config.weather.city_id
+TEMP_UNIT = config.weather.temperature_unit
 
 
 def icon_path(name: str) -> str:
@@ -46,7 +47,8 @@ def _build_url(endpoint: str) -> Optional[str]:
     if not API_KEY:
         return None
     base = "https://api.openweathermap.org/data/2.5"
-    return f"{base}/{endpoint}?id={CITY_ID}&units=metric&appid={API_KEY}"
+    units = "imperial" if TEMP_UNIT == "F" else "metric"
+    return f"{base}/{endpoint}?id={CITY_ID}&units={units}&appid={API_KEY}"
 
 
 async def _curl_json_async(url: str) -> Optional[dict]:

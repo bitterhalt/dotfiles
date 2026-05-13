@@ -8,6 +8,7 @@ from .data.weather_data import fetch_weather_async, format_time_hm, icon_path
 
 wm = WindowManager.get_default()
 CACHE_TTL = config.weather.cache_ttl
+TEMP_UNIT = config.weather.temperature_unit
 
 
 class WeatherPopup(widgets.RevealerWindow):
@@ -19,7 +20,9 @@ class WeatherPopup(widgets.RevealerWindow):
         )
 
         self._city_label = widgets.Label(label="—", css_classes=["weather-city"])
-        self._temp_label = widgets.Label(label="--°C", css_classes=["weather-temp"])
+        self._temp_label = widgets.Label(
+            label=f"--°{TEMP_UNIT}", css_classes=["weather-temp"]
+        )
         self._desc_label = widgets.Label(label="—", css_classes=["weather-desc"])
         self._extra_label = widgets.Label(label="—", css_classes=["weather-extra"])
 
@@ -207,9 +210,9 @@ class WeatherPopup(widgets.RevealerWindow):
         self._last_data = data
         self._icon_label.image = data["icon"]
         self._city_label.label = data["city"]
-        self._temp_label.label = f"{data['temp']}°C"
+        self._temp_label.label = f"{data['temp']}°{TEMP_UNIT}"
         self._desc_label.label = data["desc"]
-        self._extra_label.label = f"Feels like {data['feels_like']}°C  •  Humidity {data['humidity']}%  •  Wind {data['wind']:.1f} m/s"
+        self._extra_label.label = f"Feels like {data['feels_like']}°{TEMP_UNIT}  •  Humidity {data['humidity']}%  •  Wind {data['wind']:.1f} m/s"
 
         if moon := data.get("moon_icon"):
             self._moon_label.label = moon
@@ -235,7 +238,7 @@ class WeatherPopup(widgets.RevealerWindow):
                             css_classes=["weather-forecast-icon"],
                         ),
                         widgets.Label(
-                            label=f"{it['temp']}°C",
+                            label=f"{it['temp']}°{TEMP_UNIT}",
                             css_classes=["weather-forecast-temp"],
                         ),
                     ],
@@ -289,7 +292,7 @@ class WeatherPopup(widgets.RevealerWindow):
                             css_classes=["weather-weekly-icon"],
                         ),
                         widgets.Label(
-                            label=f"{it['temp']}°C",
+                            label=f"{it['temp']}°{TEMP_UNIT}",
                             css_classes=["weather-weekly-temp"],
                         ),
                     ],
