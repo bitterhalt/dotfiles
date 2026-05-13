@@ -44,23 +44,13 @@ class ScreenshotHistoryItem(widgets.Box):
     def __init__(self, notification: Notification):
         self._signals = SignalManager()
         self._poll = None
-        self._expanded = False
 
         self._preview = widgets.Picture(
             image=notification.icon,
             content_fit="cover",
             width=96,
             height=54,
-            css_classes=["screenshot-preview-small"],
-        )
-
-        self._large_preview = widgets.Picture(
-            image=notification.icon,
-            content_fit="cover",
-            width=352,
-            height=198,
-            css_classes=["screenshot-preview-large"],
-            visible=False,
+            css_classes=["screenshot-preview"],
         )
 
         self._timestamp = widgets.Label(
@@ -73,18 +63,6 @@ class ScreenshotHistoryItem(widgets.Box):
             label="Screenshot",
             halign="start",
             css_classes=["screenshot-filename"],
-        )
-
-        self._expand_arrow = widgets.Icon(
-            image="pan-down-symbolic",
-            pixel_size=16,
-        )
-
-        expand_btn = widgets.Button(
-            child=self._expand_arrow,
-            css_classes=["expand-btn"],
-            tooltip_text="Expand preview",
-            on_click=lambda *_: self._toggle_expand(),
         )
 
         view_btn = widgets.Button(
@@ -112,7 +90,7 @@ class ScreenshotHistoryItem(widgets.Box):
             spacing=4,
             halign="end",
             valign="start",
-            child=[view_btn, copy_btn, delete_btn, expand_btn],
+            child=[view_btn, copy_btn, delete_btn],
         )
 
         info_column = widgets.Box(
@@ -157,24 +135,11 @@ class ScreenshotHistoryItem(widgets.Box):
         if self._poll:
             try:
                 self._poll.cancel()
-            except Exception:
+            except:
                 pass
             self._poll = None
-
         self._signals.disconnect_all()
         super().destroy()
-
-    def _toggle_expand(self):
-        self._expanded = not self._expanded
-        self._expand_arrow.image = (
-            "pan-up-symbolic" if self._expanded else "pan-down-symbolic"
-        )
-
-        if self._expanded and self._large_preview not in self.child:
-            self.append(self._large_preview)
-            self._large_preview.visible = True
-        elif not self._expanded and self._large_preview in self.child:
-            self._large_preview.unparent()
 
     def _update_timestamp(self, notification):
         self._timestamp.label = format_time_ago(notification.time)

@@ -181,17 +181,10 @@
   }
 }
 
-.screenshot-preview-small {
+.screenshot-preview {
   border-radius: 4px;
   background: $bg-1;
   border: 1px solid $ui-1;
-}
-
-.screenshot-preview-large {
-  border-radius: 4px;
-  background: $bg-1;
-  border: 1px solid $ui-1;
-  margin-top: 8px;
 }
 
 .screenshot-filename {
