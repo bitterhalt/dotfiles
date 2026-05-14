@@ -33,3 +33,18 @@ menu:
   - key: "n"
     desc: Niri
     cmd: exec foot sh -c "cd ~/.config/niri && vopen ."
+  - key: "m"
+    desc: Monitor System
+    submenu:
+      - key: "g"
+        desc: GPU
+        cmd: foot -T atop -e amdgpu_top --smi
+      - key: "b"
+        desc: Btop
+        cmd: foot -a btop -e btop
+      - key: "l"
+        desc: Logs
+        cmd: foot -a foot -T journalctl -e journalctl -f
+      - key: "c"
+        desc: Combined [ tmux-window ]
+        cmd: foot -T Sysmon -e ~/.local/bin/tmux-sysmon.sh

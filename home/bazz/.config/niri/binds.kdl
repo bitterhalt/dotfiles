@@ -1,7 +1,7 @@
 binds {
   Mod+Return hotkey-overlay-title="Open Terminal" { spawn "footclient"; }
-  Mod+Shift+Delete hotkey-overlay-title="Open System Monitor GUI" {spawn "missioncenter"; }
-  Mod+CTRL+Delete hotkey-overlay-title="Open System Monitor TUI" { spawn-sh "footclient -a btop -T poptop -e btop"; }
+  Mod+Ctrl+Delete hotkey-overlay-title="GUI System Monitor" {spawn "missioncenter"; }
+  Mod+Shift+Delete hotkey-overlay-title="TUI System Monitor" { spawn-sh "footclient -a btop -T poptop -e btop"; }
   Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t"; }
   Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
   Mod+F11 hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
@@ -13,8 +13,8 @@ binds {
   Mod+M hotkey-overlay-title="Open Email" { spawn "thunderbird";}
 
   // File managers
-  Mod+E hotkey-overlay-title="Open TUI Filemanager" { spawn-sh "foot -T lf -e lf"; }
-  Mod+Shift+E hotkey-overlay-title="Open GUI Filemanager" { spawn "thunar"; }
+  Mod+E hotkey-overlay-title="TUI Filemanager" { spawn-sh "foot -T lf -e lf"; }
+  Mod+Shift+E hotkey-overlay-title="GUI Filemanager" { spawn "thunar"; }
 
   // Ignis
   Mod+B hotkey-overlay-title="Zen Mode" { spawn-sh "goignis run-command toggle-bar"; }

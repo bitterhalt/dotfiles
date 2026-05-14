@@ -38,18 +38,3 @@ menu:
   - key: "t"
     desc: Torrent
     cmd: transmission-gtk
-  - key: "m"
-    desc: System Monitor
-    submenu:
-      - key: "a"
-        desc: Atop
-        cmd: foot -T atop -e amdgpu_top --smi
-      - key: "b"
-        desc: Btop
-        cmd: foot -a btop -e btop
-      - key: "m"
-        desc: Monitor
-        cmd: foot -T Sysmon -e ~/.local/bin/tmux-sysmon.sh
-      - key: "l"
-        desc: Logs
-        cmd: foot -a foot -T journalctl -e journalctl -f
