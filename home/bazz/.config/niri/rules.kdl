@@ -3,7 +3,6 @@ window-rule {
   match app-id="GParted"
   match app-id="Pinentry-gtk"
   match app-id="blueman-manager"
-  match app-id="bluetui"
   match app-id="btrfs-assistant"
   match app-id="galculator"
   match app-id="modorganizer.exe"
@@ -73,6 +72,15 @@ window-rule {
   open-floating true
   default-column-width { proportion 0.30; }
   default-window-height { proportion 0.30; }
+  default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+
+window-rule {
+  match app-id="bluetui"
+  open-floating true
+  default-column-width { proportion 0.40; }
+  default-window-height { proportion 0.50; }
   default-floating-position x=10 y=10 relative-to="top-right"
 }
 
