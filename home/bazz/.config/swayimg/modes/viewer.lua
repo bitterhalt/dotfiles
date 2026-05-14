@@ -3,8 +3,6 @@
 --------------------------------------------------------------------------------
 swayimg.viewer.set_default_scale("optimal")
 swayimg.viewer.set_default_position("center")
-swayimg.viewer.set_window_background(0xff100F0F)
-swayimg.viewer.set_image_chessboard(20, 0xff333333, 0xff4c4c4c)
 swayimg.viewer.enable_centering(true)
 swayimg.viewer.enable_loop(true)
 swayimg.viewer.limit_preload(1)

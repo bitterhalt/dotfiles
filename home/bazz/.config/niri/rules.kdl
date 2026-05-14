@@ -14,7 +14,6 @@ window-rule {
   match app-id="polkit-gnome-authentication-agent-1"
   match app-id="qt6ct"
   match app-id="satty"
-  match app-id="swayimg"
   match app-id="xdg-desktop-portal-gnome"
   match app-id="xdg-desktop-portal-gtk"
   match app-id="yad"
@@ -75,6 +74,15 @@ window-rule {
   default-column-width { proportion 0.30; }
   default-window-height { proportion 0.30; }
   default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+// Blur background
+window-rule {
+  match app-id="swayimg"
+  open-floating true
+  background-effect {
+    blur true
+  }
 }
 
 window-rule {
