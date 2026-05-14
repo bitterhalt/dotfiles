@@ -1,10 +1,11 @@
-import os
 import asyncio
 from gi.repository import Gdk
 from ignis import utils, widgets
-from ignis.window_manager import WindowManager
+from ignis.services.niri import NiriService
+from ignis.services.hyprland import HyprlandService
 
-wm = WindowManager.get_default()
+niri_service = NiriService.get_default()
+hypr_service = HyprlandService.get_default()
 
 
 def exec_async(cmd: str):
@@ -99,14 +100,14 @@ class ConfirmDialog(widgets.Window):
         self.add_controller(key_controller)
 
     def _on_key_pressed(self, controller, keyval, keycode, state):
-        keyname = Gdk.keyval_name(keyval)
-        if keyname == "Escape":
+        keyname = Gdk.keyval_name(keyval).lower()
+        if keyname == "escape":
             self._cancel()
             return True
-        elif keyname in ["Return", "KP_Enter", "y", "Y"]:
+        elif keyname in ["return", "kp_enter", "y"]:
             self._confirm()
             return True
-        elif keyname in ["n", "N"]:
+        elif keyname == "n":
             self._cancel()
             return True
         return False
@@ -292,21 +293,18 @@ class PowerOverlay(widgets.Window):
 
     def _lock(self):
         self.toggle()
-        exec_async("swaylock")
+        if hypr_service.is_available:
+            exec_async("hyprlock")
+        else:
+            exec_async("swaylock")
 
     def _logout(self):
         self.toggle()
 
-        is_niri = (
-            os.environ.get("XDG_CURRENT_DESKTOP") == "niri"
-            or os.environ.get("DESKTOP_SESSION") == "niri"
-        )
-
-        cmd = (
-            "niri msg action quit --skip-confirmation"
-            if is_niri
-            else "loginctl terminate-user $USER"
-        )
+        if niri_service.is_available:
+            cmd = "niri msg action quit --skip-confirmation"
+        else:
+            cmd = "loginctl terminate-user $USER"
 
         confirm_dialog(
             "Logout",

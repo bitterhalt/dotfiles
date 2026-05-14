@@ -13,7 +13,6 @@ _show_focused_only: bool = getattr(config.ui.bar, "workspace_focused_only", Fals
 def _toggle_focused_only():
     global _show_focused_only
     _show_focused_only = not _show_focused_only
-    # Trigger a refresh by poking the relevant service property
     if hypr.is_available:
         hypr.notify("workspaces")
     elif niri.is_available:
