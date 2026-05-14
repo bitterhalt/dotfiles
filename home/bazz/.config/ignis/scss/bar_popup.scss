@@ -99,7 +99,7 @@
 
 .sys-net-details {
   font-size: 0.9em;
-  padding: 6px;
+  padding: 8px;
   margin: 0px 4px;
 }
 
@@ -113,7 +113,7 @@
   background: $ui-2;
   border-radius: 4px;
   padding: 6px;
-  margin: 6px 0;
+  margin-bottom: 6px;
   transition: background 0.15s;
 
   &:hover {
@@ -147,8 +147,6 @@
 
 .sys-audio-details {
   font-size: 0.9em;
-  font-weight: 600;
-  margin: 4px;
 }
 
 .pill-audio-scale {
@@ -160,7 +158,7 @@
   background: $ui-2;
   border-radius: 4px;
   padding: 6px;
-  margin: 6px 0;
+  margin-top: 4px;
   transition: background 0.15s;
 
   &:hover {

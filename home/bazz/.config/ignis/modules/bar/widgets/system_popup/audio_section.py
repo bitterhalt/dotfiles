@@ -16,7 +16,6 @@ class AudioDeviceItem(widgets.Button):
             css_classes=["audio-device-item", "unset"],
             on_click=lambda *_: setattr(audio, device_type, stream),
             child=widgets.Box(
-                spacing=4,
                 child=[
                     widgets.Label(
                         label=stream.description,
@@ -99,7 +98,7 @@ class AudioSection(widgets.Box):
 
         self._device_list = widgets.Box(
             vertical=True,
-            spacing=8,
+            spacing=4,
             visible=False,
             css_classes=["sys-audio-details"],
         )
@@ -157,7 +156,6 @@ class AudioSection(widgets.Box):
                 css_classes=["audio-settings-btn", "unset"],
                 on_click=lambda *_: self._open_audio_settings(),
                 child=widgets.Box(
-                    spacing=8,
                     halign="center",
                     child=[
                         widgets.Label(

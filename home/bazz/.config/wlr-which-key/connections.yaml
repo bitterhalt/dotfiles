@@ -24,5 +24,8 @@ menu:
     desc: 󰖩 Wi-Fi
     cmd: fuzzel_wifi
   - key: "b"
-    desc: 󰂯 Bluetooth
+    desc: 󰂯 Bluetooth [Fuzzel]
     cmd: fuzzel_bt
+  - key: "t"
+    desc: 󰂯 Bluetooth [Bluetui]
+    cmd: foot -a bluetui -e bluetui

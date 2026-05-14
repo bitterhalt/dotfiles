@@ -6,15 +6,11 @@ from settings import config
 from .audio_section import AudioSection
 from .network_section import NetworkSection
 from .system_info_section import SystemInfoWidget
-from ..system_tray import SystemTrayWidget
+from .system_tray import SystemTrayWidget
 
 wm = WindowManager.get_default()
 audio = AudioService.get_default()
 icon_size = config.ui.bar_icon_size
-
-
-def exec_async(cmd: str):
-    asyncio.create_task(utils.exec_sh_async(cmd))
 
 
 class SystemPopup(widgets.RevealerWindow):
@@ -37,6 +33,12 @@ class SystemPopup(widgets.RevealerWindow):
             child=widgets.Icon(image="system-shutdown-symbolic", pixel_size=icon_size),
         )
 
+        bt_btn = widgets.Button(
+            css_classes=["sys-top-btn", "unset"],
+            on_click=lambda x: self._open_bt_settings(),
+            child=widgets.Icon(image="bluetooth-symbolic", pixel_size=icon_size),
+        )
+
         system_tray = SystemTrayWidget()
 
         top_row = widgets.Box(
@@ -46,7 +48,7 @@ class SystemPopup(widgets.RevealerWindow):
             child=[
                 widgets.Box(
                     spacing=8,
-                    child=[record_btn],
+                    child=[record_btn, bt_btn],
                 ),
                 widgets.Box(
                     spacing=8,
@@ -132,6 +134,10 @@ class SystemPopup(widgets.RevealerWindow):
         )
 
         self.connect("notify::visible", self._on_visible_change)
+
+    def _open_bt_settings(self):
+        asyncio.create_task(utils.exec_sh_async("foot -a bluetui -e bluetui"))
+        wm.close_window("ignis_SYSTEM_MENU")
 
     def _reset_expandables(self):
         for section in self._audio_sections:

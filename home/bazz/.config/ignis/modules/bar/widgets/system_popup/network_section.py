@@ -95,18 +95,10 @@ class NetworkSection(widgets.Box):
             hexpand=True,
         )
 
-        self._arrow = widgets.Icon(
-            image="pan-down-symbolic",
-            pixel_size=16,
-            css_classes=["expand-arrow"],
-        )
-
         pill_content = widgets.Box(
-            spacing=8,
             child=[
                 widgets.Icon(image="network-wireless-symbolic", pixel_size=icon_size),
                 self._label,
-                self._arrow,
             ],
         )
 
@@ -146,7 +138,6 @@ class NetworkSection(widgets.Box):
             css_classes=["network-settings-btn", "unset"],
             on_click=lambda *_: self._open_network_settings(),
             child=widgets.Box(
-                spacing=8,
                 halign="center",
                 child=[
                     widgets.Label(
@@ -186,9 +177,6 @@ class NetworkSection(widgets.Box):
     def _toggle_list(self):
         self._list_visible = not self._list_visible
         self._device_list.visible = self._list_visible
-        self._arrow.set_css_classes(
-            ["expand-arrow", "rotated"] if self._list_visible else ["expand-arrow"]
-        )
 
         if self._list_visible and wifi.devices:
             asyncio.create_task(wifi.devices[0].scan())
