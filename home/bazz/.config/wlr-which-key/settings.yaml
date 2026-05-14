@@ -19,7 +19,7 @@ auto_kbd_layout: true
 
 menu:
   - key: "d"
-    desc: FuzzeL
+    desc: Fuzzel
     cmd: foot -e nvim ~/.config/fuzzel/fuzzel.ini
   - key: "f"
     desc: Foot
