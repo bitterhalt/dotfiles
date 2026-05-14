@@ -2,13 +2,19 @@
 # https://github.com/bitterhalt
 set -euo pipefail
 
-CONFIRM="fuzzel -d -a top-right --minimal-lines --x 4 --y 4 -w 10 -p Sure? "
+CONFIRM="fuzzel -d -a top --minimal-lines --y 4 -w 10 -p Sure? "
 
 confirm_action() {
   [[ "$(echo -e "Yes\nNo" | $CONFIRM)" == "Yes" ]]
 }
 
-case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Reboot to UEFI" "Shutdown" | fuzzel -d -a top-right --x 4 --y 4 -w 14 --minimal-lines --hide-prompt)" in
+if [[ "${XDG_CURRENT_DESKTOP:-}" == "niri" ]]; then
+  LOGOUT_CMD="niri msg action quit --skip-confirmation"
+else
+  LOGOUT_CMD="loginctl terminate-user $USER"
+fi
+
+case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -a top --y 4 -w 14 --minimal-lines --hide-prompt)" in
 "Shutdown")
   if confirm_action; then
     systemctl poweroff
@@ -19,18 +25,15 @@ case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Reboot to UEFI" "Shutd
     systemctl reboot
   fi
   ;;
-"Reboot to UEFI")
-  if confirm_action; then
-    systemctl reboot --firmware-setup
-  fi
-  ;;
 "Suspend")
   systemctl suspend
   ;;
 "Lock")
-  hyprlock
+  swaylock
   ;;
 "Logout")
-  loginctl terminate-user "$USER"
+  if confirm_action; then
+    eval "$LOGOUT_CMD"
+  fi
   ;;
 esac

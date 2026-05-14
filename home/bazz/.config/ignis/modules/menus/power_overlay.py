@@ -1,5 +1,5 @@
+import os
 import asyncio
-
 from gi.repository import Gdk
 from ignis import utils, widgets
 from ignis.window_manager import WindowManager
@@ -89,7 +89,6 @@ class ConfirmDialog(widgets.Window):
         )
 
         self._setup_keyboard_controller()
-
         confirm_btn.grab_focus()
 
     def _setup_keyboard_controller(self):
@@ -101,20 +100,15 @@ class ConfirmDialog(widgets.Window):
 
     def _on_key_pressed(self, controller, keyval, keycode, state):
         keyname = Gdk.keyval_name(keyval)
-
         if keyname == "Escape":
             self._cancel()
             return True
-        elif keyname in ["Return", "KP_Enter"]:
+        elif keyname in ["Return", "KP_Enter", "y", "Y"]:
             self._confirm()
             return True
-        elif keyname.lower() == "y":
-            self._confirm()
-            return True
-        elif keyname.lower() == "n":
+        elif keyname in ["n", "N"]:
             self._cancel()
             return True
-
         return False
 
     def _confirm(self):
@@ -134,6 +128,20 @@ def confirm_dialog(title: str, message: str, on_confirm=None, on_cancel=None):
 
 class PowerOverlay(widgets.Window):
     def __init__(self):
+        lock_btn = widgets.Button(
+            css_classes=["power-overlay-btn"],
+            on_click=lambda x: self._lock(),
+            can_focus=True,
+            child=widgets.Box(
+                vertical=True,
+                spacing=16,
+                child=[
+                    widgets.Icon(image="system-lock-screen-symbolic", pixel_size=32),
+                    widgets.Label(label="[L]ock", css_classes=["power-overlay-label"]),
+                ],
+            ),
+        )
+
         logout_btn = widgets.Button(
             css_classes=["power-overlay-btn"],
             on_click=lambda x: self._logout(),
@@ -142,14 +150,8 @@ class PowerOverlay(widgets.Window):
                 vertical=True,
                 spacing=16,
                 child=[
-                    widgets.Icon(
-                        image="system-log-out-symbolic",
-                        pixel_size=32,
-                    ),
-                    widgets.Label(
-                        label="[E]xit",
-                        css_classes=["power-overlay-label"],
-                    ),
+                    widgets.Icon(image="system-log-out-symbolic", pixel_size=32),
+                    widgets.Label(label="[E]xit", css_classes=["power-overlay-label"]),
                 ],
             ),
         )
@@ -162,14 +164,8 @@ class PowerOverlay(widgets.Window):
                 vertical=True,
                 spacing=16,
                 child=[
-                    widgets.Icon(
-                        image="media-playback-pause-symbolic",
-                        pixel_size=32,
-                    ),
-                    widgets.Label(
-                        label="z[Z]zz",
-                        css_classes=["power-overlay-label"],
-                    ),
+                    widgets.Icon(image="media-playback-pause-symbolic", pixel_size=32),
+                    widgets.Label(label="z[Z]zz", css_classes=["power-overlay-label"]),
                 ],
             ),
         )
@@ -188,8 +184,7 @@ class PowerOverlay(widgets.Window):
                         pixel_size=32,
                     ),
                     widgets.Label(
-                        label="[R]eboot",
-                        css_classes=["power-overlay-label"],
+                        label="[R]eboot", css_classes=["power-overlay-label"]
                     ),
                 ],
             ),
@@ -209,8 +204,7 @@ class PowerOverlay(widgets.Window):
                         pixel_size=32,
                     ),
                     widgets.Label(
-                        label="[S]hutdown",
-                        css_classes=["power-overlay-label"],
+                        label="[S]hutdown", css_classes=["power-overlay-label"]
                     ),
                 ],
             ),
@@ -227,6 +221,7 @@ class PowerOverlay(widgets.Window):
                     halign="center",
                     css_classes=["power-overlay-buttons"],
                     child=[
+                        lock_btn,
                         logout_btn,
                         suspend_btn,
                         reboot_btn,
@@ -271,48 +266,57 @@ class PowerOverlay(widgets.Window):
         self.add_controller(key_controller)
 
     def _on_key_pressed(self, controller, keyval, keycode, state):
-        keyname = Gdk.keyval_name(keyval)
-
-        if keyname == "Escape":
+        keyname = Gdk.keyval_name(keyval).lower()
+        if keyname == "escape":
             self.toggle()
             return True
-
-        elif keyname.lower() == "e":
+        elif keyname == "l":
+            self._lock()
+            return True
+        elif keyname == "e":
             self._logout()
             return True
-
-        elif keyname.lower() == "z":
+        elif keyname == "z":
             self._suspend()
             return True
-
-        elif keyname.lower() == "r":
+        elif keyname == "r":
             self._reboot()
             return True
-
-        elif keyname.lower() == "s":
+        elif keyname == "s":
             self._shutdown()
             return True
-
         return False
 
     def toggle(self):
         self.visible = not self.visible
 
     def _lock(self):
-        exec_async("hyprlock")
         self.toggle()
+        exec_async("swaylock")
 
     def _logout(self):
         self.toggle()
+
+        is_niri = (
+            os.environ.get("XDG_CURRENT_DESKTOP") == "niri"
+            or os.environ.get("DESKTOP_SESSION") == "niri"
+        )
+
+        cmd = (
+            "niri msg action quit --skip-confirmation"
+            if is_niri
+            else "loginctl terminate-user $USER"
+        )
+
         confirm_dialog(
             "Logout",
             "Are you sure you want to log out?",
-            on_confirm=lambda: exec_async("loginctl terminate-user $USER"),
+            on_confirm=lambda: exec_async(cmd),
         )
 
     def _suspend(self):
-        exec_async("systemctl suspend")
         self.toggle()
+        exec_async("systemctl suspend")
 
     def _reboot(self):
         self.toggle()

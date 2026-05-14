@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DMENU="wlr-which-key power"
+DMENU="fuzzel_power"
 SHELLMENU="goignis toggle-window ignis_POWER_OVERLAY"
 
 if pgrep -x ignis >/dev/null; then
