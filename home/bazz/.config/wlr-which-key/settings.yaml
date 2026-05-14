@@ -26,16 +26,16 @@ menu:
     cmd: foot -e nvim ~/.config/foot/foot.ini
   - key: "i"
     desc: Ignis
-    cmd: exec foot sh -c "cd ~/.config/ignis && vopen ."
+    cmd: foot sh -c "cd ~/.config/ignis && vopen ."
   - key: "v"
     desc: Neovim
-    cmd: exec foot sh -c "cd ~/.config/nvim && vopen ."
+    cmd: foot sh -c "cd ~/.config/nvim && vopen ."
   - key: "n"
     desc: Niri
-    cmd: exec foot sh -c "cd ~/.config/niri && vopen ."
+    cmd: foot -e nvim  ~/.config/niri/*
   - key: "w"
     desc: Wlr-which-key
-    cmd: exec foot sh -c "cd ~/.config/wlr-which-key/ && vopen . "
+    cmd: foot -e nvim ~/.config/wlr-which-key/*
   - key: "m"
     desc: Monitor system
     submenu:
