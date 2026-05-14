@@ -18,12 +18,12 @@ inhibit_compositor_keyboard_shortcuts: true
 auto_kbd_layout: true
 
 menu:
+  - key: "d"
+    desc: FuzzeL
+    cmd: foot -e nvim ~/.config/fuzzel/fuzzel.ini
   - key: "f"
     desc: Foot
     cmd: foot -e nvim ~/.config/foot/foot.ini
-  - key: "d"
-    desc: Fuzzel
-    cmd: foot -e nvim ~/.config/fuzzel/fuzzel.ini
   - key: "i"
     desc: Ignis
     cmd: exec foot sh -c "cd ~/.config/ignis && vopen ."
@@ -33,8 +33,11 @@ menu:
   - key: "n"
     desc: Niri
     cmd: exec foot sh -c "cd ~/.config/niri && vopen ."
+  - key: "w"
+    desc: Wlr-which-key
+    cmd: exec foot sh -c "cd ~/.config/wlr-which-key/ && vopen . "
   - key: "m"
-    desc: Monitor System
+    desc: Monitor system
     submenu:
       - key: "g"
         desc: GPU
