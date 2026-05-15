@@ -7,6 +7,7 @@ binds {
   Mod+F11 hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
   Mod+Shift+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
   Mod+T hotkey-overlay-title="Display Time" { spawn-sh "noti_time"; }
+  Mod+F2 hotkey-overlay-title="Open Calculator" { spawn-sh "galculator"; }
 
   // Www/Mail
   Mod+W hotkey-overlay-title="Web browser" { spawn "zen-browser"; }

@@ -30,6 +30,7 @@ layout {
     width 1
     active-color "#403E3C"
     inactive-color "transparent"
+    urgent-color "#9b0000"
   }
 
   border {

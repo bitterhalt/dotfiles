@@ -4,7 +4,6 @@ window-rule {
   match app-id="Pinentry-gtk"
   match app-id="blueman-manager"
   match app-id="btrfs-assistant"
-  match app-id="galculator"
   match app-id="modorganizer.exe"
   match app-id="nm-connection-editor"
   match app-id="nwg-look"
@@ -84,7 +83,15 @@ window-rule {
   default-floating-position x=10 y=10 relative-to="top-right"
 }
 
-// Blur background
+window-rule {
+  match app-id="galculator"
+  open-floating true
+  default-column-width { fixed 316; }
+  default-window-height { fixed 352; }
+  default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+// Blur swayimg
 window-rule {
   match app-id="swayimg"
   open-floating true
@@ -107,7 +114,6 @@ window-rule {
   open-maximized true
 }
 
-// Top floaters
 window-rule {
   match app-id="fzf-killer"
   match app-id="pacseek"
