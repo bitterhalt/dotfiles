@@ -59,6 +59,10 @@ window-rule {
 window-rule {
   match app-id="org.mozilla.Thunderbird$" title="^Calendar Reminders$"
   open-floating true
+  focus-ring {
+    width 3
+    active-color "#9b0000"
+  }
 }
 
 window-rule {

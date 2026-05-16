@@ -39,8 +39,8 @@ menu:
   - key: "m"
     desc: Monitor system
     submenu:
-      - key: "g"
-        desc: GPU
+      - key: "a"
+        desc: Atop
         cmd: foot -T atop -e amdgpu_top --smi
       - key: "b"
         desc: Btop
