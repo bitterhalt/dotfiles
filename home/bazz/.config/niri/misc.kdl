@@ -1,30 +1,29 @@
-cursor {
-  xcursor-theme "Bibata-Modern-Classic"
-  xcursor-size 24
-  hide-after-inactive-ms 10000
-}
-
-hotkey-overlay {
-  skip-at-startup
-}
-
+// Ask the applications to omit their client-side decorations
 prefer-no-csd
+
+// Don't show hotkey-overlay on startup
+hotkey-overlay {
+    skip-at-startup
+}
+
+// Screenshots path. Only needed if you use buildin tool
 screenshot-path "~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S.png"
 
+// No hot corners please
 gestures {
-  hot-corners {
-    off
-  }
+    hot-corners {
+        off
+    }
 }
 
+// Overview
 overview {
-  zoom 0.40
-  backdrop-color "#1C1B1A"
-  workspace-shadow {
-    color "#00000070"
-    softness 30
-    spread 5
-    offset x=0 y=5
-  }
+    zoom 0.40
+    backdrop-color "#1C1B1A"
+    workspace-shadow {
+        color "#00000070"
+        softness 30
+        spread 5
+        offset x=0 y=5
+    }
 }
-

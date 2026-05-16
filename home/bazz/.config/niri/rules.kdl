@@ -1,201 +1,217 @@
-// Floaters
+// =============================================================================
+// GLOBAL AESTHETICS & WINDOW GEOMETRY
+// =============================================================================
+
+// Set rounded corners and clip window contents for all windows
 window-rule {
-  match app-id="GParted"
-  match app-id="Pinentry-gtk"
-  match app-id="blueman-manager"
-  match app-id="btrfs-assistant"
-  match app-id="modorganizer.exe"
-  match app-id="nm-connection-editor"
-  match app-id="nwg-look"
-  match app-id="org.gnome.FileRoller"
-  match app-id="org.pulseaudio.pavucontrol"
-  match app-id="polkit-gnome-authentication-agent-1"
-  match app-id="qt6ct"
-  match app-id="satty"
-  match app-id="xdg-desktop-portal-gnome"
-  match app-id="xdg-desktop-portal-gtk"
-  match app-id="yad"
-  match app-id="zenity"
-  open-floating true
+    geometry-corner-radius 4
+    clip-to-geometry true
 }
 
-// window-rule {
-//     match app-id="^gimp" title="Toolbox|Tool Options|Layers|Brushes|Patterns|Fonts|Undo History|Preferences"
-//     open-floating true
-// }
-window-rule  {
-  match app-id="io.missioncenter.MissionCenter"
-  open-floating true
-  default-column-width { proportion 0.80; }
-  default-window-height { proportion 0.80; }
-}
-window-rule {
-  match app-id="steam" title="Steam Settings"
-  match app-id="steam" title="Friends List"
-  match app-id="steam" title="Special Offers"
-  match app-id="steam" title="System Information"
-  open-floating true
-  open-focused false
-  focus-ring {
-    off
-  }
-}
-
-window-rule {
-  match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
-  default-floating-position x=10 y=10 relative-to="bottom-right"
-}
-
-window-rule {
-  match app-id="firefox|zen$" title="^About|Library"
-  open-floating true
-}
-
-window-rule {
-  match app-id="org.mozilla.Thunderbird$" title="Edit Item|^Write.*$"
-  open-floating true
-}
-
-window-rule {
-  match app-id="org.mozilla.Thunderbird$" title="^Calendar Reminders$"
-  open-floating true
-  focus-ring {
-    width 3
-    active-color "#9b0000"
-  }
-}
-
-window-rule {
-  match app-id="thunar" title="Rename|File Operation Progress"
-  open-floating true
-}
-
-window-rule {
-  match app-id="firefox|zen$" title="^Picture-in-Picture$"
-  open-floating true
-  default-column-width { fixed 480; }
-  default-window-height { fixed 270; }
-  default-floating-position x=10 y=10 relative-to="top-right"
-}
-
-window-rule {
-  match app-id="bluetui"
-  open-floating true
-  default-column-width { proportion 0.40; }
-  default-window-height { proportion 0.50; }
-  default-floating-position x=10 y=10 relative-to="top-right"
-}
-
-window-rule {
-  match app-id="galculator"
-  open-floating true
-  default-column-width { fixed 316; }
-  default-window-height { fixed 352; }
-  default-floating-position x=10 y=10 relative-to="top-right"
-}
-
-// Blur swayimg
-window-rule {
-  match app-id="swayimg"
-  open-floating true
-  background-effect {
-    blur true
-  }
-}
-
-window-rule {
-  match app-id="btop" title="poptop"
-  match app-id="swayimg-setwall"
-  match app-id="noteterm"
-  open-floating true
-  default-column-width { proportion 0.80; }
-  default-window-height { proportion 0.80; }
-}
-
-window-rule {
-  match app-id="Sysmon" title="Sysmon"
-  open-maximized true
-}
-
-window-rule {
-  match app-id="fzf-killer"
-  match app-id="pacseek"
-  match app-id="pop-upgrade"
-  open-floating true
-  default-column-width { proportion 0.50; }
-  default-window-height { proportion 0.60; }
-  default-floating-position x=10 y=10 relative-to="top"
-}
-
-// Workspace assignments
-window-rule {
-  match app-id="firefox"
-  match app-id="zen"
-  open-on-workspace "1"
-  open-focused false
-  open-maximized true
-}
-
-window-rule {
-  match app-id="com.transmissionbt.transmission"
-  match app-id="discord"
-  match app-id="org.mozilla.Thunderbird"
-  open-on-workspace "2"
-  open-focused false
-  default-column-width { proportion 0.95; }
-}
-
-window-rule {
-  match app-id="steam"
-  open-on-workspace "3"
-  default-column-width { proportion 0.95; }
-  open-focused false
-  exclude title="Friends List"
-  exclude title="Special Offers"
-  exclude title="Steam Settings"
-  exclude title="System Information"
-  focus-ring {
-    off
-  }
-}
-
-window-rule {
-  match app-id="pcsx3-qt"
-  match app-id="lutris"
-  open-on-workspace "3"
-  default-column-width { proportion 0.95; }
-  open-focused false
-}
-
-
-
-// Show blurred wallpaper on overview.
-layer-rule {
-  match namespace="overview"
-  place-within-backdrop true
-}
-
+// Global layout configuration for transparency
 layout {
-  background-color "transparent"
+    background-color "transparent"
 }
 
-// Add shadow to Fuzzel
-// layer-rule {
-//     match namespace="^launcher$"
-//
-//     shadow {
-//         on
-//     }
-//
-//     // Set same as Fuzzel has
-//     geometry-corner-radius 6
-// }
 
-// Turn on shadows for floating windows.
-// window-rule {
-//     match is-floating=true
-//
-//     shadow {
-//         on
-//     }
-// }
+// =============================================================================
+// GENERAL UTILITY & SYSTEM FLOATING WINDOWS
+// =============================================================================
+
+// Standard system dialogs, authentication agents, and configuration tools
+window-rule {
+    match app-id="GParted"
+    match app-id="Pinentry-gtk"
+    match app-id="blueman-manager"
+    match app-id="btrfs-assistant"
+    match app-id="modorganizer.exe"
+    match app-id="nm-connection-editor"
+    match app-id="nwg-look"
+    match app-id="org.gnome.FileRoller"
+    match app-id="org.pulseaudio.pavucontrol"
+    match app-id="polkit-gnome-authentication-agent-1"
+    match app-id="qt6ct"
+    match app-id="satty"
+    match app-id="xdg-desktop-portal-gnome"
+    match app-id="xdg-desktop-portal-gtk"
+    match app-id="yad"
+    match app-id="zenity"
+    open-floating true
+}
+
+// Center-top floating utilities (package managers, system tools)
+window-rule {
+    match app-id="fzf-killer"
+    match app-id="pacseek"
+    match app-id="pop-upgrade"
+    open-floating true
+    default-column-width { proportion 0.50; }
+    default-window-height { proportion 0.60; }
+    default-floating-position x=10 y=10 relative-to="top"
+}
+
+// System monitors, custom terminals, and wallpaper setters (Large Center Floating)
+window-rule {
+    match app-id="io.missioncenter.MissionCenter"
+    match app-id="btop" title="poptop"
+    match app-id="swayimg-setwall"
+    match app-id="noteterm"
+    open-floating true
+    default-column-width { proportion 0.80; }
+    default-window-height { proportion 0.80; }
+}
+
+// Image viewer with background blur effect
+window-rule {
+    match app-id="swayimg"
+    open-floating true
+    background-effect {
+        blur true
+    }
+}
+
+// File manager dialogs and progress bars
+window-rule {
+    match app-id="thunar" title="Rename|File Operation Progress"
+    open-floating true
+}
+
+
+// =============================================================================
+// APP-SPECIFIC OVERRIDES & FLOATING WINDOWS
+// =============================================================================
+
+// --- Browsers (Firefox & Zen) ---
+// Popups, info windows, and media players
+window-rule {
+    match app-id="firefox|zen$" title="^About|Library"
+    open-floating true
+}
+
+window-rule {
+    match app-id="firefox|zen$" title="^Picture-in-Picture$"
+    open-floating true
+    default-column-width { fixed 480; }
+    default-window-height { fixed 270; }
+    default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+// --- Email (Thunderbird) ---
+// Composer and item editor windows
+window-rule {
+    match app-id="org.mozilla.Thunderbird$" title="Edit Item|^Write.*$"
+    open-floating true
+}
+
+// Urgent calendar reminders with a distinct red focus ring
+window-rule {
+    match app-id="org.mozilla.Thunderbird$" title="^Calendar Reminders$"
+    open-floating true
+    focus-ring {
+        width 3
+        active-color "#9b0000"
+    }
+}
+
+// --- Steam ---
+// Sub-panels, settings, and secondary windows
+window-rule {
+    match app-id="steam" title="Steam Settings"
+    match app-id="steam" title="Friends List"
+    match app-id="steam" title="Special Offers"
+    match app-id="steam" title="System Information"
+    open-floating true
+    open-focused false
+    focus-ring {
+        off
+    }
+}
+
+// Desktop notification toasts (anchored bottom-right)
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
+// --- Top-Right Desk Gadgets ---
+// Bluetooth TUI
+window-rule {
+    match app-id="bluetui"
+    open-floating true
+    default-column-width { proportion 0.40; }
+    default-window-height { proportion 0.50; }
+    default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+// Calculator
+window-rule {
+    match app-id="galculator"
+    open-floating true
+    default-column-width { fixed 316; }
+    default-window-height { fixed 352; }
+    default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+// --- Fullscreen / Maximized Apps ---
+window-rule {
+    match app-id="Sysmon" title="Sysmon"
+    open-maximized true
+}
+
+
+// =============================================================================
+// WORKSPACE ASSIGNMENTS
+// =============================================================================
+
+// Workspace 1: Web Browsers (Maximized, background launch)
+window-rule {
+    match app-id="firefox"
+    match app-id="zen"
+    open-on-workspace "1"
+    open-focused false
+    open-maximized true
+}
+
+// Workspace 2: Communication & Background Downloads (Almost Full Width)
+window-rule {
+    match app-id="com.transmissionbt.transmission"
+    match app-id="discord"
+    match app-id="org.mozilla.Thunderbird"
+    open-on-workspace "2"
+    open-focused false
+    default-column-width { proportion 0.95; }
+}
+
+// Workspace 3: Gaming (Main Steam window, Lutris, and Emulators)
+window-rule {
+    match app-id="steam"
+    open-on-workspace "3"
+    default-column-width { proportion 0.95; }
+    open-focused false
+    exclude title="Friends List"
+    exclude title="Special Offers"
+    exclude title="Steam Settings"
+    exclude title="System Information"
+    focus-ring {
+        off
+    }
+}
+
+window-rule {
+    match app-id="pcsx3-qt"
+    match app-id="lutris"
+    open-on-workspace "3"
+    default-column-width { proportion 0.95; }
+    open-focused false
+}
+
+
+// =============================================================================
+// ENVIRONMENT & SHELL LAYER RULES
+// =============================================================================
+
+// Show blurred wallpaper behind the Niri overview interface
+layer-rule {
+    match namespace="overview"
+    place-within-backdrop true
+}
