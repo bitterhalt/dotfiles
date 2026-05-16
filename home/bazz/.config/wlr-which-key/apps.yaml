@@ -18,7 +18,7 @@ auto_kbd_layout: true
 
 menu:
   - key: "a"
-    desc: all
+    desc: All
     cmd: ~/.config/niri/scripts/apps.sh
   - key: "b"
     desc: Browser
