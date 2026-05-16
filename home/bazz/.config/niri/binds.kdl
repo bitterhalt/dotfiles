@@ -31,7 +31,7 @@ binds {
   Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel_drun"; }
   Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "~/.config/niri/scripts/power.sh"; }
   Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
-  Mod+F4 hotkey-overlay-title="Kill Apps" { spawn-sh "foot -a fzf-killer -e fzf_killer.sh"; }
+  Mod+F4 hotkey-overlay-title="Kill Apps" { spawn "fuzzel_killer"; }
   Mod+F5 hotkey-overlay-title="Passmenu" { spawn-sh "fuzzel_passmenu"; }
   Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_drun b"; }
   Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn  "fuzzel_tmuxer"; }
