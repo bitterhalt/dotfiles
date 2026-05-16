@@ -14,7 +14,6 @@ from modules.osd import (
     init_barless_clock,
     set_barless_clock_visibility,
 )
-from modules.osd.workspace_osd import _osd_window
 from modules.menus import PowerOverlay, RecordingOverlay
 from modules.utils.recorder import register_recorder_commands
 from modules.weather import WeatherPopup
@@ -52,21 +51,15 @@ register_bar(bar)
 def _on_visible_changed(window, *_):
     set_bar_visibility(window.visible)
     set_barless_clock_visibility(window.visible)
-    if not window.visible and _osd_window:
-        _osd_window.show_osd()
-
-
-bar.connect("notify::visible", _on_visible_changed)
 
 
 def _handle_initial_bar_state():
     if not bar.visible:
         set_bar_visibility(False)
         set_barless_clock_visibility(False)
-        from modules.osd.workspace_osd import _osd_window
 
-        if _osd_window:
-            utils.Timeout(500, lambda: _osd_window.show_osd())
+
+bar.connect("notify::visible", _on_visible_changed)
 
 
 def _toggle_dnd():

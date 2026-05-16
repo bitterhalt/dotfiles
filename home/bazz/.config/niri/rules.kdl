@@ -69,11 +69,10 @@ window-rule {
 window-rule {
   match app-id="firefox|zen$" title="^Picture-in-Picture$"
   open-floating true
-  default-column-width { proportion 0.30; }
-  default-window-height { proportion 0.30; }
+  default-column-width { fixed 480; }
+  default-window-height { fixed 270; }
   default-floating-position x=10 y=10 relative-to="top-right"
 }
-
 
 window-rule {
   match app-id="bluetui"

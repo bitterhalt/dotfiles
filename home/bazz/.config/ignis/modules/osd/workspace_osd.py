@@ -18,6 +18,7 @@ class WorkspaceOSD(widgets.Window):
     def __init__(self):
         self._timeout = None
         self._signals = SignalManager()
+        self._ready = False
         self._label = widgets.Label(css_classes=["workspace-osd-label"])
 
         content = widgets.Box(
@@ -45,7 +46,12 @@ class WorkspaceOSD(widgets.Window):
         elif niri.is_available:
             self._signals.connect(niri, "notify::workspaces", self._on_workspace_change)
 
+        utils.Timeout(500, self._set_ready)
+
         self.connect("destroy", self._cleanup)
+
+    def _set_ready(self):
+        self._ready = True
 
     def _cleanup(self, *_):
         self._signals.disconnect_all()
@@ -76,6 +82,9 @@ class WorkspaceOSD(widgets.Window):
         self.set_visible(True)
 
     def _on_workspace_change(self, *_):
+        if not self._ready:
+            return
+
         if _bar_visible:
             return
 
