@@ -151,15 +151,15 @@ binds {
     Mod+8 hotkey-overlay-title="Switch to Workspace 8" { focus-workspace 8; }
     Mod+9 hotkey-overlay-title="Switch to Workspace 9" { focus-workspace 9; }
 
-    Mod+Shift+1 hotkey-overlay-title="Move Window to Workspace 1" { move-window-to-workspace 1 focus=false; }
-    Mod+Shift+2 hotkey-overlay-title="Move Window to Workspace 2" { move-window-to-workspace 2 focus=false; }
-    Mod+Shift+3 hotkey-overlay-title="Move Window to Workspace 3" { move-window-to-workspace 3 focus=false; }
-    Mod+Shift+4 hotkey-overlay-title="Move Window to Workspace 4" { move-window-to-workspace 4 focus=false; }
-    Mod+Shift+5 hotkey-overlay-title="Move Window to Workspace 5" { move-window-to-workspace 5 focus=false; }
-    Mod+Shift+6 hotkey-overlay-title="Move Window to Workspace 6" { move-window-to-workspace 6 focus=false; }
-    Mod+Shift+7 hotkey-overlay-title="Move Window to Workspace 7" { move-window-to-workspace 7 focus=false; }
-    Mod+Shift+8 hotkey-overlay-title="Move Window to Workspace 8" { move-window-to-workspace 8 focus=false; }
-    Mod+Shift+9 hotkey-overlay-title="Move Window to Workspace 9" { move-window-to-workspace 9 focus=false; }
+    Mod+Shift+1 hotkey-overlay-title="Move Window to Workspace 1" { move-column-to-workspace 1 focus=false; }
+    Mod+Shift+2 hotkey-overlay-title="Move Window to Workspace 2" { move-column-to-workspace 2 focus=false; }
+    Mod+Shift+3 hotkey-overlay-title="Move Window to Workspace 3" { move-column-to-workspace 3 focus=false; }
+    Mod+Shift+4 hotkey-overlay-title="Move Window to Workspace 4" { move-column-to-workspace 4 focus=false; }
+    Mod+Shift+5 hotkey-overlay-title="Move Window to Workspace 5" { move-column-to-workspace 5 focus=false; }
+    Mod+Shift+6 hotkey-overlay-title="Move Window to Workspace 6" { move-column-to-workspace 6 focus=false; }
+    Mod+Shift+7 hotkey-overlay-title="Move Window to Workspace 7" { move-column-to-workspace 7 focus=false; }
+    Mod+Shift+8 hotkey-overlay-title="Move Window to Workspace 8" { move-column-to-workspace 8 focus=false; }
+    Mod+Shift+9 hotkey-overlay-title="Move Window to Workspace 9" { move-column-to-workspace 9 focus=false; }
 
     Mod+0 hotkey-overlay-title="Previous Workspace" { focus-workspace-previous; }
 

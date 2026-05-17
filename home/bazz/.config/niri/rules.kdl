@@ -1,16 +1,11 @@
 // =============================================================================
-// GLOBAL AESTHETICS & WINDOW GEOMETRY
+//  WINDOW GEOMETRY
 // =============================================================================
 
 // Set rounded corners and clip window contents for all windows
 window-rule {
     geometry-corner-radius 4
     clip-to-geometry true
-}
-
-// Global layout configuration for transparency
-layout {
-    background-color "transparent"
 }
 
 
@@ -81,7 +76,7 @@ window-rule {
 // APP-SPECIFIC OVERRIDES & FLOATING WINDOWS
 // =============================================================================
 
-// --- Browsers (Firefox & Zen) ---
+// --- Browsers ---
 // Popups, info windows, and media players
 window-rule {
     match app-id="firefox|zen$" title="^About|Library"
@@ -96,14 +91,14 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top-right"
 }
 
-// --- Email (Thunderbird) ---
+// --- Email  ---
 // Composer and item editor windows
 window-rule {
     match app-id="org.mozilla.Thunderbird$" title="Edit Item|^Write.*$"
     open-floating true
 }
 
-// Urgent calendar reminders with a distinct red focus ring
+// Urgent calendar reminders
 window-rule {
     match app-id="org.mozilla.Thunderbird$" title="^Calendar Reminders$"
     open-floating true
@@ -122,6 +117,16 @@ window-rule {
     match app-id="steam" title="System Information"
     open-floating true
     open-focused false
+    focus-ring {
+        off
+    }
+}
+
+window-rule {
+    match app-id="steam" title="Friends List"
+    open-floating true
+    open-focused false
+    default-floating-position x=10 y=10 relative-to="bottom-right"
     focus-ring {
         off
     }
@@ -152,18 +157,12 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top-right"
 }
 
-// --- Fullscreen / Maximized Apps ---
-window-rule {
-    match app-id="Sysmon" title="Sysmon"
-    open-maximized true
-}
-
 
 // =============================================================================
 // WORKSPACE ASSIGNMENTS
 // =============================================================================
 
-// Workspace 1: Web Browsers (Maximized, background launch)
+// Workspace 1: Web Browsers, Email, Chats etc
 window-rule {
     match app-id="firefox"
     match app-id="zen"
@@ -172,17 +171,34 @@ window-rule {
     open-maximized true
 }
 
-// Workspace 2: Communication & Background Downloads (Almost Full Width)
 window-rule {
-    match app-id="com.transmissionbt.transmission"
-    match app-id="discord"
     match app-id="org.mozilla.Thunderbird"
-    open-on-workspace "2"
+    open-on-workspace "1"
     open-focused false
     default-column-width { proportion 0.95; }
 }
 
-// Workspace 3: Gaming (Main Steam window, Lutris, and Emulators)
+window-rule {
+    match app-id="mpv"
+    open-on-workspace "1"
+    open-focused true
+}
+
+// Workspace 2: Chats,  Background Downloads
+window-rule {
+    match app-id="discord"
+    match app-id="com.transmissionbt.transmission"
+    open-on-workspace "2"
+    default-column-width { proportion 0.95; }
+}
+
+window-rule {
+    match app-id="Sysmon" title="Sysmon"
+    open-on-workspace "2"
+    open-maximized true
+}
+
+// Workspace 3: Gaming
 window-rule {
     match app-id="steam"
     open-on-workspace "3"
@@ -214,4 +230,9 @@ window-rule {
 layer-rule {
     match namespace="overview"
     place-within-backdrop true
+}
+
+// Set transparent workspace background color.
+layout {
+    background-color "transparent"
 }

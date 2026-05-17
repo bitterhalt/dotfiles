@@ -50,4 +50,4 @@ menu:
         cmd: foot -a foot -T journalctl -e journalctl -f
       - key: "c"
         desc: Combined [ tmux-window ]
-        cmd: foot -T Sysmon -e ~/.local/bin/tmux-sysmon.sh
+        cmd: foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh
