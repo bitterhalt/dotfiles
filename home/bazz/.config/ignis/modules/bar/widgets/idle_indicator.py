@@ -17,9 +17,7 @@ class IdleIndicatorWidget(widgets.EventBox):
         self._signals = SignalManager()
         self._hypr = HyprlandService.get_default()
         self._niri = NiriService.get_default()
-
         self._idle_daemon = "hypridle" if self._hypr.is_available else "swayidle"
-
         self._pid_file = Path.home() / ".cache" / "idle_daemon.pid"
         self._monitor = None
         self._pending_update = False

@@ -19,7 +19,7 @@ auto_kbd_layout: true
 menu:
   - key: "a"
     desc: All
-    cmd: ~/.config/niri/scripts/apps.sh
+    cmd: zen-browser|discord|thunderbird|transmission-gtk
   - key: "b"
     desc: Browser
     cmd: zen-browser
@@ -29,12 +29,18 @@ menu:
   - key: "e"
     desc: Email
     cmd: thunderbird
-  - key: "l"
-    desc: Lutris
-    cmd: lutris
-  - key: "s"
-    desc: Steam
-    cmd: steam
   - key: "t"
     desc: Torrent
     cmd: transmission-gtk
+  - key: "g"
+    desc: Gaming
+    submenu:
+      - key: "a"
+        desc: "All"
+        cmd: steam|lutris
+      - key: "s"
+        desc: Stean
+        cmd: steam
+      - key: "l"
+        desc: Lutris
+        cmd: lutris
