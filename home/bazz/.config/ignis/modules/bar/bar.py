@@ -3,7 +3,6 @@ from modules.utils import load_bar_state
 from settings import config
 from .widgets.battery import BatteryWidget
 from .widgets.clock import ClockWidget
-from .widgets.focused_window import WindowTitleWidget
 from .widgets.recorder_indicator import RecordingIndicator
 from .widgets.system_indicator import SystemIndicatorWidget
 
@@ -21,7 +20,6 @@ def left_section(monitor_name: str):
         spacing=12,
         child=[
             WorkspaceWidget.create(monitor_name),
-            WindowTitleWidget.create(monitor_name),
         ],
     )
 
