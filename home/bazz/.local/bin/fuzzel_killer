@@ -10,7 +10,8 @@ selection=$(
     fuzzel -d -a top --y 4 -w 30 -l 8 \
       --placeholder="!!! Kill process: " \
       --border-color=af3029ff \
-      --selection-color=af302944
+      --selection-color=af302944 \
+      --index
 )
 
 [[ -z "${selection:-}" ]] && exit 0
