@@ -200,10 +200,16 @@ window-rule {
 // Workspace 2: Chats,  Background Downloads
 window-rule {
     match app-id="discord"
+    open-on-workspace "2"
+    open-maximized true
+    open-focused false
+}
+
+window-rule {
     match app-id="com.transmissionbt.transmission"
     open-on-workspace "2"
+    open-maximized true
     open-focused false
-    default-column-width { proportion 0.95; }
 }
 
 window-rule {
