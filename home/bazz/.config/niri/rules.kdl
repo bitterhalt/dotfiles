@@ -76,7 +76,7 @@ window-rule {
 
 // File manager dialogs and progress bars
 window-rule {
-    match app-id="thunar" title="Rename|File Operation Progress"
+    match app-id="(?i)^thunar$" title="Rename|File Operation Progress"
     open-floating true
 }
 
@@ -180,7 +180,6 @@ window-rule {
     match app-id="firefox"
     match app-id="zen"
     open-on-workspace "1"
-    open-focused false
     open-maximized true
 }
 
