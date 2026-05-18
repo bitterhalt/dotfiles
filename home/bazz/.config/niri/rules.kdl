@@ -1,5 +1,5 @@
 // =============================================================================
-//  WINDOW GEOMETRY
+//  GENERAL RULES
 // =============================================================================
 
 // Set rounded corners and clip window contents for all windows
@@ -8,9 +8,17 @@ window-rule {
     clip-to-geometry true
 }
 
+// Show shadow BUT only with floating windows
+window-rule {
+    match is-floating=true
+    shadow {
+        on
+    }
+}
+
 
 // =============================================================================
-// GENERAL UTILITY & SYSTEM FLOATING WINDOWS
+//  UTILITY & SYSTEM FLOATING WINDOWS
 // =============================================================================
 
 // Standard system dialogs, authentication agents, and configuration tools
