@@ -39,7 +39,7 @@ menu:
         desc: "All"
         cmd: steam|lutris
       - key: "s"
-        desc: Stean
+        desc: Steam
         cmd: steam
       - key: "l"
         desc: Lutris
