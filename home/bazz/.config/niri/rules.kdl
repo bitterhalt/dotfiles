@@ -56,6 +56,7 @@ window-rule {
     default-window-height { proportion 0.80; }
 }
 
+
 // Image viewer with background blur effect
 window-rule {
     match app-id="swayimg"
@@ -105,6 +106,10 @@ window-rule {
     focus-ring {
         width 3
         active-color "#9b0000"
+    }
+    shadow {
+      on
+      color "#9b0000"
     }
 }
 
@@ -174,8 +179,8 @@ window-rule {
 window-rule {
     match app-id="org.mozilla.Thunderbird"
     open-on-workspace "1"
-    open-focused false
     default-column-width { proportion 0.95; }
+    open-focused false
 }
 
 window-rule {
@@ -189,6 +194,7 @@ window-rule {
     match app-id="discord"
     match app-id="com.transmissionbt.transmission"
     open-on-workspace "2"
+    open-focused false
     default-column-width { proportion 0.95; }
 }
 
