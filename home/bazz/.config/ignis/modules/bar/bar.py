@@ -17,7 +17,7 @@ from .widgets.idle_indicator import IdleIndicatorWidget
 
 def left_section(monitor_name: str):
     return widgets.Box(
-        spacing=12,
+        spacing=16,
         child=[
             WorkspaceWidget.create(monitor_name),
             WindowTitleWidget.create(monitor_name),

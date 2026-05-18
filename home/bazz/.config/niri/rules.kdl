@@ -17,6 +17,7 @@ window-rule {
 }
 
 
+
 // =============================================================================
 //  UTILITY & SYSTEM FLOATING WINDOWS
 // =============================================================================
@@ -193,7 +194,6 @@ window-rule {
 window-rule {
     match app-id="mpv"
     open-on-workspace "1"
-    open-focused true
 }
 
 // Workspace 2: Chats,  Background Downloads
