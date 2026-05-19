@@ -223,7 +223,7 @@ class NormalHistoryItem(widgets.Box):
             css_classes=["notif-history-body-expanded"],
             visible=False,
             wrap=True,
-            wrap_mode="word",
+            wrap_mode="word_char",
         )
 
         text_box = widgets.Box(
