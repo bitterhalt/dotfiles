@@ -226,16 +226,20 @@ class NormalHistoryItem(widgets.Box):
             wrap_mode="word_char",
         )
 
-        text_box = widgets.Box(
-            vertical=True,
-            spacing=2,
-            child=[
-                summary,
-                self._timestamp_label,
-                self._body_collapsed,
-                self._body_expanded,
-            ],
+        text_box = widgets.Button(
+            child=widgets.Box(
+                vertical=True,
+                spacing=2,
+                child=[
+                    summary,
+                    self._timestamp_label,
+                    self._body_collapsed,
+                    self._body_expanded,
+                ],
+            ),
+            css_classes=["unset"],
             hexpand=True,
+            on_click=lambda x: self._toggle_expand(),
         )
 
         self._action_box = widgets.Box(
@@ -252,25 +256,6 @@ class NormalHistoryItem(widgets.Box):
             ],
         )
 
-        has_actions = len(notification.actions) > 0
-        has_expandable = (
-            len(notification.body) > 80 or len(notification.summary) > 70
-        ) or has_actions
-
-        self._expand_arrow = widgets.Icon(
-            image="pan-down-symbolic",
-            pixel_size=16,
-        )
-
-        expand_btn = widgets.Button(
-            child=self._expand_arrow,
-            css_classes=["expand-btn"],
-            valign="start",
-            tooltip_text="Expand",
-            visible=has_expandable,
-            on_click=lambda x: self._toggle_expand(),
-        )
-
         close_btn = widgets.Button(
             child=widgets.Icon(image="window-close-symbolic", pixel_size=16),
             css_classes=["close-btn"],
@@ -283,7 +268,7 @@ class NormalHistoryItem(widgets.Box):
             vertical=True,
             spacing=4,
             valign="start",
-            child=[close_btn, expand_btn] if has_expandable else [close_btn],
+            child=[close_btn],
         )
 
         main_row = widgets.Box(
@@ -307,12 +292,12 @@ class NormalHistoryItem(widgets.Box):
         self._signals.connect(self, "destroy", lambda *_: self.destroy())
 
     def _toggle_expand(self):
+        if not self._notification.body:
+            return
+
         self._expanded = not self._expanded
         self._body_collapsed.visible = not self._expanded
         self._body_expanded.visible = self._expanded
-        self._expand_arrow.image = (
-            "pan-up-symbolic" if self._expanded else "pan-down-symbolic"
-        )
 
         if self._expanded and len(self._notification.actions) > 0:
             if self._action_box not in self.child:

@@ -14,13 +14,12 @@
 
 .close-btn {
   all: unset;
-  color: $tx-1;
+  color: $tx-3;
   border-radius: 50%;
 }
 
 .close-btn:hover {
   color: $tx-2;
-  background: $ui-3;
 }
 
 .expand-arrow {
