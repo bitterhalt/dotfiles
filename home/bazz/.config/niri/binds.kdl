@@ -78,22 +78,22 @@ binds {
 
     // Navigation (Focus)
     Mod+Left hotkey-overlay-title="Focus Left" { focus-column-left; }
-    Mod+Down hotkey-overlay-title="Focus Down" { focus-window-down; }
-    Mod+Up hotkey-overlay-title="Focus Up" { focus-window-up; }
+    Mod+Down hotkey-overlay-title="Focus Down" { focus-window-or-workspace-down; }
+    Mod+J hotkey-overlay-title="Focus Down (Vim)" { focus-window-or-workspace-down; }
+    Mod+K hotkey-overlay-title="Focus Up (Vim)" { focus-window-or-workspace-up; }
+    Mod+Up hotkey-overlay-title="Focus Up" { focus-window-or-workspace-up; }
     Mod+Right hotkey-overlay-title="Focus Right" { focus-column-right; }
-    Mod+H hotkey-overlay-title="Focus Left" { focus-column-left; }
-    Mod+J hotkey-overlay-title="Focus Down" { focus-window-down; }
-    Mod+K hotkey-overlay-title="Focus Up" { focus-window-up; }
-    Mod+L hotkey-overlay-title="Focus Right" { focus-column-right; }
+    Mod+H hotkey-overlay-title="Focus Left (Vim)" { focus-column-left; }
+    Mod+L hotkey-overlay-title="Focus Right (Vim)" { focus-column-right; }
 
     // Moving Windows/Columns
     Mod+Shift+Left hotkey-overlay-title="Move Left" { move-column-left; }
-    Mod+Shift+Down hotkey-overlay-title="Move Down" { move-window-down; }
-    Mod+Shift+Up hotkey-overlay-title="Move Up" { move-window-up; }
+    Mod+Shift+Down hotkey-overlay-title="Move Down" { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Up hotkey-overlay-title="Move Up" { move-window-up-or-to-workspace-up; }
     Mod+Shift+Right hotkey-overlay-title="Move Right" { move-column-right; }
     Mod+Shift+H hotkey-overlay-title="Move Left (Vim)" { move-column-left; }
-    Mod+Shift+J hotkey-overlay-title="Move Down (Vim)" { move-window-down; }
-    Mod+Shift+K hotkey-overlay-title="Move Up (Vim)" { move-window-up; }
+    Mod+Shift+J hotkey-overlay-title="Move Down (Vim)" { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K hotkey-overlay-title="Move Up (Vim)" { move-window-up-or-to-workspace-up; }
     Mod+Shift+L hotkey-overlay-title="Move Right (Vim)" { move-column-right; }
 
     Mod+Home hotkey-overlay-title="Focus First Column" { focus-column-first; }
