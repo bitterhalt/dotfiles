@@ -31,6 +31,7 @@ window-rule {
     match app-id="modorganizer.exe"
     match app-id="nm-connection-editor"
     match app-id="nwg-look"
+    match app-id="localsend_app"
     match app-id="org.gnome.FileRoller"
     match app-id="org.pulseaudio.pavucontrol"
     match app-id="polkit-gnome-authentication-agent-1"
