@@ -1,7 +1,9 @@
 import asyncio
 from ignis import utils, widgets
 from ignis.services.audio import AudioService
+from ignis.services.bluetooth import BluetoothService
 from ignis.window_manager import WindowManager
+from modules.utils.signal_manager import SignalManager
 from settings import config
 from .audio_section import AudioSection
 from .network_section import NetworkSection
@@ -10,6 +12,7 @@ from .system_tray import SystemTrayWidget
 
 wm = WindowManager.get_default()
 audio = AudioService.get_default()
+bluetooth = BluetoothService.get_default()
 icon_size = config.ui.bar_icon_size
 
 
@@ -33,10 +36,15 @@ class SystemPopup(widgets.RevealerWindow):
             child=widgets.Icon(image="system-shutdown-symbolic", pixel_size=icon_size),
         )
 
+        self._bt_icon = widgets.Icon(
+            image=self._get_bt_icon(),
+            pixel_size=icon_size,
+        )
+
         bt_btn = widgets.Button(
             css_classes=["sys-top-btn", "unset"],
             on_click=lambda x: self._open_bt_settings(),
-            child=widgets.Icon(image="bluetooth-symbolic", pixel_size=icon_size),
+            child=self._bt_icon,
         )
 
         system_tray = SystemTrayWidget()
@@ -133,7 +141,30 @@ class SystemPopup(widgets.RevealerWindow):
             revealer=revealer,
         )
 
+        self._signals = SignalManager()
+        self._setup_bt_signals()
         self.connect("notify::visible", self._on_visible_change)
+        self.connect("destroy", lambda *_: self._signals.disconnect_all())
+
+    def _get_bt_icon(self):
+        try:
+            if not bluetooth.powered:
+                return "bluetooth-disabled-symbolic"
+            devices = getattr(bluetooth, "connected_devices", None)
+            if devices and len(devices) > 0:
+                return "bluetooth-symbolic"
+            return "bluetooth-disabled-symbolic"
+        except Exception:
+            return "bluetooth-disabled-symbolic"
+
+    def _setup_bt_signals(self):
+        self._signals.connect(bluetooth, "notify::powered", self._update_bt_icon)
+        self._signals.connect(
+            bluetooth, "notify::connected-devices", self._update_bt_icon
+        )
+
+    def _update_bt_icon(self, *_):
+        self._bt_icon.image = self._get_bt_icon()
 
     def _open_bt_settings(self):
         asyncio.create_task(utils.exec_sh_async("foot -a bluetui -e bluetui"))
