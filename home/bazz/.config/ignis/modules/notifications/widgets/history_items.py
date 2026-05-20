@@ -94,7 +94,6 @@ class ScreenshotHistoryItem(widgets.Box):
 
         info_column = widgets.Box(
             vertical=True,
-            spacing=4,
             hexpand=True,
             child=[
                 widgets.Box(

@@ -1,4 +1,4 @@
-from .notification_items import (
+from .history_items import (
     NotificationHistoryItem,
 )
 

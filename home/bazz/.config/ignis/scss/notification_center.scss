@@ -23,6 +23,7 @@
 
 .header-action-btn {
   color: $tx-3;
+  opacity: 0.8;
   margin-right: 22px;
   border-radius: 4px;
   font-size: 0.9em;
@@ -124,7 +125,8 @@
   padding: 0 12px;
 }
 
-.notif-history-item {
+.notif-history-item,
+.screenshot-history-item {
   background: $bg-2;
   border-radius: 4px;
   padding: 12px;
@@ -137,7 +139,8 @@
   }
 }
 
-.notif-history-title {
+.notif-history-title,
+.screenshot-filename {
   font-weight: 600;
   color: $tx-2;
 
@@ -150,52 +153,33 @@
   color: $tx-3;
 }
 
-.notif-timestamp {
+.notif-history-body-expanded {
+  all: unset;
+  color: $tx-2;
+  margin-top: 4px;
+}
+
+.notif-timestamp,
+.screenshot-timestamp {
   font-size: 0.8em;
   color: $tx-3;
   opacity: 0.9;
-  margin-top: 1px;
-  margin-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 4px;
   font-weight: 400;
-}
-
-.notif-history-item:hover {
-  opacity: 0.8;
 }
 
 .empty-state {
   font-size: 0.8em;
   color: $tx-3;
+  opacity: 0.8;
   padding: 20px;
-}
-
-.screenshot-history-item {
-  background: $bg-2;
-  padding: 12px;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  transition: background 0.2s;
-
-  &:hover {
-    background: $ui-2;
-  }
 }
 
 .screenshot-preview {
   border-radius: 4px;
   background: $bg-1;
   border: 1px solid $ui-1;
-}
-
-.screenshot-filename {
-  font-weight: 600;
-  color: $tx-2;
-}
-
-.screenshot-timestamp {
-  font-size: 0.8em;
-  color: $tx-3;
-  opacity: 0.9;
 }
 
 .screenshot-action-btn {
@@ -215,10 +199,4 @@
 .screenshot-delete-btn:hover {
   background: $warning;
   color: $bg-1;
-}
-
-.notif-history-body-expanded {
-  all: unset;
-  color: $tx-2;
-  margin-top: 4px;
 }
