@@ -43,7 +43,6 @@ def sanitize_text(text: str) -> str:
 class ScreenshotHistoryItem(widgets.Box):
     def __init__(self, notification: Notification):
         self._signals = SignalManager()
-        self._poll = None
 
         self._preview = widgets.Picture(
             image=notification.icon,
@@ -125,25 +124,14 @@ class ScreenshotHistoryItem(widgets.Box):
             child=[self._compact_row],
         )
 
-        self._poll = utils.Poll(60000, lambda *_: self._update_timestamp(notification))
         self._signals.connect(
             notification, "closed", lambda *_: setattr(self, "visible", False)
         )
         self._signals.connect(self, "destroy", lambda *_: self.destroy())
 
     def destroy(self):
-        if self._poll:
-            try:
-                self._poll.cancel()
-            except:
-                pass
-            self._poll = None
         self._signals.disconnect_all()
         super().destroy()
-
-    def _update_timestamp(self, notification):
-        self._timestamp.label = format_time_ago(notification.time)
-        return True
 
     def _open_screenshot(self, notification):
         if notification.icon:
@@ -163,7 +151,6 @@ class ScreenshotHistoryItem(widgets.Box):
 class NormalHistoryItem(widgets.Box):
     def __init__(self, notification: Notification):
         self._signals = SignalManager()
-        self._poll = None
         self._expanded = False
         self._notification = notification
 
@@ -285,7 +272,6 @@ class NormalHistoryItem(widgets.Box):
             child=[main_row],
         )
 
-        self._poll = utils.Poll(60000, lambda *_: self._update_timestamp(notification))
         self._signals.connect(
             notification, "closed", lambda *_: setattr(self, "visible", False)
         )
@@ -307,18 +293,8 @@ class NormalHistoryItem(widgets.Box):
                 self._action_box.unparent()
 
     def destroy(self):
-        if self._poll:
-            try:
-                self._poll.cancel()
-            except Exception:
-                pass
-            self._poll = None
         self._signals.disconnect_all()
         super().destroy()
-
-    def _update_timestamp(self, notification):
-        self._timestamp_label.label = format_time_ago(notification.time)
-        return True
 
 
 class NotificationHistoryItem(widgets.Box):
