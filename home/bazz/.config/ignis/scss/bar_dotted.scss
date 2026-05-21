@@ -104,6 +104,7 @@
 .idle-indicator:hover,
 .system-indicator-button:hover,
 .network-box:hover {
-  background: $bg-2;
+  background: $ui-1;
   color: $tx-2;
+  transition: background 200ms ease;
 }
