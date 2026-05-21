@@ -18,7 +18,7 @@
 
 > With bar
 >
-> <img width="1920" height="1080" alt="2026-05-09-11-49-06_screenshot" src="https://github.com/user-attachments/assets/a1dc54fc-506c-40d8-974f-62ec3b88dcbd" />
+> <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/746870c6-d8f5-498e-af23-d1beb96084cd" />
 
 > Zen
 > <img width="1920" height="1080" alt="2026-05-09-11-50-54_screenshot" src="https://github.com/user-attachments/assets/3c69e12b-509e-4db3-a89f-49dbd7dad020" />
@@ -31,8 +31,6 @@
 <summary><b>Settings</b></summary><br>
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c97ab779-c68a-461e-9083-0187a3199dcd" />
 </details>
-
-https://github.com/user-attachments/assets/b9a16046-4165-43f2-80da-c3e89093b11c
 
 ---
 
