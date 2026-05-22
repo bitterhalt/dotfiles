@@ -44,7 +44,7 @@ tooltip label {
  *                  Workspaces
  * ----------------------------------------------------- */
 #workspaces {
-  padding: 2px 8px;
+  margin: 0px 10px;
 }
 
 #workspaces button {
@@ -54,14 +54,12 @@ tooltip label {
   border-radius: 1rem;
   min-width: 0.5rem;
   min-height: 0.5rem;
-  margin: 10px 4px;
+  margin: 12px 4px;
 }
 
 #workspaces button.active {
-  min-width: 1.45rem;
+  min-width: 1.5rem;
   background: @cyan;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 #workspaces button.urgent {
@@ -83,17 +81,14 @@ window#waybar.empty #window {
 #clock {
   color: @tx-1;
   font-weight: 600;
-  margin: 2px 2px;
+  margin: 2px 0px;
   border-radius: 4px;
-  padding: 0 4px;
+  padding: 0 6px;
 }
 
 #custom-mako {
   color: @red;
   opacity: 0.8;
-  margin: 2px 2px;
-  border-radius: 4px;
-  padding: 0 4px;
 }
 
 #battery,
@@ -102,8 +97,8 @@ window#waybar.empty #window {
 #bluetooth,
 #network {
   color: @tx-1;
-  margin: 2px 2px;
-  padding: 0 8px;
+  padding: 0 6px;
+  margin: 2px 0px;
   border-radius: 4px;
 }
 
@@ -114,8 +109,7 @@ window#waybar.empty #window {
 #tray,
 #custom-expand-right {
   color: @ui-3;
-  margin: 2px 2px;
-  padding-right: 8px;
+  margin: 0 10px;
   border-radius: 4px;
 }
 
@@ -128,7 +122,9 @@ window#waybar.empty #window {
 #custom-wf-recorder {
   animation: rec-blink 1s linear infinite;
   color: @red;
-  margin: 2px 2px;
+  border-radius: 4px;
+  padding: 0 6px;
+  margin: 2px 0;
 }
 /* Rec-animation */
 @keyframes rec-blink {
@@ -149,9 +145,9 @@ window#waybar.empty #window {
  *                      Hover candy
  * ----------------------------------------------------- */
 #clock:hover,
+#custom-wf-recorder:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
-#custom-mako:hover,
 #custom-idle:hover,
 #network:hover,
 #tray menu menuitem:hover,

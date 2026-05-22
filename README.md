@@ -18,14 +18,11 @@
 
 > <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/746870c6-d8f5-498e-af23-d1beb96084cd" />
 
-s/assets/3c69e12b-509e-4db3-a89f-49dbd7dad020" />
-
 <details>
 <summary><b>Blurred overview</b></summary><br>
 <img width="1920" height="1080" alt="2026-05-09-11-49-23_screenshot" src="https://github.com/user-attachments/assets/a1dff4f2-d016-4964-b735-23533a50ef09" />
 </details>
-<details>
----
+
 
 ### Installation
 
