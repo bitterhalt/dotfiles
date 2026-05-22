@@ -8,7 +8,7 @@ corner_r: 4
 padding: 20
 column_padding: 25
 
-anchor: top
+anchor: top-right
 margin_right: 8
 margin_bottom: 8
 margin_left: 8

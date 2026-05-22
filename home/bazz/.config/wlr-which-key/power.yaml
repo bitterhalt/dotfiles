@@ -8,7 +8,7 @@ corner_r: 4
 padding: 20
 column_padding: 25
 
-anchor: top
+anchor: top-right
 margin_right: 8
 margin_bottom: 8
 margin_left: 8
@@ -18,6 +18,12 @@ inhibit_compositor_keyboard_shortcuts: true
 auto_kbd_layout: true
 
 menu:
+  - key: "l"
+    desc: 󰍃 Logout
+    cmd: loginctl terminate-user "$USER"
+  - key: "z"
+    desc: 󰒲 Suspend
+    cmd: systemctl suspend
   - key: "s"
     desc: 󰐥 Shutdown
     cmd: systemctl poweroff
@@ -27,6 +33,3 @@ menu:
   - key: "u"
     desc: 󰘚 Reboot to UEFI
     cmd: systemctl reboot --firmware-setup
-  - key: "l"
-    desc: 󰍃 Logout
-    cmd: loginctl terminate-user "$USER"
