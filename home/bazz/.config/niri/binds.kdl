@@ -28,7 +28,7 @@ binds {
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn-sh "fuzzel_emoji"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | sed -n 's/^Hex: //p' | tr -d '\n' | wl-copy"; }
     Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel_drun"; }
-    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "~/.config/niri/scripts/power.sh"; }
+    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "wlr-which-key power"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4 hotkey-overlay-title="Kill Apps" { spawn "fuzzel_killer"; }
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn-sh "fuzzel_passmenu"; }
@@ -45,7 +45,7 @@ binds {
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
-    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "fuzzel_screenshot"; }
+    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "wlr-which-key rec"; }
     Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { spawn-sh "wl-shot -f"; }
     Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "wl-shot -re"; }
 

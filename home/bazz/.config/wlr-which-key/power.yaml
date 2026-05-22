@@ -19,17 +19,14 @@ auto_kbd_layout: true
 
 menu:
   - key: "l"
-    desc: 󰍃 Logout
+    desc: Logout
     cmd: loginctl terminate-user "$USER"
   - key: "z"
-    desc: 󰒲 Suspend
+    desc: Suspend 󰒲
     cmd: systemctl suspend
   - key: "s"
-    desc: 󰐥 Shutdown
+    desc: Shutdown
     cmd: systemctl poweroff
   - key: "r"
-    desc: 󰑐 Reboot
+    desc: Reboot
     cmd: systemctl reboot
-  - key: "u"
-    desc: 󰘚 Reboot to UEFI
-    cmd: systemctl reboot --firmware-setup

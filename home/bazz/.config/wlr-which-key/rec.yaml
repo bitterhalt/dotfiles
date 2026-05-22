@@ -1,0 +1,35 @@
+font: Adwaita Sans, Symbols Nerd Font Mono 13
+background: "#100F0F"
+color: "#CECDC3"
+border: "#a02f6f"
+separator: " ➜ "
+border_width: 1
+corner_r: 4
+padding: 20
+column_padding: 25
+
+anchor: top-right
+margin_right: 8
+margin_bottom: 8
+margin_left: 8
+margin_top: 8
+
+inhibit_compositor_keyboard_shortcuts: true
+auto_kbd_layout: true
+
+menu:
+  - key: "1"
+    desc: Record Screen
+    cmd: wl-record -f && pkill -SIGRTMIN+2 waybar
+  - key: "2"
+    desc: Record Regional
+    cmd: wl-record -r && pkill -SIGRTMIN+2 waybar
+  - key: "3"
+    desc: Screenshot Full Screen
+    cmd: wl-shot -f
+  - key: "4"
+    desc: Screenshot Regional
+    cmd: wl-shot -re
+  - key: "5"
+    desc: Kill Recoding
+    cmd: wl-record -k && pkill -SIGRTMIN+2 waybar
