@@ -26,7 +26,6 @@ WEATHER_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.temp' | cut -d "." -f 1)
 FEELS_LIKE_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.feels_like' | cut -d "." -f 1)
 HUMIDITY=$(echo "$WEATHER_RESPONSE" | jq '.main.humidity')
 WIND_SPEED=$(echo "$WEATHER_RESPONSE" | jq '.wind.speed')
-WIND_DIR=$(echo "$WEATHER_RESPONSE" | jq '.wind.deg')
 SUNRISE=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunrise')
 SUNSET=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunset')
 CURRENT_TIME=$(date +%s)
@@ -62,14 +61,13 @@ esac
 # Convert wind direction degrees to cardinal direction
 get_wind_direction() {
   deg=$1
-  dirs=(N NNE NE ENE E ESE SE SSE S SSW SW WSW W WNW NW NNW)
   idx=$(echo "($deg + 11.25)/22.5" | bc)
   echo "${dirs[$((idx % 16))]}"
 }
 WIND_CARDINAL=$(get_wind_direction "$WIND_DIR")
 
 # Format output
-OUTPUT=$(printf "%s %s (%s°C)\n🌈 Feels like %s°C\n💧 Humidity: %s%%\n🌬️ Wind: %s m/s (%s)\n🌞 Sunrise: %s\n🌙 Sunset: %s" \
+OUTPUT=$(printf "%s %s (%s°C)\n🌈 Feels like %s°C\n💧 Humidity: %s%%\n🌬️ Wind: %s m/s %s\n🌞 Sunrise: %s\n🌙 Sunset: %s" \
   "$WEATHER_ICON" "$WEATHER_DESC" "$WEATHER_TEMP" "$FEELS_LIKE_TEMP" "$HUMIDITY" "$WIND_SPEED" "$WIND_CARDINAL" \
   "$(date -d @"$SUNRISE" '+%H:%M')" "$(date -d @"$SUNSET" '+%H:%M')")
 

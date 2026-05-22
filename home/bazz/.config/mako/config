@@ -53,8 +53,8 @@ text-alignment=center
 invisible=1
 
 [app-name=weather-n]
-width=240
-padding=30
+width=184
+padding=20
 group-by=app-name
 [mode=dnd]
 invisible=1
