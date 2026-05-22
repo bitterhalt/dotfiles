@@ -1,8 +1,8 @@
 ### Software I use
 
 - Distro: [Arch](https://archlinux.org)
-- Bar: [ignis](https://github.com/ignis-sh/ignis)
-- Notifications: [ignis](https://github.com/ignis-sh/ignis)
+- Bar: [waybar](https://github.com/Alexays/Waybar)
+- Notifications: [mako](https://github.com/emersion/mako)
 - WM: [Niri](https://github.com/niri-wm/niri)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
@@ -16,22 +16,15 @@
 
 ### Screenshots
 
-> With bar
->
 > <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/746870c6-d8f5-498e-af23-d1beb96084cd" />
 
-> Zen
-> <img width="1920" height="1080" alt="2026-05-09-11-50-54_screenshot" src="https://github.com/user-attachments/assets/3c69e12b-509e-4db3-a89f-49dbd7dad020" />
+s/assets/3c69e12b-509e-4db3-a89f-49dbd7dad020" />
 
 <details>
 <summary><b>Blurred overview</b></summary><br>
 <img width="1920" height="1080" alt="2026-05-09-11-49-23_screenshot" src="https://github.com/user-attachments/assets/a1dff4f2-d016-4964-b735-23533a50ef09" />
 </details>
 <details>
-<summary><b>Settings</b></summary><br>
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c97ab779-c68a-461e-9083-0187a3199dcd" />
-</details>
-
 ---
 
 ### Installation
@@ -46,14 +39,6 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 
 ---
 
-### TODO
-
-- [ ] Ignis: add bluetooth pill + basic connect/disconnect settings in bar's system_popup
-- [ ] Ignis: add optional vertical bar
-- [ ] Ignis: add brighness osd + slider in bar's popup menu (easy but I currently don't have laptop)
-
----
-
 ### Inspiration of my cool stuff ⭐
 
 - [SwayKh](https://github.com/SwayKh/dotfiles/tree/main) - For TONS of ideas and ispiration 😍
@@ -61,7 +46,6 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 - [classabbyamp](https://github.com/classabbyamp) - Helped me with TONS of stuff ⭐
 - [aellas](https://github.com/aellas) - For TONS of ideas and ispiration ⭐ ❤️ 🐐
 - [Joris](https://codeberg.org/jorisvandijk) - For showing me how to manage my dots better ❤️ ⭐
-- [linkfrg](https://github.com/linkfrg/dotfiles) - Everything related to Ignis ❤️ ⭐
 
 ### Special thanks ⭐
 
