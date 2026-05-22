@@ -107,7 +107,7 @@ window#waybar.empty #window {
 }
 
 #tray,
-#custom-expand-right {
+#custom-vertical-dots {
   color: @ui-3;
   margin-right: 10px;
   border-radius: 4px;

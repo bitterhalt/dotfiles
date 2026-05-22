@@ -119,7 +119,7 @@
     "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default) $(makoctl mode | tail -1)",
     "signal": 3,
   },
-  "custom/expand-right": {
+  "custom/vertical-dots": {
     "format": "󰇙",
     "tooltip": false,
   },
@@ -129,6 +129,6 @@
       "click-to-reveal": true,
       "transition-duration": 300,
     },
-    "modules": ["custom/expand-right", "tray"],
+    "modules": ["custom/vertical-dots", "tray"],
   },
 }

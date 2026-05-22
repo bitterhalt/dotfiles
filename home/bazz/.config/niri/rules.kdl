@@ -16,8 +16,6 @@ window-rule {
     }
 }
 
-
-
 // =============================================================================
 //  UTILITY & SYSTEM FLOATING WINDOWS
 // =============================================================================
@@ -101,19 +99,16 @@ window-rule {
 }
 
 // --- Email  ---
-// Composer and item editor windows
 window-rule {
     match app-id="org.mozilla.Thunderbird$" title="Edit Item|^Write.*$"
     open-floating true
 }
 
-// Urgent calendar reminders
 window-rule {
     match app-id="org.mozilla.Thunderbird$" title="^Calendar Reminders$"
     open-floating true
 }
 
-// --- Steam ---
 // Sub-panels, settings, and secondary windows
 window-rule {
     match app-id="steam" title="Steam Settings"
@@ -137,7 +132,6 @@ window-rule {
     }
 }
 
-// Desktop notification toasts (anchored bottom-right)
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
@@ -166,7 +160,6 @@ window-rule {
 // WORKSPACE ASSIGNMENTS
 // =============================================================================
 
-// Workspace 1: Web Browsers, Email, Chats etc
 window-rule {
     match app-id="firefox"
     match app-id="zen"
@@ -181,12 +174,7 @@ window-rule {
     open-maximized true
 }
 
-window-rule {
-    match app-id="mpv"
-    open-on-workspace "1"
-}
 
-// Workspace 2: Chats,  Background Downloads
 window-rule {
     match app-id="discord"
     open-on-workspace "2"
@@ -207,7 +195,6 @@ window-rule {
     open-maximized true
 }
 
-// Workspace 3: Gaming
 window-rule {
     match app-id="steam"
     open-on-workspace "3"
