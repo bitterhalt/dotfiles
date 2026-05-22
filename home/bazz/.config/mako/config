@@ -21,7 +21,7 @@ max-icon-size=32
 border-size=1
 width=300
 height=800
-padding=20
+padding=15
 
 ##################
 #   Colors       #
@@ -43,59 +43,18 @@ default-timeout=0
 ###############################
 ## Custom notification rules ##
 ###############################
-[app-name=vol_notify]
-anchor=top-center
-border-size=1
-font=JetBrainsMono Nerd Font 13
-group-by=app-name
-text-alignment=center
-width=150
 
-[app-name=playerctrl_notify]
-text-alignment=center
-
-[app-name=sysnfo_notify]
-font=JetBrainsMono Nerd Font 12
-width=250
-group-by=app-name
-default-timeout=10000
-padding=20
-
-[app-name=fat_notify]
-font=JetBrainsMono Nerd Font 10
-height=800
-group-by=app-name
-
-[app-name=date_notify]
-font=JetBrainsMono Nerd Font 12
-width=160
-group-by=app-name
-text-alignment=center
-
-[app-name=cal_notify]
-font=JetBrainsMono Nerd Font 10
-width=190
-group-by=app-name
-
-[app-name=weather_notify]
-font=JetBrainsMono Nerd Font 12
-width=230
-group-by=app-name
-padding=20
-
-[app-name=center_notify]
-font=JetBrainsMono Nerd Font 12
-width=260
-anchor=top-center
-group-by=app-name
-text-alignment=center
-
-[app-name=center_notify_s]
-font=JetBrainsMono Nerd Font 12
+[app-name=tiny-n]
 width=130
-anchor=top-center
 group-by=app-name
 text-alignment=center
 
+[mode=dnd]
+invisible=1
+
+[app-name=weather-n]
+width=240
+padding=30
+group-by=app-name
 [mode=dnd]
 invisible=1

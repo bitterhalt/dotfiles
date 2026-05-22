@@ -75,7 +75,7 @@ OUTPUT=$(printf "%s %s (%s°C)\n🌈 Feels like %s°C\n💧 Humidity: %s%%\n🌬
 
 # Output based on argument
 if [ "$1" = "-n" ]; then
-  notify-send -t 9000 "   Weather: ${CITY_NAME}" "$OUTPUT"
+  notify-send -a weather-n -t 9000 "   Weather: ${CITY_NAME}" "$OUTPUT"
 else
   INDENT="  "
   echo -e "${INDENT}Weather: ${CITY_NAME}"

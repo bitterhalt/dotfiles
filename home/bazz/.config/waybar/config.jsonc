@@ -96,10 +96,6 @@
     "exec": "date +'%b %d %H:%M'",
     "interval": 60,
   },
-  "custom/expand-right": {
-    "format": "󰇙",
-    "tooltip": false,
-  },
   "custom/idle": {
     "interval": "once",
     "return-type": "json",
@@ -129,12 +125,15 @@
     "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default) $(makoctl mode | tail -1)",
     "signal": 3,
   },
+  "custom/expand-right": {
+    "format": "󰇙",
+    "tooltip": false,
+  },
   "group/expand-right": {
     "orientation": "inherit",
     "drawer": {
       "click-to-reveal": true,
-      "transition-duration": 700,
-      "transition-to-left": true,
+      "transition-duration": 300,
     },
     "modules": ["custom/expand-right", "tray"],
   },

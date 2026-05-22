@@ -24,15 +24,15 @@ menu:
   - key: "f"
     desc: Foot
     cmd: foot -e nvim ~/.config/foot/foot.ini
-  - key: "i"
-    desc: Ignis
-    cmd: foot sh -c "cd ~/.config/ignis && vopen ."
   - key: "v"
     desc: Neovim
     cmd: foot sh -c "cd ~/.config/nvim && vopen ."
   - key: "n"
     desc: Niri
     cmd: foot -e nvim  ~/.config/niri/*
+  - key: "w"
+    desc: Waybar
+    cmd: foot sh -c "cd ~/.config/waybar/ && nvim *"
   - key: "m"
     desc: System Monitor
     submenu:
