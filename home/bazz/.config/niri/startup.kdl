@@ -1,4 +1,4 @@
-spawn-sh-at-startup "ignis init"
+spawn-at-startup "waybar"
 spawn-sh-at-startup "awww.sh"
 spawn-sh-at-startup "idle.sh"
 spawn-sh-at-startup "foot --server"

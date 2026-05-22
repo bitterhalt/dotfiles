@@ -1,1 +1,0 @@
-/home/bazz/.config/ignis/scripts/ignis-start.sh

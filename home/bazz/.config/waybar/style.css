@@ -1,0 +1,162 @@
+/* -----------------------------------------------------
+ *                      Config
+ * ----------------------------------------------------- */
+@define-color bg-1 #100f0f;
+@define-color bg-2 #1C1B1A;
+@define-color ui-1 #282726;
+@define-color ui-2 #343331;
+@define-color ui-3 #403E3C;
+@define-color tx-1 #CECDC3;
+@define-color tx-2 #F2F0E5;
+@define-color tx-3 #878580;
+@define-color cyan #24837B;
+@define-color magenta #A02F6F;
+@define-color red #AF3029;
+@define-color yellow #D0A215;
+
+* {
+  font-family:
+    Adwaita Sans,
+    Symbols Nerd Font Mono;
+}
+/* -----------------------------------------------------
+ *                      Bar
+ * ----------------------------------------------------- */
+window#waybar {
+  background-color: @bg-1;
+}
+
+/* -----------------------------------------------------
+ *                      Tooltip
+ * ----------------------------------------------------- */
+tooltip {
+  background: @bg-1;
+  border-radius: 6px;
+  border: solid 1px @ui-1;
+  font-family: Cascadia Code SemiLight;
+}
+
+tooltip label {
+  color: @tx-1;
+}
+
+/* -----------------------------------------------------
+ *                  Workspaces
+ * ----------------------------------------------------- */
+#workspaces {
+  padding: 2px 8px;
+}
+
+#workspaces button {
+  all: unset;
+  font-size: 0;
+  background: @ui-2;
+  border-radius: 1rem;
+  min-width: 0.5rem;
+  min-height: 0.5rem;
+  margin: 10px 4px;
+}
+
+#workspaces button.active {
+  min-width: 1.45rem;
+  background: @cyan;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#workspaces button.urgent {
+  color: @magenta;
+}
+
+#window {
+  color: @tx-1;
+  padding: 0 10px;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+/* -----------------------------------------------------
+ *                      Modules
+ * ----------------------------------------------------- */
+
+#clock {
+  color: @tx-1;
+  font-weight: 600;
+  margin: 2px 2px;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+#custom-mako {
+  color: @red;
+  opacity: 0.8;
+  margin: 2px 2px;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+#custom-expand-right {
+  color: @ui-3;
+  margin: 2px 2px;
+  padding-right: 8px;
+  border-radius: 4px;
+}
+#battery,
+#custom-idle,
+#tray,
+#pulseaudio,
+#bluetooth,
+#network {
+  color: @tx-1;
+  margin: 2px 2px;
+  padding: 0 8px;
+  border-radius: 4px;
+}
+
+#custom-idle.disabled {
+  color: @yellow;
+}
+
+#tray menu {
+  background-color: @bg-1;
+  border: solid 1px @ui-1;
+  border-radius: 4px;
+}
+
+#custom-wf-recorder {
+  animation: rec-blink 1s linear infinite;
+  color: @red;
+  margin: 2px 2px;
+}
+/* Rec-animation */
+@keyframes rec-blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* -----------------------------------------------------
+ *                      Hover candy
+ * ----------------------------------------------------- */
+#clock:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-mako:hover,
+#custom-idle:hover,
+#network:hover,
+#tray menu menuitem:hover,
+#wireplumber:hover,
+#workspaces button:hover {
+  background: @ui-3;
+}
+#workspaces button.active:hover {
+  background: @ui-3;
+}

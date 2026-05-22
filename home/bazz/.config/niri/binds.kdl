@@ -2,7 +2,7 @@ binds {
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "footclient"; }
     Mod+Ctrl+Delete hotkey-overlay-title="GUI System Monitor" { spawn "missioncenter"; }
     Mod+Shift+Delete hotkey-overlay-title="TUI System Monitor" { spawn-sh "footclient -a btop -T poptop -e btop"; }
-    Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t"; }
+    Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t && pkill -SIGRTMIN+1 waybar"; }
     Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
     Mod+F11 hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
     Mod+Shift+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
@@ -17,15 +17,13 @@ binds {
     Mod+E hotkey-overlay-title="TUI Filemanager" { spawn-sh "foot -T lf -e lf"; }
     Mod+Shift+E hotkey-overlay-title="GUI Filemanager" { spawn "thunar"; }
 
-    // Ignis
-    Mod+B hotkey-overlay-title="Zen Mode" { spawn-sh "goignis run-command toggle-bar"; }
-    Mod+Ctrl+N hotkey-overlay-title="Open Notfication Center" { spawn-sh "goignis toggle-window ignis_NOTIFICATION_CENTER"; }
-    Mod+Ctrl+S hotkey-overlay-title="Open Settings Menu" { spawn-sh "goignis toggle-window ignis_SYSTEM_MENU"; }
-    Mod+Ctrl+W hotkey-overlay-title="Toggle Weather" { spawn-sh "goignis toggle-window ignis_WEATHER"; }
+    // System
+    Mod+B hotkey-overlay-title="Toggle Waybar" { spawn-sh "bar-hider.sh"; }
+    Mod+Ctrl+N hotkey-overlay-title="Open Notfication Center" { spawn-sh "wlr-which-key notif"; }
 
     // Menus
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
-    Mod+Ctrl+D hotkey-overlay-title="Toggle DND" { spawn-sh "goignis run-command toggle-dnd"; }
+    Mod+Ctrl+D hotkey-overlay-title="Dismiss Notifications" { spawn-sh "makoctl dismiss"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn-sh "fuzzel_emoji"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | sed -n 's/^Hex: //p' | tr -d '\n' | wl-copy"; }
     Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel_drun"; }
@@ -43,11 +41,10 @@ binds {
     Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key settings"; }
     Mod+U hotkey-overlay-title="Install and remove packages" { spawn-sh "wlr-which-key pacman"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key notes"; }
-    Mod+Shift+R hotkey-overlay-title="Restart shell" { spawn-sh "wlr-which-key ignis"; }
 
     // Screen Recording
-    Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "ignis run-command recorder-stop"; }
-    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "~/.config/niri/scripts/record.sh"; }
+    Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
+    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "fuzzel_screenshot"; }
     Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { spawn-sh "wl-shot -f"; }
     Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "wl-shot -re"; }
 

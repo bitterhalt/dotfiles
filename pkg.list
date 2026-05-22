@@ -48,7 +48,6 @@ gimp
 git
 gnome-bluetooth-3.0
 gnome-themes-extra
-goignis-git
 gparted
 gpu-screen-recorder
 graphicsmagick
@@ -58,7 +57,6 @@ grub-btrfs
 gst-plugin-pipewire
 gvfs
 htop
-ignis-gvc-git
 imagemagick
 imv
 inotify-tools
@@ -74,6 +72,7 @@ linux-firmware
 logrotate
 lutris
 ly
+mako
 man-db
 man-pages
 mangohud
@@ -107,7 +106,6 @@ playerctl
 plocate
 polkit-gnome
 popsicle-bin
-python-ignis-git
 python-llfuse
 python-pipx
 python-watchdog
@@ -133,7 +131,6 @@ sudo
 swayidle
 swayimg
 swaylock
-swaync
 syncthing
 tealdeer
 thunar

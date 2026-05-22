@@ -1,0 +1,1 @@
+/home/bazz/.config/waybar/scripts/bar-hider.sh

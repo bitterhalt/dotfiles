@@ -1,1 +1,1 @@
-/home/bazz/.config/ignis/scripts/idle.sh
+/home/bazz/.config/niri/scripts/idle.sh
