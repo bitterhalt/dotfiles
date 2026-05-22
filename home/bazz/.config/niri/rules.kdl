@@ -236,6 +236,15 @@ window-rule {
 // ENVIRONMENT & SHELL LAYER RULES
 // =============================================================================
 
+// Add shadow to chosen layers
+layer-rule {
+    geometry-corner-radius 4
+    match namespace="wlr_which_key"
+    // match namespace="launcher"
+    shadow {
+      on
+    }
+}
 // Show blurred wallpaper behind the Niri overview interface
 layer-rule {
     match namespace="overview"

@@ -9,10 +9,10 @@ padding: 20
 column_padding: 25
 
 anchor: top-right
-margin_right: 8
-margin_bottom: 8
-margin_left: 8
-margin_top: 8
+margin_right: 16
+margin_bottom: 16
+margin_left: 16
+margin_top: 16
 
 inhibit_compositor_keyboard_shortcuts: true
 auto_kbd_layout: true
