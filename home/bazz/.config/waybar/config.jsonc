@@ -1,6 +1,7 @@
 {
   "layer": "top",
   "position": "top",
+  // "height": 32,
   "spacing": 4,
   "modules-left": ["niri/workspaces", "niri/window"],
   "modules-center": ["clock", "custom/mako", "custom/wf-recorder"],
@@ -28,9 +29,6 @@
     "icon-size": 20,
     "spacing": 12,
     // Override some ugly icons
-    "icons": {
-      "discord": "discord",
-    },
   },
   "battery": {
     "bat": "BAT0",

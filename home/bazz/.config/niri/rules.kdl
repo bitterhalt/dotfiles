@@ -177,8 +177,8 @@ window-rule {
 window-rule {
     match app-id="org.mozilla.Thunderbird"
     open-on-workspace "1"
-    default-column-width { proportion 0.95; }
     open-focused false
+    open-maximized true
 }
 
 window-rule {
@@ -211,8 +211,8 @@ window-rule {
 window-rule {
     match app-id="steam"
     open-on-workspace "3"
-    default-column-width { proportion 0.95; }
     open-focused false
+    default-column-width { proportion 0.95; }
     exclude title="Friends List"
     exclude title="Special Offers"
     exclude title="Steam Settings"
@@ -226,8 +226,8 @@ window-rule {
     match app-id="pcsx3-qt"
     match app-id="lutris"
     open-on-workspace "3"
-    default-column-width { proportion 0.95; }
     open-focused false
+    default-column-width { proportion 0.95; }
 }
 
 
