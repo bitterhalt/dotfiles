@@ -19,7 +19,7 @@ sig() {
 }
 
 main() {
-  choice=$( (get_options) | fuzzel -d -a top --y 4 -w 22 -l 7 --hide-prompt --minimal-lines)
+  choice=$( (get_options) | fuzzel -d -a top --y 8 -w 22 -l 7 --hide-prompt --minimal-lines)
 
   if [[ -z "${choice// /}" ]]; then
     exit 1

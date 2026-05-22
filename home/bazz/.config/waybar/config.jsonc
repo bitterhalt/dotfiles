@@ -16,11 +16,6 @@
   "niri/workspaces": {
     "disable-scroll": true,
   },
-  "hyprland/submap": {
-    "format": "{}",
-    "max-length": 70,
-    "tooltip": true,
-  },
   "niri/window": {
     "format": "{}",
     "max-length": 70,

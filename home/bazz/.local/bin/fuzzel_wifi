@@ -97,7 +97,7 @@ fuzzel_iwd() {
     ))"
   }
 
-  get_passphrase() { passphrase="$(fuzzel -d -a top --y 4 -w 30 -i --minimal-lines --placeholder 'Passphrase:')"; }
+  get_passphrase() { passphrase="$(fuzzel -d -a top --y 8 -w 30 -i --minimal-lines --placeholder 'Passphrase:')"; }
 
   show_menu() {
     prompt="${1}"
@@ -107,7 +107,7 @@ fuzzel_iwd() {
       printf '%s\n' "${option}"
     done)"
 
-    if ! answer="$(printf '%s\n' "${options}" | fuzzel -d -a top --y 4 -w 30 -i --minimal-lines --placeholder "${prompt}")"; then return 1; fi
+    if ! answer="$(printf '%s\n' "${options}" | fuzzel -d -a top --y 8 -w 30 -i --minimal-lines --placeholder "${prompt}")"; then return 1; fi
 
     printf '%s\n' "${options}" | while read -r line; do
       if [ "${line}" = "${answer}" ]; then

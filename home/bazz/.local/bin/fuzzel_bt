@@ -4,7 +4,7 @@ goback="Back"
 check_icon="󰄬  "
 
 run_menu() {
-  fuzzel -d -a top --y 4 -w 30 -i --placeholder "$1" --minimal-lines
+  fuzzel -d -a top --y 8 -w 30 -i --placeholder "$1" --minimal-lines
 }
 
 power_on() {

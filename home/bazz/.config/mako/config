@@ -6,7 +6,7 @@ font=Adwaita Sans, Symbols Nerd Font Mono 11
 default-timeout=5000
 icons=1
 ignore-timeout=0
-icon-path=/usr/share/icons/Papirus-Dark/
+icon-path=/home/bazz/.local/share/icons/Papirus-Dark/
 layer=overlay
 sort=-time
 

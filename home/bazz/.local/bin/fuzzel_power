@@ -2,7 +2,7 @@
 # https://github.com/bitterhalt
 set -euo pipefail
 
-CONFIRM="fuzzel -d -a top --minimal-lines --y 4 -w 10 -p Sure? "
+CONFIRM="fuzzel -d -a top --minimal-lines --y 8 -w 10 -p Sure? "
 
 confirm_action() {
   [[ "$(echo -e "Yes\nNo" | $CONFIRM)" == "Yes" ]]
@@ -14,24 +14,24 @@ else
   LOGOUT_CMD="loginctl terminate-user $USER"
 fi
 
-case "$(printf "%s\n" "Lock" "Logout" "Suspend" "Reboot" "Shutdown" | fuzzel -d -a top --y 4 -w 14 --minimal-lines --hide-prompt)" in
-"Shutdown")
+case "$(printf "1 - Lock\n2 - Suspend\n3 - Logout\n4 - Reboot\n5 - Shutdown" | fuzzel -d -a top --y 8 -w 14 --minimal-lines --hide-prompt)" in
+*"Shutdown")
   if confirm_action; then
     systemctl poweroff
   fi
   ;;
-"Reboot")
+*"Reboot")
   if confirm_action; then
     systemctl reboot
   fi
   ;;
-"Suspend")
+*"Suspend")
   systemctl suspend
   ;;
-"Lock")
+*"Lock")
   swaylock
   ;;
-"Logout")
+*"Logout")
   if confirm_action; then
     eval "$LOGOUT_CMD"
   fi

@@ -109,7 +109,7 @@ window#waybar.empty #window {
 #tray,
 #custom-expand-right {
   color: @ui-3;
-  margin: 0 10px;
+  margin-right: 10px;
   border-radius: 4px;
 }
 

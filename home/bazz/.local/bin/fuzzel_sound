@@ -34,7 +34,7 @@ mapfile -t sorted_devices < <(printf '%s\n' "${devices[@]}" | sort)
 final_list+=("${sorted_devices[@]}")
 
 # 4. Show Menu
-selected=$(printf '%s\n' "${final_list[@]}" | fuzzel -d -a top --y 4 -w 55 --minimal-lines --placeholder "Switch the audio device: ")
+selected=$(printf '%s\n' "${final_list[@]}" | fuzzel -d -a top --y 8 -w 55 --minimal-lines --placeholder "Switch the audio device: ")
 
 [ -z "$selected" ] && exit 0
 

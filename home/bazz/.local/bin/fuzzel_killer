@@ -7,7 +7,7 @@ processes=$(ps -u "$USER" -o pid=,comm= | awk '{pid=$1; $1=""; print $0 " (PID:"
 
 selection=$(
   printf "%s\n" "$processes" |
-    fuzzel -d -a top --y 4 -w 30 -l 8 \
+    fuzzel -d -a top --y 8 -w 30 -l 8 \
       --placeholder="!!! Kill process: " \
       --border-color=af3029ff \
       --selection-color=af302944 \

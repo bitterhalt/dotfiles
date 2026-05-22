@@ -7,7 +7,7 @@ border_width: 1
 corner_r: 4
 padding: 20
 
-anchor: top
+anchor: top-right
 margin_right: 8
 margin_bottom: 8
 margin_left: 8
@@ -24,3 +24,7 @@ menu:
     desc: 󰦛  Restore Notification(s)
     keep_open: true
     cmd: makoctl restore
+  - key: "c"
+    desc: 󰎟  Clear all
+    keep_open: true
+    cmd: makoctl dismiss -a

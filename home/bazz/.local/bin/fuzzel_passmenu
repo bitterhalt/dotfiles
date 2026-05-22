@@ -9,7 +9,7 @@ password_files=("$prefix"/**/*.gpg)
 password_files=("${password_files[@]#"$prefix"/}")
 password_files=("${password_files[@]%.gpg}")
 
-password=$(printf '%s\n' "${password_files[@]}" | fuzzel -d -a top --y 6 --x 6 -w 25 --minimal-lines --placeholder Select: "$@")
+password=$(printf '%s\n' "${password_files[@]}" | fuzzel -d -a top --y 8 --x 8 -w 25 --minimal-lines --placeholder Select: "$@")
 
 [[ -n $password ]] || exit
 
