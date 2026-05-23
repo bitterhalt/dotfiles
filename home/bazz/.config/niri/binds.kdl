@@ -59,10 +59,11 @@ binds {
     Mod+F10 hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/volume.sh mutemic"; }
 
     // Media - Playback
-    XF86AudioPlay hotkey-overlay-title="Play/Pause" allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop hotkey-overlay-title="Stop Playback" allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev hotkey-overlay-title="Previous Track" allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext hotkey-overlay-title="Next Track" allow-when-locked=true { spawn-sh "playerctl next"; }
+    XF86AudioPlay hotkey-overlay-title="Play/Pause" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --play"; }
+    XF86AudioStop hotkey-overlay-title="Stop Playback" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --stop"; }
+    XF86AudioPrev hotkey-overlay-title="Previous Track" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --prv"; }
+    XF86AudioNext hotkey-overlay-title="Next Track" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --nxt"; }
+    Mod+Shift+M  hotkey-overlay-title="Show Current Track" { spawn-sh "~/.config/niri/scripts/mediactrl.sh --noti"; }
 
     // Hardware - Brightness
     XF86MonBrightnessUp hotkey-overlay-title="Increase Brightness" allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
