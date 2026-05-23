@@ -28,7 +28,6 @@
   "tray": {
     "icon-size": 20,
     "spacing": 12,
-    // Override some ugly icons
   },
   "battery": {
     "bat": "BAT0",
@@ -59,7 +58,7 @@
     "on-click-right": "pavucontrol",
     "tooltip-format": "{volume}% ({desc})",
     "scroll-step": 5,
-    "on-click": "~/.config/niri/scripts/volume.sh mute",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
   },
   "pulseaudio#input": {
     "format-source": "󰍬",
@@ -68,6 +67,7 @@
     "format-source-bluetooth-muted": "",
     "format": "{format_source}",
     "tooltip": false,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "on-click-right": "pavucontrol",
   },
   "bluetooth": {

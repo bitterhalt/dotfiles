@@ -49,8 +49,8 @@ tooltip label {
 
 #workspaces button {
   all: unset;
-  font-size: 0;
   background: @ui-2;
+  font-size: 0;
   border-radius: 1rem;
   min-width: 0.5rem;
   min-height: 0.5rem;
@@ -58,8 +58,8 @@ tooltip label {
 }
 
 #workspaces button.active {
-  min-width: 1.5rem;
   background: @cyan;
+  min-width: 1.5rem;
 }
 
 #workspaces button.urgent {
