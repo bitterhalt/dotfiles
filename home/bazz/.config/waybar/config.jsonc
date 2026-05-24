@@ -79,8 +79,9 @@
   },
   "clock": {
     "format": "{:%H:%M}",
-    "tooltip-format": "{:%a, <b>%d</b>, %b %Y}",
+    "format-alt": "{:%a, %d %m, %H:%M}",
     "on-click-right": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+3 waybar",
+    "tooltip": false,
   },
   // "in case tzdata update fucks up your clock",
   "custom/clock": {
