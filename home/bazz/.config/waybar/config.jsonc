@@ -4,7 +4,7 @@
   // "height": 32,
   "spacing": 4,
   "modules-left": ["niri/workspaces", "niri/window"],
-  "modules-center": ["clock", "custom/mako", "custom/wf-recorder"],
+  "modules-center": ["group/clock", "custom/mako", "custom/wf-recorder"],
   "modules-right": [
     "network",
     "bluetooth",
@@ -79,9 +79,7 @@
   },
   "clock": {
     "format": "{:%H:%M}",
-    "format-alt": "{:%a, %d %m, %H:%M}",
-    "on-click-right": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+3 waybar",
-    "tooltip": false,
+    "tooltip-format": "{:%a, <b>%d</b>, %b %Y}",
   },
   // "in case tzdata update fucks up your clock",
   "custom/clock": {
@@ -89,6 +87,14 @@
     "tooltip": false,
     "exec": "date +'%b %d %H:%M'",
     "interval": 60,
+  },
+  // This needs to be installed: https://github.com/bjesus/wttrbar
+  "custom/weather": {
+    "format": "{}°",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar --date-format '%d/%m'",
+    "return-type": "json",
   },
   "custom/idle": {
     "interval": "once",
@@ -119,9 +125,22 @@
     "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default) $(makoctl mode | tail -1)",
     "signal": 3,
   },
-  "custom/vertical-dots": {
+  "custom/center-sep": {
     "format": "󰇙",
     "tooltip": false,
+  },
+  "custom/right-sep": {
+    "format": "󰇙",
+    "tooltip": false,
+  },
+
+  "group/clock": {
+    "orientation": "inherit",
+    "drawer": {
+      "click-to-reveal": true,
+      "transition-duration": 300,
+    },
+    "modules": ["clock", "custom/center-sep", "custom/weather"],
   },
   "group/audio": {
     "orientation": "inherit",
@@ -136,6 +155,6 @@
       "click-to-reveal": true,
       "transition-duration": 300,
     },
-    "modules": ["custom/vertical-dots", "tray"],
+    "modules": ["custom/right-sep", "tray"],
   },
 }

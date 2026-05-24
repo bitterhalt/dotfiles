@@ -78,7 +78,8 @@ window#waybar.empty #window {
  *                      Modules
  * ----------------------------------------------------- */
 
-#clock {
+#clock,
+#custom-weather {
   color: @tx-1;
   font-weight: 600;
   margin: 2px 0px;
@@ -98,7 +99,6 @@ window#waybar.empty #window {
 #network {
   color: @tx-1;
   padding: 0 6px;
-  margin: 2px 0px;
   border-radius: 4px;
 }
 
@@ -107,10 +107,12 @@ window#waybar.empty #window {
 }
 
 #tray,
-#custom-vertical-dots {
+#custom-right-sep {
   color: @ui-3;
   margin-right: 10px;
-  border-radius: 4px;
+}
+#custom-center-sep {
+  color: @ui-3;
 }
 
 #tray menu {
@@ -144,7 +146,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  *                      Hover candy
  * ----------------------------------------------------- */
-#clock:hover,
 #custom-wf-recorder:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
