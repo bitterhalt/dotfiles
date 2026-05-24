@@ -127,7 +127,7 @@
     "interval": "once",
     "return-type": "json",
     "format": "{}",
-    "exec": "echo '{\"class\": \"recording\",\"text\":\"󰻂\",\"tooltip\":\"Click right to stop recording\"}'",
+    "exec": "echo '{\"class\": \"recording\",\"text\":\"󰑋\",\"tooltip\":\"Click right to stop recording\"}'",
     "exec-if": "pgrep -f gpu-screen-recorder",
     "on-click": "~/.local/bin/wl-record -k",
     "signal": 2,
