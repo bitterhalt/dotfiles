@@ -152,10 +152,10 @@ window#waybar.empty #window {
 #custom-idle:hover,
 #network:hover,
 #tray menu menuitem:hover,
-#wireplumber:hover,
-#workspaces button:hover {
+#wireplumber:hover {
   background: @ui-3;
+  margin: 2px 0;
 }
-#workspaces button.active:hover {
-  background: @ui-3;
+#workspaces button:hover {
+  background: @tx-3;
 }
