@@ -19,8 +19,11 @@ auto_kbd_layout: true
 
 menu:
   - key: "l"
+    desc: Lock
+    cmd: swaylock
+  - key: "e"
     desc: Logout
-    cmd: loginctl terminate-user "$USER"
+    cmd: niri msg action quit --skip-confirmation
   - key: "z"
     desc: Suspend 󰒲
     cmd: systemctl suspend

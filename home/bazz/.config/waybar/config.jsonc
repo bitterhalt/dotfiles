@@ -8,11 +8,10 @@
   "modules-right": [
     "network",
     "bluetooth",
-    "pulseaudio#output",
-    "pulseaudio#input",
+    "group/audio",
     "custom/idle",
     "battery",
-    "group/expand-right",
+    "group/hidden-tray",
   ],
   "niri/workspaces": {
     "disable-scroll": true,
@@ -62,9 +61,9 @@
   },
   "pulseaudio#input": {
     "format-source": "󰍬",
-    "format-source-muted": "",
+    "format-source-muted": "󰍭",
     "format-source-bluetooth": "󰍬",
-    "format-source-bluetooth-muted": "",
+    "format-source-bluetooth-muted": "󰍭",
     "format": "{format_source}",
     "tooltip": false,
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
@@ -123,7 +122,14 @@
     "format": "󰇙",
     "tooltip": false,
   },
-  "group/expand-right": {
+  "group/audio": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+    },
+    "modules": ["pulseaudio#output", "pulseaudio#input"],
+  },
+  "group/hidden-tray": {
     "orientation": "inherit",
     "drawer": {
       "click-to-reveal": true,
