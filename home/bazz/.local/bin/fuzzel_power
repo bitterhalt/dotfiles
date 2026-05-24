@@ -2,7 +2,20 @@
 # https://github.com/bitterhalt
 set -euo pipefail
 
+DMENU="fuzzel -d -a top --y 8 -w 24 --minimal-lines "
+KMENU="fuzzel -d -a top --y 8 -w 24 -l 12 "
 CONFIRM="fuzzel -d -a top --minimal-lines --y 8 -w 10 -p Sure? "
+
+kill_process() {
+  local pid
+  pid=$(ps -u "$USER" -o pid,comm --no-headers | $KMENU --placeholder "Kill process" | awk '{print $1}')
+
+  if [[ -n "$pid" ]]; then
+    if confirm_action; then
+      echo "$pid" | xargs -r kill
+    fi
+  fi
+}
 
 confirm_action() {
   [[ "$(echo -e "Yes\nNo" | $CONFIRM)" == "Yes" ]]
@@ -14,7 +27,7 @@ else
   LOGOUT_CMD="loginctl terminate-user $USER"
 fi
 
-case "$(printf "1 - Lock\n2 - Suspend\n3 - Logout\n4 - Reboot\n5 - Shutdown" | fuzzel -d -a top --y 8 -w 14 --minimal-lines --hide-prompt)" in
+case "$(printf "1 - Lock\n2 - Suspend\n3 - Logout\n4 - Reboot\n5 - Shutdown\n6 - Kill process 💀" | $DMENU --placeholder 'Power menu:')" in
 *"Shutdown")
   if confirm_action; then
     systemctl poweroff
@@ -35,5 +48,8 @@ case "$(printf "1 - Lock\n2 - Suspend\n3 - Logout\n4 - Reboot\n5 - Shutdown" | f
   if confirm_action; then
     eval "$LOGOUT_CMD"
   fi
+  ;;
+*"Kill process 💀")
+  kill_process
   ;;
 esac
