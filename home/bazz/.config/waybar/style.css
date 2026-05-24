@@ -1,6 +1,7 @@
 /* -----------------------------------------------------
- *                      Config
+ *                      COLORS
  * ----------------------------------------------------- */
+
 @define-color bg-1 #100f0f;
 @define-color bg-2 #1C1B1A;
 @define-color ui-1 #282726;
@@ -14,20 +15,21 @@
 @define-color red #AF3029;
 @define-color yellow #D0A215;
 
+/* -----------------------------------------------------
+ *                      BAR
+ * ----------------------------------------------------- */
+
 * {
   font-family:
     Adwaita Sans,
     Symbols Nerd Font Mono;
 }
-/* -----------------------------------------------------
- *                      Bar
- * ----------------------------------------------------- */
 window#waybar {
   background-color: @bg-1;
 }
 
 /* -----------------------------------------------------
- *                      Tooltip
+ *                      TOOLTIPS
  * ----------------------------------------------------- */
 tooltip {
   all: unset;
@@ -41,7 +43,7 @@ tooltip label {
 }
 
 /* -----------------------------------------------------
- *                  Workspaces
+ *                  WORKSPACES
  * ----------------------------------------------------- */
 #workspaces {
   margin: 0px 10px;
@@ -75,16 +77,15 @@ window#waybar.empty #window {
   background-color: transparent;
 }
 /* -----------------------------------------------------
- *                      Modules
+ *                      MODULES
  * ----------------------------------------------------- */
 
 #clock,
 #custom-weather {
   color: @tx-1;
   font-weight: 600;
-  margin: 2px 0px;
+  margin: 0px 4px;
   border-radius: 4px;
-  padding: 0 6px;
 }
 
 #custom-mako {
@@ -128,6 +129,7 @@ window#waybar.empty #window {
   padding: 0 6px;
   margin: 2px 0;
 }
+
 /* Rec-animation */
 @keyframes rec-blink {
   0% {
@@ -143,14 +145,15 @@ window#waybar.empty #window {
     opacity: 0;
   }
 }
+
 /* -----------------------------------------------------
- *                      Hover candy
+ *                      HOVERS
  * ----------------------------------------------------- */
-#custom-wf-recorder:hover,
-#pulseaudio:hover,
 #bluetooth:hover,
 #custom-idle:hover,
+#custom-wf-recorder:hover,
 #network:hover,
+#pulseaudio:hover,
 #tray menu menuitem:hover,
 #wireplumber:hover {
   background: @ui-3;

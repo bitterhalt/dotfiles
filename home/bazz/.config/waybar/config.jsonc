@@ -1,3 +1,4 @@
+// SETTINGS
 {
   "layer": "top",
   "position": "top",
@@ -13,9 +14,12 @@
     "battery",
     "group/hidden-tray",
   ],
+
+  // NIRI MODULES
   "niri/workspaces": {
     "disable-scroll": true,
   },
+
   "niri/window": {
     "format": "{}",
     "max-length": 70,
@@ -24,10 +28,14 @@
     "tooltip": false,
     "separate-outputs": true,
   },
+
+  // TRAY
   "tray": {
     "icon-size": 20,
     "spacing": 12,
   },
+
+  // BATTERY
   "battery": {
     "bat": "BAT0",
     "interval": 60,
@@ -39,6 +47,8 @@
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "max-length": 25,
   },
+
+  // NETWORK
   "network": {
     "format-wifi": "󰖩",
     "format-ethernet": "", // No icons needed if ethernet is connected
@@ -50,6 +60,8 @@
     "max-length": 30,
     "on-click": "nm-connection-editor",
   },
+
+  // AUDIO
   "pulseaudio#output": {
     "format": "{icon}",
     "format-icons": ["󰕿", "󰖀", "󰕾"],
@@ -69,6 +81,8 @@
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "on-click-right": "pavucontrol",
   },
+
+  // BLUETOOTH
   "bluetooth": {
     "format": "",
     "format-disabled": "",
@@ -77,6 +91,8 @@
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
     "on-click": "foot -a bluetui -e bluetui",
   },
+
+  // CLOCK
   "clock": {
     "format": "{:%H:%M}",
     "tooltip-format": "{:%a, <b>%d</b>, %b %Y}",
@@ -88,14 +104,17 @@
     "exec": "date +'%b %d %H:%M'",
     "interval": 60,
   },
-  // This needs to be installed: https://github.com/bjesus/wttrbar
+
+  // WEATHER
   "custom/weather": {
     "format": "{}°",
     "tooltip": true,
     "interval": 3600,
-    "exec": "wttrbar --date-format '%d/%m'",
+    "exec": "wttrbar --date-format '%d/%m'", // Uses: https://github.com/bjesus/wttrbar
     "return-type": "json",
   },
+
+  // INDICATORS
   "custom/idle": {
     "interval": "once",
     "return-type": "json",
@@ -125,6 +144,8 @@
     "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default) $(makoctl mode | tail -1)",
     "signal": 3,
   },
+
+  // SEPARATORS
   "custom/center-sep": {
     "format": "󰇙",
     "tooltip": false,
@@ -134,6 +155,7 @@
     "tooltip": false,
   },
 
+  // GROUPS
   "group/clock": {
     "orientation": "inherit",
     "drawer": {

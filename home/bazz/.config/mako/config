@@ -40,9 +40,9 @@ border-color=#af3029
 text-color=#ad8301
 default-timeout=0
 
-###############################
-## Custom notification rules ##
-###############################
+#############################
+# Custom notification rules #
+#############################
 
 [app-name=tiny-n]
 width=130
