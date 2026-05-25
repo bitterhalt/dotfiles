@@ -23,6 +23,7 @@ binds {
     // Menus
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
     Mod+Ctrl+D hotkey-overlay-title="Dismiss Notifications" { spawn-sh "makoctl dismiss"; }
+    Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.sh"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn-sh "fuzzel_emoji"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | sed -n 's/^Hex: //p' | tr -d '\n' | wl-copy"; }
     Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel_drun"; }
@@ -35,7 +36,6 @@ binds {
 
     // Submaps
     Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key apps"; }
-    Mod+Ctrl+N hotkey-overlay-title="Open Notfication Center" { spawn-sh "wlr-which-key notif"; }
     Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key connections"; }
     Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key settings"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key notes"; }

@@ -16,13 +16,17 @@
 
 ### Screenshots
 
-> <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/746870c6-d8f5-498e-af23-d1beb96084cd" />
+<img width="1920" height="1080" alt="2026-05-25-19-58-45_screenshot" src="https://github.com/user-attachments/assets/2534611f-f5aa-444d-970f-b75383554348" />
 
 <details>
 <summary><b>Blurred overview</b></summary><br>
-<img width="1920" height="1080" alt="2026-05-09-11-49-23_screenshot" src="https://github.com/user-attachments/assets/a1dff4f2-d016-4964-b735-23533a50ef09" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/170ff2dd-2e7b-4f36-8c48-97ef5b4b2574" />
 </details>
 
+<details>
+<summary><b>Mako notification history with fzf</b></summary><br>
+<img width="1920" height="1080" alt="2026-05-25-19-59-00_screenshot" src="https://github.com/user-attachments/assets/1b657782-81c6-48cb-ad13-5e086a8f2bcc" />
+</details>
 
 ### Installation
 
