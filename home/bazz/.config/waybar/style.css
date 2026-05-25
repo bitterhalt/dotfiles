@@ -89,7 +89,8 @@ window#waybar.empty #window {
 }
 
 #custom-mako {
-  color: @red;
+  color: @tx-1;
+  margin: 0px 4px;
   opacity: 0.8;
 }
 

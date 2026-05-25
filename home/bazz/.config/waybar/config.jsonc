@@ -5,7 +5,7 @@
   // "height": 32,
   "spacing": 4,
   "modules-left": ["niri/workspaces", "niri/window"],
-  "modules-center": ["group/clock", "custom/mako", "custom/wf-recorder"],
+  "modules-center": ["group/clock", "custom/wf-recorder"],
   "modules-right": [
     "network",
     "bluetooth",
@@ -137,11 +137,13 @@
     "return-type": "json",
     "format": "{}{icon}",
     "format-icons": {
-      "default": "",
+      "default": "󰂚",
       "dnd": "󰂛",
     },
-    "on-click": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+3 waybar",
-    "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default) $(makoctl mode | tail -1)",
+    "on-click": "foot -T 'Mako History' -e mako_hist.sh",
+    "on-click-right": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+3 waybar",
+    "exec": "printf '{\"alt\":\"%s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default)",
+    "tooltip": false,
     "signal": 3,
   },
 
@@ -159,10 +161,10 @@
   "group/clock": {
     "orientation": "inherit",
     "drawer": {
-      "click-to-reveal": true,
+      "click-to-reveal": false,
       "transition-duration": 300,
     },
-    "modules": ["clock", "custom/center-sep", "custom/weather"],
+    "modules": ["clock", "custom/mako", "custom/center-sep", "custom/weather"],
   },
   "group/audio": {
     "orientation": "inherit",
