@@ -20,12 +20,12 @@ menu:
   - key: "a"
     desc: 󰓃 Audio devices
     cmd: fuzzel_sound
-  - key: "w"
-    desc: 󰖩 Wi-Fi
-    cmd: fuzzel_wifi
   - key: "b"
-    desc: 󰂯 Bluetooth [Fuzzel]
-    cmd: fuzzel_bt
-  - key: "t"
     desc: 󰂯 Bluetooth [Bluetui]
     cmd: foot -a bluetui -e bluetui
+  - key: "w"
+    desc: 󰖩 Wi-Fi (Impala)
+    cmd: foot -a impala -e impala
+  - key: "w"
+    desc: 󰲝  Network Manager
+    cmd: nm-connection-editor

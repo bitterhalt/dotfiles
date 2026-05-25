@@ -147,7 +147,9 @@ window-rule {
 
 // --- Top-Right Desk Gadgets ---
 window-rule {
-    match app-id="bluetui|nm-connection-editor"
+    match app-id="bluetui"
+    match app-id="impala"
+    match app-id="nm-connection-editor"
     open-floating true
     default-column-width { proportion 0.40; }
     default-window-height { proportion 0.50; }

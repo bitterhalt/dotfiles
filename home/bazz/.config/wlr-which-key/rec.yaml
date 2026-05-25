@@ -19,17 +19,17 @@ auto_kbd_layout: true
 
 menu:
   - key: "1"
-    desc: Record Screen
+    desc: 󰑋 Record Screen
     cmd: wl-record -f && pkill -SIGRTMIN+2 waybar
   - key: "2"
-    desc: Record Regional
+    desc: 󰩬 Record Regional
     cmd: wl-record -r && pkill -SIGRTMIN+2 waybar
   - key: "3"
-    desc: Screenshot Full Screen
+    desc: 󰄀 Screenshot Full Screen
     cmd: wl-shot -f
   - key: "4"
-    desc: Screenshot Regional
+    desc: 󰩬 Screenshot Regional
     cmd: wl-shot -re
   - key: "5"
-    desc: Kill Recoding
+    desc: 󰙦 Kill Recoding
     cmd: wl-record -k && pkill -SIGRTMIN+2 waybar
