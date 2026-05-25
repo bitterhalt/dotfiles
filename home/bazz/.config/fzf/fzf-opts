@@ -1,7 +1,7 @@
 --color=fg:#878580,bg:#100F0F,hl:#CECDC3
---color=fg+:#878580,bg+:#1C1B1A,hl+:#CECDC3
---color=border:#24837B,header:#CECDC3,gutter:#100F0F
+--color=fg+:#CECDC3,bg+:#1C1B1A,hl+:#CECDC3
+--color=border:#282726,header:#CECDC3,gutter:#100F0F
 --color=spinner:#24837B,info:#A02F6F,separator:#1C1B1A
---color=pointer:#AD8301,marker:#AF3029,prompt:#AD8301
+--color=pointer:#AD8301,marker:#AF3029,prompt:#24837B
 --border="sharp" --border-label="none" --preview-window="border-sharp" --prompt="> "
 --marker=">" --pointer="*" --separator="" --scrollbar=""
