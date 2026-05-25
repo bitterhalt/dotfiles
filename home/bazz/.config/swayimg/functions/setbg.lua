@@ -61,7 +61,7 @@ local function setbg(path)
 
 	-- Generate blurred overview and set namespace if Niri
 	if is_niri then
-		os.execute("gm convert '" .. out .. "' -blur 0x30 '" .. lockscreen .. "'")
+		os.execute("gm convert '" .. out .. "' -blur 0x30 -modulate 80 '" .. lockscreen .. "'")
 		os.execute("awww img -n overview '" .. lockscreen .. "' --transition-type=none")
 
 		swayimg.text.set_status("Updated: Default + Overview namespaces")
