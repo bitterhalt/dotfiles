@@ -20,10 +20,9 @@ menu:
   - key: "d"
     desc: 󰂛  DND
     cmd: makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar
-  - key: "r"
-    desc: 󰦛  Restore Notification(s)
-    keep_open: true
-    cmd: makoctl restore
+  - key: "h"
+    desc: 󰦛  Show history
+    cmd: foot -T "Mako History" -e mako_hist.sh
   - key: "c"
     desc: 󰎟  Clear all
     keep_open: true

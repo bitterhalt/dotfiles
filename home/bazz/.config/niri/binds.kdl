@@ -19,7 +19,6 @@ binds {
 
     // System
     Mod+B hotkey-overlay-title="Toggle Waybar" { spawn-sh "bar-hider.sh"; }
-    Mod+Ctrl+N hotkey-overlay-title="Open Notfication Center" { spawn-sh "wlr-which-key notif"; }
 
     // Menus
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
@@ -36,10 +35,11 @@ binds {
 
     // Submaps
     Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key apps"; }
+    Mod+Ctrl+N hotkey-overlay-title="Open Notfication Center" { spawn-sh "wlr-which-key notif"; }
     Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key connections"; }
     Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key settings"; }
-    Mod+U hotkey-overlay-title="Install and remove packages" { spawn-sh "wlr-which-key pacman"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key notes"; }
+    Mod+U hotkey-overlay-title="Install and remove packages" { spawn-sh "wlr-which-key pacman"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }

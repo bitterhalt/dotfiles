@@ -51,6 +51,14 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top"
 }
 
+window-rule {
+    match app-id="foot" title="Mako History"
+    open-floating true
+    default-column-width { proportion 0.35; }
+    default-window-height { proportion 0.50; }
+    default-floating-position x=10 y=10 relative-to="top"
+}
+
 // System monitors, custom terminals, and wallpaper setters (Large Center Floating)
 window-rule {
     match app-id="io.missioncenter.MissionCenter"
