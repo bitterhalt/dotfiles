@@ -140,7 +140,7 @@
       "default": "󰂚",
       "dnd": "󰂛",
     },
-    "on-click": "foot -T 'Mako History' -e mako_hist.sh",
+    "on-click": "foot -T 'Mako History' -e mako_hist.py",
     "on-click-right": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+3 waybar",
     "exec": "printf '{\"alt\":\"%s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default)",
     "tooltip": false,
