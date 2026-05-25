@@ -1,8 +1,9 @@
 ### Software I use
 
 - Distro: [Arch](https://archlinux.org)
-- Bar: [waybar](https://github.com/Alexays/Waybar)
-- Notifications: [mako](https://github.com/emersion/mako)
+- Bar: [Waybar](https://github.com/Alexays/Waybar)
+- Notifications: [Mako](https://github.com/emersion/mako)
+- Notification history: [mako_hist](https://github.com/bitterhalt/dotfiles/blob/main/home/bazz/.local/bin/mako_hist.py)
 - WM: [Niri](https://github.com/niri-wm/niri)
 - Colors (mostly): [Flexoki](https://stephango.com/flexoki)
 - Editor: [neovim](https://neovim.io/)
