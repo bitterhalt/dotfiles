@@ -80,19 +80,18 @@ window#waybar.empty #window {
  *                      MODULES
  * ----------------------------------------------------- */
 
-#clock,
-#custom-weather {
+#clock {
   color: @tx-1;
   font-weight: 600;
   margin: 0px 4px;
   border-radius: 4px;
 }
 
-#custom-mako {
-  font-weight: 400;
+#custom-mako,
+#custom-weather {
   color: @tx-1;
+  font-weight: normal;
   margin: 0px 4px;
-  opacity: 0.8;
 }
 
 #battery,
@@ -112,10 +111,12 @@ window#waybar.empty #window {
 #tray,
 #custom-right-sep {
   color: @ui-3;
+  font-weight: normal;
   margin-right: 10px;
 }
 #custom-center-sep {
   color: @ui-3;
+  font-weight: normal;
 }
 
 #tray menu {
@@ -126,10 +127,11 @@ window#waybar.empty #window {
 
 #custom-wf-recorder {
   animation: rec-blink 1s linear infinite;
-  color: @red;
   border-radius: 4px;
-  padding: 0 6px;
+  color: @red;
+  font-weight: normal;
   margin: 2px 0;
+  padding: 0 6px;
 }
 
 /* Rec-animation */
