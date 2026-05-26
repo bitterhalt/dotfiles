@@ -22,11 +22,11 @@
 
   "niri/window": {
     "format": "{}",
-    "max-length": 70,
     "icon": true,
     "icon-size": 20,
-    "tooltip": false,
+    "max-length": 70,
     "separate-outputs": true,
+    "tooltip": false,
   },
 
   // TRAY
@@ -50,46 +50,46 @@
 
   // NETWORK
   "network": {
-    "format-wifi": "󰖩",
+    "format-disconnected": "󰅛",
     "format-ethernet": "", // No icons needed if ethernet is connected
     "format-linked": "{ifname} (No IP) ?",
-    "format-disconnected": "󰅛",
-    "tooltip-format": "{ifname} via {gwaddr}",
-    "tooltip-format-wifi": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
-    "tooltip-format-disconnected": "Disconnected",
+    "format-wifi": "󰖩",
     "max-length": 30,
     "on-click": "nm-connection-editor",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "tooltip-format-wifi": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
   },
 
   // AUDIO
   "pulseaudio#output": {
     "format": "{icon}",
-    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "format-icons": ["󰕿", "󰖀", "󰖀", "󰕾"],
     "format-muted": "󰝟",
-    "on-click-right": "pavucontrol",
-    "tooltip-format": "{volume}% ({desc})",
-    "scroll-step": 5,
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "scroll-step": 5,
+    "tooltip-format": "<b>{desc}</b>\t{volume}%",
   },
   "pulseaudio#input": {
+    "format": "{format_source}",
     "format-source": "󰍬",
-    "format-source-muted": "󰍭",
     "format-source-bluetooth": "󰍬",
     "format-source-bluetooth-muted": "󰍭",
-    "format": "{format_source}",
-    "tooltip": false,
+    "format-source-muted": "󰍭",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "on-click-right": "pavucontrol",
+    "tooltip": false,
   },
 
   // BLUETOOTH
   "bluetooth": {
     "format": "",
-    "format-disabled": "",
     "format-connected": "󰂯",
+    "format-disabled": "",
+    "on-click": "foot -a bluetui -e bluetui",
     "tooltip-format-connected": "{device_enumerate}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
-    "on-click": "foot -a bluetui -e bluetui",
   },
 
   // CLOCK
@@ -99,52 +99,52 @@
   },
   // "in case tzdata update fucks up your clock",
   "custom/clock": {
-    "format": "{}",
-    "tooltip": false,
     "exec": "date +'%b %d %H:%M'",
+    "format": "{}",
     "interval": 60,
+    "tooltip": false,
   },
 
   // WEATHER
   "custom/weather": {
-    "format": "{}°",
-    "tooltip": true,
-    "interval": 3600,
     "exec": "wttrbar --date-format '%d/%m'", // Uses: https://github.com/bjesus/wttrbar
+    "format": "{}°",
+    "interval": 3600,
     "return-type": "json",
+    "tooltip": true,
   },
 
   // INDICATORS
   "custom/idle": {
-    "interval": "once",
-    "return-type": "json",
-    "format": "{}",
     "exec": "~/.config/waybar/scripts/idle.sh",
-    "signal": 1,
+    "format": "{}",
+    "interval": "once",
     "on-click": "idle.sh -t; pkill -RTMIN+1 waybar",
+    "return-type": "json",
+    "signal": 1,
   },
   "custom/wf-recorder": {
-    "interval": "once",
-    "return-type": "json",
-    "format": "{}",
     "exec": "echo '{\"class\": \"recording\",\"text\":\"󰑋\",\"tooltip\":\"Click right to stop recording\"}'",
     "exec-if": "pgrep -f gpu-screen-recorder",
+    "format": "{}",
+    "interval": "once",
     "on-click": "~/.local/bin/wl-record -k",
+    "return-type": "json",
     "signal": 2,
   },
   "custom/mako": {
-    "interval": "once",
+    "exec": "~/.config/waybar/scripts/mako-helper.sh",
+    "format": "{icon}{text}",
+    "interval": 60,
     "return-type": "json",
-    "format": "{}{icon}",
+    "signal": 3,
+    "tooltip": false,
     "format-icons": {
       "default": "󰂚",
       "dnd": "󰂛",
     },
     "on-click": "foot -T 'Mako History' -e mako_hist.py",
-    "on-click-right": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+3 waybar",
-    "exec": "printf '{\"alt\":\"%s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default)",
-    "tooltip": false,
-    "signal": 3,
+    "on-click-right": "makoctl mode -t dnd; pkill -RTMIN+3 waybar",
   },
 
   // SEPARATORS

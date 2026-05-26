@@ -55,6 +55,8 @@ def main():
             "echo {2} | tr '│' '\\n' | fmt -s",
             "--preview-window",
             "bottom:wrap",
+            "--bind",
+            "alt-0:execute(pkill mako; mako & sleep 0.2 && pkill -RTMIN+3 waybar)+abort",
         ],
         input=input_text,
         text=True,

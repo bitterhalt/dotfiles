@@ -14,22 +14,22 @@ sort=-time
 #       Style       #
 #####################
 anchor=top-center
-margin=16
 border-radius=4
-max-history=10
-max-icon-size=48
 border-size=1
-width=300
 height=400
+margin=16
+max-history=20
+max-icon-size=48
 padding=15
+width=300
 
 ##################
 #   Colors       #
 ##################
 background-color=#100f0f
-text-color=#D8D8D8
 border-color=#403E3C
 progress-color=#403E3C
+text-color=#D8D8D8
 
 ##################
 # Urgency levels #
@@ -37,24 +37,30 @@ progress-color=#403E3C
 [urgency=high]
 background-color=#100f0f
 border-color=#af3029
-text-color=#ad8301
 default-timeout=0
+text-color=#ad8301
 
 #############################
 # Custom notification rules #
 #############################
+[mode=dnd]
+invisible=1
+
+[app-name=time-noti]
+font=Adwaita Sans 13
+history=0
+text-alignment=center
+width=110
 
 [app-name=tiny-n]
-width=130
 group-by=app-name
+history=0
 text-alignment=center
-
-[mode=dnd]
-invisible=1
+width=130
 
 [app-name=weather-n]
-width=240
-padding=20
 group-by=app-name
-[mode=dnd]
-invisible=1
+history=0
+padding=20
+width=240
+

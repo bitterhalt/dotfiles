@@ -89,6 +89,7 @@ window#waybar.empty #window {
 }
 
 #custom-mako {
+  font-weight: 400;
   color: @tx-1;
   margin: 0px 4px;
   opacity: 0.8;
