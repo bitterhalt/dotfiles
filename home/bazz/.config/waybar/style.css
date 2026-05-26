@@ -83,7 +83,7 @@ window#waybar.empty #window {
 #clock {
   color: @tx-1;
   font-weight: 600;
-  margin: 0px 4px;
+  padding: 0px 4px;
   border-radius: 4px;
 }
 
@@ -91,7 +91,7 @@ window#waybar.empty #window {
 #custom-weather {
   color: @tx-1;
   font-weight: normal;
-  margin: 0px 4px;
+  padding: 0px 4px;
 }
 
 #custom-mako.dnd {
@@ -107,7 +107,6 @@ window#waybar.empty #window {
 #network {
   color: @tx-1;
   padding: 0 6px;
-  border-radius: 4px;
 }
 
 #custom-idle.disabled {
@@ -159,16 +158,21 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  *                      HOVERS
  * ----------------------------------------------------- */
-
 #bluetooth:hover,
 #custom-idle:hover,
+#custom-mako:hover,
+#custom-weather:hover,
 #custom-wf-recorder:hover,
 #network:hover,
 #pulseaudio:hover,
 #wireplumber:hover {
   background: @ui-3;
   margin: 2px 0;
+  border-radius: 4px;
 }
 #workspaces button:hover {
   background: @tx-3;
+}
+#custom-right-sep:hover {
+  color: @tx-3;
 }
