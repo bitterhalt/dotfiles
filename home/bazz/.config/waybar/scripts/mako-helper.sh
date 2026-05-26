@@ -2,16 +2,18 @@
 
 COUNT=$(makoctl history -j | jq '. | length')
 
-if [ "$COUNT" -eq 0 ]; then
-  DISPLAY_COUNT=""
-else
-  DISPLAY_COUNT="$COUNT"
-fi
-
 if makoctl mode | grep -q 'dnd'; then
   MODE="dnd"
+  ICON="󰂛"
 else
   MODE="default"
+  ICON="󰂚"
 fi
 
-printf '{"text": " %s", "alt": "%s"}\n' "$DISPLAY_COUNT" "$MODE"
+if [ "$COUNT" -eq 0 ]; then
+  DISPLAY_TEXT="$ICON"
+else
+  DISPLAY_TEXT="$ICON $COUNT"
+fi
+
+printf '{"text": "%s", "alt": "%s"}\n' "$DISPLAY_TEXT" "$MODE"

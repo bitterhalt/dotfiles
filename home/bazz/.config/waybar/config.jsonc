@@ -134,17 +134,13 @@
   },
   "custom/mako": {
     "exec": "~/.config/waybar/scripts/mako-helper.sh",
-    "format": "{icon}{text}",
+    "format": "{text}",
     "interval": 60,
+    "on-click": "foot -T 'Mako History' -e mako_hist.py",
+    "on-click-right": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+3 waybar",
     "return-type": "json",
     "signal": 3,
     "tooltip": false,
-    "format-icons": {
-      "default": "󰂚",
-      "dnd": "󰂛",
-    },
-    "on-click": "foot -T 'Mako History' -e mako_hist.py",
-    "on-click-right": "makoctl mode -t dnd; pkill -RTMIN+3 waybar",
   },
 
   // SEPARATORS
