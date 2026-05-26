@@ -14,7 +14,6 @@ def parse_body(body: str) -> str:
 
 
 def format_entry(n: dict) -> str:
-    """Formats a single notification dict into a display line for fzf."""
     icon = "❗" if n.get("urgency") == "critical" else "🔔"
     app = n.get("app_name", "unknown")
     summary = n.get("summary", "")
@@ -27,7 +26,6 @@ def format_entry(n: dict) -> str:
 
 
 def main():
-    # Fetch notification history from mako as JSON
     try:
         data = json.loads(subprocess.check_output(["makoctl", "history", "-j"]))
     except (subprocess.CalledProcessError, json.JSONDecodeError) as e:
@@ -40,7 +38,6 @@ def main():
 
     input_text = "\n".join(format_entry(n) for n in data)
 
-    # fzf preview
     result = subprocess.run(
         [
             "fzf",
