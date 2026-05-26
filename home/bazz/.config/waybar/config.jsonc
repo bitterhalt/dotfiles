@@ -138,6 +138,7 @@
     "interval": 60,
     "on-click": "foot -T 'Mako History' -e mako_hist.py",
     "on-click-right": "makoctl mode -t dnd; pkill -RTMIN+3 waybar",
+    "on-click-middle": "pkill mako; mako & sleep 0.2 && pkill -RTMIN+3 waybar",
     "return-type": "json",
     "signal": 3,
     "tooltip": false,
