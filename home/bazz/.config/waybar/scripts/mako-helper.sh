@@ -10,10 +10,11 @@ else
   ICON="󰂚"
 fi
 
-if [ "$COUNT" -eq 0 ]; then
+if [ "$COUNT" -eq 0 ] || [ "$MODE" = "dnd" ]; then
   DISPLAY_TEXT="$ICON"
 else
   DISPLAY_TEXT="$ICON $COUNT"
 fi
 
-printf '{"text": "%s", "alt": "%s"}\n' "$DISPLAY_TEXT" "$MODE"
+# Output valid JSON with the "class" parameter for styling
+printf '{"text": "%s", "class": "%s"}\n' "$DISPLAY_TEXT" "$MODE"

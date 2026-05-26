@@ -94,6 +94,12 @@ window#waybar.empty #window {
   margin: 0px 4px;
 }
 
+#custom-mako.dnd {
+  color: @yellow;
+  font-weight: normal;
+  opacity: 0.8;
+}
+
 #battery,
 #custom-idle,
 #pulseaudio,

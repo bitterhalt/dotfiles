@@ -25,8 +25,8 @@
 </details>
 
 <details>
-<summary><b>Mako notification history with fzf</b></summary><br>
-<img width="1920" height="1080" alt="2026-05-25-19-59-00_screenshot" src="https://github.com/user-attachments/assets/1b657782-81c6-48cb-ad13-5e086a8f2bcc" />
+<summary><b>Grouped clock module with notification histoy and weather</b></summary><br>
+<img width="640" height="431" alt="Recording" src="https://github.com/user-attachments/assets/23d789e7-6500-4740-b3db-0040d3d77930" />
 </details>
 
 ### Installation
