@@ -11,11 +11,12 @@ PIDFILE="/tmp/gpu-recorder.pid"
 SAVEDIR="${HOME}/Videos/Captures/"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
+NOTI="notify-send -a gpu-screen-recorder -t 3000"
 mkdir -p -- "$SAVEDIR"
 
 fullscreen() {
   pidof -q gpu-screen-recorder && {
-    notify-send -t 3000 "Screen record" "Recording already in progress"
+    $NOTI "Screen record" "Recording already in progress"
     exit 0
   }
   gpu-screen-recorder -w screen -f 60 -a default_output -o "$FILENAME" &
@@ -24,7 +25,7 @@ fullscreen() {
 
 region() {
   pidof -q gpu-screen-recorder && {
-    notify-send -t 3000 "Screen record" "Recording already in progress"
+    $NOTI "Screen record" "Recording already in progress"
     exit 0
   }
   gpu-screen-recorder -w region -region "$(slurp -f "%wx%h+%x+%y")" -o "$FILENAME" &
@@ -40,9 +41,9 @@ stop_recording() {
       sleep 1
     fi
     rm -f "$PIDFILE"
-    notify-send -t 3000 "Screen record" "Recording stopped and saved to $SAVEDIR"
+    $NOTI "Screen record" "Recording stopped and saved to $SAVEDIR"
   else
-    notify-send -t 3000 "Screen record" "No active recording"
+    $NOTI "Screen record" "No active recording"
   fi
 }
 

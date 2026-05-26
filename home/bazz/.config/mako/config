@@ -18,7 +18,7 @@ border-radius=4
 border-size=1
 height=400
 margin=16
-max-history=20
+max-history=50
 max-icon-size=48
 padding=15
 width=300
@@ -46,11 +46,20 @@ text-color=#ad8301
 [mode=dnd]
 invisible=1
 
+[app-name=gpu-screen-recorder]
+text-alignment=center
+history=0
+
+[app-name=wl-shot]
+text-alignment=center
+width=380
+
 [app-name=time-noti]
+border-color=#a02f6f
 font=Adwaita Sans 13
 history=0
 text-alignment=center
-width=110
+width=125
 
 [app-name=tiny-n]
 group-by=app-name
