@@ -124,7 +124,7 @@
     "signal": 1,
   },
   "custom/wf-recorder": {
-    "exec": "echo '{\"class\": \"recording\",\"text\":\"󰑋\",\"tooltip\":\"Click right to stop recording\"}'",
+    "exec": "echo '{\"class\": \"recording\",\"text\":\"󰑋\",\"tooltip\":\"<b>Click:</b> to stop recording\"}'",
     "exec-if": "pgrep -f gpu-screen-recorder",
     "format": "{}",
     "interval": "once",
@@ -141,7 +141,7 @@
     "on-click-middle": "pkill mako; mako & sleep 0.2 && pkill -RTMIN+3 waybar",
     "return-type": "json",
     "signal": 3,
-    "tooltip": false,
+    "tooltip-format": "<b>Mako History</b><small>\n\n<b>Click:</b> Shows history\n\n<b>Click-right:</b> Toggles DND\n\n<b>Click-middle:</b> Wipes history</small>",
   },
 
   // SEPARATORS
@@ -151,7 +151,7 @@
   },
   "custom/right-sep": {
     "format": "󰇙",
-    "tooltip": false,
+    "tooltip-format": "Show/hide system tray",
   },
 
   // GROUPS
