@@ -53,8 +53,8 @@ binds {
     Ctrl+Shift+Up hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/volume.sh up"; }
     Ctrl+Shift+Down hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/volume.sh down"; }
     XF86AudioMute hotkey-overlay-title="Mute Audio" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/volume.sh mute"; }
-    XF86AudioMicMute hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/volume.sh mutemic"; }
-    Mod+F10 hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/volume.sh mutemic"; }
+    XF86AudioMicMute hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    Mod+F10 hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     // Media - Playback
     XF86AudioPlay hotkey-overlay-title="Play/Pause" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --play"; }

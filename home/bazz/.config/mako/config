@@ -1,6 +1,4 @@
-#####################
-# General settings #
-#####################
+# SETTINGS
 format=<b>%s</b>\n\n%b
 font=Adwaita Sans, Symbols Nerd Font Mono 11
 default-timeout=5000
@@ -10,41 +8,37 @@ icon-path=/home/bazz/.local/share/icons/Papirus-Dark/
 layer=overlay
 sort=-time
 
-#####################
-#       Style       #
-#####################
+# STYLE
 anchor=top-center
 border-radius=4
 border-size=1
 height=400
-margin=16
+margin=24
 max-history=50
 max-icon-size=48
 padding=15
 width=300
 
-##################
-#   Colors       #
-##################
+# COLORS
 background-color=#100f0f
-border-color=#403E3C
+border-color=#1C1B1A
 progress-color=#403E3C
-text-color=#D8D8D8
+text-color=#CECDC3
 
-##################
-# Urgency levels #
-##################
+# URGENCY LEVELS
 [urgency=high]
 background-color=#100f0f
 border-color=#af3029
 default-timeout=0
 text-color=#ad8301
 
-#############################
-# Custom notification rules #
-#############################
-[mode=dnd]
-invisible=1
+# CUSTOM NOTIFICATION RULES
+[app-name=vol-osd]
+border-size=1
+history=0
+padding=10
+text-alignment=center
+width=200
 
 [app-name=gpu-screen-recorder]
 text-alignment=center
@@ -73,3 +67,7 @@ history=0
 padding=20
 width=240
 
+
+# DND
+[mode=dnd]
+invisible=1
