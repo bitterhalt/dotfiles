@@ -1,3 +1,5 @@
+include=~/.config/mako/rules.conf
+
 # SETTINGS
 format=<b>%s</b>\n\n%b
 font=Adwaita Sans, Symbols Nerd Font Mono 11
@@ -31,43 +33,3 @@ background-color=#100f0f
 border-color=#af3029
 default-timeout=0
 text-color=#ad8301
-
-# CUSTOM NOTIFICATION RULES
-[app-name=vol-osd]
-border-size=1
-history=0
-padding=10
-text-alignment=center
-width=200
-
-[app-name=gpu-screen-recorder]
-text-alignment=center
-history=0
-
-[app-name=wl-shot]
-text-alignment=center
-width=380
-
-[app-name=time-noti]
-border-color=#a02f6f
-font=Adwaita Sans 13
-history=0
-text-alignment=center
-width=125
-
-[app-name=tiny-n]
-group-by=app-name
-history=0
-text-alignment=center
-width=130
-
-[app-name=weather-n]
-group-by=app-name
-history=0
-padding=20
-width=240
-
-
-# DND
-[mode=dnd]
-invisible=1
