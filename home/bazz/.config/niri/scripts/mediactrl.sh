@@ -4,7 +4,7 @@ notify_track() {
   if playerctl status == "Playing" >/dev/null; then
     title=$(playerctl metadata title 2>/dev/null || echo "Unknown Title")
     artist=$(playerctl metadata artist 2>/dev/null || echo "")
-    notify-send -t 5000 -i video-x-generic "$artist" "$title" -h string:x-canonical-private-synchronous:volume
+    notify-send -a Media-notify -t 5000 -i media-playback-playing "$artist" "$title" -h string:x-canonical-private-synchronous:volume
   fi
 }
 
