@@ -1,6 +1,4 @@
---------------------------------------------------------------------------------
--- Key bindings: Viewer mode
---------------------------------------------------------------------------------
+local register_external_cmds = require("functions/external_cmds")
 
 swayimg.viewer.on_key("q", function()
 	swayimg.exit()
@@ -41,32 +39,13 @@ swayimg.viewer.on_key("plus", function()
 	local scale = swayimg.viewer.get_scale()
 	swayimg.viewer.set_abs_scale(scale + scale / 10, pos.x, pos.y)
 end)
-
 swayimg.viewer.on_key("minus", function()
 	local pos = swayimg.get_mouse_pos()
 	local scale = swayimg.viewer.get_scale()
 	swayimg.viewer.set_abs_scale(scale - scale / 10, pos.x, pos.y)
 end)
-
 swayimg.viewer.on_key("c", function()
 	swayimg.viewer.set_fix_scale("width")
-end)
-
--- External commands
-swayimg.viewer.on_key("b", function()
-	local image = swayimg.viewer.get_image()
-	setbg(image.path)
-end)
-
-swayimg.viewer.on_key("e", function()
-	local image = swayimg.viewer.get_image()
-	os.execute("gimp '" .. image.path .. "' & disown")
-end)
-
-swayimg.viewer.on_key("y", function()
-	local image = swayimg.viewer.get_image()
-	os.execute("wl-copy -t image/png <'" .. image.path .. "'")
-	swayimg.text.set_status("File " .. image.path .. " Copied to clipboard")
 end)
 
 -- Mouse scroll: pan
@@ -75,19 +54,16 @@ swayimg.viewer.on_mouse("ScrollLeft", function()
 	local pos = swayimg.viewer.get_position()
 	swayimg.viewer.set_abs_position(math.floor(pos.x - wnd.width * 0.05), pos.y)
 end)
-
 swayimg.viewer.on_mouse("ScrollRight", function()
 	local wnd = swayimg.get_window_size()
 	local pos = swayimg.viewer.get_position()
 	swayimg.viewer.set_abs_position(math.floor(pos.x + wnd.width * 0.05), pos.y)
 end)
-
 swayimg.viewer.on_mouse("ScrollUp", function()
 	local wnd = swayimg.get_window_size()
 	local pos = swayimg.viewer.get_position()
 	swayimg.viewer.set_abs_position(pos.x, math.floor(pos.y - wnd.height * 0.05))
 end)
-
 swayimg.viewer.on_mouse("ScrollDown", function()
 	local wnd = swayimg.get_window_size()
 	local pos = swayimg.viewer.get_position()
@@ -100,17 +76,18 @@ swayimg.viewer.on_mouse("Ctrl-ScrollUp", function()
 	local scale = swayimg.viewer.get_scale()
 	swayimg.viewer.set_abs_scale(scale + scale / 10, pos.x, pos.y)
 end)
-
 swayimg.viewer.on_mouse("Ctrl-ScrollDown", function()
 	local pos = swayimg.get_mouse_pos()
 	local scale = swayimg.viewer.get_scale()
 	swayimg.viewer.set_abs_scale(scale - scale / 10, pos.x, pos.y)
 end)
 
--- Mouse side buttons: file navigation
+-- Mouse side buttons
 swayimg.viewer.on_mouse("MouseSide", function()
 	swayimg.viewer.switch_image("prev")
 end)
 swayimg.viewer.on_mouse("MouseExtra", function()
 	swayimg.viewer.switch_image("next")
 end)
+
+register_external_cmds(swayimg.viewer)

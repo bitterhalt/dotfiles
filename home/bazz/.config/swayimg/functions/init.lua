@@ -1,2 +1,2 @@
-local cfg = os.getenv("HOME") .. "/.config/swayimg/"
-setbg = dofile(cfg .. "functions/setbg.lua")
+setbg = require("functions/setbg")
+shellescape = require("functions/shellescape")
