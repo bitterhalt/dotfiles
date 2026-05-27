@@ -57,8 +57,7 @@ map z zi
 #                      Jump                           #
 #-----------------------------------------------------#
 map gD cd ~/Documents
-map gL cd -r %f
-map gP cd /tmp
+map gP cd ~/Documents/projects
 map gc cd ~/.config
 map gd cd ~/Downloads
 map ge cd /etc
