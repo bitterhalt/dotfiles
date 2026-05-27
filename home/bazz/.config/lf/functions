@@ -9,7 +9,7 @@ cmd open ${{
     application/json) $EDITOR "$f" ;;
     inode/x-empty) $EDITOR "$f" ;;
     application/octet-stream) xdg-open "$f" ;;
-    audio/*|video/x-ms-asf) mpv --audio-display=no "$f" ;;
+    audio/*|video/x-ms-asf) mpv --no-config  --audio-display=no "$f" ;;
 	  video/*) setsid -f mpv "$f" -quiet >/dev/null 2>&1 ;;
     image/*) setsid -f swayimg >/dev/null 2>&1 "$f" ;;
     text/*) $EDITOR "$f" ;;
