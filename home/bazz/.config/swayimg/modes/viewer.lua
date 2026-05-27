@@ -1,7 +1,6 @@
 --------------------------------------------------------------------------------
 -- Viewer mode
 --------------------------------------------------------------------------------
-swayimg.viewer.set_default_scale("optimal")
 swayimg.viewer.set_default_position("center")
 swayimg.viewer.enable_centering(true)
 swayimg.viewer.enable_loop(true)
@@ -22,3 +21,9 @@ swayimg.viewer.set_text("topright", {
 })
 swayimg.viewer.set_text("bottomleft", {})
 swayimg.viewer.set_text("bottomright", {})
+
+swayimg.on_window_resize(function()
+	if swayimg.get_mode() == "viewer" then
+		swayimg.viewer.set_fix_scale("optimal")
+	end
+end)

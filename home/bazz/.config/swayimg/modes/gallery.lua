@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- Gallery mode
 --------------------------------------------------------------------------------
-swayimg.gallery.set_thumb_size(180)
+swayimg.gallery.set_thumb_size(150)
 swayimg.gallery.set_padding_size(10)
 swayimg.gallery.set_border_size(2)
 swayimg.gallery.limit_cache(100)
