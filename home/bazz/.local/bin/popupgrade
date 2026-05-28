@@ -63,8 +63,6 @@ if command -v snap &>/dev/null; then
   else
     echo -e "${RED}[x] Snap update encountered an error.${RESET}"
   fi
-else
-  echo -e "${YELLOW}[-] Snap is not installed on this system.${RESET}"
 fi
 
 if command -v flatpak &>/dev/null; then
@@ -74,8 +72,6 @@ if command -v flatpak &>/dev/null; then
   else
     echo -e "${RED}[x] Flatpak update encountered an error.${RESET}"
   fi
-else
-  echo -e "${YELLOW}[-] Flatpak is not installed on this system.${RESET}"
 fi
 
 echo -e "\n${YELLOW}Press <Enter> to exit this window.${RESET}\n"
