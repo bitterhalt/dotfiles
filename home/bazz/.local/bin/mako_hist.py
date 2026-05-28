@@ -41,6 +41,7 @@ def main():
     result = subprocess.run(
         [
             "fzf",
+            "--cycle",
             "--no-info",
             "--layout",
             "reverse",
