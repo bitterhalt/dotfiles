@@ -6,9 +6,10 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
+rows_per_column: 5
 column_padding: 25
 
-anchor: top-right
+anchor: top
 margin_right: 16
 margin_bottom: 16
 margin_left: 16

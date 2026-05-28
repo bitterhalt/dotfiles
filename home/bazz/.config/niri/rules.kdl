@@ -248,7 +248,7 @@ window-rule {
 // Add shadow to chosen layers
 layer-rule {
     geometry-corner-radius 4
-    match namespace="wlr_which_key|launcher"
+    match namespace="wlr_which_key"
     // match namespace="launcher"
     shadow {
       on
