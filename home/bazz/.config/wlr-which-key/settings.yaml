@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 3
+rows_per_column: 7
 column_padding: 25
 
 anchor: top
@@ -20,20 +20,23 @@ auto_kbd_layout: true
 
 menu:
   - key: "d"
-    desc: Fuzzel
+    desc: fuzzel
     cmd: foot -e nvim ~/.config/fuzzel/fuzzel.ini
   - key: "f"
-    desc: Foot
+    desc: foot
     cmd: foot -e nvim ~/.config/foot/foot.ini
   - key: "v"
-    desc: Neovim
+    desc: neovim
     cmd: foot sh -c "cd ~/.config/nvim && vopen ."
   - key: "n"
-    desc: Niri
+    desc: niri
     cmd: foot -e nvim  ~/.config/niri/*
   - key: "w"
-    desc: Waybar
+    desc: waybar
     cmd: foot sh -c "cd ~/.config/waybar/ && nvim *"
+  - key: "k"
+    desc: wlr-which-key
+    cmd: foot sh -c "cd ~/.config/wlr-which-key// && nvim *"
   - key: "m"
     desc: System Monitor
     submenu:
