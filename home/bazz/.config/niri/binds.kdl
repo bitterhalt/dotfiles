@@ -95,8 +95,8 @@ binds {
 
     Mod+Home hotkey-overlay-title="Focus First Column" { focus-column-first; }
     Mod+End hotkey-overlay-title="Focus Last Column" { focus-column-last; }
-    Mod+Ctrl+Home hotkey-overlay-title="Move Column to First" { move-column-to-first; }
-    Mod+Ctrl+End hotkey-overlay-title="Move Column to Last" { move-column-to-last; }
+    Mod+Shift+Home hotkey-overlay-title="Move Column to First" { move-column-to-first; }
+    Mod+Shift+End hotkey-overlay-title="Move Column to Last" { move-column-to-last; }
 
     // Monitor Management
     Mod+Alt+Left hotkey-overlay-title="Focus Monitor Left" { focus-monitor-left; }
