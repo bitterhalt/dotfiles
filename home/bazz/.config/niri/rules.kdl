@@ -56,7 +56,7 @@ window-rule {
     open-floating true
     default-column-width { proportion 0.35; }
     default-window-height { proportion 0.50; }
-    default-floating-position x=10 y=10 relative-to="top"
+    default-floating-position x=16 y=16 relative-to="top"
 }
 
 // System monitors, custom terminals, and wallpaper setters (Large Center Floating)
