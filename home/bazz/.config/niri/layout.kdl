@@ -17,7 +17,7 @@ layout {
         place-within-column
         gap 2
         active-color "#A02F6F"
-        inactive-color "#A02F6F80"
+        inactive-color "#A02F6F60"
         position "left"
     }
 
