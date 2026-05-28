@@ -42,4 +42,4 @@ id="${desc_to_id[$selected]}"
 [ -z "$id" ] && exit 0
 
 wpctl set-default "$id"
-notify-send -t 5000 "Audio-notify" "Audio device changed to:\n$selected"
+notify-send -t 5000 -a Audio-notify "Audio device changed to" "$selected"

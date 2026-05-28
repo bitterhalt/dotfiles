@@ -1,7 +1,7 @@
 [Default Applications]
-x-scheme-handler/mailto=userapp-Thunderbird-ZDABU2.desktop
-message/rfc822=userapp-Thunderbird-ZDABU2.desktop
-x-scheme-handler/mid=userapp-Thunderbird-ZDABU2.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-MR39P3.desktop
+message/rfc822=userapp-Thunderbird-MR39P3.desktop
+x-scheme-handler/mid=userapp-Thunderbird-MR39P3.desktop
 text/x-chdr=nvim.desktop
 x-scheme-handler/https=zen.desktop
 x-scheme-handler/http=zen.desktop
@@ -48,3 +48,5 @@ video/x-matroska=vlc.desktop;mpv.desktop;
 image/gif=imv-dir.desktop;
 image/svg+xml=swayimg.desktop;
 text/calendar=text.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-MR39P3.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-MR39P3.desktop;
