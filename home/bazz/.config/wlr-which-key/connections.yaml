@@ -28,6 +28,6 @@ menu:
   - key: "w"
     desc: 󰖩 Wi-Fi (Impala)
     cmd: foot -a impala -e impala
-  - key: "w"
+  - key: "n"
     desc: 󰲝  Network Manager
     cmd: nm-connection-editor
