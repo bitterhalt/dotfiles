@@ -5,7 +5,7 @@
   // "height": 32,
   "spacing": 4,
   "modules-left": ["niri/workspaces", "niri/window"],
-  "modules-center": ["group/clock", "custom/wf-recorder"],
+  "modules-center": ["group/middle", "custom/wf-recorder"],
   "modules-right": [
     "network",
     "bluetooth",
@@ -159,7 +159,7 @@
   },
 
   // GROUPS
-  "group/clock": {
+  "group/middle": {
     "orientation": "inherit",
     "drawer": {
       "click-to-reveal": false,

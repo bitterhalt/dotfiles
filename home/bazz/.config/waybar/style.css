@@ -90,13 +90,11 @@ window#waybar.empty #window {
 #custom-mako,
 #custom-weather {
   color: @tx-1;
-  font-weight: normal;
   padding: 0px 4px;
 }
 
 #custom-mako.dnd {
   color: @yellow;
-  font-weight: normal;
   opacity: 0.8;
 }
 
@@ -116,7 +114,6 @@ window#waybar.empty #window {
 #tray,
 #custom-right-sep {
   color: @ui-3;
-  font-weight: normal;
   margin-right: 10px;
 }
 #custom-center-sep {
@@ -134,7 +131,6 @@ window#waybar.empty #window {
   animation: rec-blink 1s linear infinite;
   border-radius: 4px;
   color: @red;
-  font-weight: normal;
   margin: 2px 0;
   padding: 0 6px;
 }

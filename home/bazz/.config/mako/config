@@ -3,7 +3,6 @@ include=~/.config/mako/rules.conf
 # SETTINGS
 format=<b>%s</b>\n\n%b
 font=Adwaita Sans, Symbols Nerd Font Mono 11
-default-timeout=5000
 icons=1
 ignore-timeout=0
 icon-path=/home/bazz/.local/share/icons/Papirus-Dark/
