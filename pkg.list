@@ -109,6 +109,7 @@ polkit-gnome
 popsicle-bin
 python-llfuse
 python-pipx
+python-pydbus
 python-watchdog
 qt5-wayland
 qt6-wayland
