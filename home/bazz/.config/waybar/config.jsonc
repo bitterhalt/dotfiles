@@ -155,7 +155,6 @@
   },
   "custom/right-sep": {
     "format": "󰇙",
-    "tooltip-format": "Show/hide system tray",
   },
 
   // GROUPS
