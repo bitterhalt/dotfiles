@@ -4,17 +4,14 @@ COUNT=$(makoctl history -j | jq '. | length')
 
 if makoctl mode | grep -q 'dnd'; then
   MODE="dnd"
-  ICON="󰂛"
+  DISPLAY_TEXT="󰂛"
 else
   MODE="default"
-  ICON="󰂚"
+  if [ "$COUNT" -gt 0 ]; then
+    DISPLAY_TEXT="󰂚"
+  else
+    DISPLAY_TEXT=""
+  fi
 fi
 
-if [ "$COUNT" -eq 0 ] || [ "$MODE" = "dnd" ]; then
-  DISPLAY_TEXT="$ICON"
-else
-  DISPLAY_TEXT="$ICON $COUNT"
-fi
-
-# Output valid JSON with the "class" parameter for styling
 printf '{"text": "%s", "class": "%s"}\n' "$DISPLAY_TEXT" "$MODE"
