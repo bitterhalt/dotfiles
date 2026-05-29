@@ -36,6 +36,7 @@ esac
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias yf="dysk"
 alias cp="cp -iv"
 alias doa="dotter add"
 alias dop="dotter add && dotter push"
