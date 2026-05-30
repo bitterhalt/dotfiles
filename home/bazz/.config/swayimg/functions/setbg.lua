@@ -1,5 +1,3 @@
-local shellescape = require("functions/shellescape")
-
 local function read_cmd(cmd)
 	local f = io.popen(cmd)
 	if not f then

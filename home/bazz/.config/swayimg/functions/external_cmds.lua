@@ -1,5 +1,3 @@
-local shellescape = require("functions/shellescape")
-
 local function register_external_cmds(mode)
 	mode.on_key("b", function()
 		local image = mode.get_image()

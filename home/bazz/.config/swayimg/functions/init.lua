@@ -1,2 +1,5 @@
 setbg = require("functions/setbg")
-shellescape = require("functions/shellescape")
+
+function shellescape(path)
+	return "'" .. path:gsub("'", "'\\''") .. "'"
+end
