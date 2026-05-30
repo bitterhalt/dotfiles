@@ -7,9 +7,9 @@
   "modules-left": ["niri/workspaces", "niri/window"],
   "modules-center": ["group/middle", "custom/wf-recorder"],
   "modules-right": [
-    "network",
-    "bluetooth",
-    "group/audio",
+    "group/connections",
+    "pulseaudio#output",
+    "pulseaudio#input",
     "custom/idle",
     "battery",
     "group/hidden-tray",
@@ -55,7 +55,7 @@
   // NETWORK
   "network": {
     "format-disconnected": "󰅛",
-    "format-ethernet": "", // No icons needed if ethernet is connected
+    "format-ethernet": "󰈀",
     "format-linked": "{ifname} (No IP) ?",
     "format-wifi": "󰖩",
     "max-length": 30,
@@ -63,6 +63,19 @@
     "tooltip-format": "{ifname} via {gwaddr}",
     "tooltip-format-disconnected": "Disconnected",
     "tooltip-format-wifi": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+  },
+
+  // BLUETOOTH
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂯 ",
+    "format-connected-battery": "󰂯 {device_alias} {device_battery_percentage}%",
+    "format-disabled": "",
+    "on-click": "foot -a bluetui -e bluetui",
+    "tooltip-format": "{num_connections} connected",
+    "tooltip-format-connected": "[ {num_connections} ] connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
   },
 
   // AUDIO
@@ -79,21 +92,11 @@
     "format": "{format_source}",
     "format-source": "󰍬",
     "format-source-bluetooth": "󰍬",
-    "format-source-bluetooth-muted": "󰍭",
-    "format-source-muted": "󰍭",
+    "format-source-bluetooth-muted": "",
+    "format-source-muted": "",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "on-click-right": "pavucontrol",
     "tooltip": false,
-  },
-
-  // BLUETOOTH
-  "bluetooth": {
-    "format": "",
-    "format-connected": "󰂯",
-    "format-disabled": "",
-    "on-click": "foot -a bluetui -e bluetui",
-    "tooltip-format-connected": "{device_enumerate}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
   },
 
   // CLOCK
@@ -166,17 +169,16 @@
     },
     "modules": ["clock", "custom/mako", "custom/center-sep", "custom/weather"],
   },
-  "group/audio": {
+  "group/connections": {
     "orientation": "inherit",
     "drawer": {
       "transition-duration": 300,
     },
-    "modules": ["pulseaudio#output", "pulseaudio#input"],
+    "modules": ["network", "bluetooth"],
   },
   "group/hidden-tray": {
     "orientation": "inherit",
     "drawer": {
-      "click-to-reveal": true,
       "transition-duration": 300,
     },
     "modules": ["custom/right-sep", "tray"],
