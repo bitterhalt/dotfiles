@@ -68,8 +68,7 @@
   // BLUETOOTH
   "bluetooth": {
     "format": "󰂯",
-    "format-connected": "󰂯 ",
-    "format-connected-battery": "󰂯 {device_alias} {device_battery_percentage}%",
+    "format-connected": "󰂯",
     "format-disabled": "",
     "on-click": "foot -a bluetui -e bluetui",
     "tooltip-format": "{num_connections} connected",
