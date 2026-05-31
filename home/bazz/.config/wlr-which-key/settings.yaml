@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 7
+rows_per_column: 2
 column_padding: 25
 
 anchor: top
@@ -19,6 +19,9 @@ inhibit_compositor_keyboard_shortcuts: true
 auto_kbd_layout: true
 
 menu:
+  - key: "b"
+    desc: bash
+    cmd: foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc
   - key: "d"
     desc: fuzzel
     cmd: foot -e nvim ~/.config/fuzzel/fuzzel.ini

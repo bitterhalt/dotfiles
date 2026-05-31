@@ -32,53 +32,5 @@ tmux* | screen*)
   ;;
 esac
 
-# Aliases
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias yf="dysk"
-alias cp="cp -iv"
-alias doa="dotter add"
-alias dop="dotter add && dotter push"
-alias duf="duf --hide special -theme ansi"
-alias df="df -hT --total"
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias free="free -m"
-alias grep="grep --color=auto"
-alias mkdir="mkdir -pv"
-alias mv="mv -iv"
-alias rm="rm -vI"
-# Pacman
-alias cleanup="sudo pacman -Rns $(pacman -Qtdq)" # remove orphaned packages
-alias pacdiff="sudo DIFFPROG=nvim pacdiff"
-alias pkglist="pacman -Qe > ~/Documents/projects/dotfiles/packages"
-alias rate-mirrors="rate-mirrors --protocol https --entry-country FI --country-test-mirrors-per-country 10 --country-neighbors-per-country 3 arch --max-delay=90 | sudo tee /etc/pacman.d/mirrorlist"
-# Vim
-alias vi="nvim"
-alias vim="nvim"
-# ls
-alias ls="eza  --group-directories-first"
-alias la="eza -la --group-directories-first"
-# Trash-cli
-alias tp="trash-put"
-alias tpe="trash-empty"
-alias tpr="trash-restore"
-# Random
-alias atop="amdgpu_top --smi"
-alias ex="extrac_helper"
-alias fzi="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias hg="history | grep "
-alias nvm="sudo nvme smart-log /dev/nvme0"
-alias tma="tmux attach-session -t"
-alias tmn="tmux new-session -s"
-alias tml="tmux list-session"
-# Systemd Journal
-alias loger="journalctl -p 3 -xb"
-alias logf="journalctl -f"
-alias logr="sudo journalctl --rotate"
-alias logs="journalctl --disk-usage"
-alias logv="journalctl --verify"
-alias logw="sudo journalctl --vacuum-time=1s"
-# Grub
-alias grub-update="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+# Load aliases
+source "$HOME/.config/shell/aliases"
