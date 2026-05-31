@@ -26,10 +26,10 @@ binds {
     Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "footclient -T 'Mako History' -e mako_hist.py"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn-sh "fuzzel_emoji"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | sed -n 's/^Hex: //p' | tr -d '\n' | wl-copy"; }
-    Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel_drun"; }
+    Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn-sh "fuzzel_passmenu"; }
-    Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_drun b"; }
+    Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel --list-executables-in-path"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "swayimg --class swayimg-setwall -g ~/Pictures/wallpaper/"; }
 

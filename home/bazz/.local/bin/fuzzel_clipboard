@@ -25,7 +25,7 @@ match(\$0, /^([0-9]+)\s(\[\[\s)?binary.*(jpg|jpeg|png|bmp)/, grp) {
 1
 EOF
 
-item=$(echo "$cliphist_list" | gawk "$thumbnail" | fuzzel -d -a top --y 8 -w 40 -l 6 --placeholder "Select:" --counter --no-sort --with-nth 2)
+item=$(echo "$cliphist_list" | gawk "$thumbnail" | fuzzel -d -a top --y 8 -w 40 -l 6 --no-sort --with-nth 2)
 exit_code=$?
 
 # ALT+0 to clear history
