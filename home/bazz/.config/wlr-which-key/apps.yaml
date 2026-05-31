@@ -27,7 +27,7 @@ menu:
     cmd: zen-browser
   - key: "d"
     desc: Discord
-    cmd: discord
+    cmd: vesktop
   - key: "m"
     desc: Email
     cmd: thunderbird

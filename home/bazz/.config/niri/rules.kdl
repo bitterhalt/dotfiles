@@ -202,6 +202,7 @@ window-rule {
 
 window-rule {
     match app-id="discord"
+    match app-id="vesktop"
     open-on-workspace "2"
     open-maximized true
     open-focused false
