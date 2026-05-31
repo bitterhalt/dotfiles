@@ -74,5 +74,5 @@ if command -v flatpak &>/dev/null; then
   fi
 fi
 
-echo -e "\n${YELLOW}Press <Enter> to exit this window.${RESET}\n"
+echo -e "\nPress <Enter> to exit this window."
 read -r _
