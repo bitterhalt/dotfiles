@@ -5,17 +5,14 @@ set -e
 NOTES_DIR="$HOME/Documents/personal/notes"
 EDITOR="${EDITOR:-nvim}"
 TERMINAL="${TERMINAL:-foot}"
+DMENU="fuzzel -d -a top --y 8 -w 40"
+
 mkdir -p "$NOTES_DIR"
 cd "$NOTES_DIR" || exit 1
 
 search_notes() {
   local selection
-  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | fuzzel -d \
-    -a top \
-    -l 10 \
-    --y 8 \
-    --placeholder "Search Notes" \
-    --width 50)
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU -l 10)
   if [ -n "$selection" ] && [ -f "$selection" ]; then
     exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/$selection"
   fi
@@ -23,10 +20,7 @@ search_notes() {
 
 create_note() {
   local note_name
-  note_name=$(fuzzel -d \
-    -a top \
-    --y 8 \
-    --prompt "New Note Title: " \
+  note_name=$($DMENU \
     --placeholder "e.g., work/meeting-minutes" \
     --minimal-lines)
   if [ -z "$note_name" ]; then
@@ -42,22 +36,14 @@ create_note() {
 
 delete_note() {
   local selection
-  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | fuzzel -d \
-    -a top \
-    -l 10 \
-    --y 8 \
-    --placeholder "Delete Note" \
-    --width 50)
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU \
+    --placeholder "Delete Note")
   if [ -z "$selection" ] || [ ! -f "$selection" ]; then
     exit 0
   fi
   local confirm
-  confirm=$(printf "No\nYes" | fuzzel -d \
-    -p "" \
-    -a top \
-    --y 8 \
+  confirm=$(printf "No\nYes" | $DMENU \
     --placeholder "Trash '$selection'? " \
-    --width 50 \
     --minimal-lines)
   if [ "$confirm" = "Yes" ]; then
     trash-put "$NOTES_DIR/$selection"

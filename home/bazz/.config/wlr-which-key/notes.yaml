@@ -23,7 +23,7 @@ menu:
     desc: 󰍉 Search
     cmd: fuzzel_notes
   - key: "n"
-    desc: 󰎚  New Note
+    desc: 󰎚 New Note
     cmd: fuzzel_notes -c
   - key: "t"
     desc:  TODO
