@@ -5,7 +5,7 @@ thumbnail_dir="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist/thumbnails"
 
 cliphist_list=$(cliphist list)
 if [ -z "$cliphist_list" ]; then
-  fuzzel -d -a top --y 8 -w 28 -l15 --placeholder "Cliphist: please store something first" --lines 0
+  fuzzel -d -a top --y 16 -w 28 -l15 --placeholder "Cliphist: please store something first" --lines 0
   rm -rf "$thumbnail_dir"
   exit
 fi
