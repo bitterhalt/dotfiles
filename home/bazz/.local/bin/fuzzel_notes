@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+NOTES_DIR="$HOME/Documents/personal/notes"
+EDITOR="${EDITOR:-nvim}"
+TERMINAL="${TERMINAL:-foot}"
+
+mkdir -p "$NOTES_DIR"
+cd "$NOTES_DIR" || exit 1
+
+search_notes() {
+  local selection
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | fuzzel -d \
+    -a top \
+    --y 8 \
+    --placeholder "Search Notes" \
+    --width 50)
+
+  if [ -n "$selection" ] && [ -f "$selection" ]; then
+    exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/$selection"
+  fi
+}
+
+create_note() {
+  local note_name
+  note_name=$(fuzzel -d \
+    -a top \
+    --y 8 \
+    --prompt "New Note Title: " \
+    --placeholder "e.g., work/meeting-minutes" \
+    --minimal-lines </dev/null)
+
+  if [ -z "$note_name" ]; then
+    exit 0
+  fi
+
+  if [[ "$note_name" != *.md ]]; then
+    note_name="${note_name}.md"
+  fi
+
+  local full_path="$NOTES_DIR/$note_name"
+
+  mkdir -p "$(dirname "$full_path")"
+
+  exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$full_path"
+}
+
+case "$1" in
+-c | --create)
+  create_note
+  ;;
+*)
+  search_notes
+  ;;
+esac

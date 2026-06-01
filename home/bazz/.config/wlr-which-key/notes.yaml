@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 2
+rows_per_column: 3
 column_padding: 25
 
 anchor: top
@@ -19,9 +19,12 @@ inhibit_compositor_keyboard_shortcuts: true
 auto_kbd_layout: true
 
 menu:
+  - key: "s"
+    desc: 󰍉 Search
+    cmd: fuzzel_notes
   - key: "n"
-    desc: 󰎚 Notes
-    cmd: footclient -a noteterm -T Notes -e nvim -p ~/Documents/personal/notes/index.md
+    desc: 󰎚  New Note
+    cmd: fuzzel_notes -c
   - key: "t"
     desc:  TODO
-    cmd: footclient -a noteterm -T Todo -e nvim -p ~/Documents/personal/notes/todo.md
+    cmd: footclient -a noteterm -T Notes sh -c "cd ~/Documents/personal/notes/ && nvim todo.md"

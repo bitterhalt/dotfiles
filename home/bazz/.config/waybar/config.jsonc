@@ -85,7 +85,7 @@
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "pavucontrol",
     "scroll-step": 5,
-    "tooltip-format": "<b>{desc}</b>\t{volume}%",
+    "tooltip-format": "Vol:\t{volume}%",
   },
   "pulseaudio#input": {
     "format": "{format_source}",
