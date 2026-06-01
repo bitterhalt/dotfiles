@@ -6,7 +6,6 @@ EMOJI_FILE="$EMOJI_DIR/emoji"
 
 mkdir -p "$EMOJI_DIR"
 
-# Download and parse emoji list if file doesn't exist
 if [ ! -s "$EMOJI_FILE" ]; then
   notify-send -t 5000 "Emoji picker" "Downloading emoji list..."
 
@@ -22,10 +21,11 @@ if [ ! -s "$EMOJI_FILE" ]; then
   fi
 fi
 
-# Show menu and get selection
-chosen=$(cut -d ';' -f1 "$EMOJI_FILE" |
-  fuzzel -d -a top --y 8 -w 30 -l 8 |
-  sed "s/ .*//")
+chosen=$(cut -d ';' -f1 "$EMOJI_FILE" | fuzzel -d \
+  -a top \
+  --y 8 \
+  -w 30 \
+  -l 8 | sed "s/ .*//")
 
 [ -z "$chosen" ] && exit
 

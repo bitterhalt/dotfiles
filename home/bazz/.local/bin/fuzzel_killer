@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 
 processes=$(ps -u "$USER" -o pid=,comm= | awk '{pid=$1; $1=""; print $0 " (PID:" pid ")"}' | sed 's/^ //')
@@ -6,12 +7,11 @@ processes=$(ps -u "$USER" -o pid=,comm= | awk '{pid=$1; $1=""; print $0 " (PID:"
 [[ -z "$processes" ]] && exit 0
 
 selection=$(
-  printf "%s\n" "$processes" |
-    fuzzel -d -a top --y 8 -w 30 -l 8 \
-      --placeholder="!!! Kill process: " \
-      --border-color=af3029ff \
-      --selection-color=af302944 \
-      --index
+  printf "%s\n" "$processes" | fuzzel -d -a top --y 8 -w 30 -l 8 \
+    --placeholder="!!! Kill process: " \
+    --border-color=af3029ff \
+    --selection-color=af302944 \
+    --index
 )
 
 [[ -z "${selection:-}" ]] && exit 0
@@ -21,12 +21,11 @@ selected_line=$(printf "%s\n" "$processes" | sed -n "$((selection + 1))p")
 pid=$(echo "$selected_line" | grep -o '（PID:[0-9]*）' | grep -o '[0-9]*' || echo "$selected_line" | sed 's/.*(PID:\([0-9]*\))/\1/')
 cmd=$(echo "$selected_line" | sed 's/ (PID:[0-9]*)//')
 
-confirm=$(printf "No\nYes" |
-  fuzzel --dmenu -d -a top --y 4 \
-    --minimal-lines \
-    --placeholder="Kill $cmd (PID $pid)? " \
-    --border-color=af3029ff \
-    --selection-color=af302944)
+confirm=$(printf "No\nYes" | fuzzel --dmenu -d -a top --y 8 \
+  --minimal-lines \
+  --placeholder="Kill $cmd (PID $pid)? " \
+  --border-color=af3029ff \
+  --selection-color=af302944)
 
 [[ "$confirm" != "Yes" ]] && exit 0
 

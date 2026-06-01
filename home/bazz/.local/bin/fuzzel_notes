@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 NOTES_DIR="$HOME/Documents/personal/notes"
 EDITOR="${EDITOR:-nvim}"
 TERMINAL="${TERMINAL:-foot}"
 DMENU="fuzzel -d -a top --y 8 -w 40"
 
+# Make dir
 mkdir -p "$NOTES_DIR"
 cd "$NOTES_DIR" || exit 1
 
