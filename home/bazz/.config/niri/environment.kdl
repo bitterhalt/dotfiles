@@ -1,5 +1,4 @@
 environment {
-    DISPLAY ":0"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
     MOZ_ENABLE_WAYLAND "1"
     MOZ_ENABLE_WAYLAND "1"
