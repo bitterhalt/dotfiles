@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 3
+rows_per_column: 2
 column_padding: 25
 
 anchor: top
@@ -28,3 +28,6 @@ menu:
   - key: "t"
     desc:  TODO
     cmd: footclient -a noteterm -T Notes sh -c "cd ~/Documents/personal/notes/ && nvim todo.md"
+  - key: "d"
+    desc: 󰩹 Delete
+    cmd: fuzzel_notes -d
