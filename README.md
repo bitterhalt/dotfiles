@@ -25,7 +25,7 @@
 </details>
 
 <details>
-<summary><b>Grouped clock module with notification histoy and weather</b></summary><br>
+<summary><b>Clock module with notification history</b></summary><br>
 <img width="640" height="431" alt="Recording" src="https://github.com/user-attachments/assets/23d789e7-6500-4740-b3db-0040d3d77930" />
 </details>
 
