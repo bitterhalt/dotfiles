@@ -157,6 +157,7 @@
   },
   "custom/right-sep": {
     "format": "󰇙",
+    "tooltip": false,
   },
 
   // GROUPS
