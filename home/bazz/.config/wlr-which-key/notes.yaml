@@ -21,7 +21,7 @@ auto_kbd_layout: true
 menu:
   - key: "s"
     desc: 󰍉 Search
-    cmd: fuzzel_notes
+    cmd: fuzzel_notes -s
   - key: "n"
     desc: 󰎚 New Note
     cmd: fuzzel_notes -c
