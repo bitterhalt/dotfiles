@@ -199,7 +199,6 @@ window-rule {
     open-maximized true
 }
 
-
 window-rule {
     match app-id="discord"
     match app-id="vesktop"
@@ -252,7 +251,7 @@ window-rule {
 layer-rule {
     geometry-corner-radius 4
     match namespace="wlr_which_key"
-    // match namespace="launcher"
+    match namespace="launcher"
     shadow {
       on
     }
