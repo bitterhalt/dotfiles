@@ -190,7 +190,6 @@ window-rule {
     match app-id="zen"
     match app-id="Sysmon" title="Sysmon"
     open-on-workspace "1"
-    open-maximized true
 }
 
 window-rule {
