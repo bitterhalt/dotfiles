@@ -7,12 +7,12 @@ fi
 
 start_idle_daemon() {
   $IDLE_DAEMON &
-  notify-send -a tiny-n "Idle timer" "Enabled" -t 1500 -h string:x-canonical-private-synchronous:volume
+  notify-send -a swayidle "Idle timer" "Enabled" -t 1500 -h string:x-canonical-private-synchronous:volume
 }
 
 stop_idle_daemon() {
   pkill -x $IDLE_DAEMON
-  notify-send -a tiny-n "Idle timer" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
+  notify-send -a swayidle "Idle timer" "Disabled" -t 1500 -h string:x-canonical-private-synchronous:volume
 }
 
 if [ "$1" = "-t" ]; then
