@@ -1,4 +1,4 @@
-##!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # A unified Wayland color picker that utilizes Niri's built-in
 # color picker when available, or falls back to grim + slurp on other compositors.
