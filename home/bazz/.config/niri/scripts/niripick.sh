@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Color picker using niri ipc
-# Color preview requires `graphicsmagick`
 
 command -v gm >/dev/null || {
   printf "'graphicsmagick' not installed\n"
