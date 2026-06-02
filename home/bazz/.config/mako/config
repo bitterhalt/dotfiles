@@ -2,7 +2,7 @@ include=~/.config/mako/rules.conf
 
 # SETTINGS
 format=<b>%s</b>\n\n%b
-font=Adwaita Sans, Symbols Nerd Font Mono 11
+font=Adwaita Mono, Symbols Nerd Font Mono 11
 icons=1
 default-timeout=5000
 ignore-timeout=0

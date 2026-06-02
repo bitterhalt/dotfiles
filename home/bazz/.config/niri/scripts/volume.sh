@@ -38,6 +38,6 @@ $((vol >= 1))) ;;
 esac
 
 $noti \
-  "$vol%" \
+  "Vol: $vol " \
   -h int:value:"${vol}" \
   -h string:x-canonical-private-synchronous:volume
