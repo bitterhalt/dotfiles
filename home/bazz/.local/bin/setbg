@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+get_resolution() {
+  if command -v niri >/dev/null 2>&1; then
+    local out
+    out=$(niri msg --json outputs | jq -r 'to_entries | .[0].value.logical | "\(.width) \(.height)"' 2>/dev/null)
+    if [[ -n "$out" ]]; then
+      local res=($out)
+      if [[ -n "${res[0]}" && -n "${res[1]}" ]]; then
+        echo "${res[0]} ${res[1]} true"
+        return 0
+      fi
+    fi
+  fi
+
+  if command -v hyprctl >/dev/null 2>&1; then
+    local out
+    out=$(hyprctl -j monitors | jq -r '.[] | select(.focused) | "\(.width) \(.height)"' 2>/dev/null)
+    if [[ -n "$out" ]]; then
+      local res=($out)
+      if [[ -n "${res[0]}" && -n "${res[1]}" ]]; then
+        echo "${res[0]} ${res[1]} false"
+        return 0
+      fi
+    fi
+  fi
+
+  return 1
+}
+
+setbg() {
+  local path="$1"
+  if [[ -z "$path" ]]; then
+    echo "Error: No image path provided." >&2
+    return 1
+  fi
+
+  local res_data
+  res_data=$(get_resolution)
+  if [[ $? -ne 0 || -z "$res_data" ]]; then
+    echo "setbg: failed to detect resolution" >&2
+    return 1
+  fi
+
+  local res=($res_data)
+  local w="${res[0]}"
+  local h="${res[1]}"
+  local is_niri="${res[2]}"
+
+  local dir="$HOME/.local/share/wall/"
+  local out="${dir}wallpaper.png"
+  local lockscreen="${dir}lockscreen.png"
+
+  mkdir -p "$dir"
+
+  vipsthumbnail "$path" --size "${w}x${h}" --output "$out"
+  awww img "$out" --transition-type=none
+
+  if [[ "$is_niri" == "true" ]]; then
+    gm convert "$out" -blur 0x30 -modulate 80 "$lockscreen"
+    awww img -n overview "$lockscreen" --transition-type=none
+    echo "Updated: Default + Overview namespaces"
+  else
+    echo "Updated: Default wallpaper"
+  fi
+}
+
+setbg "$1"
