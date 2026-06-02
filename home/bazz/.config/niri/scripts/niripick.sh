@@ -16,5 +16,5 @@ color=${output##*Hex: }
   prev="$(mktemp -u).png"
   trap 'rm -f "$prev"' EXIT
   gm convert -size 32x32 "xc:$color" "$prev" && icon="$prev" || icon=""
-  notify-send -a niripick ${icon:+-i "$icon"} "Color picker" "$color\nCopied to clipboard!"
+  notify-send -t 3000 -a niripick ${icon:+-i "$icon"} "Color picker" "$color\nCopied to clipboard!"
 }
