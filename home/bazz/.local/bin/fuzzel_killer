@@ -10,6 +10,7 @@ selection=$(
   printf "%s\n" "$processes" | fuzzel -d -a top --y 8 -w 30 -l 8 \
     --placeholder="!!! Kill process: " \
     --border-color=af3029ff \
+    --line-height 26 \
     --selection-color=af302944 \
     --index
 )
