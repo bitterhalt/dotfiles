@@ -22,6 +22,11 @@ layout {
         position "left"
     }
 
+    // Insert-hint (the thing that appear when you drag windows)
+    insert-hint {
+        color "#24837b90"
+    }
+
     // Split ratio
     default-column-width { proportion 0.5; }
 
@@ -60,3 +65,4 @@ layout {
 recent-windows {
     off
 }
+
