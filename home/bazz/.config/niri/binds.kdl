@@ -25,7 +25,7 @@ binds {
     Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
     Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "footclient -T 'Mako History' -e mako_hist.py"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn "fuzzel_emoji"; }
-    Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | sed -n 's/^Hex: //p' | tr -d '\n' | wl-copy"; }
+    Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn-sh "~/.config/niri/scripts/niripick.sh"; }
     Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel --line-height 26"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn  "fuzzel_killer"; }
