@@ -32,8 +32,9 @@ EOF
 
 item=$(echo "$cliphist_list" | gawk "$thumbnail" | fuzzel -d \
   -a top \
-  --y 8 \ -w 40 \
-  -l 6 \
+  --y 8 \
+  -w 60 \
+  -l 15 \
   --no-sort \
   --with-nth 2)
 exit_code=$?
@@ -47,8 +48,8 @@ if [ "$exit_code" -eq 19 ]; then
     --placeholder "Cliphist: delete history?" \
     --minimal-lines)
   [ "$confirmation" == "Yes" ] && rm ~/.cache/cliphist/db && rm -rf "$thumbnail_dir"
+
 # ALT+1 to delete selected item
-# configure the keybind with `custom-1` in your fuzzel.ini
 elif [ "$exit_code" -eq 10 ]; then
   if [ -n "$item" ]; then
     item_id=$(echo "$item" | cut -f1)
