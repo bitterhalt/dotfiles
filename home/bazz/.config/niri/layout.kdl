@@ -5,6 +5,7 @@ workspace "3"
 
 // Gapps and column widths
 layout {
+    background-color "transparent"
     gaps 8
     preset-column-widths {
         proportion 0.33333

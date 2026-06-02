@@ -188,6 +188,7 @@ window-rule {
 window-rule {
     match app-id="firefox"
     match app-id="zen"
+    match app-id="Sysmon" title="Sysmon"
     open-on-workspace "1"
     open-maximized true
 }
@@ -202,12 +203,6 @@ window-rule {
 window-rule {
     match app-id="discord"
     match app-id="vesktop"
-    open-on-workspace "2"
-    open-maximized true
-    open-focused false
-}
-
-window-rule {
     match app-id="com.transmissionbt.transmission"
     open-on-workspace "2"
     open-maximized true
@@ -215,13 +210,9 @@ window-rule {
 }
 
 window-rule {
-    match app-id="Sysmon" title="Sysmon"
-    open-on-workspace "1"
-    open-maximized true
-}
-
-window-rule {
     match app-id="steam"
+    match app-id="pcsx3-qt"
+    match app-id="lutris"
     open-on-workspace "3"
     open-focused false
     default-column-width { proportion 0.95; }
@@ -233,15 +224,6 @@ window-rule {
         off
     }
 }
-
-window-rule {
-    match app-id="pcsx3-qt"
-    match app-id="lutris"
-    open-on-workspace "3"
-    open-focused false
-    default-column-width { proportion 0.95; }
-}
-
 
 // =============================================================================
 // ENVIRONMENT & SHELL LAYER RULES
@@ -260,9 +242,4 @@ layer-rule {
 layer-rule {
     match namespace="overview"
     place-within-backdrop true
-}
-
-// Set transparent workspace background color.
-layout {
-    background-color "transparent"
 }
