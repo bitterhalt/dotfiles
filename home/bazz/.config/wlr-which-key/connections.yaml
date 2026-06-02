@@ -29,5 +29,5 @@ menu:
     desc: 󰖩 Wi-Fi (Impala)
     cmd: foot -a impala -e impala
   - key: "n"
-    desc: 󰲝  Network Manager
+    desc: 󰲝 Network Manager
     cmd: nm-connection-editor

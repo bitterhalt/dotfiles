@@ -1,0 +1,32 @@
+##!/usr/bin/env bash
+
+# A unified Wayland color picker that utilizes Niri's built-in
+# color picker when available, or falls back to grim + slurp on other compositors.
+# It copies the hex code to the clipboard and sends a visual desktop notification.
+
+set -e
+
+ICON="$(mktemp -u).png"
+IMAGE="$(mktemp -u).png"
+trap 'rm -f "$ICON" "$IMAGE"' EXIT
+
+if [ -n "$NIRI_SOCKET" ]; then
+  OUTPUT=$(niri msg pick-color)
+  HEXCODE=${OUTPUT##*Hex: }
+else
+  grim -g "$(slurp -b '#00000000' -p)" - >"$IMAGE"
+  HEXCODE=$(gm convert "$IMAGE" -colors 1 text:- | awk 'NR==2 {print $3}')
+fi
+
+if [ -n "$HEXCODE" ]; then
+  printf "%s" "$HEXCODE" | wl-copy
+
+  if gm convert -size 32x32 "xc:$HEXCODE" "$ICON"; then
+    ICON_ARG="-i $ICON"
+  else
+    ICON_ARG=""
+  fi
+
+  notify-send -t 3000 -a "wl-color-picker" $ICON_ARG "Color Picker" "$HEXCODE\nCopied to clipboard!"
+  printf "%s\n" "$HEXCODE"
+fi
