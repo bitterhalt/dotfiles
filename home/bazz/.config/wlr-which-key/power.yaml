@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 2
+rows_per_column: 3
 column_padding: 25
 
 anchor: top
@@ -24,16 +24,16 @@ menu:
     cmd: swaylock
   - key: "e"
     desc: Logout
-    cmd: niri msg action quit --skip-confirmation
+    cmd: niri msg action quit
   - key: "z"
     desc: Sleep 💤
     cmd: systemctl suspend
-  - key: "s"
+  - key: "S"
     desc: Shutdown
     cmd: systemctl poweroff
-  - key: "r"
+  - key: "R"
     desc: Reboot
     cmd: systemctl reboot
-  - key: "u"
-    desc: Reboot to UEFI
+  - key: "U"
+    desc: Reboot UEFI
     cmd: systemctl reboot --firmware-setup
