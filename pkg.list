@@ -160,7 +160,7 @@ wine
 winetricks
 wireplumber
 wl-clipboard
-wlr-which-key
+wlr-which-key-git
 wofi
 wttrbar-bin
 wtype
