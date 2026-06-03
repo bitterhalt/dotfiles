@@ -159,6 +159,7 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  *                      HOVERS
  * ----------------------------------------------------- */
+#clock:hover,
 #bluetooth:hover,
 #custom-idle:hover,
 #custom-mako:hover,

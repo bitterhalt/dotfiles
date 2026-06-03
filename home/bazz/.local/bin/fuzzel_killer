@@ -11,6 +11,7 @@ selection=$(
     --placeholder="!!! Kill process: " \
     --border-color=af3029ff \
     --line-height 26 \
+    --selection-text=FFFCF0FF \
     --selection-color=af302944 \
     --index
 )
@@ -26,6 +27,7 @@ confirm=$(printf "No\nYes" | fuzzel --dmenu -d -a top --y 8 \
   --minimal-lines \
   --placeholder="Kill $cmd (PID $pid)? " \
   --border-color=af3029ff \
+  --selection-text=FFFCF0FF \
   --selection-color=af302944)
 
 [[ "$confirm" != "Yes" ]] && exit 0
