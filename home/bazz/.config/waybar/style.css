@@ -113,7 +113,7 @@ window#waybar.empty #window {
 }
 
 #custom-idle.disabled {
-  color: @yellow;
+  color: @tx-1;
 }
 
 #tray,
