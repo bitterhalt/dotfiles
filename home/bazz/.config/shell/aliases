@@ -1,7 +1,7 @@
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias yf="dysk"
+alias yf="dysk -s used"
 alias cp="cp -iv"
 alias doa="dotter add"
 alias dop="dotter add && dotter push"
