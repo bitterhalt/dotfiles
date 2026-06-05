@@ -194,7 +194,7 @@ window-rule {
 
 window-rule {
     match app-id="org.mozilla.Thunderbird"
-    open-on-workspace "1"
+    open-on-workspace "2"
     open-focused false
     open-maximized true
 }
