@@ -5,7 +5,6 @@ workspace "3"
 
 // Gapps and column widths
 layout {
-    background-color "transparent"
     gaps 8
     preset-column-widths {
         proportion 0.33333
@@ -17,14 +16,11 @@ layout {
     tab-indicator {
         place-within-column
         gap 2
-        active-color "#A02F6F"
-        inactive-color "#A02F6F60"
         position "left"
     }
 
     // Insert-hint (the thing that appear when you drag windows)
     insert-hint {
-        color "#24837b90"
     }
 
     // Split ratio
@@ -34,9 +30,6 @@ layout {
     focus-ring {
         on
         width 1
-        active-color "#403E3C"
-        inactive-color "transparent"
-        urgent-color "#9b0000"
     }
 
     // Border
@@ -45,9 +38,6 @@ layout {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
         width 1
-        active-color "#403E3C"
-        inactive-color "transparent"
-        urgent-color "#9b0000"
     }
 
     // Shadow
@@ -56,7 +46,6 @@ layout {
         softness 10
         spread 4
         offset x=0 y=2
-        color "0007"
     }
 }
 

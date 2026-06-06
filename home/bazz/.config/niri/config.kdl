@@ -1,3 +1,4 @@
+include "colors.kdl"
 include "animations.kdl"
 include "environment.kdl"
 include "binds.kdl"

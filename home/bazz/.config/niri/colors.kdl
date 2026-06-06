@@ -1,0 +1,30 @@
+// All colors here. DON'T add elsewhere!
+layout {
+    background-color "transparent"
+    focus-ring {
+        active-color "#403E3C"
+        inactive-color "transparent"
+        urgent-color "#9b0000"
+    }
+    border {
+        active-color "#403E3C"
+        inactive-color "transparent"
+        urgent-color "#9b0000"
+    }
+    tab-indicator {
+        active-color "#A02F6F"
+        inactive-color "#A02F6F60"
+    }
+    insert-hint {
+        color "#24837b90"
+    }
+    shadow {
+        color "0007"
+    }
+}
+overview {
+    backdrop-color "#1C1B1A"
+        workspace-shadow {
+        color "0007"
+    }
+}

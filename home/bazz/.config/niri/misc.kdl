@@ -19,12 +19,10 @@ gestures {
 // Overview
 overview {
     zoom 0.40
-    backdrop-color "#1C1B1A"
     workspace-shadow {
         softness 10
         spread 5
         offset x=0 y=0
-        color "0007"
     }
 }
 
