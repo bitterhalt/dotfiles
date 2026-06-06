@@ -54,6 +54,7 @@ graphicsmagick
 grim
 grub
 grub-btrfs
+gst-libav
 gst-plugin-pipewire
 gvfs
 htop
@@ -151,6 +152,7 @@ tty-clock
 tumbler
 unrar
 unzip
+video-trimmer
 vulkan-radeon
 waybar
 wayland-protocols
