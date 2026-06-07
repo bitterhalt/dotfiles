@@ -56,6 +56,8 @@ setbg() {
   vipsthumbnail "$path" --size "${w}x${h}" --output "$out"
   awww img "$out" --transition-type=none
 
+  wal -b "101010" -i "$out"
+
   if [[ "$is_niri" == "true" ]]; then
     gm convert "$out" -blur 0x30 -modulate 80 "$lockscreen"
     awww img -n overview "$lockscreen" --transition-type=none
@@ -63,6 +65,7 @@ setbg() {
   else
     echo "Updated: Default wallpaper"
   fi
+
 }
 
 setbg "$1"

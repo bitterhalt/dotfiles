@@ -1,19 +1,4 @@
-/* -----------------------------------------------------
- *                      COLORS
- * ----------------------------------------------------- */
-
-@define-color bg-1 #100f0f;
-@define-color bg-2 #1C1B1A;
-@define-color ui-1 #282726;
-@define-color ui-2 #343331;
-@define-color ui-3 #403E3C;
-@define-color tx-1 #CECDC3;
-@define-color tx-2 #F2F0E5;
-@define-color tx-3 #878580;
-@define-color cyan #24837B;
-@define-color magenta #A02F6F;
-@define-color red #AF3029;
-@define-color yellow #D0A215;
+@import url("../../.cache/wal/colors-waybar.css");
 
 /* -----------------------------------------------------
  *                      BAR
@@ -25,7 +10,7 @@
     Symbols Nerd Font Mono;
 }
 window#waybar {
-  background-color: @bg-1;
+  background-color: @background;
 }
 
 /* -----------------------------------------------------
@@ -33,13 +18,13 @@ window#waybar {
  * ----------------------------------------------------- */
 tooltip {
   all: unset;
-  background: @bg-1;
+  background: @background;
   border-radius: 6px;
-  border: solid 1px @ui-1;
+  border: solid 1px @color1;
 }
 
 tooltip label {
-  color: @tx-1;
+  color: @foreground;
 }
 
 /* -----------------------------------------------------
@@ -51,7 +36,8 @@ tooltip label {
 
 #workspaces button {
   all: unset;
-  background: @ui-2;
+  background: @foreground;
+  opacity: 0.8;
   font-size: 0;
   border-radius: 1rem;
   min-width: 0.5rem;
@@ -60,16 +46,21 @@ tooltip label {
 }
 
 #workspaces button.active {
-  background: @cyan;
+  all: unset;
+  background: @color1;
+  border-radius: 1rem;
+  font-size: 0;
+  margin: 12px 4px;
+  min-height: 0.5rem;
   min-width: 1.5rem;
 }
 
 #workspaces button.urgent {
-  color: @magenta;
+  color: @color3;
 }
 
 #window {
-  color: @tx-1;
+  color: @foreground;
   padding: 0 10px;
 }
 
@@ -81,7 +72,7 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
 #clock {
-  color: @tx-1;
+  color: @foreground;
   font-weight: 600;
   padding: 0px 4px;
   border-radius: 4px;
@@ -89,13 +80,13 @@ window#waybar.empty #window {
 
 #custom-mako,
 #custom-weather {
-  color: @tx-1;
+  color: @foreground;
   padding: 0px 4px;
 }
 
 #custom-mako.dnd {
-  color: @yellow;
-  opacity: 0.8;
+  color: @foreground;
+  opacity: 0.5;
 }
 
 #battery,
@@ -103,39 +94,43 @@ window#waybar.empty #window {
 #pulseaudio,
 #bluetooth,
 #network {
-  color: @tx-1;
+  color: @foreground;
   padding: 0 6px;
 }
 
 #bluetooth.on {
-  color: @tx-1;
+  color: @foreground;
   opacity: 0.5;
 }
 
 #custom-idle.disabled {
-  color: @tx-1;
+  color: @foreground;
 }
 
-#tray,
+#tray {
+  margin-right: 10px;
+}
 #custom-right-sep {
-  color: @ui-3;
+  color: @foreground;
+  opacity: 0.5;
   margin-right: 10px;
 }
 #custom-center-sep {
-  color: @ui-3;
+  color: @foreground;
+  opacity: 0.5;
   font-weight: normal;
 }
 
 #tray menu {
-  background-color: @bg-1;
-  border: solid 1px @ui-1;
+  background-color: @background;
+  border: solid 1px @color1;
   border-radius: 4px;
 }
 
 #custom-wf-recorder {
   animation: rec-blink 1s linear infinite;
   border-radius: 4px;
-  color: @red;
+  color: @color9;
   margin: 2px 0;
   padding: 0 6px;
 }
@@ -168,13 +163,8 @@ window#waybar.empty #window {
 #network:hover,
 #pulseaudio:hover,
 #wireplumber:hover {
-  background: @ui-3;
+  color: @background;
+  background: @color1;
   margin: 2px 0;
   border-radius: 4px;
-}
-#workspaces button:hover {
-  background: @tx-3;
-}
-#custom-right-sep:hover {
-  color: @tx-3;
 }

@@ -5,7 +5,24 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd("colorscheme base16-flexoki-dark")
+      require("base16-colorscheme").setup({
+        base00 = "#101010",
+        base01 = "#1c1c1c",
+        base02 = "#282828",
+        base03 = "#585858",
+        base04 = "#888888",
+        base05 = "#cecdc3",
+        base06 = "#e6e4d9",
+        base07 = "#fffcf0",
+        base08 = "#d14d41",
+        base09 = "#da702c",
+        base0A = "#d0a215",
+        base0B = "#879a39",
+        base0C = "#3aa99f",
+        base0D = "#4385be",
+        base0E = "#8b7ec8",
+        base0F = "#ce5d97",
+      })
     end,
   },
 

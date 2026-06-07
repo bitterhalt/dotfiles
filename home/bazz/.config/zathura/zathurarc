@@ -35,4 +35,4 @@ map [fullscreen] F toggle_fullscreen
 " -----------------------------------------------------------------------------
 " Zathura theme
 " -----------------------------------------------------------------------------
-include flexoki-dark
+include colors-zathura

@@ -1,4 +1,6 @@
 include=~/.config/mako/rules.conf
+include=~/.cache/wal/colors-mako
+
 
 # SETTINGS
 format=<b>%s</b>\n\n%b
@@ -21,15 +23,7 @@ max-icon-size=48
 padding=15
 width=300
 
-# COLORS
-background-color=#100f0f
-border-color=#1C1B1A
-progress-color=#24837b
-text-color=#CECDC3
 
 # URGENCY LEVELS
 [urgency=high]
-background-color=#100f0f
-border-color=#af3029
 default-timeout=0
-text-color=#ad8301
