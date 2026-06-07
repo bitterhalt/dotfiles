@@ -5,7 +5,7 @@
 - Notifications: [Mako](https://github.com/emersion/mako)
 - Notification history: [mako_hist](https://github.com/bitterhalt/dotfiles/blob/main/home/bazz/.local/bin/mako_hist.py)
 - WM: [Niri](https://github.com/niri-wm/niri)
-- Colors (mostly): [Flexoki](https://stephango.com/flexoki)
+- Colors [Dynamic](https://github.com/eylles/pywal16)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - GTK-theme: [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
