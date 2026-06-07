@@ -167,7 +167,7 @@
       "click-to-reveal": false,
       "transition-duration": 300,
     },
-    "modules": ["clock", "custom/mako", "custom/center-sep", "custom/weather"],
+    "modules": ["clock", "custom/center-sep", "custom/mako", "custom/weather"],
   },
   "group/connections": {
     "orientation": "inherit",

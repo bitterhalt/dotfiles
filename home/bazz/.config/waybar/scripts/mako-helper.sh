@@ -10,7 +10,7 @@ else
   if [ "$COUNT" -gt 0 ]; then
     DISPLAY_TEXT="󰂚 $COUNT"
   else
-    DISPLAY_TEXT=""
+    DISPLAY_TEXT="󰂚"
   fi
 fi
 
