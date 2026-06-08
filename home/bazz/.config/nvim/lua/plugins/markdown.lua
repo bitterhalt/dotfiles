@@ -47,14 +47,7 @@ return {
             "RenderMarkdownH5Bg",
             "RenderMarkdownH6Bg",
           },
-          custom = {},
         },
-        vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#24837B", bold = true }),
-        vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = "#A02F6F", bold = true }),
-        vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = "#205EA6", bold = true }),
-        vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = "#AD8301", bold = true }),
-        vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = "#66800B", bold = true }),
-        vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#AF3029", bold = true }),
       })
     end,
     keys = {

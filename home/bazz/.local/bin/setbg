@@ -28,19 +28,19 @@ get_resolution() {
   return 1
 }
 
-setbg() {
+_apply_wallpaper() {
   local path="$1"
-  if [[ -z "$path" ]]; then
-    echo "Error: No image path provided." >&2
+
+  [[ -f "$path" ]] || {
+    echo "Error: '$path' does not exist." >&2
     return 1
-  fi
+  }
 
   local res_data
-  res_data=$(get_resolution)
-  if [[ $? -ne 0 || -z "$res_data" ]]; then
-    echo "setbg: failed to detect resolution" >&2
+  res_data=$(get_resolution) || {
+    echo "Error: failed to detect resolution." >&2
     return 1
-  fi
+  }
 
   local res=($res_data)
   local w="${res[0]}"
@@ -53,19 +53,34 @@ setbg() {
 
   mkdir -p "$dir"
 
-  vipsthumbnail "$path" --size "${w}x${h}" --output "$out"
-  awww img "$out" --transition-type=none
+  vipsthumbnail "$path" \
+    --size "${w}x${h}" \
+    --output "$out" || return 1
 
-  wal -b "101010" -i "$out"
+  awww img "$out" --transition-type=none
 
   if [[ "$is_niri" == "true" ]]; then
     gm convert "$out" -blur 0x30 -modulate 80 "$lockscreen"
     awww img -n overview "$lockscreen" --transition-type=none
-    echo "Updated: Default + Overview namespaces"
-  else
-    echo "Updated: Default wallpaper"
   fi
-
 }
 
-setbg "$1"
+setwall() {
+  _apply_wallpaper "$1"
+}
+
+pywal() {
+  _apply_wallpaper "$1" || return 1
+  wal -b "101010" -i "$HOME/.local/share/wall/wallpaper.png"
+}
+
+case "$1" in
+-w)
+  shift
+  setwall "$1"
+  ;;
+-p)
+  shift
+  pywal "$1"
+  ;;
+esac

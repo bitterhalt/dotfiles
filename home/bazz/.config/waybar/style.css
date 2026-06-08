@@ -20,7 +20,7 @@ tooltip {
   all: unset;
   background: @background;
   border-radius: 6px;
-  border: solid 1px @color1;
+  border: solid 1px @color6;
 }
 
 tooltip label {
@@ -47,7 +47,7 @@ tooltip label {
 
 #workspaces button.active {
   all: unset;
-  background: @color1;
+  background: @color6;
   border-radius: 1rem;
   font-size: 0;
   margin: 12px 4px;
@@ -123,7 +123,7 @@ window#waybar.empty #window {
 
 #tray menu {
   background-color: @background;
-  border: solid 1px @color1;
+  border: solid 1px @color8;
   border-radius: 4px;
 }
 
@@ -164,7 +164,7 @@ window#waybar.empty #window {
 #pulseaudio:hover,
 #wireplumber:hover {
   color: @background;
-  background: @color1;
+  background: @color6;
   margin: 2px 0;
   border-radius: 4px;
 }

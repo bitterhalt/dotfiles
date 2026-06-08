@@ -8,9 +8,9 @@ $line_break\
 $character"""
 
 [character]
-success_symbol = "[❯](purple)"
+success_symbol = "[❯](magenta)"
 error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+vimcmd_symbol = "[❮](yellow)"
 
 [directory]
 home_symbol = '~'

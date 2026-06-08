@@ -32,7 +32,7 @@ binds {
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn "fuzzel_passmenu"; }
     Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel --list-executables-in-path --line-height 26"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
-    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "swayimg --class swayimg-setwall -g ~/Pictures/wallpaper/"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "wlr-which-key theming"; }
 
     // Submaps
     Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key apps"; }

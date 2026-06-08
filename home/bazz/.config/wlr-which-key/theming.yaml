@@ -1,0 +1,27 @@
+font: Adwaita Mono 13
+background: "#100F0FD0"
+color: "#CECDC3"
+border: "#1C1B1A"
+separator: " ➜ "
+border_width: 1
+corner_r: 4
+padding: 20
+rows_per_column: 2
+column_padding: 25
+
+anchor: top
+margin_right: 16
+margin_bottom: 16
+margin_left: 16
+margin_top: 16
+
+inhibit_compositor_keyboard_shortcuts: true
+auto_kbd_layout: true
+
+menu:
+  - key: "w"
+    desc: Set wallpaper
+    cmd: swayimg --class swayimg-setwall -g ~/Pictures/wallpaper/
+  - key: "t"
+    desc: Set theme
+    cmd: fuzzel_theme
