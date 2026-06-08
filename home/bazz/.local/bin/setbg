@@ -77,12 +77,12 @@ setwall() {
 
 pywal() {
   _apply_wallpaper "$1" || return 1
-  wal --backend $BACKEND -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -n --backend $BACKEND -i "$HOME/.local/share/wall/wallpaper.png"
 }
 
 pywal_fixed() {
   _apply_wallpaper "$1" || return 1
-  wal --backend $BACKEND -b $BGCOL -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -n --backend $BACKEND -b $BGCOL -i "$HOME/.local/share/wall/wallpaper.png"
 }
 
 case "$1" in
