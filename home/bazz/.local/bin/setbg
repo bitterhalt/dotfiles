@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Backend: "wal" or "colorthief"
+BACKEND="wal"
+
+# Static background color for pywal_fixed
+BGCOL="101010"
+
 get_resolution() {
   if command -v niri >/dev/null 2>&1; then
     local out
@@ -71,7 +77,12 @@ setwall() {
 
 pywal() {
   _apply_wallpaper "$1" || return 1
-  wal -b "101010" -i "$HOME/.local/share/wall/wallpaper.png"
+  wal --backend $BACKEND -i "$HOME/.local/share/wall/wallpaper.png"
+}
+
+pywal_fixed() {
+  _apply_wallpaper "$1" || return 1
+  wal --backend $BACKEND -b $BGCOL -i "$HOME/.local/share/wall/wallpaper.png"
 }
 
 case "$1" in
@@ -82,5 +93,9 @@ case "$1" in
 -p)
   shift
   pywal "$1"
+  ;;
+-pf)
+  shift
+  pywal_fixed "$1"
   ;;
 esac

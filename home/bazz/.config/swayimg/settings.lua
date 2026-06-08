@@ -18,17 +18,17 @@ swayimg.imagelist.enable_adjacent(true)
 --------------------------------------------------------------------------------
 -- Text / font overlay
 --------------------------------------------------------------------------------
-swayimg.text.set_font("monospace")
-swayimg.text.set_size(14)
+swayimg.text.set_font("Adwaita Mono")
+swayimg.text.set_size(13)
 swayimg.text.set_padding(10)
-swayimg.text.set_timeout(5)
+swayimg.text.set_timeout(15)
 swayimg.text.set_status_timeout(3)
 
 --------------------------------------------------------------------------------
 -- Colors
 --------------------------------------------------------------------------------
 -- Text
-swayimg.text.set_foreground(0xffcecdc3)
+swayimg.text.set_foreground(0xffcccccc)
 swayimg.text.set_background(0x00000000)
 swayimg.text.set_shadow(0xd0000000)
 -- Gallery
