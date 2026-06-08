@@ -20,28 +20,28 @@ auto_kbd_layout: true
 
 menu:
   - key: "b"
-    desc: bash
+    desc: Bash
     cmd: foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc
   - key: "d"
-    desc: fuzzel
+    desc: Fuzzel
     cmd: foot -e nvim ~/.config/fuzzel/fuzzel.ini
   - key: "f"
-    desc: foot
+    desc: Foot
     cmd: foot -e nvim ~/.config/foot/foot.ini
   - key: "v"
-    desc: neovim
+    desc: Nvim
     cmd: foot sh -c "cd ~/.config/nvim && vopen ."
   - key: "n"
-    desc: niri
+    desc: Niri
     cmd: foot sh -c "cd ~/.config/niri/ && nvim *"
   - key: "w"
-    desc: waybar
+    desc: Waybar
     cmd: foot sh -c "cd ~/.config/waybar/ && nvim *"
   - key: "k"
-    desc: wlr-which-key
-    cmd: foot sh -c "cd ~/.config/wlr-which-key// && nvim *"
+    desc: Wlr-which-key
+    cmd: foot sh -c "cd ~/.config/wlr-which-key/ && nvim *"
   - key: "m"
-    desc: System Monitor
+    desc: Monitor
     submenu:
       - key: "a"
         desc: Atop
