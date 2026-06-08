@@ -5,3 +5,4 @@ set -euo pipefail
 DMENU="fuzzel -d -a top --y 8 -w 24 -l 15 "
 
 wal --theme | grep -E '^ - ' | sed 's/^ - //' | $DMENU | xargs -r wal --theme
+refresh_portals.sh
