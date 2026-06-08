@@ -37,7 +37,7 @@ tooltip label {
 #workspaces button {
   all: unset;
   background: @foreground;
-  opacity: 0.8;
+  opacity: 0.5;
   font-size: 0;
   border-radius: 1rem;
   min-width: 0.5rem;
