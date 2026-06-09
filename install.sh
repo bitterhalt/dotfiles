@@ -50,7 +50,7 @@ rm -rf -- "$tmpdir"
 # ==============================================================================
 
 cd ~/dotfiles
-rsync -avhu home/bazz/ ~/
+rsync -avhu home/ ~/
 sleep 1 && clear
 cd $OLDPWD
 
