@@ -1,6 +1,5 @@
 return {
   -- Theme
-
   {
     "RedsXDD/neopywal.nvim",
     config = function()
