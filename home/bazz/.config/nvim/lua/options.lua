@@ -2,6 +2,9 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Disable swap
+vim.opt.swapfile = false
+
 -- set terminal colors
 vim.opt.termguicolors = true
 
