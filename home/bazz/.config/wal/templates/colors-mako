@@ -1,0 +1,12 @@
+background-color={background}
+text-color={foreground}
+border-color={color6}
+progress-color={color6}
+
+[app-name=vol-osd]
+background-color={background}d0
+
+[urgency=high]
+border-color=#af3029
+text-color=#ad8301
+
