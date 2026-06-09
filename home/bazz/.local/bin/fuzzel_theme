@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-# https://github.com/bitterhalt
 set -euo pipefail
 
-DMENU="fuzzel -d -a top --y 8 -w 24 -l 15 "
+DMENU="fuzzel -d -a top --y 8 -w 34 -l 15"
 
-wal --theme | grep -E '^ - ' | sed 's/^ - //' | $DMENU | xargs -r wal --theme
+theme=$(
+  find ~/.config/wal/colorschemes/dark -type f -name '*.json' -printf '%f\n' |
+    sed 's/\.json$//' |
+    sort |
+    $DMENU
+)
+
+[ -n "${theme:-}" ] && wal --theme "$theme"
 refresh_portals.sh
