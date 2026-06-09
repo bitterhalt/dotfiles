@@ -1,14 +1,38 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DMENU="fuzzel -d -a top --y 8 -w 34 -l 15"
+DMENU="fuzzel -d -a top --y 8 -w 24 -l 15"
+THEMES="$HOME/.config/wal/colorschemes/dark"
+HISTORY="$HOME/.cache/wal-theme-history"
+
+mkdir -p "$(dirname "$HISTORY")"
+touch "$HISTORY"
 
 theme=$(
-  find ~/.config/wal/colorschemes/dark -type f -name '*.json' -printf '%f\n' |
-    sed 's/\.json$//' |
-    sort |
+  {
+    tac "$HISTORY" |
+      awk '!seen[$0]++' |
+      head -3 |
+      sed 's/^/★ /'
+
+    printf '%s\n' '──────────'
+
+    find "$THEMES" -type f -name '*.json' -printf '%f\n' |
+      sed 's/\.json$//' |
+      sort
+  } |
     $DMENU
 )
 
-[ -n "${theme:-}" ] && wal --theme "$theme"
+case "$theme" in
+"" | "──────────")
+  exit
+  ;;
+esac
+
+theme="${theme#★ }"
+
+echo "$theme" >>"$HISTORY"
+
+wal --theme "$theme"
 refresh_portals.sh
