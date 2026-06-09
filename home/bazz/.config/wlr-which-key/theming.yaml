@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 2
+rows_per_column: 3
 column_padding: 25
 
 anchor: top
@@ -25,3 +25,6 @@ menu:
   - key: "t"
     desc: Set theme
     cmd: fuzzel_theme
+  - key: "s"
+    desc: Save theme
+    cmd: fuzzel_theme -s
