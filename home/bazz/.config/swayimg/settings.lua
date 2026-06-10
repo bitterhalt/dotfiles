@@ -25,19 +25,41 @@ swayimg.text.set_timeout(15)
 swayimg.text.set_status_timeout(3)
 
 --------------------------------------------------------------------------------
--- Colors
+-- Colors - Load from Pywal
 --------------------------------------------------------------------------------
+local colors_path = os.getenv("HOME") .. "/.cache/wal/colors.lua"
+local colors = nil
+
+if io.open(colors_path, "r") then
+	colors = dofile(colors_path)
+end
+
+-- Fallback colors if pywal colors not available
+if not colors then
+	colors = {
+		color7 = "#cccccc",
+		color5 = "#A02F6F",
+		color8 = "#403E3C",
+		color0 = "#1C1B1A",
+	}
+end
+
+local function hex_to_argb(hex)
+	hex = hex:gsub("#", "")
+	return 0xff000000 + tonumber(hex, 16)
+end
+
 -- Text
-swayimg.text.set_foreground(0xffcccccc)
+swayimg.text.set_foreground(hex_to_argb(colors.color7))
 swayimg.text.set_background(0x00000000)
 swayimg.text.set_shadow(0xd0000000)
+
 -- Gallery
-swayimg.gallery.set_border_color(0xffA02F6F)
-swayimg.gallery.set_selected_color(0xff403E3C)
-swayimg.gallery.set_unselected_color(0xff1C1B1A)
--- swayimg.gallery.set_window_color(0xff100F0F)
+swayimg.gallery.set_border_color(hex_to_argb(colors.color6))
+swayimg.gallery.set_selected_color(hex_to_argb(colors.color8))
+swayimg.gallery.set_unselected_color(hex_to_argb(colors.color0))
 swayimg.gallery.set_window_color(0x30000000)
---Viewer
--- swayimg.viewer.set_window_background(0xff100F0F)
+
+-- Viewer
 swayimg.viewer.set_window_background(0x30000000)
-swayimg.viewer.set_image_chessboard(20, 0xff333333, 0xff4c4c4c)
+swayimg.viewer.set_image_chessboard(20, hex_to_argb(colors.color8), hex_to_argb(colors.color7))
