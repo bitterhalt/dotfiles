@@ -16,7 +16,7 @@
 	"SearchBy": "Name",
 	"CacheExpiry": 10,
 	"DisableCache": false,
-	"ColorScheme": "Custom",
+	"ColorScheme": "Arch Linux",
 	"BorderStyle": "Double",
 	"ShowPkgbuildCommand": "curl -s \"{url}\"|less",
 	"ShowPkgbuildInternally": true,
