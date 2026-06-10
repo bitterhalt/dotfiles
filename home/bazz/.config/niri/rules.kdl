@@ -160,7 +160,7 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="bottom-right"
 }
 
-// --- Top-Right Desk Gadgets ---
+// --- Top-Right  floaters---
 window-rule {
     match app-id="bluetui"
     match app-id="impala"
@@ -180,6 +180,14 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top-right"
 }
 
+// Proton-authenticator
+window-rule {
+    match app-id="proton-authenticator"
+    open-floating true
+    default-column-width { fixed 420; }
+    default-window-height { fixed 685; }
+    default-floating-position x=10 y=10 relative-to="top-right"
+}
 
 // =============================================================================
 // WORKSPACE ASSIGNMENTS
