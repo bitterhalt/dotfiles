@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 2
+rows_per_column: 3
 column_padding: 25
 
 anchor: top
@@ -40,6 +40,9 @@ menu:
   - key: "k"
     desc: Wlr-which-key
     cmd: foot sh -c "cd ~/.config/wlr-which-key/ && nvim *"
+  - key: "p"
+    desc: "Pywal"
+    cmd: foot -e nvim ~/.local/bin/setbg  ~/.config/wal/templates/*
   - key: "m"
     desc: Monitor
     submenu:
