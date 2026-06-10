@@ -117,7 +117,6 @@ qt5-wayland
 qt6-wayland
 rate-mirrors-bin
 ripgrep
-rofi
 rsync
 rust
 sassc
