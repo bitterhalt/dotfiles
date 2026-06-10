@@ -4,7 +4,7 @@
 BACKEND="wal"
 
 # Static background color for pywal_fixed
-BGCOL="101010"
+BGCOL="121212"
 
 get_resolution() {
   if command -v niri >/dev/null 2>&1; then
