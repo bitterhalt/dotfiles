@@ -71,6 +71,6 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 
 ### Contributions
 
-> I can put pieces together pretty well but I'm not a best when It comes to scripting and coding
+> I can put pieces together pretty well but I'm not a best when it comes to scripting and coding
 >
 > If something totally wrong, don't hesitate to submit a pr 🙂
