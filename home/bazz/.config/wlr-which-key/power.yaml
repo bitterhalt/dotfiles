@@ -21,7 +21,7 @@ auto_kbd_layout: true
 menu:
   - key: "l"
     desc: Lock
-    cmd: swaylock
+    cmd: swaylock -C ~/.cache/wal/colors-swaylock
   - key: "e"
     desc: Logout
     cmd: niri msg action quit

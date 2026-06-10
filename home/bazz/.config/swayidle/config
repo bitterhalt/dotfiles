@@ -1,4 +1,4 @@
 timeout 1700 'pidof swaylock || swaylock -f'
 timeout 1800 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors'
 timeout 10800 'systemctl suspend'
-before-sleep 'swaylock -f'
+before-sleep 'swaylock -C ~/.cache/wal/colors-swaylock -f'
