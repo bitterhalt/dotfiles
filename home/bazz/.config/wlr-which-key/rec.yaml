@@ -21,10 +21,10 @@ auto_kbd_layout: true
 menu:
   - key: "1"
     desc: 󰑋 Record Screen
-    cmd: wl-record -f && pkill -SIGRTMIN+2 waybar
+    cmd: wl-record -f
   - key: "2"
     desc: 󰩬 Record Regional
-    cmd: wl-record -r && pkill -SIGRTMIN+2 waybar
+    cmd: wl-record -r
   - key: "3"
     desc: 󰄀 Screenshot Full Screen
     cmd: wl-shot -f
