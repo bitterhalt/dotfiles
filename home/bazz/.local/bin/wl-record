@@ -12,6 +12,8 @@ SAVEDIR="${HOME}/Videos/Captures/"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
 NOTI="notify-send -a gpu-screen-recorder -t 3000"
+SIG="pkill -SIGRTMIN+2 waybar"
+
 mkdir -p -- "$SAVEDIR"
 
 fullscreen() {
@@ -21,6 +23,7 @@ fullscreen() {
   }
   gpu-screen-recorder -w screen -f 60 -a default_output -o "$FILENAME" &
   echo $! >"$PIDFILE"
+  $SIG
 }
 
 region() {
@@ -28,8 +31,10 @@ region() {
     $NOTI "Screen record" "Recording already in progress"
     exit 0
   }
-  gpu-screen-recorder -w "$(slurp -f "%wx%h+%x+%y")" -o "$FILENAME" &
+  REGION=$(slurp -f "%wx%h+%x+%y") || exit 1
+  gpu-screen-recorder -w "$REGION" -f 60 -o "$FILENAME" &
   echo $! >"$PIDFILE"
+  $SIG
 }
 
 stop_recording() {
