@@ -28,21 +28,21 @@ menu:
   - key: "f"
     desc: Foot
     cmd: foot -e nvim ~/.config/foot/foot.ini
-  - key: "v"
-    desc: Nvim
-    cmd: foot sh -c "cd ~/.config/nvim && vopen ."
-  - key: "n"
-    desc: Niri
-    cmd: foot sh -c "cd ~/.config/niri/ && vopen ."
-  - key: "w"
-    desc: Waybar
-    cmd: foot sh -c "cd ~/.config/waybar/ && vopen ."
   - key: "k"
     desc: Wlr-which-key
     cmd: foot sh -c "cd ~/.config/wlr-which-key/ && nvim *"
+  - key: "n"
+    desc: Niri
+    cmd: foot sh -c "cd ~/.config/niri/ && vopen ."
   - key: "p"
     desc: "Pywal"
     cmd: foot -e nvim ~/.local/bin/setbg  ~/.config/wal/templates/*
+  - key: "v"
+    desc: Nvim
+    cmd: foot sh -c "cd ~/.config/nvim && vopen ."
+  - key: "w"
+    desc: Waybar
+    cmd: foot sh -c "cd ~/.config/waybar/ && vopen ."
   - key: "m"
     desc: Monitor
     submenu:
