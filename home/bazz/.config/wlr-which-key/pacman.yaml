@@ -24,4 +24,4 @@ menu:
     cmd: foot -a pacseek -T pacseek -e pacseek -m
   - key: "u"
     desc: Update
-    cmd: foot -a pop-upgrade -e popupgrade
+    cmd: foot -a pop-upgrade -e sys_upgrade

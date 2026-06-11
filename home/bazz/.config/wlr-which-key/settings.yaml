@@ -33,10 +33,10 @@ menu:
     cmd: foot sh -c "cd ~/.config/nvim && vopen ."
   - key: "n"
     desc: Niri
-    cmd: foot sh -c "cd ~/.config/niri/ && nvim *"
+    cmd: foot sh -c "cd ~/.config/niri/ && vopen ."
   - key: "w"
     desc: Waybar
-    cmd: foot sh -c "cd ~/.config/waybar/ && nvim *"
+    cmd: foot sh -c "cd ~/.config/waybar/ && vopen ."
   - key: "k"
     desc: Wlr-which-key
     cmd: foot sh -c "cd ~/.config/wlr-which-key/ && nvim *"
