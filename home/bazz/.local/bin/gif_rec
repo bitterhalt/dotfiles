@@ -5,7 +5,7 @@ set -e
 SAVEDIR="${HOME}/Videos/Captures"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FINAL_GIF="$SAVEDIR/${TIMESTAMP}_capture.gif"
-TEMP_MP4="/tmp/${TIMESTAMP}_temp.mp4"
+TEMP_MP4="${HOME}/.cache/${TIMESTAMP}_temp.mp4"
 NOTI="notify-send -a gpu-screen-recorder -t 3000"
 
 mkdir -p "$SAVEDIR"
