@@ -28,7 +28,7 @@ region() {
     $NOTI "Screen record" "Recording already in progress"
     exit 0
   }
-  gpu-screen-recorder -w region -region "$(slurp -f "%wx%h+%x+%y")" -o "$FILENAME" &
+  gpu-screen-recorder -w "$(slurp -f "%wx%h+%x+%y")" -o "$FILENAME" &
   echo $! >"$PIDFILE"
 }
 

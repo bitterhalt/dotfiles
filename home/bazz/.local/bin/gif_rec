@@ -1,48 +1,35 @@
 #!/usr/bin/env bash
-
 set -e
-
 SAVEDIR="${HOME}/Videos/Captures"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FINAL_GIF="$SAVEDIR/${TIMESTAMP}_capture.gif"
 TEMP_MP4="/tmp/${TIMESTAMP}_temp.mp4"
 NOTI="notify-send -a gpu-screen-recorder -t 3000"
-
 mkdir -p "$SAVEDIR"
-
 echo "Select a region on your screen..."
 REGION=$(slurp -f "%wx%h+%x+%y")
-
 if [ -z "$REGION" ]; then
   echo "Selection cancelled."
   exit 1
 fi
-
 cleanup() {
   echo -e "\n[!] Recording caught stop signal. Finalizing video..."
   sleep 1
-
   if [ -f "$TEMP_MP4" ]; then
-    $NOTI "Screen record" "Converting video to high-quality GIF..."
-    echo "Processing high-quality GIF colors (please wait)..."
-
+    $NOTI "Screen record" "Converting video to GIF..."
+    echo "Processing GIF colors (please wait)..."
     ffmpeg -v error -i "$TEMP_MP4" -vf "fps=30,scale=iw:-1:flags=lanczos,palettegen" -y /tmp/gif_palette.png
     ffmpeg -v error -i "$TEMP_MP4" -i /tmp/gif_palette.png -filter_complex "fps=30,scale=iw:-1:flags=lanczos[x];[x][1:v]paletteuse" -y "$FINAL_GIF"
-
     rm -f /tmp/gif_palette.png
     rm -f "$TEMP_MP4"
-
     $NOTI "Screen record" "GIF saved to $FINAL_GIF"
     echo "Done! Saved to $FINAL_GIF"
   fi
   exit 0
 }
-
 trap cleanup SIGINT SIGTERM
-
 echo "----------------------------------------"
 echo "🔴 RECORDING REGION..."
 echo "Close this window or press Ctrl+C to STOP."
 echo "----------------------------------------"
-
-gpu-screen-recorder -w region -region "$REGION" -f 30 -o "$TEMP_MP4"
+gpu-screen-recorder -w "$REGION" -f 30 -o "$TEMP_MP4"
