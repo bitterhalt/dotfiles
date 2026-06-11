@@ -1,17 +1,23 @@
 #!/usr/bin/env bash
+
 set -e
+
 SAVEDIR="${HOME}/Videos/Captures"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FINAL_GIF="$SAVEDIR/${TIMESTAMP}_capture.gif"
 TEMP_MP4="/tmp/${TIMESTAMP}_temp.mp4"
 NOTI="notify-send -a gpu-screen-recorder -t 3000"
+
 mkdir -p "$SAVEDIR"
 echo "Select a region on your screen..."
+
 REGION=$(slurp -f "%wx%h+%x+%y")
+
 if [ -z "$REGION" ]; then
   echo "Selection cancelled."
   exit 1
 fi
+
 cleanup() {
   echo -e "\n[!] Recording caught stop signal. Finalizing video..."
   sleep 1
@@ -27,6 +33,7 @@ cleanup() {
   fi
   exit 0
 }
+
 trap cleanup SIGINT SIGTERM
 echo "----------------------------------------"
 echo "🔴 RECORDING REGION..."
