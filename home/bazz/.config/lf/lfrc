@@ -24,7 +24,7 @@ set shellopts '-eu'
 #-----------------------------------------------------#
 map . set hidden!
 map <c-c> clear
-map <c-n> %dragon-drop -i -x $fx # dragon-drop needs to be installed
+map <c-n> %dragon -i -x $fx # dragon-drop needs to be installed
 map <c-r> reload
 map <c-z> push :&apack<space>''<space>$fx<left><left><left><left><left> #  Archive
 map <delete> trash
