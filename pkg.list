@@ -104,7 +104,6 @@ pipewire-pulse
 playerctl
 plocate
 polkit-gnome
-popsicle-bin
 proton-authenticator-bin
 python-colorthief
 python-llfuse
@@ -114,7 +113,7 @@ python-pywal16
 python-watchdog
 qt5-wayland
 qt6-wayland
-rate-mirrors-bin
+rate-mirrors
 ripgrep
 rsync
 rust
@@ -146,7 +145,6 @@ tree-sitter-cli
 ttf-jetbrains-mono
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
-tty-clock
 tumbler
 unrar
 unzip
