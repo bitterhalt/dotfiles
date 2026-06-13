@@ -32,7 +32,7 @@ theme=$(
   {
     tac "$HISTORY" 2>/dev/null |
       awk '!seen[$0]++' |
-      head -3 |
+      head -8 |
       sed 's/^/★ /'
 
     printf '%s\n' '──────────'
