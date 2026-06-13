@@ -26,9 +26,9 @@ headerbar.default-decoration {
   margin-top: -100px;
 }
 
-/* rm -rf window shadows */
-window.csd,             /* gtk4? */
-window.csd decoration {
-  /* gtk3 */
-  box-shadow: none;
-}
+/* /* rm -rf window shadows */ */
+/* window.csd,             /* gtk4? */ */
+/* window.csd decoration { */
+/*   /* gtk3 */ */
+/*   box-shadow: none; */
+/* } */
