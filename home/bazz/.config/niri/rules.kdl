@@ -86,8 +86,8 @@ window-rule {
 window-rule {
     match app-id="swayimg"
     open-floating true
-    default-column-width { fixed 700; }
-    default-window-height { fixed 400; }
+    default-column-width { proportion 0.45; }
+    default-window-height { proportion 0.45; }
     default-floating-position x=16 y=16 relative-to="top-right"
     exclude app-id="swayimg-setwall"
     background-effect {
