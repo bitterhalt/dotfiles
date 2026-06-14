@@ -15,13 +15,19 @@ for input in "$@"; do
     continue
   fi
 
-  if [[ "$input" == *.png ]]; then
-    echo "Skipping: '$input' (already PNG)"
+  mime_type=$(file --mime-type -b "$input")
+
+  if [ "$mime_type" = "image/png" ]; then
+    echo "Skipping: '$input' (already a PNG)"
     continue
   fi
 
   base="${input%.*}"
   output="${base}.png"
+
+  if [ "$input" = "$output" ]; then
+    output="${base}_converted.png"
+  fi
 
   magick "$input" "$output"
 
