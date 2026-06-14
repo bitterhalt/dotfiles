@@ -33,7 +33,7 @@ binds {
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
 
     // Submaps
-    Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key apps"; }
+    Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key wl-apps"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "wlr-which-key wl-power"; }
     Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key wl-system"; }
     Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key wl-settings"; }
