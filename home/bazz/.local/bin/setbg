@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
-# Backend: "wal" or "colorthief"
-BACKEND="wal"
-
-# Static background color for pywal_fixed
 BGCOL="121212"
+
+get_backend() {
+  local backend
+  backend=$(printf "wal\ncolorthief" | fuzzel -d --minimal-lines --placeholder "Select Backend: ")
+  if [[ -z "$backend" ]]; then
+    backend="wal"
+  fi
+  echo "$backend"
+}
 
 get_resolution() {
   if command -v niri >/dev/null 2>&1; then
@@ -76,14 +81,20 @@ setwall() {
 }
 
 pywal() {
+  local backend
+  backend=$(get_backend)
+
   _apply_wallpaper "$1" || return 1
-  wal -n --backend $BACKEND -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -n --backend "$backend" -i "$HOME/.local/share/wall/wallpaper.png"
   refresh_portals.sh
 }
 
 pywal_fixed() {
+  local backend
+  backend=$(get_backend)
+
   _apply_wallpaper "$1" || return 1
-  wal -n --backend $BACKEND -b $BGCOL -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -n --backend "$backend" -b $BGCOL -i "$HOME/.local/share/wall/wallpaper.png"
   refresh_portals.sh
 }
 
