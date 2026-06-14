@@ -1,0 +1,56 @@
+#!/bin/bash
+
+TARGET_DIR="/home/bazz/Pictures/wallpaper"
+
+if [ ! -d "$TARGET_DIR" ]; then
+  echo "Error: Directory $TARGET_DIR does not exist."
+  exit 1
+fi
+
+cd "$TARGET_DIR" || exit 1
+
+max_num=0
+for file in wallpaper.*.png; do
+  [ -e "$file" ] || break
+
+  num=$(echo "$file" | cut -d. -f2)
+
+  if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -gt "$max_num" ]; then
+    max_num=$num
+  fi
+done
+
+count=$((max_num + 1))
+renamed_count=0
+
+for file in *; do
+  if [ -f "$file" ]; then
+    if [[ "$file" =~ ^wallpaper\.[0-9]+\.png$ ]]; then
+      continue
+    fi
+
+    mv "$file" "wallpaper.$count.png"
+    ((count++))
+    ((renamed_count++))
+  fi
+done
+
+if [ "$renamed_count" -gt 0 ]; then
+  echo "Renamed $renamed_count new file(s)."
+fi
+
+if [ -n "$(git status --porcelain)" ]; then
+  echo "Changes detected in repository. Preparing to sync with Git..."
+
+  git add -A
+
+  commit_message="Auto-sync: Wallpapers updated on $(date '+%Y-%m-%d %H:%M:%S')"
+  git commit -m "$commit_message"
+
+  echo "Pushing to remote repository..."
+  git push
+
+  echo "Git sync complete"
+else
+  echo "No changes or deletions detected"
+fi
