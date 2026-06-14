@@ -31,14 +31,14 @@ binds {
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn "fuzzel_passmenu"; }
     Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel --list-executables-in-path --line-height 26"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
-    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "wlr-which-key theming"; }
 
     // Submaps
     Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key apps"; }
-    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key system"; }
-    Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key settings"; }
-    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key notes"; }
-    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "wlr-which-key power"; }
+    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "wlr-which-key wl-power"; }
+    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key wl-system"; }
+    Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key wl-settings"; }
+    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key wl-notes"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "wlr-which-key wl-theming"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }

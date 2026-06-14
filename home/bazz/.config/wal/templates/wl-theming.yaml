@@ -1,7 +1,7 @@
 font: Adwaita Mono 13
-background: "#101010"
-color: "#CCCCCC"
-border: "#1C1C1C"
+background: "{background}"
+color: "{foreground}"
+border: "{color6}"
 separator: " ➜ "
 border_width: 1
 corner_r: 4
