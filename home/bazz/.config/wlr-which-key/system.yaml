@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 2
+rows_per_column: 5
 column_padding: 25
 
 anchor: top
@@ -31,3 +31,18 @@ menu:
   - key: "n"
     desc: 󰲝 Network Manager
     cmd: nm-connection-editor
+  - key: "m"
+    desc: " 󰨇 Monitor"
+    submenu:
+      - key: "a"
+        desc: Atop
+        cmd: foot -T atop -e amdgpu_top --smi
+      - key: "b"
+        desc: Btop
+        cmd: foot -a btop -e btop
+      - key: "l"
+        desc: Logs
+        cmd: foot -a foot -T journalctl -e journalctl -f
+      - key: "c"
+        desc: Combined [ tmux-window ]
+        cmd: foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh

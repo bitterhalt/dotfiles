@@ -1,4 +1,4 @@
-font: Adwaita Mono 13
+font: Adwaita Mono, Symbols Nerd Font Mono 13
 background: "#101010"
 color: "#CCCCCC"
 border: "#1C1C1C"
@@ -43,18 +43,12 @@ menu:
   - key: "w"
     desc: Waybar
     cmd: foot sh -c "cd ~/.config/waybar/ && vopen ."
-  - key: "m"
-    desc: Monitor
+  - key: "u"
+    desc: Manage Packages
     submenu:
-      - key: "a"
-        desc: Atop
-        cmd: foot -T atop -e amdgpu_top --smi
-      - key: "b"
-        desc: Btop
-        cmd: foot -a btop -e btop
-      - key: "l"
-        desc: Logs
-        cmd: foot -a foot -T journalctl -e journalctl -f
-      - key: "c"
-        desc: Combined [ tmux-window ]
-        cmd: foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh
+      - key: "i"
+        desc: Install
+        cmd: foot -a pacseek -T pacseek -e pacseek -m
+      - key: "u"
+        desc: Update
+        cmd: foot -a pop-upgrade -e sys_upgrade

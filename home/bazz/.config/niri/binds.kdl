@@ -35,10 +35,9 @@ binds {
 
     // Submaps
     Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key apps"; }
-    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key connections"; }
+    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key system"; }
     Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key settings"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key notes"; }
-    Mod+U hotkey-overlay-title="Install and remove packages" { spawn-sh "wlr-which-key pacman"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "wlr-which-key power"; }
 
     // Screen Recording
