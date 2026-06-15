@@ -2,7 +2,6 @@
 
 # ==============================================================================
 # Arch Linux Post-Install Script
-# This script automates my dotfiles installation
 # ==============================================================================
 
 set -e
@@ -11,13 +10,11 @@ set -e
 # 1. INITIAL CHECKS
 # ==============================================================================
 
-# Check if the script is run as root. Exit if it is.
 if [[ $EUID -eq 0 ]]; then
   echo -e "This script MUST NOT be run as root.\nPlease run it as a regular user. Exiting..." >&2
   exit 1
 fi
 
-# Refresh sudo timestamp at the beginning. This prevents repeated password prompts.
 echo "Authenticating user for package installation..."
 sudo -v
 if [[ $? -ne 0 ]]; then
@@ -38,7 +35,7 @@ sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs || exit
 
 helper="$(head -n 1 pkg.list)"
 tmpdir="$(mktemp -d --tmpdir ${helper%%:*}-build-XXXXXX)"
-trap 'rm -rf -- "$tmpdir"' EXIT # rm the tempdir if the script exits unexpectedly
+trap 'rm -rf -- "$tmpdir"' EXIT 
 echo "Installing ${helper%%:*}..."
 git clone https://aur.archlinux.org/${helper##*:}.git "$tmpdir"
 cd "$tmpdir" && makepkg -si --noconfirm
@@ -58,7 +55,6 @@ cd $OLDPWD
 # 5. INSTALL PACKAGES FROM THE DOTFILES LIST
 # ==============================================================================
 
-# Install packages
 if [[ -f pkg.list ]]; then
   echo "Installing programs..."
   yay -S --needed $(tail pkg.list -n +2)
