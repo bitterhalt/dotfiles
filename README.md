@@ -42,14 +42,6 @@ A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully c
 ```bash
 bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 ```
-
-### After install
-
-1.  Run `fuzzel_theme` to select theme
-2.  OR type `wal -i ~/.local/share/wall/wallpaper.png` and Pywal generates theme
-3.  OR populate _~/Pictures/wallpaper/_ you can choose wallpaper from swayimg and it auto generates colors
-    <img width="678" height="446" alt="image" src="https://github.com/user-attachments/assets/a4b372e6-fec4-4037-b23b-39800e6c9ded" />
-
 ---
 
 ### Inspiration of my cool stuff ⭐
