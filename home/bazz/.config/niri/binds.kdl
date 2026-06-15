@@ -37,12 +37,12 @@ binds {
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "wlr-which-key wl-power"; }
     Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key wl-system"; }
     Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key wl-settings"; }
+    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "wlr-which-key wl-rec"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key wl-notes"; }
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "wlr-which-key wl-theming"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
-    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "wlr-which-key rec"; }
     Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { spawn-sh "wl-shot -f"; }
     Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "wl-shot -re"; }
 
