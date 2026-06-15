@@ -75,6 +75,9 @@ sleep 1 && clear
 echo "Updating XDG user directories..."
 xdg-user-dirs-update
 
+echo "Generating color scheme..."
+wal -i "$HOME"/share/wall/wallpaper.png -n
+
 # ==============================================================================
 # 7. FINAL INSTRUCTIONS
 # ==============================================================================
