@@ -1,109 +1,77 @@
 #!/usr/bin/env bash
 
+# Small helper script to record your desktop using gpu-screen-recorder
+# Depends on: gpu-screen-recorder, slurp
+# More info https://git.dec05eba.com/gpu-screen-recorder/about/
+# Github @ bitterhalt
+
 set -e
 
 PIDFILE="/tmp/gpu-recorder.pid"
-MODEFILE="/tmp/gpu-recorder.mode"
-
-SAVEDIR="${HOME}/Videos/Captures"
+SAVEDIR="${HOME}/Videos/Captures/"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
-
-MP4_FILE="$SAVEDIR/${TIMESTAMP}_capture.mp4"
-GIF_FILE="$SAVEDIR/${TIMESTAMP}_capture.gif"
-TEMP_MP4="${HOME}/.cache/${TIMESTAMP}_temp.mp4"
-
+FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
 NOTI="notify-send -a gpu-screen-recorder -t 3000"
 SIG="pkill -SIGRTMIN+2 waybar"
 
-mkdir -p "$SAVEDIR"
+mkdir -p -- "$SAVEDIR"
 
-start_recording() {
-  local target="$1"
-  local outfile="$2"
-  local mode="$3"
-
+fullscreen() {
   pidof -q gpu-screen-recorder && {
     $NOTI "Screen record" "Recording already in progress"
     exit 0
   }
-
-  gpu-screen-recorder -w "$target" -f 30 -o "$outfile" &
+  gpu-screen-recorder -w screen -f 60 -a default_output -o "$FILENAME" &
   echo $! >"$PIDFILE"
-  echo "$mode" >"$MODEFILE"
   $SIG
-}
-
-fullscreen() {
-  start_recording "screen" "$MP4_FILE" "mp4"
 }
 
 region() {
-  REGION=$(slurp -f "%wx%h+%x+%y") || exit 1
-  start_recording "$REGION" "$MP4_FILE" "mp4"
-}
-
-gif_region() {
-  REGION=$(slurp -f "%wx%h+%x+%y") || exit 1
-  start_recording "$REGION" "$TEMP_MP4" "gif"
-}
-
-stop_recording() {
-  if [ ! -f "$PIDFILE" ]; then
-    $NOTI "Screen record" "No active recording"
+  pidof -q gpu-screen-recorder && {
+    $NOTI "Screen record" "Recording already in progress"
     exit 0
-  fi
-
-  PID=$(cat "$PIDFILE")
-  MODE=$(cat "$MODEFILE" 2>/dev/null || echo "mp4")
-
-  if ps -p "$PID" >/dev/null 2>&1; then
-    kill -SIGINT "$PID" 2>/dev/null || kill "$PID"
-    sleep 2
-  fi
-
-  rm -f "$PIDFILE"
-
-  if [ "$MODE" = "gif" ] && [ -f "$TEMP_MP4" ]; then
-    $NOTI "Screen record" "Converting video to GIF..."
-    ffmpeg -v error -i "$TEMP_MP4" \
-      -vf "fps=30,scale=iw:-1:flags=lanczos,palettegen" \
-      -y /tmp/gif_palette.png
-
-    ffmpeg -v error -i "$TEMP_MP4" -i /tmp/gif_palette.png \
-      -filter_complex "fps=30,scale=iw:-1:flags=lanczos[x];[x][1:v]paletteuse" \
-      -y "$GIF_FILE"
-
-    rm -f /tmp/gif_palette.png "$TEMP_MP4"
-    $NOTI "Screen record" "GIF saved to $GIF_FILE"
-  else
-    $NOTI "Screen record" "Recording stopped and saved to $SAVEDIR"
-  fi
-
-  rm -f "$MODEFILE"
+  }
+  REGION=$(slurp -f "%wx%h+%x+%y") || exit 1
+  gpu-screen-recorder -w "$REGION" -f 60 -o "$FILENAME" &
+  echo $! >"$PIDFILE"
   $SIG
 }
 
-print_help() {
-  cat <<EOF
-Usage: wl-record [options]
-
-Options:
-  -f, --fullscreen   Record fullscreen MP4
-  -r, --region       Record selected region to MP4
-  -g, --gif          Record selected region to GIF
-  -k, --kill         Stop active MP4/GIF recording
-  -h, --help         Show help
-EOF
+stop_recording() {
+  if [ -f "$PIDFILE" ]; then
+    PID=$(cat "$PIDFILE")
+    if ps -p "$PID" >/dev/null 2>&1; then
+      # Send SIGINT to stop gracefully
+      kill -SIGINT "$PID" 2>/dev/null || kill "$PID"
+      sleep 1
+    fi
+    rm -f "$PIDFILE"
+    $NOTI "Screen record" "Recording stopped and saved to $SAVEDIR"
+  else
+    $NOTI "Screen record" "No active recording"
+  fi
 }
 
-case "${1:-}" in
--f | --fullscreen) fullscreen ;;
--r | --region) region ;;
--g | --gif) gif_region ;;
--k | --kill) stop_recording ;;
--h | --help | "") print_help ;;
-*)
-  print_help
-  exit 1
-  ;;
-esac
+print_help() {
+  echo "Usage: wl-record [options]"
+  echo "Options:"
+  echo "  -f,  --fullscreen   Capture the fullscreen."
+  echo "  -r,  --region       Select a region to capture."
+  echo "  -k,  --kill         Kill record"
+  echo "  -h,  --help         Show this help message."
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -f | --fullscreen) fullscreen ;;
+  -r | --region) region ;;
+  -k | --kill) stop_recording ;;
+  -h | --help) print_help ;;
+  *)
+    echo "Unknown option: $1"
+    print_help
+    exit 1
+    ;;
+  esac
+  shift
+done
