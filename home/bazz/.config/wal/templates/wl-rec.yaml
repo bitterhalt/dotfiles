@@ -6,7 +6,6 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 20
-rows_per_column: 5
 column_padding: 25
 
 anchor: top
@@ -31,6 +30,3 @@ menu:
   - key: "4"
     desc: 󰩬 Screenshot Regional
     cmd: wl-shot -re
-  - key: "5"
-    desc: 󰵸 Regional Gif
-    cmd: foot -a "wl-record-gif" -e gif_rec
