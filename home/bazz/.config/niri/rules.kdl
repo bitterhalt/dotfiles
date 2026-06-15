@@ -189,24 +189,6 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top-right"
 }
 
-// --- Bttom-Right  floaters---
-window-rule {
-    match app-id="wl-record-gif"
-    open-floating true
-    default-column-width { proportion 0.30; }
-    default-window-height { proportion 0.30; }
-    default-floating-position x=10 y=10 relative-to="bottom-right"
-    shadow {
-        color "#ff0000"
-        softness 10
-        spread 4
-        offset x=0 y=0
-    }
-    focus-ring {
-      off
-    }
-}
-
 // =============================================================================
 // WORKSPACE ASSIGNMENTS
 // =============================================================================
