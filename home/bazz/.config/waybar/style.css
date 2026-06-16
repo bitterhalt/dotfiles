@@ -130,7 +130,7 @@ window#waybar.empty #window {
 #custom-wf-recorder {
   animation: rec-blink 1s linear infinite;
   border-radius: 4px;
-  color: @color9;
+  color: #af3029;
   margin: 2px 0;
   padding: 0 6px;
 }
