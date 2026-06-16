@@ -1,1 +1,7 @@
-/home/bazz/.config/waybar/scripts/bar-hider.sh
+#!/usr/bin/env bash
+
+if pgrep waybar >/dev/null; then
+  pkill waybar
+else
+  waybar &
+fi
