@@ -5,8 +5,7 @@ border: "{color6}"
 separator: " ➜ "
 border_width: 1
 corner_r: 4
-padding: 20
-rows_per_column: 3
+padding: 25
 column_padding: 25
 
 anchor: top
@@ -19,9 +18,6 @@ inhibit_compositor_keyboard_shortcuts: true
 auto_kbd_layout: true
 
 menu:
-  - key: "a"
-    desc: All
-    cmd: zen-browser|discord|thunderbird|transmission-gtk
   - key: "b"
     desc: Browser
     cmd: zen-browser
@@ -37,12 +33,15 @@ menu:
   - key: "g"
     desc: Gaming
     submenu:
-      - key: "a"
-        desc: "All"
-        cmd: steam|lutris
       - key: "s"
         desc: Steam
         cmd: steam
       - key: "l"
         desc: Lutris
         cmd: lutris
+      - key: "a"
+        desc: "All"
+        cmd: steam|lutris
+  - key: "a"
+    desc: All
+    cmd: zen-browser|discord|thunderbird|transmission-gtk
