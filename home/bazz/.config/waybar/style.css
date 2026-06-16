@@ -110,6 +110,11 @@ window#waybar.empty #window {
 #tray {
   margin-right: 10px;
 }
+#tray menu {
+  background-color: @background;
+  border: unset;
+}
+
 #custom-right-sep {
   color: @foreground;
   opacity: 0.5;
@@ -119,12 +124,6 @@ window#waybar.empty #window {
   color: @foreground;
   opacity: 0.5;
   font-weight: normal;
-}
-
-#tray menu {
-  background-color: @background;
-  border: solid 1px @color8;
-  border-radius: 4px;
 }
 
 #custom-wf-recorder {
