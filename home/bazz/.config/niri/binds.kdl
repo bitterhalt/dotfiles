@@ -40,6 +40,7 @@ binds {
     Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "wlr-which-key wl-rec"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key wl-notes"; }
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "wlr-which-key wl-theming"; }
+    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "wlr-which-key wl-packages"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }

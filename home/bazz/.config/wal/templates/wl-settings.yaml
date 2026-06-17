@@ -6,7 +6,7 @@ separator: " ➜ "
 border_width: 1
 corner_r: 4
 padding: 25
-rows_per_column: 3
+rows_per_column: 2
 column_padding: 25
 
 anchor: top
@@ -43,12 +43,3 @@ menu:
   - key: "w"
     desc: Waybar
     cmd: foot sh -c "cd ~/.config/waybar/ && vopen ."
-  - key: "u"
-    desc: Manage Packages
-    submenu:
-      - key: "i"
-        desc: Install
-        cmd: foot -a pacseek -T pacseek -e pacseek -m
-      - key: "u"
-        desc: Update
-        cmd: foot -a pop-upgrade -e sys_upgrade
