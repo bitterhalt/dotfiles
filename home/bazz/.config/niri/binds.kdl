@@ -1,6 +1,6 @@
 binds {
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "foot"; }
-    Mod+Shift+Delete hotkey-overlay-title="TUI System Monitor" { spawn-sh "footclient -a btop -T poptop -e btop"; }
+    Mod+Shift+Delete hotkey-overlay-title="TUI System Monitor" { spawn-sh "foot -a btop -T poptop -e btop"; }
     Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t && pkill -SIGRTMIN+1 waybar"; }
     Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
     Mod+F11 hotkey-overlay-title="Lock Screen" { spawn-sh "swaylock -C ~/.cache/wal/colors-swaylock"; }
@@ -22,7 +22,7 @@ binds {
     // Menus
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
     Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
-    Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "footclient -T 'Mako History' -e mako_hist.py"; }
+    Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn "fuzzel_emoji"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
     Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel --line-height 26"; }

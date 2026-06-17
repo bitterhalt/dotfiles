@@ -1,7 +1,6 @@
 spawn-at-startup "waybar"
 spawn-sh-at-startup "awww.sh"
 spawn-sh-at-startup "swayidle"
-spawn-sh-at-startup "foot --server"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-at-startup  "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
