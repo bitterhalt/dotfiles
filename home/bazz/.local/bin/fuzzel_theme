@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-DMENU="fuzzel -d -a top --y 8 -w 24 -l 15"
+DMENU="fuzzel -d -a top --y 8 -w 24 -l 10"
 THEMES="$HOME/.config/wal/colorschemes/dark"
 HISTORY="$HOME/.cache/wal-theme-history"
 CACHE_FILE="$HOME/.cache/wal/colors.json"
@@ -51,8 +51,12 @@ case "$theme" in
 esac
 
 theme="${theme#★ }"
-
 echo "$theme" >>"$HISTORY"
+
+if [ -f "$HISTORY" ]; then
+  trimmed=$(tac "$HISTORY" | awk '!seen[$0]++' | head -4 | tac)
+  echo "$trimmed" >"$HISTORY"
+fi
 
 wal --theme "$theme"
 refresh_portals.sh
