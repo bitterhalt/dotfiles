@@ -1,6 +1,7 @@
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin/appimages/:$PATH"
+export PATH="$HOME/.local/bin/apps/:$PATH"
 export PATH="$HOME/.local/share/cargo/bin/:$PATH"
 
 # Variables
