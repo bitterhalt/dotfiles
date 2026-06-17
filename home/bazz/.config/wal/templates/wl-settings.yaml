@@ -28,9 +28,9 @@ menu:
   - key: "f"
     desc: Foot
     cmd: foot -e nvim ~/.config/foot/foot.ini
-  - key: "k"
-    desc: Wlr-which-key
-    cmd: foot sh -c "cd ~/.config/wlr-which-key/ && nvim *"
+  - key: "m"
+    desc: Mako
+    cmd: foot sh -c "cd ~/.config/mako/ && nvim *"
   - key: "n"
     desc: Niri
     cmd: foot sh -c "cd ~/.config/niri/ && vopen ."
