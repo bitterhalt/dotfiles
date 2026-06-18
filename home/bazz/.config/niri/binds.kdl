@@ -1,6 +1,7 @@
 binds {
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "foot"; }
-    Mod+Shift+Delete hotkey-overlay-title="TUI System Monitor" { spawn-sh "foot -a btop -T poptop -e btop"; }
+    Mod+Shift+Delete hotkey-overlay-title="BTOP" { spawn-sh "foot -a btop -T poptop -e btop"; }
+    Mod+Ctrl+Delete hotkey-overlay-title="HTOP" { spawn-sh "foot -a htop -T poptop -e htop"; }
     Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t && pkill -SIGRTMIN+1 waybar"; }
     Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
     Mod+F11 hotkey-overlay-title="Lock Screen" { spawn-sh "swaylock -C ~/.cache/wal/colors-swaylock"; }

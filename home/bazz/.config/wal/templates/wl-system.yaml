@@ -40,6 +40,9 @@ menu:
       - key: "b"
         desc: Btop
         cmd: foot -a btop -e btop
+      - key: "h"
+        desc: Htop
+        cmd: foot -a htop -e htop
       - key: "l"
         desc: Logs
         cmd: foot -a foot -T journalctl -e journalctl -f
