@@ -6,6 +6,7 @@ distrotype=none
 osi=""
 ki=""
 di="󰧨"
+ti="󰞷"
 pi="󰏔"
 ui="󰅶"
 ai="󰃭"
@@ -208,6 +209,21 @@ else
   dewm="N/A"
 fi
 
+# Terminal detection
+if [ -n "$TERM_PROGRAM" ]; then
+  term="$TERM_PROGRAM"
+elif [ -n "$TERM" ]; then
+  # Fallback to getting the parent process name if TERM is generic (like xterm-256color)
+  ppid_name=$(ps -p $PPID -o comm= 2>/dev/null | sed 's/^-//')
+  if [[ "$TERM" == "xterm"* ]] && [ -n "$ppid_name" ]; then
+    term="$ppid_name"
+  else
+    term="$TERM"
+  fi
+else
+  term="N/A"
+fi
+
 # OS age (days since filesystem birth/install)
 case $ostype in
 *"Linux"*)
@@ -247,12 +263,13 @@ ic="${reset}${green}"          # info
 
 cat <<EOF
 
-${nc}${USER}${red}@${reset}${hn}${host}${reset}
-${lc}${osi}  ${ic}${os}${reset}
-${lc}${ki}  ${ic}${kernel}${reset}
-${lc}${di}  ${ic}${dewm}${reset}
-${lc}${pi}  ${ic}${packages} (${manager})${reset}
-${lc}${ui}  ${ic}${uptime}${reset}
-${lc}${ai}  ${ic}Age ${osage}${reset}
+  ${nc}${USER}${red}@${reset}${hn}${host}${reset}
+  ${lc}${osi}  ${ic}${os}${reset}
+  ${lc}${ki}  ${ic}${kernel}${reset}
+  ${lc}${di}  ${ic}${dewm}${reset}
+  ${lc}${ti}  ${ic}${term}${reset}
+  ${lc}${pi}  ${ic}${packages} (${manager})${reset}
+  ${lc}${ui}  ${ic}${uptime}${reset}
+  ${lc}${ai}  ${ic}Age ${osage}${reset}
 
 EOF

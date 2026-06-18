@@ -5,11 +5,6 @@ local function register_external_cmds(mode)
 			return
 		end
 		local ret = os.execute("setbg -w " .. shellescape(image.path) .. " & disown")
-		if ret ~= 0 then
-			swayimg.text.set_status("setbg failed for: " .. image.path)
-		else
-			swayimg.text.set_status("Wallpaper set!")
-		end
 	end)
 
 	mode.on_key("p", function()
@@ -18,11 +13,6 @@ local function register_external_cmds(mode)
 			return
 		end
 		local ret = os.execute("setbg -p " .. shellescape(image.path) .. " & disown")
-		if ret ~= 0 then
-			swayimg.text.set_status("setbg failed for: " .. image.path)
-		else
-			swayimg.text.set_status("Pywal theme generated and Wallpaper set!")
-		end
 	end)
 
 	mode.on_key("Shift+p", function()
@@ -31,11 +21,6 @@ local function register_external_cmds(mode)
 			return
 		end
 		local ret = os.execute("setbg -pf " .. shellescape(image.path) .. " & disown")
-		if ret ~= 0 then
-			swayimg.text.set_status("setbg failed for: " .. image.path)
-		else
-			swayimg.text.set_status("Pywal theme generated and Wallpaper set!")
-		end
 	end)
 
 	mode.on_key("e", function()
