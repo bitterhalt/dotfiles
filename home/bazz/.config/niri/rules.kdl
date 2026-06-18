@@ -241,7 +241,6 @@ layer-rule {
     geometry-corner-radius 4
     match namespace="wlr_which_key"
     match namespace="launcher"
-    match namespace="waybar"
     shadow {
       on
     }
