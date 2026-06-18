@@ -96,14 +96,13 @@ case $ostype in
   ;;
 esac
 
-MANAGER=$(command -v nix-env pkg flatpak yum zypper dnf rpm dpkg-query brew port pacman xbps-query emerge cave apk kiss pmm /usr/sbin/slackpkg bulge birb yay paru pacstall cpm pmm opkg eopkg getprop 2>/dev/null)
+MANAGER=$(command -v nix-env pkg yum zypper dnf rpm dpkg-query brew port pacman xbps-query emerge cave apk kiss pmm /usr/sbin/slackpkg bulge birb cpm pmm opkg eopkg getprop 2>/dev/null)
 manager=$(basename "$MANAGER")
 if [ $distrotype = netbsd ]; then
   manager="pkg_info-netbsd"
 fi
 case $manager in
 cpm) packages="$(cpm C)" ;;
-flatpak) packages="$(flatpak list --app | wc -l)" ;;
 brew) packages="$(printf '%s\n' "$(brew --cellar)/"* | wc -l)" ;;
 port) packages="$(($(port installed | wc -l) - 1))" ;;
 dpkg-query) packages="$(dpkg-query -f '${binary:Package}\n' -W | wc -l)" ;;
@@ -112,9 +111,6 @@ yum) packages="$(yum list installed | wc -l)" ;;
 dnf) packages="$(dnf list installed | wc -l)" ;;
 zypper) packages="$(zypper se | wc -l)" ;;
 pacman) packages="$(pacman -Q | wc -l)" ;;
-yay) packages="$(yay -Q | wc -l)" ;;
-paru) packages="$(paru -Q | wc -l)" ;;
-pacstall) packages="$(pacstall -L | wc -l)" ;;
 kiss) packages="$(kiss list | wc -l)" ;;
 emerge) packages="$(qlist -I | wc -l)" ;;
 pkg) packages="$(pkg info | wc -l | tr -d ' ')" ;;
