@@ -48,7 +48,13 @@ layout {
         offset x=0 y=2
     }
 }
-
+    // Blur
+    blur {
+      passes 4
+      offset 5.0
+      noise 0.02
+      saturation 2.0
+}
 
 // No alt/tab menu
 recent-windows {
