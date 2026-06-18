@@ -9,7 +9,7 @@ di="󰧨"
 ti="󰞷"
 pi="󰏔"
 ui="󰅶"
-ai="󰃭"
+ai="󱦟"
 
 if command -v getprop 1>/dev/null; then
   distrotype=android
