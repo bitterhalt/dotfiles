@@ -250,6 +250,7 @@ hn="${reset}${bold}${blue}"    # hostname
 ic="${reset}${green}"          # info
 
 cat <<EOF
+
 ${nc}${USER}${red}@${reset}${hn}${host}${reset}
 ${lc}${osi}  ${ic}${os}${reset}
 ${lc}${ki}  ${ic}${kernel}${reset}
@@ -257,4 +258,5 @@ ${lc}${di}  ${ic}${dewm}${reset}
 ${lc}${pi}  ${ic}${packages} (${manager})${reset}
 ${lc}${ui}  ${ic}${uptime}${reset}
 ${lc}${ai}  ${ic}Age ${osage}${reset}
+
 EOF
