@@ -68,7 +68,10 @@ _apply_wallpaper() {
     --size "${w}x${h}" \
     --output "$out" || return 1
 
-  awww img "$out" --transition-type=none
+  awww img "$out" --transition-type=any \
+    --transition-step=60 \
+    --transition-fps=60 \
+    --transition-duration=.7
 
   if [[ "$is_niri" == "true" ]]; then
     gm convert "$out" -blur 0x30 -modulate 80 "$lockscreen"
