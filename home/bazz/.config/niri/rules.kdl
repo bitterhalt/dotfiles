@@ -165,9 +165,8 @@ window-rule {
     match app-id="bluetui"
     match app-id="impala"
     match app-id="nm-connection-editor"
+    match app-id="pavucontrol"
     open-floating true
-    default-column-width { proportion 0.40; }
-    default-window-height { proportion 0.50; }
     default-floating-position x=10 y=10 relative-to="top-right"
 }
 
