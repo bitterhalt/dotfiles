@@ -2,16 +2,10 @@
 
 HISTORY_FILE="$HOME/.cache/fuzzel-runhistory"
 PROMPT="fuzzel -d --line-height 26"
-hist=$(tac "$HISTORY_FILE" 2>/dev/null | awk '!seen[$0]++' | head -n 5)
 
-all_binaries=$(
-  echo "$PATH" |
-    tr ':' '\n' |
-    xargs -I {} find {} -maxdepth 1 -executable -type f 2>/dev/null |
-    awk -F/ '{print $NF}' |
-    awk '!seen[$0]++'
-)
+hist=$(tac "$HISTORY_FILE" | awk '!seen[$0]++' | head -n 5)
 
+all_binaries=$(echo "$PATH" | tr ':' '\n' | xargs -I {} find {} -maxdepth 1 -executable -type f 2>/dev/null | awk -F/ '{print $NF}' | sort -u)
 filtered_binaries=$(echo "$all_binaries" | grep -vFx -f <(echo "$hist"))
 
 choice=$(printf "%s\n%s" "$hist" "$filtered_binaries" | sed '/^$/d' | $PROMPT)

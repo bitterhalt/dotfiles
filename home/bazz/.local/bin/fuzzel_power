@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/bitterhalt
+
 set -euo pipefail
 
 DMENU="fuzzel -d -a top --y 8 -w 24 --minimal-lines "
