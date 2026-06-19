@@ -30,7 +30,7 @@ binds {
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn  "fuzzel_killer"; }
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn "fuzzel_passmenu"; }
-    Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel --list-executables-in-path --line-height 26"; }
+    Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_run"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
 
     // Submaps
