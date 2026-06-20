@@ -114,6 +114,11 @@ window-rule {
 }
 
 window-rule {
+    match title="Task Manager - Helium"
+    open-floating true
+}
+
+window-rule {
     match app-id="firefox|zen$" title="^Picture-in-Picture$"
     open-floating true
     default-column-width { fixed 480; }

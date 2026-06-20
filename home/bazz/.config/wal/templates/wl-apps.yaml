@@ -20,7 +20,7 @@ auto_kbd_layout: true
 menu:
   - key: "b"
     desc: Browser
-    cmd: zen-browser
+    cmd: $BROWSER
   - key: "d"
     desc: Discord
     cmd: discord
