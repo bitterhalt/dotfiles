@@ -33,7 +33,7 @@ menu:
     cmd: foot sh -c "cd ~/.config/mako/ && nvim *"
   - key: "n"
     desc: Niri
-    cmd: foot sh -c "cd ~/.config/niri/ && vopen ."
+    cmd: foot sh -c "cd ~/.config/niri/ && nvim *"
   - key: "p"
     desc: "Pywal"
     cmd: foot -e nvim ~/.local/bin/setbg  ~/.config/wal/templates/*

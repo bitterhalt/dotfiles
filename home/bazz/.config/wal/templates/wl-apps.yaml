@@ -20,7 +20,7 @@ auto_kbd_layout: true
 menu:
   - key: "b"
     desc: Browser
-    cmd: $BROWSER
+    cmd: zen-browser
   - key: "d"
     desc: Discord
     cmd: discord
@@ -44,4 +44,4 @@ menu:
         cmd: steam|lutris
   - key: "a"
     desc: All
-    cmd: $BROWSER|discord|thunderbird|transmission-gtk
+    cmd: zen-browser|discord|thunderbird|transmission-gtk

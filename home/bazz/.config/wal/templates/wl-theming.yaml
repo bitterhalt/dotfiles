@@ -21,7 +21,7 @@ auto_kbd_layout: true
 menu:
   - key: "w"
     desc: Set wallpaper
-    cmd: swayimg --class swayimg-setwall -g ~/Pictures/wallpaper/
+    cmd: swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/
   - key: "t"
     desc: Set theme
     cmd: fuzzel_theme
