@@ -93,7 +93,7 @@ npm
 nvme-cli
 nwg-look
 pacman-contrib
-pacseek-bin
+pacseek
 pass
 pavucontrol
 pipewire
@@ -173,7 +173,7 @@ xorg-xinit
 xorg-xwayland
 xterm
 xwayland-satellite
-yay-bin
+yay
 yt-dlp
 zathura
 zathura-pdf-poppler
