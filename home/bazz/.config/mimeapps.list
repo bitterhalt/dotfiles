@@ -25,6 +25,7 @@ application/xhtml+xml=zen.desktop
 application/x-extension-xhtml=zen.desktop
 x-scheme-handler/betterdiscord=discord.desktop
 application/x-bittorrent=transmission-qt.desktop
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-7GLIR3.desktop
 
 [Added Associations]
 image/x-xcf=gimp.desktop;
@@ -50,3 +51,4 @@ image/svg+xml=swayimg.desktop;
 text/calendar=text.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-MR39P3.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-MR39P3.desktop;
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-7GLIR3.desktop;

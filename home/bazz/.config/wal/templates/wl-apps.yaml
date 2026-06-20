@@ -44,4 +44,4 @@ menu:
         cmd: steam|lutris
   - key: "a"
     desc: All
-    cmd: zen-browser|discord|thunderbird|transmission-gtk
+    cmd: $BROWSER|discord|thunderbird|transmission-gtk

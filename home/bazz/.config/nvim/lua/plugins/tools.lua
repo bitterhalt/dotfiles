@@ -102,9 +102,26 @@ return {
       {
         "<leader>sl",
         function()
-          require("persistence").select()
+          local persistence = require("persistence")
+          local fzf = require("fzf-lua")
+          local sessions = persistence.list()
+
+          if #sessions == 0 then
+            vim.notify("No sessions found", vim.log.levels.WARN)
+            return
+          end
+
+          fzf.fzf_exec(sessions, {
+            actions = {
+              ["default"] = function(selected)
+                if selected and selected[1] then
+                  persistence.load({ last = false, file = selected[1] })
+                end
+              end,
+            },
+          })
         end,
-        desc = "Select session",
+        desc = "Select session (fzf-lua)",
       },
     },
   },

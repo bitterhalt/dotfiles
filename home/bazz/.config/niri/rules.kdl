@@ -200,6 +200,7 @@ window-rule {
 
 window-rule {
     match app-id="firefox"
+    match app-id="helium"
     match app-id="zen"
     match app-id="Sysmon" title="Sysmon"
     open-on-workspace "1"
