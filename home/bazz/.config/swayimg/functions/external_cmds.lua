@@ -4,7 +4,7 @@ local function register_external_cmds(mode)
 		if not image then
 			return
 		end
-		local ret = os.execute("setbg -w " .. shellescape(image.path) .. " & disown")
+		local ret = os.execute("setbg -w " .. image.path .. " & disown")
 	end)
 
 	mode.on_key("p", function()
@@ -12,7 +12,7 @@ local function register_external_cmds(mode)
 		if not image then
 			return
 		end
-		local ret = os.execute("setbg -p " .. shellescape(image.path) .. " & disown")
+		local ret = os.execute("setbg -p " .. image.path .. " & disown")
 	end)
 
 	mode.on_key("Shift+p", function()
@@ -20,7 +20,7 @@ local function register_external_cmds(mode)
 		if not image then
 			return
 		end
-		local ret = os.execute("setbg -pf " .. shellescape(image.path) .. " & disown")
+		local ret = os.execute("setbg -pf " .. image.path .. " & disown")
 	end)
 
 	mode.on_key("e", function()
@@ -28,7 +28,7 @@ local function register_external_cmds(mode)
 		if not image then
 			return
 		end
-		os.execute("gimp " .. shellescape(image.path) .. " & disown")
+		os.execute("gimp " .. image.path .. " & disown")
 	end)
 
 	mode.on_key("y", function()
@@ -36,7 +36,7 @@ local function register_external_cmds(mode)
 		if not image then
 			return
 		end
-		os.execute("wl-copy -t image/png <" .. shellescape(image.path))
+		os.execute("wl-copy -t image/png <" .. image.path)
 		swayimg.text.set_status("Copied to clipboard: " .. image.path)
 	end)
 end
