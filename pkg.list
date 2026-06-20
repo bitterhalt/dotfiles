@@ -19,6 +19,8 @@ btop
 btrfs-assistant
 btrfs-progs
 chafa
+chaotic-keyring
+chaotic-mirrorlist
 cliphist
 dart-sass
 ddcutil
@@ -53,6 +55,7 @@ grub-btrfs
 gst-libav
 gst-plugin-pipewire
 gvfs
+helium-browser-bin
 htop
 imagemagick
 impala
