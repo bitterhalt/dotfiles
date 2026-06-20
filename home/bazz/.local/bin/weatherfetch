@@ -8,6 +8,10 @@ command -v curl >/dev/null 2>&1 || {
   echo >&2 "Program 'curl' required but is not installed. Aborting."
   exit 1
 }
+command -v bc >/dev/null 2>&1 || {
+  echo >&2 "Program 'bc' required but is not installed. Aborting."
+  exit 1
+}
 
 # To use this script you need to create an API key: https://home.openweathermap.org and add it below or in your .profile
 APIKEY=$OPEN_WEATHER_APIKEY
@@ -26,6 +30,7 @@ WEATHER_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.temp' | cut -d "." -f 1)
 FEELS_LIKE_TEMP=$(echo "$WEATHER_RESPONSE" | jq '.main.feels_like' | cut -d "." -f 1)
 HUMIDITY=$(echo "$WEATHER_RESPONSE" | jq '.main.humidity')
 WIND_SPEED=$(echo "$WEATHER_RESPONSE" | jq '.wind.speed')
+WIND_DIR=$(echo "$WEATHER_RESPONSE" | jq '.wind.deg // 0')
 SUNRISE=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunrise')
 SUNSET=$(echo "$WEATHER_RESPONSE" | jq '.sys.sunset')
 CURRENT_TIME=$(date +%s)
@@ -60,7 +65,8 @@ esac
 
 # Convert wind direction degrees to cardinal direction
 get_wind_direction() {
-  deg=$1
+  deg=${1:-0}
+  local dirs=(N NNE NE ENE E ESE SE SSE S SSW SW WSW W WNW NW NNW)
   idx=$(echo "($deg + 11.25)/22.5" | bc)
   echo "${dirs[$((idx % 16))]}"
 }
@@ -73,7 +79,7 @@ OUTPUT=$(printf "%s %s (%s°C)\n🌈 Feels like %s°C\n💧 Humidity: %s%%\n🌬
 
 # Output based on argument
 if [ "$1" = "-n" ]; then
-  notify-send -a weather-n -t 9000 "   Weather: ${CITY_NAME}" "$OUTPUT"
+  notify-send -a weather-n -t 9000 "    Weather: ${CITY_NAME}" "$OUTPUT"
 else
   INDENT="  "
   echo -e "${INDENT}Weather: ${CITY_NAME}"
