@@ -119,7 +119,8 @@ window-rule {
 }
 
 window-rule {
-    match app-id="firefox|zen$" title="^Picture-in-Picture$"
+    match title="^Picture-in-Picture$"
+    match title="^Picture in picture$"
     open-floating true
     default-column-width { fixed 480; }
     default-window-height { fixed 270; }
