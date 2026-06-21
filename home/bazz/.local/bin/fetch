@@ -259,7 +259,7 @@ reset='[0m'
 lc="${reset}${bold}${magenta}" # labels
 nc="${reset}${bold}${yellow}"  # user
 hn="${reset}${bold}${blue}"    # hostname
-ic="${reset}${green}"          # info
+ic="${reset}${reset}"          # info
 
 cat <<EOF
 
