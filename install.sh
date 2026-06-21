@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# ==============================================================================
-# Arch Linux Post-Install Script
-# ==============================================================================
-
 set -e
 
 # ==============================================================================
@@ -30,17 +26,29 @@ echo "Updating system and installing required tools: git, base-devel, rsync, xdg
 sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs || exit 1
 
 # ==============================================================================
-# 3. INSTALL YAY (AUR HELPER)
+# 3. SET UP CHAOTIC-AUR & INSTALL YAY
 # ==============================================================================
 
-helper="$(head -n 1 pkg.list)"
-tmpdir="$(mktemp -d --tmpdir ${helper%%:*}-build-XXXXXX)"
-trap 'rm -rf -- "$tmpdir"' EXIT 
-echo "Installing ${helper%%:*}..."
-git clone https://aur.archlinux.org/${helper##*:}.git "$tmpdir"
-cd "$tmpdir" && makepkg -si --noconfirm
-cd $OLDPWD
-rm -rf -- "$tmpdir"
+echo "Setting up Chaotic-AUR repository..."
+
+sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key 3056513887B78AEB
+
+sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+
+if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
+  echo "Appending Chaotic-AUR to /etc/pacman.conf..."
+  sudo bash -c 'cat << EOF >> /etc/pacman.conf
+
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+EOF'
+fi
+
+echo "Syncing databases and installing yay directly from Chaotic-AUR..."
+sudo pacman -Sy --noconfirm
+sudo pacman -S --noconfirm --needed yay
 
 # ==============================================================================
 # 4. SYNC DOTFILES
@@ -57,6 +65,7 @@ cd $OLDPWD
 
 if [[ -f pkg.list ]]; then
   echo "Installing programs..."
+  # Skip line 1 if it only listed the 'yay:yay-bin' placeholder, otherwise processes the rest
   yay -S --needed $(tail pkg.list -n +2)
 else
   echo "Error: './pkg.list' file not found!" >&2
