@@ -26,7 +26,7 @@ menu:
     cmd: fuzzel_notes -c
   - key: "t"
     desc:  TODO
-    cmd: footclient -a noteterm -T Notes sh -c "cd ~/Documents/personal/notes/ && nvim todo.md"
+    cmd: foot -a noteterm -T Notes sh -c "cd ~/Documents/personal/notes/ && nvim todo.md"
   - key: "d"
     desc: 󰩹 Delete
     cmd: fuzzel_notes -d

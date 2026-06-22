@@ -1,4 +1,11 @@
 return {
+
+  -- Bullets-vim
+  {
+    "bullets-vim/bullets.vim",
+    ft = "markdown",
+  },
+
   -- Markdown-preview
   {
     "iamcco/markdown-preview.nvim",
