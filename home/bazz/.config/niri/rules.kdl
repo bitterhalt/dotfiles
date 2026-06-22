@@ -24,8 +24,8 @@ window-rule {
 window-rule {
     match app-id="GParted"
     match app-id="Pinentry-gtk"
-    match app-id="anomalylauncher.exe"
     match app-id="anomalydx11avx.exe"
+    match app-id="anomalylauncher.exe"
     match app-id="blueman-manager"
     match app-id="btrfs-assistant"
     match app-id="localsend_app"
@@ -40,6 +40,7 @@ window-rule {
     match app-id="xdg-desktop-portal-gtk"
     match app-id="yad"
     match app-id="zenity"
+    match title="Vivaldi Settings: General - Vivaldi"
     open-floating true
 }
 
@@ -115,6 +116,7 @@ window-rule {
 
 window-rule {
     match title="Task Manager - Helium"
+    match title="Task Manager - Vivaldi"
     open-floating true
 }
 
