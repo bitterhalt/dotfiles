@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
+FUZZEL_FLAGS="-d -a top --y 8 -w 20 --minimal-lines"
 
 confirm_action() {
   local action_name="$1"
@@ -15,9 +15,9 @@ confirm_action() {
 }
 
 while true; do
-  SUB=$(echo -e "← ➜ Back\nl ➜ Lock\ne ➜ Logout\nz ➜ Sleep 💤\nS ➜ Shutdown\nR ➜ Reboot\nU ➜ Reboot UEFI" | fuzzel $FUZZEL_FLAGS)
+  SUB=$(echo -e "l ➜ Lock\ne ➜ Logout\nz ➜ Sleep 💤\nS ➜ Shutdown\nR ➜ Reboot\nU ➜ Reboot UEFI" | fuzzel $FUZZEL_FLAGS)
 
-  if [ -z "$SUB" ] || [[ "$SUB" == *"Back"* ]]; then
+  if [ -z "$SUB" ]; then
     exit 0
   fi
 
