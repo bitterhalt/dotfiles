@@ -1,13 +1,14 @@
 # Dotfiles
 
-Philosophy of my dotfiles is the emphasis on a keyboard-centric workflow. Navigating through tasks, managing windows, and executing commands – all is centered around the efficiency and speed that keyboard shortcuts provides:
+A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully curated applications. This repository contains my personal desktop setup built on [Arch Linux](https://archlinux.org).
 
-- No bloated shells - speed before eye candy
-- Easy to maintain
-- Low resource usage
-- Stability
+- Philosophy:
+  - Less clutter - a clear working environment 🧘‍♂️
+  - Low resource usage 🪶
+  - Simplicity - no bleeding edge shells that are pain to maintain 🐒
+  - Speed before eye candy 🚀
 
-### Current Stack
+### My Stack
 
 - Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
