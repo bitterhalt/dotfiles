@@ -1,8 +1,13 @@
 # Dotfiles
 
-A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully curated applications. This repository contains my personal desktop setup built on [Arch Linux](https://archlinux.org).
+Philosophy of my dotfiles is the emphasis on a keyboard-centric workflow. Navigating through tasks, managing windows, and executing commands – all is centered around the efficiency and speed that keyboard shortcuts provides:
 
-### My Stack
+- No bloated shells - speed before eye candy
+- Easy to maintain
+- Low resource usage
+- Stability
+
+### Current Stack
 
 - Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
@@ -42,6 +47,7 @@ A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully c
 ```bash
 bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 ```
+
 ---
 
 ### Inspiration of my cool stuff ⭐
