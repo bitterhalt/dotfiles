@@ -1,0 +1,18 @@
+hotkey-overlay {
+    skip-at-startup
+}
+
+environment {
+    GTK_USE_PORTAL "0"
+    GDK_DEBUG "no-portals"
+}
+
+layout {
+    background-color "#000000"
+}
+
+output "DP-1" {
+    scale 1.0
+}
+
+spawn-sh-at-startup "wlgreet; niri msg action quit --skip-confirmation"
