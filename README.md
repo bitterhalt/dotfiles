@@ -1,7 +1,5 @@
 # Dotfiles
 
-A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully curated applications. This repository contains my personal desktop setup built on [Arch Linux](https://archlinux.org).
-
 ### Philosophy:
   - Less clutter - a clear working environment 🧘‍♂️
   - Low resource usage 🪶
