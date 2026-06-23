@@ -2,9 +2,13 @@
 
 A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully curated applications. This repository contains my personal desktop setup built on [Arch Linux](https://archlinux.org).
 
+### Philosophy:
+  - Less clutter - a clear working environment 🧘‍♂️
+  - Low resource usage 🪶
+  - Simplicity - no bleeding edge shells that are pain to maintain 🐒
+  - Speed before eye candy 🚀
 
-
-### My Stack
+### Current Stack
 
 - Distro: [Arch](https://archlinux.org)
 - Bar: [Waybar](https://github.com/Alexays/Waybar)
@@ -20,20 +24,11 @@ A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully c
 - Login Manager: [ly](https://github.com/fairyglade/ly)
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
-- 
-### Philosophy:
-  - Less clutter - a clear working environment 🧘‍♂️
-  - Low resource usage 🪶
-  - Simplicity - no bleeding edge shells that are pain to maintain 🐒
-  - Speed before eye candy 🚀
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/58b9b8b5-9534-407b-962b-f83af91c4252" />
 
 
-
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d362e791-b931-4ac9-9369-7f47868c4fa7" />
-
-
 
 
 ### Installation
