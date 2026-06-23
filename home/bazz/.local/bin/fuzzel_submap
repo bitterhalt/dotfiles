@@ -5,7 +5,7 @@ FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
 
 menu_apps() {
   while true; do
-    SUB=$(echo -e "b ➜ Browser\nd ➜ Discord\nm ➜ Email\nt ➜ Torrent\ng ➜ Gaming\na ➜ All Apps" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ Browser\n2 ➜ Discord\n3 ➜ Email\n4 ➜ Torrent\n5 ➜ Gaming\n6 ➜ All Apps" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
@@ -34,7 +34,7 @@ menu_apps() {
       ;;
     *"Gaming")
       while true; do
-        GAMING_SUB=$(echo -e "← ➜ Back\ns ➜ Steam\nl ➜ Lutris\na ➜ All Gaming" | fuzzel $FUZZEL_FLAGS)
+        GAMING_SUB=$(echo -e "← ➜ Back\n1 ➜ Steam\n2 ➜ Lutris\n3 ➜ All Gaming" | fuzzel $FUZZEL_FLAGS)
         if [ -z "$GAMING_SUB" ]; then exit 0; fi
         if [[ "$GAMING_SUB" == *"Back"* ]]; then break; fi
 
@@ -61,7 +61,7 @@ menu_apps() {
 
 menu_notes() {
   while true; do
-    SUB=$(echo -e "s ➜ 󰍉 Search\nn ➜ 󰎚 New Note\nt ➜  TODO\nd ➜ 󰩹 Delete" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ 󰍉 Search\n2 ➜ 󰎚 New Note\n3 ➜  TODO\n4 ➜ 󰩹 Delete" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
@@ -87,7 +87,7 @@ menu_notes() {
 
 menu_packages() {
   while true; do
-    SUB=$(echo -e "i ➜ Install\nu ➜ Update" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ Install\n2 ➜ Update" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
@@ -105,7 +105,7 @@ menu_packages() {
 
 menu_settings() {
   while true; do
-    SUB=$(echo -e "b ➜ Bash\nd ➜ Fuzzel\nf ➜ Foot\nm ➜ Mako\nn ➜ Niri\np ➜ Pywal\nv ➜ Nvim\nw ➜ Waybar" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ Bash\n2 ➜ Fuzzel\n3 ➜ Foot\n4 ➜ Mako\n5 ➜ Niri\n6 ➜ Pywal\n7 ➜ Nvim\n8 ➜ Waybar" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
@@ -147,7 +147,7 @@ menu_settings() {
 
 menu_system() {
   while true; do
-    SUB=$(echo -e "a ➜ 󰓃 Audio devices\nb ➜ 󰂯 Bluetooth [Bluetui]\nw ➜ 󰖩 Wi-Fi (Impala)\nn ➜ 󰲝 Network Manager\nm ➜  󰨇 Monitor" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ 󰓃 Audio devices\n2 ➜ 󰂯 Bluetooth [Bluetui]\n3 ➜ 󰖩 Wi-Fi (Impala)\n4 ➜ 󰲝 Network Manager\n5 ➜ 󰨇 Monitor" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
@@ -169,7 +169,7 @@ menu_system() {
       ;;
     *"Monitor"*)
       while true; do
-        MON_SUB=$(echo -e "← ➜ Back\na ➜ Atop\nb ➜ Btop\nh ➜ Htop\nl ➜ Logs\nc ➜ Combined [ tmux-window ]" | fuzzel $FUZZEL_FLAGS)
+        MON_SUB=$(echo -e "← ➜ Back\n1 ➜ Atop\n2 ➜ Btop\n3 ➜ Htop\n4 ➜ Logs\n5 ➜ Combined [ tmux-window ]" | fuzzel $FUZZEL_FLAGS)
         if [ -z "$MON_SUB" ]; then exit 0; fi
         if [[ "$MON_SUB" == *"Back"* ]]; then break; fi
 
@@ -203,7 +203,7 @@ menu_system() {
 
 menu_theming() {
   while true; do
-    SUB=$(echo -e "w ➜ Set wallpaper\nt ➜ Set theme\ns ➜ Save theme" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ Set wallpaper\n2 ➜ Set theme\n3 ➜ Save theme" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
