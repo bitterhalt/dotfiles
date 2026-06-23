@@ -34,7 +34,7 @@ menu_apps() {
       ;;
     *"Gaming")
       while true; do
-        GAMING_SUB=$(echo -e "← Back\ns ➜ Steam\nl ➜ Lutris\na ➜ All Gaming" | fuzzel $FUZZEL_FLAGS)
+        GAMING_SUB=$(echo -e "← ➜ Back\ns ➜ Steam\nl ➜ Lutris\na ➜ All Gaming" | fuzzel $FUZZEL_FLAGS)
         if [ -z "$GAMING_SUB" ]; then exit 0; fi
         if [[ "$GAMING_SUB" == *"Back"* ]]; then break; fi
 
@@ -97,32 +97,6 @@ menu_packages() {
       ;;
     *"Update")
       foot -a pop-upgrade -e sys_upgrade
-      exit 0
-      ;;
-    esac
-  done
-}
-
-menu_recording() {
-  while true; do
-    SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰄀 Screenshot Full Screen\n4 ➜ 󰩬 Screenshot Regional" | fuzzel $FUZZEL_FLAGS)
-    if [ -z "$SUB" ]; then exit 0; fi
-
-    case "$SUB" in
-    *"Record Screen")
-      wl-record -f
-      exit 0
-      ;;
-    *"Record Regional")
-      wl-record -r
-      exit 0
-      ;;
-    *"Screenshot Full Screen")
-      wl-shot -f
-      exit 0
-      ;;
-    *"Screenshot Regional")
-      wl-shot -re
       exit 0
       ;;
     esac
@@ -195,7 +169,7 @@ menu_system() {
       ;;
     *"Monitor"*)
       while true; do
-        MON_SUB=$(echo -e "← Back\na ➜ Atop\nb ➜ Btop\nh ➜ Htop\nl ➜ Logs\nc ➜ Combined [ tmux-window ]" | fuzzel $FUZZEL_FLAGS)
+        MON_SUB=$(echo -e "← ➜ Back\na ➜ Atop\nb ➜ Btop\nh ➜ Htop\nl ➜ Logs\nc ➜ Combined [ tmux-window ]" | fuzzel $FUZZEL_FLAGS)
         if [ -z "$MON_SUB" ]; then exit 0; fi
         if [[ "$MON_SUB" == *"Back"* ]]; then break; fi
 
@@ -249,15 +223,10 @@ menu_theming() {
   done
 }
 
-# ----------------------------------------------------
-# Execution Router
-# ----------------------------------------------------
 case "${1:-}" in
 -apps) menu_apps ;;
 -notes) menu_notes ;;
 -packages) menu_packages ;;
--power) exec fuzzel_power ;;
--rec) menu_recording ;;
 -settings) menu_settings ;;
 -system) menu_system ;;
 -theming) menu_theming ;;

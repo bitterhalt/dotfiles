@@ -23,22 +23,22 @@ binds {
     // Menus
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
     Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
-    Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn "fuzzel_emoji"; }
+    Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
     Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel --line-height 26"; }
+    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "fuzzel_power"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn  "fuzzel_killer"; }
     Mod+F5 hotkey-overlay-title="Passmenu" { spawn "fuzzel_passmenu"; }
     Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_run"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
+    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "fuzzel_screenshot"; }
 
     // Submaps
     Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "fuzzel_submap -apps"; }
-    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "fuzzel_submap -power"; }
     Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "fuzzel_submap -system"; }
     Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "fuzzel_submap -settings"; }
-    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "fuzzel_submap -rec"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "fuzzel_submap -notes"; }
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "fuzzel_submap -theming"; }
     Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "fuzzel_submap -packages"; }

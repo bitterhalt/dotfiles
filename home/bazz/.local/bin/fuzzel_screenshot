@@ -1,57 +1,32 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-get_options() {
-  echo "Record Screen"
-  echo "Record Region"
-  echo "Screenshot Full"
-  echo "Screenshot Region"
-  echo "Screenshot Full (Delay)"
-  echo "Stop Recording"
-}
+FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
 
-# Ping waybar
-sig() {
-  if pgrep -x waybar >/dev/null 2>&1; then
-    pkill -SIGRTMIN+2 waybar
-  fi
-}
+while true; do
+  SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰄀 Screenshot Full Screen\n4 ➜ 󰩬 Screenshot Regional" | fuzzel $FUZZEL_FLAGS)
 
-main() {
-  choice=$( (get_options) | fuzzel -d \
-    -a top \
-    --y 8 \
-    -w 22 \
-    -l 7 \
-    --hide-prompt \
-    --minimal-lines)
-
-  if [[ -z "${choice// /}" ]]; then
-    exit 1
+  if [ -z "$SUB" ]; then
+    exit 0
   fi
 
-  case $choice in
-  'Record Screen')
-    wl-record -f && sig
+  case "$SUB" in
+  *"Record Screen")
+    wl-record -f
+    exit 0
     ;;
-  'Record Region')
-    wl-record -r && sig
+  *"Record Regional")
+    wl-record -r
+    exit 0
     ;;
-  'Screenshot Full')
+  *"Screenshot Full Screen")
     wl-shot -f
+    exit 0
     ;;
-  'Screenshot Region')
-    wl-shot -r
-    ;;
-  'Screenshot Full (Delay)')
-    wl-shot -t
-    ;;
-  'Stop Recording')
-    wl-record -k && sig
+  *"Screenshot Regional")
+    wl-shot -re
+    exit 0
     ;;
   esac
-}
-
-main &
-exit 0
+done
