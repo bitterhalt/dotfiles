@@ -1,0 +1,265 @@
+#!/usr/bin/env bash
+
+# Flags
+FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
+
+menu_apps() {
+  while true; do
+    SUB=$(echo -e "b ➜ Browser\nd ➜ Discord\nm ➜ Email\nt ➜ Torrent\ng ➜ Gaming\na ➜ All Apps" | fuzzel $FUZZEL_FLAGS)
+    if [ -z "$SUB" ]; then exit 0; fi
+
+    case "$SUB" in
+    *"Browser")
+      vivaldi
+      exit 0
+      ;;
+    *"Discord")
+      discord
+      exit 0
+      ;;
+    *"Email")
+      thunderbird
+      exit 0
+      ;;
+    *"Torrent")
+      transmission-gtk
+      exit 0
+      ;;
+    *"All Apps")
+      vivaldi &
+      discord &
+      thunderbird &
+      transmission-gtk
+      exit 0
+      ;;
+    *"Gaming")
+      while true; do
+        GAMING_SUB=$(echo -e "← Back\ns ➜ Steam\nl ➜ Lutris\na ➜ All Gaming" | fuzzel $FUZZEL_FLAGS)
+        if [ -z "$GAMING_SUB" ]; then exit 0; fi
+        if [[ "$GAMING_SUB" == *"Back"* ]]; then break; fi
+
+        case "$GAMING_SUB" in
+        *"Steam")
+          steam
+          exit 0
+          ;;
+        *"Lutris")
+          lutris
+          exit 0
+          ;;
+        *"All Gaming")
+          steam &
+          lutris
+          exit 0
+          ;;
+        esac
+      done
+      ;;
+    esac
+  done
+}
+
+menu_notes() {
+  while true; do
+    SUB=$(echo -e "s ➜ 󰍉 Search\nn ➜ 󰎚 New Note\nt ➜  TODO\nd ➜ 󰩹 Delete" | fuzzel $FUZZEL_FLAGS)
+    if [ -z "$SUB" ]; then exit 0; fi
+
+    case "$SUB" in
+    *"Search")
+      fuzzel_notes
+      exit 0
+      ;;
+    *"New Note")
+      fuzzel_notes -c
+      exit 0
+      ;;
+    *"TODO")
+      foot -a noteterm -T Notes sh -c "cd ~/Documents/personal/notes/ && nvim todo.md"
+      exit 0
+      ;;
+    *"Delete")
+      fuzzel_notes -d
+      exit 0
+      ;;
+    esac
+  done
+}
+
+menu_packages() {
+  while true; do
+    SUB=$(echo -e "i ➜ Install\nu ➜ Update" | fuzzel $FUZZEL_FLAGS)
+    if [ -z "$SUB" ]; then exit 0; fi
+
+    case "$SUB" in
+    *"Install")
+      foot -a pacseek -T pacseek -e pacseek -m
+      exit 0
+      ;;
+    *"Update")
+      foot -a pop-upgrade -e sys_upgrade
+      exit 0
+      ;;
+    esac
+  done
+}
+
+menu_recording() {
+  while true; do
+    SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰄀 Screenshot Full Screen\n4 ➜ 󰩬 Screenshot Regional" | fuzzel $FUZZEL_FLAGS)
+    if [ -z "$SUB" ]; then exit 0; fi
+
+    case "$SUB" in
+    *"Record Screen")
+      wl-record -f
+      exit 0
+      ;;
+    *"Record Regional")
+      wl-record -r
+      exit 0
+      ;;
+    *"Screenshot Full Screen")
+      wl-shot -f
+      exit 0
+      ;;
+    *"Screenshot Regional")
+      wl-shot -re
+      exit 0
+      ;;
+    esac
+  done
+}
+
+menu_settings() {
+  while true; do
+    SUB=$(echo -e "b ➜ Bash\nd ➜ Fuzzel\nf ➜ Foot\nm ➜ Mako\nn ➜ Niri\np ➜ Pywal\nv ➜ Nvim\nw ➜ Waybar" | fuzzel $FUZZEL_FLAGS)
+    if [ -z "$SUB" ]; then exit 0; fi
+
+    case "$SUB" in
+    *"Bash")
+      foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc
+      exit 0
+      ;;
+    *"Fuzzel")
+      foot -e nvim ~/.config/fuzzel/fuzzel.ini
+      exit 0
+      ;;
+    *"Foot")
+      foot -e nvim ~/.config/foot/foot.ini
+      exit 0
+      ;;
+    *"Mako")
+      foot sh -c "cd ~/.config/mako/ && nvim *"
+      exit 0
+      ;;
+    *"Niri")
+      foot sh -c "cd ~/.config/niri/ && nvim *"
+      exit 0
+      ;;
+    *"Pywal")
+      foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*
+      exit 0
+      ;;
+    *"Nvim")
+      foot sh -c "cd ~/.config/nvim && vopen ."
+      exit 0
+      ;;
+    *"Waybar")
+      foot sh -c "cd ~/.config/waybar/ && vopen ."
+      exit 0
+      ;;
+    esac
+  done
+}
+
+menu_system() {
+  while true; do
+    SUB=$(echo -e "a ➜ 󰓃 Audio devices\nb ➜ 󰂯 Bluetooth [Bluetui]\nw ➜ 󰖩 Wi-Fi (Impala)\nn ➜ 󰲝 Network Manager\nm ➜  󰨇 Monitor" | fuzzel $FUZZEL_FLAGS)
+    if [ -z "$SUB" ]; then exit 0; fi
+
+    case "$SUB" in
+    *"Audio devices")
+      fuzzel_sound
+      exit 0
+      ;;
+    *"Bluetooth"*)
+      foot -a bluetui -e bluetui
+      exit 0
+      ;;
+    *"Wi-Fi"*)
+      foot -a impala -e impala
+      exit 0
+      ;;
+    *"Network Manager")
+      nm-connection-editor
+      exit 0
+      ;;
+    *"Monitor"*)
+      while true; do
+        MON_SUB=$(echo -e "← Back\na ➜ Atop\nb ➜ Btop\nh ➜ Htop\nl ➜ Logs\nc ➜ Combined [ tmux-window ]" | fuzzel $FUZZEL_FLAGS)
+        if [ -z "$MON_SUB" ]; then exit 0; fi
+        if [[ "$MON_SUB" == *"Back"* ]]; then break; fi
+
+        case "$MON_SUB" in
+        *"Atop")
+          foot -T atop -e amdgpu_top --smi
+          exit 0
+          ;;
+        *"Btop")
+          foot -a btop -e btop
+          exit 0
+          ;;
+        *"Htop")
+          foot -a htop -e htop
+          exit 0
+          ;;
+        *"Logs")
+          foot -a foot -T journalctl -e journalctl -f
+          exit 0
+          ;;
+        *"Combined")
+          foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh
+          exit 0
+          ;;
+        esac
+      done
+      ;;
+    esac
+  done
+}
+
+menu_theming() {
+  while true; do
+    SUB=$(echo -e "w ➜ Set wallpaper\nt ➜ Set theme\ns ➜ Save theme" | fuzzel $FUZZEL_FLAGS)
+    if [ -z "$SUB" ]; then exit 0; fi
+
+    case "$SUB" in
+    *"Set wallpaper")
+      swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/
+      exit 0
+      ;;
+    *"Set theme")
+      fuzzel_theme
+      exit 0
+      ;;
+    *"Save theme")
+      fuzzel_theme -s
+      exit 0
+      ;;
+    esac
+  done
+}
+
+# ----------------------------------------------------
+# Execution Router
+# ----------------------------------------------------
+case "${1:-}" in
+-apps) menu_apps ;;
+-notes) menu_notes ;;
+-packages) menu_packages ;;
+-power) exec fuzzel_power ;;
+-rec) menu_recording ;;
+-settings) menu_settings ;;
+-system) menu_system ;;
+-theming) menu_theming ;;
+*) exit 0 ;;
+esac

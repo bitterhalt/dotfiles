@@ -34,14 +34,14 @@ binds {
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
 
     // Submaps
-    Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "wlr-which-key wl-apps"; }
-    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "wlr-which-key wl-power"; }
-    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "wlr-which-key wl-system"; }
-    Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "wlr-which-key wl-settings"; }
-    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "wlr-which-key wl-rec"; }
-    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "wlr-which-key wl-notes"; }
-    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "wlr-which-key wl-theming"; }
-    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "wlr-which-key wl-packages"; }
+    Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "fuzzel_submap -apps"; }
+    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "fuzzel_submap -power"; }
+    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "fuzzel_submap -system"; }
+    Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "fuzzel_submap -settings"; }
+    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "fuzzel_submap -rec"; }
+    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "fuzzel_submap -notes"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "fuzzel_submap -theming"; }
+    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "fuzzel_submap -packages"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }

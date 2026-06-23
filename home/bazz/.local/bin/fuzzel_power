@@ -2,54 +2,49 @@
 
 set -euo pipefail
 
-DMENU="fuzzel -d -a top --y 8 -w 24 --minimal-lines "
-KMENU="fuzzel -d -a top --y 8 -w 24 -l 12 "
-CONFIRM="fuzzel -d -a top --minimal-lines --y 8 -w 10 -p Sure? "
-
-kill_process() {
-  local pid
-  pid=$(ps -u "$USER" -o pid,comm --no-headers | $KMENU --placeholder "Kill process" | awk '{print $1}')
-
-  if [[ -n "$pid" ]]; then
-    if confirm_action; then
-      echo "$pid" | xargs -r kill
-    fi
-  fi
-}
+FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
 
 confirm_action() {
-  [[ "$(echo -e "Yes\nNo" | $CONFIRM)" == "Yes" ]]
+  local action_name="$1"
+  local selection
+  selection=$(echo -e "n ➜ No, Cancel\ny ➜ Yes, ${action_name}" | fuzzel $FUZZEL_FLAGS)
+  if [[ "$selection" == *"Yes"* ]]; then
+    return 0
+  fi
+  return 1
 }
 
-if [[ "${XDG_CURRENT_DESKTOP:-}" == "niri" ]]; then
-  LOGOUT_CMD="niri msg action quit --skip-confirmation"
-else
-  LOGOUT_CMD="loginctl terminate-user $USER"
-fi
+while true; do
+  SUB=$(echo -e "← ➜ Back\nl ➜ Lock\ne ➜ Logout\nz ➜ Sleep 💤\nS ➜ Shutdown\nR ➜ Reboot\nU ➜ Reboot UEFI" | fuzzel $FUZZEL_FLAGS)
 
-case "$(printf "1 - Lock\n2 - zZzz\n3 - Logout\n4 - Reboot\n5 - Shutdown\n6 - Kill process 💀" | $DMENU --placeholder 'Power menu:')" in
-*"Lock")
-  swaylock
-  ;;
-*"zZzz")
-  systemctl suspend
-  ;;
-*"Logout")
-  if confirm_action; then
-    eval "$LOGOUT_CMD"
+  if [ -z "$SUB" ] || [[ "$SUB" == *"Back"* ]]; then
+    exit 0
   fi
-  ;;
-*"Reboot")
-  if confirm_action; then
-    systemctl reboot
-  fi
-  ;;
-*"Shutdown")
-  if confirm_action; then
-    systemctl poweroff
-  fi
-  ;;
-*"Kill process 💀")
-  kill_process
-  ;;
-esac
+
+  case "$SUB" in
+  *"Lock")
+    swaylock -C ~/.cache/wal/colors-swaylock
+    exit 0
+    ;;
+  *"Logout")
+    niri msg action quit
+    exit 0
+    ;;
+  *"Sleep"*)
+    systemctl suspend
+    exit 0
+    ;;
+  *"Shutdown")
+    confirm_action "Shutdown" && systemctl poweroff
+    exit 0
+    ;;
+  *"Reboot")
+    confirm_action "Reboot" && systemctl reboot
+    exit 0
+    ;;
+  *"Reboot UEFI")
+    confirm_action "Reboot to UEFI" && systemctl reboot --firmware-setup
+    exit 0
+    ;;
+  esac
+done

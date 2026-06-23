@@ -7,7 +7,6 @@ EDITOR="${EDITOR:-nvim}"
 TERMINAL="${TERMINAL:-foot}"
 DMENU="fuzzel -d -a top --y 8 -w 40"
 
-# Make dir
 mkdir -p "$NOTES_DIR"
 cd "$NOTES_DIR" || exit 1
 
@@ -21,7 +20,7 @@ search_notes() {
 
 create_note() {
   local note_name
-  note_name=$($DMENU \
+  note_name=$(echo -n | $DMENU \
     --placeholder "e.g., work/meeting-minutes" \
     --minimal-lines)
   if [ -z "$note_name" ]; then
@@ -43,15 +42,15 @@ delete_note() {
     exit 0
   fi
   local confirm
-  confirm=$(printf "No\nYes" | $DMENU \
+  confirm=$(echo -e "n ➜ No\ny ➜ Yes" | $DMENU \
     --placeholder "Trash '$selection'? " \
     --minimal-lines)
-  if [ "$confirm" = "Yes" ]; then
+  if [[ "$confirm" == *"Yes"* ]]; then
     trash-put "$NOTES_DIR/$selection"
   fi
 }
 
-case "$1" in
+case "${1:-}" in
 -c | --create)
   create_note
   ;;
