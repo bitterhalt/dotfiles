@@ -1,21 +1,44 @@
 #!/bin/bash
 
 export PASSWORD_STORE_CLIP_TIME=10
-
 shopt -s nullglob globstar
 
-prefix=${PASSWORD_STORE_DIR-~/.password-store}
+prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
 password_files=("$prefix"/**/*.gpg)
 password_files=("${password_files[@]#"$prefix"/}")
 password_files=("${password_files[@]%.gpg}")
 
-password=$(printf '%s\n' "${password_files[@]}" | fuzzel -d \
-  -a top \
-  --y 8 \
-  --x 8 \
-  -w 25 \
-  --minimal-lines "$@")
+if [[ ${#password_files[@]} -eq 0 ]]; then
+  exit 1
+fi
 
-[[ -n $password ]] || exit
+password=$(printf '%s\n' "${password_files[@]}" | fuzzel \
+  --dmenu \
+  --anchor=top \
+  --x-margin=8 \
+  --y-margin=8 \
+  --width=25 \
+  --prompt="Select Password: ")
 
-pass show -c "$password" 2>/dev/null
+[[ -n $password ]] || exit 0
+
+action=$(printf '%s\n' "Copy" "Edit" | fuzzel \
+  --dmenu \
+  --anchor=top \
+  --x-margin=8 \
+  --y-margin=8 \
+  --width=25 \
+  --minimal-lines \
+  --prompt="Action: ")
+
+case "$action" in
+"Copy")
+  pass show -c "$password" 2>/dev/null
+  ;;
+"Edit")
+  $TERMINAL -e pass edit "$password"
+  ;;
+*)
+  exit 0
+  ;;
+esac
