@@ -15,7 +15,7 @@ confirm_action() {
 }
 
 while true; do
-  SUB=$(echo -e "l ➜ Lock\ne ➜ Logout\nz ➜ Sleep 💤\nS ➜ Shutdown\nR ➜ Reboot\nU ➜ Reboot UEFI" | fuzzel $FUZZEL_FLAGS)
+  SUB=$(echo -e "l ➜ Lock\ne ➜ Exit\nz ➜ Sleep 💤\ns ➜ Shutdown\nr ➜ Reboot\nu ➜ Reboot UEFI" | fuzzel $FUZZEL_FLAGS)
 
   if [ -z "$SUB" ]; then
     exit 0
@@ -26,7 +26,7 @@ while true; do
     swaylock -C ~/.cache/wal/colors-swaylock
     exit 0
     ;;
-  *"Logout")
+  *"Exit")
     niri msg action quit
     exit 0
     ;;
