@@ -18,7 +18,7 @@ password=$(printf '%s\n' "${password_files[@]}" | fuzzel \
   --x-margin=8 \
   --y-margin=8 \
   --width=25 \
-  --prompt="Select Password: ")
+  --placeholder="Select Password ")
 
 [[ -n $password ]] || exit 0
 
@@ -29,7 +29,7 @@ action=$(printf '%s\n' "Copy" "Edit" | fuzzel \
   --y-margin=8 \
   --width=25 \
   --minimal-lines \
-  --prompt="Action: ")
+  --placeholder="Choose? ")
 
 case "$action" in
 "Copy")
