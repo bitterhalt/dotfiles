@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
+# ==============================================================================
+# Script: fuzzel_submap
+# Description: A modular, fast, and minimalist menu router using Fuzzel.
+#              Invokes specific standalone sub-menus (Apps, Notes, Packages,
+#              Pass, Settings, System, Theming) directly via command-line flags.
+# Usage: Execute with an explicit flag to open the target menu:
+#        fuzzel_submap [-apps | -notes | -packages | -pass | -settings | -system | -theming]
+# ==============================================================================
+
 # Flags
-FUZZEL_FLAGS="-d -a top --y 8 -w 25 --minimal-lines"
+FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
 
 menu_apps() {
   while true; do
@@ -34,7 +43,6 @@ menu_apps() {
       ;;
     *"Gaming")
       while true; do
-        # CHANGED: Replaced '← Back' with '..'
         GAMING_SUB=$(echo -e "..\n1 ➜ All\n2 ➜ Steam\n3 ➜ Lutris" | fuzzel $FUZZEL_FLAGS)
         if [ -z "$GAMING_SUB" ]; then exit 0; fi
         if [[ "$GAMING_SUB" == ".." ]]; then break; fi
@@ -98,6 +106,24 @@ menu_packages() {
       ;;
     *"Update")
       foot -a pop-upgrade -e sys_upgrade
+      exit 0
+      ;;
+    esac
+  done
+}
+
+menu_pass() {
+  while true; do
+    SUB=$(echo -e "1 ➜ Passwords\n2 ➜ Authenticator" | fuzzel $FUZZEL_FLAGS)
+    if [ -z "$SUB" ]; then exit 0; fi
+
+    case "$SUB" in
+    *"Passwords")
+      fuzzel_passmenu
+      exit 0
+      ;;
+    *"Authenticator")
+      proton-authenticator
       exit 0
       ;;
     esac
@@ -170,7 +196,6 @@ menu_system() {
       ;;
     *"Monitor"*)
       while true; do
-        # CHANGED: Replaced '← Back' with '..'
         MON_SUB=$(echo -e "..\n1 ➜ Atop\n2 ➜ Btop\n3 ➜ Htop\n4 ➜ Logs\n5 ➜ Combined" | fuzzel $FUZZEL_FLAGS)
         if [ -z "$MON_SUB" ]; then exit 0; fi
         if [[ "$MON_SUB" == ".." ]]; then break; fi
@@ -229,6 +254,7 @@ case "${1:-}" in
 -apps) menu_apps ;;
 -notes) menu_notes ;;
 -packages) menu_packages ;;
+-pass) menu_pass ;;
 -settings) menu_settings ;;
 -system) menu_system ;;
 -theming) menu_theming ;;
