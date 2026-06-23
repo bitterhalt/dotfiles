@@ -27,10 +27,13 @@ A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully c
   - Simplicity - no bleeding edge shells that are pain to maintain 🐒
   - Speed before eye candy 🚀
 
-<img width="1920" height="1080" alt="2026-05-25-19-58-45_screenshot" src="https://github.com/user-attachments/assets/2534611f-f5aa-444d-970f-b75383554348" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/58b9b8b5-9534-407b-962b-f83af91c4252" />
 
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/170ff2dd-2e7b-4f36-8c48-97ef5b4b2574" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d362e791-b931-4ac9-9369-7f47868c4fa7" />
+
+
 
 
 ### Installation
