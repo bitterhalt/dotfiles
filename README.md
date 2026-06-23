@@ -2,11 +2,7 @@
 
 A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully curated applications. This repository contains my personal desktop setup built on [Arch Linux](https://archlinux.org).
 
-- Philosophy:
-  - Less clutter - a clear working environment 🧘‍♂️
-  - Low resource usage 🪶
-  - Simplicity - no bleeding edge shells that are pain to maintain 🐒
-  - Speed before eye candy 🚀
+
 
 ### My Stack
 
@@ -24,20 +20,18 @@ A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully c
 - Login Manager: [ly](https://github.com/fairyglade/ly)
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
-
-### Screenshots
+- 
+### Philosophy:
+  - Less clutter - a clear working environment 🧘‍♂️
+  - Low resource usage 🪶
+  - Simplicity - no bleeding edge shells that are pain to maintain 🐒
+  - Speed before eye candy 🚀
 
 <img width="1920" height="1080" alt="2026-05-25-19-58-45_screenshot" src="https://github.com/user-attachments/assets/2534611f-f5aa-444d-970f-b75383554348" />
 
-<details>
-<summary><b>Blurred overview</b></summary><br>
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/170ff2dd-2e7b-4f36-8c48-97ef5b4b2574" />
-</details>
 
-<details>
-<summary><b>Clock module with notification history</b></summary><br>
-<img width="640" height="431" alt="Recording" src="https://github.com/user-attachments/assets/23d789e7-6500-4740-b3db-0040d3d77930" />
-</details>
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/170ff2dd-2e7b-4f36-8c48-97ef5b4b2574" />
+
 
 ### Installation
 
