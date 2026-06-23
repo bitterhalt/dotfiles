@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Flags
-FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
+FUZZEL_FLAGS="-d -a top --y 8 -w 25 --minimal-lines"
 
 menu_apps() {
   while true; do
