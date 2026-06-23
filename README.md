@@ -5,7 +5,7 @@ A minimal [Niri](https://github.com/niri-wm/niri) configuration with carefully c
 ### Philosophy:
   - Less clutter - a clear working environment 🧘‍♂️
   - Low resource usage 🪶
-  - Simplicity - no bleeding edge shells that are pain to maintain 🐒
+  - Simplicity 🐒
   - Speed before eye candy 🚀
 
 ### Current Stack
