@@ -5,7 +5,7 @@ FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
 
 menu_apps() {
   while true; do
-    SUB=$(echo -e "1 ➜ Browser\n2 ➜ Discord\n3 ➜ Email\n4 ➜ Torrent\n5 ➜ Gaming\n6 ➜ All Apps" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ All\n2 ➜ Browser\n3 ➜ Discord\n4 ➜ Email\n5 ➜ Torrent\n6 ➜ + Gaming" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
@@ -25,7 +25,7 @@ menu_apps() {
       transmission-gtk
       exit 0
       ;;
-    *"All Apps")
+    *"All")
       vivaldi &
       discord &
       thunderbird &
@@ -34,9 +34,10 @@ menu_apps() {
       ;;
     *"Gaming")
       while true; do
-        GAMING_SUB=$(echo -e "← ➜ Back\n1 ➜ Steam\n2 ➜ Lutris\n3 ➜ All Gaming" | fuzzel $FUZZEL_FLAGS)
+        # CHANGED: Replaced '← Back' with '..'
+        GAMING_SUB=$(echo -e "..\n1 ➜ All\n2 ➜ Steam\n3 ➜ Lutris" | fuzzel $FUZZEL_FLAGS)
         if [ -z "$GAMING_SUB" ]; then exit 0; fi
-        if [[ "$GAMING_SUB" == *"Back"* ]]; then break; fi
+        if [[ "$GAMING_SUB" == ".." ]]; then break; fi
 
         case "$GAMING_SUB" in
         *"Steam")
@@ -47,7 +48,7 @@ menu_apps() {
           lutris
           exit 0
           ;;
-        *"All Gaming")
+        *"All")
           steam &
           lutris
           exit 0
@@ -147,7 +148,7 @@ menu_settings() {
 
 menu_system() {
   while true; do
-    SUB=$(echo -e "1 ➜ 󰓃 Audio devices\n2 ➜ 󰂯 Bluetooth [Bluetui]\n3 ➜ 󰖩 Wi-Fi (Impala)\n4 ➜ 󰲝 Network Manager\n5 ➜ 󰨇 Monitor" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ 󰓃 Audio devices\n2 ➜ 󰂯 Bluetooth [Bluetui]\n3 ➜ 󰖩 Wi-Fi (Impala)\n4 ➜ 󰲝 Network Manager\n5 ➜ + 󰨇 Monitor" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
@@ -169,9 +170,10 @@ menu_system() {
       ;;
     *"Monitor"*)
       while true; do
-        MON_SUB=$(echo -e "← ➜ Back\n1 ➜ Atop\n2 ➜ Btop\n3 ➜ Htop\n4 ➜ Logs\n5 ➜ Combined [ tmux-window ]" | fuzzel $FUZZEL_FLAGS)
+        # CHANGED: Replaced '← Back' with '..'
+        MON_SUB=$(echo -e "..\n1 ➜ Atop\n2 ➜ Btop\n3 ➜ Htop\n4 ➜ Logs\n5 ➜ Combined" | fuzzel $FUZZEL_FLAGS)
         if [ -z "$MON_SUB" ]; then exit 0; fi
-        if [[ "$MON_SUB" == *"Back"* ]]; then break; fi
+        if [[ "$MON_SUB" == ".." ]]; then break; fi
 
         case "$MON_SUB" in
         *"Atop")

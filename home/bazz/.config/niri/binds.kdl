@@ -36,12 +36,12 @@ binds {
     Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "fuzzel_screenshot"; }
 
     // Submaps
-    Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "fuzzel_submap -apps"; }
-    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "fuzzel_submap -system"; }
-    Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "fuzzel_submap -settings"; }
-    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "fuzzel_submap -notes"; }
-    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "fuzzel_submap -theming"; }
-    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "fuzzel_submap -packages"; }
+    Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "fuzzel_menus -apps"; }
+    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "fuzzel_menus -system"; }
+    Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "fuzzel_menus -settings"; }
+    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "fuzzel_menus -notes"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "fuzzel_menus -theming"; }
+    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "fuzzel_menus -packages"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
