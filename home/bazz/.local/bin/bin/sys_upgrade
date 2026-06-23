@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+echo "[*] Beginning system upgrade..."
+
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+  echo "[*] Detected OS: $NAME"
+
+  case "$ID" in
+  arch | manjaro | cachyos | endeavouros)
+    if command -v yay &>/dev/null; then
+      echo "[*] Updating via yay..."
+      MAIN_UPGRADE_CMD="yay -Syu"
+    else
+      echo "[*] Updating via pacman..."
+      MAIN_UPGRADE_CMD="sudo pacman -Syu"
+    fi
+    ;;
+  void)
+    echo "[*] Updating via xbps..."
+    MAIN_UPGRADE_CMD="sudo xbps-install -Syu"
+    ;;
+  ubuntu | debian | pop | mint)
+    echo "[*] Updating via apt..."
+    MAIN_UPGRADE_CMD="sudo apt update && sudo apt dist-upgrade -y"
+    ;;
+  fedora | rhel | centos)
+    echo "[*] Updating via dnf..."
+    MAIN_UPGRADE_CMD="sudo dnf upgrade -y"
+    ;;
+  *)
+    echo "[!] Generic Linux detected. Attempting to use pacman/yay..."
+    if command -v yay &>/dev/null; then
+      MAIN_UPGRADE_CMD="yay -Syu"
+    else
+      MAIN_UPGRADE_CMD="sudo pacman -Syu"
+    fi
+    ;;
+  esac
+else
+  echo "[x] Cannot determine OS type (/etc/os-release missing). Defaulting to yay..."
+  MAIN_UPGRADE_CMD="yay -Syu"
+fi
+
+if eval "$MAIN_UPGRADE_CMD"; then
+  echo -e "\n[✓] Base system upgrade complete!"
+else
+  echo -e "\n[x] Base system upgrade failed! Check the errors above."
+fi
+
+echo -e "\n[*] Checking for universal package managers..."
+
+if command -v snap &>/dev/null; then
+  echo "[*] Snap detected. Updating snap packages..."
+  if sudo snap refresh; then
+    echo "[✓] Snap packages updated successfully!"
+  else
+    echo "[x] Snap update encountered an error."
+  fi
+fi
+
+if command -v flatpak &>/dev/null; then
+  echo -e "\n[*] Flatpak detected. Updating flatpak packages..."
+  if flatpak update -y; then
+    echo "[✓] Flatpak packages updated successfully!"
+  else
+    echo "[x] Flatpak update encountered an error."
+  fi
+fi
+
+if command -v pipx &>/dev/null; then
+  echo -e "\n[*] pipx detected. Updating pipx packages..."
+  if pipx upgrade-all; then
+    echo "[✓] pipx packages updated successfully!"
+  else
+    echo "[x] pipx update encountered an error."
+  fi
+fi
+
+echo -e "\nPress <Enter> to exit this window."
+read -r _

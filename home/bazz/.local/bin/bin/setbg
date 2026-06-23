@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+BGCOL="121212"
+
+get_backend() {
+  local backend
+  backend=$(printf "wal\ncolorthief" | fuzzel -d --minimal-lines --placeholder "Select Backend: ")
+  if [[ -z "$backend" ]]; then
+    backend="wal"
+  fi
+  echo "$backend"
+}
+
+get_resolution() {
+  if command -v niri >/dev/null 2>&1; then
+    local out
+    out=$(niri msg --json outputs | jq -r 'to_entries | .[0].value.logical | "\(.width) \(.height)"' 2>/dev/null)
+    if [[ -n "$out" ]]; then
+      local res=($out)
+      if [[ -n "${res[0]}" && -n "${res[1]}" ]]; then
+        echo "${res[0]} ${res[1]} true"
+        return 0
+      fi
+    fi
+  fi
+
+  if command -v hyprctl >/dev/null 2>&1; then
+    local out
+    out=$(hyprctl -j monitors | jq -r '.[] | select(.focused) | "\(.width) \(.height)"' 2>/dev/null)
+    if [[ -n "$out" ]]; then
+      local res=($out)
+      if [[ -n "${res[0]}" && -n "${res[1]}" ]]; then
+        echo "${res[0]} ${res[1]} false"
+        return 0
+      fi
+    fi
+  fi
+
+  return 1
+}
+
+_apply_wallpaper() {
+  local path="$1"
+
+  [[ -f "$path" ]] || {
+    echo "Error: '$path' does not exist." >&2
+    return 1
+  }
+
+  local res_data
+  res_data=$(get_resolution) || {
+    echo "Error: failed to detect resolution." >&2
+    return 1
+  }
+
+  local res=($res_data)
+  local w="${res[0]}"
+  local h="${res[1]}"
+  local is_niri="${res[2]}"
+
+  local dir="$HOME/.local/share/wall/"
+  local out="${dir}wallpaper.png"
+  local lockscreen="${dir}lockscreen.png"
+
+  mkdir -p "$dir"
+
+  vipsthumbnail "$path" \
+    --size "${w}x${h}" \
+    --output "$out" || return 1
+
+  awww img "$out" --transition-type=any \
+    --transition-step=60 \
+    --transition-fps=60 \
+    --transition-duration=.7
+
+  if [[ "$is_niri" == "true" ]]; then
+    gm convert "$out" -blur 0x30 -modulate 80 "$lockscreen"
+    awww img -n overview "$lockscreen" --transition-type=none
+  fi
+}
+
+setwall() {
+  _apply_wallpaper "$1"
+}
+
+pywal() {
+  local backend
+  backend=$(get_backend)
+
+  _apply_wallpaper "$1" || return 1
+  wal -n --backend "$backend" -i "$HOME/.local/share/wall/wallpaper.png"
+  refresh_portals.sh
+}
+
+pywal_fixed() {
+  local backend
+  backend=$(get_backend)
+
+  _apply_wallpaper "$1" || return 1
+  wal -n --backend "$backend" -b $BGCOL -i "$HOME/.local/share/wall/wallpaper.png"
+  refresh_portals.sh
+}
+
+case "$1" in
+-w)
+  shift
+  setwall "$1"
+  ;;
+-p)
+  shift
+  pywal "$1"
+  ;;
+-pf)
+  shift
+  pywal_fixed "$1"
+  ;;
+esac

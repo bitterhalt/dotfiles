@@ -1,0 +1,275 @@
+#!/usr/bin/env bash
+# Forked version of https://github.com/elifouts/MyFetch/tree/master
+
+ostype="$(uname)"
+distrotype=none
+osi=""
+ki=""
+di="󰧨"
+ti="󰞷"
+pi="󰏔"
+ui="󰅶"
+ai="󱦟"
+
+if command -v getprop 1>/dev/null; then
+  distrotype=android
+fi
+
+kernel="$(echo $(uname -r) | cut -d'-' -f1-1)"
+
+case $ostype in
+*"Linux"*)
+  if [ $distrotype = android ]; then
+    host="$(hostname)"
+    USER="$(whoami)"
+    os="Android $(getprop ro.build.version.release)"
+    osi="󰀲"
+  else
+    host="$(cat /proc/sys/kernel/hostname)"
+    . /etc/os-release
+    if [ -f /bedrock/etc/bedrock-release ]; then
+      os="$(brl version)"
+    else
+      os="${PRETTY_NAME}"
+      case $(echo $ID | sed 's/ .*//') in
+      debian) osi="" ;;
+      arch) osi="󰣇" ;;
+      endeavouros) osi="" ;;
+      fedora) osi="" ;;
+      gentoo) osi="" ;;
+      rhel) osi="" ;;
+      slackware) osi="" ;;
+      void) osi="" ;;
+      alpine) osi="" ;;
+      nixos) osi="󱄅" ;;
+      artix) osi="" ;;
+      exherbo) osi="󰆚" ;;
+      mageia) osi="" ;;
+      manjaro) osi="" ;;
+      opensuse) osi="" ;;
+      solus) osi="" ;;
+      ubuntu) osi="" ;;
+      linuxmint) osi="󰣭" ;;
+      trisquel) osi="" ;;
+      puppy) osi="" ;;
+      coreos) osi="" ;;
+      mx) osi="" ;;
+      vanilla) osi="" ;;
+      pop_os) osi="" ;;
+      raspbian) osi="" ;;
+      deepin) osi="" ;;
+      almalinux) osi="" ;;
+      garuda) osi="" ;;
+      centos) osi="" ;;
+      rocky) osi="" ;;
+      esac
+    fi
+  fi
+  ;;
+*"Darwin"*)
+  host="$(hostname -f | sed -e 's/^[^.]*\.//')"
+  mac_product="$(/usr/libexec/PlistBuddy -c "Print:ProductName" /System/Library/CoreServices/SystemVersion.plist)"
+  mac_version="$(/usr/libexec/PlistBuddy -c "Print:ProductVersion" /System/Library/CoreServices/SystemVersion.plist)"
+  os="${mac_product} ${mac_version}"
+  osi=""
+  ;;
+*"FreeBSD"*)
+  host="$(hostname)"
+  distrotype=bsd
+  os="FreeBSD $(freebsd-version | sed 's/-.*//')"
+  osi=""
+  ;;
+*"OpenBSD"*)
+  host="$(hostname)"
+  distrotype=bsd
+  os="OpenBSD $(uname -r)"
+  osi=""
+  ;;
+*"NetBSD"*)
+  host="$(hostname)"
+  distrotype=netbsd
+  os="NetBSD $(uname -r)"
+  osi="󰉀"
+  ;;
+*)
+  os="Unix-like"
+  host="host"
+  ;;
+esac
+
+MANAGER=$(command -v nix-env pkg yum zypper dnf rpm dpkg-query brew port pacman xbps-query emerge cave apk kiss pmm /usr/sbin/slackpkg bulge birb cpm pmm opkg eopkg getprop 2>/dev/null)
+manager=$(basename "$MANAGER")
+if [ $distrotype = netbsd ]; then
+  manager="pkg_info-netbsd"
+fi
+case $manager in
+cpm) packages="$(cpm C)" ;;
+brew) packages="$(printf '%s\n' "$(brew --cellar)/"* | wc -l)" ;;
+port) packages="$(($(port installed | wc -l) - 1))" ;;
+dpkg-query) packages="$(dpkg-query -f '${binary:Package}\n' -W | wc -l)" ;;
+rpm) packages="$(rpm -qa --last | wc -l)" ;;
+yum) packages="$(yum list installed | wc -l)" ;;
+dnf) packages="$(dnf list installed | wc -l)" ;;
+zypper) packages="$(zypper se | wc -l)" ;;
+pacman) packages="$(pacman -Q | wc -l)" ;;
+kiss) packages="$(kiss list | wc -l)" ;;
+emerge) packages="$(qlist -I | wc -l)" ;;
+pkg) packages="$(pkg info | wc -l | tr -d ' ')" ;;
+cave) packages="$(cave show installed-slots | wc -l)" ;;
+xbps-query) packages="$(xbps-query -l | wc -l)" ;;
+nix-env) packages="$(nix-store -q --requisites /run/current-system/sw | wc -l)" ;;
+apk) packages="$(apk list --installed | wc -l)" ;;
+pmm) packages="$(/bedrock/libexec/pmm pacman pmm -Q 2>/dev/null | wc -l)" ;;
+opkg) packages="$(opkg list-installed | wc -l)" ;;
+eopkg) packages="$(eopkg li | wc -l)" ;;
+/usr/sbin/slackpkg) packages="$(ls /var/log/packages | wc -l)" ;;
+bulge) packages="$(bulge list | wc -l)" ;;
+birb) packages="$(birb --list-installed | wc -l)" ;;
+pkg_info)
+  packages="$(pkg_info -A | wc -l)"
+  manager="pkg"
+  ;;
+pkg_info-netbsd)
+  packages="$(pkg_info -a | wc -l)"
+  manager="pkg"
+  ;;
+*)
+  if [ $distrotype = android ]; then
+    packages="$(pkg list-installed | wc -l)"
+    manager="pkg"
+  else
+    packages="$(ls /usr/bin | wc -l)"
+    manager="bin"
+  fi
+  ;;
+esac
+
+packages="${packages#"${packages%%[![:space:]]*}"}"
+manager=$(echo $manager | sed "s/-query//; s/\/usr\/.*\///")
+
+if [ $distrotype = android ]; then
+  uptime="$(echo $(uptime -p) | cut -c 4-)"
+elif [ $distrotype = bsd ] || [ $distrotype = netbsd ]; then
+  uptime="$(uptime | sed -e 's/.* up //; s/, [0-9]* user.*//')"
+else
+  case $ostype in
+  *"Linux"*)
+    IFS=. read -r s _ </proc/uptime
+    ;;
+  *)
+    s=$(sysctl -n kern.boottime)
+    s=${s#*=}
+    s=${s%,*}
+    s=$(($(date +%s) - s))
+    ;;
+  esac
+  d="$((s / 60 / 60 / 24))"
+  h="$((s / 60 / 60 % 24))"
+  m="$((s / 60 % 60))"
+  # Plurals
+  [ "$d" -gt 1 ] && dp=s
+  [ "$h" -gt 1 ] && hp=s
+  [ "$m" -gt 1 ] && mp=s
+  [ "$s" -gt 1 ] && sp=s
+  # Hide empty fields.
+  [ "$d" = 0 ] && d=
+  [ "$h" = 0 ] && h=
+  [ "$m" = 0 ] && m=
+  [ "$m" != "" ] && s=
+  # Make the output of uptime smaller.
+  [ "$d" ] && uptime="$d day$dp, "
+  [ "$h" ] && uptime="$uptime$h hour$hp, "
+  [ "$m" ] && uptime="$uptime$m min$mp"
+  [ "$s" ] && uptime="$uptime$s sec$sp"
+  uptime=${uptime%, }
+fi
+
+# DE/WM detection
+de=""
+wm=""
+if [ "$ostype" = "Darwin" ]; then
+  de="Aqua"
+  wm="Quartz Compositor"
+elif [ "$distrotype" != "android" ]; then
+  de="${XDG_CURRENT_DESKTOP:-${XDG_SESSION_DESKTOP:-${DESKTOP_SESSION}}}"
+  if command -v pgrep 1>/dev/null 2>&1; then
+    wmlist="i3|bspwm|sway|dwm|awesome|xmonad|qtile|herbstluftwm|openbox|icewm|fluxbox|spectrwm|stumpwm|wmaker|fvwm2|fvwm3|musca|monsterwm|dwl|hyprland|river|wayfire|kwin_x11|kwin_wayland|mutter|xfwm4|marco|metacity|compiz|enlightenment|cwm|2bwm|catwm"
+    wm="$(pgrep -x -l "$wmlist" 2>/dev/null | awk '{print $2; exit}')"
+  fi
+fi
+[ -z "$de" ] && de="N/A"
+[ -z "$wm" ] && wm="N/A"
+if [ "$de" != "N/A" ] && [ "$wm" != "N/A" ]; then
+  dewm="${de}/${wm}"
+elif [ "$de" != "N/A" ]; then
+  dewm="${de}"
+elif [ "$wm" != "N/A" ]; then
+  dewm="${wm}"
+else
+  dewm="N/A"
+fi
+
+# Terminal detection
+if [ -n "$TERM_PROGRAM" ]; then
+  term="$TERM_PROGRAM"
+elif [ -n "$TERM" ]; then
+  # Fallback to getting the parent process name if TERM is generic (like xterm-256color)
+  ppid_name=$(ps -p $PPID -o comm= 2>/dev/null | sed 's/^-//')
+  if [[ "$TERM" == "xterm"* ]] && [ -n "$ppid_name" ]; then
+    term="$ppid_name"
+  else
+    term="$TERM"
+  fi
+else
+  term="N/A"
+fi
+
+# OS age (days since filesystem birth/install)
+case $ostype in
+*"Linux"*)
+  osbirth="$(stat -c %W / 2>/dev/null)"
+  case $osbirth in
+  '' | 0 | *[!0-9]*) osbirth="$(stat -c %Y /lost+found 2>/dev/null)" ;;
+  esac
+  ;;
+*"Darwin"* | *"FreeBSD"* | *"OpenBSD"* | *"NetBSD"*)
+  osbirth="$(stat -f %B / 2>/dev/null)"
+  ;;
+*)
+  osbirth=""
+  ;;
+esac
+case $osbirth in
+'' | 0 | *[!0-9]*)
+  osage="N/A"
+  ;;
+*)
+  osage="$((($(date +%s) - osbirth) / 86400)) days"
+  ;;
+esac
+
+bold='[1m'
+red='[31m'
+green='[32m'
+yellow='[33m'
+blue='[34m'
+magenta='[35m'
+reset='[0m'
+
+lc="${reset}${bold}${magenta}" # labels
+nc="${reset}${bold}${yellow}"  # user
+hn="${reset}${bold}${blue}"    # hostname
+ic="${reset}${reset}"          # info
+
+cat <<EOF
+
+  ${nc}${USER}${red}@${reset}${hn}${host}${reset}
+  ${lc}${osi}  ${ic}${os}${reset}
+  ${lc}${ki}  ${ic}${kernel}${reset}
+  ${lc}${di}  ${ic}${dewm}${reset}
+  ${lc}${ti}  ${ic}${term}${reset}
+  ${lc}${pi}  ${ic}${packages} (${manager})${reset}
+  ${lc}${ui}  ${ic}${uptime}${reset}
+  ${lc}${ai}  ${ic}Age ${osage}${reset}
+
+EOF

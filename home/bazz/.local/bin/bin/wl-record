@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+# Small helper script to record your desktop using gpu-screen-recorder
+# Depends on: gpu-screen-recorder, slurp
+# More info https://git.dec05eba.com/gpu-screen-recorder/about/
+# Github @ bitterhalt
+
+set -e
+
+PIDFILE="/tmp/gpu-recorder.pid"
+SAVEDIR="${HOME}/Videos/Captures/"
+TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
+FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
+NOTI="notify-send -a gpu-screen-recorder -t 3000"
+SIG="pkill -SIGRTMIN+2 waybar"
+
+mkdir -p -- "$SAVEDIR"
+
+fullscreen() {
+  pidof -q gpu-screen-recorder && {
+    $NOTI "Screen record" "Recording already in progress"
+    exit 0
+  }
+  gpu-screen-recorder -w screen -f 60 -a default_output -o "$FILENAME" &
+  echo $! >"$PIDFILE"
+  $SIG
+}
+
+region() {
+  pidof -q gpu-screen-recorder && {
+    $NOTI "Screen record" "Recording already in progress"
+    exit 0
+  }
+  REGION=$(slurp -f "%wx%h+%x+%y") || exit 1
+  gpu-screen-recorder -w "$REGION" -f 60 -o "$FILENAME" &
+  echo $! >"$PIDFILE"
+  $SIG
+}
+
+stop_recording() {
+  if [ -f "$PIDFILE" ]; then
+    PID=$(cat "$PIDFILE")
+    if ps -p "$PID" >/dev/null 2>&1; then
+      # Send SIGINT to stop gracefully
+      kill -SIGINT "$PID" 2>/dev/null || kill "$PID"
+      sleep 1
+    fi
+    rm -f "$PIDFILE"
+    $NOTI "Screen record" "Recording stopped and saved to $SAVEDIR"
+  else
+    $NOTI "Screen record" "No active recording"
+  fi
+}
+
+print_help() {
+  echo "Usage: wl-record [options]"
+  echo "Options:"
+  echo "  -f,  --fullscreen   Capture the fullscreen."
+  echo "  -r,  --region       Select a region to capture."
+  echo "  -k,  --kill         Kill record"
+  echo "  -h,  --help         Show this help message."
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -f | --fullscreen) fullscreen ;;
+  -r | --region) region ;;
+  -k | --kill) stop_recording ;;
+  -h | --help) print_help ;;
+  *)
+    echo "Unknown option: $1"
+    print_help
+    exit 1
+    ;;
+  esac
+  shift
+done

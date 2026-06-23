@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# Stolen from: https://codeberg.org/jorisvandijk/dotfiles-hyprland/src/branch/main/home/joris/.local/bin/Dotfiles
+
+# Colors
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+CYAN="\033[0;36m"
+RESET="\033[0m"
+
+# Locations / excludes
+dotfiles_repo="$HOME/Documents/projects/dotfiles"
+dotfiles_list="$HOME/.local/share/dotlist"
+exclude_path="$HOME/.local/bin/apps"
+
+# Add new dotfiles
+add() {
+  echo -e "${CYAN}[*] Adding dotfiles from list...${RESET}"
+  cd "$dotfiles_repo" || {
+    echo -e "${RED}[!] Failed to change directory to $dotfiles_repo${RESET}"
+    exit 1
+  }
+
+  # Capture pacman package list once
+  pacman -Qe | awk '{print $1}' >"$dotfiles_repo/pkg.list" &&
+    echo -e "${GREEN}[✓] Updated package list.${RESET}" ||
+    echo -e "${YELLOW}[!] Warning: Could not update pacman package list.${RESET}"
+
+  echo -e "${CYAN}[*] Syncing files (including deletions, excluding $exclude_path)...${RESET}"
+
+  while IFS= read -r dotfile; do
+    if [[ -e "$dotfile" ]]; then
+      if rsync -a --relative --delete --exclude "$exclude_path" "$dotfile" "$dotfiles_repo"/; then
+        echo -e "${GREEN}[✓] Synced:${RESET} $dotfile"
+      else
+        echo -e "${RED}[x] Failed to sync:${RESET} $dotfile"
+      fi
+    else
+      echo -e "${YELLOW}[!] Missing locally, removing from repo:${RESET} $dotfile"
+      rel_path=$(realpath --relative-to=/ "$dotfile")
+      find "$dotfiles_repo" -path "*/$rel_path" -exec rm -rf {} \; 2>/dev/null
+    fi
+  done <"$dotfiles_list"
+
+  git add -A
+  if [[ -n $(git status -s) ]]; then
+    git status
+    read -rp "Enter a commit message: " commit_message
+    git commit -m "$commit_message"
+    echo -e "${GREEN}[✓] Commit complete.${RESET}"
+  else
+    echo -e "${YELLOW}[!] No changes to commit.${RESET}"
+  fi
+}
+
+# Push changes
+push() {
+  echo -e "${CYAN}[*] Pushing to repository...${RESET}"
+  cd "$dotfiles_repo" || {
+    echo -e "${RED}[!] Failed to change directory to $dotfiles_repo${RESET}"
+    exit 1
+  }
+
+  if git push; then
+    echo -e "${GREEN}[✓] Push complete.${RESET}"
+  else
+    echo -e "${RED}[x] Push failed.${RESET}"
+  fi
+}
+
+# Entry
+case "$1" in
+add)
+  add
+  ;;
+push)
+  push
+  ;;
+*)
+  echo -e "${YELLOW}Usage:${RESET} $0 {add|push}"
+  exit 1
+  ;;
+esac
