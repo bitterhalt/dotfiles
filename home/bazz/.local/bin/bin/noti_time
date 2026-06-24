@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-notify-send -a time-noti -t 5000 "$(date +%H:%M:%S)"
