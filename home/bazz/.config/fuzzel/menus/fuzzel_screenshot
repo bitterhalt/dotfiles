@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
+
+while true; do
+  SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰄀 Screenshot Full Screen\n4 ➜ 󰩬 Screenshot Regional\n5 ➜ 󰙦 Stop" | fuzzel $FUZZEL_FLAGS)
+
+  if [ -z "$SUB" ]; then
+    exit 0
+  fi
+
+  case "$SUB" in
+  *"Record Screen")
+    wl-record -f
+    exit 0
+    ;;
+  *"Record Regional")
+    wl-record -r
+    exit 0
+    ;;
+  *"Screenshot Full Screen")
+    wl-shot -f
+    exit 0
+    ;;
+  *"Screenshot Regional")
+    wl-shot -re
+    exit 0
+    ;;
+  *"Stop")
+    wl-record -k && pkill -SIGRTMIN+2 waybar
+    exit 0
+    ;;
+  esac
+done
