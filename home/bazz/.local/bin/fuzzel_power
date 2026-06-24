@@ -15,7 +15,7 @@ confirm_action() {
 }
 
 while true; do
-  SUB=$(echo -e "1 ➜ Lock\n2 ➜ Exit\n3 ➜ Sleep 💤\n4 ➜ Shutdown\n5 ➜ Reboot\n6 ➜ Reboot UEFI" | fuzzel $FUZZEL_FLAGS)
+  SUB=$(echo -e "1 ➜ Lock\n2 ➜ Exit\n3 ➜ zZzz 💤\n4 ➜ Shutdown\n5 ➜ Reboot\n6 ➜ Reboot UEFI" | fuzzel $FUZZEL_FLAGS)
 
   if [ -z "$SUB" ]; then
     exit 0
@@ -30,7 +30,7 @@ while true; do
     niri msg action quit
     exit 0
     ;;
-  *"Sleep"*)
+  *"zZzz"*)
     systemctl suspend
     exit 0
     ;;
