@@ -2,11 +2,8 @@
 
 # ==============================================================================
 # Script: fuzzel_submap
-# Description: A modular, fast, and minimalist menu router using Fuzzel.
-#              Invokes specific standalone sub-menus (Apps, Notes, Packages,
-#              Pass, Settings, System, Theming) directly via command-line flags.
-# Usage: Execute with an explicit flag to open the target menu:
-#        fuzzel_submap [-apps | -notes | -packages | -pass | -settings | -system | -theming]
+# Description: Just quick and dirty attempt to clone functionality of wlr-which-key.
+# You have been fooled, this is just a normal fuzzel menu!
 # ==============================================================================
 
 # Flags
