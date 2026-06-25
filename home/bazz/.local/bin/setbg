@@ -74,7 +74,7 @@ _apply_wallpaper() {
     --transition-duration=.7
 
   if [[ "$is_niri" == "true" ]]; then
-    gm convert "$out" -blur 0x30 -modulate 80 "$lockscreen"
+    gm convert "$out" -blur 0x55 -modulate 80 "$lockscreen"
     awww img -n overview "$lockscreen" --transition-type=none
   fi
 }

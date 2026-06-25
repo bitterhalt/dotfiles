@@ -14,6 +14,7 @@ layout {
 
 output "DP-1" {
     scale 1.0
+    focus-at-startup
 }
 
 spawn-sh-at-startup "wlgreet; niri msg action quit --skip-confirmation"
