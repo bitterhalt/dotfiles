@@ -8,14 +8,11 @@ swayimg.gallery.limit_cache(100)
 swayimg.gallery.enable_preload(false)
 swayimg.gallery.enable_pstore(true)
 
-local register_external_cmds = require("functions/external_cmds")
-
 -- Configure Gallery Layout & Text Hints
 swayimg.gallery.set_text("topleft", {
 	"[b] -> Set Wallpaper",
 	"[p] -> Wallpaper with Pywal  [Shift+p] -> Wallpaper with Pywal alternative",
 })
-
 swayimg.gallery.set_text("topright", {
 	"[e] -> Edit (GIMP)",
 	"[y] -> Copy to Clipboard",
@@ -23,6 +20,16 @@ swayimg.gallery.set_text("topright", {
 swayimg.gallery.set_text("bottomleft", { "{list.index} of {list.total}" })
 swayimg.gallery.set_text("bottomright", { "{name}" })
 
+local function with_image(fn)
+	local image = swayimg.gallery.get_image()
+	if image then
+		fn(image)
+	end
+end
+
+--------------------------------------------------------------------------------
+-- Binds
+--------------------------------------------------------------------------------
 swayimg.gallery.on_key("q", function()
 	swayimg.exit()
 end)
@@ -63,16 +70,42 @@ end)
 
 -- Trash
 swayimg.gallery.on_key("Delete", function()
-	local image = swayimg.gallery.get_image()
-	if image then
+	with_image(function(image)
 		os.execute("trash-put " .. shellescape(image.path))
 		swayimg.text.set_status("File trashed: " .. image.path)
-	end
+	end)
 end)
 
-register_external_cmds(swayimg.gallery)
+-- External commands
+swayimg.gallery.on_key("b", function()
+	with_image(function(image)
+		os.execute("setbg -w " .. shellescape(image.path) .. " & disown")
+	end)
+end)
+swayimg.gallery.on_key("p", function()
+	with_image(function(image)
+		os.execute("setbg -p " .. shellescape(image.path) .. " & disown")
+	end)
+end)
+swayimg.gallery.on_key("Shift-p", function()
+	with_image(function(image)
+		os.execute("setbg -pf " .. shellescape(image.path) .. " & disown")
+	end)
+end)
+swayimg.gallery.on_key("e", function()
+	with_image(function(image)
+		os.execute("gimp " .. shellescape(image.path) .. " & disown")
+	end)
+end)
+swayimg.gallery.on_key("y", function()
+	with_image(function(image)
+		os.execute("wl-copy -t image/png < " .. shellescape(image.path))
+		swayimg.text.set_status("Copied to clipboard: " .. image.path)
+	end)
+end)
 
 swayimg.gallery.on_image_change(function()
-	local image = swayimg.gallery.get_image()
-	swayimg.set_title("Gallery: " .. image.path)
+	with_image(function(image)
+		swayimg.set_title("Gallery: " .. image.path)
+	end)
 end)

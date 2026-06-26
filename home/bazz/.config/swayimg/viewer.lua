@@ -1,5 +1,43 @@
-local register_external_cmds = require("functions/external_cmds")
+--------------------------------------------------------------------------------
+-- Viewer mode
+--------------------------------------------------------------------------------
+swayimg.viewer.set_default_position("center")
+swayimg.viewer.enable_centering(true)
+swayimg.viewer.enable_loop(true)
+swayimg.viewer.limit_preload(1)
 
+swayimg.viewer.set_text("topleft", {
+	"File: {name}",
+	"Format: {format}",
+	"File size: {sizehr}",
+	"Size: {frame.width}x{frame.height}",
+	"{meta.Exif.Photo.DateTimeOriginal}",
+	"{meta.Exif.Image.Model}",
+})
+swayimg.viewer.set_text("topright", {
+	"Image: {list.index} of {list.total}",
+	"Frame: {frame.index} of {frame.total}",
+	"Scale: {scale}",
+})
+swayimg.viewer.set_text("bottomleft", {})
+swayimg.viewer.set_text("bottomright", {})
+
+swayimg.on_window_resize(function()
+	if swayimg.get_mode() == "viewer" then
+		swayimg.viewer.set_fix_scale("optimal")
+	end
+end)
+
+local function with_image(fn)
+	local image = swayimg.viewer.get_image()
+	if image then
+		fn(image)
+	end
+end
+
+--------------------------------------------------------------------------------
+-- Binds
+--------------------------------------------------------------------------------
 swayimg.viewer.on_key("q", function()
 	swayimg.exit()
 end)
@@ -90,4 +128,30 @@ swayimg.viewer.on_mouse("MouseExtra", function()
 	swayimg.viewer.switch_image("next")
 end)
 
-register_external_cmds(swayimg.viewer)
+-- External commands
+swayimg.viewer.on_key("b", function()
+	with_image(function(image)
+		os.execute("setbg -w " .. shellescape(image.path) .. " & disown")
+	end)
+end)
+swayimg.viewer.on_key("p", function()
+	with_image(function(image)
+		os.execute("setbg -p " .. shellescape(image.path) .. " & disown")
+	end)
+end)
+swayimg.viewer.on_key("Shift-p", function()
+	with_image(function(image)
+		os.execute("setbg -pf " .. shellescape(image.path) .. " & disown")
+	end)
+end)
+swayimg.viewer.on_key("e", function()
+	with_image(function(image)
+		os.execute("gimp " .. shellescape(image.path) .. " & disown")
+	end)
+end)
+swayimg.viewer.on_key("y", function()
+	with_image(function(image)
+		os.execute("wl-copy -t image/png < " .. shellescape(image.path))
+		swayimg.text.set_status("Copied to clipboard: " .. image.path)
+	end)
+end)
