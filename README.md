@@ -40,7 +40,7 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 
 ### Keybinds
 
-(Check here)[https://github.com/bitterhalt/dotfiles/blob/main/.assets/keybind.md]
+[Check here](https://github.com/bitterhalt/dotfiles/blob/main/.assets/keybind.md)
 
 ---
 
