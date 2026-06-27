@@ -11,6 +11,7 @@ ignore-timeout=0
 icon-path=/home/bazz/.local/share/icons/Papirus-Dark/
 layer=overlay
 sort=-time
+output=DP-1
 
 # STYLE
 anchor=top-center
