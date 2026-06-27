@@ -1,0 +1,256 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+trap 'echo "Error on line $LINENO: $BASH_COMMAND"; coredump' ERR
+trap 'echo "Script interrupted"; exit 130' INT TERM
+
+if [[ $EUID -eq 0 ]]; then
+  echo "This script must not be run as root"
+  exit 1
+fi
+
+FAVORITES_FILE="$HOME/.sysmenu_favorites"
+SHOW_FAVORITES_ONLY=false
+RUN_AS_APP=false
+
+require_command() {
+  if ! command -v "$1" &>/dev/null; then
+    echo "Error: $1 is required but not installed"
+    exit 1
+  fi
+}
+
+require_command fzf
+require_command systemctl
+require_command journalctl
+require_command sudo
+require_command awk
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  --favorites | -f)
+    SHOW_FAVORITES_ONLY=true
+    shift
+    ;;
+  --app | -a)
+    RUN_AS_APP=true
+    shift
+    ;;
+  *)
+    echo "Unknown parameter: $1"
+    exit 1
+    ;;
+  esac
+done
+
+if command -v gum &>/dev/null; then
+  IS_GUM_INSTALLED=true
+else
+  IS_GUM_INSTALLED=false
+fi
+
+if command -v bat &>/dev/null; then
+  IS_BAT_INSTALLED=true
+  BAT_COMMAND="bat"
+elif command -v batcat &>/dev/null; then
+  IS_BAT_INSTALLED=true
+  BAT_COMMAND="batcat"
+else
+  IS_BAT_INSTALLED=false
+fi
+
+main() {
+  get_sysd_units() {
+    local args=(
+      --all
+      --plain
+      --no-legend
+      --no-pager
+    )
+
+    list_units_with_scope() {
+      local scope=$1
+
+      systemctl --"$scope" list-units "${args[@]}" |
+        awk -v scope="[$scope]" '{printf "%-60s %-15s %-10s %s\n", $1, $3, $4, scope}'
+    }
+
+    list_unit_files_with_scope() {
+      local scope=$1
+
+      systemctl --"$scope" list-unit-files "${args[@]}" |
+        awk -v scope="[$scope]" '{printf "%-60s %-15s %-10s %s\n", $1, $2, "(file)", scope}'
+    }
+
+    all_units=$(
+      (
+        (
+          list_units_with_scope user
+          list_unit_files_with_scope user
+        ) | sort -u
+        (
+          list_units_with_scope system
+          list_unit_files_with_scope system
+        ) | sort -u
+      )
+    )
+
+    if [[ -f $FAVORITES_FILE ]]; then
+      favorite_units=$(printf "%s\n" "$all_units" |
+        grep -Ff "$FAVORITES_FILE" |
+        sed 's/^/★ /')
+
+      if $SHOW_FAVORITES_ONLY; then
+        printf "%s\n" "$favorite_units"
+        return
+      fi
+
+      other_units=$(printf "%s\n" "$all_units" |
+        grep -Fvf "$FAVORITES_FILE" |
+        sed 's/^/  /')
+
+      printf "%s\n%s\n" "$favorite_units" "$other_units"
+    else
+      printf "%s\n" "$all_units"
+    fi
+  }
+
+  selected=$(get_sysd_units |
+    fzf --preview "echo {} | sed 's/^[★ ]* *//' | awk '{print \$1}' | xargs systemctl status --no-pager" \
+      --preview-window=down:40%:wrap \
+      --header 'Select a systemd service to manage' \
+      --color "fg+:bold,hl:reverse,fg+:yellow,header:italic:underline" \
+      --ansi \
+      --multi \
+      --border \
+      --reverse)
+
+  services=$(echo "$selected" | sed 's/^[★ ]* *//' | awk '{print $1}')
+  scopes=$(echo "$selected" | sed 's/^[★ ]* *//' | awk '{print $NF}')
+
+  [[ -z $services ]] && exit 0
+
+  if $IS_GUM_INSTALLED; then
+    action=$(
+      printf "start\nstop\nrestart\nenable\ndisable\nstatus\nlogs\ntoggle favorite" |
+        gum choose --header "$(printf "%s\n" "Select action for:" "${services[*]}")"
+    )
+  else
+    action=$(
+      printf "start\nstop\nrestart\nenable\ndisable\nstatus\nlogs\ntoggle favorite" |
+        fzf --header "$(printf "%s\n" "Select action for:" "${services[*]}")" \
+          --border \
+          --reverse
+    )
+  fi
+
+  [[ -z $action ]] && exit 0
+
+  execute_action() {
+    local services=$1
+    local scopes=$2
+    local action=$3
+
+    case $action in
+    logs)
+      local journalctl_args=()
+      for service in $services; do
+        journalctl_args+=(-u "$service")
+      done
+
+      if $IS_BAT_INSTALLED; then
+        sudo journalctl "${journalctl_args[@]}" -xe | $BAT_COMMAND --paging=always -l log
+      else
+        sudo journalctl "${journalctl_args[@]}" -xe | less
+      fi
+      ;;
+    toggle\ favorite)
+      if [[ ! -f $FAVORITES_FILE ]]; then
+        touch "$FAVORITES_FILE"
+        chmod 600 "$FAVORITES_FILE"
+      fi
+
+      for service in $services; do
+        if ! grep -qxF "$service" "$FAVORITES_FILE" 2>/dev/null; then
+          echo "$service" >>"$FAVORITES_FILE"
+        else
+          grep -vxF "$service" "$FAVORITES_FILE" >"${FAVORITES_FILE}.tmp" && mv "${FAVORITES_FILE}.tmp" "$FAVORITES_FILE"
+        fi
+      done
+      ;;
+    *)
+      mapfile -t services_arr < <(printf "%s\n" "$services")
+      mapfile -t scopes_arr < <(printf "%s\n" "$scopes")
+
+      local -a system_services=()
+      local -a user_services=()
+
+      for i in "${!services_arr[@]}"; do
+        local service=${services_arr[$i]}
+        local scope=${scopes_arr[$i]}
+
+        if [[ -z "$service" ]]; then
+          continue
+        fi
+
+        if [[ "$scope" == "[system]" ]]; then
+          system_services+=("$service")
+        elif [[ "$scope" == "[user]" ]]; then
+          user_services+=("$service")
+        fi
+      done
+
+      if ((${#system_services[@]} > 0)); then
+        sudo systemctl --system --no-pager "$action" "${system_services[@]}"
+      fi
+
+      if ((${#user_services[@]} > 0)); then
+        systemctl --user --no-pager "$action" "${user_services[@]}"
+      fi
+
+      if $IS_GUM_INSTALLED; then
+        gum style "Action successfully executed on:" "${services[*]}!" \
+          --foreground 212 \
+          --border double \
+          --margin "1 1" \
+          --padding "1 2" \
+          --align center \
+          --bold
+      else
+        echo "Action successfully executed on: ${services[*]}!"
+      fi
+
+      if $RUN_AS_APP; then
+        read -rp "Press Enter to continue..."
+        clear
+      fi
+      ;;
+    esac
+  }
+
+  if $IS_GUM_INSTALLED; then
+    gum confirm "$(printf "%s\n" "Execute '$action' on" "${services[*]}"?)" || exit 0
+    gum spin --spinner dot --title "$(printf "%s\n" "Running $action on" "${services[*]}...")" -- sleep 0.5
+
+    execute_action "$services" "$scopes" "$action"
+  else
+    yesno=$(printf "yes\nno" |
+      fzf --header "$(printf "%s\n" "Execute '$action' on" "${services[*]}"?)" \
+        --border \
+        --reverse \
+        --disabled)
+
+    [[ $yesno != "yes" ]] && exit 0
+
+    execute_action "$services" "$scopes" "$action"
+  fi
+}
+
+if $RUN_AS_APP; then
+  while true; do
+    main
+  done
+else
+  main
+fi
