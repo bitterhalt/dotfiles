@@ -26,29 +26,47 @@ echo "Updating system and installing required tools: git, base-devel, rsync, xdg
 sudo pacman -Syu --noconfirm --needed git base-devel rsync xdg-user-dirs || exit 1
 
 # ==============================================================================
-# 3. SET UP CHAOTIC-AUR & INSTALL YAY
+# 3. SET UP CHAOTIC-AUR OR BUILD YAY FROM AUR
 # ==============================================================================
 
-echo "Setting up Chaotic-AUR repository..."
+read -p "Do you want to enable the Chaotic-AUR repository? (y/N): " -n 1 -r
+echo ""
 
-sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-sudo pacman-key --lsign-key 3056513887B78AEB
+if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+  echo "Setting up Chaotic-AUR repository..."
 
-sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
-sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+  sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+  sudo pacman-key --lsign-key 3056513887B78AEB
 
-if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
-  echo "Appending Chaotic-AUR to /etc/pacman.conf..."
-  sudo bash -c 'cat << EOF >> /etc/pacman.conf
+  sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+  sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+
+  if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
+    echo "Appending Chaotic-AUR to /etc/pacman.conf..."
+    sudo bash -c 'cat << EOF >> /etc/pacman.conf
 
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
 EOF'
-fi
+  fi
 
-echo "Syncing databases and installing yay directly from Chaotic-AUR..."
-sudo pacman -Sy --noconfirm
-sudo pacman -S --noconfirm --needed yay
+  echo "Syncing databases and installing yay directly from Chaotic-AUR..."
+  sudo pacman -Sy --noconfirm
+  sudo pacman -S --noconfirm --needed yay
+
+else
+  echo "Skipping Chaotic-AUR. Installing yay-bin manually from the AUR..."
+
+  BUILD_DIR=$(mktemp -d)
+  cd "$BUILD_DIR"
+
+  git clone https://aur.archlinux.org/yay-bin.git
+  cd yay-bin
+  makepkg -si --noconfirm --needed
+
+  cd "$OLDPWD"
+  rm -rf "$BUILD_DIR"
+fi
 
 # ==============================================================================
 # 4. SYNC DOTFILES
@@ -57,7 +75,7 @@ sudo pacman -S --noconfirm --needed yay
 cd ~/dotfiles
 rsync -avhu home/ ~/
 sleep 1 && clear
-cd $OLDPWD
+cd "$OLDPWD"
 
 # ==============================================================================
 # 5. INSTALL PACKAGES FROM THE DOTFILES LIST
@@ -65,7 +83,6 @@ cd $OLDPWD
 
 if [[ -f pkg.list ]]; then
   echo "Installing programs..."
-  # Skip line 1 if it only listed the 'yay:yay-bin' placeholder, otherwise processes the rest
   yay -S --needed $(tail pkg.list -n +2)
 else
   echo "Error: './pkg.list' file not found!" >&2
@@ -93,5 +110,5 @@ echo "Please take the following steps to finalize your setup:"
 echo "1. Copy contents of dotfiles/etc/greetd inside your /etc/greetd/"
 echo "2. Enable greetd $(sudo systemctl enable greetd.service)"
 echo "3. Reboot and log in"
-echo "4. If your don't want greetd, just type $(niri-session) in tty"
+echo "4. If your don't want greetd, just type \$(niri-session) in tty"
 echo "--------------------------------------------------------"
