@@ -120,10 +120,8 @@ main() {
     fzf --preview "echo {} | sed 's/^[★ ]* *//' | awk '{print \$1}' | xargs systemctl status --no-pager" \
       --preview-window=down:40%:wrap \
       --header 'Select a systemd service to manage' \
-      --color "fg+:bold,hl:reverse,fg+:yellow,header:italic:underline" \
       --ansi \
       --multi \
-      --border \
       --reverse)
 
   services=$(echo "$selected" | sed 's/^[★ ]* *//' | awk '{print $1}')
@@ -140,7 +138,6 @@ main() {
     action=$(
       printf "start\nstop\nrestart\nenable\ndisable\nstatus\nlogs\ntoggle favorite" |
         fzf --header "$(printf "%s\n" "Select action for:" "${services[*]}")" \
-          --border \
           --reverse
     )
   fi
@@ -212,7 +209,6 @@ main() {
       if $IS_GUM_INSTALLED; then
         gum style "Action successfully executed on:" "${services[*]}!" \
           --foreground 212 \
-          --border double \
           --margin "1 1" \
           --padding "1 2" \
           --align center \
@@ -237,7 +233,6 @@ main() {
   else
     yesno=$(printf "yes\nno" |
       fzf --header "$(printf "%s\n" "Execute '$action' on" "${services[*]}"?)" \
-        --border \
         --reverse \
         --disabled)
 
