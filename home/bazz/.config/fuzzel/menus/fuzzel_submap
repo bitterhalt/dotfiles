@@ -171,7 +171,7 @@ menu_settings() {
 
 menu_system() {
   while true; do
-    SUB=$(echo -e "1 ➜ 󰓃 Audio devices\n2 ➜ 󰂯 Bluetooth [Bluetui]\n3 ➜ 󰖩 Wi-Fi (Impala)\n4 ➜ 󰲝 Network Manager\n5 ➜ + 󰨇 Monitor" | fuzzel $FUZZEL_FLAGS)
+    SUB=$(echo -e "1 ➜ 󰓃 Audio devices\n2 ➜ 󰂯 Bluetooth [Bluetui]\n3 ➜ 󰖩 Wi-Fi (Impala)\n4 ➜ 󰲝 Network Manager \n5 ➜ 󰒓 Systemd Units\n6 ➜ + 󰨇 Monitor" | fuzzel $FUZZEL_FLAGS)
     if [ -z "$SUB" ]; then exit 0; fi
 
     case "$SUB" in
@@ -189,6 +189,10 @@ menu_system() {
       ;;
     *"Network Manager")
       nm-connection-editor
+      exit 0
+      ;;
+    *"Systemd Units"*)
+      foot -a fzystemd -e fzystemd
       exit 0
       ;;
     *"Monitor"*)

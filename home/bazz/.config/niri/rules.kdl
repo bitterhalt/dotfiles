@@ -65,6 +65,7 @@ window-rule {
 // System monitors, custom terminals, and wallpaper setters (Large Center Floating)
 window-rule {
     match app-id="io.missioncenter.MissionCenter"
+    match app-id="fzystemd"
     match app-id="htop|btop" title="poptop"
     match app-id="swayimg-setwall"
     match app-id="noteterm"

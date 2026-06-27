@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -71,29 +72,23 @@ main() {
 
     list_units_with_scope() {
       local scope=$1
-
       systemctl --"$scope" list-units "${args[@]}" |
         awk -v scope="[$scope]" '{printf "%-60s %-15s %-10s %s\n", $1, $3, $4, scope}'
     }
 
     list_unit_files_with_scope() {
       local scope=$1
-
       systemctl --"$scope" list-unit-files "${args[@]}" |
         awk -v scope="[$scope]" '{printf "%-60s %-15s %-10s %s\n", $1, $2, "(file)", scope}'
     }
 
     all_units=$(
       (
-        (
-          list_units_with_scope user
-          list_unit_files_with_scope user
-        ) | sort -u
-        (
-          list_units_with_scope system
-          list_unit_files_with_scope system
-        ) | sort -u
-      )
+        list_units_with_scope system
+        list_unit_files_with_scope system
+        list_units_with_scope user
+        list_unit_files_with_scope user
+      ) | sort -u
     )
 
     if [[ -f $FAVORITES_FILE ]]; then
@@ -119,10 +114,9 @@ main() {
   selected=$(get_sysd_units |
     fzf --preview "echo {} | sed 's/^[★ ]* *//' | awk '{print \$1}' | xargs systemctl status --no-pager" \
       --preview-window=down:40%:wrap \
-      --header 'Select a systemd service to manage' \
+      --border-label ' Select a systemd service to manage ' \
       --ansi \
-      --multi \
-      --reverse)
+      --multi)
 
   services=$(echo "$selected" | sed 's/^[★ ]* *//' | awk '{print $1}')
   scopes=$(echo "$selected" | sed 's/^[★ ]* *//' | awk '{print $NF}')
@@ -137,8 +131,7 @@ main() {
   else
     action=$(
       printf "start\nstop\nrestart\nenable\ndisable\nstatus\nlogs\ntoggle favorite" |
-        fzf --header "$(printf "%s\n" "Select action for:" "${services[*]}")" \
-          --reverse
+        fzf --header "$(printf "%s\n" "Select action for:" "${services[*]}")"
     )
   fi
 
@@ -209,6 +202,7 @@ main() {
       if $IS_GUM_INSTALLED; then
         gum style "Action successfully executed on:" "${services[*]}!" \
           --foreground 212 \
+          --border double \
           --margin "1 1" \
           --padding "1 2" \
           --align center \
@@ -233,7 +227,6 @@ main() {
   else
     yesno=$(printf "yes\nno" |
       fzf --header "$(printf "%s\n" "Execute '$action' on" "${services[*]}"?)" \
-        --reverse \
         --disabled)
 
     [[ $yesno != "yes" ]] && exit 0
