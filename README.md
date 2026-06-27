@@ -38,6 +38,10 @@
 bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 ```
 
+### Keybinds
+
+(Check here)[https://github.com/bitterhalt/dotfiles/blob/main/.assets/keybinds.md]
+
 ---
 
 ### Inspiration of my cool stuff ⭐
