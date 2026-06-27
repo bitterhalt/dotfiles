@@ -40,7 +40,10 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 
 ### Keybinds
 
-[Check here](https://github.com/bitterhalt/dotfiles/blob/main/.assets/keybind.md)
+`Super+F3` 
+or
+[Cheat cheet](https://github.com/bitterhalt/dotfiles/blob/main/.assets/keybind.md)
+
 
 ---
 
