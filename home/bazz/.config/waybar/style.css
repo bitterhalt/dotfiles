@@ -10,7 +10,8 @@
     Symbols Nerd Font Mono;
 }
 window#waybar {
-  background-color: @background;
+  background: @background;
+  /* background: alpha(@background, 0.5); */
 }
 
 /* -----------------------------------------------------
@@ -65,7 +66,7 @@ tooltip label {
 }
 
 window#waybar.empty #window {
-  background-color: transparent;
+  background: transparent;
 }
 /* -----------------------------------------------------
  *                      MODULES
@@ -111,7 +112,7 @@ window#waybar.empty #window {
   margin-right: 10px;
 }
 #tray menu {
-  background-color: @background;
+  background: @background;
   border: unset;
 }
 
