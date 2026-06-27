@@ -3,11 +3,11 @@ import re
 import os
 
 NIRI_CONFIG = os.path.expanduser("~/.config/niri/binds.kdl")
-OUTPUT_FILE = os.path.expanduser("~/.config/niri/keybinds.md")
+OUTPUT_FILE = os.path.expanduser("~/Documents/projects/dotfiles/.assets/keybind.md")
 
 
 def parse_niri_binds(config_path):
-    markdown_content = "# ⌨️ Niri Keybindids\n\n"
+    markdown_content = "# ⌨️ Niri Keybinds\n\n"
     current_section = "General Bindings"
     table_started = False
 
