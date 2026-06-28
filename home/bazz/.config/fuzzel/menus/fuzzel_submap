@@ -95,7 +95,7 @@ menu_pass() {
 menu_settings() {
   run_menu "Settings" \
     "Bash|foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" \
-    "Fuzzel|foot sh -c 'cd ~/.config/fuzzel/ && nvim */*'" \
+    "Fuzzel|foot sh -c 'cd ~/.config/fuzzel/ && vopen . '" \
     "Foot|foot -e nvim ~/.config/foot/foot.ini" \
     "Mako|foot sh -c 'cd ~/.config/mako/ && nvim *'" \
     "Niri|foot sh -c 'cd ~/.config/niri/ && nvim *'" \
