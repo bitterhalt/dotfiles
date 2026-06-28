@@ -48,6 +48,7 @@ window-rule {
 window-rule {
     match app-id="pacseek"
     match app-id="pop-upgrade"
+    match app-id="arch-maintenance"
     open-floating true
     default-column-width { proportion 0.50; }
     default-window-height { proportion 0.60; }

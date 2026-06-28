@@ -111,6 +111,7 @@ menu_system() {
     "󰖩 Wi-Fi (Impala)|foot -a impala -e impala" \
     "󰲝 Network Manager|nm-connection-editor" \
     "󰒓 Systemd Units|foot -a fzystemd -e fzystemd" \
+    "󱡄 Arch Maintenance|foot -a arch-maintenance -e arch-maintenance" \
     "+ 󰨇 Monitor|submenu_monitor"
 }
 
