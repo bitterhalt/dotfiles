@@ -1,254 +1,133 @@
 #!/usr/bin/env bash
 
-# ==============================================================================
-# Script: fuzzel_submap
-# Description: Just quick and dirty attempt to clone functionality of wlr-which-key.
-# You have been fooled, this is just a normal fuzzel menu!
-# ==============================================================================
-
-# Flags
 FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
 
-menu_apps() {
+# Menu Runner
+run_menu() {
+  local is_submenu=false
+
+  if [[ "$1" == "-sub" ]]; then
+    is_submenu=true
+    shift
+  fi
+
+  local menu_title="$1"
+  shift
+  local items=("$@")
+
   while true; do
-    SUB=$(echo -e "1 ➜ All\n2 ➜ Browser\n3 ➜ Discord\n4 ➜ Email\n5 ➜ Torrent\n6 ➜ + Gaming" | fuzzel $FUZZEL_FLAGS)
-    if [ -z "$SUB" ]; then exit 0; fi
+    local fuzzel_input=""
+    local i=1
+    for item in "${items[@]}"; do
+      local label="${item%%|*}"
+      fuzzel_input+="$i ➜ $label\n"
+      ((i++))
+    done
 
-    case "$SUB" in
-    *"Browser")
-      vivaldi
-      exit 0
-      ;;
-    *"Discord")
-      discord
-      exit 0
-      ;;
-    *"Email")
-      thunderbird
-      exit 0
-      ;;
-    *"Torrent")
-      transmission-gtk
-      exit 0
-      ;;
-    *"All")
-      vivaldi &
-      discord &
-      thunderbird &
-      transmission-gtk
-      exit 0
-      ;;
-    *"Gaming")
-      while true; do
-        GAMING_SUB=$(echo -e "..\n1 ➜ All\n2 ➜ Steam\n3 ➜ Lutris" | fuzzel $FUZZEL_FLAGS)
-        if [ -z "$GAMING_SUB" ]; then exit 0; fi
-        if [[ "$GAMING_SUB" == ".." ]]; then break; fi
+    if [ "$is_submenu" = true ]; then
+      fuzzel_input=".. Back\n$fuzzel_input"
+    fi
 
-        case "$GAMING_SUB" in
-        *"Steam")
-          steam
+    local choice
+    choice=$(echo -e -n "$fuzzel_input" | fuzzel $FUZZEL_FLAGS)
+
+    if [ -z "$choice" ]; then exit 0; fi
+    if [[ "$choice" == *"Back"* ]]; then return 0; fi
+
+    local chosen_label="${choice#*➜ }"
+    for item in "${items[@]}"; do
+      local label="${item%%|*}"
+      local command="${item#*|}"
+
+      if [[ "$chosen_label" == "$label" ]]; then
+        if declare -f "$command" >/dev/null; then
+          "$command"
+        else
+          eval "$command"
           exit 0
-          ;;
-        *"Lutris")
-          lutris
-          exit 0
-          ;;
-        *"All")
-          steam &
-          lutris
-          exit 0
-          ;;
-        esac
-      done
-      ;;
-    esac
+        fi
+      fi
+    done
   done
+}
+
+# Top-level menus
+
+menu_apps() {
+  run_menu "Apps" \
+    "All|vivaldi & discord & thunderbird & transmission-gtk" \
+    "Browser|vivaldi" \
+    "Discord|discord" \
+    "Email|thunderbird" \
+    "Torrent|transmission-gtk" \
+    "+ Gaming|submenu_gaming"
 }
 
 menu_notes() {
-  while true; do
-    SUB=$(echo -e "1 ➜ 󰍉 Search\n2 ➜ 󰎚 New Note\n3 ➜  TODO\n4 ➜ 󰩹 Delete" | fuzzel $FUZZEL_FLAGS)
-    if [ -z "$SUB" ]; then exit 0; fi
-
-    case "$SUB" in
-    *"Search")
-      fuzzel_notes
-      exit 0
-      ;;
-    *"New Note")
-      fuzzel_notes -c
-      exit 0
-      ;;
-    *"TODO")
-      foot -a noteterm -T Notes sh -c "cd ~/Documents/personal/notes/ && nvim todo.md"
-      exit 0
-      ;;
-    *"Delete")
-      fuzzel_notes -d
-      exit 0
-      ;;
-    esac
-  done
+  run_menu "Notes" \
+    "󰍉 Search|fuzzel_notes" \
+    "󰎚 New Note|fuzzel_notes -c" \
+    " TODO|foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" \
+    "󰩹 Delete|fuzzel_notes -d"
 }
 
 menu_packages() {
-  while true; do
-    SUB=$(echo -e "1 ➜ Install\n2 ➜ Update" | fuzzel $FUZZEL_FLAGS)
-    if [ -z "$SUB" ]; then exit 0; fi
-
-    case "$SUB" in
-    *"Install")
-      foot -a pacseek -T pacseek -e pacseek -m
-      exit 0
-      ;;
-    *"Update")
-      foot -a pop-upgrade -e sys_upgrade
-      exit 0
-      ;;
-    esac
-  done
+  run_menu "Packages" \
+    "Install|foot -a pacseek -T pacseek -e pacseek -m" \
+    "Update|foot -a pop-upgrade -e sys_upgrade"
 }
 
 menu_pass() {
-  while true; do
-    SUB=$(echo -e "1 ➜ Passwords\n2 ➜ Authenticator" | fuzzel $FUZZEL_FLAGS)
-    if [ -z "$SUB" ]; then exit 0; fi
-
-    case "$SUB" in
-    *"Passwords")
-      fuzzel_passmenu
-      exit 0
-      ;;
-    *"Authenticator")
-      proton-authenticator
-      exit 0
-      ;;
-    esac
-  done
+  run_menu "Pass" \
+    "Passwords|fuzzel_passmenu" \
+    "Authenticator|proton-authenticator"
 }
 
 menu_settings() {
-  while true; do
-    SUB=$(echo -e "1 ➜ Bash\n2 ➜ Fuzzel\n3 ➜ Foot\n4 ➜ Mako\n5 ➜ Niri\n6 ➜ Pywal\n7 ➜ Nvim\n8 ➜ Waybar" | fuzzel $FUZZEL_FLAGS)
-    if [ -z "$SUB" ]; then exit 0; fi
-
-    case "$SUB" in
-    *"Bash")
-      foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc
-      exit 0
-      ;;
-    *"Fuzzel")
-      foot sh -c "cd ~/.config/fuzzel/ && nvim */*"
-      exit 0
-      ;;
-    *"Foot")
-      foot -e nvim ~/.config/foot/foot.ini
-      exit 0
-      ;;
-    *"Mako")
-      foot sh -c "cd ~/.config/mako/ && nvim *"
-      exit 0
-      ;;
-    *"Niri")
-      foot sh -c "cd ~/.config/niri/ && nvim *"
-      exit 0
-      ;;
-    *"Pywal")
-      foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*
-      exit 0
-      ;;
-    *"Nvim")
-      foot sh -c "cd ~/.config/nvim && vopen ."
-      exit 0
-      ;;
-    *"Waybar")
-      foot sh -c "cd ~/.config/waybar/ && vopen ."
-      exit 0
-      ;;
-    esac
-  done
+  run_menu "Settings" \
+    "Bash|foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" \
+    "Fuzzel|foot sh -c 'cd ~/.config/fuzzel/ && nvim */*'" \
+    "Foot|foot -e nvim ~/.config/foot/foot.ini" \
+    "Mako|foot sh -c 'cd ~/.config/mako/ && nvim *'" \
+    "Niri|foot sh -c 'cd ~/.config/niri/ && nvim *'" \
+    "Pywal|foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" \
+    "Nvim|foot sh -c 'cd ~/.config/nvim && vopen .'" \
+    "Waybar|foot sh -c 'cd ~/.config/waybar/ && vopen .'"
 }
 
 menu_system() {
-  while true; do
-    SUB=$(echo -e "1 ➜ 󰓃 Audio devices\n2 ➜ 󰂯 Bluetooth [Bluetui]\n3 ➜ 󰖩 Wi-Fi (Impala)\n4 ➜ 󰲝 Network Manager \n5 ➜ 󰒓 Systemd Units\n6 ➜ + 󰨇 Monitor" | fuzzel $FUZZEL_FLAGS)
-    if [ -z "$SUB" ]; then exit 0; fi
-
-    case "$SUB" in
-    *"Audio devices")
-      fuzzel_sound
-      exit 0
-      ;;
-    *"Bluetooth"*)
-      foot -a bluetui -e bluetui
-      exit 0
-      ;;
-    *"Wi-Fi"*)
-      foot -a impala -e impala
-      exit 0
-      ;;
-    *"Network Manager")
-      nm-connection-editor
-      exit 0
-      ;;
-    *"Systemd Units"*)
-      foot -a fzystemd -e fzystemd
-      exit 0
-      ;;
-    *"Monitor"*)
-      while true; do
-        MON_SUB=$(echo -e "..\n1 ➜ Atop\n2 ➜ Btop\n3 ➜ Htop\n4 ➜ Logs\n5 ➜ Combined" | fuzzel $FUZZEL_FLAGS)
-        if [ -z "$MON_SUB" ]; then exit 0; fi
-        if [[ "$MON_SUB" == ".." ]]; then break; fi
-
-        case "$MON_SUB" in
-        *"Atop")
-          foot -T atop -e amdgpu_top --smi
-          exit 0
-          ;;
-        *"Btop")
-          foot -a btop -e btop
-          exit 0
-          ;;
-        *"Htop")
-          foot -a htop -e htop
-          exit 0
-          ;;
-        *"Logs")
-          foot -a foot -T journalctl -e journalctl -f
-          exit 0
-          ;;
-        *"Combined")
-          foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh
-          exit 0
-          ;;
-        esac
-      done
-      ;;
-    esac
-  done
+  run_menu "System" \
+    "󰓃 Audio devices|fuzzel_sound" \
+    "󰂯 Bluetooth [Bluetui]|foot -a bluetui -e bluetui" \
+    "󰖩 Wi-Fi (Impala)|foot -a impala -e impala" \
+    "󰲝 Network Manager|nm-connection-editor" \
+    "󰒓 Systemd Units|foot -a fzystemd -e fzystemd" \
+    "+ 󰨇 Monitor|submenu_monitor"
 }
 
 menu_theming() {
-  while true; do
-    SUB=$(echo -e "1 ➜ Set wallpaper\n2 ➜ Set theme\n3 ➜ Save theme" | fuzzel $FUZZEL_FLAGS)
-    if [ -z "$SUB" ]; then exit 0; fi
+  run_menu "Theming" \
+    "Set wallpaper|swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/" \
+    "Set theme|fuzzel_theme" \
+    "Save theme|fuzzel_theme -s"
+}
 
-    case "$SUB" in
-    *"Set wallpaper")
-      swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/
-      exit 0
-      ;;
-    *"Set theme")
-      fuzzel_theme
-      exit 0
-      ;;
-    *"Save theme")
-      fuzzel_theme -s
-      exit 0
-      ;;
-    esac
-  done
+# Nested Sub-menus
+
+submenu_gaming() {
+  run_menu -sub "Gaming" \
+    "All|steam & lutris" \
+    "Steam|steam" \
+    "Lutris|lutris"
+}
+
+submenu_monitor() {
+  run_menu -sub "Monitor" \
+    "Atop|foot -T atop -e amdgpu_top --smi" \
+    "Btop|foot -a btop -e btop" \
+    "Htop|foot -a htop -e htop" \
+    "Logs|foot -a foot -T journalctl -e journalctl -f" \
+    "Combined|foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh"
 }
 
 case "${1:-}" in
