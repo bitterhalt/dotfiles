@@ -37,3 +37,4 @@ video/webm=video.desktop;
 video/x-flv=video.desktop;
 video/x-matroska=video.desktop;
 video/x-msvideo=video.desktop;
+x-scheme-handler/discord-1296840202995896363=discord-1296840202995896363.desktop;
