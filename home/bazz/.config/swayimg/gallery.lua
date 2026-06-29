@@ -16,6 +16,7 @@ swayimg.gallery.set_text("topleft", {
 swayimg.gallery.set_text("topright", {
 	"[e] -> Edit (GIMP)",
 	"[y] -> Copy to Clipboard",
+	"[r] -> Rename File",
 })
 swayimg.gallery.set_text("bottomleft", { "{list.index} of {list.total}" })
 swayimg.gallery.set_text("bottomright", { "{name}" })
@@ -33,42 +34,52 @@ end
 swayimg.gallery.on_key("q", function()
 	swayimg.exit()
 end)
+
 swayimg.gallery.on_key("f", function()
 	swayimg.toggle_fullscreen()
 end)
+
 swayimg.gallery.on_key("Return", function()
 	swayimg.set_mode("viewer")
 end)
+
 swayimg.gallery.on_key("g", function()
 	swayimg.gallery.switch_image("first")
 end)
+
 swayimg.gallery.on_key("Shift-g", function()
 	swayimg.gallery.switch_image("last")
 end)
 
--- Navigation (vim-style)
+swayimg.gallery.on_key("r", function()
+	rename_image()
+	swayimg.gallery.reload()
+end)
+
 swayimg.gallery.on_key("h", function()
 	swayimg.gallery.switch_image("left")
 end)
+
 swayimg.gallery.on_key("j", function()
 	swayimg.gallery.switch_image("down")
 end)
+
 swayimg.gallery.on_key("k", function()
 	swayimg.gallery.switch_image("up")
 end)
+
 swayimg.gallery.on_key("l", function()
 	swayimg.gallery.switch_image("right")
 end)
 
--- Thumbnail size
 swayimg.gallery.on_key("Minus", function()
 	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() - 20)
 end)
+
 swayimg.gallery.on_key("Plus", function()
 	swayimg.gallery.set_thumb_size(swayimg.gallery.get_thumb_size() + 20)
 end)
 
--- Trash
 swayimg.gallery.on_key("Delete", function()
 	with_image(function(image)
 		os.execute("trash-put " .. shellescape(image.path))
@@ -76,27 +87,30 @@ swayimg.gallery.on_key("Delete", function()
 	end)
 end)
 
--- External commands
 swayimg.gallery.on_key("b", function()
 	with_image(function(image)
 		os.execute("setbg -w " .. shellescape(image.path) .. " & disown")
 	end)
 end)
+
 swayimg.gallery.on_key("p", function()
 	with_image(function(image)
 		os.execute("setbg -p " .. shellescape(image.path) .. " & disown")
 	end)
 end)
+
 swayimg.gallery.on_key("Shift-p", function()
 	with_image(function(image)
 		os.execute("setbg -pf " .. shellescape(image.path) .. " & disown")
 	end)
 end)
+
 swayimg.gallery.on_key("e", function()
 	with_image(function(image)
 		os.execute("gimp " .. shellescape(image.path) .. " & disown")
 	end)
 end)
+
 swayimg.gallery.on_key("y", function()
 	with_image(function(image)
 		os.execute("wl-copy -t image/png < " .. shellescape(image.path))
