@@ -11,7 +11,8 @@ swayimg.gallery.enable_pstore(true)
 -- Configure Gallery Layout & Text Hints
 swayimg.gallery.set_text("topleft", {
 	"[b] -> Set Wallpaper",
-	"[p] -> Wallpaper with Pywal  [Shift+p] -> Wallpaper with Pywal alternative",
+	"[p] -> Wallpaper with Pywal",
+	"[Shift+p] -> Wallpaper with Pywal alternative",
 })
 swayimg.gallery.set_text("topright", {
 	"[e] -> Edit (GIMP)",

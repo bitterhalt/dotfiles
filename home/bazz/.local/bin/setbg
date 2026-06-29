@@ -93,11 +93,20 @@ pywal() {
 }
 
 pywal_fixed() {
-  local backend
+  local backend selection custom_bg
   backend=$(get_backend)
 
+  selection=$(printf "121212 (Default)\n000000 (Pure Black)" |
+    fuzzel -d --minimal-lines --placeholder "Type or select background hex (e.g. 1A1A1A): ")
+
+  custom_bg=$(echo "$selection" | awk '{print $1}' | tr -d '#')
+
+  if [[ -z "$custom_bg" ]]; then
+    custom_bg="$BGCOL"
+  fi
+
   _apply_wallpaper "$1" || return 1
-  wal -n --backend "$backend" -b $BGCOL -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -n --backend "$backend" -b "$custom_bg" -i "$HOME/.local/share/wall/wallpaper.png"
   refresh_portals.sh
 }
 
@@ -113,5 +122,9 @@ case "$1" in
 -pf)
   shift
   pywal_fixed "$1"
+  ;;
+*)
+  echo "Usage: $0 {-w|-p|-pf} path/to/wallpaper"
+  exit 1
   ;;
 esac
