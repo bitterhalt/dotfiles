@@ -158,6 +158,7 @@ wine
 winetricks
 wireplumber
 wl-clipboard
+wlr-randr
 wofi
 wtype
 xdg-desktop-portal-gtk

@@ -12,28 +12,36 @@ get_backend() {
 }
 
 get_resolution() {
-  if command -v niri >/dev/null 2>&1; then
-    local out
-    out=$(niri msg --json outputs | jq -r 'to_entries | .[0].value.logical | "\(.width) \(.height)"' 2>/dev/null)
-    if [[ -n "$out" ]]; then
-      local res=($out)
-      if [[ -n "${res[0]}" && -n "${res[1]}" ]]; then
-        echo "${res[0]} ${res[1]} true"
-        return 0
-      fi
-    fi
+  if ! command -v wlr-randr >/dev/null 2>&1; then
+    echo "Error: wlr-randr is not installed." >&2
+    return 1
   fi
 
-  if command -v hyprctl >/dev/null 2>&1; then
-    local out
-    out=$(hyprctl -j monitors | jq -r '.[] | select(.focused) | "\(.width) \(.height)"' 2>/dev/null)
-    if [[ -n "$out" ]]; then
-      local res=($out)
-      if [[ -n "${res[0]}" && -n "${res[1]}" ]]; then
-        echo "${res[0]} ${res[1]} false"
-        return 0
-      fi
+  local out
+  out=$(wlr-randr | awk '
+    /^[^[:space:]]/ { enabled = 0 }
+    /Enabled: yes/ { enabled = 1 }
+    /current/ {
+      if (enabled && match($0, /[0-9]+x[0-9]+/)) {
+        split(substr($0, RSTART, RLENGTH), r, "x")
+        print r[1], r[2]
+        exit
+      }
+    }
+  ')
+
+  if [[ -n "$out" ]]; then
+    local res=($out)
+    local w="${res[0]}"
+    local h="${res[1]}"
+
+    local is_niri="false"
+    if pgrep -x niri >/dev/null 2>&1; then
+      is_niri="true"
     fi
+
+    echo "$w $h $is_niri"
+    return 0
   fi
 
   return 1
