@@ -22,6 +22,10 @@ eval "$(fzf --bash)"                          # CTRL-t = fzf select | CTRL-r = f
 eval "$(starship init bash)"                  # Load prompt
 eval "$(zoxide init --cmd cd bash)"           # Use zoxide to cd
 
+# Bind Alt+z to cdi for both Vi insert and command modes
+bind -m vi-insert -x '"\ez": cdi'
+bind -m vi-command -x '"\ez": cdi'
+
 # Cleaner titles
 case ${TERM} in
 st* | alacritty | foot* | xterm* | rxvt* | kitty | kterm | gnome*)
