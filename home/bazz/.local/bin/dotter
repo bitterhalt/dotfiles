@@ -12,6 +12,8 @@ RESET="\033[0m"
 dotfiles_repo="$HOME/Documents/projects/dotfiles"
 dotfiles_list="$HOME/.local/share/dotlist"
 exclude_path="$HOME/.local/bin/apps"
+# Keybind parser
+keybind_parser="$HOME/.local/bin/niri_keybind_parser.py"
 
 # Add new dotfiles
 add() {
@@ -42,7 +44,16 @@ add() {
     fi
   done <"$dotfiles_list"
 
+  # Regenerate Niri keybind documentation
+  echo -e "${CYAN}[*] Regenerating Niri keybind documentation...${RESET}"
+  if "$keybind_parser"; then
+    echo -e "${GREEN}[✓] Keybind documentation updated.${RESET}"
+  else
+    echo -e "${YELLOW}[!] Failed to regenerate keybind documentation.${RESET}"
+  fi
+
   git add -A
+
   if [[ -n $(git status -s) ]]; then
     git status
     read -rp "Enter a commit message: " commit_message
