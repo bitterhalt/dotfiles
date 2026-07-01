@@ -38,10 +38,6 @@
 bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 ```
 
-### Keybinds
-
-Press **Super+F3** for the interactive keybind overlay, or browse the complete list here:
-
 ➡️ **[Niri Keybindings](home/bazz/.config/niri/keybinds.md)**
 
 ---
