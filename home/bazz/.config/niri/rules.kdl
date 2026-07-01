@@ -46,7 +46,7 @@ window-rule {
 
 // Center-top floating utilities (package managers, system tools)
 window-rule {
-    match app-id="pacseek"
+    match app-id="fzfpack"
     match app-id="pop-upgrade"
     match app-id="arch-maintenance"
     open-floating true

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+pacman_search() {
+  pacman -Slq | fzf --multi --border-label "Pacman-Install" --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+}
+
+yay_search() {
+  (
+    yay -Slq
+    yay -Slq aur
+  ) | fzf --multi --border-label "Yay-Install" --preview 'yay -Si {1}' | xargs -ro yay -S --noconfirm
+}
+
+# Check for the -y flag
+case "$1" in
+-y)
+  yay_search
+  ;;
+*)
+  if [ -n "$1" ]; then
+    echo "Unknown option: $1"
+    echo "Usage: ${0##*/} [-y]"
+    exit 1
+  fi
+  pacman_search
+  ;;
+esac
