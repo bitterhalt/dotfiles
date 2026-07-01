@@ -38,7 +38,9 @@
 bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 ```
 
-➡️ **[Niri Keybindings](home/bazz/.config/niri/keybinds.md)**
+### Keybinds
+
+➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 
 ---
 
