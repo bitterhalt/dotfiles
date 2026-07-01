@@ -40,7 +40,7 @@ bash <(curl -L https://github.com/bitterhalt/dotfiles/blob/main/.assets/curl.sh)
 
 ### Keybinds
 
-➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
+Go to ➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 
 ---
 
