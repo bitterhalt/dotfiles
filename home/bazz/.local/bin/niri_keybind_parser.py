@@ -3,7 +3,7 @@
 from pathlib import Path
 import re
 
-CONFIG = Path.home() / ".config/niri/config.kdl"
+CONFIG = Path.home() / ".config/niri/binds.kdl"
 
 OUTPUTS = [
     Path.home() / "Documents/personal/notes/niri-binds.md",
