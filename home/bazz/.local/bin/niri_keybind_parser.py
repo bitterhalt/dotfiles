@@ -62,7 +62,7 @@ with CONFIG.open(encoding="utf-8") as f:
 markdown = [
     "# Niri Keybindings",
     "",
-    "_Generated automatically from `~/.config/niri/config.kdl`._",
+    "_Generated automatically from `~/.config/niri/binds.kdl`._",
     "",
 ]
 
