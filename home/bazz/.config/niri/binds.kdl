@@ -9,7 +9,7 @@ binds {
     Mod+T hotkey-overlay-title="Display Time" { spawn "noti_time"; }
     Mod+F2 hotkey-overlay-title="Open Calculator" { spawn "galculator"; }
 
-    // Www/Mail
+    // WWW/Mail
     Mod+W hotkey-overlay-title="Web browser" { spawn "vivaldi"; }
     Mod+M hotkey-overlay-title="Open Email" { spawn "thunderbird"; }
 
