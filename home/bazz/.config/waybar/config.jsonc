@@ -113,11 +113,11 @@
 
   // WEATHER
   "custom/weather": {
-    "exec": "wttrbar --date-format '%d/%m'", // Uses: https://github.com/bjesus/wttrbar
-    "format": "{}°",
-    "interval": 3600,
-    "return-type": "json",
+    "format": "{}",
     "tooltip": true,
+    "interval": 300, // Checks the script every 5 minutes (will read from cache)
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/weather.sh",
   },
 
   // INDICATORS
