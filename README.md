@@ -17,7 +17,6 @@
 - Colors [Dynamic](https://github.com/eylles/pywal16)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
-- GTK-theme: [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
 - Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
 - Login Manager: [wlgreet](https://git.sr.ht/~kennylevinsen/wlgreet)
