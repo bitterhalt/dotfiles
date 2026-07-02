@@ -16,7 +16,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+T` | Display Time |
 | `Mod+F2` | Open Calculator |
 
-## Www/Mail
+## WWW/Mail
 
 | Key | Action |
 | --- | ------ |
