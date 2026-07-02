@@ -115,7 +115,7 @@
   "custom/weather": {
     "format": "{}",
     "tooltip": true,
-    "interval": 300, // Checks the script every 5 minutes (will read from cache)
+    "interval": 3600,
     "return-type": "json",
     "exec": "~/.config/waybar/scripts/weather.sh",
   },
