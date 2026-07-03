@@ -28,8 +28,7 @@ return {
   --Bufferline
   {
     "akinsho/bufferline.nvim",
-    version = "*",
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "famiu/bufdelete.nvim",
