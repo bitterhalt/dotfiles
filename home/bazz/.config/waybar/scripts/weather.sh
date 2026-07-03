@@ -3,14 +3,21 @@
 CACHE_DIR="$HOME/.cache"
 CACHE_FILE="$CACHE_DIR/waybar_weather.json"
 CACHE_TIMEOUT=7200
-# Leave empty "" for auto-location, or specify a city like "Paris"
 LOCATION=""
 
+mkdir -p "$CACHE_DIR"
+
 fetch_weather() {
-  curl -s "https://wttr.in/${LOCATION}?format=j1" >"$CACHE_FILE"
+  if response=$(curl -sf "https://wttr.in/${LOCATION}?format=j1"); then
+    if echo "$response" | jq empty >/dev/null 2>&1; then
+      echo "$response" >"$CACHE_FILE"
+      return 0
+    fi
+  fi
+  return 1
 }
 
-if [ ! -f "$CACHE_FILE" ]; then
+if [ ! -f "$CACHE_FILE" ] || [ ! -s "$CACHE_FILE" ]; then
   fetch_weather
 else
   LAST_MOD=$(stat -c %Y "$CACHE_FILE")
@@ -22,8 +29,6 @@ fi
 
 if [ -s "$CACHE_FILE" ]; then
   temp=$(jq -r '.current_condition[0].temp_C' "$CACHE_FILE")
-
-  # Daily High / Low
   max_temp=$(jq -r '.weather[0].maxtempC' "$CACHE_FILE")
   min_temp=$(jq -r '.weather[0].mintempC' "$CACHE_FILE")
   humidity=$(jq -r '.current_condition[0].humidity' "$CACHE_FILE")
@@ -42,7 +47,7 @@ if [ -s "$CACHE_FILE" ]; then
   *) icon="✨" ;;
   esac
 
-  echo "{\"text\": \"$icon ${temp}°C\", \"tooltip\": \"Weather in ${city}\\n\\n${condition}\\nDaily high: ${max_temp}°C\\nDaily low: ${min_temp}°C\\nHumidity: ${humidity}%\"}"
+  echo "{\"text\": \"$icon ${temp}°C\", \"tooltip\": \"Weather in ${city}\\n\\n${condition}\\n\\nHigh: ${max_temp}°C\\nLow: ${min_temp}°C\\nHumidity: ${humidity}%\"}"
 else
   echo "{\"text\": \"⚠️ N/A\", \"tooltip\": \"Weather data unavailable\"}"
 fi
