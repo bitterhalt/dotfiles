@@ -13,6 +13,8 @@ aur_search() {
   ) | fzf --multi --border-label "$helper-install" --preview "$helper -Si {1}" | xargs -ro "$helper" -S --noconfirm
 }
 
+# --- Main Logic ---
+
 if command -v paru &>/dev/null; then
   AUR_HELPER="paru"
 elif command -v yay &>/dev/null; then
@@ -39,3 +41,6 @@ case "$1" in
   pacman_search
   ;;
 esac
+
+echo -e "\nPress <Enter> to exit this window"
+read -r
