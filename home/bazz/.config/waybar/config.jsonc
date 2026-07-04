@@ -5,11 +5,10 @@
   // "height": 32,
   "spacing": 4,
   "modules-left": ["niri/workspaces", "niri/window"],
-  "modules-center": ["group/middle", "custom/wf-recorder"],
+  "modules-center": ["group/middle", "privacy", "custom/wf-recorder"],
   "modules-right": [
     "group/connections",
-    "pulseaudio#output",
-    "pulseaudio#input",
+    "pulseaudio",
     "custom/idle",
     "battery",
     "group/hidden-tray",
@@ -78,7 +77,7 @@
   },
 
   // AUDIO
-  "pulseaudio#output": {
+  "pulseaudio": {
     "format": "{icon}",
     "format-icons": ["󰕿", "󰖀", "󰖀", "󰕾"],
     "format-muted": "󰝟",
@@ -86,16 +85,6 @@
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "scroll-step": 5,
     "tooltip-format": "Vol:\t{volume}%",
-  },
-  "pulseaudio#input": {
-    "format": "{format_source}",
-    "format-source": "󰍬",
-    "format-source-bluetooth": "󰍬",
-    "format-source-bluetooth-muted": "",
-    "format-source-muted": "",
-    "on-click": "pavucontrol",
-    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    "tooltip": false,
   },
 
   // CLOCK
@@ -109,6 +98,43 @@
     "format": "{}",
     "interval": 60,
     "tooltip": false,
+  },
+
+  // PRIVACY
+  "privacy": {
+    "icon-spacing": 2,
+    "icon-size": 16,
+    "transition-duration": 0,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+        "icon-name": "audio-input-microphone-symbolic",
+      },
+      {
+        "type": "location",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+        "icon-name": "location-services-active-symbolic",
+      },
+    ],
+    "ignore-monitor": true,
+    "ignore": [
+      {
+        "type": "audio-in",
+        "name": "cava",
+      },
+      {
+        "type": "screenshare",
+        "name": "obs",
+      },
+    ],
   },
 
   // WEATHER

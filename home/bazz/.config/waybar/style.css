@@ -93,10 +93,26 @@ window#waybar.empty #window {
 #battery,
 #custom-idle,
 #pulseaudio,
+#privacy,
 #bluetooth,
 #network {
   color: @foreground;
   padding: 0 6px;
+}
+
+#privacy-item.screenshare {
+  color: @color1;
+  opacity: 0.8;
+}
+
+#privacy-item.location {
+  color: @color5;
+  opacity: 0.8;
+}
+
+#privacy-item.audio-in {
+  color: @color6;
+  opacity: 0.8;
 }
 
 #bluetooth.on {
