@@ -10,6 +10,7 @@ export HISTCONTROL="ignoreboth:erasedups"                      # No duplicate en
 export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*" # Ignore commands
 export LC_COLLATE="C"                                          # Collation order
 export MANPAGER="nvim +Man!"                                   # Nvim as manpager
+export BROWSER="helium-browser"
 
 shopt -s autocd                  # Change to named directory
 shopt -s cdspell                 # Autocorrects cd misspellings

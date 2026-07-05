@@ -6,12 +6,7 @@
 
 FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
 
-# BROWSER="helium-browser"
-BROWSER="vivaldi"
-
-EMAIL="thunderbird"
-
-# Menu Runner
+Menu Runner
 run_menu() {
   local is_submenu=false
 
@@ -64,10 +59,10 @@ run_menu() {
 
 menu_apps() {
   run_menu "Apps" \
-    "All|$BROWSER & discord & $EMAIL & transmission-gtk" \
+    "All|$BROWSER & discord & thunderbird & transmission-gtk" \
     "Browser|$BROWSER" \
     "Discord|discord" \
-    "Email|$EMAIL" \
+    "Email|thunderbird" \
     "Torrent|transmission-gtk" \
     "+ Gaming|submenu_gaming"
 }
