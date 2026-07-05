@@ -3,14 +3,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin/appimages/:$PATH"
 export PATH="$HOME/.local/share/cargo/bin/:$PATH"
 
-# Variables
-export BAT_PAGER="never"
-export BAT_STYLE="plain"
-export BAT_THEME="ansi"
-export EDITOR="nvim"
-export TERMINAL="foot"
-export VISUAL="nvim"
-
 # XDG Base Directory
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

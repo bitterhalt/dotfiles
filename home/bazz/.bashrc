@@ -9,8 +9,16 @@ export HISTFILESIZE="${HISTSIZE}"                              # History file si
 export HISTCONTROL="ignoreboth:erasedups"                      # No duplicate entries
 export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*" # Ignore commands
 export LC_COLLATE="C"                                          # Collation order
-export MANPAGER="nvim +Man!"                                   # Nvim as manpager
+
+# Variables
+export BAT_PAGER="never"
+export BAT_STYLE="plain"
+export BAT_THEME="ansi"
 export BROWSER="helium-browser"
+export EDITOR="nvim"
+export MANPAGER="nvim +Man!"
+export TERMINAL="foot"
+export VISUAL="nvim"
 
 shopt -s autocd                  # Change to named directory
 shopt -s cdspell                 # Autocorrects cd misspellings
