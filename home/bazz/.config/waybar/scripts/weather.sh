@@ -47,7 +47,7 @@ if [ -s "$CACHE_FILE" ]; then
   *) icon="✨" ;;
   esac
 
-  echo "{\"text\": \"$icon ${temp}°C\", \"tooltip\": \"Weather in ${city}\\n\\n${condition}\\n\\nHigh: ${max_temp}°C\\nLow: ${min_temp}°C\\nHumidity: ${humidity}%\"}"
+  echo "{\"text\": \"$icon ${temp}°C\", \"tooltip\": \"Weather in ${city}\\n\\n${condition}\\n\\n<b>High:</b> ${max_temp}°C\\n<b>Low:</b> ${min_temp}°C\\n<b>Humidity:</b> ${humidity}%\"}"
 else
   echo "{\"text\": \"⚠️ N/A\", \"tooltip\": \"Weather data unavailable\"}"
 fi
