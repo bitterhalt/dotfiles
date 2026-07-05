@@ -14,6 +14,7 @@ bc
 bluetui
 bluez
 bluez-utils
+brave-origin-bin
 brightnessctl
 btop
 btrfs-assistant
@@ -147,7 +148,6 @@ tumbler
 unrar
 unzip
 video-trimmer
-vivaldi
 vulkan-radeon
 waybar
 wayland-protocols
@@ -177,6 +177,5 @@ yay
 yt-dlp
 zathura
 zathura-pdf-poppler
-zen-browser-bin
 zip
 zoxide

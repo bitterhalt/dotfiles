@@ -14,7 +14,6 @@ export LC_COLLATE="C"                                          # Collation order
 export BAT_PAGER="never"
 export BAT_STYLE="plain"
 export BAT_THEME="ansi"
-export BROWSER="helium-browser"
 export EDITOR="nvim"
 export MANPAGER="nvim +Man!"
 export TERMINAL="foot"
