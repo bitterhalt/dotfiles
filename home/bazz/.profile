@@ -3,13 +3,19 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin/appimages/:$PATH"
 export PATH="$HOME/.local/share/cargo/bin/:$PATH"
 
-# XDG Base Directory
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# Tidy ~/
+# VARIABLES
+export BAT_PAGER="never"
+export BAT_STYLE="plain"
+export BAT_THEME="ansi"
+export EDITOR="nvim"
+export TERMINAL="foot"
+export VISUAL="nvim"
+
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzf/fzf-opts"
 export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
