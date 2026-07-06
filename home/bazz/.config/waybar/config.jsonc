@@ -137,7 +137,14 @@
     ],
   },
 
-  // WEATHER
+  // INDICATORS
+  "custom/system": {
+    "format": "󱑞",
+    "on-click": "foot -a pop-upgrade -e sys_upgrade",
+    "on-click-right": "fuzzel_power",
+    "on-click-middle": "fuzzel_submap -system",
+    "tooltip-format": "<b>System menu</b><small>\n\n<b>Click:</b> Update System\n\n<b>Click-right:</b> Open Power Menu\n\n<b>Click-middle:</b> Edit Settings</small>",
+  },
   "custom/weather": {
     "format": "{}",
     "tooltip": true,
@@ -145,8 +152,6 @@
     "return-type": "json",
     "exec": "~/.config/waybar/scripts/weather.sh",
   },
-
-  // INDICATORS
   "custom/idle": {
     "exec": "~/.config/waybar/scripts/idle.sh",
     "format": "{}",
@@ -177,11 +182,7 @@
   },
 
   // SEPARATORS
-  "custom/center-sep": {
-    "format": "󰇙",
-    "tooltip": false,
-  },
-  "custom/right-sep": {
+  "custom/sep": {
     "format": "󰇙",
     "tooltip": false,
   },
@@ -193,7 +194,7 @@
       "click-to-reveal": false,
       "transition-duration": 300,
     },
-    "modules": ["clock", "custom/center-sep", "custom/mako", "custom/weather"],
+    "modules": ["clock", "custom/weather", "custom/mako", "custom/system"],
   },
   "group/connections": {
     "orientation": "inherit",
@@ -207,6 +208,6 @@
     "drawer": {
       "transition-duration": 300,
     },
-    "modules": ["custom/right-sep", "tray"],
+    "modules": ["custom/sep", "tray"],
   },
 }
