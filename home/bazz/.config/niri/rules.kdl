@@ -119,6 +119,7 @@ window-rule {
 window-rule {
     match title="Task Manager - Helium"
     match title="Task Manager - Vivaldi"
+    match title="Task Manager - Brave"
     open-floating true
 }
 
@@ -203,6 +204,7 @@ window-rule {
 // =============================================================================
 
 window-rule {
+    match app-id="brave|brave-origin"
     match app-id="firefox"
     match app-id="helium"
     match app-id="zen"
