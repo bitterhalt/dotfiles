@@ -1,52 +1,11 @@
 # vim:ft=dircolors
-# (This is not a dircolors file but it helps to highlight colors and comments)
 
-# default values from dircolors
-# (entries with a leading # are not implemented in lf)
-# #no     00              # NORMAL
-# fi      00              # FILE
-# #rs     0               # RESET
-# di      01;34           # DIR
-# ln      01;36           # LINK
-# #mh     00              # MULTIHARDLINK
-# pi      40;33           # FIFO
-# so      01;35           # SOCK
-# #do     01;35           # DOOR
-# bd      40;33;01        # BLK
-# cd      40;33;01        # CHR
-# or      40;31;01        # ORPHAN
-# #mi     00              # MISSING
-# su      37;41           # SETUID
-# sg      30;43           # SETGID
-# #ca     30;41           # CAPABILITY
-# tw      30;42           # STICKY_OTHER_WRITABLE
-# ow      34;42           # OTHER_WRITABLE
-# st      37;44           # STICKY
-# ex      01;32           # EXEC
-
-# default values from lf (with matching order)
-# ln      01;36   # LINK
-# or      31;01   # ORPHAN
-# tw      01;34   # STICKY_OTHER_WRITABLE
-# ow      01;34   # OTHER_WRITABLE
-# st      01;34   # STICKY
-# di      01;34   # DIR
-# pi      33      # FIFO
-# so      01;35   # SOCK
-# bd      33;01   # BLK
-# cd      33;01   # CHR
-# su      01;32   # SETUID
-# sg      01;32   # SETGID
-# ex      01;32   # EXEC
-# fi      00      # FILE
-
-# file types (with matching order)
 ln      01;36   # LINK
 or      31;01   # ORPHAN
-tw      34      # STICKY_OTHER_WRITABLE
-ow      34      # OTHER_WRITABLE
-st      01;34   # STICKY
-di      01;34   # DIR
+tw      36      # STICKY_OTHER_WRITABLE
+ow      36      # OTHER_WRITABLE
+st      01;36   # STICKY
+di      01;36   # DIR
 pi      33      # FIFO
 so      01;35   # SOCK
 bd      33;01   # BLK
