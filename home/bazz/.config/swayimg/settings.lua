@@ -60,8 +60,8 @@ swayimg.text.set_shadow(0xd0000000)
 swayimg.gallery.set_border_color(hex_to_argb(colors.color6))
 swayimg.gallery.set_selected_color(hex_to_argb(colors.color8))
 swayimg.gallery.set_unselected_color(hex_to_argb(colors.color0))
-swayimg.gallery.set_window_color(0x30000000)
+swayimg.gallery.set_window_color(hex_to_argb(colors.color0))
 
 -- Viewer
-swayimg.viewer.set_window_background(0x30000000)
+swayimg.viewer.set_window_background(hex_to_argb(colors.color0))
 swayimg.viewer.set_image_chessboard(20, hex_to_argb(colors.color8), hex_to_argb(colors.color7))

@@ -81,9 +81,6 @@ window-rule {
     open-floating true
     default-column-width { proportion 0.80; }
     default-window-height { proportion 0.80; }
-    background-effect {
-        blur true
-    }
 }
 
 window-rule {
@@ -93,9 +90,6 @@ window-rule {
     default-window-height { proportion 0.45; }
     default-floating-position x=16 y=16 relative-to="top-right"
     exclude app-id="swayimg-setwall"
-    background-effect {
-        blur true
-    }
 }
 
 // File manager dialogs and progress bars
