@@ -57,17 +57,19 @@ window#waybar.empty #window {
 #clock,
 #privacy,
 #custom-mako,
-#custom-system,
-#custom-weather {
+#custom-system {
   border-radius: 4px;
   color: @foreground;
   margin: 2px;
   padding: 0 6px;
 }
 
-#clock {
+#clock,
+#custom-weather {
   color: @foreground;
   font-weight: 600;
+  margin: 2px;
+  padding: 0 6px;
 }
 #custom-mako.dnd {
   opacity: 0.5;

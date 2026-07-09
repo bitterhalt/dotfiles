@@ -4,6 +4,10 @@
 
 .dbus
 .local/state/nvim
+.local/share/icons/
+.local/share/wineprefixes/
+.local/share/nvim/
+.config/discord/
 .local/games/
 .state
 .steampath
