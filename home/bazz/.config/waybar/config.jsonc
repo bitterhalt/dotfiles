@@ -150,7 +150,7 @@
     "tooltip": true,
     "interval": 3600,
     "return-type": "json",
-    "exec": "~/.config/waybar/scripts/weather.sh",
+    "exec": "~/.config/waybar/scripts/weather.py",
   },
   "custom/idle": {
     "exec": "~/.config/waybar/scripts/idle.sh",
