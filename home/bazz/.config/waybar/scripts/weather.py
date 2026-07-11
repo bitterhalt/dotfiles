@@ -124,8 +124,6 @@ tooltip = [
     f"🌅 <b>Sunrise:</b> {sunrise}",
     f"🌇 <b>Sunset:</b> {sunset}",
     "",
-    "<b>Forecast</b>",
-    "",
 ]
 
 for day in weather["weather"]:
