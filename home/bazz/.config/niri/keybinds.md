@@ -20,11 +20,6 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 | Key | Action |
 | --- | ------ |
-
-## Mod+W hotkey-overlay-title="Web browser" { spawn "helium-browser"; }
-
-| Key | Action |
-| --- | ------ |
 | `Mod+W` | Web browser |
 | `Mod+M` | Open Email |
 
