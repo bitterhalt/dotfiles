@@ -53,6 +53,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Shift+D` | Run Binary |
 | `Mod+Shift+T` | Attach Tmux sessions |
 | `Mod+F8` | Open Screenshot Menu |
+| `Mod+S` | Find Files |
 
 ## Submaps
 
