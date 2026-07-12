@@ -34,6 +34,7 @@ binds {
     Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_run"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
     Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "fuzzel_screenshot"; }
+    Mod+S hotkey-overlay-title="Find Files" { spawn-sh "fuzzel_finder"; }
 
     // Submaps
     Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "fuzzel_submap -apps"; }

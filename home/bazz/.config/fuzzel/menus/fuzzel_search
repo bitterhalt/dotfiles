@@ -1,58 +1,45 @@
 #!/usr/bin/env bash
 
-HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/web-search-history"
+# FZF file finder
+# Uses plocate and xdg-open to find and display files
+# Make sure that "plocate-updatedb.timer" is enabled
 
-mkdir -p "$(dirname "$HISTFILE")"
-touch "$HISTFILE"
+DB_DIR="$HOME/.local/share"
+LOCAL_DB="$DB_DIR/plocate.db"
+SYSTEM_DB="/var/lib/plocate/plocate.db"
+DMENU="fuzzel -d -a top --y 8 -l 10 --minimal-lines"
 
-query=$(
-  head -50 "$HISTFILE" |
-    fuzzel -d --minimal-lines \
-      --line-heigh 26
-)
-exit_code=$?
+EDITOR="nvim"
 
-# Alt+0 → clear history
-if [ "$exit_code" -eq 19 ]; then
-  confirmation=$(
-    printf "No\nYes\n" |
-      fuzzel -d \
-        --placeholder "Delete search history?" \
-        --minimal-lines
-  )
+mkdir -p "$DB_DIR"
 
-  if [ "$confirmation" = "Yes" ]; then
-    rm -f "$HISTFILE"
-  fi
-
-  exit 0
+# Automatically update the local database in the background if it's > 24 hours old or missing
+if [[ ! -f "$LOCAL_DB" ]] || (($(date +%s) - $(date -r "$LOCAL_DB" +%s) > 86400)); then
+  updatedb -l 0 -o "$LOCAL_DB" -U "$HOME" &
 fi
 
-[ -z "$query" ] && exit 0
+QUERY=$($DMENU -w 25 --placeholder="Find files ")
+[[ -z "$QUERY" ]] && exit 0
 
-{
-  printf '%s\n' "$query"
-  grep -Fvx -- "$query" "$HISTFILE" 2>/dev/null
-} | head -50 >"${HISTFILE}.tmp"
+SELECTION=$(plocate -d "$LOCAL_DB:$SYSTEM_DB" "$QUERY" | $DMENU -w 55 --placeholder="Select file ")
 
-mv "${HISTFILE}.tmp" "$HISTFILE"
+# Check ownership and file type, then open securely
+if [[ -n "$SELECTION" ]]; then
+  if [[ "$SELECTION" == "$HOME"* ]]; then
+    # File logic
+    MIME=$(file --mime-type -b "$SELECTION")
 
-case "$query" in
-"!y "*)
-  q="${query#!y }"
-  url="https://www.youtube.com/results?search_query=${q// /+}"
-  ;;
-"!a "*)
-  q="${query#!a }"
-  url="https://wiki.archlinux.org/title/Special:Search?search=${q// /+}"
-  ;;
-"!w "*)
-  q="${query#!w }"
-  url="https://en.wikipedia.org/wiki/Special:Search?search=${q// /+}"
-  ;;
-*)
-  url="https://www.google.com/search?q=${query// /+}"
-  ;;
-esac
-
-xdg-open "$url" >/dev/null 2>&1 &
+    if [[ "$MIME" == text/* || "$SELECTION" == *.sh || "$SELECTION" == *.py || "$SELECTION" == *.conf ]]; then
+      # If it's a script/text file, open it directly in Neovim to prevent xdg-open breakdown
+      $TERMINAL -e $EDITOR "$SELECTION" &
+    else
+      # Media, PDFs, Images, etc.
+      xdg-open "$SELECTION" &
+    fi
+    disown
+  else
+    # System file: Elevate privileges and open safely in a terminal editor
+    $TERMINAL -e pkexec $EDITOR "$SELECTION" &
+    disown
+  fi
+fi
