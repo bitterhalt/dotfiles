@@ -21,7 +21,14 @@ fi
 QUERY=$($DMENU -w 25 --placeholder="Find files ")
 [[ -z "$QUERY" ]] && exit 0
 
-SELECTION=$(plocate -d "$LOCAL_DB:$SYSTEM_DB" "$QUERY" | $DMENU -w 55 --placeholder="Select file ")
+SELECTION=$(
+  plocate -d "$LOCAL_DB:$SYSTEM_DB" "$QUERY" |
+    while IFS= read -r file; do
+      [[ -L "$file" ]] && continue
+      printf '%s\n' "$file"
+    done |
+    $DMENU -w 55 --placeholder="Select file "
+)
 
 # Check ownership and file type, then open securely
 if [[ -n "$SELECTION" ]]; then
@@ -33,7 +40,6 @@ if [[ -n "$SELECTION" ]]; then
       # If it's a script/text file, open it directly in Neovim to prevent xdg-open breakdown
       $TERMINAL -e $EDITOR "$SELECTION" &
     else
-      # Media, PDFs, Images, etc.
       xdg-open "$SELECTION" &
     fi
     disown
