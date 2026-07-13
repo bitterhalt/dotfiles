@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
+FUZZEL_FLAGS="-d -a top --y 24 -w 35 --minimal-lines"
 
 while true; do
   SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰄀 Screenshot Full Screen\n4 ➜ 󰩬 Screenshot Regional\n5 ➜ 󰙦 Stop" | fuzzel $FUZZEL_FLAGS)

@@ -7,7 +7,7 @@ cliphist_list=$(cliphist list)
 if [ -z "$cliphist_list" ]; then
   fuzzel -d \
     -a top \
-    --y 16 \
+    --y 24 \
     -w 28 \
     -l 15 \
     --placeholder "Cliphist: please store something first" --lines 0
@@ -32,7 +32,7 @@ EOF
 
 item=$(echo "$cliphist_list" | gawk "$thumbnail" | fuzzel -d \
   -a top \
-  --y 8 \
+  --y 24 \
   -w 60 \
   -l 15 \
   --no-sort \
@@ -43,7 +43,7 @@ exit_code=$?
 if [ "$exit_code" -eq 19 ]; then
   confirmation=$(echo -e "No\nYes" | fuzzel -d \
     -a top \
-    --y 8 \
+    --y 24 \
     -w 20 \
     --placeholder "Cliphist: delete history?" \
     --minimal-lines)

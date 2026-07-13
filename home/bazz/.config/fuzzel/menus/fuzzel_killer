@@ -7,7 +7,7 @@ processes=$(ps -u "$USER" -o pid=,comm= | awk '{pid=$1; $1=""; print $0 " (PID:"
 [[ -z "$processes" ]] && exit 0
 
 selection=$(
-  printf "%s\n" "$processes" | fuzzel -d -a top --y 8 -w 30 -l 8 \
+  printf "%s\n" "$processes" | fuzzel -d -a top --y 24 -w 30 -l 8 \
     --placeholder="!!! Kill process: " \
     --line-height 26 \
     --index
@@ -21,7 +21,7 @@ pid=$(echo "$selected_line" | grep -o '（PID:[0-9]*）' | grep -o '[0-9]*' || e
 cmd=$(echo "$selected_line" | sed 's/ (PID:[0-9]*)//')
 
 confirm=$(
-  printf "No\nYes" | fuzzel --dmenu -d -a top --y 8 \
+  printf "No\nYes" | fuzzel --dmenu -d -a top --y 24 \
     --minimal-lines \
     --placeholder="Kill $cmd (PID $pid)? "
 )

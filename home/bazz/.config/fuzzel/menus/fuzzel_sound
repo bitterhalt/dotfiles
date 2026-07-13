@@ -36,7 +36,7 @@ final_list+=("${sorted_devices[@]}")
 
 selected=$(printf '%s\n' "${final_list[@]}" | fuzzel -d \
   -a top \
-  --y 8 \
+  --y 24 \
   -w 55 \
   --minimal-lines \
   --placeholder "Switch the audio device: ")

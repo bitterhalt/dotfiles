@@ -4,7 +4,7 @@
 # Description: expandable wlr-which-key clone using fuzzel
 # ========================================================
 
-FUZZEL_FLAGS="-d -a top --y 8 -w 35 --minimal-lines"
+FUZZEL_FLAGS="-d -a top --y 24 -w 35 --minimal-lines"
 BROWSER="brave-origin"
 
 run_menu() {

@@ -15,8 +15,8 @@ fi
 password=$(printf '%s\n' "${password_files[@]}" | fuzzel \
   --dmenu \
   --anchor=top \
-  --x-margin=8 \
-  --y-margin=8 \
+  --x-margin=24 \
+  --y-margin=24 \
   --width=25 \
   --placeholder="Select Password ")
 
@@ -25,8 +25,8 @@ password=$(printf '%s\n' "${password_files[@]}" | fuzzel \
 action=$(printf '%s\n' "Copy" "Edit" | fuzzel \
   --dmenu \
   --anchor=top \
-  --x-margin=8 \
-  --y-margin=8 \
+  --x-margin=24 \
+  --y-margin=24 \
   --width=25 \
   --minimal-lines \
   --placeholder="Choose? ")

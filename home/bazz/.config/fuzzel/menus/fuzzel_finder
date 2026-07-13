@@ -7,7 +7,7 @@
 DB_DIR="$HOME/.local/share"
 LOCAL_DB="$DB_DIR/plocate.db"
 SYSTEM_DB="/var/lib/plocate/plocate.db"
-DMENU="fuzzel -d -a top --y 8 -l 10 --minimal-lines"
+DMENU="fuzzel -d -a top --y 24 -l 10 --minimal-lines"
 
 EDITOR="nvim"
 

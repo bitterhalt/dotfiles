@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dmenu="fuzzel -d -a top --y 8 --x 8 -w 25 --minimal-lines"
+dmenu="fuzzel -d -a top --y 24 --x 24 -w 25 --minimal-lines"
 sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 
 if [ -n "$sessions" ]; then

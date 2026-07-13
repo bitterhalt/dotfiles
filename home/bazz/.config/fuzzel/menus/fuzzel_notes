@@ -5,7 +5,7 @@ set -euo pipefail
 NOTES_DIR="$HOME/Documents/personal/notes"
 EDITOR="${EDITOR:-nvim}"
 TERMINAL="${TERMINAL:-foot}"
-DMENU="fuzzel -d -a top --y 8 -w 40"
+DMENU="fuzzel -d -a top --y 24 -w 40"
 
 mkdir -p "$NOTES_DIR"
 cd "$NOTES_DIR" || exit 1
