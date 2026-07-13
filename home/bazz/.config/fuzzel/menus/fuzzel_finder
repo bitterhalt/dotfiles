@@ -1,28 +1,26 @@
 #!/usr/bin/env bash
 
-# FZF file finder
-# Uses plocate and xdg-open to find and display files
-# Make sure that "plocate-updatedb.timer" is enabled
+# Fuzzel file finder using fd
 
-DB_DIR="$HOME/.local/share"
-LOCAL_DB="$DB_DIR/plocate.db"
-SYSTEM_DB="/var/lib/plocate/plocate.db"
 DMENU="fuzzel -d -a top --y 24 -l 10 --minimal-lines"
 
 EDITOR="nvim"
-
-mkdir -p "$DB_DIR"
-
-# Automatically update the local database in the background if it's > 24 hours old or missing
-if [[ ! -f "$LOCAL_DB" ]] || (($(date +%s) - $(date -r "$LOCAL_DB" +%s) > 86400)); then
-  updatedb -l 0 -o "$LOCAL_DB" -U "$HOME" &
-fi
 
 QUERY=$($DMENU -w 25 --placeholder="Find files ")
 [[ -z "$QUERY" ]] && exit 0
 
 SELECTION=$(
-  plocate -d "$LOCAL_DB:$SYSTEM_DB" "$QUERY" |
+  fd -HI -t f \
+    --exclude Pictures \
+    --exclude Videos \
+    "$QUERY" \
+    "$HOME" \
+    /etc \
+    /usr \
+    /opt \
+    /var \
+    /srv \
+    2>/dev/null |
     while IFS= read -r file; do
       [[ -L "$file" ]] && continue
       printf '%s\n' "$file"
@@ -30,22 +28,22 @@ SELECTION=$(
     $DMENU -w 55 --placeholder="Select file "
 )
 
-# Check ownership and file type, then open securely
 if [[ -n "$SELECTION" ]]; then
-  if [[ "$SELECTION" == "$HOME"* ]]; then
-    # File logic
-    MIME=$(file --mime-type -b "$SELECTION")
+  MIME=$(file --mime-type -b "$SELECTION")
 
-    if [[ "$MIME" == text/* || "$SELECTION" == *.sh || "$SELECTION" == *.py || "$SELECTION" == *.conf ]]; then
-      # If it's a script/text file, open it directly in Neovim to prevent xdg-open breakdown
-      $TERMINAL -e $EDITOR "$SELECTION" &
+  if [[ "$MIME" == text/* ||
+    "$SELECTION" == *.sh ||
+    "$SELECTION" == *.py ||
+    "$SELECTION" == *.conf ]]; then
+
+    if [[ "$SELECTION" == "$HOME"* ]]; then
+      "$TERMINAL" -e "$EDITOR" "$SELECTION" &
     else
-      xdg-open "$SELECTION" &
+      "$TERMINAL" -e pkexec "$EDITOR" "$SELECTION" &
     fi
-    disown
   else
-    # System file: Elevate privileges and open safely in a terminal editor
-    $TERMINAL -e pkexec $EDITOR "$SELECTION" &
-    disown
+    xdg-open "$SELECTION" &
   fi
+
+  disown
 fi
