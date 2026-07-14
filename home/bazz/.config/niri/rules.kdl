@@ -229,7 +229,7 @@ window-rule {
     match app-id="lutris"
     open-on-workspace "3"
     open-focused false
-    default-column-width { proportion 0.95; }
+    open-maximized true
     exclude title="Friends List"
     exclude title="Special Offers"
     exclude title="Steam Settings"
