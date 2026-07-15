@@ -1,5 +1,7 @@
 # Dotfiles
 
+![image](https://camo.githubusercontent.com/08b36d190a492dc14e60d5067ed753fff78b20c4f37d79f187b36e6d0fda010f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7374617475732d776f726b732532306f6e2532306d792532306d616368696e652d677265656e)
+
 - Philosophy:
   - Keyboard driven workflow
   - Less clutter - a clear working environment
@@ -45,14 +47,11 @@ Go to ➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 
 ### Inspiration of my cool stuff ⭐
 
-- [SwayKh](https://github.com/SwayKh/dotfiles/tree/main) - For TONS of ideas and ispiration 😍
-- [newmanls](https://github.com/newmanls/dotfiles) - Helped me with TONS of stuff ⭐
-- [classabbyamp](https://github.com/classabbyamp) - Helped me with TONS of stuff ⭐
-- [aellas](https://github.com/aellas) - For TONS of ideas and ispiration ⭐ ❤️ 🐐
-- [Joris](https://codeberg.org/jorisvandijk) - For showing me how to manage my dots better ❤️ ⭐
-
-### Special thanks ⭐
-
+- [SwayKh](https://github.com/SwayKh/dotfiles/tree/main)
+- [newmanls](https://github.com/newmanls/dotfiles)
+- [classabbyamp](https://github.com/classabbyamp)
+- [aellas](https://github.com/aellas)
+- [Joris](https://codeberg.org/jorisvandijk)
 - [fesowowako](https://github.com/fesowowako) and his commits from [My Sway-dotfiles](https://github.com/bitterhalt/dots-sway)
 - [NihaAlGhul](https://codeberg.org/NihaAlGhul) For making installation script to actually work ❤️
 
