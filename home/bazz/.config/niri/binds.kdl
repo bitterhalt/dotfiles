@@ -46,8 +46,8 @@ binds {
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
-    Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { spawn-sh "wl-shot -f"; }
-    Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "wl-shot -re"; }
+    Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { screenshot-screen; }
+    Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "waytator_screenshot"; }
 
     // Media - Volume
     XF86AudioRaiseVolume hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "volume.sh up"; }

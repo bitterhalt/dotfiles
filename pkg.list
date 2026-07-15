@@ -117,7 +117,6 @@ ripgrep
 rsync
 rust
 sassc
-satty
 screenkey
 signal-desktop
 slurp
@@ -150,6 +149,7 @@ video-trimmer
 vulkan-radeon
 waybar
 wayland-protocols
+waytator
 wev
 wget
 wine

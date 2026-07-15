@@ -35,7 +35,7 @@ window-rule {
     match app-id="org.pulseaudio.pavucontrol"
     match app-id="polkit-gnome-authentication-agent-1"
     match app-id="qt6ct"
-    match app-id="satty"
+    match app-id="dev.faetalize.waytator"
     match app-id="xdg-desktop-portal-gnome"
     match app-id="xdg-desktop-portal-gtk"
     match app-id="yad"
