@@ -4,7 +4,7 @@
 # Description: expandable wlr-which-key clone using fuzzel
 # ========================================================
 
-FUZZEL_FLAGS="-d -a top --y 24 -w 35 --minimal-lines"
+FLAGS="-d -a top --y 24 -w 35 --minimal-lines"
 BROWSER="brave-origin"
 
 run_menu() {
@@ -33,7 +33,7 @@ run_menu() {
     fi
 
     local choice
-    choice=$(echo -e -n "$fuzzel_input" | fuzzel $FUZZEL_FLAGS)
+    choice=$(echo -e -n "$fuzzel_input" | fuzzel $FLAGS)
 
     if [ -z "$choice" ]; then exit 0; fi
     if [[ "$choice" == *"Back"* ]]; then return 0; fi

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+FLAGS="-d -a top --y 24 -w 35 --minimal-lines --placeholder Choose"
+
+while true; do
+  SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰙦 Stop" | fuzzel $FLAGS)
+
+  if [ -z "$SUB" ]; then
+    exit 0
+  fi
+
+  case "$SUB" in
+  *"Record Screen")
+    wl-record -f
+    exit 0
+    ;;
+  *"Record Regional")
+    wl-record -r
+    exit 0
+    ;;
+  *"Stop")
+    wl-record -k && pkill -SIGRTMIN+2 waybar
+    exit 0
+    ;;
+  esac
+done

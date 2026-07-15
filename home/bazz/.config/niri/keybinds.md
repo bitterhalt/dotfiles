@@ -50,7 +50,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+F3` | Launch program |
 | `Mod+F4` | Process Killer |
 | `Mod+F5` | Passwords and AUTH |
-| `Mod+F8` | Open Screenshot Menu |
+| `Mod+F8` | Screen Record Menu |
 | `Mod+S` | Find Files |
 | `Mod+Shift+D` | Run Binary |
 | `Mod+Shift+T` | Attach Tmux sessions |

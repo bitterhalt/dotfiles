@@ -31,7 +31,7 @@ binds {
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn  "fuzzel_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "fuzzel_submap -pass"; }
-    Mod+F8 hotkey-overlay-title="Open Screenshot Menu" { spawn-sh "fuzzel_screenshot"; }
+    Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "fuzzel_record"; }
     Mod+S hotkey-overlay-title="Find Files" { spawn-sh "fuzzel_finder"; }
     Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_run"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }

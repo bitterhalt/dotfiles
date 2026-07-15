@@ -2,12 +2,12 @@
 
 set -euo pipefail
 
-FUZZEL_FLAGS="-d -a top --y 24 -w 20 --minimal-lines"
+FLAGS="-d -a top --y 24 -w 20 --minimal-lines"
 
 confirm_action() {
   local action_name="$1"
   local selection
-  selection=$(echo -e "n ➜ No, Cancel\ny ➜ Yes, ${action_name}" | fuzzel $FUZZEL_FLAGS)
+  selection=$(echo -e "n ➜ No, Cancel\ny ➜ Yes, ${action_name}" | fuzzel $FLAGS)
   if [[ "$selection" == *"Yes"* ]]; then
     return 0
   fi
@@ -15,7 +15,7 @@ confirm_action() {
 }
 
 while true; do
-  SUB=$(echo -e "1 ➜ Lock\n2 ➜ Exit\n3 ➜ zZzz 💤\n4 ➜ Shutdown\n5 ➜ Reboot\n6 ➜ Reboot UEFI" | fuzzel $FUZZEL_FLAGS)
+  SUB=$(echo -e "1 ➜ Lock\n2 ➜ Exit\n3 ➜ zZzz 💤\n4 ➜ Shutdown\n5 ➜ Reboot\n6 ➜ Reboot UEFI" | fuzzel $FLAGS)
 
   if [ -z "$SUB" ]; then
     exit 0
