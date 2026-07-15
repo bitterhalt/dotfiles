@@ -1,3 +1,31 @@
+-- Edit .
+function edit_image(image)
+	if not image or not image.path then
+		return
+	end
+
+	local reply = os.tmpname()
+	os.execute(
+		string.format(
+			"printf '%%s\\n' gimp waytator | fuzzel --dmenu --minimal-lines -d --placeholder 'Edit with' > %s",
+			reply
+		)
+	)
+
+	local f = io.open(reply, "r")
+	local choice = f and f:read("*all"):gsub("\n$", "") or ""
+	if f then
+		f:close()
+	end
+	os.remove(reply)
+
+	if choice == "gimp" then
+		os.execute("gimp " .. shellescape(image.path) .. " & disown")
+	elseif choice == "waytator" then
+		os.execute("waytator " .. shellescape(image.path) .. " & disown")
+	end
+end
+
 -- Rename .
 function rename_image()
 	local image = nil

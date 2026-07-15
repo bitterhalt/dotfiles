@@ -15,7 +15,7 @@ swayimg.gallery.set_text("topleft", {
 	"[Shift+p] -> Wallpaper with Pywal alternative",
 })
 swayimg.gallery.set_text("topright", {
-	"[e] -> Edit (GIMP)",
+	"[e] -> Edit",
 	"[y] -> Copy to Clipboard",
 	"[r] -> Rename File",
 })
@@ -107,9 +107,7 @@ swayimg.gallery.on_key("Shift-p", function()
 end)
 
 swayimg.gallery.on_key("e", function()
-	with_image(function(image)
-		os.execute("gimp " .. shellescape(image.path) .. " & disown")
-	end)
+	with_image(edit_image)
 end)
 
 swayimg.gallery.on_key("y", function()
