@@ -59,8 +59,3 @@ Go to ➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 
 <img width="441" height="173" alt="image" src="https://github.com/user-attachments/assets/b9586fb7-f365-4df7-9c24-12f75099b301" />
 
-### Contributions
-
-I can put pieces together pretty well but I'm not a best when it comes to scripting and coding
-
-If something totally wrong, don't hesitate to submit a pr 🙂
