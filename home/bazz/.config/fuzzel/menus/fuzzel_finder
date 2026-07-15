@@ -13,6 +13,10 @@ SELECTION=$(
   fd -HI -t f \
     --exclude Pictures \
     --exclude Videos \
+    --exclude bin \
+    --exclude lib \
+    --exclude lib64 \
+    --exclude man \
     "$QUERY" \
     "$HOME" \
     /etc \
