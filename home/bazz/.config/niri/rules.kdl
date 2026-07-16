@@ -75,7 +75,7 @@ window-rule {
     default-window-height { proportion 0.80; }
 }
 
-// Image viewer with background blur effect
+// Image viewer
 window-rule {
     match app-id="swayimg-setwall"
     open-floating true
@@ -86,9 +86,6 @@ window-rule {
 window-rule {
     match app-id="swayimg"
     open-floating true
-    default-column-width { proportion 0.45; }
-    default-window-height { proportion 0.45; }
-    default-floating-position x=16 y=16 relative-to="top-right"
     exclude app-id="swayimg-setwall"
 }
 
