@@ -1,1 +1,62 @@
-/home/bazz/.config/fuzzel/menus/fuzzel_theme
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DMENU="fuzzel -d -a top -y 24  -l 10"
+THEMES="$HOME/.config/wal/colorschemes/dark"
+HISTORY="$HOME/.cache/wal-theme-history"
+CACHE_FILE="$HOME/.cache/wal/colors.json"
+
+if [[ "${1:-}" == "-s" ]]; then
+  if [ ! -f "$CACHE_FILE" ]; then
+    notify-send "Error" "No active Pywal theme found in cache."
+    exit 1
+  fi
+
+  THEME_NAME=$(echo "" | fuzzel -d -a top --y 8 -w 20 -l 0 --placeholder="Save theme as: ")
+
+  if [ -z "$THEME_NAME" ]; then
+    exit 0
+  fi
+
+  if [[ "$THEME_NAME" != *.json ]]; then
+    THEME_NAME="${THEME_NAME}.json"
+  fi
+
+  jq 'del(.checksum, .wallpaper, .alpha)' "$CACHE_FILE" >"${THEMES}/${THEME_NAME}"
+  notify-send "Theme Saved" "Saved as ${THEME_NAME}"
+  exit 0
+fi
+
+theme=$(
+  {
+    tac "$HISTORY" 2>/dev/null |
+      awk '!seen[$0]++' |
+      head -8 |
+      sed 's/^/★ /'
+
+    printf '%s\n' '──────────'
+
+    find "$THEMES" -type f -name '*.json' -printf '%f\n' |
+      sed 's/\.json$//' |
+      sort
+  } |
+    $DMENU
+)
+
+case "$theme" in
+"" | "──────────")
+  exit
+  ;;
+esac
+
+theme="${theme#★ }"
+echo "$theme" >>"$HISTORY"
+
+if [ -f "$HISTORY" ]; then
+  trimmed=$(tac "$HISTORY" | awk '!seen[$0]++' | head -4 | tac)
+  echo "$trimmed" >"$HISTORY"
+fi
+
+wal --theme "$theme"
+refresh_portals.sh

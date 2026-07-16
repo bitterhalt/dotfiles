@@ -1,1 +1,148 @@
-/home/bazz/.config/fuzzel/menus/fuzzel_submap
+#!/usr/bin/env bash
+
+# ========================================================
+# Description: expandable wlr-which-key clone using fuzzel
+# ========================================================
+
+FLAGS="-d -a top --y 24 -w 35 --minimal-lines"
+BROWSER="brave-origin"
+
+run_menu() {
+  local is_submenu=false
+
+  if [[ "$1" == "-sub" ]]; then
+    is_submenu=true
+    shift
+  fi
+
+  local menu_title="$1"
+  shift
+  local items=("$@")
+
+  while true; do
+    local fuzzel_input=""
+    local i=1
+    for item in "${items[@]}"; do
+      local label="${item%%|*}"
+      fuzzel_input+="$i ➜ $label\n"
+      ((i++))
+    done
+
+    if [ "$is_submenu" = true ]; then
+      fuzzel_input=".. Back\n$fuzzel_input"
+    fi
+
+    local choice
+    choice=$(echo -e -n "$fuzzel_input" | fuzzel $FLAGS)
+
+    if [ -z "$choice" ]; then exit 0; fi
+    if [[ "$choice" == *"Back"* ]]; then return 0; fi
+
+    local chosen_label="${choice#*➜ }"
+    for item in "${items[@]}"; do
+      local label="${item%%|*}"
+      local command="${item#*|}"
+
+      if [[ "$chosen_label" == "$label" ]]; then
+        if declare -f "$command" >/dev/null; then
+          "$command"
+        else
+          eval "$command"
+          exit 0
+        fi
+      fi
+    done
+  done
+}
+
+# Top-level menus
+
+menu_apps() {
+  run_menu "Apps" \
+    "All|$BROWSER & discord & thunderbird & transmission-gtk" \
+    "Browser|$BROWSER" \
+    "Discord|discord" \
+    "Email|thunderbird" \
+    "Torrent|transmission-gtk" \
+    "+ Gaming|submenu_gaming"
+}
+
+menu_notes() {
+  run_menu "Notes" \
+    "󰍉 Search|fuzzel_notes" \
+    "󰎚 New Note|fuzzel_notes -c" \
+    " TODO|foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" \
+    "󰩹 Delete|fuzzel_notes -d"
+}
+
+menu_packages() {
+  run_menu "Packages" \
+    "Pacman-install|foot -a fzpack -T fzpack -e fzpack" \
+    "Aur-install|foot -a fzpack -T fzfpack -e fzpack -y" \
+    "Update|foot -a pop-upgrade -e sys_upgrade"
+}
+
+menu_pass() {
+  run_menu "Pass" \
+    "Passwords|fuzzel_passmenu" \
+    "Authenticator|proton-authenticator"
+}
+
+menu_settings() {
+  run_menu "Settings" \
+    "Bash|foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" \
+    "Fuzzel|foot sh -c ' nvim ~/.config/fuzzel/fuzzel.ini ~/.local/bin/fuzzel_* '" \
+    "Foot|foot -e nvim ~/.config/foot/foot.ini" \
+    "Mako|foot sh -c 'cd ~/.config/mako/ && nvim *'" \
+    "Niri|foot sh -c 'cd ~/.config/niri/ && nvim *'" \
+    "Pywal|foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" \
+    "Nvim|foot sh -c 'cd ~/.config/nvim && vopen .'" \
+    "Waybar|foot sh -c 'cd ~/.config/waybar/ && vopen .'"
+}
+
+menu_system() {
+  run_menu "System" \
+    "󰓃 Audio devices|fuzzel_sound" \
+    "󰂯 Bluetooth [Bluetui]|foot -a bluetui -e bluetui" \
+    "󰖩 Wi-Fi (Impala)|foot -a impala -e impala" \
+    "󰲝 Network Manager|nm-connection-editor" \
+    "󰒓 Systemd Units|foot -a fzystemd -e fzystemd" \
+    "󱡄 Arch Maintenance|foot -a arch-maintenance -e arch-maintenance" \
+    "+ 󰨇 Monitor|submenu_monitor"
+}
+
+menu_theming() {
+  run_menu "Theming" \
+    "Set wallpaper|swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/" \
+    "Set theme|fuzzel_theme" \
+    "Save theme|fuzzel_theme -s"
+}
+
+# Nested Sub-menus
+
+submenu_gaming() {
+  run_menu -sub "Gaming" \
+    "All|steam & lutris" \
+    "Steam|steam" \
+    "Lutris|lutris"
+}
+
+submenu_monitor() {
+  run_menu -sub "Monitor" \
+    "Atop|foot -T atop -e amdgpu_top --smi" \
+    "Btop|foot -a btop -e btop" \
+    "Htop|foot -a htop -e htop" \
+    "Logs|foot -a foot -T journalctl -e journalctl -f" \
+    "Combined|foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh"
+}
+
+case "${1:-}" in
+-apps) menu_apps ;;
+-notes) menu_notes ;;
+-packages) menu_packages ;;
+-pass) menu_pass ;;
+-settings) menu_settings ;;
+-system) menu_system ;;
+-theming) menu_theming ;;
+*) exit 0 ;;
+esac

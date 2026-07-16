@@ -1,1 +1,44 @@
-/home/bazz/.config/fuzzel/menus/fuzzel_passmenu
+#!/bin/bash
+
+export PASSWORD_STORE_CLIP_TIME=10
+shopt -s nullglob globstar
+
+prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+password_files=("$prefix"/**/*.gpg)
+password_files=("${password_files[@]#"$prefix"/}")
+password_files=("${password_files[@]%.gpg}")
+
+if [[ ${#password_files[@]} -eq 0 ]]; then
+  exit 1
+fi
+
+password=$(printf '%s\n' "${password_files[@]}" | fuzzel \
+  --dmenu \
+  --anchor=top \
+  --x-margin=24 \
+  --y-margin=24 \
+  --width=25 \
+  --placeholder="Select Password ")
+
+[[ -n $password ]] || exit 0
+
+action=$(printf '%s\n' "Copy" "Edit" | fuzzel \
+  --dmenu \
+  --anchor=top \
+  --x-margin=24 \
+  --y-margin=24 \
+  --width=25 \
+  --minimal-lines \
+  --placeholder="Choose? ")
+
+case "$action" in
+"Copy")
+  pass show -c "$password" 2>/dev/null
+  ;;
+"Edit")
+  $TERMINAL -e pass edit "$password"
+  ;;
+*)
+  exit 0
+  ;;
+esac
