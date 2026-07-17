@@ -11,9 +11,11 @@ QUERY=$($DMENU -w 25 --placeholder="Find files ")
 
 SELECTION=$(
   fd -HI -t f \
+    --exclude .icons \
     --exclude Pictures \
     --exclude Videos \
     --exclude bin \
+    --exclude icons \
     --exclude lib \
     --exclude lib64 \
     --exclude man \
