@@ -140,10 +140,9 @@
   // INDICATORS
   "custom/system": {
     "format": "󱑞",
-    "on-click": "foot -a pop-upgrade -e sys_upgrade",
     "on-click-right": "fuzzel_power",
-    "on-click-middle": "fuzzel_submap -system",
-    "tooltip-format": "<b>System menu</b><small>\n\n<b>Click:</b> Update System\n\n<b>Click-right:</b> Open Power Menu\n\n<b>Click-middle:</b> Edit Settings</small>",
+    "on-click": "fuzzel_submap -system",
+    "tooltip-format": "<b>System menu</b><small>\n\n<b>Click:</b> Edit Settings\n\n<b>Click-right:</b> Open Power Menu</small>",
   },
   "custom/weather": {
     "format": "{}",
