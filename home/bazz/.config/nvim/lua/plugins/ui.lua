@@ -1,4 +1,5 @@
 return {
+
   -- Theme
   {
     "RedsXDD/neopywal.nvim",
@@ -6,6 +7,7 @@ return {
       vim.cmd.colorscheme("neopywal")
     end,
   },
+
   -- Vim-tmux-navigator
   {
     "christoomey/vim-tmux-navigator",
@@ -25,6 +27,7 @@ return {
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
   },
+
   --Bufferline
   {
     "akinsho/bufferline.nvim",
