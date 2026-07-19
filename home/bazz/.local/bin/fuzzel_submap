@@ -77,8 +77,7 @@ menu_notes() {
 
 menu_packages() {
   run_menu "Packages" \
-    "Pacman-install|foot -a fzpack -T fzpack -e fzpack" \
-    "Aur-install|foot -a fzpack -T fzfpack -e fzpack -y" \
+    "Install Packages|foot -a pacseek -T pacseek -e pacseek -m" \
     "Update|foot -a pop-upgrade -e sys_upgrade"
 }
 
