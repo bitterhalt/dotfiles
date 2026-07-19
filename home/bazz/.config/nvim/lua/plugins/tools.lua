@@ -79,7 +79,6 @@ return {
     end,
     keys = {
       { "<leader>ff", "<Cmd>FzfLua files<CR>", desc = "Search files" },
-      { "<leader>fd", "<Cmd>FzfLua diagnostics_document<CR>", desc = "Show diagnostics" },
       { "<leader><tab>", "<Cmd>FzfLua buffers<CR>", desc = "Search buffers" },
       { "<leader>fw", "<Cmd>FzfLua live_grep<CR>", desc = "Search for a pattern" },
       { "<leader>fr", "<Cmd>FzfLua oldfiles<CR>", desc = "Search recent files" },
@@ -123,6 +122,45 @@ return {
           })
         end,
         desc = "Select session (fzf-lua)",
+      },
+    },
+  },
+
+  -- Trouble
+  {
+    "folke/trouble.nvim",
+    opts = {},
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>fd",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>fX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
       },
     },
   },

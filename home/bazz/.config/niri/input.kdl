@@ -10,7 +10,7 @@ input {
     keyboard {
         xkb {
             layout "fi"
-            options "caps:escape "
+            options "caps:escape"
         }
         numlock
     }
