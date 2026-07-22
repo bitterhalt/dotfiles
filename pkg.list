@@ -48,8 +48,6 @@ gnome-themes-extra
 gparted
 gpu-screen-recorder
 graphicsmagick
-greetd
-greetd-wlgreet
 grim
 grub
 grub-btrfs
@@ -71,6 +69,7 @@ linux-firmware
 localsend
 logrotate
 lutris
+ly
 mako
 man-db
 man-pages
