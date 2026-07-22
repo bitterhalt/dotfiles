@@ -21,7 +21,7 @@
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
 - Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
-- Login Manager: [wlgreet](https://git.sr.ht/~kennylevinsen/wlgreet)
+- Login Manager: [ly](https://codeberg.org/fairyglade/ly)
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [foot](https://codeberg.org/dnkl/foot)
 
@@ -58,4 +58,3 @@ Go to ➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 ### User reviews ❤️
 
 <img width="441" height="173" alt="image" src="https://github.com/user-attachments/assets/b9586fb7-f365-4df7-9c24-12f75099b301" />
-
