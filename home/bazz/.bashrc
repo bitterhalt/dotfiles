@@ -2,27 +2,34 @@
 
 [[ $- != *i* ]] && return
 
-PS1='[\u@\h \W]\$ ' # Default prompt
+PS1="[\u@\h \W]\$ "
 
-export HISTSIZE="50000"                                        # History size
-export HISTFILESIZE="${HISTSIZE}"                              # History file size
-export HISTCONTROL="ignoreboth:erasedups"                      # No duplicate entries
-export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*" # Ignore commands
-export LC_COLLATE="C"                                          # Collation order
+set -o vi
+
+export HISTSIZE="50000"
+export HISTFILESIZE="${HISTSIZE}"
+export HISTCONTROL="ignoreboth:erasedups"
+export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*"
+export LC_COLLATE="C"
 export MANPAGER="nvim +Man!"
 
-shopt -s autocd                  # Change to named directory
-shopt -s cdspell                 # Autocorrects cd misspellings
-shopt -s checkwinsize            # Checks term size when bash regains control
-shopt -s histappend              # Do not overwrite history
-shopt -s no_empty_cmd_completion # Do not TAB expand empty lines
+shopt -s autocd
+shopt -s cdspell
+shopt -s checkwinsize
+shopt -s histappend
+shopt -s no_empty_cmd_completion
 
-eval "$(dircolors ~/.config/shell/dircolors)" # Load dircolors
-eval "$(fzf --bash)"                          # CTRL-t = fzf select | CTRL-r = fzf history |  ALT-c  = fzf cd
-eval "$(starship init bash)"                  # Load prompt
-eval "$(zoxide init --cmd cd bash)"           # Use zoxide to cd
+eval "$(fzf --bash)"
+eval "$(starship init bash)"
+eval "$(zoxide init --cmd cd bash)"
 
-# Cleaner titles
+bind "set show-all-if-ambiguous on"
+bind "set completion-ignore-case on"
+bind "set colored-completion-prefix on"
+bind "set bell-style none"
+bind "TAB:menu-complete"
+bind '"\ez":"cdi\C-m"'
+
 case ${TERM} in
 st* | alacritty | foot* | xterm* | rxvt* | kitty | kterm | gnome*)
   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s\007" "${PWD/#$HOME/\~}"'
@@ -32,5 +39,4 @@ tmux* | screen*)
   ;;
 esac
 
-# Load aliases
 source "$HOME/.config/shell/aliases"
