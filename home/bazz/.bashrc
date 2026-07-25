@@ -28,7 +28,7 @@ bind "set completion-ignore-case on"
 bind "set colored-completion-prefix on"
 bind "set bell-style none"
 bind "TAB:menu-complete"
-bind '"\ez":"cdi\C-m"'
+bind '"\ej":"cdi\C-m"'
 
 case ${TERM} in
 st* | alacritty | foot* | xterm* | rxvt* | kitty | kterm | gnome*)
