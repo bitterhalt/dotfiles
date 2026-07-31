@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 HISTORY_FILE="$HOME/.cache/fuzzel-runhistory"
-PROMPT="fuzzel -d --line-height 26"
+PROMPT="fuzzel -d"
 
 hist=$(tac "$HISTORY_FILE" | awk '!seen[$0]++' | head -n 5)
 
