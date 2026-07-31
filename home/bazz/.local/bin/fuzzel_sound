@@ -39,7 +39,7 @@ selected=$(printf '%s\n' "${final_list[@]}" | fuzzel -d \
   --y 24 \
   -w 55 \
   --minimal-lines \
-  --placeholder "Switch the audio device: ")
+  --placeholder "Switch the audio device")
 
 [ -z "$selected" ] && exit 0
 

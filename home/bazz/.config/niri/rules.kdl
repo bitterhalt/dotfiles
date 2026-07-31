@@ -1,6 +1,4 @@
-// =============================================================================
-//  GENERAL RULES
-// =============================================================================
+//  General rules
 
 // Set rounded corners and clip window contents for all windows
 window-rule {
@@ -16,9 +14,7 @@ window-rule {
     }
 }
 
-// =============================================================================
-//  UTILITY & SYSTEM FLOATING WINDOWS
-// =============================================================================
+//  Utility & system floating windows
 
 // Standard system dialogs, authentication agents, and configuration tools
 window-rule {
@@ -96,9 +92,7 @@ window-rule {
 }
 
 
-// =============================================================================
-// APP-SPECIFIC OVERRIDES & FLOATING WINDOWS
-// =============================================================================
+// App-specific overrides & floating windows
 
 // --- Browsers ---
 // Popups, info windows, and media players
@@ -190,9 +184,7 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top-right"
 }
 
-// =============================================================================
-// WORKSPACE ASSIGNMENTS
-// =============================================================================
+// Workspace assignments
 
 window-rule {
     match app-id="brave|brave-origin"
@@ -236,9 +228,7 @@ window-rule {
     }
 }
 
-// =============================================================================
-// ENVIRONMENT & SHELL LAYER RULES
-// =============================================================================
+// Environment & shell layer rules
 
 // Add shadow to chosen layers
 layer-rule {
