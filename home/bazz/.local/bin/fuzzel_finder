@@ -1,13 +1,23 @@
 #!/usr/bin/env bash
 
-# Fuzzel file finder using fd
+# Fuzzel file finder & web search
 
 DMENU="fuzzel -d -a top --y 24 -l 10 --minimal-lines"
+EDITOR="${EDITOR:-nvim}"
 
-EDITOR="nvim"
-
-QUERY=$($DMENU -w 25 --placeholder="Find files ")
+QUERY=$($DMENU -w 30 --placeholder="Find files")
 [[ -z "$QUERY" ]] && exit 0
+
+# Handle web search: triggers if input starts with "w "
+if [[ "$QUERY" =~ ^w[[:space:]]+(.*) ]]; then
+  SEARCH_QUERY="${BASH_REMATCH[1]}"
+
+  ENCODED_QUERY=$(printf '%s' "$SEARCH_QUERY" | sed 's/ /+/g')
+
+  xdg-open "https://www.google.com/search?q=${ENCODED_QUERY}" >/dev/null 2>&1 &
+  disown
+  exit 0
+fi
 
 SELECTION=$(
   fd -HI -t f \
@@ -43,9 +53,9 @@ if [[ -n "$SELECTION" ]]; then
     "$SELECTION" == *.conf ]]; then
 
     if [[ "$SELECTION" == "$HOME"* ]]; then
-      "$TERMINAL" -e "$EDITOR" "$SELECTION" &
+      "${TERMINAL:-alacritty}" -e "$EDITOR" "$SELECTION" &
     else
-      "$TERMINAL" -e pkexec "$EDITOR" "$SELECTION" &
+      "${TERMINAL:-alacritty}" -e pkexec "$EDITOR" "$SELECTION" &
     fi
   else
     xdg-open "$SELECTION" &
