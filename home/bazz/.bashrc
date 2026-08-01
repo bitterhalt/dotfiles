@@ -29,6 +29,8 @@ bind "set colored-completion-prefix on"
 bind "set bell-style none"
 bind "TAB:menu-complete"
 bind '"\ej":"cdi\C-m"'
+bind -m vi-command "C-l: clear-screen"
+bind -m vi-insert "C-l: clear-screen"
 
 case ${TERM} in
 st* | alacritty | foot* | xterm* | rxvt* | kitty | kterm | gnome*)
