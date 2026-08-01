@@ -68,7 +68,7 @@ def icon(condition):
     if "cloud" in c or "overcast" in c:
         return "☁️"
     if any(x in c for x in ("mist", "fog", "haze")):
-        return "🌫"
+        return "🌫️"
     if "drizzle" in c or "light rain" in c:
         return "🌦️"
     if "rain" in c:
