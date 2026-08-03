@@ -1,28 +1,28 @@
 --------------------------------------------------------------------------------
 -- General
 --------------------------------------------------------------------------------
-swayimg.set_mode("viewer")
-swayimg.enable_antialiasing(true)
-swayimg.enable_decoration(true)
-swayimg.enable_overlay(false)
-swayimg.set_dnd_button("MouseRight") -- mouse drag and drop
+swayimg.mode = "viewer"
+swayimg.antialiasing = true
+swayimg.decoration = true
+swayimg.overlay = false
+swayimg.dnd_button = "MouseRight" -- mouse drag and drop
 
 --------------------------------------------------------------------------------
 -- Image list
 --------------------------------------------------------------------------------
-swayimg.imagelist.set_order("alpha")
-swayimg.imagelist.enable_reverse(false)
-swayimg.imagelist.enable_recursive(false)
-swayimg.imagelist.enable_adjacent(true)
+swayimg.imagelist.order = "alpha"
+swayimg.imagelist.reverse = false
+swayimg.imagelist.recursive = false
+swayimg.imagelist.adjacent = true
 
 --------------------------------------------------------------------------------
 -- Text / font overlay
 --------------------------------------------------------------------------------
-swayimg.text.set_font("Adwaita Mono")
-swayimg.text.set_size(13)
-swayimg.text.set_padding(10)
-swayimg.text.set_timeout(15)
-swayimg.text.set_status_timeout(3)
+swayimg.text.font = "Adwaita Mono"
+swayimg.text.size = 13
+swayimg.text.padding = 10
+swayimg.text.timeout = 15
+swayimg.text.status_timeout = 3
 
 --------------------------------------------------------------------------------
 -- Colors - Load from Pywal
@@ -52,15 +52,15 @@ local function hex_to_argb(hex)
 end
 
 -- Text
-swayimg.text.set_foreground(hex_to_argb(colors.color7))
-swayimg.text.set_background(0x00000000)
-swayimg.text.set_shadow(0xd0000000)
+swayimg.text.color = hex_to_argb(colors.color7)
+swayimg.text.background = 0x00000000
+swayimg.text.shadow = 0xd0000000
 
 -- Gallery
-swayimg.gallery.set_border_color(hex_to_argb(colors.color6))
-swayimg.gallery.set_selected_color(hex_to_argb(colors.color8))
-swayimg.gallery.set_unselected_color(hex_to_argb(colors.color0))
-swayimg.gallery.set_window_color(hex_to_argb(colors.color0))
+swayimg.gallery.border_color = hex_to_argb(colors.color6)
+swayimg.gallery.selected_color = hex_to_argb(colors.color8)
+swayimg.gallery.unselected_color = hex_to_argb(colors.color0)
+swayimg.gallery.window_color = hex_to_argb(colors.color0)
 
 -- Viewer
 swayimg.viewer.set_window_background(hex_to_argb(colors.color0))

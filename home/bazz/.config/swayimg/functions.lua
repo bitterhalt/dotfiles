@@ -29,7 +29,7 @@ end
 -- Rename .
 function rename_image()
 	local image = nil
-	local mode = swayimg.get_mode()
+	local mode = swayimg.mode
 	if mode == "gallery" then
 		image = swayimg.gallery.get_image()
 	elseif mode == "viewer" then
@@ -64,9 +64,9 @@ function rename_image()
 		local success = os.rename(image.path, new_path)
 
 		if success then
-			swayimg.text.set_status("Renamed to: " .. new_name)
+			swayimg.text.status = "Renamed to: " .. new_name
 		else
-			swayimg.text.set_status("Error: Rename failed")
+			swayimg.text.status = "Error: Rename failed"
 		end
 	end
 end

@@ -1,10 +1,10 @@
 --------------------------------------------------------------------------------
 -- Viewer mode
 --------------------------------------------------------------------------------
-swayimg.viewer.set_default_position("center")
-swayimg.viewer.enable_centering(true)
-swayimg.viewer.enable_loop(true)
-swayimg.viewer.limit_preload(1)
+swayimg.viewer.default_position = "center"
+swayimg.viewer.autocenter = true
+swayimg.viewer.loop = true
+swayimg.viewer.preload = 1
 
 swayimg.viewer.set_text("topleft", {
 	"File: {name}",
@@ -23,7 +23,7 @@ swayimg.viewer.set_text("bottomleft", {})
 swayimg.viewer.set_text("bottomright", {})
 
 swayimg.on_window_resize(function()
-	if swayimg.get_mode() == "viewer" then
+	if swayimg.mode == "viewer" then
 		swayimg.viewer.set_fix_scale("optimal")
 	end
 end)
@@ -51,7 +51,7 @@ swayimg.viewer.on_key("r", function()
 end)
 
 swayimg.viewer.on_key("Return", function()
-	swayimg.set_mode("gallery")
+	swayimg.mode = "gallery"
 end)
 
 swayimg.viewer.on_key("r", function()
@@ -60,38 +60,38 @@ swayimg.viewer.on_key("r", function()
 end)
 
 swayimg.viewer.on_key("Up", function()
-	swayimg.viewer.switch_image("next")
+	swayimg.viewer.open("next")
 end)
 
 swayimg.viewer.on_key("l", function()
-	swayimg.viewer.switch_image("next")
+	swayimg.viewer.open("next")
 end)
 
 swayimg.viewer.on_key("Down", function()
-	swayimg.viewer.switch_image("prev")
+	swayimg.viewer.open("prev")
 end)
 
 swayimg.viewer.on_key("h", function()
-	swayimg.viewer.switch_image("prev")
+	swayimg.viewer.open("prev")
 end)
 
 swayimg.viewer.on_key("g", function()
-	swayimg.viewer.switch_image("first")
+	swayimg.viewer.open("first")
 end)
 
 swayimg.viewer.on_key("Shift-g", function()
-	swayimg.viewer.switch_image("last")
+	swayimg.viewer.open("last")
 end)
 
 swayimg.viewer.on_key("plus", function()
 	local pos = swayimg.get_mouse_pos()
-	local scale = swayimg.viewer.get_scale()
+	local scale = swayimg.viewer.scale
 	swayimg.viewer.set_abs_scale(scale + scale / 10, pos.x, pos.y)
 end)
 
 swayimg.viewer.on_key("minus", function()
 	local pos = swayimg.get_mouse_pos()
-	local scale = swayimg.viewer.get_scale()
+	local scale = swayimg.viewer.scale
 	swayimg.viewer.set_abs_scale(scale - scale / 10, pos.x, pos.y)
 end)
 
@@ -125,22 +125,22 @@ end)
 
 swayimg.viewer.on_mouse("Ctrl-ScrollUp", function()
 	local pos = swayimg.get_mouse_pos()
-	local scale = swayimg.viewer.get_scale()
+	local scale = swayimg.viewer.scale
 	swayimg.viewer.set_abs_scale(scale + scale / 10, pos.x, pos.y)
 end)
 
 swayimg.viewer.on_mouse("Ctrl-ScrollDown", function()
 	local pos = swayimg.get_mouse_pos()
-	local scale = swayimg.viewer.get_scale()
+	local scale = swayimg.viewer.scale
 	swayimg.viewer.set_abs_scale(scale - scale / 10, pos.x, pos.y)
 end)
 
 swayimg.viewer.on_mouse("MouseSide", function()
-	swayimg.viewer.switch_image("prev")
+	swayimg.viewer.open("prev")
 end)
 
 swayimg.viewer.on_mouse("MouseExtra", function()
-	swayimg.viewer.switch_image("next")
+	swayimg.viewer.open("next")
 end)
 
 swayimg.viewer.on_key("b", function()
@@ -168,6 +168,6 @@ end)
 swayimg.viewer.on_key("y", function()
 	with_image(function(image)
 		os.execute("wl-copy -t image/png < " .. shellescape(image.path))
-		swayimg.text.set_status("Copied to clipboard: " .. image.path)
+		swayimg.text.status = "Copied to clipboard: " .. image.path
 	end)
 end)
