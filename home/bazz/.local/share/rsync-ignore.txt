@@ -2,13 +2,14 @@
 #                      rsync-excludes                 #
 #-----------------------------------------------------#
 
-.dbus
-.local/state/nvim
-.local/share/icons/
-.local/share/wineprefixes/
-.local/share/nvim/
+*/CacheStorage/*
 .config/discord/
+.dbus
 .local/games/
+.local/share/icons/
+.local/share/nvim/
+.local/share/wineprefixes/
+.local/state/nvim
 .state
 .steampath
 .steampid
@@ -17,7 +18,6 @@
 /etc/NetworkManager
 /etc/gshadow
 /etc/gshadow-
-/etc/ssl/private
 /etc/kernel.d
 /etc/libvirt
 /etc/passwd-
@@ -27,6 +27,7 @@
 /etc/shadow
 /etc/shadow-
 /etc/ssh/
+/etc/ssl/private
 GOG.com
 Signal
 Videos
