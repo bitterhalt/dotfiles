@@ -43,10 +43,10 @@ swayimg.viewer.on_key("q", function()
 end)
 
 swayimg.viewer.on_key("f", function()
-	swayimg.toggle_fullscreen()
+	swayimg.fullscreen = not swayimg.fullscreen
 end)
 
-swayimg.viewer.on_key("r", function()
+swayimg.viewer.on_key("<", function()
 	swayimg.viewer.rotate(90)
 end)
 
