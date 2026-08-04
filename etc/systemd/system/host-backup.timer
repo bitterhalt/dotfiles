@@ -3,8 +3,9 @@ Description=Run weekly local backup
 
 [Timer]
 OnCalendar=weekly
+OnCalendar=Mon,Wed,Fri *-*-* 00:05:00
 Persistent=false
-RandomizedDelaySec=10m
+RandomizedDelaySec=2h
 
 [Install]
 WantedBy=timers.target
