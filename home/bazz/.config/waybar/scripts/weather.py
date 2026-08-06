@@ -8,7 +8,7 @@ import urllib.request
 CACHE_DIR = os.path.expanduser("~/.cache")
 CACHE_FILE = os.path.join(CACHE_DIR, "waybar_weather.json")
 CACHE_TIMEOUT = 7200  # 2 hours
-LOCATION = ""  # Emty means automatic
+LOCATION = ""  # Empty means automatic
 
 os.makedirs(CACHE_DIR, exist_ok=True)
 
@@ -108,9 +108,46 @@ city = weather["nearest_area"][0]["areaName"][0]["value"]
 sunrise = today["astronomy"][0]["sunrise"]
 sunset = today["astronomy"][0]["sunset"]
 
-# Around noon is a good representation of the day
-hour = today["hourly"][4]
+moon_phase_raw = today["astronomy"][0].get("moon_phase", "")
+moon_illum = today["astronomy"][0].get("moon_illumination", "")
 
+
+def moon_emoji(phase):
+    p = (phase or "").lower()
+    if "new" in p:
+        return "🌑"
+    if "waxing crescent" in p:
+        return "🌒"
+    if "first" in p or ("quarter" in p and "first" in p):
+        return "🌓"
+    if "waxing gibbous" in p:
+        return "🌔"
+    if "full" in p:
+        return "🌕"
+    if "waning gibbous" in p:
+        return "🌖"
+    if "last" in p or ("quarter" in p and "last" in p):
+        return "🌗"
+    if "waning crescent" in p:
+        return "🌘"
+    try:
+        illum = int(moon_illum)
+        if illum == 0:
+            return "🌑"
+        if illum < 25:
+            return "🌒"
+        if illum < 50:
+            return "🌓"
+        if illum < 75:
+            return "🌔"
+        if illum < 100:
+            return "🌖"
+        return "🌕"
+    except Exception:
+        return "🌙"
+
+
+hour = today["hourly"][4]
 
 tooltip = [
     f"<b>{city}</b>: {icon(condition)} {condition}",
@@ -123,8 +160,16 @@ tooltip = [
     f"🌞 <b>UV Index:</b> {uv}",
     f"🌅 <b>Sunrise:</b> {sunrise}",
     f"🌇 <b>Sunset:</b> {sunset}",
-    "",
 ]
+
+moon_emj = moon_emoji(moon_phase_raw)
+if moon_phase_raw or moon_illum:
+    moon_info = f"{moon_emj} <b>Moon:</b> {moon_phase_raw}"
+    if moon_illum:
+        moon_info += f" ({moon_illum}%)"
+    tooltip.append(moon_info)
+
+tooltip.append("")
 
 for day in weather["weather"]:
     weekday = time.strftime(
@@ -141,7 +186,7 @@ for day in weather["weather"]:
     )
 
     tooltip.append(
-        f"{weekday:>3} {icon(desc)} {day['maxtempC']}°/{day['mintempC']}°   🌧️ {rain}%"
+        f"{weekday:>3} {icon(desc)} {day['maxtempC']}°/{day['mintempC']}°    🌧️ {rain}%"
     )
 
 print(
