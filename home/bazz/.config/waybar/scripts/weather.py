@@ -7,7 +7,7 @@ import urllib.request
 
 CACHE_DIR = os.path.expanduser("~/.cache")
 CACHE_FILE = os.path.join(CACHE_DIR, "waybar_weather.json")
-CACHE_TIMEOUT = 7200  # 2 hours
+CACHE_TIMEOUT = 3600  # 1 hour
 LOCATION = ""  # Empty means automatic
 
 os.makedirs(CACHE_DIR, exist_ok=True)
