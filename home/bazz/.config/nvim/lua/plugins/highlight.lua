@@ -2,6 +2,7 @@ return {
   -- Treesitter
   {
     "romus204/tree-sitter-manager.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {},
     config = function()
       require("tree-sitter-manager").setup({
