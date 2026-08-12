@@ -59,9 +59,8 @@ run_menu() {
 
 menu_apps() {
   run_menu "Apps" \
-    "All|$BROWSER & discord & thunderbird & transmission-gtk" \
+    "All|$BROWSER & thunderbird & transmission-gtk" \
     "Browser|$BROWSER" \
-    "Discord|discord" \
     "Email|thunderbird" \
     "Torrent|transmission-gtk" \
     "+ Gaming|submenu_gaming"
