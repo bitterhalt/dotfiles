@@ -154,12 +154,12 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  *                      TOOLTIPS
  * ----------------------------------------------------- */
-tooltip {
-  all: unset;
-  background: @background;
-  border-radius: 6px;
-  border: solid 1px @color6;
-}
+/* tooltip { */
+/*   all: unset; */
+/*   background: @background; */
+/*   border-radius: 6px; */
+/*   border: solid 1px @color6; */
+/* } */
 
 tooltip label {
   color: @foreground;
