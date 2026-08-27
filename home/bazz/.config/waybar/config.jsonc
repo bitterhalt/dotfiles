@@ -103,7 +103,7 @@
   // PRIVACY
   "privacy": {
     "icon-spacing": 2,
-    "icon-size": 16,
+    "icon-size": 0, // 0 = automatic size
     "transition-duration": 0,
     "modules": [
       {
