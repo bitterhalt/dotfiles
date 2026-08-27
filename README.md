@@ -16,7 +16,7 @@
 - Notifications: [Mako](https://github.com/emersion/mako)
 - Notification history: [mako_hist](https://github.com/bitterhalt/dotfiles/blob/main/home/bazz/.local/bin/mako_hist.py)
 - WM: [Niri](https://github.com/niri-wm/niri)
-- Colors [Dynamic](https://github.com/eylles/pywal16)
+- Colors [pywal16](https://github.com/eylles/pywal16)
 - Editor: [neovim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
