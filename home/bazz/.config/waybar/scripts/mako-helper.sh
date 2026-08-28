@@ -8,9 +8,9 @@ if makoctl mode | grep -q 'dnd'; then
 else
   MODE="default"
   if [ "$COUNT" -gt 0 ]; then
-    DISPLAY_TEXT="󰂚 $COUNT"
-  else
     DISPLAY_TEXT="󰂚"
+  else
+    DISPLAY_TEXT=""
   fi
 fi
 

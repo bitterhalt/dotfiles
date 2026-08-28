@@ -5,7 +5,12 @@
   // "height": 32,
   "spacing": 4,
   "modules-left": ["niri/workspaces", "niri/window"],
-  "modules-center": ["group/middle", "privacy", "custom/wf-recorder"],
+  "modules-center": [
+    "group/middle",
+    "custom/mako",
+    "privacy",
+    "custom/wf-recorder",
+  ],
   "modules-right": [
     "group/connections",
     "pulseaudio",
@@ -193,7 +198,7 @@
       "click-to-reveal": false,
       "transition-duration": 300,
     },
-    "modules": ["clock", "custom/weather", "custom/mako", "custom/system"],
+    "modules": ["clock", "custom/weather", "custom/system"],
   },
   "group/connections": {
     "orientation": "inherit",

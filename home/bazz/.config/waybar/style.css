@@ -56,7 +56,6 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 #clock,
 #privacy,
-#custom-mako,
 #custom-system {
   border-radius: 4px;
   color: @foreground;
@@ -70,6 +69,11 @@ window#waybar.empty #window {
   font-weight: 600;
   margin: 2px;
   padding: 0 6px;
+}
+
+#custom-mako {
+  margin: 2px;
+  color: @foreground;
 }
 #custom-mako.dnd {
   opacity: 0.5;
@@ -168,14 +172,17 @@ tooltip label {
 #bluetooth:hover,
 #clock:hover,
 #custom-idle:hover,
-#custom-mako:hover,
 #custom-system:hover,
 #custom-weather:hover,
-#custom-wf-recorder:hover,
 #network:hover,
 #pulseaudio:hover,
 #wireplumber:hover {
   color: @background;
   background: @color6;
   border-radius: 4px;
+}
+
+#custom-wf-recorder:hover,
+#custom-mako:hover {
+  color: @color6;
 }
