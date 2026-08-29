@@ -249,3 +249,9 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Space` | Toggle Floating |
 | `Mod+Ctrl+Space` | Toggle Floating/Tiling Focus |
 | `Mod+G` | Toggle Column Tabs |
+
+## Suspend Process
+
+| Key | Action |
+| --- | ------ |
+| `Mod+Pause` | Suspend Process (wl-freeze) |
