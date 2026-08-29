@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+wl-freeze -c "niri msg --json focused-window | jq '.pid'"

@@ -196,5 +196,5 @@ binds {
     Mod+G hotkey-overlay-title="Toggle Column Tabs" { toggle-column-tabbed-display; }
 
     // Suspend Process
-    Mod+Pause hotkey-overlay-title="Suspend Process (wl-freeze)" { spawn "wl-freeze" "-a"; }
+    Mod+Pause hotkey-overlay-title="Suspend Process (wl-freeze)" { spawn-sh "wl-pause";}
 }
