@@ -1,0 +1,13 @@
+{
+  // BLUETOOTH
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂯",
+    "format-disabled": "",
+    "on-click": "foot -a bluetui -e bluetui",
+    "tooltip-format": "{num_connections} connected",
+    "tooltip-format-connected": "[ {num_connections} ] connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%"
+  }
+}

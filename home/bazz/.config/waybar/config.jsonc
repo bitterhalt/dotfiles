@@ -1,16 +1,24 @@
-// SETTINGS
+// IMPORTS
 {
+  "include": ["modules/*.jsonc", "modules/custom/*.jsonc", "groups/*.jsonc"],
+
+  // SETTINGS
   "layer": "top",
   "position": "top",
-  // "height": 32,
   "spacing": 4,
+
+  // LEFT
   "modules-left": ["niri/workspaces", "niri/window"],
+
+  // CENTER
   "modules-center": [
     "group/middle",
     "custom/mako",
     "privacy",
     "custom/wf-recorder",
   ],
+
+  // RIGHT
   "modules-right": [
     "group/connections",
     "pulseaudio",
@@ -18,239 +26,4 @@
     "battery",
     "group/hidden-tray",
   ],
-
-  // NIRI MODULES
-  "niri/workspaces": {
-    "disable-scroll": true,
-  },
-
-  "niri/window": {
-    "format": "{}",
-    "icon": true,
-    "icon-size": 20,
-    "max-length": 70,
-    "separate-outputs": true,
-    "tooltip": false,
-  },
-
-  // TRAY
-  "tray": {
-    "icon-size": 20,
-    "spacing": 12,
-    "icons": {
-      // Override some ugly icons
-      "discord": "discord",
-    },
-  },
-
-  // BATTERY
-  "battery": {
-    "bat": "BAT0",
-    "interval": 60,
-    "states": {
-      "warning": 30,
-      "critical": 15,
-    },
-    "format": "{capacity}% {icon}",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "max-length": 25,
-  },
-
-  // NETWORK
-  "network": {
-    "format-disconnected": "󰅛",
-    "format-ethernet": "󰈀",
-    "format-linked": "{ifname} (No IP) ?",
-    "format-wifi": "󰖩",
-    "max-length": 30,
-    "on-click": "nm-connection-editor",
-    "tooltip-format": "{ifname} via {gwaddr}",
-    "tooltip-format-disconnected": "Disconnected",
-    "tooltip-format-wifi": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
-  },
-
-  // BLUETOOTH
-  "bluetooth": {
-    "format": "󰂯",
-    "format-connected": "󰂯",
-    "format-disabled": "",
-    "on-click": "foot -a bluetui -e bluetui",
-    "tooltip-format": "{num_connections} connected",
-    "tooltip-format-connected": "[ {num_connections} ] connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
-  },
-
-  // AUDIO
-  "pulseaudio": {
-    "format": "{icon}",
-    "format-icons": ["󰕿", "󰖀", "󰖀", "󰕾"],
-    "format-muted": "󰝟",
-    "on-click": "pavucontrol",
-    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "scroll-step": 5,
-    "tooltip-format": "Vol:\t{volume}%",
-  },
-
-  // CLOCK
-  "clock": {
-    "format": "{:%H:%M}",
-    "tooltip-format": "{:%a, <b>%d</b>, %b %Y}",
-  },
-  // "in case tzdata update fucks up your clock",
-  "custom/clock": {
-    "exec": "date +'%b %d %H:%M'",
-    "format": "{}",
-    "interval": 60,
-    "tooltip": false,
-  },
-
-  // PRIVACY
-  "privacy": {
-    "icon-spacing": 2,
-    "icon-size": 0, // 0 = automatic size
-    "transition-duration": 0,
-    "modules": [
-      {
-        "type": "screenshare",
-        "tooltip": true,
-        "tooltip-icon-size": 24,
-      },
-      {
-        "type": "audio-in",
-        "tooltip": true,
-        "tooltip-icon-size": 24,
-        "icon-name": "audio-input-microphone-symbolic",
-      },
-      {
-        "type": "location",
-        "tooltip": true,
-        "tooltip-icon-size": 24,
-        "icon-name": "location-services-active-symbolic",
-      },
-    ],
-    "ignore-monitor": true,
-    "ignore": [
-      {
-        "type": "audio-in",
-        "name": "cava",
-      },
-      {
-        "type": "screenshare",
-        "name": "obs",
-      },
-    ],
-  },
-
-  // INDICATORS
-
-  "custom/weather": {
-    "format": "{}",
-    "tooltip": true,
-    "interval": 3600,
-    "return-type": "json",
-    "exec": "~/.config/waybar/scripts/weather.py",
-  },
-  "custom/idle": {
-    "exec": "~/.config/waybar/scripts/idle.sh",
-    "format": "{}",
-    "interval": "once",
-    "on-click": "idle.sh -t; pkill -RTMIN+1 waybar",
-    "return-type": "json",
-    "signal": 1,
-  },
-  "custom/wf-recorder": {
-    "exec": "echo '{\"class\": \"recording\",\"text\":\"󰑋\",\"tooltip\":\"<b>Click:</b> to stop recording\"}'",
-    "exec-if": "pgrep -f gpu-screen-recorder",
-    "format": "{}",
-    "interval": "once",
-    "on-click": "~/.local/bin/wl-record -k",
-    "return-type": "json",
-    "signal": 2,
-  },
-
-  "custom/mako": {
-    "exec": "~/.config/waybar/scripts/mako-helper.sh",
-    "format": "{text}",
-    "interval": 60,
-    "on-click": "foot -T 'Mako History' -e mako_hist.py",
-    "on-click-right": "makoctl mode -t dnd; pkill -RTMIN+3 waybar",
-    "on-click-middle": "pkill mako; mako & sleep 0.2 && pkill -RTMIN+3 waybar",
-    "return-type": "json",
-    "signal": 3,
-  },
-
-  // SEPARATORS
-  "custom/sep": {
-    "format": "󰇙",
-    "tooltip": false,
-  },
-
-  // GROUPS
-  "group/middle": {
-    "orientation": "inherit",
-    "drawer": {
-      "click-to-reveal": false,
-      "transition-duration": 300,
-    },
-    "modules": ["clock", "custom/weather", "group/system"],
-  },
-  "group/connections": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 300,
-    },
-    "modules": ["network", "bluetooth"],
-  },
-  "group/hidden-tray": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 300,
-    },
-    "modules": ["custom/sep", "tray"],
-  },
-  "group/system": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 300,
-      "children-class": "not-system",
-    },
-    "modules": [
-      "custom/system",
-      "custom/power",
-      "custom/quit",
-      "custom/lock",
-      "custom/sleep",
-    ],
-  },
-  "custom/system": {
-    "format": "󱑞",
-    "tooltip": true,
-    "tooltip-format": "Settings",
-    "on-click": "fuzzel_submap -system",
-  },
-  "custom/power": {
-    "format": "󰐥",
-    "tooltip": true,
-    "tooltip-format": "Power Menu",
-    "on-click": "fuzzel_power",
-  },
-  "custom/quit": {
-    "format": "󰍂",
-    "tooltip": true,
-    "tooltip-format": "Quit / Log Out",
-    "on-click": "niri msg action quit",
-  },
-  "custom/lock": {
-    "format": "󰌾",
-    "tooltip": true,
-    "tooltip-format": "Lock Screen",
-    "on-click": "swaylock -C ~/.cache/wal/colors-swaylock",
-  },
-  "custom/sleep": {
-    "format": "󰤄",
-    "tooltip": true,
-    "tooltip-format": "Suspend",
-    "on-click": "systemctl suspend",
-  },
 }

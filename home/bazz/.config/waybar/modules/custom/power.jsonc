@@ -1,0 +1,9 @@
+{
+  // POWER MENU
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
+    "on-click": "fuzzel_power"
+  }
+}

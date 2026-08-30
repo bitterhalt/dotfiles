@@ -1,0 +1,17 @@
+{
+  // SYSTEM GROUP
+  "group/system": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-system"
+    },
+    "modules": [
+      "custom/system",
+      "custom/power",
+      "custom/quit",
+      "custom/lock",
+      "custom/sleep"
+    ]
+  }
+}

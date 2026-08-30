@@ -1,0 +1,9 @@
+{
+  // LOCK
+  "custom/lock": {
+    "format": "󰌾",
+    "tooltip": true,
+    "tooltip-format": "Lock Screen",
+    "on-click": "swaylock -C ~/.cache/wal/colors-swaylock"
+  }
+}

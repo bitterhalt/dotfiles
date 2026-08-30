@@ -1,0 +1,38 @@
+{
+  // PRIVACY
+  "privacy": {
+    "icon-spacing": 2,
+    "icon-size": 0,
+    "transition-duration": 0,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+        "icon-name": "audio-input-microphone-symbolic"
+      },
+      {
+        "type": "location",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+        "icon-name": "location-services-active-symbolic"
+      }
+    ],
+    "ignore-monitor": true,
+    "ignore": [
+      {
+        "type": "audio-in",
+        "name": "cava"
+      },
+      {
+        "type": "screenshare",
+        "name": "obs"
+      }
+    ]
+  }
+}

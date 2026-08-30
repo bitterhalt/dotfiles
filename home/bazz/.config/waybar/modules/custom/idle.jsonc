@@ -1,0 +1,11 @@
+{
+  // IDLE
+  "custom/idle": {
+    "exec": "~/.config/waybar/scripts/idle.sh",
+    "format": "{}",
+    "interval": "once",
+    "on-click": "idle.sh -t; pkill -RTMIN+1 waybar",
+    "return-type": "json",
+    "signal": 1
+  }
+}

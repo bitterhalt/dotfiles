@@ -1,0 +1,13 @@
+{
+  // TRAY GROUP
+  "group/hidden-tray": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300
+    },
+    "modules": [
+      "custom/sep",
+      "tray"
+    ]
+  }
+}

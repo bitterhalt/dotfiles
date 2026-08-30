@@ -1,0 +1,15 @@
+{
+  // CENTER GROUP
+  "group/middle": {
+    "orientation": "inherit",
+    "drawer": {
+      "click-to-reveal": false,
+      "transition-duration": 300
+    },
+    "modules": [
+      "clock",
+      "custom/weather",
+      "group/system"
+    ]
+  }
+}

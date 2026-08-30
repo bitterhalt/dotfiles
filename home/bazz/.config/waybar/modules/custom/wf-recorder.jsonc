@@ -1,0 +1,12 @@
+{
+  // RECORDING
+  "custom/wf-recorder": {
+    "exec": "echo '{\"class\": \"recording\",\"text\":\"󰑋\",\"tooltip\":\"<b>Click:</b> to stop recording\"}'",
+    "exec-if": "pgrep -f gpu-screen-recorder",
+    "format": "{}",
+    "interval": "once",
+    "on-click": "~/.local/bin/wl-record -k",
+    "return-type": "json",
+    "signal": 2
+  }
+}

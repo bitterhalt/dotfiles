@@ -1,0 +1,11 @@
+{
+  // TRAY
+  "tray": {
+    "icon-size": 20,
+    "spacing": 12,
+    "icons": {
+      // Override some ugly icons
+      "discord": "discord"
+    }
+  }
+}

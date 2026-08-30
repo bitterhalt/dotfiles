@@ -1,0 +1,15 @@
+{
+  // NIRI
+  "niri/workspaces": {
+    "disable-scroll": true
+  },
+
+  "niri/window": {
+    "format": "{}",
+    "icon": true,
+    "icon-size": 20,
+    "max-length": 70,
+    "separate-outputs": true,
+    "tooltip": false
+  }
+}
