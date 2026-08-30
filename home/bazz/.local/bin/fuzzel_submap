@@ -57,15 +57,6 @@ run_menu() {
 
 # Top-level menus
 
-menu_apps() {
-  run_menu "Apps" \
-    "All|$BROWSER & thunderbird & transmission-gtk" \
-    "Browser|$BROWSER" \
-    "Email|thunderbird" \
-    "Torrent|transmission-gtk" \
-    "+ Gaming|submenu_gaming"
-}
-
 menu_notes() {
   run_menu "Notes" \
     "󰍉 Search|fuzzel_notes" \
@@ -115,26 +106,7 @@ menu_theming() {
     "Save theme|fuzzel_theme -s"
 }
 
-# Nested Sub-menus
-
-submenu_gaming() {
-  run_menu -sub "Gaming" \
-    "All|steam & lutris" \
-    "Steam|steam" \
-    "Lutris|lutris"
-}
-
-submenu_monitor() {
-  run_menu -sub "Monitor" \
-    "Atop|foot -T atop -e amdgpu_top --smi" \
-    "Btop|foot -a btop -e btop" \
-    "Htop|foot -a htop -e htop" \
-    "Logs|foot -a foot -T journalctl -e journalctl -f" \
-    "Combined|foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh"
-}
-
 case "${1:-}" in
--apps) menu_apps ;;
 -notes) menu_notes ;;
 -packages) menu_packages ;;
 -pass) menu_pass ;;

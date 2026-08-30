@@ -9,9 +9,10 @@ binds {
     Mod+T hotkey-overlay-title="Display Time" { spawn "noti_time"; }
     Mod+F2 hotkey-overlay-title="Open Calculator" { spawn "galculator"; }
 
-    // WWW/Mail
+    // WWW/Mail/Downloads
     Mod+W hotkey-overlay-title="Web browser" { spawn "brave-origin"; }
     Mod+M hotkey-overlay-title="Open Email" { spawn "thunderbird"; }
+    Mod+A hotkey-overlay-title="Launch Daily Applications" { spawn-sh "~/.config/niri/scripts/apps.sh"; }
 
     // File managers
     Mod+E hotkey-overlay-title="TUI Filemanager" { spawn-sh "foot -T lf -e lf"; }
@@ -37,7 +38,6 @@ binds {
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
 
     // Submaps
-    Mod+A hotkey-overlay-title="Quick apps" { spawn-sh "fuzzel_submap -apps"; }
     Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "fuzzel_submap -system"; }
     Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "fuzzel_submap -settings"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "fuzzel_submap -notes"; }
