@@ -16,12 +16,13 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+T` | Display Time |
 | `Mod+F2` | Open Calculator |
 
-## WWW/Mail
+## WWW/Mail/Downloads
 
 | Key | Action |
 | --- | ------ |
 | `Mod+W` | Web browser |
 | `Mod+M` | Open Email |
+| `Mod+A` | Launch Daily Applications |
 
 ## File managers
 
@@ -59,7 +60,6 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 | Key | Action |
 | --- | ------ |
-| `Mod+A` | Quick apps |
 | `Mod+F1` | Audio and connection switcher |
 | `Mod+F12` | System and shell setting |
 | `Mod+N` | Open Notes |

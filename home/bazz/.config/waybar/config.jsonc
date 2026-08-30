@@ -143,12 +143,7 @@
   },
 
   // INDICATORS
-  "custom/system": {
-    "format": "󱑞",
-    "on-click-right": "fuzzel_power",
-    "on-click": "fuzzel_submap -system",
-    "tooltip-format": "<b>System menu</b><small>\n\n<b>Click:</b> Edit Settings\n\n<b>Click-right:</b> Open Power Menu</small>",
-  },
+
   "custom/weather": {
     "format": "{}",
     "tooltip": true,
@@ -198,7 +193,7 @@
       "click-to-reveal": false,
       "transition-duration": 300,
     },
-    "modules": ["clock", "custom/weather", "custom/system"],
+    "modules": ["clock", "custom/weather", "group/system"],
   },
   "group/connections": {
     "orientation": "inherit",
@@ -213,5 +208,49 @@
       "transition-duration": 300,
     },
     "modules": ["custom/sep", "tray"],
+  },
+  "group/system": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-system",
+    },
+    "modules": [
+      "custom/system",
+      "custom/power",
+      "custom/quit",
+      "custom/lock",
+      "custom/sleep",
+    ],
+  },
+  "custom/system": {
+    "format": "󱑞",
+    "tooltip": true,
+    "tooltip-format": "Settings",
+    "on-click": "fuzzel_submap -system",
+  },
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
+    "on-click": "fuzzel_power",
+  },
+  "custom/quit": {
+    "format": "󰍂",
+    "tooltip": true,
+    "tooltip-format": "Quit / Log Out",
+    "on-click": "niri msg action quit",
+  },
+  "custom/lock": {
+    "format": "󰌾",
+    "tooltip": true,
+    "tooltip-format": "Lock Screen",
+    "on-click": "swaylock -C ~/.cache/wal/colors-swaylock",
+  },
+  "custom/sleep": {
+    "format": "󰤄",
+    "tooltip": true,
+    "tooltip-format": "Suspend",
+    "on-click": "systemctl suspend",
   },
 }

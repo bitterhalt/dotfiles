@@ -56,6 +56,10 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 #clock,
 #privacy,
+#custom-lock,
+#custom-quit,
+#custom-power,
+#custom-sleep,
 #custom-system {
   border-radius: 4px;
   color: @foreground;
@@ -172,6 +176,10 @@ tooltip label {
 #bluetooth:hover,
 #clock:hover,
 #custom-idle:hover,
+#custom-lock:hover,
+#custom-quit:hover,
+#custom-power:hover,
+#custom-sleep:hover,
 #custom-system:hover,
 #custom-weather:hover,
 #network:hover,
