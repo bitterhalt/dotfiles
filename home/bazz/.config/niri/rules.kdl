@@ -201,6 +201,7 @@ window-rule {
     open-on-workspace "2"
     open-focused false
     open-maximized true
+    exclude title="^Calendar Reminders$"
 }
 
 window-rule {
