@@ -1,9 +1,0 @@
-{
-  // LOG OUT
-  "custom/quit": {
-    "format": "󰍂",
-    "tooltip": true,
-    "tooltip-format": "Quit / Log Out",
-    "on-click": "niri msg action quit"
-  }
-}

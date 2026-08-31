@@ -2,8 +2,15 @@
   // POWER MENU
   "custom/power": {
     "format": "󰐥",
-    "tooltip": true,
-    "tooltip-format": "Power Menu",
-    "on-click": "fuzzel_power"
-  }
+    "tooltip": false,
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/menus/power_menu.xml",
+    "menu-actions": {
+      "exit": "niri msg action quit",
+      "lock": "swaylock -C ~/.cache/wal/colors-swaylock",
+      "sleep": "systemctl suspend",
+      "reboot": "~/.config/waybar/scripts/confirm.sh reboot",
+      "shutdown": "~/.config/waybar/scripts/confirm.sh shutdown",
+    },
+  },
 }

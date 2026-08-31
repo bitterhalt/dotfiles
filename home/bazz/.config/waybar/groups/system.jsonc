@@ -4,14 +4,8 @@
     "orientation": "inherit",
     "drawer": {
       "transition-duration": 300,
-      "children-class": "not-system"
+      "children-class": "not-system",
     },
-    "modules": [
-      "custom/system",
-      "custom/power",
-      "custom/quit",
-      "custom/lock",
-      "custom/sleep"
-    ]
-  }
+    "modules": ["custom/system", "custom/power"],
+  },
 }

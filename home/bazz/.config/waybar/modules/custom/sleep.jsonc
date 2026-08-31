@@ -1,9 +1,0 @@
-{
-  // SUSPEND
-  "custom/sleep": {
-    "format": "󰤄",
-    "tooltip": true,
-    "tooltip-format": "Suspend",
-    "on-click": "systemctl suspend"
-  }
-}
