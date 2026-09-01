@@ -4,12 +4,8 @@
     "orientation": "inherit",
     "drawer": {
       "click-to-reveal": false,
-      "transition-duration": 300
+      "transition-duration": 300,
     },
-    "modules": [
-      "clock",
-      "custom/weather",
-      "group/system"
-    ]
-  }
+    "modules": ["clock", "custom/weather", "custom/system", "custom/power"],
+  },
 }
