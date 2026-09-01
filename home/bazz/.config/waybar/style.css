@@ -116,19 +116,24 @@ window#waybar.empty #window {
   margin: 2px;
   padding: 0 6px;
 }
+#custom-idle {
+  color: #d79921;
+  margin: 2px;
+  padding: 0 6px;
+}
 
 #privacy-item.screenshare {
-  color: @color1;
+  color: @color3;
   opacity: 0.8;
 }
 
 #privacy-item.location {
-  color: @color5;
+  color: @color3;
   opacity: 0.8;
 }
 
 #privacy-item.audio-in {
-  color: @color6;
+  color: @color3;
   opacity: 0.8;
 }
 

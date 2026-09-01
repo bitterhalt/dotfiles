@@ -2,8 +2,7 @@
   // SYSTEM MENU
   "custom/system": {
     "format": "󱑞",
-    "tooltip": true,
-    "tooltip-format": "Settings",
+    "tooltip": false,
     "on-click": "fuzzel_submap -system",
   },
 }
