@@ -106,6 +106,15 @@ menu_theming() {
     "Save theme|fuzzel_theme -s"
 }
 
+submenu_monitor() {
+  run_menu -sub "Monitor" \
+    "Atop|foot -T atop -e amdgpu_top --smi" \
+    "Btop|foot -a btop -e btop" \
+    "Htop|foot -a htop -e htop" \
+    "Logs|foot -a foot -T journalctl -e journalctl -f" \
+    "Combined|foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh"
+}
+
 case "${1:-}" in
 -notes) menu_notes ;;
 -packages) menu_packages ;;
