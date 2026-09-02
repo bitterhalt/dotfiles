@@ -55,6 +55,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+S` | Find Files |
 | `Mod+Shift+D` | Run Binary |
 | `Mod+Shift+T` | Attach Tmux sessions |
+| `Mod+Ctrl+W` | Display Weather |
 
 ## Submaps
 
