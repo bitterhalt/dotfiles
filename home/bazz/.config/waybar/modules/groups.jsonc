@@ -1,0 +1,29 @@
+{
+  // CONNECTIONS
+  "group/connections": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+    },
+    "modules": ["network", "bluetooth"],
+  },
+
+  // HIDDEN TRAY GROUP
+  "group/hidden-tray": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+    },
+    "modules": ["custom/sep", "tray"],
+  },
+
+  // CENTER/MIDDLE GROUP
+  "group/middle": {
+    "orientation": "inherit",
+    "drawer": {
+      "click-to-reveal": false,
+      "transition-duration": 300,
+    },
+    "modules": ["clock", "custom/weather", "custom/system", "custom/power"],
+  },
+}

@@ -1,7 +1,0 @@
-{
-  // TRAY SEPARATOR
-  "custom/sep": {
-    "format": "󰇙",
-    "tooltip": false
-  }
-}

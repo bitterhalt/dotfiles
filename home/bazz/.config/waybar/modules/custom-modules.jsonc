@@ -1,0 +1,71 @@
+{
+  // IDLE
+  "custom/idle": {
+    "exec": "~/.config/waybar/scripts/idle.sh",
+    "format": "{}",
+    "interval": "once",
+    "on-click": "idle.sh -t; pkill -RTMIN+1 waybar",
+    "return-type": "json",
+    "signal": 1,
+  },
+
+  // RECORDING
+  "custom/wf-recorder": {
+    "exec": "echo '{\"class\": \"recording\",\"text\":\"Recording...\",\"tooltip\":\"<b>Click:</b> to stop recording\"}'",
+    "exec-if": "pgrep -f gpu-screen-recorder",
+    "format": "{}",
+    "interval": "once",
+    "on-click": "~/.local/bin/wl-record -k",
+    "return-type": "json",
+    "signal": 2,
+  },
+
+  // WEATHER
+  "custom/weather": {
+    "format": "{}",
+    "tooltip": true,
+    "interval": 3600,
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/weather.py",
+  },
+
+  // MAKO
+  "custom/mako": {
+    "exec": "~/.config/waybar/scripts/mako-helper.sh",
+    "format": "{text}",
+    "interval": 60,
+    "on-click": "foot -T 'Mako History' -e mako_hist.py",
+    "on-click-right": "makoctl mode -t dnd; pkill -RTMIN+3 waybar",
+    "on-click-middle": "pkill mako; mako & sleep 0.2 && pkill -RTMIN+3 waybar",
+    "return-type": "json",
+    "signal": 3,
+  },
+
+  // SYSTEM MENU
+  "custom/system": {
+    "format": "󱑞",
+    "tooltip": false,
+    "on-click": "fuzzel_submap -system",
+  },
+
+  // TRAY
+  "custom/sep": {
+    "format": "󰇙",
+    "tooltip": false,
+  },
+
+  // POWER MENU
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip": false,
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/menus/power_menu.xml",
+    "menu-actions": {
+      "exit": "niri msg action quit",
+      "lock": "swaylock -C ~/.cache/wal/colors-swaylock",
+      "sleep": "systemctl suspend",
+      "reboot": "~/.config/waybar/scripts/confirm.sh reboot",
+      "shutdown": "~/.config/waybar/scripts/confirm.sh shutdown",
+    },
+  },
+}

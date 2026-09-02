@@ -1,8 +1,0 @@
-{
-  // SYSTEM MENU
-  "custom/system": {
-    "format": "󱑞",
-    "tooltip": false,
-    "on-click": "fuzzel_submap -system",
-  },
-}

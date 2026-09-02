@@ -1,6 +1,10 @@
 // IMPORTS
 {
-  "include": ["modules/*.jsonc", "modules/custom/*.jsonc", "groups/*.jsonc"],
+  "include": [
+    "modules/modules.jsonc",
+    "modules/custom-modules.jsonc",
+    "modules/groups.jsonc",
+  ],
 
   // SETTINGS
   "layer": "top",

@@ -1,0 +1,125 @@
+{
+  // AUDIO
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-icons": ["󰕿", "󰖀", "󰖀", "󰕾"],
+    "format-muted": "󰝟",
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "scroll-step": 5,
+    "tooltip-format": "Vol:\t{volume}%",
+  },
+
+  // BATTERY
+  "battery": {
+    "bat": "BAT0",
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "max-length": 25,
+  },
+
+  // BLUETOOTH
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂯",
+    "format-disabled": "",
+    "on-click": "foot -a bluetui -e bluetui",
+    "tooltip-format": "{num_connections} connected",
+    "tooltip-format-connected": "[ {num_connections} ] connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
+  },
+
+  // CLOCK
+  "clock": {
+    "format": "{:%H:%M}",
+    "tooltip-format": "{:%a, <b>%d</b>, %b %Y}",
+  },
+
+  // In case tzdata update fucks up your clock
+  "custom/clock": {
+    "exec": "date +'%b %d %H:%M'",
+    "format": "{}",
+    "interval": 60,
+    "tooltip": false,
+  },
+
+  // NETWORK
+  "network": {
+    "format-disconnected": "󰅛",
+    "format-ethernet": "󰈀",
+    "format-linked": "{ifname} (No IP) ?",
+    "format-wifi": "󰖩",
+    "max-length": 30,
+    "on-click": "nm-connection-editor",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "tooltip-format-wifi": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+  },
+
+  // NIRI
+  "niri/workspaces": {
+    "disable-scroll": true,
+  },
+
+  "niri/window": {
+    "format": "{}",
+    "icon": true,
+    "icon-size": 20,
+    "max-length": 70,
+    "separate-outputs": true,
+    "tooltip": false,
+  },
+
+  // PRIVACY
+  "privacy": {
+    "icon-spacing": 2,
+    "icon-size": 0,
+    "transition-duration": 0,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+        "icon-name": "audio-input-microphone-symbolic",
+      },
+      {
+        "type": "location",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+        "icon-name": "location-services-active-symbolic",
+      },
+    ],
+    "ignore-monitor": true,
+    "ignore": [
+      {
+        "type": "audio-in",
+        "name": "cava",
+      },
+      {
+        "type": "screenshare",
+        "name": "obs",
+      },
+    ],
+  },
+
+  // TRAY
+  "tray": {
+    "icon-size": 20,
+    "spacing": 12,
+    "icons": {
+      // Override some ugly icons
+      "discord": "discord",
+    },
+  },
+}
