@@ -5,7 +5,7 @@
 DMENU="fuzzel -d -a top --y 24 -l 10 --minimal-lines"
 EDITOR="${EDITOR:-nvim}"
 
-QUERY=$($DMENU -w 30 --placeholder="Find files or w <web_search>")
+QUERY=$($DMENU -w 20 --placeholder="Find files")
 [[ -z "$QUERY" ]] && exit 0
 
 # Handle web search: triggers if input starts with "w "

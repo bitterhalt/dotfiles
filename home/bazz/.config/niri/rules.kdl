@@ -59,6 +59,14 @@ window-rule {
     default-floating-position x=16 y=16 relative-to="top"
 }
 
+window-rule {
+    match app-id="Linecast" title="Weather-Peek"
+    open-floating true
+    default-column-width { proportion 0.60; }
+    default-window-height { proportion 0.60; }
+    default-floating-position x=16 y=16 relative-to="top"
+}
+
 // System monitors, custom terminals, and wallpaper setters (Large Center Floating)
 window-rule {
     match app-id="io.missioncenter.MissionCenter"
