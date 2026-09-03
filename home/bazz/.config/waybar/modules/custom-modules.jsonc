@@ -59,7 +59,7 @@
     "format": "󰐥",
     "tooltip": false,
     "menu": "on-click",
-    "menu-file": "~/.config/waybar/menus/power_menu.xml",
+    "menu-file": "~/.config/waybar/modules/menus/power_menu.xml",
     "menu-actions": {
       "exit": "niri msg action quit",
       "lock": "swaylock -C ~/.cache/wal/colors-swaylock",
