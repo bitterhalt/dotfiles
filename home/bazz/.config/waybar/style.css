@@ -56,8 +56,7 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 #clock,
 #privacy,
-#custom-power,
-#custom-system {
+#custom-power {
   border-radius: 4px;
   color: @foreground;
   margin: 2px;
@@ -179,7 +178,6 @@ tooltip label {
 #clock:hover,
 #custom-idle:hover,
 #custom-power:hover,
-#custom-system:hover,
 #custom-weather:hover,
 #network:hover,
 #pulseaudio:hover,

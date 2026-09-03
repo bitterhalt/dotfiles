@@ -24,6 +24,6 @@
       "click-to-reveal": false,
       "transition-duration": 300,
     },
-    "modules": ["clock", "custom/weather", "custom/system", "custom/power"],
+    "modules": ["clock", "custom/weather", "custom/power"],
   },
 }

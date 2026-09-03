@@ -41,13 +41,6 @@
     "signal": 3,
   },
 
-  // SYSTEM MENU
-  "custom/system": {
-    "format": "󱑞",
-    "tooltip": false,
-    "on-click": "fuzzel_submap -system",
-  },
-
   // TRAY
   "custom/sep": {
     "format": "󰇙",
@@ -58,6 +51,7 @@
   "custom/power": {
     "format": "󰐥",
     "tooltip": false,
+    "on-click-right": "foot -a pop-upgrade -e sys_upgrade",
     "menu": "on-click",
     "menu-file": "~/.config/waybar/modules/menus/power_menu.xml",
     "menu-actions": {

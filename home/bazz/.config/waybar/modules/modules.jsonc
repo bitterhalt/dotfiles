@@ -57,7 +57,7 @@
     "format-wifi": "󰖩",
     "max-length": 30,
     "menu": "on-click",
-    "menu-file": "~/.config/waybar/modules/menus/network-menu.xml",
+    "menu-file": "~/.config/waybar/modules/menus/network_menu.xml",
     "menu-actions": {
       "impala": "foot -a impala -e impala",
       "networkmanager": "nm-connection-editor",
