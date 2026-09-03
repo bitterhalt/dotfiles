@@ -1,0 +1,11 @@
+fps = 60.0
+mouse = true
+
+peaks = "auto" # off, mono, auto
+char_set = "default"
+theme = "default"
+tab = "output"
+tabs = [ "playback", "recording", "output", "input", "configuration" ]
+
+max_volume_percent = 120.0
+enforce_max_volume = false

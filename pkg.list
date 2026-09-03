@@ -153,6 +153,7 @@ wev
 wget
 wine
 winetricks
+wiremix
 wireplumber
 wl-clipboard
 wl-freeze
