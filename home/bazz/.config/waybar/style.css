@@ -55,15 +55,6 @@ window#waybar.empty #window {
  *                      MODULES CENTER
  * ----------------------------------------------------- */
 #clock,
-#privacy,
-#custom-power {
-  border-radius: 4px;
-  color: @foreground;
-  margin: 2px;
-  padding: 0 6px;
-}
-
-#clock,
 #custom-weather {
   color: @foreground;
   font-weight: 600;
@@ -75,8 +66,31 @@ window#waybar.empty #window {
   margin: 2px;
   color: @foreground;
 }
+
 #custom-mako.dnd {
   opacity: 0.5;
+}
+
+#privacy {
+  border-radius: 4px;
+  color: @foreground;
+  margin: 2px;
+  padding: 0 6px;
+}
+
+#privacy-item.screenshare {
+  color: @color3;
+  opacity: 0.8;
+}
+
+#privacy-item.location {
+  color: @color3;
+  opacity: 0.8;
+}
+
+#privacy-item.audio-in {
+  color: @color3;
+  opacity: 0.8;
 }
 
 #custom-wf-recorder {
@@ -114,6 +128,11 @@ window#waybar.empty #window {
   margin: 2px;
   padding: 0 6px;
 }
+
+#bluetooth.on {
+  color: @foreground;
+  opacity: 0.5;
+}
 #custom-idle {
   color: @foreground;
   margin: 2px;
@@ -123,39 +142,27 @@ window#waybar.empty #window {
   color: #d79921;
 }
 
-#privacy-item.screenshare {
-  color: @color3;
-  opacity: 0.8;
-}
-
-#privacy-item.location {
-  color: @color3;
-  opacity: 0.8;
-}
-
-#privacy-item.audio-in {
-  color: @color3;
-  opacity: 0.8;
-}
-
-#bluetooth.on {
+#custom-sep {
   color: @foreground;
+  font-weight: normal;
+  margin: 2px 10px;
   opacity: 0.5;
 }
 
 #tray {
   margin: 2px 10px;
 }
+
 #tray menu {
   background: @background;
   border: unset;
 }
 
-#custom-sep {
+#custom-power {
+  border-radius: 4px;
   color: @foreground;
-  font-weight: normal;
-  margin: 2px 10px;
-  opacity: 0.5;
+  margin: 2px 10px 2px 0;
+  padding: 0 6px;
 }
 
 /* -----------------------------------------------------
