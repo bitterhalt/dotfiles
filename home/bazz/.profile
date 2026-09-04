@@ -33,4 +33,4 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
 # Get api keys
-[ -f "$HOME/Documents/credentials/api_key_exports" ] && . "$HOME/Documents/credentials/api_key_exports"
+[ -f "$HOME/Documents/credentials/exports" ] && . "$HOME/Documents/credentials/exports"
