@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if pgrep -x "swayidle" >/dev/null; then
-  echo ""
+  echo "{\"text\": \"󰤄\", \"tooltip\": \"Idle daemon is enabled\", \"class\": \"enabled\"}"
 else
-  echo "{\"text\": \"󱐋\", \"tooltip\": \"<b>Idle daemon is disabled</b>\"}"
+  echo "{\"text\": \"󱐋\", \"tooltip\": \"Idle daemon is disabled\", \"class\": \"disabled\"}"
 fi

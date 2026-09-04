@@ -107,7 +107,6 @@ window#waybar.empty #window {
  *                      MODULES RIGHT
  * ----------------------------------------------------- */
 #battery,
-#custom-idle,
 #pulseaudio,
 #bluetooth,
 #network {
@@ -116,9 +115,12 @@ window#waybar.empty #window {
   padding: 0 6px;
 }
 #custom-idle {
-  color: #d79921;
+  color: @foreground;
   margin: 2px;
   padding: 0 6px;
+}
+#custom-idle.disabled {
+  color: #d79921;
 }
 
 #privacy-item.screenshare {
@@ -139,10 +141,6 @@ window#waybar.empty #window {
 #bluetooth.on {
   color: @foreground;
   opacity: 0.5;
-}
-
-#custom-idle.disabled {
-  color: @foreground;
 }
 
 #tray {
