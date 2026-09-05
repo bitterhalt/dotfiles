@@ -11,7 +11,7 @@
 
   // RECORDING
   "custom/wf-recorder": {
-    "exec": "echo '{\"class\": \"recording\",\"text\":\"Recording...\",\"tooltip\":\"<b>Click:</b> to stop recording\"}'",
+    "exec": "echo '{\"class\": \"recording\",\"text\":\"Recording\",\"tooltip\":\"<b>Click:</b> to stop recording\"}'",
     "exec-if": "pgrep -f gpu-screen-recorder",
     "format": "{}",
     "interval": "once",
