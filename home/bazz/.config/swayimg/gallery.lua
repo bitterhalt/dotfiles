@@ -8,19 +8,20 @@ swayimg.gallery.cache = 100
 swayimg.gallery.preload = false
 swayimg.gallery.pstore = true
 
--- Configure Gallery Layout & Text Hints
-swayimg.gallery.set_text("topleft", {
-	"[b] -> Set Wallpaper",
-	"[p] -> Wallpaper with Pywal",
-	"[Shift+p] -> Wallpaper with Pywal alternative",
-})
-swayimg.gallery.set_text("topright", {
-	"[e] -> Edit",
-	"[y] -> Copy to Clipboard",
-	"[r] -> Rename File",
-})
-swayimg.gallery.set_text("bottomleft", { "{list.index} of {list.total}" })
-swayimg.gallery.set_text("bottomright", { "{name}" })
+swayimg.gallery.text = {
+	topleft = {
+		"[b] -> Set Wallpaper",
+		"[p] -> Wallpaper with Pywal",
+		"[Shift+p] -> Wallpaper with Pywal alternative",
+	},
+	topright = {
+		"[e] -> Edit",
+		"[y] -> Copy to Clipboard",
+		"[r] -> Rename File",
+	},
+	bottomleft = { "{list.index} of {list.total}" },
+	bottomright = { "{name}" },
+}
 
 local function with_image(fn)
 	local image = swayimg.gallery.get_image()

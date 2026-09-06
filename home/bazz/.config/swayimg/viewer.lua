@@ -6,21 +6,23 @@ swayimg.viewer.autocenter = true
 swayimg.viewer.loop = true
 swayimg.viewer.preload = 1
 
-swayimg.viewer.set_text("topleft", {
-	"File: {name}",
-	"Format: {format}",
-	"File size: {sizehr}",
-	"Size: {frame.width}x{frame.height}",
-	"{meta.Exif.Photo.DateTimeOriginal}",
-	"{meta.Exif.Image.Model}",
-})
-swayimg.viewer.set_text("topright", {
-	"Image: {list.index} of {list.total}",
-	"Frame: {frame.index} of {frame.total}",
-	"Scale: {scale}",
-})
-swayimg.viewer.set_text("bottomleft", {})
-swayimg.viewer.set_text("bottomright", {})
+swayimg.viewer.text = {
+	topleft = {
+		"File: {name}",
+		"Format: {format}",
+		"File size: {sizehr}",
+		"Size: {frame.width}x{frame.height}",
+		"{meta.Exif.Photo.DateTimeOriginal}",
+		"{meta.Exif.Image.Model}",
+	},
+	topright = {
+		"Image: {list.index} of {list.total}",
+		"Frame: {frame.index} of {frame.total}",
+		"Scale: {scale}",
+	},
+	bottomleft = {},
+	bottomright = {},
+}
 
 swayimg.on_window_resize(function()
 	if swayimg.mode == "viewer" then
