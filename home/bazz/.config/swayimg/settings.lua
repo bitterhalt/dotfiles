@@ -5,7 +5,7 @@ swayimg.mode = "viewer"
 swayimg.antialiasing = true
 swayimg.decoration = true
 swayimg.overlay = false
-swayimg.dnd_button = "MouseRight" -- mouse drag and drop
+swayimg.dnd_button = "MouseLeft" -- mouse drag and drop
 
 --------------------------------------------------------------------------------
 -- Image list
