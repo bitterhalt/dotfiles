@@ -65,6 +65,7 @@ binds {
     XF86AudioPrev hotkey-overlay-title="Previous Track" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --prv"; }
     XF86AudioNext hotkey-overlay-title="Next Track" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --nxt"; }
     Mod+Shift+M  hotkey-overlay-title="Show Current Track" { spawn-sh "~/.config/niri/scripts/mediactrl.sh --noti"; }
+    Mod+Ctrl+S hotkey-overlay-title="Open Wiremix" { spawn-sh "foot -a wiremix -e wiremix"; }
 
     // Hardware - Brightness
     XF86MonBrightnessUp hotkey-overlay-title="Increase Brightness" allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
