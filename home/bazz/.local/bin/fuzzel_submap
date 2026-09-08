@@ -91,7 +91,6 @@ menu_settings() {
 
 menu_system() {
   run_menu "System" \
-    "󰓃 Select Audio Device|fuzzel_sound" \
     "󰓃 Wiremix|foot -a wiremix -e wiremix" \
     "󰂯 Bluetooth [Bluetui]|foot -a bluetui -e bluetui" \
     "󰖩 Wi-Fi (Impala)|foot -a impala -e impala" \
