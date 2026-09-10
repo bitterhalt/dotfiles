@@ -1,0 +1,1 @@
+SUBSYSTEM=="usb", KERNELS=="1-10", ATTR{power/wakeup}="disabled"
