@@ -2,44 +2,12 @@
 
 echo "[*] Beginning system upgrade..."
 
-if [ -f /etc/os-release ]; then
-  . /etc/os-release
-  echo "[*] Detected OS: $NAME"
-
-  case "$ID" in
-  arch | manjaro | cachyos | endeavouros)
-    if command -v yay &>/dev/null; then
-      echo "[*] Updating via yay..."
-      MAIN_UPGRADE_CMD="yay -Syu"
-    else
-      echo "[*] Updating via pacman..."
-      MAIN_UPGRADE_CMD="sudo pacman -Syu"
-    fi
-    ;;
-  void)
-    echo "[*] Updating via xbps..."
-    MAIN_UPGRADE_CMD="sudo xbps-install -Syu"
-    ;;
-  ubuntu | debian | pop | mint)
-    echo "[*] Updating via apt..."
-    MAIN_UPGRADE_CMD="sudo apt update && sudo apt dist-upgrade -y"
-    ;;
-  fedora | rhel | centos)
-    echo "[*] Updating via dnf..."
-    MAIN_UPGRADE_CMD="sudo dnf upgrade -y"
-    ;;
-  *)
-    echo "[!] Generic Linux detected. Attempting to use pacman/yay..."
-    if command -v yay &>/dev/null; then
-      MAIN_UPGRADE_CMD="yay -Syu"
-    else
-      MAIN_UPGRADE_CMD="sudo pacman -Syu"
-    fi
-    ;;
-  esac
-else
-  echo "[x] Cannot determine OS type (/etc/os-release missing). Defaulting to yay..."
+if command -v yay &>/dev/null; then
+  echo "[*] Updating via yay..."
   MAIN_UPGRADE_CMD="yay -Syu"
+else
+  echo "[*] Updating via pacman..."
+  MAIN_UPGRADE_CMD="sudo pacman -Syu"
 fi
 
 if eval "$MAIN_UPGRADE_CMD"; then
@@ -77,5 +45,5 @@ if command -v pipx &>/dev/null; then
   fi
 fi
 
-echo -e "\nPress <Enter> to exit this window."
+echo -e "\nPress  to exit this window."
 read -r _
