@@ -46,7 +46,7 @@ def main():
             "--layout",
             "reverse",
             "--border-label",
-            " Mako-history ",
+            " Notification History ",
             "--preview-label",
             " Clear all: Alt+0 ",
             "--delimiter",
