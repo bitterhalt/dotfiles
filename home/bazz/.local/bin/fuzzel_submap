@@ -4,7 +4,7 @@
 # Description: expandable wlr-which-key clone using fuzzel
 # ========================================================
 
-FLAGS="-d -a top --y 24 -w 25 --minimal-lines"
+FLAGS="-d -a top --y 24 -w 25 -l 9"
 BROWSER="brave-origin"
 
 run_menu() {
@@ -80,12 +80,13 @@ menu_pass() {
 menu_settings() {
   run_menu "Settings" \
     "Bash|foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" \
-    "Fuzzel|foot sh -c ' nvim ~/.config/fuzzel/fuzzel.ini ~/.local/bin/fuzzel_* '" \
     "Foot|foot -e nvim ~/.config/foot/foot.ini" \
+    "Fuzzel|foot sh -c ' nvim ~/.config/fuzzel/fuzzel.ini ~/.local/bin/fuzzel_* '" \
     "Mako|foot sh -c 'cd ~/.config/mako/ && nvim *'" \
     "Niri|foot sh -c 'cd ~/.config/niri/ && nvim *'" \
-    "Pywal|foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" \
     "Nvim|foot sh -c 'cd ~/.config/nvim && vopen .'" \
+    "Pywal|foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" \
+    "Swayidle|foot sh -c 'cd ~/.config/swayidle/ && nvim config'" \
     "Waybar|foot sh -c 'cd ~/.config/waybar/ && vopen .'"
 }
 
