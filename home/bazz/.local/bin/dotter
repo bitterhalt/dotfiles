@@ -23,10 +23,10 @@ add() {
     exit 1
   }
 
-  # Capture pacman package list once
-  pacman -Qe | awk '{print $1}' >"$dotfiles_repo/pkg.list" &&
-    echo -e "${GREEN}[✓] Updated package list.${RESET}" ||
-    echo -e "${YELLOW}[!] Warning: Could not update pacman package list.${RESET}"
+  # Capture pacman package lists
+  pacman -Qe | awk '{print $1}' >"$dotfiles_repo/pkg.list" && pipx list --short | awk '{print $1}' >"$dotfiles_repo/pipx_pkg.list" &&
+    echo -e "${GREEN}[✓] Updated package lists.${RESET}" ||
+    echo -e "${YELLOW}[!] Warning: Could not update package lists.${RESET}"
 
   echo -e "${CYAN}[*] Syncing files (including deletions, excluding $exclude_path)...${RESET}"
 
