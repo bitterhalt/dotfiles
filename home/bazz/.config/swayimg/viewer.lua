@@ -164,7 +164,9 @@ swayimg.viewer.on_key("Shift-p", function()
 end)
 
 swayimg.viewer.on_key("e", function()
-	with_image(edit_image)
+	with_image(function(image)
+		os.execute("gimp " .. shellescape(image.path) .. " & disown")
+	end)
 end)
 
 swayimg.viewer.on_key("y", function()
