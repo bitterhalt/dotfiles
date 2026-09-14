@@ -39,8 +39,8 @@ binds {
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn "fuzzel_weather"; }
 
     // Submaps
-    Mod+F1 hotkey-overlay-title="Audio and connection switcher" { spawn-sh "fuzzel_submap -system"; }
-    Mod+F12 hotkey-overlay-title="System and shell setting" { spawn-sh "fuzzel_submap -settings"; }
+    Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "fuzzel_submap -system"; }
+    Mod+F12 hotkey-overlay-title="System Configs" { spawn-sh "fuzzel_submap -settings"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "fuzzel_submap -notes"; }
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "fuzzel_submap -theming"; }
     Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "fuzzel_submap -packages"; }

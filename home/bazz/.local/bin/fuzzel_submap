@@ -4,7 +4,7 @@
 # Description: expandable wlr-which-key clone using fuzzel
 # ========================================================
 
-FLAGS="-d -a top --y 24 -w 25 -l 9"
+FLAGS="-d -a top --y 24 -w 25 -l 9 --minimal-lines"
 BROWSER="brave-origin"
 
 run_menu() {
@@ -68,7 +68,7 @@ menu_notes() {
 menu_packages() {
   run_menu "Packages" \
     "Install Packages|foot -a pacseek -T pacseek -e pacseek -m" \
-    "Update|foot -a pop-upgrade -e sys_upgrade"
+    "Update|foot -a pop-upgrade -e sysup"
 }
 
 menu_pass() {
@@ -96,7 +96,7 @@ menu_system() {
     "󰂯 Bluetooth [Bluetui]|foot -a bluetui -e bluetui" \
     "󰖩 Wi-Fi (Impala)|foot -a impala -e impala" \
     "󰲝 Network Manager|nm-connection-editor" \
-    "󰑐 Update System|foot -a pop-upgrade -e sys_upgrade" \
+    "󰑐 Update System|foot -a pop-upgrade -e sysup" \
     "+ 󰨇 Monitor|submenu_monitor"
 }
 
