@@ -61,8 +61,8 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 | Key | Action |
 | --- | ------ |
-| `Mod+F1` | Audio and connection switcher |
-| `Mod+F12` | System and shell setting |
+| `Mod+F1` | System Menu |
+| `Mod+F12` | System Configs |
 | `Mod+N` | Open Notes |
 | `Mod+Shift+W` | Set Wallpaper |
 | `Mod+U` | Install and Mange Packages |

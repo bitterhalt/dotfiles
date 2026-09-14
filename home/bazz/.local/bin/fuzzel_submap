@@ -94,8 +94,8 @@ menu_system() {
   run_menu "System" \
     "󰓃 Wiremix|foot -a wiremix -e wiremix" \
     "󰂯 Bluetooth [Bluetui]|foot -a bluetui -e bluetui" \
-    "󰖩 Wi-Fi (Impala)|foot -a impala -e impala" \
-    "󰲝 Network Manager|nm-connection-editor" \
+    "󰖩 Wi-Fi|foot -a impala -e impala" \
+    "󰲝 Network Manager|foot -e nmtui" \
     "󰑐 Update System|foot -a pop-upgrade -e sysup" \
     "+ 󰨇 Monitor|submenu_monitor"
 }
