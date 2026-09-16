@@ -10,6 +10,7 @@
   "layer": "top",
   "position": "top",
   "spacing": 4,
+  // "height": 30,
 
   // LEFT
   "modules-left": ["niri/workspaces", "niri/window"],
