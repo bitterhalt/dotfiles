@@ -1,7 +1,7 @@
 background-color={background}
 text-color={foreground}
-border-color={color5}
-progress-color={color5}
+border-color={color1}
+progress-color={color1}
 
 [app-name=vol-osd]
 background-color={background}d0

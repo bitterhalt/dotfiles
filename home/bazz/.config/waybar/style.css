@@ -25,12 +25,12 @@ window#waybar {
   margin: 12px 4px;
   min-height: 0.5rem;
   min-width: 0.5rem;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 #workspaces button.active {
   all: unset;
-  background: @color5;
+  background: @color1;
   border-radius: 1rem;
   font-size: 0;
   margin: 12px 4px;
@@ -79,17 +79,17 @@ window#waybar.empty #window {
 }
 
 #privacy-item.screenshare {
-  color: @color3;
+  color: @color1;
   opacity: 0.8;
 }
 
 #privacy-item.location {
-  color: @color3;
+  color: @color1;
   opacity: 0.8;
 }
 
 #privacy-item.audio-in {
-  color: @color3;
+  color: @color1;
   opacity: 0.8;
 }
 
@@ -130,7 +130,7 @@ window#waybar.empty #window {
 }
 
 #pulseaudio.muted {
-  color: @color5;
+  color: @color1;
 }
 
 #bluetooth.on {
@@ -192,11 +192,11 @@ tooltip label {
 #pulseaudio:hover,
 #wireplumber:hover {
   color: @background;
-  background: @color5;
+  background: @color1;
   border-radius: 4px;
 }
 
 #custom-wf-recorder:hover,
 #custom-mako:hover {
-  color: @color5;
+  color: @color1;
 }

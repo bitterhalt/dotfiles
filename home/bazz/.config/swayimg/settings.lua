@@ -57,7 +57,7 @@ swayimg.text.background = 0x00000000
 swayimg.text.shadow = 0xd0000000
 
 -- Gallery
-swayimg.gallery.border_color = hex_to_argb(colors.color6)
+swayimg.gallery.border_color = hex_to_argb(colors.color1)
 swayimg.gallery.selected_color = hex_to_argb(colors.color8)
 swayimg.gallery.unselected_color = hex_to_argb(colors.color0)
 swayimg.gallery.window_color = hex_to_argb(colors.color0)
