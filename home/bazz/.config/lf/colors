@@ -1,11 +1,11 @@
 # vim:ft=dircolors
 
-ln      01;31   # LINK
+ln      01;34   # LINK
 or      31;01   # ORPHAN
 tw      36      # STICKY_OTHER_WRITABLE
 ow      36      # OTHER_WRITABLE
-st      01;31   # STICKY
-di      01;31   # DIR
+st      01;34   # STICKY
+di      01;34   # DIR
 pi      33      # FIFO
 so      01;35   # SOCK
 bd      33;01   # BLK
