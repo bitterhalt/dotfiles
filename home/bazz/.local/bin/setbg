@@ -2,15 +2,6 @@
 
 BGCOL="121212"
 
-get_backend() {
-  local backend
-  backend=$(printf "wal\ncolorthief" | fuzzel -d --minimal-lines --placeholder "Select Backend: ")
-  if [[ -z "$backend" ]]; then
-    backend="wal"
-  fi
-  echo "$backend"
-}
-
 get_resolution() {
   if ! command -v wlr-randr >/dev/null 2>&1; then
     echo "Error: wlr-randr is not installed." >&2
@@ -92,29 +83,27 @@ setwall() {
 }
 
 pywal() {
-  local backend
-  backend=$(get_backend)
-
   _apply_wallpaper "$1" || return 1
-  wal -n --backend "$backend" -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -n -i "$HOME/.local/share/wall/wallpaper.png"
   refresh_portals.sh
 }
 
 pywal_fixed() {
-  local backend selection custom_bg
-  backend=$(get_backend)
+  local custom_bg
 
-  selection=$(printf "121212 (Default)\n000000 (Pure Black)" |
-    fuzzel -d --minimal-lines --placeholder "Type or select background hex (e.g. 1A1A1A): ")
+  selection=$(printf "121212 (Default)\nCustom" |
+    fuzzel -d --minimal-lines --placeholder "Select background color: ")
 
-  custom_bg=$(echo "$selection" | awk '{print $1}' | tr -d '#')
-
-  if [[ -z "$custom_bg" ]]; then
-    custom_bg="$BGCOL"
+  if [[ "$selection" == "Custom" ]]; then
+    custom_bg=$(fuzzel -d --minimal-lines --placeholder "Enter hex (e.g. 1A1A1A): ")
+    custom_bg="${custom_bg#\#}" # Remove # if present
+    [[ -z "$custom_bg" ]] && custom_bg="$BGCOL"
+  else
+    custom_bg=$(echo "$selection" | awk '{print $1}')
   fi
 
   _apply_wallpaper "$1" || return 1
-  wal -n --backend "$backend" -b "$custom_bg" -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -n -b "$custom_bg" -i "$HOME/.local/share/wall/wallpaper.png"
   refresh_portals.sh
 }
 
