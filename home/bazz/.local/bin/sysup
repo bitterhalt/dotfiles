@@ -45,5 +45,5 @@ if command -v pipx &>/dev/null; then
   fi
 fi
 
-echo -e "\nPress  to exit this window."
+echo -e "\nPress enter to exit this window."
 read -r _
