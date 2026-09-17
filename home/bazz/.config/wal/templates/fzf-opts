@@ -1,8 +1,8 @@
 --color=fg:{foreground},bg:{background},hl:{color3}
---color=fg+:{background},bg+:{color6},hl+:{color3}
+--color=fg+:{background},bg+:{color5},hl+:{color3}
 --color=border:{color8},header:{color7},gutter:{background}
---color=spinner:{color6},info:{color5},separator:{color6}
---color=pointer:{color11},marker:{color9},prompt:{color6}
+--color=spinner:{color5},info:{color5},separator:{color5}
+--color=pointer:{color11},marker:{color9},prompt:{color5}
 --border="sharp"
 --border-label="none"
 --preview-window="border-sharp"

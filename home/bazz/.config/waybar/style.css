@@ -30,7 +30,7 @@ window#waybar {
 
 #workspaces button.active {
   all: unset;
-  background: @color6;
+  background: @color5;
   border-radius: 1rem;
   font-size: 0;
   margin: 12px 4px;
@@ -129,6 +129,10 @@ window#waybar.empty #window {
   padding: 0 6px;
 }
 
+#pulseaudio.muted {
+  color: @color5;
+}
+
 #bluetooth.on {
   color: @foreground;
   opacity: 0.5;
@@ -188,11 +192,11 @@ tooltip label {
 #pulseaudio:hover,
 #wireplumber:hover {
   color: @background;
-  background: @color6;
+  background: @color5;
   border-radius: 4px;
 }
 
 #custom-wf-recorder:hover,
 #custom-mako:hover {
-  color: @color6;
+  color: @color5;
 }

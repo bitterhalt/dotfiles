@@ -1,6 +1,6 @@
 background-color={background}
 text-color={foreground}
-border-color={color6}
+border-color={color5}
 progress-color={color6}
 
 [app-name=vol-osd]
