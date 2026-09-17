@@ -96,7 +96,7 @@ window#waybar.empty #window {
 #custom-wf-recorder {
   animation: rec-blink 1s linear infinite;
   border-radius: 4px;
-  color: #af3029;
+  color: @color1;
   margin: 2px;
   padding: 0 6px;
 }
@@ -130,7 +130,7 @@ window#waybar.empty #window {
 }
 
 #pulseaudio.muted {
-  color: @color1;
+  color: @color3;
 }
 
 #bluetooth.on {
@@ -143,7 +143,7 @@ window#waybar.empty #window {
   padding: 0 6px;
 }
 #custom-idle.disabled {
-  color: #d79921;
+  color: @color3;
 }
 
 #custom-sep {
