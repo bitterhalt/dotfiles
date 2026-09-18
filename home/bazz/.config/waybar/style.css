@@ -68,7 +68,7 @@ window#waybar.empty #window {
 }
 
 #custom-mako.dnd {
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 #privacy {
