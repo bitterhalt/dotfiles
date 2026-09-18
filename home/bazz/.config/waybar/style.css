@@ -140,7 +140,7 @@ window#waybar.empty #window {
   padding: 0 6px;
 }
 #custom-idle.disabled {
-  color: @color3;
+  color: @color4;
 }
 
 #custom-sep {

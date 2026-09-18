@@ -1,5 +1,4 @@
 [Desktop Entry]
 Type=Application
-Icon=blueman
-Name=Bluetoth Manager
+Name=Bluetui
 Exec=foot -a bluetui -e bluetui %u
