@@ -1,18 +1,18 @@
 layout {
     focus-ring {
-        active-color "{color1}"
+        active-color "{color4}"
         inactive-color "transparent"
         urgent-color "#af3029"
     }
 
     border {
-        active-color "{color1}"
+        active-color "{color4}"
         inactive-color "transparent"
         urgent-color "#af3029"
     }
     tab-indicator {
-        active-color "{color1}"
-        inactive-color "{color1}60"
+        active-color "{color4}"
+        inactive-color "{color4}60"
     }
     insert-hint {
         color "#24837b90"
