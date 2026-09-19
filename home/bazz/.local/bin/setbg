@@ -120,13 +120,21 @@ _refresh_portals() {
   fi
 }
 
+_refresh_apps() {
+  # Reload applications
+  pkill -x waybar
+  waybar &
+  makoctl reload
+}
+
 setwall() {
   _apply_wallpaper "$1"
 }
 
 pywal() {
   _apply_wallpaper "$1" || return 1
-  wal -n -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -e -n -i "$HOME/.local/share/wall/wallpaper.png"
+  _refresh_apps
   _refresh_portals
 }
 
@@ -145,7 +153,8 @@ pywal_fixed() {
   fi
 
   _apply_wallpaper "$1" || return 1
-  wal -n -i "$HOME/.local/share/wall/wallpaper.png" -b "$custom_bg"
+  wal -e -n -i "$HOME/.local/share/wall/wallpaper.png" -b "$custom_bg"
+  _refresh_apps
   _refresh_portals
 }
 
