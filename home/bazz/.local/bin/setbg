@@ -23,15 +23,7 @@ get_resolution() {
 
   if [[ -n "$out" ]]; then
     local res=($out)
-    local w="${res[0]}"
-    local h="${res[1]}"
-
-    local is_niri="false"
-    if pgrep -x niri >/dev/null 2>&1; then
-      is_niri="true"
-    fi
-
-    echo "$w $h $is_niri"
+    echo "${res[0]} ${res[1]}"
     return 0
   fi
 
@@ -55,7 +47,6 @@ _apply_wallpaper() {
   local res=($res_data)
   local w="${res[0]}"
   local h="${res[1]}"
-  local is_niri="${res[2]}"
 
   local dir="$HOME/.local/share/wall/"
   local out="${dir}wallpaper.png"
@@ -72,10 +63,8 @@ _apply_wallpaper() {
     --transition-fps=60 \
     --transition-duration=.7
 
-  if [[ "$is_niri" == "true" ]]; then
-    convert "$out" -blur 0x55 -modulate 80 "$lockscreen"
-    awww img -n overview "$lockscreen" --transition-type=none
-  fi
+  convert "$out" -blur 0x55 -modulate 80 "$lockscreen"
+  awww img -n overview "$lockscreen" --transition-type=none
 }
 
 _refresh_portals() {
@@ -120,13 +109,21 @@ _refresh_portals() {
   fi
 }
 
+_refresh_apps() {
+  # Reload applications
+  pkill -x waybar
+  waybar &
+  makoctl reload
+}
+
 setwall() {
   _apply_wallpaper "$1"
 }
 
 pywal() {
   _apply_wallpaper "$1" || return 1
-  wal -n -i "$HOME/.local/share/wall/wallpaper.png"
+  wal -e -n -i "$HOME/.local/share/wall/wallpaper.png"
+  _refresh_apps
   _refresh_portals
 }
 
@@ -145,7 +142,8 @@ pywal_fixed() {
   fi
 
   _apply_wallpaper "$1" || return 1
-  wal -n -i "$HOME/.local/share/wall/wallpaper.png" -b "$custom_bg"
+  wal -e -n -i "$HOME/.local/share/wall/wallpaper.png" -b "$custom_bg"
+  _refresh_apps
   _refresh_portals
 }
 
