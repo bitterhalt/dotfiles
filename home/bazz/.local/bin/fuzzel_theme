@@ -59,4 +59,3 @@ if [ -f "$HISTORY" ]; then
 fi
 
 wal --theme "$theme"
-refresh_portals.sh
