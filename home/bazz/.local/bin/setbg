@@ -54,16 +54,23 @@ _apply_wallpaper() {
 
   mkdir -p "$dir"
 
-  vipsthumbnail "$path" \
-    --size "${w}x${h}" \
-    --output "$out" || return 1
+  magick "$path" \
+    -resize "${w}x${h}^" \
+    -gravity center \
+    -extent "${w}x${h}" \
+    "$out" || return 1
 
-  awww img "$out" --transition-type=any \
+  awww img "$out" \
+    --transition-type=any \
     --transition-step=60 \
     --transition-fps=60 \
     --transition-duration=.7
 
-  convert "$out" -blur 0x55 -modulate 80 "$lockscreen"
+  magick "$out" \
+    -blur 0x55 \
+    -modulate 80 \
+    "$lockscreen" || return 1
+
   awww img -n overview "$lockscreen" --transition-type=none
 }
 
