@@ -2,6 +2,13 @@
 
 set -e
 
+IGNORE_WORDS=("mouse" "keyboard")
+
+IGNORE_PATTERN=$(
+  IFS='|'
+  echo "${IGNORE_WORDS[*]}"
+)
+
 while read -r line; do
 
   if [[ "$line" =~ ^UDEV.*\ ([[:alpha:]]+)\ .*/devices/ ]]; then
@@ -9,6 +16,10 @@ while read -r line; do
 
   elif [[ "$line" =~ ^NAME=\"(.*)[[:space:]]*\(AVRCP\)\"$ ]]; then
     device_name="${BASH_REMATCH[1]}"
+
+    if [[ "${device_name,,}" =~ ($IGNORE_PATTERN) ]]; then
+      continue
+    fi
 
     case "$action" in
     add) state="Connected" ;;
