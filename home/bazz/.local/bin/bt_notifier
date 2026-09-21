@@ -3,37 +3,28 @@
 set -e
 
 IGNORE_WORDS=("mouse" "keyboard")
-
 IGNORE_PATTERN=$(
   IFS='|'
-  echo "${IGNORE_WORDS[*]}"
+  printf '%s' "${IGNORE_WORDS[*]}"
 )
 
+action=""
+
 while read -r line; do
+  if [[ "$line" =~ ^UDEV.*\ (add)\ .*/devices/ ]]; then
+    action="add"
 
-  if [[ "$line" =~ ^UDEV.*\ ([[:alpha:]]+)\ .*/devices/ ]]; then
-    action="${BASH_REMATCH[1]}"
+  elif [[ "$line" =~ ^NAME=\"(.*)[[:space:]]*\(AVRCP\)\"$ ]] &&
+    [[ "$action" == "add" ]]; then
 
-  elif [[ "$line" =~ ^NAME=\"(.*)[[:space:]]*\(AVRCP\)\"$ ]]; then
     device_name="${BASH_REMATCH[1]}"
 
-    if [[ "${device_name,,}" =~ ($IGNORE_PATTERN) ]]; then
-      continue
+    if [[ ! "${device_name,,}" =~ ($IGNORE_PATTERN) ]]; then
+      notify-send -a btnot -i bluetooth "$device_name" "Connected"
     fi
 
-    case "$action" in
-    add)
-      state="Connected"
-      icon="bluetooth"
-      ;;
-    remove)
-      state="Disconnected"
-      icon="bluetooth-disabled"
-      ;;
-    *) continue ;;
-    esac
-
-    notify-send -a btnot -i "$icon" "$device_name" "$state"
+    action=""
   fi
-
-done < <(udevadm monitor --udev --subsystem-match=input --property)
+done < <(
+  udevadm monitor --udev --subsystem-match=input --property
+)
