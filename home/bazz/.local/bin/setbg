@@ -116,11 +116,12 @@ _refresh_portals() {
   fi
 }
 
-_refresh_apps() {
+_refresh_env() {
   # Reload applications
   pkill -x waybar
   waybar &
   makoctl reload
+  xrdb -merge -quiet ~/.cache/wal/colors.Xresources
 }
 
 setwall() {
@@ -130,7 +131,7 @@ setwall() {
 pywal() {
   _apply_wallpaper "$1" || return 1
   wal -e -n -i "$HOME/.local/share/wall/wallpaper.png"
-  _refresh_apps
+  _refresh_env
   _refresh_portals
 }
 
@@ -150,7 +151,7 @@ pywal_fixed() {
 
   _apply_wallpaper "$1" || return 1
   wal -e -n -i "$HOME/.local/share/wall/wallpaper.png" -b "$custom_bg"
-  _refresh_apps
+  _refresh_env
   _refresh_portals
 }
 
