@@ -1,13 +1,4 @@
 {
-  // CONNECTIONS
-  "group/connections": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 300,
-    },
-    "modules": ["network", "bluetooth"],
-  },
-
   // CENTER/MIDDLE GROUP
   "group/middle": {
     "orientation": "inherit",

@@ -25,7 +25,8 @@
 
   // RIGHT
   "modules-right": [
-    "group/connections",
+    "network",
+    "bluetooth",
     "pulseaudio",
     "custom/idle",
     "battery",

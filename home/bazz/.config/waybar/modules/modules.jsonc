@@ -60,7 +60,7 @@
     "menu-file": "~/.config/waybar/modules/menus/network_menu.xml",
     "menu-actions": {
       "impala": "foot -a impala -e impala",
-      "networkmanager": "nm-connection-editor",
+      "networkmanager": "foot -e nmtui",
     },
     "tooltip-format": "{ifname} via {gwaddr}",
     "tooltip-format-disconnected": "Disconnected",
