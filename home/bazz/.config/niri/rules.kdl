@@ -73,7 +73,6 @@ window-rule {
     match app-id="fzystemd"
     match app-id="htop|btop" title="poptop"
     match app-id="swayimg-setwall"
-    match app-id="noteterm"
     open-floating true
     default-column-width { proportion 0.80; }
     default-window-height { proportion 0.80; }

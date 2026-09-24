@@ -1,5 +1,10 @@
-# Get the aliases and functions
 [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
-# Get exports from .profile (they are in .profile because greetd can't read bash profile)
-[ -f "$HOME/.profile" ] && . "$HOME/.profile"
+# PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin/appimages/:$PATH"
+export PATH="$HOME/.local/share/cargo/bin/:$PATH"
+
+# SHELL STUFF
+export HISTFILE="$HOME/.cache/bash_history"
+export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
