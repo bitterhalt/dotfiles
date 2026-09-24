@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FLAGS="-d -a top --y 24 -w 20 --minimal-lines"
+FLAGS="-d -a top --y 24 -w 24 --minimal-lines"
 
 confirm_action() {
   local action_name="$1"
@@ -15,7 +15,7 @@ confirm_action() {
 }
 
 while true; do
-  SUB=$(echo -e "1 ➜ Lock\n2 ➜ Exit\n3 ➜ zZzz 💤\n4 ➜ Shutdown\n5 ➜ Reboot\n6 ➜ Reboot UEFI" | fuzzel $FLAGS)
+  SUB=$(echo -e "1 ➜ Lock\n2 ➜ Exit\n3 ➜ Terminate User\n4 ➜ zZzz 💤\n5 ➜ Shutdown\n6 ➜ Reboot\n7 ➜ Reboot UEFI" | fuzzel $FLAGS)
 
   if [ -z "$SUB" ]; then
     exit 0
@@ -28,6 +28,10 @@ while true; do
     ;;
   *"Exit")
     niri msg action quit
+    exit 0
+    ;;
+  *"Terminate User")
+    confirm_action "Terminate User" && loginctl terminate-user $USER
     exit 0
     ;;
   *"zZzz"*)
