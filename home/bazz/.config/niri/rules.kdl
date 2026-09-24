@@ -230,7 +230,6 @@ window-rule {
 }
 
 window-rule {
-    match app-id="amethyst-mod-manager"
     match app-id="steam"
     match app-id="pcsx3-qt"
     match app-id="lutris"
@@ -244,6 +243,11 @@ window-rule {
     focus-ring {
         off
     }
+}
+
+window-rule {
+    match app-id="amethyst-mod-manager"
+    open-on-workspace "3"
 }
 
 // Environment & shell layer rules

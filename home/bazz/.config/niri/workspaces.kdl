@@ -1,0 +1,4 @@
+// Named workspaces: https://github.com/niri-wm/niri/wiki/Configuration:-Named-Workspaces
+workspace "1"
+workspace "2"
+workspace "3"
