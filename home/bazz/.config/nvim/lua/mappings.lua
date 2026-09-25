@@ -38,7 +38,7 @@ vim.keymap.set("n", "<leader>th", "<C-w>t<C-w>H") -- change horizontal to vertic
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Update Lazy plugins
-vim.keymap.set("n", "<leader>ls", "<CMD>Lazy sync<CR>")
+vim.keymap.set("n", "<leader>lz", "<CMD>Lazy sync<CR>")
 
 -- Tabs
 vim.keymap.set("n", "<leader>bt", "<CMD>:tab sball<CR>")
