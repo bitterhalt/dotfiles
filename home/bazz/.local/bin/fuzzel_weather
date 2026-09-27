@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 OPTIONS="Weather\nMoon\nSunshine\nAll (tmux split)"
-FLAGS="-d -a top --y 24 -w 25 --line-height 26 --minimal-lines"
+FLAGS="-d  -w 25 --line-height 26 --minimal-lines"
 
 if ! command -v linecast &>/dev/null; then
   notify-send -a "Linecast" -t 10000 \

@@ -4,8 +4,7 @@
 # Description: expandable wlr-which-key clone using fuzzel
 # ========================================================
 
-FLAGS="-d -a top --y 24 -w 25 -l 9 --minimal-lines"
-BROWSER="brave-origin"
+FLAGS="-d -w 25 -l 9 --minimal-lines --placeholder Select"
 
 run_menu() {
   local is_submenu=false
@@ -33,7 +32,7 @@ run_menu() {
     fi
 
     local choice
-    choice=$(echo -e -n "$fuzzel_input" | fuzzel $FLAGS --placeholder "Edit settings")
+    choice=$(echo -e -n "$fuzzel_input" | fuzzel $FLAGS)
 
     if [ -z "$choice" ]; then exit 0; fi
     if [[ "$choice" == *"Back"* ]]; then return 0; fi
@@ -93,7 +92,7 @@ menu_settings() {
 menu_system() {
   run_menu "System" \
     "󰓃 Wiremix|foot -a wiremix -e wiremix" \
-    "󰂯 Bluetooth [Bluetui]|foot -a bluetui -e bluetui" \
+    "󰂯 Bluetooth|foot -a bluetui -e bluetui" \
     "󰖩 Wi-Fi|foot -a impala -e impala" \
     "󰲝 Network Manager|foot -e nmtui" \
     "󰑐 Update System|foot -a pop-upgrade -e sysup" \

@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FLAGS="-d -a top --y 24 -w 35 --minimal-lines --placeholder Choose"
+FLAGS="-d  -w 35 --minimal-lines --placeholder Choose"
 
 while true; do
   SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰙦 Stop" | fuzzel $FLAGS)

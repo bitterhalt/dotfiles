@@ -2,7 +2,7 @@
 
 # Fuzzel file finder
 
-DMENU="fuzzel -d -a top --y 24 -l 10 --minimal-lines"
+DMENU="fuzzel -d  -l 10 --minimal-lines"
 EDITOR="${EDITOR:-nvim}"
 
 QUERY=$($DMENU -w 20 --placeholder="Find files")

@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FLAGS="-d -a top --y 24 -w 24 --minimal-lines"
+FLAGS="-d -w 24 --minimal-lines"
 
 confirm_action() {
   local action_name="$1"

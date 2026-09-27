@@ -5,7 +5,7 @@ set -euo pipefail
 NOTES_DIR="$HOME/Documents/personal/notes"
 EDITOR="${EDITOR:-nvim}"
 TERMINAL="${TERMINAL:-foot}"
-DMENU="fuzzel -d -a top --y 24 -w 40"
+DMENU="fuzzel -d  -w 40"
 
 mkdir -p "$NOTES_DIR"
 cd "$NOTES_DIR" || exit 1
@@ -14,7 +14,7 @@ search_notes() {
   local selection
   selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU -l 10)
   if [ -n "$selection" ] && [ -f "$selection" ]; then
-    exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/$selection"
+    exec "$TERMINAL" -e "$EDITOR" "$NOTES_DIR/$selection"
   fi
 }
 
@@ -31,7 +31,7 @@ create_note() {
   fi
   local full_path="$NOTES_DIR/$note_name"
   mkdir -p "$(dirname "$full_path")"
-  exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$full_path"
+  exec "$TERMINAL" -e "$EDITOR" "$full_path"
 }
 
 delete_note() {
