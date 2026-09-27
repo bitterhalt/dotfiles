@@ -45,11 +45,10 @@ Go to ➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 
 ---
 
-### Inspiration of my cool stuff ⭐
+### Inspiration
 
 - [SwayKh](https://github.com/SwayKh/dotfiles/tree/main)
 - [newmanls](https://github.com/newmanls/dotfiles)
-- [classabbyamp](https://github.com/classabbyamp)
 - [aellas](https://github.com/aellas)
 - [Joris](https://codeberg.org/jorisvandijk)
 - [fesowowako](https://github.com/fesowowako) and his commits from [My Sway-dotfiles](https://github.com/bitterhalt/dots-sway)
