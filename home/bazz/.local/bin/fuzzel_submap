@@ -4,7 +4,7 @@
 # Description: expandable wlr-which-key clone using fuzzel
 # ========================================================
 
-FLAGS="-d -w 25 -l 9 --minimal-lines --placeholder Select"
+FLAGS="-d -w 30 -l 9 --minimal-lines --placeholder Select"
 
 run_menu() {
   local is_submenu=false
@@ -108,9 +108,9 @@ menu_theming() {
 
 submenu_monitor() {
   run_menu -sub "Monitor" \
-    "Atop|foot -T atop -e amdgpu_top --smi" \
-    "Btop|foot -a btop -e btop" \
-    "Htop|foot -a htop -e htop" \
+    "Atop [AMD GPU Monitor]|foot -T atop -e amdgpu_top --smi" \
+    "Btop [System Monitor]|foot -a btop -e btop" \
+    "Nethogs [Network Monitor]|foot -a nethogs -e nethogs" \
     "Logs|foot -a foot -T journalctl -e journalctl -f" \
     "Combined|foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh"
 }
