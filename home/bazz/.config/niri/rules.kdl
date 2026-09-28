@@ -20,6 +20,7 @@ window-rule {
 window-rule {
     match app-id="GParted"
     match app-id="Pinentry-gtk"
+    match app-id="piper"
     match app-id="anomalydx11avx.exe"
     match app-id="anomalylauncher.exe"
     match app-id="blueman-manager"
