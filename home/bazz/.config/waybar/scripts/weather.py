@@ -88,7 +88,7 @@ def fetch_weather():
                     ]
                 ),
                 "timezone": "auto",
-                "forecast_days": 3,
+                "forecast_days": 7,
             }
         )
         data = get_json(f"https://api.open-meteo.com/v1/forecast?{params}")
