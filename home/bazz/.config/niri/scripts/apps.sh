@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-DMENU="fuzzel -d -a top --y 8 -w 24 --minimal-lines"
+APPS=(brave-origin thunderbird transmission-gtk)
 
-choice=$(printf "Yes\nNo" | $DMENU --prompt="Launch daily applications? ")
+DMENU="fuzzel -d -a top --y 8 -w 18 --minimal-lines"
+
+choice=$(printf "Yes\nNo" | $DMENU --prompt="Open Daily Apps? 🤔 ")
 
 [[ "$choice" == "Yes" ]] || exit 0
 
-brave-origin &
-thunderbird &
-transmission-gtk &
+for app in "${APPS[@]}"; do
+  "$app" &
+done

@@ -27,6 +27,12 @@
     "interval": 3600,
     "return-type": "json",
     "exec": "~/.config/waybar/scripts/weather.py",
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/menus/weather_menu.xml",
+    "menu-actions": {
+      "weather": "foot -a Linecast -T Weather-Peek -e linecast weather",
+      "moon": "foot -a Linecast -T Weather-Peek -e linecast moon",
+    },
   },
 
   // MAKO
@@ -53,7 +59,7 @@
     "tooltip": false,
     "on-click-right": "foot -a pop-upgrade -e sys_upgrade",
     "menu": "on-click",
-    "menu-file": "~/.config/waybar/modules/menus/power_menu.xml",
+    "menu-file": "~/.config/waybar/menus/power_menu.xml",
     "menu-actions": {
       "exit": "niri msg action quit",
       "lock": "swaylock -C ~/.cache/wal/colors-swaylock",
