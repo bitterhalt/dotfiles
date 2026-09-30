@@ -8,7 +8,7 @@ FINAL_GIF="$SAVEDIR/${TIMESTAMP}_capture.gif"
 TEMP_MP4="${HOME}/.cache/${TIMESTAMP}_temp.mp4"
 
 mkdir -p "$SAVEDIR"
-echo "Select a region on your screen..."
+echo "Select a region on your screen :: press Ctrl+C to STOP"
 
 REGION=$(slurp -f "%wx%h+%x+%y")
 
