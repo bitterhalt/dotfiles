@@ -41,6 +41,11 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 | Key | Action |
 | --- | ------ |
+
+## Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
+
+| Key | Action |
+| --- | ------ |
 | `Mod+Ctrl+C` | Open Clipboard |
 | `Mod+Ctrl+D` | Hide Notification Pop-ups |
 | `Mod+Ctrl+E` | Browse Emojis 😀 |
