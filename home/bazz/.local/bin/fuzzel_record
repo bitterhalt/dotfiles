@@ -5,7 +5,13 @@ set -euo pipefail
 FLAGS="-d  -w 35 --minimal-lines --placeholder Choose"
 
 while true; do
-  SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰙦 Stop" | fuzzel $FLAGS)
+  MENU="1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional"
+
+  if [ -f /tmp/gpu-recorder.pid ]; then
+    MENU="$MENU\n3 ➜ 󰙦 Stop"
+  fi
+
+  SUB=$(echo -e "$MENU" | fuzzel $FLAGS)
 
   if [ -z "$SUB" ]; then
     exit 0
