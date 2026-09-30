@@ -45,15 +45,8 @@ Go to ➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 
 ---
 
-### Inspiration
-
-- [SwayKh](https://github.com/SwayKh/dotfiles/tree/main)
-- [newmanls](https://github.com/newmanls/dotfiles)
-- [aellas](https://github.com/aellas)
-- [Joris](https://codeberg.org/jorisvandijk)
-- [fesowowako](https://github.com/fesowowako) and his commits from [My Sway-dotfiles](https://github.com/bitterhalt/dots-sway)
-- [NihaAlGhul](https://codeberg.org/NihaAlGhul) For making installation script to actually work ❤️
-
 ### User reviews ❤️
 
 <img width="441" height="173" alt="image" src="https://github.com/user-attachments/assets/b9586fb7-f365-4df7-9c24-12f75099b301" />
+
+### [⭐ Inspiration](https://github.com/bitterhalt?tab=stars)
