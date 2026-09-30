@@ -81,6 +81,8 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | --- | ------ |
 | `XF86AudioRaiseVolume` | Increase Volume |
 | `XF86AudioLowerVolume` | Decrease Volume |
+| `Mod+WheelScrollDown` | Decrease Volume |
+| `Mod+WheelScrollUp` | Increase Volume |
 | `Ctrl+Shift+Up` | Increase Volume |
 | `Ctrl+Shift+Down` | Decrease Volume |
 | `XF86AudioMute` | Mute Audio |
@@ -178,19 +180,6 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Ctrl+Page_Up` | Move Column to Workspace Up |
 | `Mod+Shift+Page_Down` | Move Workspace Down |
 | `Mod+Shift+Page_Up` | Move Workspace Up |
-
-## Mouse Wheel Bindings
-
-| Key | Action |
-| --- | ------ |
-| `Mod+WheelScrollDown` | Workspace Down |
-| `Mod+WheelScrollUp` | Workspace Up |
-| `Mod+Ctrl+WheelScrollDown` | Move Column Workspace Down |
-| `Mod+Ctrl+WheelScrollUp` | Move Column Workspace Up |
-| `Mod+WheelScrollRight` | Focus Right |
-| `Mod+WheelScrollLeft` | Focus Left |
-| `Mod+Ctrl+WheelScrollRight` | Move Column Right |
-| `Mod+Ctrl+WheelScrollLeft` | Move Column Left |
 
 ## Numeric Workspaces (1-9)
 

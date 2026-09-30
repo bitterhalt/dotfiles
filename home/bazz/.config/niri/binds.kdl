@@ -53,6 +53,8 @@ binds {
     // Media - Volume
     XF86AudioRaiseVolume hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "volume.sh up"; }
     XF86AudioLowerVolume hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "volume.sh down"; }
+    Mod+WheelScrollDown hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "volume.sh down"; }
+    Mod+WheelScrollUp hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "volume.sh up"; }
     Ctrl+Shift+Up hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "volume.sh up"; }
     Ctrl+Shift+Down hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "volume.sh down"; }
     XF86AudioMute hotkey-overlay-title="Mute Audio" allow-when-locked=true { spawn-sh "volume.sh mute"; }
@@ -130,16 +132,6 @@ binds {
     Mod+Shift+Page_Down hotkey-overlay-title="Move Workspace Down" { move-workspace-down; }
     Mod+Shift+Page_Up hotkey-overlay-title="Move Workspace Up" { move-workspace-up; }
 
-    // Mouse Wheel Bindings
-    Mod+WheelScrollDown hotkey-overlay-title="Workspace Down" cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp hotkey-overlay-title="Workspace Up" cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown hotkey-overlay-title="Move Column Workspace Down" cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp hotkey-overlay-title="Move Column Workspace Up" cooldown-ms=150 { move-column-to-workspace-up; }
-
-    Mod+WheelScrollRight hotkey-overlay-title="Focus Right" { focus-column-right; }
-    Mod+WheelScrollLeft hotkey-overlay-title="Focus Left" { focus-column-left; }
-    Mod+Ctrl+WheelScrollRight hotkey-overlay-title="Move Column Right" { move-column-right; }
-    Mod+Ctrl+WheelScrollLeft hotkey-overlay-title="Move Column Left" { move-column-left; }
 
     // Numeric Workspaces (1-9)
     Mod+1 hotkey-overlay-title="Switch to Workspace 1" { focus-workspace 1; }
