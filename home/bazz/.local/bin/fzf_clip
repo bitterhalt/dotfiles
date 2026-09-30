@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CACHE="$HOME/.cache/cliphist/db"
+
 case "$1" in
 preview)
   row="$2"
@@ -12,7 +14,7 @@ preview)
 
 *)
   id="$(cliphist list | fzf --border-label " Clipboard - Clear all: Alt+0 " \
-    --bind "alt-0:execute-silent(rm -rf '$HOME/.cache/cliphist/db' '$HOME/.cache/cliphist/thumbnails')+abort" \
+    --bind "alt-0:execute-silent(rm -rf $CACHE)+abort" \
     --preview "$(realpath "$0") preview {}")"
   test -z "$id" && exit
 
