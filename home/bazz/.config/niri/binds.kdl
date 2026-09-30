@@ -22,7 +22,8 @@ binds {
     Mod+B hotkey-overlay-title="Toggle Waybar" { spawn "bar-hider.sh"; }
 
     // Menus
-    Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
+    // Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
+    Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "foot -a fzf_clip -e fzf_clip" ; }
     Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn "fuzzel_emoji"; }
     Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }

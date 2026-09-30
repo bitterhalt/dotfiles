@@ -11,7 +11,9 @@ preview)
   ;;
 
 *)
-  id="$(cliphist list | fzf --border-label "Clipboard" --preview "$(realpath "$0") preview {}")"
+  id="$(cliphist list | fzf --border-label " Clipboard - Clear all: Alt+0 " \
+    --bind "alt-0:execute-silent(rm -rf '$HOME/.cache/cliphist/db' '$HOME/.cache/cliphist/thumbnails')+abort" \
+    --preview "$(realpath "$0") preview {}")"
   test -z "$id" && exit
 
   cliphist decode <<<"$id" | wl-copy
