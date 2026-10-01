@@ -3,19 +3,28 @@
 CACHE="$HOME/.cache/cliphist/db"
 
 case "$1" in
+
 preview)
+
   row="$2"
+
   if echo "$row" | grep -vqP '^\d+\t\[\[ binary data .* \]\]'; then
     echo "$row" | cliphist decode
   else
     echo "$row" | cliphist decode | chafa -f sixel -s "${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}"
   fi
+
   ;;
 
 *)
+
+  exec 9>"$HOME/.cache/cliphist-picker.lock"
+  flock -n 9 || exit 0
+
   id="$(cliphist list | fzf --border-label " Clipboard - Clear all: Alt+0 " \
     --bind "alt-0:execute-silent(rm -rf $CACHE)+abort" \
     --preview "$(realpath "$0") preview {}")"
+
   test -z "$id" && exit
 
   cliphist decode <<<"$id" | wl-copy
