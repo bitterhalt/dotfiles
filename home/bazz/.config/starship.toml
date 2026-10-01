@@ -8,14 +8,14 @@ $line_break\
 $character"""
 
 [character]
-success_symbol = "[\\$](purple)"
+success_symbol = "[\\$](blue)"
 error_symbol = "[\\$](red)"
 vimcmd_symbol = "[\\$](yellow)"
 
 [directory]
 home_symbol = '~'
 truncation_symbol = '…/'
-style ='bold blue'
+style ='bold purple'
 read_only = ' !'
 read_only_style = 'bold red'
 

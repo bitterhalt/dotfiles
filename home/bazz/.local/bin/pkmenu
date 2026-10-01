@@ -1,0 +1,124 @@
+#!/usr/bin/env bash
+# pkmenu: PolicyKit helper supporting dmenu-compatible launchers
+# Supports dmenu (password patch recommended), fuzzel and rofi
+# Written in POSIX shell, change the shebang or symlink to your favourite shell
+# Originally based on czaplicki/rofi-polkit-agent
+
+VERSION="1.0.1"
+
+print_usage_and_exit() {
+  echo "usage: $0 [-l dmenu|rofi|fuzzel] [-a \"launcher args\"] [-v]"
+  echo "  -l, --launcher <launcher>"
+  echo "      specify launcher to use (supported: dmenu, rofi, fuzzel)"
+  echo "  -a, --launcher-args \"<launcher-args>\""
+  echo "      additional arguments to pass to launcher"
+  echo "  -v, --version"
+  echo "      print version and exit"
+  echo ""
+  echo "Examples:"
+  echo "  $0 -l dmenu"
+  echo "  $0 -l rofi -a \"-theme Arc-Dark\""
+  echo "  $0 -l fuzzel -a \"--prompt-color=ff0000ff --font='DejaVu Sans Mono'\""
+
+  exit $1
+}
+
+get_response() {
+  case "$LAUNCHER" in
+  "dmenu") printf "$message" | dmenu -P -p "$prompt" $LAUNCHER_ARGS ||
+    printf "$message" | dmenu -p "$prompt" $LAUNCHER_ARGS ;;
+  "rofi") printf "" | rofi -dmenu -p "$prompt" -mesg "$message" -password -no-fixed-num-lines $LAUNCHER_ARGS ;;
+  "fuzzel") fuzzel --dmenu --prompt-only="$prompt" --password $LAUNCHER_ARGS ;;
+  esac
+}
+
+prep_params() {
+  for i in "$@"; do printf "'%s' " "$i"; done
+}
+
+if [ "$1" != '_CALLED_INTERNALLY' ]; then
+  LAUNCHER=""
+  LAUNCHER_ARGS=""
+
+  while [ $# -gt 0 ]; do
+    case "$1" in
+    "-l" | "--launcher")
+      [ -z "$2" ] && print_usage_and_exit 1 >&2
+      LAUNCHER="$2"
+      shift 2
+      ;;
+    "-a" | "--launcher-args")
+      [ -z "$2" ] && print_usage_and_exit 1 >&2
+      LAUNCHER_ARGS="$2"
+      shift 2
+      ;;
+    "-h" | "--help")
+      print_usage_and_exit 0
+      ;;
+    "-v" | "--version")
+      echo "pkmenu $VERSION"
+      exit 0
+      ;;
+    -*)
+      echo "$0: unknown option: $1" >&2
+      print_usage_and_exit 1 >&2
+      ;;
+    esac
+  done
+
+  if [ -z "$LAUNCHER" ]; then
+    echo "$0: launcher must be specified" >&2
+    print_usage_and_exit 1 >&2
+  fi
+
+  case "$LAUNCHER" in
+  "dmenu" | "rofi" | "fuzzel")
+    if ! command -v "$LAUNCHER" >/dev/null 2>&1; then
+      echo "$0: launcher '$LAUNCHER' not found in PATH" >&2
+      exit 1
+    fi
+    ;;
+  *)
+    echo "$0: unsupported launcher '$LAUNCHER'" >&2
+    print_usage_and_exit 1 >&2
+    ;;
+  esac
+
+  if [ "$LAUNCHER" = "dmenu" ] && ! dmenu -h 2>&1 | grep -q "\-bfivP"; then
+    echo "$0: dmenu not installed with password patch, password will be exposed!"
+  fi
+
+  exec cmd-polkit-agent -s -c "$0 _CALLED_INTERNALLY $(prep_params "$@" -l "$LAUNCHER" -a "$LAUNCHER_ARGS")"
+else
+  shift 1
+  LAUNCHER=""
+  LAUNCHER_ARGS=""
+
+  while [ $# -gt 0 ]; do
+    case "$1" in
+    -l)
+      LAUNCHER="$2"
+      shift 2
+      ;;
+    -a)
+      LAUNCHER_ARGS="$2"
+      shift 2
+      ;;
+    *)
+      shift
+      ;;
+    esac
+  done
+fi
+
+while read -r msg; do
+  if echo "$msg" | jq -e '.action == "request password"' >/dev/null 2>&1; then
+    prompt="$(printf '%s' "$msg" | jq -rc '.prompt // "Password:"')"
+    message="$(printf '%s' "$msg" | jq -rc '.message // "No message given!"')"
+    response="$(get_response)"
+
+    [ -z "$response" ] &&
+      echo '{"action":"cancel"}' ||
+      echo "{\"action\":\"authenticate\",\"password\": \"$response\"}"
+  fi
+done
