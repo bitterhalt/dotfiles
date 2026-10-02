@@ -21,7 +21,10 @@ preview)
   exec 9>"$HOME/.cache/cliphist-picker.lock"
   flock -n 9 || exit 0
 
-  id="$(cliphist list | fzf --border-label " Clipboard - Clear all: Alt+0 " \
+  id="$(cliphist list | fzf --border-label " Clipboard - Alt+0 to Clear, Esc to Exit " \
+    --layout reverse \
+    --border \
+    --prompt '📋 ' \
     --bind "alt-0:execute-silent(rm -rf $CACHE)+abort" \
     --preview "$(realpath "$0") preview {}")"
 
