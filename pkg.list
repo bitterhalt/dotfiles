@@ -111,6 +111,7 @@ python-pydbus
 python-watchdog
 qt5-wayland
 qt6-wayland
+quickshell
 rate-mirrors
 ripgrep
 rsync
