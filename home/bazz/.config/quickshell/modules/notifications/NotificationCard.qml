@@ -41,15 +41,11 @@ Rectangle {
         id: cardHover
     }
 
-    // Single media slot on the right:
-    // notification image takes priority, otherwise show the app icon.
     Item {
         id: mediaBox
 
         anchors.right: parent.right
-        anchors.rightMargin: 12
-        // In history, keep the icon directly below the timestamp/close row.
-        // Compact toast cards have no timestamp, so center it vertically.
+        anchors.rightMargin: 22
         y: root.compact ? Math.round((parent.height - height) / 2) : 30
         width: root.appIconSize
         height: root.appIconSize
@@ -93,7 +89,7 @@ Rectangle {
         id: contentColumn
 
         anchors.left: parent.left
-        anchors.leftMargin: 12
+        anchors.leftMargin: 22
         anchors.right: mediaBox.left
         anchors.rightMargin: 10
         anchors.top: parent.top
@@ -139,7 +135,7 @@ Rectangle {
         anchors.right: closeButton.left
         anchors.rightMargin: 4
         anchors.top: parent.top
-        anchors.topMargin: 9
+        anchors.topMargin: 10
         color: config.muted
         font.pointSize: config.fontSize(0.74)
         text: root.notificationService ? root.notificationService.timeLabel(root.notification) : ""

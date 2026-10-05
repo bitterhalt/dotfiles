@@ -58,4 +58,6 @@ if [ -f "$HISTORY" ]; then
   echo "$trimmed" >"$HISTORY"
 fi
 
-wal --theme "$theme"
+wal -e -n --theme "$theme"
+vicinae theme set pywal
+xrdb -merge -quiet ~/.cache/wal/colors.Xresources

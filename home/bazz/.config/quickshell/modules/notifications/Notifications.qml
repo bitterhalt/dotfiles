@@ -1,7 +1,6 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Quickshell.Wayland
 
 Item {
     id: root
@@ -10,18 +9,6 @@ Item {
     required property var barWindow
     required property var popupManager
     required property var notificationService
-
-    readonly property int defaultToastTimeoutMs: 5000
-
-    function toastTimeoutMs(notification): int {
-        if (!notification)
-            return defaultToastTimeoutMs
-
-        if (notification.expireTimeout < 0)
-            return defaultToastTimeoutMs
-
-        return Math.round(notification.expireTimeout)
-    }
 
     readonly property bool active:
         notificationService.dnd
@@ -55,7 +42,8 @@ Item {
                 return
             }
 
-            toastWindow.visible = false
+            notificationPopup.hide()
+
             centerPopup.grabFocus = true
             popupManager.toggle(centerPopup)
         }
@@ -69,70 +57,12 @@ Item {
         notificationService: root.notificationService
     }
 
-    PanelWindow {
-        id: toastWindow
+    NotificationPopup {
+        id: notificationPopup
 
-        screen: root.barWindow.screen
-
-        anchors {
-            top: true
-            left: true
-            right: true
-        }
-
-        margins.top: root.config.popupGap
-
-        WlrLayershell.layer: WlrLayer.Overlay
-
-        exclusiveZone: 0
-        implicitHeight: 92
-        visible: false
-        color: "transparent"
-
-        mask: Region {
-            item: toastCard
-        }
-
-        NotificationCard {
-            id: toastCard
-
-            width: 380
-            height: parent.height
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            config: root.config
-            notification: notificationService.toastNotification
-            notificationService: root.notificationService
-
-            compact: true
-            showClose: false
-            dismissOnClick: false
-        }
-
-        MouseArea {
-            anchors.fill: toastCard
-            cursorShape: Qt.PointingHandCursor
-
-            onClicked: {
-                toastWindow.visible = false
-                toastTimer.stop()
-            }
-        }
-    }
-
-    Timer {
-        id: toastTimer
-
-        interval: root.toastTimeoutMs(
-            notificationService.toastNotification
-        )
-        repeat: false
-
-        onTriggered: {
-            const notification = notificationService.toastNotification
-            toastWindow.visible = false
-            notificationService.finishToast(notification)
-        }
+        config: root.config
+        barWindow: root.barWindow
+        notificationService: root.notificationService
     }
 
     Connections {
@@ -142,22 +72,15 @@ Item {
             if (!notificationService.dnd
                     && notificationService.toastNotification) {
                 centerPopup.visible = false
-                toastWindow.visible = true
-
-                if (root.toastTimeoutMs(
-                        notificationService.toastNotification) > 0) {
-                    toastTimer.restart()
-                } else {
-                    toastTimer.stop()
-                }
+                notificationPopup.show(
+                    notificationService.toastNotification
+                )
             }
         }
 
         function onDndChanged(): void {
-            if (notificationService.dnd) {
-                toastWindow.visible = false
-                toastTimer.stop()
-            }
+            if (notificationService.dnd)
+                notificationPopup.hide()
         }
     }
 
@@ -165,7 +88,7 @@ Item {
         target: "notificationCenter"
 
         function toggle(): void {
-            toastWindow.visible = false
+            notificationPopup.hide()
 
             if (centerPopup.visible) {
                 centerPopup.visible = false
@@ -176,7 +99,7 @@ Item {
         }
 
         function open(): void {
-            toastWindow.visible = false
+            notificationPopup.hide()
             centerPopup.grabFocus = false
             centerPopup.visible = true
         }
