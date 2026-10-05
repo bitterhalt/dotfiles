@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DMENU="${DMENU:-vicinae dmenu}"
+
 set -e
 
 EMOJI_DIR="$HOME/.local/share/emoji"
@@ -22,11 +24,11 @@ if [ ! -s "$EMOJI_FILE" ]; then
   fi
 fi
 
-chosen=$(cut -d ';' -f1 "$EMOJI_FILE" | fuzzel -d -w 30 -l 8 | sed "s/ .*//")
+chosen=$(cut -d ';' -f1 "$EMOJI_FILE" | $DMENU --placeholder "Emoji" | sed "s/ .*//")
 
 [ -z "$chosen" ] && exit
 
-if [ -n "$1" ]; then
+if [ -n "${1:-}" ]; then
   wl-copy "$chosen"
 else
   printf "%s" "$chosen" | wl-copy

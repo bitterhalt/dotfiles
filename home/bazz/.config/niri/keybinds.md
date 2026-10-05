@@ -9,6 +9,11 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Return` | Open Terminal |
 | `Mod+Shift+Delete` | BTOP |
 | `Mod+Ctrl+Delete` | HTOP |
+
+## Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t && pkill -SIGRTMIN+1 waybar"; }
+
+| Key | Action |
+| --- | ------ |
 | `Mod+Shift+F11` | Toggle Idle-deamon |
 | `Mod+V` | Open Editor |
 | `Mod+F11` | Lock Screen |
@@ -47,8 +52,18 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | Key | Action |
 | --- | ------ |
 | `Mod+Ctrl+C` | Open Clipboard |
+
+## Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
+
+| Key | Action |
+| --- | ------ |
 | `Mod+Ctrl+D` | Hide Notification Pop-ups |
 | `Mod+Ctrl+E` | Browse Emojis 😀 |
+
+## Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
+
+| Key | Action |
+| --- | ------ |
 | `Mod+Ctrl+H` | Show Notfication History |
 | `Mod+Ctrl+P` | Color Picker |
 | `Mod+D` | Run Application |
@@ -60,6 +75,11 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+S` | Find Files |
 | `Mod+Shift+D` | Run Binary |
 | `Mod+Shift+T` | Attach Tmux sessions |
+
+## Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn "fuzzel_weather"; }
+
+| Key | Action |
+| --- | ------ |
 | `Mod+Ctrl+W` | Display Weather |
 
 ## Submaps

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dmenu="fuzzel -d --x 24 -w 25 --minimal-lines"
+DMENU="${DMENU:-vicinae dmenu}"
 sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 
 if [ -n "$sessions" ]; then
@@ -9,17 +9,17 @@ else
   menu_options="New session"
 fi
 
-choice=$(echo -e "$menu_options" |
-  $dmenu "Tmux manager:")
+choice=$(printf '%b\n' "$menu_options" |
+  $DMENU --placeholder "Tmux manager:")
 
 case "$choice" in
 "Attach session")
-  target=$(echo "$sessions" | $dmenu "Attach to:")
+  target=$(printf '%s\n' "$sessions" | $DMENU --placeholder "Attach to:")
   [ -n "$target" ] && "$TERMINAL" -e tmux attach-session -t "$target"
   ;;
 
 "New session")
-  session_name=$(echo "" | $dmenu "Name (optional):")
+  session_name=$(printf '' | $DMENU --placeholder "Name (optional):")
   if [ -z "$session_name" ]; then
     "$TERMINAL" -e tmux new-session
   else
@@ -28,10 +28,10 @@ case "$choice" in
   ;;
 
 "Delete session")
-  target=$(echo "$sessions" | $dmenu "Kill session:")
+  target=$(printf '%s\n' "$sessions" | $DMENU --placeholder "Kill session:")
 
   if [ -n "$target" ]; then
-    confirm=$(echo -e "Yes\nNo" | $dmenu "Delete $target?")
+    confirm=$(printf "Yes\nNo\n" | $DMENU --placeholder "Delete $target?")
 
     if [ "$confirm" = "Yes" ]; then
       tmux kill-session -t "$target"

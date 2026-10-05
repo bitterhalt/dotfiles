@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-DMENU="fuzzel -d -l 10"
+DMENU="${DMENU:-vicinae dmenu}"
 THEMES="$HOME/.config/wal/colorschemes/dark"
 HISTORY="$HOME/.cache/wal-theme-history"
 CACHE_FILE="$HOME/.cache/wal/colors.json"
@@ -13,7 +13,7 @@ if [[ "${1:-}" == "-s" ]]; then
     exit 1
   fi
 
-  THEME_NAME=$(echo "" | fuzzel -d -a top --y 8 -w 20 -l 0 --placeholder="Save theme as: ")
+  THEME_NAME=$(printf '' | $DMENU --placeholder "Save theme as:")
 
   if [ -z "$THEME_NAME" ]; then
     exit 0
@@ -41,7 +41,7 @@ theme=$(
       sed 's/\.json$//' |
       sort
   } |
-    $DMENU
+    $DMENU --placeholder "Select theme"
 )
 
 case "$theme" in

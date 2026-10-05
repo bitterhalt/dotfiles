@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-pkmenu -l fuzzel -a "--prompt-color=ff0000ff --border-color=ffff00ff -B 3"

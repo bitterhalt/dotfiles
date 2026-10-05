@@ -2,12 +2,12 @@
 
 set -euo pipefail
 
-FLAGS="-d -w 24 --minimal-lines"
+DMENU="${DMENU:-vicinae dmenu}"
 
 confirm_action() {
   local action_name="$1"
   local selection
-  selection=$(echo -e "n ➜ No, Cancel\ny ➜ Yes, ${action_name}" | fuzzel $FLAGS)
+  selection=$(printf "n ➜ No, Cancel\ny ➜ Yes, %s\n" "$action_name" | $DMENU --placeholder "Confirm")
   if [[ "$selection" == *"Yes"* ]]; then
     return 0
   fi
@@ -15,7 +15,7 @@ confirm_action() {
 }
 
 while true; do
-  SUB=$(echo -e "1 ➜ Lock\n2 ➜ Exit\n3 ➜ Terminate User\n4 ➜ zZzz 💤\n5 ➜ Shutdown\n6 ➜ Reboot\n7 ➜ Reboot UEFI" | fuzzel $FLAGS)
+  SUB=$(printf "1 ➜ Lock\n2 ➜ Exit\n3 ➜ Terminate User\n4 ➜ zZzz 💤\n5 ➜ Shutdown\n6 ➜ Reboot\n7 ➜ Reboot UEFI\n" | $DMENU --placeholder "Power")
 
   if [ -z "$SUB" ]; then
     exit 0
@@ -31,7 +31,7 @@ while true; do
     exit 0
     ;;
   *"Terminate User")
-    confirm_action "Terminate User" && loginctl terminate-user $USER
+    confirm_action "Terminate User" && loginctl terminate-user "$USER"
     exit 0
     ;;
   *"zZzz"*)

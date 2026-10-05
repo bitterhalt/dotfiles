@@ -1,0 +1,31 @@
+[meta]
+version = 1
+name = "Pywal"
+description = "Dynamic pywal16 theme"
+variant = "dark"
+inherits = "vicinae-dark"
+
+[colors.core]
+background = "{background}"
+foreground = "{foreground}"
+secondary_background = "{color0}"
+border = "{color8}"
+accent = "{color4}"
+accent_foreground = "{background}"
+
+[colors.accents]
+blue = "{color4}"
+green = "{color2}"
+magenta = "{color5}"
+orange = "{color3}"
+purple = "{color5}"
+red = "{color1}"
+yellow = "{color3}"
+cyan = "{color6}"
+
+[colors.list.item.selection]
+background = "{color8}"
+secondary_background = "{color0}"
+
+[colors.grid.item]
+background = "{color0}"

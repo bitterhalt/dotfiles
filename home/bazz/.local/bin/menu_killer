@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+DMENU="${DMENU:-vicinae dmenu}"
+
+set -euo pipefail
+
+processes=$(ps -u "$USER" -o pid=,comm= | awk '{pid=$1; $1=""; print $0 " (PID:" pid ")"}' | sed 's/^ //')
+
+[[ -z "$processes" ]] && exit 0
+
+selection=$(
+  printf "%s\n" "$processes" | $DMENU --placeholder "Kill selected"
+)
+
+[[ -z "${selection:-}" ]] && exit 0
+
+pid=$(sed -n 's/.*(PID:\([0-9]*\)).*/\1/p' <<<"$selection")
+cmd=$(sed 's/ (PID:[0-9]*)$//' <<<"$selection")
+
+[[ -z "$pid" ]] && exit 1
+
+confirm=$(
+  printf "No\nYes\n" | $DMENU --placeholder "Kill $cmd (PID $pid)?"
+)
+
+[[ "$confirm" != "Yes" ]] && exit 0
+
+kill -9 "$pid" 2>/dev/null

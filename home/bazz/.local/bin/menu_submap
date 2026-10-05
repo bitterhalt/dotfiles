@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# ========================================================
-# Description: expandable wlr-which-key clone using fuzzel
-# ========================================================
+# ==========================================================
+# Description: expandable wlr-which-key clone using Vicinae
+# ==========================================================
 
-FLAGS="-d -w 30 -l 9 --minimal-lines --placeholder Select"
+DMENU="${DMENU:-vicinae dmenu}"
 
 run_menu() {
   local is_submenu=false
@@ -19,20 +19,20 @@ run_menu() {
   local items=("$@")
 
   while true; do
-    local fuzzel_input=""
+    local menu_input=""
     local i=1
     for item in "${items[@]}"; do
       local label="${item%%|*}"
-      fuzzel_input+="$i ➜ $label\n"
+      menu_input+="$i ➜ $label\n"
       ((i++))
     done
 
     if [ "$is_submenu" = true ]; then
-      fuzzel_input=".. Back\n$fuzzel_input"
+      menu_input=".. Back\n$menu_input"
     fi
 
     local choice
-    choice=$(echo -e -n "$fuzzel_input" | fuzzel $FLAGS)
+    choice=$(printf '%b' "$menu_input" | $DMENU --placeholder "$menu_title")
 
     if [ -z "$choice" ]; then exit 0; fi
     if [[ "$choice" == *"Back"* ]]; then return 0; fi
@@ -54,14 +54,12 @@ run_menu() {
   done
 }
 
-# Top-level menus
-
 menu_notes() {
   run_menu "Notes" \
-    "󰍉 Search|fuzzel_notes" \
-    "󰎚 New Note|fuzzel_notes -c" \
+    "󰍉 Search|~/.local/bin/menu_notes" \
+    "󰎚 New Note|~/.local/bin/menu_notes -c" \
     " TODO|foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" \
-    "󰩹 Delete|fuzzel_notes -d"
+    "󰩹 Delete|~/.local/bin/menu_notes -d"
 }
 
 menu_packages() {
@@ -72,7 +70,7 @@ menu_packages() {
 
 menu_pass() {
   run_menu "Pass" \
-    "Passwords|fuzzel_passmenu" \
+    "Passwords|~/.local/bin/menu_passmenu" \
     "Authenticator|proton-authenticator"
 }
 
@@ -80,7 +78,7 @@ menu_settings() {
   run_menu "Settings" \
     "Bash|foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" \
     "Foot|foot -e nvim ~/.config/foot/foot.ini" \
-    "Fuzzel|foot sh -c ' nvim ~/.config/fuzzel/fuzzel.ini ~/.local/bin/fuzzel_* '" \
+    "Vicinae|foot sh -c 'nvim ~/.local/bin/menu_*'" \
     "Mako|foot sh -c 'cd ~/.config/mako/ && nvim *'" \
     "Niri|foot sh -c 'cd ~/.config/niri/ && nvim *'" \
     "Nvim|foot sh -c 'cd ~/.config/nvim && vopen .'" \
@@ -102,8 +100,8 @@ menu_system() {
 menu_theming() {
   run_menu "Theming" \
     "Set wallpaper|swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/" \
-    "Set theme|fuzzel_theme" \
-    "Save theme|fuzzel_theme -s"
+    "Set theme|~/.local/bin/menu_theme" \
+    "Save theme|~/.local/bin/menu_theme -s"
 }
 
 submenu_monitor() {

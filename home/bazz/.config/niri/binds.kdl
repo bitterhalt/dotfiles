@@ -23,32 +23,28 @@ binds {
     Mod+B hotkey-overlay-title="Toggle Waybar" { spawn "bar-hider.sh"; }
 
     // Menus
-    // Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
-    Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "foot -a fzf_clip -e fzf_clip" ; }
+    Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "vicinae 'vicinae://launch/clipboard/history?toggle=true'"; }
+    // Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "foot -a fzf_clip -e fzf_clip" ; }
     // Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
     Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "qs ipc call notifications toggleDnd"; }
-    Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn "fuzzel_emoji"; }
     // Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
     Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "qs ipc call notificationCenter toggle"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
-    Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel"; }
-    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "fuzzel_power"; }
+    Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "vicinae toggle"; }
+    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "menu_power"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
-    Mod+F4  hotkey-overlay-title="Process Killer" { spawn  "fuzzel_killer"; }
-    Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "fuzzel_submap -pass"; }
-    Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "fuzzel_record"; }
-    Mod+S hotkey-overlay-title="Find Files" { spawn-sh "fuzzel_finder"; }
-    Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_run"; }
-    Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
-    // Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn "fuzzel_weather"; }
+    Mod+F4  hotkey-overlay-title="Process Killer" { spawn  "menu_killer"; }
+    Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_submap -pass"; }
+    Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "menu_record"; }
+    Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "menu_tmuxer"; }
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
 
     // Submaps
-    Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "fuzzel_submap -system"; }
-    Mod+F12 hotkey-overlay-title="System Configs" { spawn-sh "fuzzel_submap -settings"; }
-    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "fuzzel_submap -notes"; }
-    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "fuzzel_submap -theming"; }
-    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "fuzzel_submap -packages"; }
+    Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "menu_submap -system"; }
+    Mod+F12 hotkey-overlay-title="System Configs" { spawn-sh "menu_submap -settings"; }
+    Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "menu_submap -notes"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "menu_submap -theming"; }
+    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "menu_submap -packages"; }
 
     // Screen Recording
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }

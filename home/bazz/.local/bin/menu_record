@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FLAGS="-d  -w 35 --minimal-lines --placeholder Choose"
+DMENU="${DMENU:-vicinae dmenu}"
 
 while true; do
   MENU="1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional"
@@ -11,7 +11,7 @@ while true; do
     MENU="$MENU\n3 ➜ 󰙦 Stop"
   fi
 
-  SUB=$(echo -e "$MENU" | fuzzel $FLAGS)
+  SUB=$(printf '%b\n' "$MENU" | $DMENU --placeholder "Choose")
 
   if [ -z "$SUB" ]; then
     exit 0

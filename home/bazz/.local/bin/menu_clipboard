@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+DMENU="${DMENU:-vicinae dmenu}"
+
+thumbnail_dir="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist/thumbnails"
+
+cliphist_list=$(cliphist list)
+if [ -z "$cliphist_list" ]; then
+  notify-send "Clipboard" "cliphist: please store something first"
+  rm -rf "$thumbnail_dir"
+  exit 0
+fi
+
+item=$(printf '%s\n' "$cliphist_list" | $DMENU --placeholder "Clipboard")
+
+[ -z "$item" ] || printf '%s\n' "$item" | cliphist decode | wl-copy
