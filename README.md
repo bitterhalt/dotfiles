@@ -12,18 +12,16 @@
 ### Current Stack
 
 - Distro: [Arch](https://archlinux.org)
-- Bar: [Waybar](https://github.com/Alexays/Waybar)
-- Notifications: [Mako](https://github.com/emersion/mako)
-- Notification history: [mako_hist](https://github.com/bitterhalt/dotfiles/blob/main/home/bazz/.local/bin/mako_hist.py)
+- Bar and notifications: [Quickshell](https://quickshell.org/)
 - WM: [Niri](https://github.com/niri-wm/niri)
-- Colors [pywal16](https://github.com/eylles/pywal16)
-- Editor: [neovim](https://neovim.io/)
+- Colors [Pywal16](https://github.com/eylles/pywal16)
+- Editor: [NeoVim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
-- Launcher: [fuzzel](https://codeberg.org/dnkl/fuzzel)
+- Launcher: [Vicinae](https://github.com/vicinaehq/vicinae/)
 - Login Manager: [ly](https://codeberg.org/fairyglade/ly)
 - Media Player: [mpv](https://mpv.io/)
-- Terminal: [foot](https://codeberg.org/dnkl/foot)
+- Terminal: [Foot](https://codeberg.org/dnkl/foot)
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/58b9b8b5-9534-407b-962b-f83af91c4252" />
 
