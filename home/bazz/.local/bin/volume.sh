@@ -18,26 +18,26 @@ mute)
   ;;
 esac
 
-vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
-
-[ "$vol" != "${vol%\[MUTED\]}" ] && $noti "Muted" && exit
-
-vol="${vol#Volume: }"
-
-split() {
-  IFS=$2
-  set -- $1
-  printf '%s' "$@"
-}
-
-vol="$(printf "%.0f" "$(split "$vol" ".")")"
-
-case 1 in
-$((vol >= 1))) ;;
-*) $noti "Muted" && exit ;;
-esac
-
-$noti \
-  "Vol: $vol " \
-  -h int:value:"${vol}" \
-  -h string:x-canonical-private-synchronous:volume
+# vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+#
+# [ "$vol" != "${vol%\[MUTED\]}" ] && $noti "Muted" && exit
+#
+# vol="${vol#Volume: }"
+#
+# split() {
+#   IFS=$2
+#   set -- $1
+#   printf '%s' "$@"
+# }
+#
+# vol="$(printf "%.0f" "$(split "$vol" ".")")"
+#
+# case 1 in
+# $((vol >= 1))) ;;
+# *) $noti "Muted" && exit ;;
+# esac
+#
+# $noti \
+#   "Vol: $vol " \
+#   -h int:value:"${vol}" \
+#   -h string:x-canonical-private-synchronous:volume

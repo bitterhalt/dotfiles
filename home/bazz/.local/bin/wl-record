@@ -12,9 +12,21 @@ SAVEDIR="${HOME}/Videos/Captures/"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FILENAME="$SAVEDIR/${TIMESTAMP}_capture.mp4"
 NOTI="notify-send -a gpu-screen-recorder -t 3000"
-SIG="pkill -SIGRTMIN+2 waybar"
 
 mkdir -p -- "$SAVEDIR"
+
+# Refresh whichever status bar(s) are running (Quickshell and/or Waybar)
+refresh_bar() {
+  # Quickshell (the process is named "quickshell"; "qs" is just the CLI alias)
+  if pgrep -x qs >/dev/null 2>&1; then
+    qs ipc call recorder refresh >/dev/null 2>&1 || true
+  fi
+
+  # Waybar (custom module with "signal": 2)
+  if pgrep -x waybar >/dev/null 2>&1; then
+    pkill -SIGRTMIN+2 -x waybar || true
+  fi
+}
 
 fullscreen() {
   pidof -q gpu-screen-recorder && {
@@ -23,7 +35,7 @@ fullscreen() {
   }
   gpu-screen-recorder -w screen -f 60 -a default_output -o "$FILENAME" &
   echo $! >"$PIDFILE"
-  $SIG
+  refresh_bar
 }
 
 region() {
@@ -34,7 +46,7 @@ region() {
   REGION=$(slurp -f "%wx%h+%x+%y") || exit 1
   gpu-screen-recorder -w "$REGION" -f 60 -o "$FILENAME" &
   echo $! >"$PIDFILE"
-  $SIG
+  refresh_bar
 }
 
 stop_recording() {
@@ -46,6 +58,7 @@ stop_recording() {
       sleep 1
     fi
     rm -f "$PIDFILE"
+    refresh_bar
     $NOTI "Screen record" "Recording stopped and saved to $SAVEDIR"
   else
     $NOTI "Screen record" "No active recording"

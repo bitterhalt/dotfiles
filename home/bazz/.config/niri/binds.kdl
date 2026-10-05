@@ -2,7 +2,8 @@ binds {
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "foot"; }
     Mod+Shift+Delete hotkey-overlay-title="BTOP" { spawn-sh "foot -a btop -T poptop -e btop"; }
     Mod+Ctrl+Delete hotkey-overlay-title="HTOP" { spawn-sh "foot -a htop -T poptop -e htop"; }
-    Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t && pkill -SIGRTMIN+1 waybar"; }
+    // Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t && pkill -SIGRTMIN+1 waybar"; }
+    Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "qs ipc call idle toggle"; }
     Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
     Mod+F11 hotkey-overlay-title="Lock Screen" { spawn-sh "swaylock -C ~/.cache/wal/colors-swaylock"; }
     Mod+Shift+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
@@ -24,9 +25,11 @@ binds {
     // Menus
     // Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn "fuzzel_clipboard"; }
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "foot -a fzf_clip -e fzf_clip" ; }
-    Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
+    // Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
+    Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "qs ipc call notifications toggleDnd"; }
     Mod+Ctrl+E hotkey-overlay-title="Browse Emojis 😀" { spawn "fuzzel_emoji"; }
-    Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
+    // Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
+    Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "qs ipc call notificationCenter toggle"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
     Mod+D hotkey-overlay-title="Run Application" { spawn-sh "fuzzel"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "fuzzel_power"; }
@@ -37,7 +40,8 @@ binds {
     Mod+S hotkey-overlay-title="Find Files" { spawn-sh "fuzzel_finder"; }
     Mod+Shift+D hotkey-overlay-title="Run Binary" { spawn-sh "fuzzel_run"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "fuzzel_tmuxer"; }
-    Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn "fuzzel_weather"; }
+    // Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn "fuzzel_weather"; }
+    Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
 
     // Submaps
     Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "fuzzel_submap -system"; }

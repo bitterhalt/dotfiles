@@ -118,8 +118,11 @@ _refresh_portals() {
 
 _refresh_env() {
   # Reload applications
-  pkill -x waybar
-  waybar &
+  if ! pgrep -x qs >/dev/null; then
+    pkill -x waybar
+    waybar &
+  fi
+
   makoctl reload
   xrdb -merge -quiet ~/.cache/wal/colors.Xresources
 }
