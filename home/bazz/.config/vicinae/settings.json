@@ -1,0 +1,144 @@
+// This configuration is merged with the default vicinae configuration file, which you can obtain by running the `vicinae config default` command.
+// Every item defined in this file takes precedence over the values defined in the default config or any other imported file.
+//
+// You can make manual edits to this file, however you should keep in mind that this file may be written to by vicinae when a configuration change is made through the GUI.
+// When that happens, any custom comments or formatting will be lost.
+//
+// If you want to maintain a configuration file with your own comments and formatting, you should create a separate file and add it to the 'imports' array.
+//
+// Learn more about configuration at https://docs.vicinae.com/config
+
+{
+   "$schema": "https://vicinae.com/schemas/config.json",
+   "pop_to_root_on_close": true,
+   "escape_key_behavior": "",
+   "tray": {
+      "enabled": false
+   },
+   "font": {
+      "rendering": "native",
+      "normal": {
+         "family": "Adwaita Mono",
+         "size": 11
+      }
+   },
+   "theme": {
+      "dark": {
+         "name": "pywal",
+         "icon_theme": "Papirus-Dark"
+      }
+   },
+   "telemetry": {
+      "system_info": false
+   },
+   "launcher_window": {
+      "rounding": 4,
+      "client_side_decorations": {
+         "enabled": true,
+         "shadow_size": 12
+      },
+      "size": {
+         "width": 570,
+         "height": 480
+      },
+      "compact_mode": {
+         "enabled": true
+      },
+      "material": "none"
+   },
+   "favorites": [
+      "core:search-emojis",
+      "files:search",
+      "clipboard:history"
+   ],
+   "providers": {
+      "calculator": {
+         "entrypoints": {
+            "history": {
+               "enabled": true
+            }
+         }
+      },
+      "clipboard": {
+         "preferences": {
+            "eraseOnStartup": false,
+            "evictionThreshold": "86400",
+            "ignorePasswords": true,
+            "monitoring": true,
+            "preserveTagged": true
+         }
+      },
+      "core": {
+         "entrypoints": {
+            "search-emojis": {
+               "preferences": {
+                  "defaultAction": "paste",
+                  "skinTone": "default"
+               }
+            },
+            "sponsor": {
+               "enabled": true
+            },
+            "store": {
+               "enabled": true
+            }
+         }
+      },
+      "files": {
+         "enabled": false,
+         "preferences": {
+            "autoIndexing": false,
+            "excludedIndexingPaths": [
+               "/home/bazz/Videos/Captures",
+               "/home/bazz/Pictures/Screenshots"
+            ],
+            "indexingPaths": [
+               "/home/bazz"
+            ]
+         }
+      },
+      "media": {
+         "enabled": false
+      },
+      "power": {
+         "entrypoints": {
+            "hibernate": {
+               "enabled": false
+            },
+            "lock": {
+               "preferences": {
+                  "confirm": false,
+                  "customProgram": "swaylock -C ~/.cache/wal/colors-swaylock"
+               }
+            },
+            "logout": {
+               "preferences": {
+                  "confirm": true,
+                  "customProgram": "niri msg action quit"
+               }
+            },
+            "sleep": {
+               "alias": "zzz"
+            },
+            "soft-reboot": {
+               "enabled": false
+            }
+         }
+      },
+      "raycast-compat": {
+         "enabled": false
+      },
+      "snippets": {
+         "preferences": {
+            "enabled": true,
+            "keyDelay": "2",
+            "layout": "",
+            "prePasteDelay": "0",
+            "undo": true
+         }
+      },
+      "wm": {
+         "enabled": false
+      }
+   }
+}
