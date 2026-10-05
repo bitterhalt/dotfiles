@@ -21,7 +21,7 @@ text/html=brave-origin.desktop
 application/x-extension-htm=zen.desktop
 application/x-extension-html=zen.desktop
 application/x-extension-shtml=zen.desktop
-application/xhtml+xml=zen.desktop
+application/xhtml+xml=brave-origin.desktop
 application/x-extension-xhtml=zen.desktop
 x-scheme-handler/betterdiscord=discord.desktop
 application/x-bittorrent=transmission-gtk.desktop
@@ -35,14 +35,14 @@ x-scheme-handler/nxm=amethystmodmanager-nxm.desktop
 
 [Added Associations]
 image/x-xcf=gimp.desktop;
-x-scheme-handler/http=zen.desktop;firefox.desktop;userapp-Firefox-ZGQGT2.desktop;
-x-scheme-handler/https=zen.desktop;firefox.desktop;userapp-Firefox-ZGQGT2.desktop;
+x-scheme-handler/http=brave-origin.desktop;zen.desktop;firefox.desktop;userapp-Firefox-ZGQGT2.desktop;
+x-scheme-handler/https=brave-origin.desktop;zen.desktop;firefox.desktop;userapp-Firefox-ZGQGT2.desktop;
 x-scheme-handler/chrome=zen.desktop;firefox.desktop;userapp-Firefox-ZGQGT2.desktop;
-text/html=userapp-Firefox-ZGQGT2.desktop;zen.desktop;firefox.desktop;
+text/html=brave-origin.desktop;userapp-Firefox-ZGQGT2.desktop;zen.desktop;firefox.desktop;
 application/x-extension-htm=userapp-Firefox-ZGQGT2.desktop;zen.desktop;firefox.desktop;
 application/x-extension-html=userapp-Firefox-ZGQGT2.desktop;zen.desktop;firefox.desktop;
 application/x-extension-shtml=userapp-Firefox-ZGQGT2.desktop;zen.desktop;firefox.desktop;
-application/xhtml+xml=userapp-Firefox-ZGQGT2.desktop;zen.desktop;firefox.desktop;
+application/xhtml+xml=brave-origin.desktop;userapp-Firefox-ZGQGT2.desktop;zen.desktop;firefox.desktop;
 application/x-extension-xhtml=userapp-Firefox-ZGQGT2.desktop;zen.desktop;firefox.desktop;
 image/png=satty.desktop;org.xfce.ristretto.desktop;org.gnome.Loupe.desktop;imv-dir.desktop;imv.desktop;com.interversehq.qView.desktop;oculante.desktop;gimp.desktop;
 application/x-bittorrent=transmission-qt.desktop;transmission-gtk.desktop;

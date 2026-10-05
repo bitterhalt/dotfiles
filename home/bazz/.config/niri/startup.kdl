@@ -1,5 +1,6 @@
 // spawn-at-startup "waybar"
 spawn-sh-at-startup "qs --no-detailed-logs"
+spawn-sh-at-startup "vicinae server"
 spawn-sh-at-startup "awww.sh"
 spawn-sh-at-startup "swayidle"
 spawn-sh-at-startup "bt_notifier"

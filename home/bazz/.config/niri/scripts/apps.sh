@@ -2,9 +2,9 @@
 
 APPS=(brave-origin thunderbird transmission-gtk)
 
-DMENU="fuzzel -d -a top --y 8 -w 18 --minimal-lines"
+DMENU="${DMENU:-vicinae dmenu}"
 
-choice=$(printf "Yes\nNo" | $DMENU --prompt="Open Daily Apps? 🤔 ")
+choice=$(printf "Yes\nNo" | $DMENU --placeholder="Open Daily Apps? 🤔 ")
 
 [[ "$choice" == "Yes" ]] || exit 0
 

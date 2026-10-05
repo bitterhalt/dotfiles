@@ -47,8 +47,8 @@
       "material": "none"
    },
    "favorites": [
+      "applications:steam",
       "core:search-emojis",
-      "files:search",
       "clipboard:history"
    ],
    "providers": {
@@ -61,7 +61,7 @@
       },
       "clipboard": {
          "preferences": {
-            "eraseOnStartup": false,
+            "eraseOnStartup": true,
             "evictionThreshold": "86400",
             "ignorePasswords": true,
             "monitoring": true,
@@ -106,22 +106,36 @@
                "enabled": false
             },
             "lock": {
+               "alias": "lock",
                "preferences": {
                   "confirm": false,
                   "customProgram": "swaylock -C ~/.cache/wal/colors-swaylock"
                }
             },
             "logout": {
+               "alias": "exit",
                "preferences": {
                   "confirm": true,
                   "customProgram": "niri msg action quit"
                }
+            },
+            "power-off": {
+               "alias": "shutdown"
+            },
+            "reboot": {
+               "alias": "reboot"
             },
             "sleep": {
                "alias": "zzz"
             },
             "soft-reboot": {
                "enabled": false
+            },
+            "suspend": {
+               "enabled": false,
+               "preferences": {
+                  "confirm": true
+               }
             }
          }
       },
@@ -135,6 +149,18 @@
             "layout": "",
             "prePasteDelay": "0",
             "undo": true
+         },
+         "entrypoints": {
+            "create": {
+               "enabled": true
+            }
+         }
+      },
+      "system": {
+         "entrypoints": {
+            "browse-apps": {
+               "enabled": false
+            }
          }
       },
       "wm": {

@@ -36,6 +36,7 @@ binds {
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn  "menu_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_submap -pass"; }
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "menu_record"; }
+    Mod+Shift+D hotkey-overlay-title="Run Executables" { spawn-sh "menu_run"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "menu_tmuxer"; }
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
 
