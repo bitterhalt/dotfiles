@@ -10,6 +10,9 @@
 
 {
    "$schema": "https://vicinae.com/schemas/config.json",
+   "imports": [
+      "/home/bazz/.config/vicinae/custom.json"
+   ],
    "pop_to_root_on_close": true,
    "escape_key_behavior": "",
    "tray": {
@@ -19,7 +22,7 @@
       "rendering": "native",
       "normal": {
          "family": "Adwaita Mono",
-         "size": 11
+         "size": 10
       }
    },
    "theme": {
@@ -36,10 +39,6 @@
       "client_side_decorations": {
          "enabled": true,
          "shadow_size": 12
-      },
-      "size": {
-         "width": 570,
-         "height": 480
       },
       "compact_mode": {
          "enabled": true

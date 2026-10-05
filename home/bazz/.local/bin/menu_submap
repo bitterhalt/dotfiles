@@ -78,12 +78,13 @@ menu_settings() {
   run_menu "Settings" \
     "Bash|foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" \
     "Foot|foot -e nvim ~/.config/foot/foot.ini" \
-    "Vicinae|foot sh -c 'nvim ~/.local/bin/menu_*'" \
     "Mako|foot sh -c 'cd ~/.config/mako/ && nvim *'" \
     "Niri|foot sh -c 'cd ~/.config/niri/ && nvim *'" \
     "Nvim|foot sh -c 'cd ~/.config/nvim && vopen .'" \
     "Pywal|foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" \
+    "Quicshell|foot sh -c 'cd ~/.config/quickshell && vopen .'" \
     "Swayidle|foot sh -c 'cd ~/.config/swayidle/ && nvim config'" \
+    "Dmenus|foot sh -c 'nvim ~/.local/bin/menu_*'" \
     "Waybar|foot sh -c 'cd ~/.config/waybar/ && vopen .'"
 }
 
