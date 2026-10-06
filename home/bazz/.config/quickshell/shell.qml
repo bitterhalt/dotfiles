@@ -1,5 +1,4 @@
 //@ pragma UseQApplication
-//@ pragma ShellId aate-bar
 
 import QtQuick
 import Quickshell

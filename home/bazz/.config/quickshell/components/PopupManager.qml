@@ -21,6 +21,7 @@ Item {
     property var hostComponent: null
     property var hostAnchor: null
     property bool hostFocusable: false
+    property bool hostCentered: false
 
     function toggle(popup) {
         closeHost()
@@ -49,7 +50,7 @@ Item {
         closeHost()
     }
 
-    function openHost(key, component, anchorItem, focusable) {
+    function openHost(key, component, anchorItem, focusable, centered) {
         if (current)
             current.visible = false
 
@@ -58,16 +59,17 @@ Item {
         hostComponent = component
         hostAnchor = anchorItem
         hostFocusable = focusable === true
+        hostCentered = centered === true
         hostVisible = true
     }
 
-    function toggleHost(key, component, anchorItem) {
+    function toggleHost(key, component, anchorItem, focusable, centered) {
         if (hostVisible && activeKey === key) {
             closeHost()
             return
         }
 
-        openHost(key, component, anchorItem)
+        openHost(key, component, anchorItem, focusable, centered)
     }
 
     function closeHost(key) {
@@ -76,30 +78,34 @@ Item {
 
         hostVisible = false
         hostFocusable = false
+        hostCentered = false
         activeKey = ""
         hostComponent = null
         hostAnchor = null
     }
 
     function popupX(popupWidth) {
+        if (hostCentered)
+            return Math.round((popupHost.width - popupWidth) / 2)
+
         if (hostAnchor) {
             try {
                 const pos = barWindow.itemPosition(hostAnchor)
-                const centered =
+                const centeredX =
                     pos.x + hostAnchor.width / 2 - popupWidth / 2
 
                 return Math.max(
                     config.popupGap,
                     Math.min(
-                        barWindow.width - popupWidth - config.popupGap,
-                        centered
+                        popupHost.width - popupWidth - config.popupGap,
+                        centeredX
                     )
                 )
             } catch (_) {
             }
         }
 
-        return Math.round((barWindow.width - popupWidth) / 2)
+        return Math.round((popupHost.width - popupWidth) / 2)
     }
 
     PanelWindow {

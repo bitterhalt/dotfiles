@@ -47,7 +47,9 @@ Item {
             popupManager.toggleHost(
                 "notificationCenter",
                 notificationCenterComponent,
-                root
+                root,
+                false,
+                true
             )
         }
     }
@@ -97,7 +99,9 @@ Item {
             popupManager.toggleHost(
                 "notificationCenter",
                 notificationCenterComponent,
-                root
+                root,
+                false,
+                true
             )
         }
 
@@ -107,7 +111,9 @@ Item {
             popupManager.openHost(
                 "notificationCenter",
                 notificationCenterComponent,
-                root
+                root,
+                false,
+                true
             )
         }
 

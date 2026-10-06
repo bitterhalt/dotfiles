@@ -3,9 +3,16 @@
 HISTORY_FILE="$HOME/.cache/fuzzel-runhistory"
 DMENU="${DMENU:-vicinae dmenu}"
 
-hist=$(tac "$HISTORY_FILE" | awk '!seen[$0]++' | head -n 5)
-
 all_binaries=$(echo "$PATH" | tr ':' '\n' | xargs -I {} find {} -maxdepth 1 -executable -type f 2>/dev/null | awk -F/ '{print $NF}' | sort -u)
+
+if [ -f "$HISTORY_FILE" ]; then
+  tmp=$(mktemp)
+  grep -Fx -f <(echo "$all_binaries") "$HISTORY_FILE" >"$tmp"
+  mv "$tmp" "$HISTORY_FILE"
+fi
+
+hist=$(tac "$HISTORY_FILE" 2>/dev/null | awk '!seen[$0]++' | head -n 5)
+
 filtered_binaries=$(echo "$all_binaries" | grep -vFx -f <(echo "$hist"))
 
 choice=$(printf "%s\n%s" "$hist" "$filtered_binaries" | sed '/^$/d' | $DMENU --placeholder "Search")

@@ -90,7 +90,9 @@ Item {
             popupManager.toggleHost(
                 "weather",
                 weatherPopupComponent,
-                root
+                root,
+                false,
+                true
             )
     }
 
@@ -110,7 +112,9 @@ Item {
             popupManager.toggleHost(
                 "weather",
                 weatherPopupComponent,
-                root
+                root,
+                false,
+                true
             )
         }
 
@@ -118,7 +122,9 @@ Item {
             popupManager.openHost(
                 "weather",
                 weatherPopupComponent,
-                root
+                root,
+                false,
+                true
             )
         }
 
