@@ -7,7 +7,7 @@ PopupWindow {
     required property Item anchorItem
     required property var config
     property int contentWidth: 330
-    property int padding: 12
+    property int padding: 14
     default property alias contentData: panelContent.data
 
     implicitWidth: contentWidth

@@ -23,13 +23,10 @@ Item {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         cursorShape: Qt.PointingHandCursor
-
-        onClicked: mouse => {
+        onClicked: (mouse) => {
             if (mouse.button === Qt.LeftButton) {
-                powerMenu.confirmAction = ""
-                popupManager.toggle(powerMenu)
-            } else {
-                config.run("foot -a pop-upgrade -e sys_upgrade")
+                powerMenu.confirmAction = "";
+                popupManager.toggle(powerMenu);
             }
         }
     }
@@ -39,23 +36,23 @@ Item {
 
         property string confirmAction: ""
 
+        implicitWidth: 160
+        implicitHeight: menuColumn.implicitHeight + 12
+        visible: false
+        grabFocus: true
+        color: "transparent"
+        onVisibleChanged: {
+            if (!visible)
+                confirmAction = "";
+
+        }
+
         anchor {
             item: root
             edges: Edges.Bottom | Edges.Right
             gravity: Edges.Bottom | Edges.Left
             margins.bottom: -config.popupGap
             margins.right: config.popupGap
-        }
-
-        implicitWidth: 160
-        implicitHeight: menuColumn.implicitHeight + 12
-        visible: false
-        grabFocus: true
-        color: "transparent"
-
-        onVisibleChanged: {
-            if (!visible)
-                confirmAction = ""
         }
 
         Rectangle {
@@ -78,8 +75,8 @@ Item {
                     text: "Lock"
                     visible: powerMenu.confirmAction === ""
                     onActivated: {
-                        powerMenu.visible = false
-                        config.run("swaylock -C ~/.cache/wal/colors-swaylock")
+                        powerMenu.visible = false;
+                        config.run("swaylock -C ~/.cache/wal/colors-swaylock");
                     }
                 }
 
@@ -87,8 +84,8 @@ Item {
                     text: "Exit"
                     visible: powerMenu.confirmAction === ""
                     onActivated: {
-                        powerMenu.visible = false
-                        config.run("niri msg action quit")
+                        powerMenu.visible = false;
+                        config.run("niri msg action quit");
                     }
                 }
 
@@ -96,8 +93,8 @@ Item {
                     text: "Sleep"
                     visible: powerMenu.confirmAction === ""
                     onActivated: {
-                        powerMenu.visible = false
-                        config.run("systemctl suspend")
+                        powerMenu.visible = false;
+                        config.run("systemctl suspend");
                     }
                 }
 
@@ -117,15 +114,12 @@ Item {
                     width: parent.width
                     height: powerMenu.confirmAction !== "" ? 34 : 0
                     visible: height > 0
-
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     color: config.fg
                     font.pointSize: config.fontSize(0.95)
                     font.weight: Font.DemiBold
-                    text: powerMenu.confirmAction === "reboot"
-                        ? "Reboot?"
-                        : "Shutdown?"
+                    text: powerMenu.confirmAction === "reboot" ? "Reboot?" : "Shutdown?"
                 }
 
                 Row {
@@ -146,21 +140,23 @@ Item {
                         text: "Yes"
                         centered: true
                         accentHover: true
-
                         onActivated: {
-                            const action = powerMenu.confirmAction
-                            powerMenu.visible = false
-                            powerMenu.confirmAction = ""
-
+                            const action = powerMenu.confirmAction;
+                            powerMenu.visible = false;
+                            powerMenu.confirmAction = "";
                             if (action === "reboot")
-                                config.run("systemctl reboot")
+                                config.run("systemctl reboot");
                             else if (action === "shutdown")
-                                config.run("systemctl poweroff")
+                                config.run("systemctl poweroff");
                         }
                     }
+
                 }
+
             }
+
         }
+
     }
 
     component PowerRow: Item {
@@ -178,9 +174,7 @@ Item {
         Rectangle {
             anchors.fill: parent
             radius: 3
-            color: rowMouse.containsMouse
-                ? (row.accentHover ? config.accent : config.borderColor)
-                : "transparent"
+            color: rowMouse.containsMouse ? (row.accentHover ? config.accent : config.borderColor) : "transparent"
         }
 
         Text {
@@ -188,7 +182,6 @@ Item {
             anchors.leftMargin: row.centered ? 0 : 10
             anchors.centerIn: row.centered ? parent : undefined
             anchors.verticalCenter: row.centered ? undefined : parent.verticalCenter
-
             color: config.fg
             font.pointSize: config.fontSize(0.95)
             text: row.text
@@ -202,5 +195,7 @@ Item {
             cursorShape: Qt.PointingHandCursor
             onClicked: row.activated()
         }
+
     }
+
 }

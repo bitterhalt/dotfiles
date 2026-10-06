@@ -42,7 +42,7 @@ Rectangle {
     }
 
     Item {
-        id: mediaBox
+        id: imageBox
 
         anchors.right: parent.right
         anchors.rightMargin: 22
@@ -90,7 +90,7 @@ Rectangle {
 
         anchors.left: parent.left
         anchors.leftMargin: 22
-        anchors.right: mediaBox.left
+        anchors.right: imageBox.left
         anchors.rightMargin: 10
         anchors.top: parent.top
         anchors.topMargin: 10

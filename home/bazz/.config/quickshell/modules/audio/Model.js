@@ -33,32 +33,38 @@ function deviceRows(nodes, sink, defaultId) {
 }
 
 function playbackStreams(nodes) {
-  var result = [];
+    var result = []
 
-  for (var i = 0; i < nodes.length; ++i) {
-    var node = nodes[i];
-    if (!node || !node.isStream || !node.audio || node.isSink) continue;
+    for (var i = 0; i < nodes.length; ++i) {
+        var node = nodes[i]
 
-    result.push({
-      id: Number(node.id),
-      name: String(
-        (node.properties && node.properties["application.name"]) ||
-          node.description ||
-          node.nickname ||
-          node.name ||
-          "Application",
-      ),
-      media: String(
-        (node.properties &&
-          (node.properties["media.name"] || node.properties["media.title"])) ||
-          "",
-      ),
-    });
-  }
+        if (!node || !node.isStream || !node.audio || !node.isSink)
+            continue
 
-  result.sort(function (a, b) {
-    return a.name.localeCompare(b.name);
-  });
+        result.push({
+            id: Number(node.id),
 
-  return result;
+            name: String(
+                (node.properties && node.properties["application.name"])
+                || node.description
+                || node.nickname
+                || node.name
+                || "Application"
+            ),
+
+            media: String(
+                (node.properties && (
+                    node.properties["media.name"]
+                    || node.properties["media.title"]
+                ))
+                || ""
+            )
+        })
+    }
+
+    result.sort(function(a, b) {
+        return a.name.localeCompare(b.name)
+    })
+
+    return result
 }

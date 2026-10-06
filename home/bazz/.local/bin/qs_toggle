@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+pkill -x qs
+qs --no-detailed-logs &
