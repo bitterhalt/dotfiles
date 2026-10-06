@@ -2,9 +2,12 @@
 
 HISTORY_FILE="$HOME/.cache/fuzzel-runhistory"
 DMENU="${DMENU:-vicinae dmenu}"
+MARK="⭐ "
 
+# Collect all executables currently in PATH
 all_binaries=$(echo "$PATH" | tr ':' '\n' | xargs -I {} find {} -maxdepth 1 -executable -type f 2>/dev/null | awk -F/ '{print $NF}' | sort -u)
 
+# Prune history: keep only entries that still exist as binaries
 if [ -f "$HISTORY_FILE" ]; then
   tmp=$(mktemp)
   grep -Fx -f <(echo "$all_binaries") "$HISTORY_FILE" >"$tmp"
@@ -15,7 +18,13 @@ hist=$(tac "$HISTORY_FILE" 2>/dev/null | awk '!seen[$0]++' | head -n 5)
 
 filtered_binaries=$(echo "$all_binaries" | grep -vFx -f <(echo "$hist"))
 
-choice=$(printf "%s\n%s" "$hist" "$filtered_binaries" | sed '/^$/d' | $DMENU --placeholder "Search")
+# Add the star prefix to history entries for display only
+hist_display=$(echo "$hist" | sed '/^$/d' | sed "s/^/$MARK/")
+
+choice=$(printf "%s\n%s" "$hist_display" "$filtered_binaries" | sed '/^$/d' | $DMENU --placeholder "Search")
+
+# Strip the prefix if a starred entry was chosen
+choice="${choice#"$MARK"}"
 
 if [ -n "$choice" ]; then
   echo "$choice" >>"$HISTORY_FILE"
