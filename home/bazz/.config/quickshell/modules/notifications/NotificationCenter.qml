@@ -1,11 +1,10 @@
 import QtQuick
 import Quickshell
 
-PopupWindow {
+Item {
     id: root
 
     required property var config
-    required property Item anchorItem
     required property var notificationService
     readonly property int popupWidth: 360
     readonly property int popupMinHeight: 320
@@ -15,16 +14,9 @@ PopupWindow {
 
     implicitWidth: popupWidth
     implicitHeight: Math.min(Math.max(notificationService.notificationCount > 0 ? 72 + notificationService.notificationCount * 100 : 118, popupMinHeight), popupMaxHeight)
-    visible: false
-    grabFocus: true
-    color: "transparent"
+    width: implicitWidth
+    height: implicitHeight
 
-    anchor {
-        item: root.anchorItem
-        edges: Edges.Bottom
-        gravity: Edges.Bottom
-        margins.bottom: -config.popupGap
-    }
 
     Rectangle {
         anchors.fill: parent

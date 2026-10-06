@@ -5,15 +5,13 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 
-PopupWindow {
+Item {
     id: root
 
     required property var config
-    required property Item anchorItem
     required property var weatherData
 
     // Popup geometry from Config.qml
-    readonly property int popupGap: config.popupGap
     readonly property int popupRadius: config.popupRadius
 
     // Rest are hard coded in here
@@ -21,18 +19,11 @@ PopupWindow {
     readonly property int popupPadding: 22
     readonly property int popupSpacing: 10
 
-    anchor {
-    item: anchorItem
-    edges: Edges.Bottom
-    gravity: Edges.Bottom
-        margins.bottom: -root.popupGap
-    }
 
     implicitWidth: root.popupWidth
     implicitHeight: weatherPanel.implicitHeight + root.popupPadding * 2
-    visible: false
-    grabFocus: true
-    color: "transparent"
+    width: implicitWidth
+    height: implicitHeight
 
     Rectangle {
         anchors.fill: parent

@@ -86,39 +86,44 @@ Item {
         enabled: weatherClip.width > 0
         cursorShape: Qt.PointingHandCursor
 
-        onClicked: {
-            weatherPopup.grabFocus = true
-            popupManager.toggle(weatherPopup)
-        }
+        onClicked:
+            popupManager.toggleHost(
+                "weather",
+                weatherPopupComponent,
+                root
+            )
     }
 
-    WeatherPopup {
-        id: weatherPopup
+    Component {
+        id: weatherPopupComponent
 
-        config: root.config
-        anchorItem: root
-        weatherData: weather
+        WeatherPopup {
+            config: root.config
+            weatherData: weather
+        }
     }
 
     IpcHandler {
         target: "weather"
 
         function toggle(): void {
-            if (weatherPopup.visible) {
-                weatherPopup.visible = false
-            } else {
-                weatherPopup.grabFocus = false
-                weatherPopup.visible = true
-            }
+            popupManager.toggleHost(
+                "weather",
+                weatherPopupComponent,
+                root
+            )
         }
 
         function open(): void {
-            weatherPopup.grabFocus = false
-            weatherPopup.visible = true
+            popupManager.openHost(
+                "weather",
+                weatherPopupComponent,
+                root
+            )
         }
 
         function close(): void {
-            weatherPopup.visible = false
+            popupManager.closeHost("weather")
         }
     }
 }

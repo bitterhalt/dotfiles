@@ -1,10 +1,8 @@
 import QtQuick
-import Quickshell
 
-PopupWindow {
+Item {
     id: panel
 
-    required property Item anchorItem
     required property var config
     property int contentWidth: 330
     property int padding: 14
@@ -12,17 +10,8 @@ PopupWindow {
 
     implicitWidth: contentWidth
     implicitHeight: panelContent.implicitHeight + padding * 2
-    visible: false
-    grabFocus: true
-    color: "transparent"
-
-    anchor {
-        item: panel.anchorItem
-        edges: Edges.Bottom | Edges.Right
-        gravity: Edges.Bottom | Edges.Left
-        margins.bottom: -panel.config.popupGap
-        margins.right: panel.config.popupGap
-    }
+    width: implicitWidth
+    height: implicitHeight
 
     Rectangle {
         anchors.fill: parent
@@ -38,7 +27,5 @@ PopupWindow {
             anchors.margins: panel.padding
             spacing: 8
         }
-
     }
-
 }

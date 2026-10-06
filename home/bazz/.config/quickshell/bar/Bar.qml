@@ -34,6 +34,8 @@ PanelWindow {
 
     PopupManager {
         id: popupManager
+        barWindow: barWindow
+        config: barWindow.config
     }
 
     // ---------------------------------------------------------

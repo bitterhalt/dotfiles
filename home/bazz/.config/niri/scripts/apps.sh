@@ -4,7 +4,7 @@ APPS=(brave-origin thunderbird transmission-gtk)
 
 DMENU="${DMENU:-vicinae dmenu}"
 
-choice=$(printf "Yes\nNo" | $DMENU --placeholder="Open Daily Apps? 🤔 ")
+choice=$(printf "Yes\nNo" | $DMENU --placeholder="Open Communications? 🤔 ")
 
 [[ "$choice" == "Yes" ]] || exit 0
 

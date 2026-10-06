@@ -6,8 +6,7 @@
     },
 
     "layer_shell": {
-      "layer": "overlay",
-      "keyboard_interactivity": "exclusive"
+      "layer": "overlay"
     }
   }
 }

@@ -10,7 +10,6 @@ PopoutPanel {
 
     required property var network
 
-    anchorItem: network
     config: network.config
     contentWidth: 240
 
@@ -20,7 +19,7 @@ PopoutPanel {
     property string errorText: ""
 
     function resetState() {
-        network.barWindow.focusable = false
+        network.popupManager.hostFocusable = false
         passwordMode = false
         actionMode = false
         selectedSsid = ""
@@ -47,19 +46,22 @@ PopoutPanel {
         }
 
         selectedSsid = row.ssid
-        network.barWindow.focusable = true
+        network.popupManager.hostFocusable = true
         passwordMode = true
 
         Qt.callLater(() => wifiPassword.forceActiveFocus())
     }
 
-    onVisibleChanged: {
+    Component.onCompleted: {
         if (network.wifiDevice)
-            network.wifiDevice.scannerEnabled =
-                visible && Networking.wifiEnabled
+            network.wifiDevice.scannerEnabled = Networking.wifiEnabled
+    }
 
-        if (!visible)
-            resetState()
+    Component.onDestruction: {
+        if (network.wifiDevice)
+            network.wifiDevice.scannerEnabled = false
+
+        resetState()
     }
 
     Item {
@@ -546,7 +548,7 @@ PopoutPanel {
 
                     root.errorText = ""
                     item.connectWithPsk(wifiPassword.text)
-                    root.network.barWindow.focusable = false
+                    root.network.popupManager.hostFocusable = false
                     root.passwordMode = false
                     wifiPassword.text = ""
                 }

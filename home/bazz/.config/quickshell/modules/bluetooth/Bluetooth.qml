@@ -68,7 +68,11 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onClicked: (mouse) => {
             if (mouse.button === Qt.LeftButton)
-                popupManager.toggle(bluetoothPopup);
+                popupManager.toggleHost(
+                    "bluetooth",
+                    bluetoothPopupComponent,
+                    root
+                );
             else if (root.adapter)
                 root.adapter.enabled = !root.adapter.enabled;
         }
@@ -80,17 +84,23 @@ Item {
         devices: root.deviceObjects
     }
 
-    PopoutPanel {
-        id: bluetoothPopup
+    Component {
+        id: bluetoothPopupComponent
 
-        anchorItem: root
+        PopoutPanel {
+            id: bluetoothPopup
+
         config: root.config
         contentWidth: 330
-        onVisibleChanged: {
-            if (root.adapter)
-                root.adapter.discovering = visible && root.adapter.enabled;
+            Component.onCompleted: {
+                if (root.adapter)
+                    root.adapter.discovering = root.adapter.enabled;
+            }
 
-        }
+            Component.onDestruction: {
+                if (root.adapter)
+                    root.adapter.discovering = false;
+            }
 
         Item {
             width: parent.width
@@ -247,6 +257,7 @@ Item {
 
         }
 
+    }
     }
 
     component DeviceRow: Item {

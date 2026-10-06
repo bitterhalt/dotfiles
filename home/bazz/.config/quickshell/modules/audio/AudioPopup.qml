@@ -10,16 +10,13 @@ PopoutPanel {
 
     required property var audioItem
 
-    anchorItem: audioItem
     config: audioItem.config
     contentWidth: 340
 
-    onVisibleChanged: {
-        if (!visible) {
-            audioItem.showOutputs = false
-            audioItem.showInputs = false
-            audioItem.showStreams = false
-        }
+    Component.onDestruction: {
+        audioItem.showOutputs = false
+        audioItem.showInputs = false
+        audioItem.showStreams = false
     }
 
         Item {
@@ -90,8 +87,8 @@ PopoutPanel {
 
                         onClicked: {
                             if (audioItem.sinkAudio) {
-                                if (volumeOsd)
-                                    volumeOsd.suppress(600)
+                                if (audioItem.volumeOsd)
+                                    audioItem.volumeOsd.suppress(600)
 
                                 audioItem.sinkAudio.muted =
                                     !audioItem.sinkAudio.muted
@@ -171,8 +168,8 @@ PopoutPanel {
 
                 onMoved: {
                     if (audioItem.sinkAudio) {
-                        if (volumeOsd)
-                            volumeOsd.suppress(600)
+                        if (audioItem.volumeOsd)
+                            audioItem.volumeOsd.suppress(600)
 
                         audioItem.sinkAudio.volume = value
                     }

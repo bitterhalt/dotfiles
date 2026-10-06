@@ -25,138 +25,132 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onClicked: (mouse) => {
             if (mouse.button === Qt.LeftButton) {
-                powerMenu.confirmAction = "";
-                popupManager.toggle(powerMenu);
+                popupManager.toggleHost(
+                    "power",
+                    powerMenuComponent,
+                    root
+                );
             }
         }
     }
 
-    PopupWindow {
-        id: powerMenu
+    Component {
+        id: powerMenuComponent
 
-        property string confirmAction: ""
-
-        implicitWidth: 160
-        implicitHeight: menuColumn.implicitHeight + 12
-        visible: false
-        grabFocus: true
-        color: "transparent"
-        onVisibleChanged: {
-            if (!visible)
-                confirmAction = "";
-
-        }
-
-        anchor {
-            item: root
-            edges: Edges.Bottom | Edges.Right
-            gravity: Edges.Bottom | Edges.Left
-            margins.bottom: -config.popupGap
-            margins.right: config.popupGap
-        }
-
-        Rectangle {
-            anchors.fill: parent
-            color: config.surface
-            border.color: config.borderColor
-            border.width: 1
-            radius: config.popupRadius
-
-            Column {
-                id: menuColumn
-
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.margins: 6
-                spacing: 2
-
-                PowerRow {
-                    text: "Lock"
-                    visible: powerMenu.confirmAction === ""
-                    onActivated: {
-                        powerMenu.visible = false;
-                        config.run("swaylock -C ~/.cache/wal/colors-swaylock");
-                    }
-                }
-
-                PowerRow {
-                    text: "Exit"
-                    visible: powerMenu.confirmAction === ""
-                    onActivated: {
-                        powerMenu.visible = false;
-                        config.run("niri msg action quit");
-                    }
-                }
-
-                PowerRow {
-                    text: "Sleep"
-                    visible: powerMenu.confirmAction === ""
-                    onActivated: {
-                        powerMenu.visible = false;
-                        config.run("systemctl suspend");
-                    }
-                }
-
-                PowerRow {
-                    text: "Reboot"
-                    visible: powerMenu.confirmAction === ""
-                    onActivated: powerMenu.confirmAction = "reboot"
-                }
-
-                PowerRow {
-                    text: "Shutdown"
-                    visible: powerMenu.confirmAction === ""
-                    onActivated: powerMenu.confirmAction = "shutdown"
-                }
-
-                Text {
-                    width: parent.width
-                    height: powerMenu.confirmAction !== "" ? 34 : 0
-                    visible: height > 0
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    color: config.fg
-                    font.pointSize: config.fontSize(0.95)
-                    font.weight: Font.DemiBold
-                    text: powerMenu.confirmAction === "reboot" ? "Reboot?" : "Shutdown?"
-                }
-
-                Row {
-                    width: parent.width
-                    height: powerMenu.confirmAction !== "" ? 34 : 0
-                    visible: height > 0
-                    spacing: 4
-
+        Item {
+            id: powerMenu
+    
+            property string confirmAction: ""
+    
+            implicitWidth: 160
+            implicitHeight: menuColumn.implicitHeight + 12
+            width: implicitWidth
+            height: implicitHeight
+    
+    
+            Rectangle {
+                anchors.fill: parent
+                color: config.surface
+                border.color: config.borderColor
+                border.width: 1
+                radius: config.popupRadius
+    
+                Column {
+                    id: menuColumn
+    
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.margins: 6
+                    spacing: 2
+    
                     PowerRow {
-                        width: (parent.width - 4) / 2
-                        text: "No"
-                        centered: true
-                        onActivated: powerMenu.confirmAction = ""
-                    }
-
-                    PowerRow {
-                        width: (parent.width - 4) / 2
-                        text: "Yes"
-                        centered: true
-                        accentHover: true
+                        text: "Lock"
+                        visible: powerMenu.confirmAction === ""
                         onActivated: {
-                            const action = powerMenu.confirmAction;
-                            powerMenu.visible = false;
-                            powerMenu.confirmAction = "";
-                            if (action === "reboot")
-                                config.run("systemctl reboot");
-                            else if (action === "shutdown")
-                                config.run("systemctl poweroff");
+                            root.popupManager.closeHost("power");
+                            config.run("swaylock -C ~/.cache/wal/colors-swaylock");
                         }
                     }
-
+    
+                    PowerRow {
+                        text: "Exit"
+                        visible: powerMenu.confirmAction === ""
+                        onActivated: {
+                            root.popupManager.closeHost("power");
+                            config.run("niri msg action quit");
+                        }
+                    }
+    
+                    PowerRow {
+                        text: "Sleep"
+                        visible: powerMenu.confirmAction === ""
+                        onActivated: {
+                            root.popupManager.closeHost("power");
+                            config.run("systemctl suspend");
+                        }
+                    }
+    
+                    PowerRow {
+                        text: "Reboot"
+                        visible: powerMenu.confirmAction === ""
+                        onActivated: powerMenu.confirmAction = "reboot"
+                    }
+    
+                    PowerRow {
+                        text: "Shutdown"
+                        visible: powerMenu.confirmAction === ""
+                        onActivated: powerMenu.confirmAction = "shutdown"
+                    }
+    
+                    Text {
+                        width: parent.width
+                        height: powerMenu.confirmAction !== "" ? 34 : 0
+                        visible: height > 0
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        color: config.fg
+                        font.pointSize: config.fontSize(0.95)
+                        font.weight: Font.DemiBold
+                        text: powerMenu.confirmAction === "reboot" ? "Reboot?" : "Shutdown?"
+                    }
+    
+                    Row {
+                        width: parent.width
+                        height: powerMenu.confirmAction !== "" ? 34 : 0
+                        visible: height > 0
+                        spacing: 4
+    
+                        PowerRow {
+                            width: (parent.width - 4) / 2
+                            text: "No"
+                            centered: true
+                            onActivated: powerMenu.confirmAction = ""
+                        }
+    
+                        PowerRow {
+                            width: (parent.width - 4) / 2
+                            text: "Yes"
+                            centered: true
+                            accentHover: true
+                            onActivated: {
+                                const action = powerMenu.confirmAction;
+                                root.popupManager.closeHost("power");
+                                powerMenu.confirmAction = "";
+                                if (action === "reboot")
+                                    config.run("systemctl reboot");
+                                else if (action === "shutdown")
+                                    config.run("systemctl poweroff");
+                            }
+                        }
+    
+                    }
+    
                 }
-
+    
             }
-
+    
         }
-
     }
 
     component PowerRow: Item {

@@ -14,6 +14,7 @@
       "/home/bazz/.config/vicinae/custom.json"
    ],
    "pop_to_root_on_close": true,
+   "wrap_navigation": false,
    "escape_key_behavior": "",
    "tray": {
       "enabled": false
@@ -36,21 +37,35 @@
    },
    "launcher_window": {
       "rounding": 4,
+      "opacity": 1,
       "client_side_decorations": {
          "enabled": true,
-         "shadow_size": 12
+         "border_width": 1,
+         "shadow_size": 0
       },
       "compact_mode": {
+         "enabled": true
+      },
+      "floating_status_bar": true,
+      "layer_shell": {
          "enabled": true
       },
       "material": "none"
    },
    "favorites": [
+      "power:sleep",
       "applications:steam",
       "core:search-emojis",
       "clipboard:history"
    ],
    "providers": {
+      "@fbosch/store.vicinae.nerdfont-search": {
+         "entrypoints": {
+            "nerdfonts-search": {
+               "alias": "nerd"
+            }
+         }
+      },
       "calculator": {
          "entrypoints": {
             "history": {
@@ -62,7 +77,7 @@
          "preferences": {
             "eraseOnStartup": true,
             "evictionThreshold": "86400",
-            "ignorePasswords": true,
+            "ignorePasswords": false,
             "monitoring": true,
             "preserveTagged": true
          }
@@ -70,10 +85,14 @@
       "core": {
          "entrypoints": {
             "search-emojis": {
+               "alias": "emo",
                "preferences": {
                   "defaultAction": "paste",
                   "skinTone": "default"
                }
+            },
+            "settings": {
+               "alias": "settings"
             },
             "sponsor": {
                "enabled": true
@@ -119,13 +138,25 @@
                }
             },
             "power-off": {
-               "alias": "shutdown"
+               "alias": "shutdown",
+               "preferences": {
+                  "confirm": true,
+                  "customProgram": "systemctl poweroff"
+               }
             },
             "reboot": {
-               "alias": "reboot"
+               "alias": "reboot",
+               "preferences": {
+                  "confirm": true,
+                  "customProgram": "systemctl reboot"
+               }
             },
             "sleep": {
-               "alias": "zzz"
+               "alias": "zzz",
+               "preferences": {
+                  "confirm": false,
+                  "customProgram": "systemctl suspend"
+               }
             },
             "soft-reboot": {
                "enabled": false
@@ -140,6 +171,11 @@
       },
       "raycast-compat": {
          "enabled": false
+      },
+      "scripts": {
+         "preferences": {
+            "customDirs": []
+         }
       },
       "snippets": {
          "preferences": {

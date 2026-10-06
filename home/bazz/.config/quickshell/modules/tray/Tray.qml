@@ -105,8 +105,11 @@ Item {
                             if (mouse.button === Qt.RightButton
                                     || trayItem.modelData.onlyMenu) {
                                 if (trayItem.modelData.hasMenu) {
-                                    trayMenu.reset()
-                                    root.popupManager.toggle(trayMenu)
+                                    root.popupManager.toggleHost(
+                                        "trayMenu",
+                                        trayMenuComponent,
+                                        trayItem
+                                    )
                                 }
                                 return
                             }
@@ -115,12 +118,14 @@ Item {
                         }
                     }
 
-                    TrayMenu {
-                        id: trayMenu
+                    Component {
+                        id: trayMenuComponent
 
-                        config: root.config
-                        anchorItem: trayItem
-                        menuHandle: trayItem.modelData.menu
+                        TrayMenu {
+                            config: root.config
+                            menuHandle: trayItem.modelData.menu
+                            popupManager: root.popupManager
+                        }
                     }
                 }
             }

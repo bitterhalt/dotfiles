@@ -99,15 +99,21 @@ Item {
 
         onClicked: mouse => {
             if (mouse.button === Qt.LeftButton) {
-                popupManager.toggle(networkPopup)
+                popupManager.toggleHost(
+                    "network",
+                    networkPopupComponent,
+                    root
+                )
             } else if (wifiDevice) {
                 Networking.wifiEnabled = !Networking.wifiEnabled
             }
         }
     }
+    Component {
+        id: networkPopupComponent
 
-    NetworkPopup {
-        id: networkPopup
-        network: root
+        NetworkPopup {
+            network: root
+        }
     }
 }

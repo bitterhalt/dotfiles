@@ -44,17 +44,21 @@ Item {
 
             notificationPopup.hide()
 
-            centerPopup.grabFocus = true
-            popupManager.toggle(centerPopup)
+            popupManager.toggleHost(
+                "notificationCenter",
+                notificationCenterComponent,
+                root
+            )
         }
     }
 
-    NotificationCenter {
-        id: centerPopup
+    Component {
+        id: notificationCenterComponent
 
-        config: root.config
-        anchorItem: root
-        notificationService: root.notificationService
+        NotificationCenter {
+            config: root.config
+            notificationService: root.notificationService
+        }
     }
 
     NotificationPopup {
@@ -71,7 +75,7 @@ Item {
         function onToastSerialChanged(): void {
             if (!notificationService.dnd
                     && notificationService.toastNotification) {
-                centerPopup.visible = false
+                popupManager.closeHost("notificationCenter")
                 notificationPopup.show(
                     notificationService.toastNotification
                 )
@@ -90,22 +94,25 @@ Item {
         function toggle(): void {
             notificationPopup.hide()
 
-            if (centerPopup.visible) {
-                centerPopup.visible = false
-            } else {
-                centerPopup.grabFocus = false
-                centerPopup.visible = true
-            }
+            popupManager.toggleHost(
+                "notificationCenter",
+                notificationCenterComponent,
+                root
+            )
         }
 
         function open(): void {
             notificationPopup.hide()
-            centerPopup.grabFocus = false
-            centerPopup.visible = true
+
+            popupManager.openHost(
+                "notificationCenter",
+                notificationCenterComponent,
+                root
+            )
         }
 
         function close(): void {
-            centerPopup.visible = false
+            popupManager.closeHost("notificationCenter")
         }
     }
 }

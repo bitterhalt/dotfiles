@@ -2,12 +2,12 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 
-PopupWindow {
+Item {
     id: root
 
     required property var config
-    required property Item anchorItem
     required property var menuHandle
+    required property var popupManager
 
     property var currentMenu: menuHandle
     property var menuStack: []
@@ -30,25 +30,13 @@ PopupWindow {
         menuStack = menuStack.slice(0, -1)
     }
 
-    anchor {
-        item: root.anchorItem
-        edges: Edges.Bottom | Edges.Right
-        gravity: Edges.Bottom | Edges.Left
-        margins.bottom: -root.config.popupGap
-        margins.right: root.config.popupGap
-    }
 
     implicitWidth: 190
     implicitHeight: menuColumn.implicitHeight + 12
+    width: implicitWidth
+    height: implicitHeight
 
-    visible: false
-    grabFocus: true
-    color: "transparent"
-
-    onVisibleChanged: {
-        if (!visible)
-            reset()
-    }
+    Component.onCompleted: reset()
 
     QsMenuOpener {
         id: opener
@@ -228,7 +216,7 @@ PopupWindow {
                         root.openSubmenu(entry)
                     } else {
                         entry.triggered()
-                        root.visible = false
+                        root.popupManager.closeHost("trayMenu")
                     }
                 }
             }

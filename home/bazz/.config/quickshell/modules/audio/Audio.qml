@@ -7,7 +7,7 @@ import "../../components"
 import "Model.js" as Model
 
 Item {
-    id: audioItem
+    id: root
 
     required property var config
     required property var barWindow
@@ -35,7 +35,7 @@ Item {
         allNodes.filter(node => node && node.audio)
 
     PwObjectTracker {
-        objects: audioItem.trackedNodes
+        objects: root.trackedNodes
     }
 
     readonly property var outputRows:
@@ -97,10 +97,10 @@ Item {
     Text {
         anchors.centerIn: parent
         color: config.fg
-        opacity: audioItem.muted ? 0.5 : 1.0
+        opacity: root.muted ? 0.5 : 1.0
         font.family: config.iconFontFamily
         font.pointSize: config.iconSize
-        text: audioItem.icon
+        text: root.icon
     }
 
     MouseArea {
@@ -110,33 +110,38 @@ Item {
 
         onClicked: mouse => {
             if (mouse.button === Qt.LeftButton) {
-                popupManager.toggle(audioPopup)
-            } else if (audioItem.sinkAudio) {
+                popupManager.toggleHost(
+                    "audio",
+                    audioPopupComponent,
+                    root
+                )
+            } else if (root.sinkAudio) {
                 if (volumeOsd)
                     volumeOsd.suppress(600)
 
-                audioItem.sinkAudio.muted = !audioItem.sinkAudio.muted
+                root.sinkAudio.muted = !root.sinkAudio.muted
             }
         }
 
         onWheel: wheel => {
-            if (!audioItem.sinkAudio)
+            if (!root.sinkAudio)
                 return
 
-            var next = audioItem.sinkAudio.volume
+            var next = root.sinkAudio.volume
                 + (wheel.angleDelta.y > 0 ? 0.05 : -0.05)
 
             if (volumeOsd)
                 volumeOsd.suppress(600)
 
-            audioItem.sinkAudio.volume =
+            root.sinkAudio.volume =
                 Math.max(0, Math.min(1.5, next))
         }
     }
+    Component {
+        id: audioPopupComponent
 
-
-    AudioPopup {
-        id: audioPopup
-        audioItem: audioItem
+        AudioPopup {
+            audioItem: root
+        }
     }
 }

@@ -75,7 +75,7 @@ menu_pass() {
 }
 
 menu_settings() {
-  run_menu "Settings" \
+  run_menu "Edit configs" \
     "Bash|foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" \
     "Foot|foot -e nvim ~/.config/foot/foot.ini" \
     "Mako|foot sh -c 'cd ~/.config/mako/ && nvim *'" \
@@ -89,7 +89,7 @@ menu_settings() {
 }
 
 menu_system() {
-  run_menu "System" \
+  run_menu "Settings" \
     "󰓃 Wiremix|foot -a wiremix -e wiremix" \
     "󰂯 Bluetooth|foot -a bluetui -e bluetui" \
     "󰖩 Wi-Fi|foot -a impala -e impala" \
