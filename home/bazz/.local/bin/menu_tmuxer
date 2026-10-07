@@ -4,7 +4,7 @@ DMENU="${DMENU:-vicinae dmenu}"
 sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 
 if [ -n "$sessions" ]; then
-  menu_options="Attach session\nNew session\nDelete session"
+  menu_options="1 ➜ Attach session\n2 ➜ New session\n3 ➜ Delete session"
 else
   menu_options="New session"
 fi
@@ -13,12 +13,12 @@ choice=$(printf '%b\n' "$menu_options" |
   $DMENU --placeholder "Tmux manager:")
 
 case "$choice" in
-"Attach session")
+*"Attach session")
   target=$(printf '%s\n' "$sessions" | $DMENU --placeholder "Attach to:")
   [ -n "$target" ] && "$TERMINAL" -e tmux attach-session -t "$target"
   ;;
 
-"New session")
+*"New session")
   session_name=$(printf '' | $DMENU --placeholder "Name (optional):")
   if [ -z "$session_name" ]; then
     "$TERMINAL" -e tmux new-session
@@ -27,7 +27,7 @@ case "$choice" in
   fi
   ;;
 
-"Delete session")
+*"Delete session")
   target=$(printf '%s\n' "$sessions" | $DMENU --placeholder "Kill session:")
 
   if [ -n "$target" ]; then
