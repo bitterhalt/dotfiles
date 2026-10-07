@@ -8,14 +8,25 @@ Item {
 
     signal activated()
 
+    function strengthIcon(strength) {
+        if (strength >= 0.75)
+            return "󰤨";
+
+        if (strength >= 0.5)
+            return "󰤥";
+
+        if (strength >= 0.25)
+            return "󰤢";
+
+        return "󰤟";
+    }
+
     implicitHeight: 40
 
     Rectangle {
         anchors.fill: parent
         radius: 3
-        color: rowMouse.containsMouse
-            ? root.config.borderColor
-            : "transparent"
+        color: rowMouse.containsMouse ? root.config.borderColor : "transparent"
     }
 
     Text {
@@ -39,22 +50,12 @@ Item {
 
     MouseArea {
         id: rowMouse
+
         anchors.fill: parent
         hoverEnabled: true
         enabled: root.enabled
-        cursorShape: root.enabled
-            ? Qt.PointingHandCursor
-            : Qt.ArrowCursor
+        cursorShape: root.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
         onClicked: root.activated()
     }
 
-    function strengthIcon(strength) {
-        if (strength >= 0.75)
-            return "󰤨"
-        if (strength >= 0.50)
-            return "󰤥"
-        if (strength >= 0.25)
-            return "󰤢"
-        return "󰤟"
-    }
 }

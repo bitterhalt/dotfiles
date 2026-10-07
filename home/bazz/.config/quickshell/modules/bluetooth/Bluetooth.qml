@@ -68,11 +68,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onClicked: (mouse) => {
             if (mouse.button === Qt.LeftButton)
-                popupManager.toggleHost(
-                    "bluetooth",
-                    bluetoothPopupComponent,
-                    root
-                );
+                popupManager.toggleHost("bluetooth", bluetoothPopupComponent, root);
             else if (root.adapter)
                 root.adapter.enabled = !root.adapter.enabled;
         }
@@ -90,174 +86,176 @@ Item {
         PopoutPanel {
             id: bluetoothPopup
 
-        config: root.config
-        contentWidth: 330
+            config: root.config
+            contentWidth: 330
             Component.onCompleted: {
                 if (root.adapter)
                     root.adapter.discovering = root.adapter.enabled;
-            }
 
+            }
             Component.onDestruction: {
                 if (root.adapter)
                     root.adapter.discovering = false;
-            }
-
-        Item {
-            width: parent.width
-            height: 28
-
-            Text {
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                color: config.fg
-                font.pointSize: config.fontSize(1.08)
-                font.weight: Font.DemiBold
-                text: "Bluetooth"
-            }
-
-            Row {
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 8
-
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: config.muted
-                    font.pointSize: config.fontSize(0.85)
-                    text: root.adapter && root.adapter.enabled ? "On" : "Off"
-                }
-
-                ToggleSwitch {
-                    config: root.config
-                    checked: root.adapter && root.adapter.enabled
-                    enabled: root.adapter !== null
-                    onToggled: {
-                        if (root.adapter)
-                            root.adapter.enabled = !root.adapter.enabled;
-
-                    }
-                }
-
-            }
-
-        }
-
-        PanelSeparator {
-            config: root.config
-        }
-
-        Text {
-            width: parent.width
-            visible: !root.adapter || !root.adapter.enabled
-            horizontalAlignment: Text.AlignHCenter
-            color: config.muted
-            font.pointSize: config.fontSize(0.85)
-            text: root.adapter ? "Bluetooth is turned off" : "No Bluetooth adapter found"
-            topPadding: 10
-            bottomPadding: 10
-        }
-
-        Column {
-            width: parent.width
-            spacing: 4
-            visible: root.adapter && root.adapter.enabled
-
-            SectionHeader {
-                config: root.config
-                visible: root.connectedRows.length > 0
-                text: "CONNECTED"
-            }
-
-            Repeater {
-                model: root.connectedRows
-
-                delegate: DeviceRow {
-                    required property var modelData
-
-                    width: parent ? parent.width : 0
-                    config: root.config
-                    row: modelData
-                    actionText: "Disconnect"
-                    highlighted: true
-                    onActivated: root.toggleDevice(modelData)
-                }
-
-            }
-
-            SectionHeader {
-                config: root.config
-                visible: root.pairedRows.length > 0
-                text: "PAIRED"
-            }
-
-            Repeater {
-                model: root.pairedRows
-
-                delegate: DeviceRow {
-                    required property var modelData
-
-                    width: parent ? parent.width : 0
-                    config: root.config
-                    row: modelData
-                    actionText: modelData.pairing ? "Cancel" : "Connect"
-                    onActivated: root.toggleDevice(modelData)
-                }
 
             }
 
             Item {
                 width: parent.width
-                height: 20
+                height: 28
 
                 Text {
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    color: config.muted
-                    font.pointSize: config.fontSize(0.77)
+                    color: config.fg
+                    font.pointSize: config.fontSize(1.08)
                     font.weight: Font.DemiBold
-                    font.letterSpacing: 0.4
-                    text: "AVAILABLE"
+                    text: "Bluetooth"
                 }
 
-                Text {
+                Row {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    color: config.muted
-                    font.pointSize: config.fontSize(0.77)
-                    text: root.adapter && root.adapter.discovering ? "Scanning…" : ""
+                    spacing: 8
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: config.muted
+                        font.pointSize: config.fontSize(0.85)
+                        text: root.adapter && root.adapter.enabled ? "On" : "Off"
+                    }
+
+                    ToggleSwitch {
+                        config: root.config
+                        checked: root.adapter && root.adapter.enabled
+                        enabled: root.adapter !== null
+                        onToggled: {
+                            if (root.adapter)
+                                root.adapter.enabled = !root.adapter.enabled;
+
+                        }
+                    }
+
                 }
 
             }
 
-            Repeater {
-                model: root.availableRows
-
-                delegate: DeviceRow {
-                    required property var modelData
-
-                    width: parent ? parent.width : 0
-                    config: root.config
-                    row: modelData
-                    actionText: modelData.pairing ? "Cancel" : "Pair"
-                    onActivated: root.toggleDevice(modelData)
-                }
-
+            PanelSeparator {
+                config: root.config
             }
 
             Text {
                 width: parent.width
-                visible: root.deviceRows.length === 0
+                visible: !root.adapter || !root.adapter.enabled
                 horizontalAlignment: Text.AlignHCenter
                 color: config.muted
                 font.pointSize: config.fontSize(0.85)
-                text: root.adapter && root.adapter.discovering ? "Scanning for devices…" : "No devices found"
+                text: root.adapter ? "Bluetooth is turned off" : "No Bluetooth adapter found"
                 topPadding: 10
                 bottomPadding: 10
             }
 
+            Column {
+                width: parent.width
+                spacing: 4
+                visible: root.adapter && root.adapter.enabled
+
+                SectionHeader {
+                    config: root.config
+                    visible: root.connectedRows.length > 0
+                    text: "CONNECTED"
+                }
+
+                Repeater {
+                    model: root.connectedRows
+
+                    delegate: DeviceRow {
+                        required property var modelData
+
+                        width: parent ? parent.width : 0
+                        config: root.config
+                        row: modelData
+                        actionText: "Disconnect"
+                        highlighted: true
+                        onActivated: root.toggleDevice(modelData)
+                    }
+
+                }
+
+                SectionHeader {
+                    config: root.config
+                    visible: root.pairedRows.length > 0
+                    text: "PAIRED"
+                }
+
+                Repeater {
+                    model: root.pairedRows
+
+                    delegate: DeviceRow {
+                        required property var modelData
+
+                        width: parent ? parent.width : 0
+                        config: root.config
+                        row: modelData
+                        actionText: modelData.pairing ? "Cancel" : "Connect"
+                        onActivated: root.toggleDevice(modelData)
+                    }
+
+                }
+
+                Item {
+                    width: parent.width
+                    height: 20
+
+                    Text {
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: config.muted
+                        font.pointSize: config.fontSize(0.77)
+                        font.weight: Font.DemiBold
+                        font.letterSpacing: 0.4
+                        text: "AVAILABLE"
+                    }
+
+                    Text {
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: config.muted
+                        font.pointSize: config.fontSize(0.77)
+                        text: root.adapter && root.adapter.discovering ? "Scanning…" : ""
+                    }
+
+                }
+
+                Repeater {
+                    model: root.availableRows
+
+                    delegate: DeviceRow {
+                        required property var modelData
+
+                        width: parent ? parent.width : 0
+                        config: root.config
+                        row: modelData
+                        actionText: modelData.pairing ? "Cancel" : "Pair"
+                        onActivated: root.toggleDevice(modelData)
+                    }
+
+                }
+
+                Text {
+                    width: parent.width
+                    visible: root.deviceRows.length === 0
+                    horizontalAlignment: Text.AlignHCenter
+                    color: config.muted
+                    font.pointSize: config.fontSize(0.85)
+                    text: root.adapter && root.adapter.discovering ? "Scanning for devices…" : "No devices found"
+                    topPadding: 10
+                    bottomPadding: 10
+                }
+
+            }
+
         }
 
-    }
     }
 
     component DeviceRow: Item {

@@ -17,7 +17,6 @@ Item {
     width: implicitWidth
     height: implicitHeight
 
-
     Rectangle {
         anchors.fill: parent
         color: config.surface

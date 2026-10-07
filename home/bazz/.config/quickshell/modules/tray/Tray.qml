@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
-import Quickshell.Widgets
 import Quickshell.Services.SystemTray
+import Quickshell.Widgets
 
 Item {
     id: root
@@ -9,33 +9,20 @@ Item {
     required property var config
     required property var barWindow
     required property var popupManager
-
     readonly property int revealDuration: 300
-
     property bool expanded: false
     property real revealProgress: expanded ? 1 : 0
-
-    readonly property real revealExtent:
-        trayItems.implicitWidth * revealProgress
-    readonly property real revealSpacing:
-        config.barModuleSpacing * revealProgress
+    readonly property real revealExtent: trayItems.implicitWidth * revealProgress
+    readonly property real revealSpacing: config.barModuleSpacing * revealProgress
 
     height: barWindow.height
     implicitWidth: expander.width + revealSpacing + revealExtent
-
-    Behavior on revealProgress {
-        NumberAnimation {
-            duration: root.revealDuration
-            easing.type: Easing.OutCubic
-        }
-    }
 
     Item {
         id: expander
 
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-
         width: 20
         height: barWindow.height
 
@@ -53,6 +40,7 @@ Item {
             cursorShape: Qt.PointingHandCursor
             onClicked: root.expanded = !root.expanded
         }
+
     }
 
     Item {
@@ -60,7 +48,6 @@ Item {
 
         x: expander.width + root.revealSpacing
         anchors.verticalCenter: parent.verticalCenter
-
         width: root.revealExtent
         height: barWindow.height
         clip: true
@@ -91,30 +78,20 @@ Item {
 
                     MouseArea {
                         anchors.fill: parent
-                        acceptedButtons: Qt.LeftButton
-                            | Qt.RightButton
-                            | Qt.MiddleButton
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
                         cursorShape: Qt.PointingHandCursor
-
-                        onClicked: mouse => {
+                        onClicked: (mouse) => {
                             if (mouse.button === Qt.MiddleButton) {
-                                trayItem.modelData.secondaryActivate()
-                                return
+                                trayItem.modelData.secondaryActivate();
+                                return ;
                             }
+                            if (mouse.button === Qt.RightButton || trayItem.modelData.onlyMenu) {
+                                if (trayItem.modelData.hasMenu)
+                                    root.popupManager.toggleHost("trayMenu", trayMenuComponent, trayItem);
 
-                            if (mouse.button === Qt.RightButton
-                                    || trayItem.modelData.onlyMenu) {
-                                if (trayItem.modelData.hasMenu) {
-                                    root.popupManager.toggleHost(
-                                        "trayMenu",
-                                        trayMenuComponent,
-                                        trayItem
-                                    )
-                                }
-                                return
+                                return ;
                             }
-
-                            trayItem.modelData.activate()
+                            trayItem.modelData.activate();
                         }
                     }
 
@@ -126,8 +103,11 @@ Item {
                             menuHandle: trayItem.modelData.menu
                             popupManager: root.popupManager
                         }
+
                     }
+
                 }
+
             }
 
             Power {
@@ -135,6 +115,17 @@ Item {
                 barWindow: root.barWindow
                 popupManager: root.popupManager
             }
+
         }
+
     }
+
+    Behavior on revealProgress {
+        NumberAnimation {
+            duration: root.revealDuration
+            easing.type: Easing.OutCubic
+        }
+
+    }
+
 }
