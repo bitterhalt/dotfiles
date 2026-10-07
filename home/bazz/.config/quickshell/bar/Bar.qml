@@ -6,10 +6,10 @@ import "../modules/clock"
 import "../modules/idle"
 import "../modules/network"
 import "../modules/notifications"
-import "../modules/recorder"
 import "../modules/tray"
 import "../modules/window"
 import "../modules/workspaces"
+import "../recorder"
 import QtQuick
 import Quickshell
 
@@ -34,6 +34,7 @@ PanelWindow {
 
     PopupManager {
         id: popupManager
+
         barWindow: barWindow
         config: barWindow.config
     }

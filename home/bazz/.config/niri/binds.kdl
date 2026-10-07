@@ -36,7 +36,7 @@ binds {
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "menu_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_submap -pass"; }
-    Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "menu_record"; }
+    Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
     Mod+Shift+D hotkey-overlay-title="Run Executables" { spawn-sh "menu_run"; }
     Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn "menu_tmuxer"; }
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
@@ -49,7 +49,8 @@ binds {
     Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "menu_submap -packages"; }
 
     // Screen Recording
-    Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
+    // Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
+    Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "qs ipc call recorder stop"; }
     Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { screenshot-screen show-pointer=false; }
     Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "wl-shot -re"; }
 

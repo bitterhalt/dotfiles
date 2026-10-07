@@ -7,6 +7,7 @@ import Quickshell.Services.Pipewire
 
 import "components"
 import "services"
+import "recorder"
 import "osd"
 import "bar"
 
