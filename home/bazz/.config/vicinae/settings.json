@@ -66,25 +66,6 @@
             }
          }
       },
-      "@leonkohli/store.vicinae.process-manager": {
-         "preferences": {
-            "clear-search-after-kill": false,
-            "close-window-after-kill": false,
-            "process-limit": "100",
-            "refresh-interval": "2000",
-            "search-in-paths": true,
-            "search-in-pid": true,
-            "show-path": false,
-            "show-pid": true,
-            "show-system-processes": false,
-            "sort-by-memory": false
-         },
-         "entrypoints": {
-            "kill": {
-               "alias": "kill"
-            }
-         }
-      },
       "calculator": {
          "entrypoints": {
             "history": {
