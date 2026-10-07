@@ -12,7 +12,7 @@
 ### Current Stack
 
 - Distro: [Arch](https://archlinux.org)
-- Bar and notifications: [Quickshell](https://quickshell.org/)
+- Bar and most widgeds: [My Quickshell config](https://github.com/bitterhalt/dotfiles/tree/main/home/bazz/.config/quickshell) 
 - WM: [Niri](https://github.com/niri-wm/niri)
 - Colors [Pywal16](https://github.com/eylles/pywal16)
 - Editor: [NeoVim](https://neovim.io/)
