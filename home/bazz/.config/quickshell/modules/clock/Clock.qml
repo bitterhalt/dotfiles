@@ -15,17 +15,17 @@ Item {
   property real revealProgress: clockHover.hovered ? 1 : 0
 
   readonly property real revealExtent:
-    revealRow.implicitWidth * revealProgress
+  revealRow.implicitWidth * revealProgress
 
   readonly property real revealSpacing:
-    config.barModuleSpacing * revealProgress
+  config.barModuleSpacing * revealProgress
 
   height: barWindow.height
 
   implicitWidth:
-    clockText.implicitWidth
-    + revealSpacing
-    + revealExtent
+  clockText.implicitWidth
+  + revealSpacing
+  + revealExtent
 
   Behavior on revealProgress {
     NumberAnimation {
@@ -85,10 +85,10 @@ Item {
         textFormat: Text.RichText
 
         text:
-          "<span style='color:" + config.accent + "'>" +
-          Qt.formatDateTime(clock.date, "ddd") +
-          "</span>" +
-          Qt.formatDateTime(clock.date, ", dd.MM")
+        "<span style='color:" + config.accent + "'>" +
+        Qt.formatDateTime(clock.date, "ddd") +
+        "</span>" +
+        Qt.formatDateTime(clock.date, ", dd.MM")
       }
 
       Text {
@@ -103,18 +103,18 @@ Item {
   }
 
   MouseArea {
-    anchors.fill: weatherText
+    anchors.fill: weatherClip
     enabled: weatherClip.width > 0
     cursorShape: Qt.PointingHandCursor
 
     onClicked:
-      popupManager.toggleHost(
-        "weather",
-        weatherPopupComponent,
-        root,
-        false,
-        true
-      )
+    popupManager.toggleHost(
+      "weather",
+      weatherPopupComponent,
+      root,
+      false,
+      true
+    )
   }
 
   Component {
