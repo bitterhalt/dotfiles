@@ -94,6 +94,11 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 | Key | Action |
 | --- | ------ |
+
+## Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
+
+| Key | Action |
+| --- | ------ |
 | `Mod+Ctrl+F8` | Stop Recording |
 | `Mod+Print` | Screenshot (Full Screen) |
 | `Mod+Shift+Print` | Screenshot (Region) |
