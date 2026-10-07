@@ -32,8 +32,8 @@ binds {
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
     Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "vicinae toggle"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "menu_power"; }
-    Mod+F3 { spawn-sh "vicinae 'vicinae://launch/@knoopx/store.vicinae.niri/keybinds?toggle=true'"; }
-    Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "vicinae 'vicinae://launch/@leonkohli/store.vicinae.process-manager/processes'"; }
+    Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
+    Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "menu_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_submap -pass"; }
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "menu_record"; }
     Mod+Shift+D hotkey-overlay-title="Run Executables" { spawn-sh "menu_run"; }
