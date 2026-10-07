@@ -51,7 +51,7 @@ Item {
     color: config.fg
     font.pointSize: config.fontSize(1)
     font.weight: Font.DemiBold
-    text: Qt.formatDateTime(clock.date, "HH:mm")
+    text: Qt.formatDateTime(clock.date, config.clockFormat)
 
     SystemClock {
       id: clock
@@ -84,11 +84,20 @@ Item {
         font.weight: Font.DemiBold
         textFormat: Text.RichText
 
-        text:
-        "<span style='color:" + config.accent + "'>" +
-        Qt.formatDateTime(clock.date, "ddd") +
-        "</span>" +
-        Qt.formatDateTime(clock.date, ", dd.MM")
+        text: {
+          const formatted = Qt.formatDateTime(
+            clock.date,
+            config.clockAlternativeFormat
+          )
+          const weekday = Qt.formatDateTime(clock.date, "ddd")
+
+          return formatted.replace(
+            weekday,
+            "<span style='color:" + config.accent + "'>"
+              + weekday
+              + "</span>"
+          )
+        }
       }
 
       Text {

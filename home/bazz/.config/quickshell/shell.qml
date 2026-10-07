@@ -7,6 +7,7 @@ import Quickshell.Services.Pipewire
 
 import "components"
 import "services"
+import "osd"
 import "bar"
 
 ShellRoot {
