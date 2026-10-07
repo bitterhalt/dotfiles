@@ -4,7 +4,7 @@ DMENU="${DMENU:-vicinae dmenu}"
 sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 
 if [ -n "$sessions" ]; then
-  menu_options="1 ➜ Attach session\n2 ➜ New session\n3 ➜ Delete session"
+  menu_options="1 ➜ Attach session\n2 ➜ New session\n3 ➜ Rename session\n4 ➜ Delete session"
 else
   menu_options="New session"
 fi
@@ -24,6 +24,18 @@ case "$choice" in
     "$TERMINAL" -e tmux new-session
   else
     "$TERMINAL" -e tmux new-session -s "$session_name"
+  fi
+  ;;
+
+*"Rename session")
+  target=$(printf '%s\n' "$sessions" | $DMENU --placeholder "Rename session:")
+
+  if [ -n "$target" ]; then
+    new_name=$(printf '' | $DMENU --placeholder "New name for $target:")
+
+    if [ -n "$new_name" ]; then
+      tmux rename-session -t "$target" "$new_name"
+    fi
   fi
   ;;
 

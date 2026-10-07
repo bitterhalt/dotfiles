@@ -66,6 +66,11 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Ctrl+H` | Show Notfication History |
 | `Mod+Ctrl+P` | Color Picker |
 | `Mod+D` | Run Application Launcher |
+
+## Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "menu_power"; }
+
+| Key | Action |
+| --- | ------ |
 | `Mod+Escape` | Open Power Menu |
 | `Mod+F3` | Launch program |
 | `Mod+F4` | Process Killer |
