@@ -27,10 +27,6 @@
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d362e791-b931-4ac9-9369-7f47868c4fa7" />
 
-### Installation
-
-> I don't recommend blindly running scripts here or anywhere from internet, but rather taking bits here and there so you get the idea how things are working
-
 ### Keybinds
 
 Go to ➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
