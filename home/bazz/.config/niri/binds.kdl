@@ -31,7 +31,8 @@ binds {
     Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "qs ipc call notificationCenter toggle"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
     Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "vicinae toggle"; }
-    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "menu_power"; }
+    // Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "menu_power"; }
+    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "qs ipc call power toggle"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "menu_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_submap -pass"; }

@@ -1,5 +1,9 @@
 import QtQuick
 import Quickshell
+import Quickshell.Io
+import Quickshell.Wayland
+
+import "../../components"
 
 Item {
     id: root
@@ -11,8 +15,87 @@ Item {
     width: 24
     height: barWindow.height
 
+    property int selectedIndex: 0
+    readonly property int actionCount: 5
+
+    function run(command) {
+        config.run(command)
+    }
+
+    function openMenu() {
+        selectedIndex = 0
+        powerMenu.visible = true
+        Qt.callLater(() => keyboardHandler.forceActiveFocus())
+    }
+
+    function closeMenu() {
+        powerMenu.visible = false
+    }
+
+    function toggleMenu() {
+        if (powerMenu.visible)
+            closeMenu()
+        else
+            openMenu()
+    }
+
+    function selectNext() {
+        selectedIndex = (selectedIndex + 1) % actionCount
+    }
+
+    function selectPrevious() {
+        selectedIndex =
+            (selectedIndex - 1 + actionCount) % actionCount
+    }
+
+    function activateSelected() {
+        switch (selectedIndex) {
+        case 0:
+            lock()
+            break
+        case 1:
+            suspend()
+            break
+        case 2:
+            restart()
+            break
+        case 3:
+            shutdown()
+            break
+        case 4:
+            logout()
+            break
+        }
+    }
+
+    function lock() {
+        closeMenu()
+        run("swaylock -C ~/.cache/wal/colors-swaylock")
+    }
+
+    function suspend() {
+        closeMenu()
+        run("systemctl suspend")
+    }
+
+    function restart() {
+        closeMenu()
+        run("systemctl reboot")
+    }
+
+    function shutdown() {
+        closeMenu()
+        run("systemctl poweroff")
+    }
+
+    function logout() {
+        closeMenu()
+        run("niri msg action quit")
+    }
+
     Text {
         anchors.centerIn: parent
+
         color: config.fg
         font.family: config.iconFontFamily
         font.pointSize: config.iconSize
@@ -23,169 +106,279 @@ Item {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         cursorShape: Qt.PointingHandCursor
-        onClicked: (mouse) => {
-            if (mouse.button === Qt.LeftButton)
-                popupManager.toggleHost("power", powerMenuComponent, root);
 
+        onClicked: mouse => {
+            if (mouse.button === Qt.LeftButton)
+                root.toggleMenu()
+            else
+                config.run("foot -a pop-upgrade -e sys_upgrade")
         }
     }
 
-    Component {
-        id: powerMenuComponent
+    PanelWindow {
+        id: powerMenu
 
-        Item {
-            id: powerMenu
+        screen: root.barWindow.screen
 
-            property string confirmAction: ""
+        anchors {
+            top: true
+            left: true
+            right: true
+            bottom: true
+        }
 
-            implicitWidth: 160
-            implicitHeight: menuColumn.implicitHeight + 12
-            width: implicitWidth
-            height: implicitHeight
+        visible: false
+        color: "transparent"
+        exclusiveZone: 0
+        focusable: true
 
-            Rectangle {
-                anchors.fill: parent
-                color: config.surface
-                border.color: config.borderColor
-                border.width: 1
-                radius: config.popupRadius
+        WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.keyboardFocus: visible
+            ? WlrKeyboardFocus.Exclusive
+            : WlrKeyboardFocus.None
 
-                Column {
-                    id: menuColumn
+        MouseArea {
+            anchors.fill: parent
+            onClicked: root.closeMenu()
+        }
 
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.margins: 6
-                    spacing: 2
+        FocusScope {
+            id: keyboardHandler
 
-                    PowerRow {
-                        text: "Lock"
-                        visible: powerMenu.confirmAction === ""
-                        onActivated: {
-                            root.popupManager.closeHost("power");
-                            config.run("swaylock -C ~/.cache/wal/colors-swaylock");
-                        }
-                    }
+            anchors.fill: parent
+            focus: true
 
-                    PowerRow {
-                        text: "Exit"
-                        visible: powerMenu.confirmAction === ""
-                        onActivated: {
-                            root.popupManager.closeHost("power");
-                            config.run("niri msg action quit");
-                        }
-                    }
+            Keys.onPressed: event => {
+                switch (event.key) {
+                case Qt.Key_Up:
+                    root.selectPrevious()
+                    event.accepted = true
+                    return
 
-                    PowerRow {
-                        text: "Sleep"
-                        visible: powerMenu.confirmAction === ""
-                        onActivated: {
-                            root.popupManager.closeHost("power");
-                            config.run("systemctl suspend");
-                        }
-                    }
+                case Qt.Key_Down:
+                    root.selectNext()
+                    event.accepted = true
+                    return
 
-                    PowerRow {
-                        text: "Reboot"
-                        visible: powerMenu.confirmAction === ""
-                        onActivated: powerMenu.confirmAction = "reboot"
-                    }
+                case Qt.Key_Return:
+                case Qt.Key_Enter:
+                    root.activateSelected()
+                    event.accepted = true
+                    return
 
-                    PowerRow {
-                        text: "Shutdown"
-                        visible: powerMenu.confirmAction === ""
-                        onActivated: powerMenu.confirmAction = "shutdown"
-                    }
-
-                    Text {
-                        width: parent.width
-                        height: powerMenu.confirmAction !== "" ? 34 : 0
-                        visible: height > 0
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        color: config.fg
-                        font.pointSize: config.fontSize(0.95)
-                        font.weight: Font.DemiBold
-                        text: powerMenu.confirmAction === "reboot" ? "Reboot?" : "Shutdown?"
-                    }
-
-                    Row {
-                        width: parent.width
-                        height: powerMenu.confirmAction !== "" ? 34 : 0
-                        visible: height > 0
-                        spacing: 4
-
-                        PowerRow {
-                            width: (parent.width - 4) / 2
-                            text: "No"
-                            centered: true
-                            onActivated: powerMenu.confirmAction = ""
-                        }
-
-                        PowerRow {
-                            width: (parent.width - 4) / 2
-                            text: "Yes"
-                            centered: true
-                            accentHover: true
-                            onActivated: {
-                                const action = powerMenu.confirmAction;
-                                root.popupManager.closeHost("power");
-                                powerMenu.confirmAction = "";
-                                if (action === "reboot")
-                                    config.run("systemctl reboot");
-                                else if (action === "shutdown")
-                                    config.run("systemctl poweroff");
-                            }
-                        }
-
-                    }
-
+                case Qt.Key_Escape:
+                    root.closeMenu()
+                    event.accepted = true
+                    return
                 }
 
-            }
+                switch (event.text) {
+                case "l":
+                    root.lock()
+                    event.accepted = true
+                    break
 
+                case "s":
+                    root.suspend()
+                    event.accepted = true
+                    break
+
+                case "R":
+                    root.restart()
+                    event.accepted = true
+                    break
+
+                case "S":
+                    root.shutdown()
+                    event.accepted = true
+                    break
+
+                case "E":
+                    root.logout()
+                    event.accepted = true
+                    break
+                }
+            }
         }
 
+        PopoutPanel {
+            id: menuCard
+
+            z: 1
+
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.topMargin: root.config.popupGap
+            anchors.rightMargin: root.config.barEdgeMargin
+
+            config: root.config
+            contentWidth: 180
+            spacing: 2
+
+            PowerMenuItem {
+                index: 0
+                icon: "󰌾"
+                label: "Lock"
+                keyHint: "l"
+                onTriggered: root.lock()
+            }
+
+            PowerMenuItem {
+                index: 1
+                icon: "󰤄"
+                label: "Suspend"
+                keyHint: "s"
+                onTriggered: root.suspend()
+            }
+
+            PowerMenuItem {
+                index: 2
+                icon: "󰜉"
+                label: "Restart"
+                keyHint: "R"
+                dangerous: true
+                onTriggered: root.restart()
+            }
+
+            PowerMenuItem {
+                index: 3
+                icon: "󰐥"
+                label: "Shut down"
+                keyHint: "S"
+                dangerous: true
+                onTriggered: root.shutdown()
+            }
+
+            PowerMenuItem {
+                index: 4
+                icon: "󰍃"
+                label: "Log out"
+                keyHint: "E"
+                dangerous: true
+                onTriggered: root.logout()
+            }
+        }
+
+        onVisibleChanged: {
+            if (visible) {
+                root.selectedIndex = 0
+                Qt.callLater(() => keyboardHandler.forceActiveFocus())
+            }
+        }
     }
 
-    component PowerRow: Item {
-        id: row
+    component PowerMenuItem: Item {
+        id: menuItem
 
-        property string text: ""
-        property bool centered: false
-        property bool accentHover: false
+        required property int index
+        required property string icon
+        required property string label
+        required property string keyHint
 
-        signal activated()
+        property bool dangerous: false
+
+        readonly property bool selected:
+            root.selectedIndex === menuItem.index
+
+        signal triggered()
 
         width: parent ? parent.width : 0
-        height: visible ? 34 : 0
+        height: 32
 
         Rectangle {
             anchors.fill: parent
-            radius: 3
-            color: rowMouse.containsMouse ? (row.accentHover ? config.accent : config.borderColor) : "transparent"
+            radius: 4
+
+            color:
+                menuItem.selected || itemMouse.containsMouse
+                    ? root.config.borderColor
+                    : "transparent"
         }
 
         Text {
-            anchors.left: row.centered ? undefined : parent.left
-            anchors.leftMargin: row.centered ? 0 : 10
-            anchors.centerIn: row.centered ? parent : undefined
-            anchors.verticalCenter: row.centered ? undefined : parent.verticalCenter
-            color: config.fg
-            font.pointSize: config.fontSize(0.95)
-            text: row.text
+            anchors.left: parent.left
+            anchors.leftMargin: 7
+            anchors.verticalCenter: parent.verticalCenter
+
+            width: 22
+
+            color: root.config.accent
+            font.family: root.config.iconFontFamily
+            font.pointSize: root.config.iconSize * 1.077
+            horizontalAlignment: Text.AlignHCenter
+            text: menuItem.icon
+        }
+
+        Text {
+            anchors.left: parent.left
+            anchors.leftMargin: 38
+            anchors.verticalCenter: parent.verticalCenter
+
+            color: root.config.fg
+            font.pointSize: root.config.fontSize(1)
+            font.weight: Font.Medium
+            text: menuItem.label
+        }
+
+        Rectangle {
+            anchors.right: parent.right
+            anchors.rightMargin: 6
+            anchors.verticalCenter: parent.verticalCenter
+
+            width: 21
+            height: 20
+            radius: 4
+            color: "transparent"
+
+            border.width: 1
+            border.color:
+                menuItem.dangerous
+                    ? root.config.accent
+                    : root.config.accent
+
+            Text {
+                anchors.centerIn: parent
+
+                color:
+                    menuItem.dangerous
+                        ? root.config.accent
+                        : root.config.muted
+
+                font.pointSize: root.config.fontSize(0.846)
+                font.weight:
+                    menuItem.dangerous
+                        ? Font.DemiBold
+                        : Font.Normal
+
+                text: menuItem.keyHint
+            }
         }
 
         MouseArea {
-            id: rowMouse
+            id: itemMouse
 
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
-            onClicked: row.activated()
-        }
 
+            onEntered: root.selectedIndex = menuItem.index
+            onClicked: menuItem.triggered()
+        }
     }
 
+    IpcHandler {
+        target: "power"
+
+        function toggle(): void {
+            root.toggleMenu()
+        }
+
+        function open(): void {
+            root.openMenu()
+        }
+
+        function close(): void {
+            root.closeMenu()
+        }
+    }
 }
