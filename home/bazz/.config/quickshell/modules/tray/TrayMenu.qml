@@ -67,9 +67,7 @@ Item {
                 Rectangle {
                     anchors.fill: parent
                     radius: 3
-                    color: backMouse.containsMouse
-                        ? root.config.borderColor
-                        : "transparent"
+                    color: backMouse.containsMouse ? root.config.borderColor : "transparent"
                 }
 
                 Text {
@@ -87,6 +85,7 @@ Item {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
+
                     onClicked: root.goBack()
                 }
             }
@@ -99,9 +98,7 @@ Item {
 
                     width: menuColumn.width
 
-                    sourceComponent: modelData.isSeparator
-                        ? separatorComponent
-                        : menuItemComponent
+                    sourceComponent: modelData.isSeparator ? separatorComponent : menuItemComponent
 
                     property var entry: modelData
                 }
@@ -142,9 +139,7 @@ Item {
             Rectangle {
                 anchors.fill: parent
                 radius: 3
-                color: rowMouse.containsMouse && entry.enabled
-                    ? root.config.borderColor
-                    : "transparent"
+                color: rowMouse.containsMouse && entry.enabled ? root.config.borderColor : "transparent"
             }
 
             Item {
@@ -165,8 +160,7 @@ Item {
 
                 Text {
                     anchors.centerIn: parent
-                    visible: entry.icon === ""
-                        && entry.buttonType !== QsMenuButtonType.None
+                    visible: entry.icon === "" && entry.buttonType !== QsMenuButtonType.None
                     color: root.config.accent
                     font.pointSize: root.config.fontSize(0.9)
                     text: entry.checkState === Qt.Checked ? "✓" : ""
@@ -206,9 +200,7 @@ Item {
                 anchors.fill: parent
                 hoverEnabled: true
                 enabled: entry.enabled
-                cursorShape: entry.enabled
-                    ? Qt.PointingHandCursor
-                    : Qt.ArrowCursor
+                cursorShape: entry.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
 
                 onClicked: {
                     if (entry.hasChildren) {

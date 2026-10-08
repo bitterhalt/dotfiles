@@ -11,10 +11,11 @@ PopoutPanel {
 
     config: audioItem.config
     contentWidth: 340
+
     Component.onDestruction: {
-        audioItem.showOutputs = false;
-        audioItem.showInputs = false;
-        audioItem.showStreams = false;
+        audioItem.showOutputs = false
+        audioItem.showInputs = false
+        audioItem.showStreams = false
     }
 
     Item {
@@ -37,7 +38,6 @@ PopoutPanel {
             font.pointSize: config.fontSize(0.77)
             text: Pipewire.ready ? "PipeWire" : "Loading…"
         }
-
     }
 
     PanelSeparator {
@@ -81,16 +81,16 @@ PopoutPanel {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
+
                     onClicked: {
                         if (audioItem.sinkAudio) {
                             if (audioItem.volumeOsd)
-                                audioItem.volumeOsd.suppress(600);
+                                audioItem.volumeOsd.suppress(600)
 
-                            audioItem.sinkAudio.muted = !audioItem.sinkAudio.muted;
+                            audioItem.sinkAudio.muted = !audioItem.sinkAudio.muted
                         }
                     }
                 }
-
             }
 
             Column {
@@ -115,7 +115,6 @@ PopoutPanel {
                     elide: Text.ElideRight
                     text: audioItem.sink ? Model.label(audioItem.sink) : "No output device"
                 }
-
             }
 
             Row {
@@ -129,7 +128,6 @@ PopoutPanel {
                     font.pointSize: config.fontSize(0.92)
                     text: `${audioItem.volume}%`
                 }
-
             }
 
             MouseArea {
@@ -139,15 +137,15 @@ PopoutPanel {
                 anchors.leftMargin: 30
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
+
                 onClicked: {
-                    audioItem.showOutputs = !audioItem.showOutputs;
+                    audioItem.showOutputs = !audioItem.showOutputs
                     if (audioItem.showOutputs) {
-                        audioItem.showInputs = false;
-                        audioItem.showStreams = false;
+                        audioItem.showInputs = false
+                        audioItem.showStreams = false
                     }
                 }
             }
-
         }
 
         Slider {
@@ -160,12 +158,13 @@ PopoutPanel {
             stepSize: 0.01
             enabled: audioItem.sinkAudio !== null
             value: audioItem.sinkAudio ? audioItem.sinkAudio.volume : 0
+
             onMoved: {
                 if (audioItem.sinkAudio) {
                     if (audioItem.volumeOsd)
-                        audioItem.volumeOsd.suppress(600);
+                        audioItem.volumeOsd.suppress(600)
 
-                    audioItem.sinkAudio.volume = value;
+                    audioItem.sinkAudio.volume = value
                 }
             }
 
@@ -183,7 +182,6 @@ PopoutPanel {
                     radius: parent.radius
                     color: config.accent
                 }
-
             }
 
             handle: Rectangle {
@@ -194,9 +192,7 @@ PopoutPanel {
                 radius: 6
                 color: outputSlider.pressed ? config.fg : config.accent
             }
-
         }
-
     }
 
     Column {
@@ -214,14 +210,13 @@ PopoutPanel {
                 config: audioItem.config
                 row: modelData
                 icon: "󰓃"
+
                 onActivated: {
-                    audioItem.setOutput(modelData.id);
-                    audioItem.showOutputs = false;
+                    audioItem.setOutput(modelData.id)
+                    audioItem.showOutputs = false
                 }
             }
-
         }
-
     }
 
     PanelSeparator {
@@ -265,13 +260,12 @@ PopoutPanel {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
+
                     onClicked: {
                         if (audioItem.sourceAudio)
-                            audioItem.sourceAudio.muted = !audioItem.sourceAudio.muted;
-
+                            audioItem.sourceAudio.muted = !audioItem.sourceAudio.muted
                     }
                 }
-
             }
 
             Column {
@@ -296,7 +290,6 @@ PopoutPanel {
                     elide: Text.ElideRight
                     text: audioItem.source ? Model.label(audioItem.source) : "No input device"
                 }
-
             }
 
             Row {
@@ -310,7 +303,6 @@ PopoutPanel {
                     font.pointSize: config.fontSize(0.92)
                     text: audioItem.sourceAudio ? `${Math.round(audioItem.sourceAudio.volume * 100)}%` : "—"
                 }
-
             }
 
             MouseArea {
@@ -320,15 +312,15 @@ PopoutPanel {
                 anchors.leftMargin: 30
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
+
                 onClicked: {
-                    audioItem.showInputs = !audioItem.showInputs;
+                    audioItem.showInputs = !audioItem.showInputs
                     if (audioItem.showInputs) {
-                        audioItem.showOutputs = false;
-                        audioItem.showStreams = false;
+                        audioItem.showOutputs = false
+                        audioItem.showStreams = false
                     }
                 }
             }
-
         }
 
         Slider {
@@ -341,10 +333,10 @@ PopoutPanel {
             stepSize: 0.01
             enabled: audioItem.sourceAudio !== null
             value: audioItem.sourceAudio ? audioItem.sourceAudio.volume : 0
+
             onMoved: {
                 if (audioItem.sourceAudio)
-                    audioItem.sourceAudio.volume = value;
-
+                    audioItem.sourceAudio.volume = value
             }
 
             background: Rectangle {
@@ -361,7 +353,6 @@ PopoutPanel {
                     radius: parent.radius
                     color: config.accent
                 }
-
             }
 
             handle: Rectangle {
@@ -372,9 +363,7 @@ PopoutPanel {
                 radius: 6
                 color: inputSlider.pressed ? config.fg : config.accent
             }
-
         }
-
     }
 
     Column {
@@ -392,14 +381,13 @@ PopoutPanel {
                 config: audioItem.config
                 row: modelData
                 icon: "󰍬"
+
                 onActivated: {
-                    audioItem.setInput(modelData.id);
-                    audioItem.showInputs = false;
+                    audioItem.setInput(modelData.id)
+                    audioItem.showInputs = false
                 }
             }
-
         }
-
     }
 
     // ----------------------------------------------------------
@@ -445,15 +433,15 @@ PopoutPanel {
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
+
             onClicked: {
-                audioItem.showStreams = !audioItem.showStreams;
+                audioItem.showStreams = !audioItem.showStreams
                 if (audioItem.showStreams) {
-                    audioItem.showOutputs = false;
-                    audioItem.showInputs = false;
+                    audioItem.showOutputs = false
+                    audioItem.showInputs = false
                 }
             }
         }
-
     }
 
     Column {
@@ -474,9 +462,7 @@ PopoutPanel {
                 media: modelData.media
                 volumeOsd: audioItem.volumeOsd
             }
-
         }
-
     }
 
     component DeviceRow: Item {
@@ -532,9 +518,9 @@ PopoutPanel {
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
+
             onClicked: deviceRow.activated()
         }
-
     }
 
     component StreamRow: Column {
@@ -570,7 +556,6 @@ PopoutPanel {
                 font.pointSize: streamRow.config.fontSize(0.77)
                 text: streamRow.nodeAudio ? `${Math.round(streamRow.nodeAudio.volume * 100)}%` : "—"
             }
-
         }
 
         Row {
@@ -594,16 +579,16 @@ PopoutPanel {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
+
                     onClicked: {
                         if (streamRow.nodeAudio) {
                             if (streamRow.volumeOsd)
-                                streamRow.volumeOsd.suppress(600);
+                                streamRow.volumeOsd.suppress(600)
 
-                            streamRow.nodeAudio.muted = !streamRow.nodeAudio.muted;
+                            streamRow.nodeAudio.muted = !streamRow.nodeAudio.muted
                         }
                     }
                 }
-
             }
 
             Slider {
@@ -616,12 +601,13 @@ PopoutPanel {
                 stepSize: 0.01
                 enabled: streamRow.nodeAudio !== null
                 value: streamRow.nodeAudio ? streamRow.nodeAudio.volume : 0
+
                 onMoved: {
                     if (streamRow.nodeAudio) {
                         if (streamRow.volumeOsd)
-                            streamRow.volumeOsd.suppress(600);
+                            streamRow.volumeOsd.suppress(600)
 
-                        streamRow.nodeAudio.volume = value;
+                        streamRow.nodeAudio.volume = value
                     }
                 }
 
@@ -639,7 +625,6 @@ PopoutPanel {
                         radius: parent.radius
                         color: streamRow.config.accent
                     }
-
                 }
 
                 handle: Rectangle {
@@ -650,11 +635,7 @@ PopoutPanel {
                     radius: 5
                     color: streamSlider.pressed ? streamRow.config.fg : streamRow.config.accent
                 }
-
             }
-
         }
-
     }
-
 }

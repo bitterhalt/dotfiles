@@ -2,7 +2,7 @@
 
 function label(node) {
   return String(
-    node.description || node.nickname || node.name || "Unknown device",
+    node.description || node.nickname || node.name || "Unknown device"
   );
 }
 
@@ -43,7 +43,6 @@ function playbackStreams(nodes) {
 
     result.push({
       id: Number(node.id),
-
       name: String(
         (node.properties && node.properties["application.name"])
         || node.description
@@ -51,7 +50,6 @@ function playbackStreams(nodes) {
         || node.name
         || "Application"
       ),
-
       media: String(
         (node.properties && (
           node.properties["media.name"]
@@ -62,7 +60,7 @@ function playbackStreams(nodes) {
     });
   }
 
-  result.sort(function(a, b) {
+  result.sort(function (a, b) {
     return a.name.localeCompare(b.name);
   });
 
