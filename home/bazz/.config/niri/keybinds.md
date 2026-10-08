@@ -36,22 +36,18 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+E` | TUI Filemanager |
 | `Mod+Shift+E` | GUI Filemanager |
 
-## System
+## Shell
 
 | Key | Action |
 | --- | ------ |
-| `Mod+B` | Toggle Waybar |
+| `Mod+B` | Toggle Bar |
+| `Mod+Ctrl+Q` | Reload Quickshell |
 
 ## Menus
 
 | Key | Action |
 | --- | ------ |
 | `Mod+Ctrl+C` | Open Clipboard |
-
-## Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "foot -a fzf_clip -e fzf_clip" ; }
-
-| Key | Action |
-| --- | ------ |
 
 ## Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
 
