@@ -46,7 +46,7 @@ binds {
     Mod+F12 hotkey-overlay-title="System Configs" { spawn-sh "qs ipc call menu settings"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "menu_submap -notes"; }
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs ipc call menu theming"; }
-    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "menu_submap -packages"; }
+    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "qs ipc call menu packages"; }
 
     // Screen Recording
     // Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }

@@ -16,6 +16,7 @@
    "pop_to_root_on_close": true,
    "wrap_navigation": false,
    "escape_key_behavior": "",
+   "keybinding": "vim",
    "tray": {
       "enabled": false
    },
