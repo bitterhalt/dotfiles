@@ -210,7 +210,7 @@ Item {
 
             config: root.config
             contentWidth: 180
-            spacing: 2
+            spacing: 4
 
             PowerMenuItem {
                 index: 0

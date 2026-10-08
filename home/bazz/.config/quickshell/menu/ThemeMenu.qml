@@ -323,8 +323,8 @@ Item {
             visible: !root.saveMode
             config: root.config
             contentWidth: 230
-            padding: 5
-            spacing: 2
+            padding: 12
+            spacing: 4
 
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter

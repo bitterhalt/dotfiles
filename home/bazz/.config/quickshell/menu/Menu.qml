@@ -243,8 +243,8 @@ Item {
             z: 1
             config: root.config
             contentWidth: 260
-            padding: 8
-            spacing: 2
+            padding: 12
+            spacing: 4
 
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter

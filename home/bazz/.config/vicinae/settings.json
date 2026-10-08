@@ -54,10 +54,9 @@
       "material": "none"
    },
    "favorites": [
-      "power:sleep",
-      "applications:steam",
-      "core:search-emojis",
-      "clipboard:history"
+      "applications:transmission-gtk",
+      "@fbosch/store.vicinae.nerdfont-search:nerdfonts-search",
+      "applications:steam"
    ],
    "providers": {
       "@fbosch/store.vicinae.nerdfont-search": {
