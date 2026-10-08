@@ -10,6 +10,7 @@ Item {
   required property var config
   required property var barWindow
   required property var popupManager
+  required property var weatherData
 
   readonly property int revealDuration: 300
   property real revealProgress: clockHover.hovered ? 1 : 0
@@ -32,10 +33,6 @@ Item {
       duration: root.revealDuration
       easing.type: Easing.OutCubic
     }
-  }
-
-  WeatherData {
-    id: weather
   }
 
   HoverHandler {
@@ -106,7 +103,7 @@ Item {
         color: config.fg
         font.pointSize: config.fontSize(1)
         font.weight: Font.DemiBold
-        text: weather.text
+        text: weatherData.text
       }
     }
   }
@@ -131,7 +128,7 @@ Item {
 
     WeatherPopup {
       config: root.config
-      weatherData: weather
+      weatherData: root.weatherData
     }
   }
 

@@ -4,6 +4,7 @@ import Quickshell.Io
 
 Item {
     id: root
+
     visible: false
 
     property string text: ""

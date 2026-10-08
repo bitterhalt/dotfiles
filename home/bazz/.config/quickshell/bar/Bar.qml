@@ -21,6 +21,8 @@ PanelWindow {
     required property var niri
     required property var volumeOsd
     required property var notificationService
+    required property var weatherService
+    required property var batteryService
 
     screen: targetScreen
     implicitHeight: config.barHeight
@@ -76,6 +78,7 @@ PanelWindow {
             config: barWindow.config
             barWindow: barWindow
             popupManager: popupManager
+            weatherData: barWindow.weatherService
         }
 
         Notifications {
@@ -129,6 +132,7 @@ PanelWindow {
         Battery {
             config: barWindow.config
             barWindow: barWindow
+            battery: barWindow.batteryService
         }
 
         Tray {

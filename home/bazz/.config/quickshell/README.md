@@ -70,7 +70,6 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   │   ├── Tray.qml
 │   │   └── TrayMenu.qml
 │   ├── weather
-│   │   ├── WeatherData.qml
 │   │   ├── WeatherPopup.qml
 │   │   └── weather.py
 │   ├── window
@@ -83,15 +82,17 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── Recorder.qml
 │   └── RegionSelector.qml
 ├── services
+│   ├── BatteryService.qml
 │   ├── NiriService.qml
 │   ├── NotificationService.qml
-│   └── ThemeService.qml
+│   ├── ThemeService.qml
+│   └── WeatherService.qml
 └── shell.qml
 ```
 
 ### Layout
 
-`ShellRoot` in `shell.qml` owns shared services and creates one `Bar` instance for every screen exposed by `Quickshell.screens`.
+`ShellRoot` in `shell.qml` owns shared services and creates one `Bar` instance for every screen exposed by `Quickshell.screens`. Polling and other machine-wide state, such as battery and weather data, stays in one shell-owned service and is passed to each bar.
 
 `Bar.qml` is primarily responsible for arranging modules. Feature-specific behavior stays inside the corresponding module instead of being accumulated in the bar itself.
 

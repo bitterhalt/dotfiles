@@ -46,6 +46,14 @@ ShellRoot {
     id: appNotificationService
   }
 
+  WeatherService {
+    id: appWeatherService
+  }
+
+  BatteryService {
+    id: appBatteryService
+  }
+
   PwObjectTracker {
     objects: [Pipewire.defaultAudioSink, Pipewire.defaultAudioSource]
   }
@@ -91,6 +99,8 @@ ShellRoot {
       niri: niriService
       volumeOsd: appVolumeOsd
       notificationService: appNotificationService
+      weatherService: appWeatherService
+      batteryService: appBatteryService
 
       visible: root.barVisible
     }
