@@ -108,10 +108,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
 
         onClicked: mouse => {
-            if (mouse.button === Qt.LeftButton)
                 root.toggleMenu()
-            else
-                config.run("foot -a pop-upgrade -e sys_upgrade")
         }
     }
 
@@ -178,7 +175,7 @@ Item {
                     event.accepted = true
                     break
 
-                case "s":
+                case "z":
                     root.suspend()
                     event.accepted = true
                     break
@@ -227,7 +224,7 @@ Item {
                 index: 1
                 icon: "󰤄"
                 label: "Suspend"
-                keyHint: "s"
+                keyHint: "z"
                 onTriggered: root.suspend()
             }
 

@@ -25,14 +25,12 @@ Item {
     readonly property var settingsItems: [
         { label: "Bash", icon: "󱆃", command: "foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" },
         { label: "Foot", icon: "󰆍", command: "foot -e nvim ~/.config/foot/foot.ini" },
-        { label: "Mako", icon: "󰂚", command: "foot sh -c 'cd ~/.config/mako/ && nvim *'" },
         { label: "Niri", icon: "󰖲", command: "foot sh -c 'cd ~/.config/niri/ && nvim *'" },
         { label: "Nvim", icon: "", command: "foot sh -c 'cd ~/.config/nvim && vopen .'" },
         { label: "Pywal", icon: "󰏘", command: "foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" },
         { label: "Quickshell", icon: "󰆍", command: "foot sh -c 'cd ~/.config/quickshell && vopen .'" },
         { label: "Swayidle", icon: "󰒲", command: "foot sh -c 'cd ~/.config/swayidle/ && nvim config'" },
         { label: "Dmenus", icon: "󰍉", command: "foot sh -c 'nvim ~/.local/bin/menu_*'" },
-        { label: "Waybar", icon: "󰕰", command: "foot sh -c 'cd ~/.config/waybar/ && vopen .'" }
     ]
 
     readonly property var systemItems: [
