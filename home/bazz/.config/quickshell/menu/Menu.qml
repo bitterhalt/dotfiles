@@ -21,7 +21,6 @@ Item {
     ]
 
 
-
     readonly property var settingsItems: [
         { label: "Bash", icon: "󱆃", command: "foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" },
         { label: "Foot", icon: "󰆍", command: "foot -e nvim ~/.config/foot/foot.ini" },

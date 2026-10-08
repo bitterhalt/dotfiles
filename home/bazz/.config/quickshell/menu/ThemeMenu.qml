@@ -316,19 +316,92 @@ Item {
             Repeater {
                 model: root.menuEntries
 
-                delegate: Loader {
+                delegate: Item {
+                    id: menuItem
+
                     required property var modelData
                     required property int index
 
                     width: parent ? parent.width : 0
+                    height: modelData.type === "separator" ? 9 : 32
 
-                    sourceComponent:
+                    readonly property bool isSeparator:
                         modelData.type === "separator"
-                        ? separatorComponent
-                        : themeItemComponent
 
-                    property var entry: modelData
-                    property int entryIndex: index
+                    readonly property bool selected:
+                        !isSeparator
+                        && root.selectedIndex === index
+
+                    Rectangle {
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        height: 1
+                        visible: menuItem.isSeparator
+                        color: root.config.borderColor
+                    }
+
+                    Rectangle {
+                        anchors.fill: parent
+                        visible: !menuItem.isSeparator
+                        radius: 4
+                        color: menuItem.selected || itemMouse.containsMouse
+                            ? root.config.borderColor
+                            : "transparent"
+                    }
+
+                    Text {
+                        anchors.left: parent.left
+                        anchors.leftMargin: 8
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        width: 22
+                        visible: !menuItem.isSeparator
+                        color: root.config.accent
+                        font.pointSize: root.config.fontSize(1)
+                        horizontalAlignment: Text.AlignHCenter
+                        text: !menuItem.isSeparator && modelData.recent
+                            ? "★"
+                            : ""
+                    }
+
+                    Text {
+                        anchors.left: parent.left
+                        anchors.leftMargin: 38
+                        anchors.right: parent.right
+                        anchors.rightMargin: 8
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        visible: !menuItem.isSeparator
+                        color: root.config.fg
+                        font.pointSize: root.config.fontSize(1)
+                        font.weight:
+                            !menuItem.isSeparator && modelData.recent
+                            ? Font.DemiBold
+                            : Font.Medium
+                        elide: Text.ElideRight
+                        text: !menuItem.isSeparator
+                            ? (modelData.name ?? "")
+                            : ""
+                    }
+
+                    MouseArea {
+                        id: itemMouse
+
+                        anchors.fill: parent
+                        enabled: !menuItem.isSeparator
+                        hoverEnabled: enabled
+                        cursorShape: enabled
+                            ? Qt.PointingHandCursor
+                            : Qt.ArrowCursor
+
+                        onEntered:
+                            root.selectedIndex = menuItem.index
+
+                        onClicked:
+                            root.applyTheme(menuItem.modelData.name)
+                    }
                 }
             }
         }
@@ -407,89 +480,8 @@ Item {
         }
     }
 
-    Component {
-        id: separatorComponent
-
-        Item {
-            width: parent ? parent.width : 0
-            height: 9
-
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                height: 1
-                color: root.config.borderColor
-            }
-        }
-    }
-
-    Component {
-        id: themeItemComponent
-
-        Item {
-            id: menuItem
-
-            width: parent ? parent.width : 0
-            height: 32
-
-            readonly property bool selected:
-                root.selectedIndex === parent.entryIndex
-
-            Rectangle {
-                anchors.fill: parent
-                radius: 4
-                color: menuItem.selected || itemMouse.containsMouse
-                    ? root.config.borderColor
-                    : "transparent"
-            }
-
-            Text {
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-
-                width: 22
-                color: root.config.accent
-                font.pointSize: root.config.fontSize(1)
-                horizontalAlignment: Text.AlignHCenter
-                text: parent.entry.recent ? "★" : ""
-            }
-
-            Text {
-                anchors.left: parent.left
-                anchors.leftMargin: 38
-                anchors.right: parent.right
-                anchors.rightMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-
-                color: root.config.fg
-                font.pointSize: root.config.fontSize(1)
-                font.weight: parent.entry.recent
-                    ? Font.DemiBold
-                    : Font.Medium
-                elide: Text.ElideRight
-                text: parent.entry.name
-            }
-
-            MouseArea {
-                id: itemMouse
-
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-
-                onEntered:
-                    root.selectedIndex = parent.entryIndex
-
-                onClicked:
-                    root.applyTheme(parent.entry.name)
-            }
-        }
-    }
-
     IpcHandler {
-        target: "theme"
+        target: "themeMenu"
 
         function toggle(): void {
             root.toggleMenu()
