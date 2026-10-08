@@ -19,12 +19,12 @@ binds {
     Mod+E hotkey-overlay-title="TUI Filemanager" { spawn-sh "foot -T lf -e lf"; }
     Mod+Shift+E hotkey-overlay-title="GUI Filemanager" { spawn "thunar"; }
 
-    // System
-    Mod+B hotkey-overlay-title="Toggle Waybar" { spawn "bar-hider.sh"; }
+    // Shell
+    Mod+B hotkey-overlay-title="Toggle Bar" { spawn-sh "qs ipc call bar toggle"; }
+    Mod+Ctrl+Q hotkey-overlay-title="Reload Quickshell" { spawn-sh "qs_toggle"; }
 
     // Menus
     Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "vicinae 'vicinae://launch/clipboard/history?toggle=true'"; }
-    // Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "foot -a fzf_clip -e fzf_clip" ; }
     // Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
     Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "qs ipc call notifications toggleDnd"; }
     // Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
@@ -42,10 +42,10 @@ binds {
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
 
     // Submaps
-    Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "menu_submap -system"; }
-    Mod+F12 hotkey-overlay-title="System Configs" { spawn-sh "menu_submap -settings"; }
+    Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "qs ipc call menu system"; }
+    Mod+F12 hotkey-overlay-title="System Configs" { spawn-sh "qs ipc call menu settings"; }
     Mod+N hotkey-overlay-title="Open Notes" { spawn-sh "menu_submap -notes"; }
-    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "menu_submap -theming"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs ipc call menu theming"; }
     Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "menu_submap -packages"; }
 
     // Screen Recording
