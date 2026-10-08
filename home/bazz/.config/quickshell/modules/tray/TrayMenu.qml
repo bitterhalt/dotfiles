@@ -30,7 +30,6 @@ Item {
         menuStack = menuStack.slice(0, -1)
     }
 
-
     implicitWidth: 190
     implicitHeight: menuColumn.implicitHeight + 12
     width: implicitWidth
