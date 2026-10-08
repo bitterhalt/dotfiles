@@ -6,7 +6,7 @@ PanelWindow {
     id: root
 
     required property var config
-    required property var barWindow
+    required property var targetScreen
     required property var notificationService
 
     property var notification: null
@@ -41,7 +41,7 @@ PanelWindow {
         toastTimer.stop()
     }
 
-    screen: barWindow.screen
+    screen: targetScreen
 
     anchors {
         top: true

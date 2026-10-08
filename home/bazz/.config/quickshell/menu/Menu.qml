@@ -10,6 +10,7 @@ Item {
 
     required property var config
     required property var themeMenu
+    required property var targetScreen
 
     property string page: ""
     property int selectedIndex: 0
@@ -165,9 +166,7 @@ Item {
     PanelWindow {
         id: menuWindow
 
-        screen: Quickshell.screens.length > 0
-            ? Quickshell.screens[0]
-            : null
+        screen: root.targetScreen
 
         anchors {
             top: true

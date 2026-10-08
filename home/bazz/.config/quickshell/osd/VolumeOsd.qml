@@ -9,6 +9,7 @@ Item {
     visible: false
 
     required property var config
+    required property var targetScreen
 
     PwObjectTracker {
         objects: [Pipewire.defaultAudioSink]
@@ -74,6 +75,8 @@ Item {
         active: osd.volumeOsdVisible
 
         PanelWindow {
+            screen: osd.targetScreen
+
             anchors {
                 top: true
                 left: true

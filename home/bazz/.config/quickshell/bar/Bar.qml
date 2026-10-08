@@ -21,8 +21,13 @@ PanelWindow {
     required property var niri
     required property var volumeOsd
     required property var notificationService
+    required property var notificationPopup
+    required property var bluetoothService
     required property var weatherService
     required property var batteryService
+    required property var idleService
+    required property var recorderService
+    required property var uiService
 
     screen: targetScreen
     implicitHeight: config.barHeight
@@ -79,6 +84,7 @@ PanelWindow {
             barWindow: barWindow
             popupManager: popupManager
             weatherData: barWindow.weatherService
+            uiService: barWindow.uiService
         }
 
         Notifications {
@@ -86,11 +92,14 @@ PanelWindow {
             barWindow: barWindow
             popupManager: popupManager
             notificationService: barWindow.notificationService
+            notificationPopup: barWindow.notificationPopup
+            uiService: barWindow.uiService
         }
 
         Recorder {
             config: barWindow.config
             barWindow: barWindow
+            recorderService: barWindow.recorderService
         }
 
     }
@@ -115,6 +124,7 @@ PanelWindow {
             config: barWindow.config
             barWindow: barWindow
             popupManager: popupManager
+            bluetoothService: barWindow.bluetoothService
         }
 
         Audio {
@@ -127,6 +137,7 @@ PanelWindow {
         Idle {
             config: barWindow.config
             barWindow: barWindow
+            idleService: barWindow.idleService
         }
 
         Battery {
@@ -139,6 +150,7 @@ PanelWindow {
             config: barWindow.config
             barWindow: barWindow
             popupManager: popupManager
+            uiService: barWindow.uiService
         }
 
     }

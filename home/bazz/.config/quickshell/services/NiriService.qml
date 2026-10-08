@@ -10,8 +10,16 @@ Item {
     property var windows: ({
     })
     property int focusedWindowId: -1
+    readonly property string focusedOutput: {
+        for (let i = 0; i < workspaces.length; ++i) {
+            if (workspaces[i].is_focused)
+                return workspaces[i].output || ""
+        }
 
-    function updateWorkspaceActivation(id) {
+        return ""
+    }
+
+    function updateWorkspaceActivation(id, focused) {
         let target = null;
         for (let i = 0; i < workspaces.length; ++i) {
             if (workspaces[i].id === id) {
@@ -29,6 +37,9 @@ Item {
             }, old);
             if (ws.output === target.output)
                 ws.is_active = ws.id === id;
+
+            if (focused)
+                ws.is_focused = ws.id === id;
 
             updated.push(ws);
         }
@@ -94,7 +105,10 @@ Item {
                 return ;
             }
             if (event.WorkspaceActivated) {
-                updateWorkspaceActivation(event.WorkspaceActivated.id);
+                updateWorkspaceActivation(
+                    event.WorkspaceActivated.id,
+                    event.WorkspaceActivated.focused === true
+                );
                 return ;
             }
             if (event.WorkspaceUrgencyChanged) {

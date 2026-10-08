@@ -7,7 +7,7 @@ Item {
     id: root
 
     required property var config
-    required property var barWindow
+    required property var targetScreen
     required property var devices
     property string deviceName: ""
     property string deviceIcon: ""
@@ -63,7 +63,7 @@ Item {
     PanelWindow {
         id: toast
 
-        screen: root.barWindow.screen
+        screen: root.targetScreen
         margins.top: root.config.popupGap
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0

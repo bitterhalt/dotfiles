@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 
 Item {
     id: root
@@ -9,6 +8,8 @@ Item {
     required property var barWindow
     required property var popupManager
     required property var notificationService
+    required property var notificationPopup
+    required property var uiService
 
     readonly property bool active:
         notificationService.dnd
@@ -63,62 +64,47 @@ Item {
         }
     }
 
-    NotificationPopup {
-        id: notificationPopup
-
-        config: root.config
-        barWindow: root.barWindow
-        notificationService: root.notificationService
-    }
-
     Connections {
         target: notificationService
 
         function onToastSerialChanged(): void {
-            if (!notificationService.dnd
-                    && notificationService.toastNotification) {
-                popupManager.closeHost("notificationCenter")
-                notificationPopup.show(
-                    notificationService.toastNotification
-                )
-            }
-        }
-
-        function onDndChanged(): void {
-            if (notificationService.dnd)
-                notificationPopup.hide()
+            popupManager.closeHost("notificationCenter")
         }
     }
 
-    IpcHandler {
-        target: "notificationCenter"
+    Connections {
+        target: uiService
 
-        function toggle(): void {
+        function onNotificationCenterActionRequested(action): void {
+            if (action === "close") {
+                popupManager.closeHost("notificationCenter")
+                return
+            }
+
+            if (barWindow.screen !== uiService.targetScreen) {
+                popupManager.closeHost("notificationCenter")
+                return
+            }
+
             notificationPopup.hide()
 
-            popupManager.toggleHost(
-                "notificationCenter",
-                notificationCenterComponent,
-                root,
-                false,
-                true
-            )
-        }
-
-        function open(): void {
-            notificationPopup.hide()
-
-            popupManager.openHost(
-                "notificationCenter",
-                notificationCenterComponent,
-                root,
-                false,
-                true
-            )
-        }
-
-        function close(): void {
-            popupManager.closeHost("notificationCenter")
+            if (action === "toggle") {
+                popupManager.toggleHost(
+                    "notificationCenter",
+                    notificationCenterComponent,
+                    root,
+                    false,
+                    true
+                )
+            } else if (action === "open") {
+                popupManager.openHost(
+                    "notificationCenter",
+                    notificationCenterComponent,
+                    root,
+                    false,
+                    true
+                )
+            }
         }
     }
 }

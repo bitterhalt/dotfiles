@@ -9,6 +9,7 @@ Item {
     id: root
 
     required property var config
+    required property var targetScreen
 
     property var themes: []
     property var recentThemes: []
@@ -69,13 +70,16 @@ Item {
     }
 
     function saveTheme(): void {
-        let name = saveInput.text.trim()
+        const name = normalizedThemeName(saveInput.text)
 
-        if (name.length === 0)
+        if (name === "") {
+            Quickshell.execDetached([
+                "notify-send",
+                "Invalid theme name",
+                "Use letters, numbers, spaces, dots, underscores, or hyphens."
+            ])
             return
-
-        if (!name.endsWith(".json"))
-            name += ".json"
+        }
 
         saveProc.command = [
             "sh",
@@ -97,6 +101,21 @@ Item {
 
         closeMenu()
         saveProc.running = true
+    }
+
+    function normalizedThemeName(input): string {
+        let name = String(input).trim()
+
+        if (name.toLowerCase().endsWith(".json"))
+            name = name.slice(0, -5)
+
+        if (!/^[A-Za-z0-9][A-Za-z0-9 ._-]*$/.test(name))
+            return ""
+
+        if (name.includes(".."))
+            return ""
+
+        return name + ".json"
     }
 
     function toggleMenu(): void {
@@ -240,9 +259,7 @@ Item {
     PanelWindow {
         id: themeMenu
 
-        screen: Quickshell.screens.length > 0
-            ? Quickshell.screens[0]
-            : null
+        screen: root.targetScreen
 
         anchors {
             top: true

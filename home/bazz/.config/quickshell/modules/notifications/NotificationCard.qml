@@ -164,7 +164,9 @@ Rectangle {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-                if (root.notification)
+                if (root.notificationService)
+                    root.notificationService.dismiss(root.notification);
+                else if (root.notification)
                     root.notification.dismiss();
 
             }
@@ -178,7 +180,9 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
         z: 10
         onClicked: {
-            if (root.notification)
+            if (root.notificationService)
+                root.notificationService.dismiss(root.notification);
+            else if (root.notification)
                 root.notification.dismiss();
 
         }

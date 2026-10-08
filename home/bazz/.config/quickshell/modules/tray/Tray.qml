@@ -9,6 +9,7 @@ Item {
     required property var config
     required property var barWindow
     required property var popupManager
+    required property var uiService
     readonly property int revealDuration: 300
     property bool expanded: false
     property real revealProgress: expanded ? 1 : 0
@@ -114,6 +115,7 @@ Item {
                 config: root.config
                 barWindow: root.barWindow
                 popupManager: root.popupManager
+                uiService: root.uiService
             }
 
         }

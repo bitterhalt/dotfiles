@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 import Quickshell.Wayland
 
 import "../../components"
@@ -11,6 +10,7 @@ Item {
     required property var config
     required property var barWindow
     required property var popupManager
+    required property var uiService
 
     width: 24
     height: barWindow.height
@@ -366,19 +366,24 @@ Item {
         }
     }
 
-    IpcHandler {
-        target: "power"
+    Connections {
+        target: uiService
 
-        function toggle(): void {
-            root.toggleMenu()
-        }
+        function onPowerActionRequested(action): void {
+            if (action === "close") {
+                root.closeMenu()
+                return
+            }
 
-        function open(): void {
-            root.openMenu()
-        }
+            if (barWindow.screen !== uiService.targetScreen) {
+                root.closeMenu()
+                return
+            }
 
-        function close(): void {
-            root.closeMenu()
+            if (action === "toggle")
+                root.toggleMenu()
+            else if (action === "open")
+                root.openMenu()
         }
     }
 }

@@ -11,11 +11,6 @@ Item {
     width: 0
     height: 0
 
-    // Existing PopupWindow/PopoutPanel support. Audio/network/bluetooth/tray
-    // can keep using popupManager.toggle(...) while we migrate gradually.
-    property var current: null
-
-    // Shared shell-managed popup host.
     property bool hostVisible: false
     property string activeKey: ""
     property var hostComponent: null
@@ -23,38 +18,7 @@ Item {
     property bool hostFocusable: false
     property bool hostCentered: false
 
-    function toggle(popup) {
-        closeHost()
-
-        const opening = !popup.visible
-
-        if (current && current !== popup)
-            current.visible = false
-
-        popup.visible = opening
-        current = opening ? popup : null
-    }
-
-    function close(popup) {
-        popup.visible = false
-
-        if (current === popup)
-            current = null
-    }
-
-    function closeAll() {
-        if (current)
-            current.visible = false
-
-        current = null
-        closeHost()
-    }
-
     function openHost(key, component, anchorItem, focusable, centered) {
-        if (current)
-            current.visible = false
-
-        current = null
         activeKey = key
         hostComponent = component
         hostAnchor = anchorItem

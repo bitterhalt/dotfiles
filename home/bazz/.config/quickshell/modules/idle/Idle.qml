@@ -1,34 +1,15 @@
 import QtQuick
-import Quickshell
-import Quickshell.Io
 
 Item {
     id: idleModule
 
     required property var config
     required property var barWindow
+    required property var idleService
 
-    property bool disabled: false
-    width: disabled ? 24 : 0
+    width: idleService.disabled ? 24 : 0
     height: barWindow.height
     visible: width > 0
-
-    function refresh(): void {
-        if (!statusCheck.running)
-            statusCheck.running = true
-    }
-
-    function toggle(): void {
-        if (disabled) {
-            Quickshell.execDetached(["swayidle"])
-            disabled = false
-            idleNotifier.show("Enabled")
-        } else {
-            Quickshell.execDetached(["pkill", "-x", "swayidle"])
-            disabled = true
-            idleNotifier.show("Disabled")
-        }
-    }
 
     Text {
         anchors.centerIn: parent
@@ -41,19 +22,7 @@ Item {
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        onClicked: idleModule.toggle()
-    }
-
-    // One initial state check only. Explicit toggles update the state directly.
-    Process {
-        id: statusCheck
-
-        command: ["pgrep", "-x", "swayidle"]
-        running: true
-
-        onExited: exitCode => {
-            idleModule.disabled = exitCode !== 0
-        }
+        onClicked: idleService.toggle(barWindow.screen)
     }
 
     IdleNotifier {
@@ -62,19 +31,12 @@ Item {
         barWindow: idleModule.barWindow
     }
 
-    IpcHandler {
-        target: "idle"
+    Connections {
+        target: idleService
 
-        function toggle(): void {
-            idleModule.toggle()
-        }
-
-        function refresh(): void {
-            idleModule.refresh()
-        }
-
-        function isDisabled(): bool {
-            return idleModule.disabled
+        function onNotificationRequested(message, screen): void {
+            if (barWindow.screen === screen)
+                idleNotifier.show(message)
         }
     }
 }

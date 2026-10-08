@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 
 import "../weather"
 
@@ -11,6 +10,7 @@ Item {
   required property var barWindow
   required property var popupManager
   required property var weatherData
+  required property var uiService
 
   readonly property int revealDuration: 300
   property real revealProgress: clockHover.hovered ? 1 : 0
@@ -132,31 +132,37 @@ Item {
     }
   }
 
-  IpcHandler {
-    target: "weather"
+  Connections {
+    target: uiService
 
-    function toggle(): void {
-      popupManager.toggleHost(
-        "weather",
-        weatherPopupComponent,
-        root,
-        false,
-        true
-      )
-    }
+    function onWeatherActionRequested(action): void {
+      if (action === "close") {
+        popupManager.closeHost("weather")
+        return
+      }
 
-    function open(): void {
-      popupManager.openHost(
-        "weather",
-        weatherPopupComponent,
-        root,
-        false,
-        true
-      )
-    }
+      if (barWindow.screen !== uiService.targetScreen) {
+        popupManager.closeHost("weather")
+        return
+      }
 
-    function close(): void {
-      popupManager.closeHost("weather")
+      if (action === "toggle") {
+        popupManager.toggleHost(
+          "weather",
+          weatherPopupComponent,
+          root,
+          false,
+          true
+        )
+      } else if (action === "open") {
+        popupManager.openHost(
+          "weather",
+          weatherPopupComponent,
+          root,
+          false,
+          true
+        )
+      }
     }
   }
 }

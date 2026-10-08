@@ -2,7 +2,6 @@ import "../../components"
 import "Model.js" as Model
 import QtQuick
 import Quickshell
-import Quickshell.Bluetooth
 import Quickshell.Widgets
 
 Item {
@@ -11,8 +10,9 @@ Item {
     required property var config
     required property var barWindow
     required property var popupManager
-    readonly property var adapter: Bluetooth.defaultAdapter
-    readonly property var deviceObjects: adapter && adapter.devices ? adapter.devices.values : []
+    required property var bluetoothService
+    readonly property var adapter: bluetoothService.adapter
+    readonly property var deviceObjects: bluetoothService.devices
     readonly property var deviceRows: Model.rows(deviceObjects)
     readonly property var connectedRows: deviceRows.filter((row) => {
         return row.connected;
@@ -25,29 +25,8 @@ Item {
     })
     readonly property int connectedCount: connectedRows.length
 
-    function deviceForAddress(address) {
-        for (var i = 0; i < deviceObjects.length; ++i) {
-            var device = deviceObjects[i];
-            if (device && device.address === address)
-                return device;
-
-        }
-        return null;
-    }
-
     function toggleDevice(row) {
-        var device = deviceForAddress(row.address);
-        if (!device)
-            return ;
-
-        if (device.connected)
-            device.disconnect();
-        else if (device.paired)
-            device.connect();
-        else if (device.pairing)
-            device.cancelPair();
-        else
-            device.pair();
+        bluetoothService.toggleDevice(row)
     }
 
     width: 24
@@ -72,12 +51,6 @@ Item {
             else if (root.adapter)
                 root.adapter.enabled = !root.adapter.enabled;
         }
-    }
-
-    BluetoothNotifier {
-        config: root.config
-        barWindow: root.barWindow
-        devices: root.deviceObjects
     }
 
     Component {

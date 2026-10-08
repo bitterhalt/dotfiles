@@ -15,6 +15,8 @@ Item {
     readonly property var notifications: server.trackedNotifications.values
     readonly property int notificationCount: notifications.length
 
+    onNotificationsChanged: Qt.callLater(() => root.pruneReceivedTimes())
+
     function receive(notification): void {
         // Keep notifications alive so they can appear in the notification center.
         notification.tracked = true
@@ -38,6 +40,36 @@ Item {
         return receivedTimes[notification.id] ?? 0
     }
 
+    function removeReceivedTime(notification): void {
+        if (!notification)
+            return
+
+        const nextTimes = Object.assign({}, receivedTimes)
+        delete nextTimes[notification.id]
+        receivedTimes = nextTimes
+    }
+
+    function pruneReceivedTimes(): void {
+        const nextTimes = {}
+
+        for (let i = 0; i < notifications.length; ++i) {
+            const id = notifications[i].id
+
+            if (receivedTimes[id] !== undefined)
+                nextTimes[id] = receivedTimes[id]
+        }
+
+        receivedTimes = nextTimes
+    }
+
+    function dismiss(notification): void {
+        if (!notification)
+            return
+
+        removeReceivedTime(notification)
+        notification.dismiss()
+    }
+
     function timeLabel(notification): string {
         const timestamp = receivedAt(notification)
 
@@ -48,8 +80,10 @@ Item {
     }
 
     function finishToast(notification): void {
-        if (notification && notification.transient)
+        if (notification && notification.transient) {
+            removeReceivedTime(notification)
             notification.expire()
+        }
 
         if (toastNotification === notification)
             toastNotification = null
@@ -70,6 +104,7 @@ Item {
             items[i].dismiss()
 
         toastNotification = null
+        receivedTimes = ({})
     }
 
     NotificationServer {

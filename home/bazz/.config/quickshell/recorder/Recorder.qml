@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 import Quickshell.Wayland
 
 import "../components"
@@ -10,10 +9,11 @@ Item {
 
     required property var config
     required property var barWindow
+    required property var recorderService
 
-    property string pendingMode: ""
-    property string outputFile: ""
-    readonly property bool runningNow: recorderProc.running
+    readonly property bool runningNow: recorderService.runningNow
+    readonly property bool ipcOwner:
+        barWindow.screen === recorderService.targetScreen
 
     property int selectedIndex: 0
     readonly property int actionCount: runningNow ? 3 : 2
@@ -21,32 +21,6 @@ Item {
     width: runningNow ? 24 : 0
     height: barWindow.height
     visible: runningNow
-
-    function captureDirectory(): string {
-        return Quickshell.env("HOME") + "/Videos/Captures"
-    }
-
-    function makeOutputFile(): string {
-        const stamp = Qt.formatDateTime(
-            new Date(),
-            "yyyy-MM-dd-HH-mm-ss"
-        )
-
-        return captureDirectory()
-            + "/"
-            + stamp
-            + "_capture.mp4"
-    }
-
-    function notify(title, message): void {
-        Quickshell.execDetached([
-            "notify-send",
-            "-a", "gpu-screen-recorder",
-            "-t", "3000",
-            title,
-            message
-        ])
-    }
 
     function openMenu(): void {
         selectedIndex = 0
@@ -85,63 +59,21 @@ Item {
         }
     }
 
-    function prepare(mode): void {
-        closeMenu()
-
-        if (runningNow || prepareDir.running) {
-            notify(
-                "Screen record",
-                "Recording already in progress"
-            )
-            return
-        }
-
-        pendingMode = mode
-        outputFile = makeOutputFile()
-        prepareDir.running = true
-    }
-
     function fullscreen(): void {
-        prepare("fullscreen")
+        closeMenu()
+        recorderService.fullscreen()
     }
 
     function region(): void {
-        prepare("region")
+        closeMenu()
+
+        if (recorderService.canStart())
+            regionSelector.open()
     }
 
     function stop(): void {
         closeMenu()
-
-        if (!runningNow) {
-            notify("Screen record", "No active recording")
-            return
-        }
-
-        if (!stopProc.running)
-            stopProc.running = true
-    }
-
-    function startRecorder(windowTarget, withAudio): void {
-        const command = [
-            "gpu-screen-recorder",
-            "-w", windowTarget,
-            "-f", "60"
-        ]
-
-        if (withAudio) {
-            command.push(
-                "-a",
-                "default_output"
-            )
-        }
-
-        command.push(
-            "-o",
-            outputFile
-        )
-
-        recorderProc.command = command
-        recorderProc.running = true
+        recorderService.stop()
     }
 
     Text {
@@ -158,86 +90,6 @@ Item {
         onClicked: root.toggleMenu()
     }
 
-    Process {
-        id: prepareDir
-
-        command: [
-            "mkdir",
-            "-p",
-            root.captureDirectory()
-        ]
-
-        onExited: exitCode => {
-            if (exitCode !== 0) {
-                root.pendingMode = ""
-                root.notify(
-                    "Screen record",
-                    "Could not create capture directory"
-                )
-                return
-            }
-
-            if (root.pendingMode === "fullscreen") {
-                root.pendingMode = ""
-                root.startRecorder("screen", true)
-                return
-            }
-
-            if (root.pendingMode === "region") {
-                root.pendingMode = ""
-                regionSelector.open()
-            }
-        }
-    }
-
-
-
-Process {
-    id: slurpProc
-
-    command: [
-        "slurp",
-        "-f", "%wx%h+%x+%y"
-    ]
-
-    stdout: StdioCollector {
-        onStreamFinished: {
-            const geometry = text.trim()
-
-            if (!geometry)
-                return
-
-            root.startRecorder(geometry, false)
-        }
-    }
-}
-
-    Process {
-        id: recorderProc
-
-        onExited: {
-            if (root.outputFile !== "") {
-                root.notify(
-                    "Screen record",
-                    "Recording saved to "
-                        + root.captureDirectory()
-                )
-            }
-
-            root.outputFile = ""
-        }
-    }
-
-    Process {
-        id: stopProc
-
-        command: [
-            "killall",
-            "-SIGINT",
-            "gpu-screen-recorder"
-        ]
-    }
-
     RegionSelector {
         id: regionSelector
 
@@ -245,11 +97,7 @@ Process {
         targetScreen: root.barWindow.screen
 
         onAccepted: geometry => {
-            root.startRecorder(geometry, false)
-        }
-
-        onCanceled: {
-            root.outputFile = ""
+            root.recorderService.startRegion(geometry)
         }
     }
 
@@ -472,35 +320,29 @@ Process {
         }
     }
 
-    IpcHandler {
-        target: "recorder"
+    Connections {
+        target: recorderService
 
-        function toggle(): void {
-            root.toggleMenu()
+        function onMenuActionRequested(action): void {
+            if (action === "close") {
+                root.closeMenu()
+                return
+            }
+
+            if (!root.ipcOwner) {
+                root.closeMenu()
+                return
+            }
+
+            if (action === "toggle")
+                root.toggleMenu()
+            else if (action === "open")
+                root.openMenu()
         }
 
-        function open(): void {
-            root.openMenu()
-        }
-
-        function close(): void {
-            root.closeMenu()
-        }
-
-        function fullscreen(): void {
-            root.fullscreen()
-        }
-
-        function region(): void {
-            root.region()
-        }
-
-        function stop(): void {
-            root.stop()
-        }
-
-        function isRecording(): bool {
-            return root.runningNow
+        function onRegionSelectionRequested(): void {
+            if (root.ipcOwner)
+                root.region()
         }
     }
 }
