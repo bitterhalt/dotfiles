@@ -9,6 +9,32 @@ Item {
     readonly property var adapter: Bluetooth.defaultAdapter
     readonly property var devices:
         adapter && adapter.devices ? adapter.devices.values : []
+    property int discoveryUsers: 0
+    property var discoveryAdapter: null
+
+    onAdapterChanged: updateDiscovery()
+
+    function updateDiscovery(): void {
+        if (discoveryAdapter && discoveryAdapter !== adapter)
+            discoveryAdapter.discovering = false
+
+        discoveryAdapter = adapter
+
+        if (discoveryAdapter) {
+            discoveryAdapter.discovering =
+                discoveryAdapter.enabled && discoveryUsers > 0
+        }
+    }
+
+    function beginDiscovery(): void {
+        discoveryUsers += 1
+        updateDiscovery()
+    }
+
+    function endDiscovery(): void {
+        discoveryUsers = Math.max(0, discoveryUsers - 1)
+        updateDiscovery()
+    }
 
     function deviceForAddress(address) {
         for (let i = 0; i < devices.length; ++i) {
@@ -35,5 +61,14 @@ Item {
             device.cancelPair()
         else
             device.pair()
+    }
+
+    Connections {
+        target: root.adapter
+        ignoreUnknownSignals: true
+
+        function onEnabledChanged(): void {
+            root.updateDiscovery()
+        }
     }
 }

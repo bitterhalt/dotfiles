@@ -61,16 +61,8 @@ Item {
 
             config: root.config
             contentWidth: 330
-            Component.onCompleted: {
-                if (root.adapter)
-                    root.adapter.discovering = root.adapter.enabled;
-
-            }
-            Component.onDestruction: {
-                if (root.adapter)
-                    root.adapter.discovering = false;
-
-            }
+            Component.onCompleted: root.bluetoothService.beginDiscovery()
+            Component.onDestruction: root.bluetoothService.endDiscovery()
 
             Item {
                 width: parent.width
