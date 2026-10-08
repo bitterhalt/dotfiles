@@ -16,8 +16,8 @@ Item {
 
 
     readonly property var packagesItems: [
-        { label: "Install Packages", icon: "󰏗", command: "foot -a pacseek -T pacseek -e pacseek -m" },
-        { label: "Update", icon: "󰑐", command: "foot -a pop-upgrade -e sup" }
+        { label: "Install Packages", icon: "󰏗", shortcut: "i", command: "foot -a pacseek -T pacseek -e pacseek -m" },
+        { label: "Update", icon: "󰑐", shortcut: "u", command: "foot -a pop-upgrade -e sup" }
     ]
 
 
@@ -221,6 +221,16 @@ Item {
                     return
                 }
 
+                const key = event.text.toLowerCase()
+
+                for (let i = 0; i < root.currentItems.length; ++i) {
+                    if (root.currentItems[i].shortcut === key) {
+                        root.activateIndex(i)
+                        event.accepted = true
+                        return
+                    }
+                }
+
                 const number = Number(event.text)
 
                 if (number >= 1 && number <= root.currentItems.length) {
@@ -350,13 +360,13 @@ Item {
                         color: "transparent"
 
                         border.width: 1
-                        border.color: root.config.borderColor
+                        border.color: root.config.accent
 
                         Text {
                             anchors.centerIn: parent
                             color: root.config.muted
                             font.pointSize: root.config.fontSize(0.846)
-                            text: menuItem.index + 1
+                            text: modelData.shortcut ?? (menuItem.index + 1)
                         }
                     }
 
