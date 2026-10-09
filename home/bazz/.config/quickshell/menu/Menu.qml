@@ -321,7 +321,7 @@ Item {
                     Text {
                         anchors.left: parent.left
                         anchors.leftMargin: 38
-                        anchors.right: keyBox.left
+                        anchors.right: keyHint.left
                         anchors.rightMargin: 8
                         anchors.verticalCenter: parent.verticalCenter
 
@@ -334,7 +334,7 @@ Item {
 
                     Text {
                         visible: modelData.page !== undefined
-                        anchors.right: keyBox.left
+                        anchors.right: keyHint.left
                         anchors.rightMargin: 8
                         anchors.verticalCenter: parent.verticalCenter
 
@@ -344,27 +344,18 @@ Item {
                         text: "󰅂"
                     }
 
-                    Rectangle {
-                        id: keyBox
+                    Text {
+                        id: keyHint
 
                         anchors.right: parent.right
                         anchors.rightMargin: 6
                         anchors.verticalCenter: parent.verticalCenter
 
                         width: 21
-                        height: 20
-                        radius: 4
-                        color: "transparent"
-
-                        border.width: 1
-                        border.color: root.config.accent
-
-                        Text {
-                            anchors.centerIn: parent
-                            color: root.config.muted
-                            font.pointSize: root.config.fontSize(0.846)
-                            text: modelData.shortcut ?? (menuItem.index + 1)
-                        }
+                        horizontalAlignment: Text.AlignHCenter
+                        color: root.config.fg
+                        font.pointSize: root.config.fontSize(0.846)
+                        text: modelData.shortcut ?? (menuItem.index + 1)
                     }
 
                     MouseArea {

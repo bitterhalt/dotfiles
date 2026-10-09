@@ -9,8 +9,8 @@ inherits = "vicinae-dark"
 background = "{background}"
 foreground = "{foreground}"
 secondary_background = "{color0}"
-border = "{color8}"
-accent = "{color4}"
+border = "{color1}"
+accent = "{color1}"
 accent_foreground = "{background}"
 
 [colors.accents]
@@ -24,7 +24,7 @@ yellow = "{color3}"
 cyan = "{color6}"
 
 [colors.list.item.selection]
-background = "{color8}"
+background = "{color1}"
 secondary_background = "{color0}"
 
 [colors.grid.item]

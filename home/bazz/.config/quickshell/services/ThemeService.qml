@@ -82,7 +82,7 @@ Item {
         fg = colors.foreground
         muted = colors.color8
         accent = colors.color4
-        urgent = colors.color1
+        urgent = colors.color3
         pywalActive = true
     }
 

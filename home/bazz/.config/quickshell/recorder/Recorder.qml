@@ -212,7 +212,6 @@ Item {
                 icon: "󰙦"
                 label: "Stop"
                 keyHint: "s"
-                dangerous: true
                 visible: root.runningNow
                 height: visible ? 32 : 0
                 onTriggered: root.stop()
@@ -237,7 +236,6 @@ Item {
         required property string label
         required property string keyHint
 
-        property bool dangerous: false
         readonly property bool selected:
             root.selectedIndex === menuItem.index
 
@@ -278,34 +276,17 @@ Item {
             text: menuItem.label
         }
 
-        Rectangle {
+        Text {
             anchors.right: parent.right
             anchors.rightMargin: 6
             anchors.verticalCenter: parent.verticalCenter
 
             width: 21
-            height: 20
-            radius: 4
-            color: "transparent"
-
-            border.width: 1
-            border.color: root.config.accent
-
-
-            Text {
-                anchors.centerIn: parent
-
-                color: menuItem.dangerous
-                    ? root.config.accent
-                    : root.config.muted
-
-                font.pointSize: root.config.fontSize(0.846)
-                font.weight: menuItem.dangerous
-                    ? Font.DemiBold
-                    : Font.Normal
-
-                text: menuItem.keyHint
-            }
+            horizontalAlignment: Text.AlignHCenter
+            color: root.config.fg
+            font.pointSize: root.config.fontSize(0.846)
+            font.weight: Font.Normal
+            text: menuItem.keyHint
         }
 
         MouseArea {
