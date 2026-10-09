@@ -20,7 +20,7 @@ Item {
 
         command: [
             Quickshell.env("HOME")
-                + "/.config/quickshell/modules/weather/weather.py"
+                + "/.config/quickshell/weather/weather.py"
         ]
 
         stdout: StdioCollector {

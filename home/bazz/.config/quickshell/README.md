@@ -29,53 +29,31 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 .
 ├── Config.qml
 ├── bar
-│   └── Bar.qml
+│   ├── Bar.qml
+│   └── modules
+│       ├── audio
+│       ├── battery
+│       ├── bluetooth
+│       ├── clock
+│       ├── idle
+│       ├── network
+│       ├── tray
+│       ├── window
+│       └── workspaces
 ├── components
 │   ├── PanelSeparator.qml
 │   ├── PopoutPanel.qml
 │   ├── PopupManager.qml
 │   ├── SectionHeader.qml
 │   └── ToggleSwitch.qml
-├── modules
-│   ├── audio
-│   │   ├── Audio.qml
-│   │   ├── AudioDeviceRow.qml
-│   │   ├── AudioPopup.qml
-│   │   ├── AudioStreamRow.qml
-│   │   ├── Model.js
-│   │   └── VolumeSlider.qml
-│   ├── battery
-│   │   └── Battery.qml
-│   ├── bluetooth
-│   │   ├── Bluetooth.qml
-│   │   ├── BluetoothNotifier.qml
-│   │   └── Model.js
-│   ├── clock
-│   │   └── Clock.qml
-│   ├── idle
-│   │   ├── Idle.qml
-│   │   └── IdleNotifier.qml
-│   ├── network
-│   │   ├── Model.js
-│   │   ├── Network.qml
-│   │   ├── NetworkPopup.qml
-│   │   └── NetworkRow.qml
-│   ├── notifications
-│   │   ├── NotificationCard.qml
-│   │   ├── NotificationCenter.qml
-│   │   ├── NotificationPopup.qml
-│   │   └── Notifications.qml
-│   ├── tray
-│   │   ├── Power.qml
-│   │   ├── Tray.qml
-│   │   └── TrayMenu.qml
-│   ├── weather
-│   │   ├── WeatherPopup.qml
-│   │   └── weather.py
-│   ├── window
-│   │   └── WindowTitle.qml
-│   └── workspaces
-│       └── Workspaces.qml
+├── menus
+│   ├── MainMenu.qml
+│   └── ThemeMenu.qml
+├── notifications
+│   ├── NotificationCard.qml
+│   ├── NotificationCenter.qml
+│   ├── NotificationIndicator.qml
+│   └── NotificationPopup.qml
 ├── osd
 │   └── VolumeOsd.qml
 ├── recorder
@@ -91,6 +69,9 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── ShellUiService.qml
 │   ├── ThemeService.qml
 │   └── WeatherService.qml
+├── weather
+│   ├── WeatherPopup.qml
+│   └── weather.py
 └── shell.qml
 ```
 
@@ -98,7 +79,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 
 `ShellRoot` in `shell.qml` owns shared services and creates one `Bar` instance for every screen exposed by `Quickshell.screens`. Polling and other machine-wide state, such as battery and weather data, stays in one shell-owned service and is passed to each bar.
 
-`Bar.qml` is primarily responsible for arranging modules. Feature-specific behavior stays inside the corresponding module instead of being accumulated in the bar itself.
+`Bar.qml` is primarily responsible for arranging modules under `bar/modules/`. Cross-shell notification and weather UI use top-level feature directories instead of being owned by one bar.
 
 `Config.qml` contains global shell configuration such as bar geometry, typography, popup styling, clock formats, and shared colors.
 
@@ -242,7 +223,7 @@ The configured icon font is:
 Symbols Nerd Font Mono
 ```
 
-The weather module uses `weather.py` under `modules/weather/`.
+The weather feature keeps its helper at `weather/weather.py`.
 
 ## Design Notes
 
@@ -252,9 +233,10 @@ The project follows a few simple rules:
 - **`Bar.qml` arranges the bar rather than implementing features.**
 - **`services/` owns shared system state.**
 - **`components/` contains reusable presentation components.**
-- **`modules/` contains self-contained bar features.**
+- **`bar/modules/` contains self-contained bar features.**
+- **Cross-shell feature UI uses a top-level feature directory.**
 - **Feature-specific helpers stay beside the feature that uses them.**
-- **`Config.qml` stores global policy, while modules own implementation details.**
+- **`Config.qml` stores global policy, while features own implementation details.**
 
 This keeps dependencies explicit and avoids turning either `shell.qml` or `Config.qml` into a collection of unrelated feature logic.
 
@@ -296,7 +278,8 @@ For larger architectural changes, preserve the separation between:
 ```text
 shared state → services/
 shared UI    → components/
-feature UI   → modules/
+bar UI       → bar/modules/
+global UI    → top-level feature directories
 global shell → shell.qml
 ```
 

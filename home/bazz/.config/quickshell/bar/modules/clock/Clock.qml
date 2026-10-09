@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
 
-import "../weather"
+import "../../../weather"
 
 Item {
   id: root

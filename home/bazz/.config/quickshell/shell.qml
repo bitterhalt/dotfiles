@@ -10,9 +10,9 @@ import "services"
 import "recorder"
 import "osd"
 import "bar"
-import "menu"
-import "modules/bluetooth"
-import "modules/notifications"
+import "menus"
+import "bar/modules/bluetooth"
+import "notifications"
 
 ShellRoot {
   id: root
@@ -52,7 +52,7 @@ ShellRoot {
     targetScreen: root.activeScreen
   }
 
-  Menu {
+  MainMenu {
     id: mainMenu
     config: appConfig
     themeMenu: themeMenu

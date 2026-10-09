@@ -1,4 +1,4 @@
-import "../../components"
+import "../../../components"
 import "Model.js" as Model
 import QtQuick
 import Quickshell
