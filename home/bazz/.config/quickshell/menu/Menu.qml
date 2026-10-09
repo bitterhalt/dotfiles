@@ -29,7 +29,6 @@ Item {
         { label: "Nvim", icon: "", command: "foot sh -c 'cd ~/.config/nvim && vopen .'" },
         { label: "Pywal", icon: "󰏘", command: "foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" },
         { label: "Quickshell", icon: "󰆍", command: "foot sh -c 'cd ~/.config/quickshell && vopen .'" },
-        { label: "Swayidle", icon: "󰒲", command: "foot sh -c 'cd ~/.config/swayidle/ && nvim config'" },
         { label: "Dmenus", icon: "󰍉", command: "foot sh -c 'nvim ~/.local/bin/menu_*'" },
     ]
 

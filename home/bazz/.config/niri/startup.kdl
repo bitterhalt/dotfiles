@@ -5,4 +5,3 @@
 spawn-sh-at-startup "qs --no-detailed-logs"
 spawn-sh-at-startup "vicinae server"
 spawn-sh-at-startup "awww.sh"
-spawn-sh-at-startup "swayidle"

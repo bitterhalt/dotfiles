@@ -125,6 +125,12 @@ property int barItemPadding: 6
 property string clockFormat: "HH:mm"
 property string clockAlternativeFormat: "ddd, dd.MM"
 
+// Idle timeouts (seconds; 0 disables an individual action)
+property int idleLockTimeout: 1700
+property int idleDisplayTimeout: 1800
+property int idleSuspendTimeout: 7200
+property bool idleRespectInhibitors: true
+
 // Popups
 property int popupGap: 8
 property int popupRadius: 4
@@ -235,6 +241,8 @@ notify-send
 ```
 
 Additional modules may rely on system services or tools such as NetworkManager, Bluetooth/BlueZ, UPower, and Python.
+
+Idle handling requires compositor support for `ext-idle-notify-v1`. The current idle lock action still uses `swaylock`; only timeout monitoring is handled natively by QuickShell. There is intentionally no pre-sleep lock hook while the native lock screen is deferred, so manual or external suspend does not automatically lock the session.
 
 The configured icon font is:
 
