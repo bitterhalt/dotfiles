@@ -9,7 +9,12 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Return` | Open Terminal |
 | `Mod+Shift+Delete` | BTOP |
 | `Mod+Ctrl+Delete` | HTOP |
-| `Mod+Shift+F11` | Toggle Idle Timers |
+
+## Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "idle.sh -t && pkill -SIGRTMIN+1 waybar"; }
+
+| Key | Action |
+| --- | ------ |
+| `Mod+Shift+F11` | Toggle Idle-deamon |
 | `Mod+V` | Open Editor |
 | `Mod+F11` | Lock Screen |
 | `Mod+Shift+A` | Launch program |

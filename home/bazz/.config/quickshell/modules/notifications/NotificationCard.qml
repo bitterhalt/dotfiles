@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Services.Notifications
 import Quickshell.Widgets
 
 Rectangle {
@@ -13,6 +14,9 @@ Rectangle {
     property bool dismissOnClick: false
     readonly property int appIconSize: 36
     readonly property bool hasImage: notification && notification.image && notification.image !== ""
+    readonly property bool critical: notification && notification.urgency === NotificationUrgency.Critical
+    readonly property color criticalBorderColor: "#af3029"
+    readonly property color criticalTextColor: "#ad8301"
     readonly property int actionCount: !compact && notification && notification.actions ? Math.min(notification.actions.length, 2) : 0
 
     function iconSource(icon) {
@@ -34,7 +38,7 @@ Rectangle {
     }
     radius: config.popupRadius
     color: config.bg
-    border.color: config.borderColor
+    border.color: critical ? criticalBorderColor : config.borderColor
     border.width: 1
 
     HoverHandler {
@@ -52,7 +56,7 @@ Rectangle {
 
         Rectangle {
             anchors.fill: parent
-            visible: root.hasImage
+            visible: !root.critical && root.hasImage
             radius: width / 2
             clip: true
             color: config.surface
@@ -70,17 +74,17 @@ Rectangle {
             id: appIcon
 
             anchors.fill: parent
-            visible: !root.hasImage && source.toString() !== ""
+            visible: !root.critical && !root.hasImage && source.toString() !== ""
             source: root.iconSource(root.notification ? root.notification.appIcon : "")
         }
 
         Text {
             anchors.centerIn: parent
-            visible: !root.hasImage && !appIcon.visible
-            color: config.muted
+            visible: root.critical || (!root.hasImage && !appIcon.visible)
+            color: root.critical ? root.criticalTextColor : config.muted
             font.family: config.iconFontFamily
             font.pointSize: config.iconSize
-            text: "󰂚"
+            text: root.critical ? "󰀧" : "󰂚"
         }
 
     }
@@ -98,7 +102,7 @@ Rectangle {
 
         Text {
             width: parent.width
-            color: config.muted
+            color: root.critical ? root.criticalTextColor : config.muted
             font.pointSize: config.fontSize(0.78)
             elide: Text.ElideRight
             text: root.notification ? (root.notification.appName || "Notification") : ""
@@ -106,7 +110,7 @@ Rectangle {
 
         Text {
             width: parent.width
-            color: config.fg
+            color: root.critical ? root.criticalTextColor : config.fg
             font.pointSize: config.fontSize(0.96)
             font.weight: Font.DemiBold
             elide: Text.ElideRight
@@ -116,7 +120,7 @@ Rectangle {
         Text {
             width: parent.width
             visible: text.length > 0
-            color: config.fg
+            color: root.critical ? root.criticalTextColor : config.fg
             opacity: 0.85
             font.pointSize: config.fontSize(0.86)
             textFormat: Text.PlainText
@@ -136,7 +140,7 @@ Rectangle {
         anchors.rightMargin: 4
         anchors.top: parent.top
         anchors.topMargin: 10
-        color: config.muted
+        color: root.critical ? root.criticalTextColor : config.muted
         font.pointSize: config.fontSize(0.74)
         text: root.notificationService ? root.notificationService.timeLabel(root.notification) : ""
     }
@@ -155,7 +159,7 @@ Rectangle {
 
         Text {
             anchors.centerIn: parent
-            color: config.muted
+            color: root.critical ? root.criticalTextColor : config.muted
             font.pointSize: config.fontSize(1)
             text: "×"
         }
@@ -216,7 +220,7 @@ Rectangle {
                     width: parent.width - 12
                     horizontalAlignment: Text.AlignHCenter
                     elide: Text.ElideRight
-                    color: config.fg
+                    color: root.critical ? root.criticalTextColor : config.fg
                     font.pointSize: config.fontSize(0.8)
                     text: root.notification ? root.notification.actions[index].text : ""
                 }
