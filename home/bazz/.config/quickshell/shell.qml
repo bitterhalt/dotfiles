@@ -108,7 +108,6 @@ ShellRoot {
 
   IdleService {
     id: appIdleService
-    config: appConfig
     targetScreen: root.activeScreen
   }
 

@@ -5,27 +5,27 @@ Item {
     id: config
 
     required property var theme
+
     // Typography
     property real fontScale: 1
     property real iconScale: 1
     property string iconFontFamily: "Symbols Nerd Font Mono"
+
     // Bar geometry
     property int barHeight: 32
     property int barEdgeMargin: 14
     property int barModuleSpacing: 8
     property int workspaceTitleGap: 10
     property int barItemPadding: 6
+
     // Clock
     property string clockFormat: "HH:mm"
     property string clockAlternativeFormat: "ddd, dd.MM"
-    // Idle timeouts in seconds. Set an individual timeout to 0 to disable it.
-    property int idleLockTimeout: 1700
-    property int idleDisplayTimeout: 1800
-    property int idleSuspendTimeout: 7200
-    property bool idleRespectInhibitors: true
+
     // Popup geometry
     property int popupGap: 16
     property int popupRadius: 4
+
     // Semantic palette supplied by ThemeService.
     // ThemeService falls back to the hardcoded palette when Pywal is absent.
     readonly property color bg: theme.bg
@@ -40,11 +40,11 @@ Item {
     readonly property real iconSize: systemFontPointSize * fontScale * iconScale
 
     function fontSize(scale) {
-        return systemFontPointSize * fontScale * scale;
+        return systemFontPointSize * fontScale * scale
     }
 
     function run(command) {
-        Quickshell.execDetached(["sh", "-lc", command]);
+        Quickshell.execDetached(["sh", "-lc", command])
     }
 
     visible: false
@@ -52,5 +52,4 @@ Item {
     FontMetrics {
         id: systemFontMetrics
     }
-
 }

@@ -1,93 +1,42 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Quickshell.Wayland
 
 Item {
     id: root
 
     visible: false
 
-    required property var config
-
     property bool disabled: false
     property var targetScreen: null
-    property bool displaysPoweredOff: false
 
     signal notificationRequested(string message, var screen)
 
-    function lockSession(): void {
-        Quickshell.execDetached([
-            "sh",
-            "-lc",
-            "pidof swaylock >/dev/null || "
-                + "swaylock -C \"$HOME/.cache/wal/colors-swaylock\" -f"
-        ])
-    }
-
-    function powerOffDisplays(): void {
-        if (displaysPoweredOff)
-            return
-
-        displaysPoweredOff = true
-        Quickshell.execDetached([
-            "niri", "msg", "action", "power-off-monitors"
-        ])
-    }
-
-    function powerOnDisplays(): void {
-        if (!displaysPoweredOff)
-            return
-
-        displaysPoweredOff = false
-        Quickshell.execDetached([
-            "niri", "msg", "action", "power-on-monitors"
-        ])
+    function refresh(): void {
+        if (!statusCheck.running)
+            statusCheck.running = true
     }
 
     function toggle(screen): void {
         if (disabled) {
+            Quickshell.execDetached(["swayidle"])
             disabled = false
             notificationRequested("Enabled", screen || targetScreen)
         } else {
+            Quickshell.execDetached(["pkill", "-x", "swayidle"])
             disabled = true
-            powerOnDisplays()
             notificationRequested("Disabled", screen || targetScreen)
         }
     }
 
-    IdleMonitor {
-        enabled: !root.disabled && root.config.idleLockTimeout > 0
-        timeout: root.config.idleLockTimeout
-        respectInhibitors: root.config.idleRespectInhibitors
+    Process {
+        id: statusCheck
 
-        onIsIdleChanged: {
-            if (isIdle)
-                root.lockSession()
-        }
-    }
+        command: ["pgrep", "-x", "swayidle"]
+        running: true
 
-    IdleMonitor {
-        enabled: !root.disabled && root.config.idleDisplayTimeout > 0
-        timeout: root.config.idleDisplayTimeout
-        respectInhibitors: root.config.idleRespectInhibitors
-
-        onIsIdleChanged: {
-            if (isIdle)
-                root.powerOffDisplays()
-            else
-                root.powerOnDisplays()
-        }
-    }
-
-    IdleMonitor {
-        enabled: !root.disabled && root.config.idleSuspendTimeout > 0
-        timeout: root.config.idleSuspendTimeout
-        respectInhibitors: root.config.idleRespectInhibitors
-
-        onIsIdleChanged: {
-            if (isIdle)
-                Quickshell.execDetached(["systemctl", "suspend"])
+        onExited: exitCode => {
+            root.disabled = exitCode !== 0
         }
     }
 
@@ -96,6 +45,10 @@ Item {
 
         function toggle(): void {
             root.toggle(root.targetScreen)
+        }
+
+        function refresh(): void {
+            root.refresh()
         }
 
         function isDisabled(): bool {

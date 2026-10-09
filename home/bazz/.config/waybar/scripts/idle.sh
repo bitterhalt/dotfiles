@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
-if [[ "$1" == "-t" ]]; then
-  qs ipc call idle toggle >/dev/null
-  exit
-fi
-
-if [[ "$(qs ipc call idle isDisabled 2>/dev/null)" != "true" ]]; then
+if pgrep -x "swayidle" >/dev/null; then
   echo ""
 else
-  echo "{\"text\": \"󱐋\", \"tooltip\": \"Idle timers are disabled\", \"class\": \"disabled\"}"
+  echo "{\"text\": \"󱐋\", \"tooltip\": \"Idle daemon is disabled\", \"class\": \"disabled\"}"
 fi
