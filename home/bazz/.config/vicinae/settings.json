@@ -59,6 +59,13 @@
       "applications:steam"
    ],
    "providers": {
+      "@bazz/fdsearch": {
+         "entrypoints": {
+            "search-files": {
+               "alias": "fds"
+            }
+         }
+      },
       "@fbosch/store.vicinae.nerdfont-search": {
          "entrypoints": {
             "nerdfonts-search": {
