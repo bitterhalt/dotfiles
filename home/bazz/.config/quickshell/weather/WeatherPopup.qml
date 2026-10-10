@@ -54,7 +54,7 @@ Item {
         }
 
         Column {
-          width: parent.width - 66
+          width: parent.width - 102
           anchors.verticalCenter: parent.verticalCenter
           spacing: 1
 
@@ -97,6 +97,35 @@ Item {
                 : ""
               }
             }
+          }
+        }
+
+        Item {
+          width: 24
+          height: parent.height
+
+          Text {
+            id: refreshIcon
+
+            anchors.top: parent.top
+            anchors.topMargin: -1
+            anchors.right: parent.right
+            anchors.rightMargin: 6
+            color: refreshMouse.containsMouse ? config.fg : config.muted
+            font.family: config.iconFontFamily
+            font.pointSize: config.iconSize * 0.9
+            text: "󰑐"
+          }
+
+          MouseArea {
+            id: refreshMouse
+
+            anchors.centerIn: refreshIcon
+            width: 30
+            height: 30
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: weatherData.refresh(true)
           }
         }
       }

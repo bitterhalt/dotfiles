@@ -9,19 +9,22 @@ Item {
 
     property string text: ""
     property var data: ({})
+    readonly property string scriptPath:
+        Quickshell.env("HOME") + "/.config/quickshell/weather/weather.py"
 
-    function refresh(): void {
-        if (!weatherProcess.running)
+    function refresh(force): void {
+        if (!weatherProcess.running) {
+            weatherProcess.command = force === true
+                ? [scriptPath, "--refresh"]
+                : [scriptPath]
             weatherProcess.running = true
+        }
     }
 
     Process {
         id: weatherProcess
 
-        command: [
-            Quickshell.env("HOME")
-                + "/.config/quickshell/weather/weather.py"
-        ]
+        command: [root.scriptPath]
 
         stdout: StdioCollector {
             onStreamFinished: {
@@ -42,6 +45,6 @@ Item {
         repeat: true
         interval: 3600000
         triggeredOnStart: true
-        onTriggered: root.refresh()
+        onTriggered: root.refresh(false)
     }
 }

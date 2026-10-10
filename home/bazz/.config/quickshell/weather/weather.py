@@ -16,6 +16,7 @@ Refresh:
 import json
 import math
 import os
+import sys
 import time
 import urllib.parse
 import urllib.request
@@ -140,8 +141,8 @@ def read_cache():
     return None
 
 
-def load_weather():
-    if os.path.exists(CACHE_FILE):
+def load_weather(force_refresh=False):
+    if not force_refresh and os.path.exists(CACHE_FILE):
         age = time.time() - os.path.getmtime(CACHE_FILE)
         if age < CACHE_TIMEOUT:
             cached = read_cache()
@@ -205,7 +206,7 @@ def hhmm(value):
 
 
 def main():
-    weather = load_weather()
+    weather = load_weather("--refresh" in sys.argv[1:])
 
     if weather is None:
         print(json.dumps({
