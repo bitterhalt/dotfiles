@@ -23,8 +23,6 @@ Item {
 
 
     readonly property var settingsItems: [
-        { label: "Bash", icon: "󱆃", command: "foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" },
-        { label: "Foot", icon: "󰆍", command: "foot -e nvim ~/.config/foot/foot.ini" },
         { label: "Niri", icon: "󰖲", command: "foot sh -c 'cd ~/.config/niri/ && nvim *'" },
         { label: "Nvim", icon: "", command: "foot sh -c 'cd ~/.config/nvim && vopen .'" },
         { label: "Pywal", icon: "󰏘", command: "foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" },

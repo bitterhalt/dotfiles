@@ -119,6 +119,7 @@
          "enabled": false
       },
       "power": {
+         "enabled": true,
          "entrypoints": {
             "hibernate": {
                "enabled": false
