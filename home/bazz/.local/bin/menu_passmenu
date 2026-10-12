@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DMENU="${DMENU:-vicinae dmenu}"
-
 export PASSWORD_STORE_CLIP_TIME=10
 shopt -s nullglob globstar
 
@@ -14,20 +12,18 @@ if [[ ${#password_files[@]} -eq 0 ]]; then
   exit 1
 fi
 
-password=$(printf '%s\n' "${password_files[@]}" | $DMENU \
-  --placeholder "Select Password")
+password=$(printf '%s\n' "${password_files[@]}" | fzf --border-label=" Passmenu " --reverse)
 
 [[ -n $password ]] || exit 0
 
-action=$(printf '%s\n' "Copy" "Edit" | $DMENU \
-  --placeholder "Choose?")
+action=$(printf '%s\n' "Copy" "Edit" | fzf --reverse)
 
 case "$action" in
 "Copy")
   pass show -c "$password" 2>/dev/null
   ;;
 "Edit")
-  "$TERMINAL" -e pass edit "$password"
+  pass edit "$password"
   ;;
 *)
   exit 0

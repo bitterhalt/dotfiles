@@ -16,8 +16,6 @@ Item {
 
     property bool opened: false
     property bool quitOnClose: false
-    property bool forceExpanded: false
-
     // Modes, switched with Ctrl+<key>.
     readonly property var modes: [
         { id: "apps", label: "Apps", name: "Applications", key: "A" },
@@ -57,15 +55,8 @@ Item {
     readonly property int inputHeight: 50
     readonly property int footerHeight: 38
     readonly property int capHeight: 20
-    readonly property int contentWidth: 560
-    readonly property int maximumCardHeight: inputHeight
-        + maxVisibleRows * rowHeight + 9 + footerHeight
-    readonly property int expandedTopMargin: Math.max(
-        config.popupGap,
-        Math.round(((targetScreen ? targetScreen.height : 0)
-            - maximumCardHeight) / 2)
-            + config.popupGap
-    )
+    readonly property int contentWidth: 400
+    readonly property int contentSpacing: config.barModuleSpacing
     readonly property bool fileMode:
         !runMode && !emojiMode && query.trim().startsWith("/")
     readonly property string fileNeedle:
@@ -203,7 +194,7 @@ Item {
             entries = []
         } else if (fileMode) {
             entries = fileResults
-        } else if (value !== "" || forceExpanded) {
+        } else {
             entries = applications
                 .map(entry => ({
                     type: "application",
@@ -217,7 +208,7 @@ Item {
                 .sort((a, b) => b.score - a.score
                     || a.text.localeCompare(b.text))
 
-            if (value === "" && forceExpanded) {
+            if (value === "") {
                 entries = applications
                     .map(entry => ({
                         type: "application",
@@ -240,25 +231,20 @@ Item {
             })
         }
 
-        return entries.slice(0, 100)
+        return !runMode && value === "" ? entries : entries.slice(0, 100)
     }
 
-    // Run mode lists recent binaries even before anything is typed.
-    readonly property bool expanded:
-        forceExpanded
-        || query.trim() !== ""
-        || (runMode && results.length > 0)
+    // The launcher stays at a fixed size; its result list scrolls when needed.
+    readonly property bool expanded: true
     readonly property bool fileSearching:
         fileProcess.running || fileSearchDebounce.running
-    readonly property int visibleRows:
-        expanded
-            ? Math.max(1, Math.min(maxVisibleRows, results.length))
-            : 0
+    readonly property int visibleRows: maxVisibleRows
 
     readonly property int cardHeight: inputHeight
-        + (expanded
-            ? visibleRows * rowHeight + 9 + footerHeight
-            : 0)
+        + visibleRows * rowHeight
+        + contentSpacing * 2
+        + footerHeight
+        + 2
 
 
     function close(): void {
@@ -275,7 +261,6 @@ Item {
 
     function reset(): void {
         mode = "apps"
-        forceExpanded = false
         query = ""
         calculatorResult = ""
         fileResults = []
@@ -299,7 +284,6 @@ Item {
             return
 
         mode = id
-        forceExpanded = id === "emoji"
         selectedIndex = 0
         calculatorResult = ""
         updateCalculator()
@@ -324,12 +308,6 @@ Item {
     }
 
     function navigateResults(direction): void {
-        if (!expanded) {
-            forceExpanded = true
-            selectedIndex = results.length > 0 ? 0 : -1
-            return
-        }
-
         if (direction > 0)
             selectNext()
         else
@@ -582,7 +560,7 @@ Item {
             left: true
         }
 
-        margins.top: root.expandedTopMargin
+        margins.top: root.config.popupGap
         margins.left: root.targetScreen
             ? Math.max(0, Math.round((root.targetScreen.width - width) / 2))
             : 0
@@ -733,9 +711,9 @@ Item {
                 id: resultList
 
                 anchors.top: searchInput.bottom
-                anchors.topMargin: 5
+                anchors.topMargin: root.contentSpacing
                 anchors.bottom: footer.top
-                anchors.bottomMargin: 4
+                anchors.bottomMargin: root.contentSpacing
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 4

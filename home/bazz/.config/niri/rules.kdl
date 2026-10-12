@@ -62,8 +62,9 @@ window-rule {
 
 window-rule {
     match app-id="fzf_killer"
+    match app-id="fzf_pass"
     open-floating true
-    default-column-width { proportion 0.20; }
+    default-column-width { proportion 0.30; }
     default-window-height { proportion 0.40; }
     default-floating-position x=16 y=16 relative-to="top"
 }
@@ -274,6 +275,7 @@ layer-rule {
     match namespace="wlr_which_key"
     match namespace="launcher"
     match namespace="notifications"
+    match namespace="weather"
     shadow {
       on
     }

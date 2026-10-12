@@ -172,7 +172,6 @@ Rectangle {
                     root.notificationService.dismiss(root.notification);
                 else if (root.notification)
                     root.notification.dismiss();
-
             }
         }
 
@@ -188,7 +187,6 @@ Rectangle {
                 root.notificationService.dismiss(root.notification);
             else if (root.notification)
                 root.notification.dismiss();
-
         }
     }
 

@@ -18,7 +18,7 @@ cmd=$(sed 's/ (PID:[0-9]*)$//' <<<"$selection")
 [[ -z "$pid" ]] && exit 1
 
 confirm=$(
-  printf "No\nYes\n" | fzf --prompt="Kill $cmd (PID $pid)? > " --height=20% --reverse || true
+  printf "No\nYes\n" | fzf --prompt="Kill $cmd (PID $pid)? " --reverse || true
 )
 
 [[ "$confirm" != "Yes" ]] && exit 0

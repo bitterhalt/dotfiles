@@ -1,53 +1,48 @@
 #!/usr/bin/env bash
 
-DMENU="${DMENU:-vicinae dmenu}"
 sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 
-if [ -n "$sessions" ]; then
-  menu_options="1 ➜ Attach session\n2 ➜ New session\n3 ➜ Rename session\n4 ➜ Delete session"
+menu() {
+  fzf --reverse --border-label " tmux-helper "
+}
+
+if [[ -n "$sessions" ]]; then
+  options="Attach session\nNew session\nRename session\nDelete session"
 else
-  menu_options="New session"
+  options="New session"
 fi
 
-choice=$(printf '%b\n' "$menu_options" |
-  $DMENU --placeholder "Tmux manager:")
+choice=$(printf '%b\n' "$options" | menu "Tmux manager")
 
 case "$choice" in
-*"Attach session")
-  target=$(printf '%s\n' "$sessions" | $DMENU --placeholder "Attach to:")
-  [ -n "$target" ] && "$TERMINAL" -e tmux attach-session -t "$target"
+"Attach session")
+  target=$(printf '%s\n' "$sessions" | menu "Attach to")
+  [[ -n "$target" ]] && "$TERMINAL" -e tmux attach-session -t "$target"
   ;;
 
-*"New session")
-  session_name=$(printf '' | $DMENU --placeholder "Name (optional):")
-  if [ -z "$session_name" ]; then
-    "$TERMINAL" -e tmux new-session
+"New session")
+  read -r -p "Session name (optional): " session_name
+
+  if [[ -z "$session_name" ]]; then
+    tmux new-session
   else
-    "$TERMINAL" -e tmux new-session -s "$session_name"
+    tmux new-session -s "$session_name"
   fi
   ;;
 
-*"Rename session")
-  target=$(printf '%s\n' "$sessions" | $DMENU --placeholder "Rename session:")
+"Rename session")
+  target=$(printf '%s\n' "$sessions" | menu "Rename session")
+  [[ -z "$target" ]] && exit 0
 
-  if [ -n "$target" ]; then
-    new_name=$(printf '' | $DMENU --placeholder "New name for $target:")
-
-    if [ -n "$new_name" ]; then
-      tmux rename-session -t "$target" "$new_name"
-    fi
-  fi
+  read -r -p "New name for $target: " new_name
+  [[ -n "$new_name" ]] && tmux rename-session -t "$target" "$new_name"
   ;;
 
-*"Delete session")
-  target=$(printf '%s\n' "$sessions" | $DMENU --placeholder "Kill session:")
+"Delete session")
+  target=$(printf '%s\n' "$sessions" | menu "Kill session")
+  [[ -z "$target" ]] && exit 0
 
-  if [ -n "$target" ]; then
-    confirm=$(printf "Yes\nNo\n" | $DMENU --placeholder "Delete $target?")
-
-    if [ "$confirm" = "Yes" ]; then
-      tmux kill-session -t "$target"
-    fi
-  fi
+  confirm=$(printf 'No\nYes\n' | menu "Delete $target?")
+  [[ "$confirm" == "Yes" ]] && tmux kill-session -t "$target"
   ;;
 esac

@@ -49,8 +49,12 @@ Item {
     }
 
     function popupX(popupWidth) {
+        const screenWidth = barWindow.screen
+            ? barWindow.screen.width
+            : popupWidth
+
         if (hostCentered)
-            return Math.round((popupHost.width - popupWidth) / 2)
+            return Math.round((screenWidth - popupWidth) / 2)
 
         if (hostAnchor) {
             try {
@@ -61,7 +65,7 @@ Item {
                 return Math.max(
                     config.popupGap,
                     Math.min(
-                        popupHost.width - popupWidth - config.popupGap,
+                        screenWidth - popupWidth - config.popupGap,
                         centeredX
                     )
                 )
@@ -69,17 +73,85 @@ Item {
             }
         }
 
-        return Math.round((popupHost.width - popupWidth) / 2)
+        return Math.round((screenWidth - popupWidth) / 2)
     }
 
-    PanelWindow {
-        id: popupHost
+    component PopupSurface: PanelWindow {
+        id: popupSurface
 
+        required property var managerRef
+        required property string hostKey
+        required property string surfaceNamespace
+
+        screen: managerRef.barWindow.screen
+        visible: managerRef.hostVisible
+            && (hostKey === ""
+                ? managerRef.activeKey !== "weather"
+                    && managerRef.activeKey !== "notificationCenter"
+                : managerRef.activeKey === hostKey)
+        color: "transparent"
+        exclusiveZone: 0
+        focusable: managerRef.hostFocusable
+        implicitWidth: popupLoader.item
+            ? popupLoader.item.implicitWidth
+            : 0
+        implicitHeight: popupLoader.item
+            ? popupLoader.item.implicitHeight
+            : 0
+
+        anchors {
+            top: true
+            left: true
+        }
+
+        margins.top: managerRef.config.popupGap
+        margins.left: managerRef.popupX(implicitWidth)
+
+        WlrLayershell.namespace: surfaceNamespace
+        WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.keyboardFocus: visible
+            ? WlrKeyboardFocus.Exclusive
+            : WlrKeyboardFocus.None
+
+        Item {
+            anchors.fill: parent
+
+            Loader {
+                id: popupLoader
+
+                anchors.fill: parent
+                active: popupSurface.visible
+                sourceComponent: managerRef.hostComponent
+            }
+        }
+    }
+
+    PopupSurface {
+        managerRef: manager
+        hostKey: "weather"
+        surfaceNamespace: "weather"
+    }
+
+    PopupSurface {
+        managerRef: manager
+        hostKey: "notificationCenter"
+        surfaceNamespace: "notifications"
+    }
+
+    PopupSurface {
+        managerRef: manager
+        hostKey: ""
+        surfaceNamespace: "quickshell-popup"
+    }
+
+    // The full-screen surface only catches outside clicks. It lives below the
+    // card-sized overlay surfaces and intentionally has no shadow namespace.
+    PanelWindow {
         screen: manager.barWindow.screen
         visible: manager.hostVisible
         color: "transparent"
         exclusiveZone: 0
-        focusable: manager.hostFocusable
+        focusable: false
 
         anchors {
             top: true
@@ -88,46 +160,14 @@ Item {
             right: true
         }
 
-        WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.namespace: "quickshell-popup-catcher"
+        WlrLayershell.layer: WlrLayer.Top
+        WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
-        // Declared before the popup card so interactive controls inside the
-        // loaded content stay on top. Any click outside the card closes it.
         MouseArea {
             anchors.fill: parent
-
-            onClicked: mouse => {
-                const inside =
-                    mouse.x >= popupContainer.x
-                    && mouse.x <= popupContainer.x + popupContainer.width
-                    && mouse.y >= popupContainer.y
-                    && mouse.y <= popupContainer.y + popupContainer.height
-
-                if (!inside)
-                    manager.closeHost()
-            }
-        }
-
-        Item {
-            id: popupContainer
-
-            x: manager.popupX(width)
-            y: manager.config.popupGap
-
-            width: popupLoader.item
-                ? popupLoader.item.implicitWidth
-                : 0
-
-            height: popupLoader.item
-                ? popupLoader.item.implicitHeight
-                : 0
-
-            Loader {
-                id: popupLoader
-
-                anchors.fill: parent
-                active: manager.hostVisible
-                sourceComponent: manager.hostComponent
-            }
+            onClicked: manager.closeHost()
         }
     }
+
 }

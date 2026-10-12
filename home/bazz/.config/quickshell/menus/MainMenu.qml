@@ -35,7 +35,7 @@ Item {
         { label: "Bluetooth", icon: "󰂯", command: "foot -a bluetui -e bluetui" },
         { label: "Wi-Fi", icon: "󰖩", command: "foot -a impala -e impala" },
         { label: "Network Manager", icon: "󰲝", command: "foot -e nmtui" },
-        { label: "Update System", icon: "󰑐", command: "foot -a pop-upgrade -e sysup" },
+        { label: "Update System", icon: "󰑐", command: "foot -a pop-upgrade -e sup" },
         { label: "Monitor", icon: "󰨇", page: "monitor" },
     ]
 
