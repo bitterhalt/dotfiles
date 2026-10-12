@@ -65,22 +65,20 @@ Item {
 
         screen: root.targetScreen
         margins.top: root.config.popupGap
+        WlrLayershell.namespace: "notifications"
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
+        implicitWidth: 200
         implicitHeight: 62
         visible: false
         color: "transparent"
 
-        anchors {
-            top: true
-            left: true
-            right: true
-        }
+        // Anchored to the top edge only and sized to the card, so compositor
+        // effects (a niri shadow) wrap the card, not a full-width strip.
+        anchors.top: true
 
         Rectangle {
-            width: 200
-            height: parent.height
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.fill: parent
             radius: root.config.popupRadius
             color: root.config.surface
             border.color: root.config.borderColor

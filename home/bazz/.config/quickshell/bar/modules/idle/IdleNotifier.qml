@@ -23,26 +23,24 @@ Item {
 
         screen: root.barWindow.screen
 
-        anchors {
-            top: true
-            left: true
-            right: true
-        }
+        // Anchored to the top edge only and sized to the card, so compositor
+        // effects (a niri shadow) wrap the card, not a full-width strip.
+        anchors.top: true
 
         margins.top: root.config.popupGap
 
+        WlrLayershell.namespace: "notifications"
         WlrLayershell.layer: WlrLayer.Overlay
 
         exclusiveZone: 0
+        implicitWidth: 160
         implicitHeight: 62
         visible: false
         color: "transparent"
         mask: Region {}
 
         Rectangle {
-            width: 160
-            height: parent.height
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.fill: parent
 
             radius: root.config.popupRadius
             color: root.config.surface

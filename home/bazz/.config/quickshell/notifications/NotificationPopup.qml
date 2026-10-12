@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 
-PanelWindow {
+Scope {
     id: root
 
     required property var config
@@ -23,6 +23,7 @@ PanelWindow {
     readonly property int toastHeight: 84
     readonly property int toastSpacing: 8
     readonly property int chipHeight: 24
+    readonly property int slotHeight: toastHeight + toastSpacing
     readonly property int defaultToastTimeoutMs: 5000
 
     // expireTimeout is the raw D-Bus value in milliseconds (despite what the
@@ -56,6 +57,11 @@ PanelWindow {
     // Remove from the stack only (e.g. the notification was closed elsewhere).
     function removeToast(notification): void {
         toasts = toasts.filter(toast => toast !== notification)
+
+        // The "+N more" count belongs to the current burst of toasts. Once
+        // the stack is empty, forget it so it doesn't reappear on the next one.
+        if (toasts.length === 0)
+            overflowedNotifications = []
     }
 
     function removeOverflowed(notification): void {
@@ -81,29 +87,6 @@ PanelWindow {
             notificationService.finishToast(current[i])
     }
 
-    screen: targetScreen
-
-    anchors {
-        top: true
-        left: true
-        right: true
-    }
-
-    margins.top: config.popupGap
-
-    WlrLayershell.layer: WlrLayer.Overlay
-
-    exclusiveZone: 0
-    // Fixed size for the maximum stack: the surface never resizes, and the
-    // mask below keeps everything outside the toasts click-through.
-    implicitHeight: maxToasts * (toastHeight + toastSpacing) + chipHeight
-    visible: toasts.length > 0
-    color: "transparent"
-
-    mask: Region {
-        item: stack
-    }
-
     Connections {
         target: root.notificationService
 
@@ -113,93 +96,132 @@ PanelWindow {
         }
     }
 
-    Repeater {
-        model: root.overflowedNotifications
+    // One layer surface per toast, each exactly card-sized. Compositor effects
+    // (a niri shadow, say) then wrap each card, and the gaps between cards stay
+    // empty instead of being filled by one big surface.
+    Variants {
+        model: root.toasts
 
-        delegate: Item {
+        delegate: PanelWindow {
+            id: toastWindow
+
             required property var modelData
 
-            visible: false
+            // Position in the stack (0 = newest, at the top).
+            readonly property int slot: Math.max(
+                0, root.toasts.indexOf(modelData))
+
+            screen: root.targetScreen
+            anchors.top: true
+            anchors.left: true
+            margins.top: root.config.popupGap + slot * root.slotHeight
+            margins.left: root.targetScreen
+                ? Math.max(
+                    0,
+                    Math.round(
+                        (root.targetScreen.width - root.toastWidth) / 2
+                    )
+                )
+                : 0
+
+            WlrLayershell.namespace: "notifications"
+            WlrLayershell.layer: WlrLayer.Overlay
+
+            exclusiveZone: 0
+            implicitWidth: root.toastWidth
+            implicitHeight: card.height
+            color: "transparent"
+
+            HoverHandler {
+                id: hover
+            }
+
+            NotificationCard {
+                id: card
+
+                width: parent.width
+                height: implicitHeight
+
+                config: root.config
+                notification: toastWindow.modelData
+                notificationService: root.notificationService
+
+                compact: true
+                showClose: false
+                dismissOnClick: false
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+
+                onClicked: root.dismissToast(toastWindow.modelData)
+            }
+
+            // Hovering pauses the countdown; leaving restarts it.
+            Timer {
+                interval: root.toastTimeoutMs(toastWindow.modelData)
+                running: interval > 0 && !hover.hovered
+                repeat: false
+
+                onTriggered: root.dismissToast(toastWindow.modelData)
+            }
 
             Connections {
-                target: modelData
+                target: toastWindow.modelData
 
                 function onClosed(): void {
-                    root.removeOverflowed(modelData)
+                    root.removeToast(toastWindow.modelData)
                 }
             }
         }
     }
 
-    Column {
-        id: stack
+    // "+N more" chip, in its own surface right below the last toast.
+    PanelWindow {
+        id: chipWindow
 
-        width: root.toastWidth
-        anchors.horizontalCenter: parent.horizontalCenter
-        spacing: root.toastSpacing
+        screen: root.targetScreen
+        anchors.top: true
+        anchors.left: true
+        margins.top: root.config.popupGap + root.toasts.length * root.slotHeight
+        margins.left: root.targetScreen
+            ? Math.max(
+                0,
+                Math.round((root.targetScreen.width - root.toastWidth) / 2)
+            )
+            : 0
 
+        WlrLayershell.namespace: "notifications"
+        WlrLayershell.layer: WlrLayer.Overlay
+
+        exclusiveZone: 0
+        implicitWidth: root.toastWidth
+        implicitHeight: root.chipHeight
+        visible: root.toasts.length > 0 && root.overflowCount > 0
+        color: "transparent"
+
+        // Stop tracking bumped notifications once they are closed elsewhere.
         Repeater {
-            model: ScriptModel {
-                values: root.toasts
-            }
+            model: root.overflowedNotifications
 
             delegate: Item {
-                id: toastItem
-
                 required property var modelData
 
-                width: stack.width
-                height: card.height
-
-                HoverHandler {
-                    id: hover
-                }
-
-                NotificationCard {
-                    id: card
-
-                    width: parent.width
-                    height: implicitHeight
-
-                    config: root.config
-                    notification: toastItem.modelData
-                    notificationService: root.notificationService
-
-                    compact: true
-                    showClose: false
-                    dismissOnClick: false
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-
-                    onClicked: root.dismissToast(toastItem.modelData)
-                }
-
-                // Hovering pauses the countdown; leaving restarts it.
-                Timer {
-                    interval: root.toastTimeoutMs(toastItem.modelData)
-                    running: interval > 0 && !hover.hovered
-                    repeat: false
-
-                    onTriggered: root.dismissToast(toastItem.modelData)
-                }
+                visible: false
 
                 Connections {
-                    target: toastItem.modelData
+                    target: modelData
 
                     function onClosed(): void {
-                        root.removeToast(toastItem.modelData)
+                        root.removeOverflowed(modelData)
                     }
                 }
             }
         }
 
         Rectangle {
-            visible: root.overflowCount > 0
-            width: stack.width
-            height: root.chipHeight
+            anchors.fill: parent
             radius: root.config.popupRadius
             color: root.config.surface
             border.color: root.config.borderColor
