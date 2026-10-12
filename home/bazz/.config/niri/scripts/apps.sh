@@ -2,12 +2,19 @@
 
 APPS=(brave-origin thunderbird transmission-gtk)
 
-DMENU="${DMENU:-vicinae dmenu}"
+is_running() {
+  local app="$1"
+  local process_name="$app"
 
-choice=$(printf "Yes\nNo" | $DMENU --placeholder="Open Communications? 🤔 ")
+  # Brave is launched through a wrapper but its main process is named "brave".
+  [[ "$app" == "brave-origin" ]] && process_name="brave"
 
-[[ "$choice" == "Yes" ]] || exit 0
+  pgrep -x "$process_name" >/dev/null
+}
 
 for app in "${APPS[@]}"; do
-  "$app" &
+  is_running "$app" && continue
+  command -v "$app" >/dev/null 2>&1 || continue
+
+  "$app" >/dev/null 2>&1 &
 done
