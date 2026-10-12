@@ -48,31 +48,19 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | Key | Action |
 | --- | ------ |
 | `Mod+Ctrl+C` | Open Clipboard |
-
-## Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "makoctl mode -t dnd && pkill -SIGRTMIN+3 waybar"; }
-
-| Key | Action |
-| --- | ------ |
 | `Mod+Ctrl+D` | Hide Notification Pop-ups |
-
-## Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "foot -T 'Mako History' -e mako_hist.py"; }
-
-| Key | Action |
-| --- | ------ |
 | `Mod+Ctrl+H` | Show Notfication History |
 | `Mod+Ctrl+P` | Color Picker |
 | `Mod+D` | Run Application Launcher |
-
-## Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "menu_power"; }
-
-| Key | Action |
-| --- | ------ |
 | `Mod+Escape` | Open Power Menu |
 | `Mod+F3` | Launch program |
 | `Mod+F4` | Process Killer |
-| `Mod+F5` | Passwords and AUTH |
+
+## Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_submap -pass"; } // TODO: add Quickshell Menu
+
+| Key | Action |
+| --- | ------ |
 | `Mod+F8` | Screen Record Menu |
-| `Mod+Shift+D` | Run Executables |
 | `Mod+Shift+T` | Attach Tmux sessions |
 | `Mod+Ctrl+W` | Display Weather |
 
