@@ -26,8 +26,11 @@ Item {
         receivedTimes = nextTimes
 
         // Transient notifications may still be shown as banners, but they
-        // should not remain in history after the banner expires.
-        if (!dnd && !notification.lastGeneration) {
+        // should not remain in history after the banner expires. Low urgency
+        // ones skip the banner and go straight to the notification center.
+        const quiet = notification.urgency === NotificationUrgency.Low
+
+        if (!dnd && !quiet && !notification.lastGeneration) {
             toastNotification = notification
             toastSerial += 1
         }

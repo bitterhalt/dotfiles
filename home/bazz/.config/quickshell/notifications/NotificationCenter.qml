@@ -106,7 +106,11 @@ Item {
                     visible: notificationService.notificationCount > 0
                     clip: true
                     spacing: root.itemSpacing
-                    model: notificationService.notifications.slice().reverse()
+                    // ScriptModel diffs by object, so delegates (and scroll
+                    // position) survive when notifications come and go.
+                    model: ScriptModel {
+                        values: notificationService.notifications.slice().reverse()
+                    }
 
                     delegate: NotificationCard {
                         required property var modelData

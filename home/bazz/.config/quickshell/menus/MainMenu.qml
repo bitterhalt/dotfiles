@@ -48,7 +48,7 @@ Item {
     ]
 
     readonly property var notesItems: [
-        { label: "Search", icon: "󰍉", command: "foot -e ~/.local/bin/menu_notes" },
+        { label: "Search", icon: "󰍉", command: "foot -a fzf_notes -e ~/.local/bin/menu_notes" },
         { label: "New Note", icon: "󰎚", command: "foot -e ~/.local/bin/menu_notes -c" },
         { label: "TODO", icon: "", command: "foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" },
         { label: "Delete", icon: "󰩹", command: "foot -e ~/.local/bin/menu_notes -d" }

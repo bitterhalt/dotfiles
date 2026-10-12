@@ -46,7 +46,6 @@ window-rule {
     match app-id="pacseek"
     match app-id="pop-upgrade"
     match app-id="arch-maintenance"
-    match app-id="fzf_clip"
     open-floating true
     default-column-width { proportion 0.50; }
     default-window-height { proportion 0.60; }
@@ -54,11 +53,10 @@ window-rule {
 }
 
 window-rule {
-    match app-id="fzf_clip"
-    match app-id="fzf_killer"
+    match app-id="fzf_notes"
     open-floating true
     default-column-width { proportion 0.50; }
-    default-window-height { proportion 0.40; }
+    default-window-height { proportion 0.70; }
     default-floating-position x=16 y=16 relative-to="top"
 }
 

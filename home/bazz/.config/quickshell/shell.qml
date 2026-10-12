@@ -83,6 +83,14 @@ ShellRoot {
   }
 
   Connections {
+    target: appNotificationPopup
+
+    function onOpenNotificationCenterRequested(): void {
+      shellUiService.notificationCenterActionRequested("open")
+    }
+  }
+
+  Connections {
     target: appNotificationService
 
     function onToastSerialChanged(): void {

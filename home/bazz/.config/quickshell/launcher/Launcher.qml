@@ -316,6 +316,13 @@ Item {
         searchInput.forceActiveFocus()
     }
 
+    function cycleMode(direction): void {
+        const currentIndex = modes.findIndex(item => item.id === mode)
+        const nextIndex = (currentIndex + direction + modes.length)
+            % modes.length
+        setMode(modes[nextIndex].id)
+    }
+
     function navigateResults(direction): void {
         if (!expanded) {
             forceExpanded = true
@@ -624,6 +631,18 @@ Item {
                 Keys.onPressed: (event) => {
                     const control = event.modifiers & Qt.ControlModifier;
                     switch (event.key) {
+                    case Qt.Key_Left:
+                        if (control) {
+                            root.cycleMode(-1);
+                            event.accepted = true;
+                        }
+                        break;
+                    case Qt.Key_Right:
+                        if (control) {
+                            root.cycleMode(1);
+                            event.accepted = true;
+                        }
+                        break;
                     case Qt.Key_Down:
                         root.navigateResults(1);
                         event.accepted = true;
@@ -909,7 +928,8 @@ Item {
                             readonly property bool active: root.mode === modelData.id
 
                             anchors.verticalCenter: parent.verticalCenter
-                            width: hintRow.width
+                            visible: !active
+                            width: visible ? hintRow.width : 0
                             height: root.capHeight
 
                             Row {
