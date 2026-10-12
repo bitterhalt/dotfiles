@@ -21,7 +21,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 - Native power menu
 - Tmux session manager
 - Native screen recorder menu
-- Compact application launcher with calculator, file search, run, and emoji modes
+- Compact application launcher with calculator, file search, run, emoji, and timer modes
 - Pywal-aware theming with fallback colors
 - QuickShell IPC controls for selected shell features
 

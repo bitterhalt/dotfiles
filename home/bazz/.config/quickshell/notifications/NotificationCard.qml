@@ -15,6 +15,8 @@ Rectangle {
     readonly property int appIconSize: 36
     readonly property bool hasImage: notification && notification.image && notification.image !== ""
     readonly property bool critical: notification && notification.urgency === NotificationUrgency.Critical
+    readonly property bool timerNotification:
+        notification && notification.appName === "QuickShell Timer"
     readonly property color criticalBorderColor: "#af3029"
     readonly property color criticalTextColor: "#ad8301"
     readonly property int actionCount: !compact && notification && notification.actions ? Math.min(notification.actions.length, 2) : 0
@@ -56,7 +58,7 @@ Rectangle {
 
         Rectangle {
             anchors.fill: parent
-            visible: !root.critical && root.hasImage
+            visible: !root.critical && !root.timerNotification && root.hasImage
             radius: width / 2
             clip: true
             color: config.surface
@@ -74,17 +76,21 @@ Rectangle {
             id: appIcon
 
             anchors.fill: parent
-            visible: !root.critical && !root.hasImage && source.toString() !== ""
+            visible: !root.critical && !root.timerNotification
+                && !root.hasImage && source.toString() !== ""
             source: root.iconSource(root.notification ? root.notification.appIcon : "")
         }
 
         Text {
             anchors.centerIn: parent
-            visible: root.critical || (!root.hasImage && !appIcon.visible)
-            color: root.critical ? root.criticalTextColor : config.muted
-            font.family: config.iconFontFamily
+            visible: root.critical || root.timerNotification
+                || (!root.hasImage && !appIcon.visible)
+            color: root.critical ? root.criticalTextColor
+                : root.timerNotification ? config.accent : config.muted
+            font.family: root.timerNotification
+                ? config.textFontFamily : config.iconFontFamily
             font.pointSize: config.iconSize
-            text: root.critical ? "󰀧" : "󰂚"
+            text: root.critical ? "󰀧" : root.timerNotification ? "⏰" : "󰂚"
         }
 
     }

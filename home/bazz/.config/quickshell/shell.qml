@@ -68,9 +68,14 @@ ShellRoot {
     targetScreen: root.activeScreen
   }
 
+  TimerService {
+    id: appTimerService
+  }
+
   Launcher {
     config: appConfig
     targetScreen: root.activeScreen
+    timerService: appTimerService
   }
 
   Clipboard {

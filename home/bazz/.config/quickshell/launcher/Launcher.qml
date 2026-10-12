@@ -13,6 +13,7 @@ Item {
 
     required property var config
     required property var targetScreen
+    required property var timerService
 
     property bool opened: false
     property bool quitOnClose: false
@@ -20,12 +21,15 @@ Item {
     readonly property var modes: [
         { id: "apps", label: "Apps", name: "Applications", key: "A" },
         { id: "run", label: "Run", name: "Run binary", key: "B" },
-        { id: "emoji", label: "Emoji", name: "Emoji", key: "E" }
+        { id: "emoji", label: "Emoji", name: "Emoji", key: "E" },
+        { id: "timer", label: "Timer", name: "Timer", key: "T" }
     ]
     property string mode: "apps"
     readonly property bool runMode: mode === "run"
     readonly property bool emojiMode: mode === "emoji"
+    readonly property bool timerMode: mode === "timer"
     property var emojiEntries: []
+    property double timerClock: Date.now()
 
     // Run-mode data
     property var binaries: []
@@ -42,6 +46,7 @@ Item {
 
     readonly property string placeholder: runMode
         ? "Search binaries"
+        : timerMode ? "Set a timer (e.g. 25m Focus)"
         : emojiMode ? "Search emoji"
         : fileMode ? "Search files" : "Search applications"
 
@@ -58,14 +63,16 @@ Item {
     readonly property int contentWidth: 400
     readonly property int contentSpacing: config.barModuleSpacing
     readonly property bool fileMode:
-        !runMode && !emojiMode && query.trim().startsWith("/")
+        !runMode && !emojiMode && !timerMode
+        && query.trim().startsWith("/")
     readonly property string fileNeedle:
         fileMode ? query.trim().slice(1).trim() : ""
 
     // "=" prefix hands everything after it to qalc, so units, functions and
     // words work too ("=5 km to miles", "=sqrt(2)", "=1x3").
     readonly property bool calcPrefix:
-        !runMode && !emojiMode && query.trim().startsWith("=")
+        !runMode && !emojiMode && !timerMode
+        && query.trim().startsWith("=")
     readonly property string calcExpression:
         calcPrefix ? query.trim().slice(1).trim() : query.trim()
 
@@ -77,6 +84,7 @@ Item {
         const value = query.trim()
         return !runMode
             && !emojiMode
+            && !timerMode
             && !fileMode
             && /[0-9]/.test(value)
             && (/[+\-*/%^×÷]/.test(value)
@@ -182,6 +190,35 @@ Item {
             .slice(0, 100)
     }
 
+    readonly property var timerInput: parseTimer(query)
+
+    readonly property var timerResults: {
+        if (query.trim() !== "") {
+            if (!timerInput)
+                return []
+
+            return [{
+                type: "timer-start",
+                text: formatDuration(timerInput.seconds),
+                subtitle: timerInput.note || "Press Enter to start",
+                icon: "󰔛",
+                seconds: timerInput.seconds,
+                note: timerInput.note
+            }]
+        }
+
+        return timerService.timers
+            .filter(timer => timer.endAt > timerClock)
+            .sort((a, b) => a.endAt - b.endAt)
+            .map(timer => ({
+                type: "timer-active",
+                text: timer.note || "Timer",
+                subtitle: formatRemaining(timer.endAt - timerClock),
+                icon: "󰔛",
+                unit: timer.unit
+            }))
+    }
+
     readonly property var results: {
         const value = query.trim().toLowerCase()
         let entries = []
@@ -190,6 +227,8 @@ Item {
             entries = binaryResults
         } else if (emojiMode) {
             entries = emojiResults
+        } else if (timerMode) {
+            entries = timerResults
         } else if (calcPrefix) {
             entries = []
         } else if (fileMode) {
@@ -222,7 +261,7 @@ Item {
             }
         }
 
-        if (!runMode && calculatorResult !== "") {
+        if (!runMode && !timerMode && calculatorResult !== "") {
             entries.unshift({
                 type: "calculator",
                 text: calculatorResult,
@@ -297,6 +336,11 @@ Item {
         if (emojiMode && emojiEntries.length === 0)
             emojiFile.reload()
 
+        if (timerMode) {
+            timerClock = Date.now()
+            timerService.pruneExpired(timerClock)
+        }
+
         searchInput.forceActiveFocus()
     }
 
@@ -346,7 +390,14 @@ Item {
 
         const item = results[selectedIndex]
 
-        if (item.type === "application") {
+        if (item.type === "timer-start") {
+            timerService.startTimer(item.seconds, item.note)
+            searchInput.text = ""
+            timerClock = Date.now()
+        } else if (item.type === "timer-active") {
+            timerService.cancelTimer(item.unit)
+            timerClock = Date.now()
+        } else if (item.type === "application") {
             item.entry.execute()
             finalizeClose()
         } else if (item.type === "calculator") {
@@ -404,6 +455,71 @@ Item {
             tokens.push(current)
 
         return tokens
+    }
+
+    function parseTimer(text): var {
+        const value = String(text || "").trim()
+
+        if (value === "")
+            return null
+
+        const clockMatch = value.match(/^(\d+):([0-5]?\d)(?:\s+(.+))?$/)
+        if (clockMatch) {
+            const seconds = Number(clockMatch[1]) * 60
+                + Number(clockMatch[2])
+            return seconds > 0
+                ? { seconds: seconds, note: (clockMatch[3] || "").trim() }
+                : null
+        }
+
+        const unitMatch = value.match(
+            /^((?:\d+(?:\.\d+)?\s*[hms]\s*)+)(.*)$/i
+        )
+        if (unitMatch) {
+            let seconds = 0
+            const parts = /(\d+(?:\.\d+)?)\s*([hms])/gi
+            let part
+
+            while ((part = parts.exec(unitMatch[1])) !== null) {
+                const amount = Number(part[1])
+                const unit = part[2].toLowerCase()
+                seconds += amount * (unit === "h" ? 3600 : unit === "m" ? 60 : 1)
+            }
+
+            return seconds > 0
+                ? { seconds: Math.ceil(seconds), note: unitMatch[2].trim() }
+                : null
+        }
+
+        const minutesMatch = value.match(/^(\d+(?:\.\d+)?)(?:\s+(.+))?$/)
+        if (!minutesMatch)
+            return null
+
+        const seconds = Math.ceil(Number(minutesMatch[1]) * 60)
+        return seconds > 0
+            ? { seconds: seconds, note: (minutesMatch[2] || "").trim() }
+            : null
+    }
+
+    function formatDuration(seconds): string {
+        if (seconds >= 3600) {
+            const hours = Math.floor(seconds / 3600)
+            const minutes = Math.floor((seconds % 3600) / 60)
+            return hours + "h" + (minutes > 0 ? " " + minutes + "m" : "")
+        }
+
+        if (seconds >= 60) {
+            const minutes = Math.floor(seconds / 60)
+            const remainder = seconds % 60
+            return minutes + "m" + (remainder > 0 ? " " + remainder + "s" : "")
+        }
+
+        return seconds + "s"
+    }
+
+    function formatRemaining(milliseconds): string {
+        const seconds = Math.max(0, Math.ceil(milliseconds / 1000))
+        return formatDuration(seconds) + " remaining · select to cancel"
     }
 
     // Collect every executable on $PATH (replaces `find` in menu_run).
@@ -667,6 +783,12 @@ Item {
                             event.accepted = true;
                         }
                         break;
+                    case Qt.Key_T:
+                        if (control) {
+                            root.setMode("timer");
+                            event.accepted = true;
+                        }
+                        break;
                     case Qt.Key_PageDown:
                         root.selectPage(1);
                         event.accepted = true;
@@ -754,11 +876,11 @@ Item {
                         anchors.left: parent.left
                         anchors.leftMargin: 12
                         anchors.verticalCenter: parent.verticalCenter
-                        visible: modelData.type === "calculator" || modelData.type === "file" || modelData.type === "binary" || modelData.type === "emoji"
+                        visible: modelData.type === "calculator" || modelData.type === "file" || modelData.type === "binary" || modelData.type === "emoji" || modelData.type === "timer-start" || modelData.type === "timer-active"
                         color: root.config.accent
                         font.family: modelData.type === "emoji" ? root.config.textFontFamily : root.config.iconFontFamily
                         font.pointSize: root.config.iconSize
-                        text: modelData.type === "emoji" ? modelData.emoji : modelData.type === "file" ? "󰈔" : modelData.type === "binary" ? (modelData.recent ? root.iconStar : root.iconRun) : "󰃬"
+                        text: modelData.type === "emoji" ? modelData.emoji : modelData.type === "file" ? "󰈔" : modelData.type === "binary" ? (modelData.recent ? root.iconStar : root.iconRun) : modelData.type === "timer-start" || modelData.type === "timer-active" ? "󰔛" : "󰃬"
                     }
 
                     Column {
@@ -816,6 +938,10 @@ Item {
                                 ? "Calculating…" : "Can't evaluate expression")
                         : root.runMode
                         ? (binaryProcess.running ? "Loading binaries…" : "No binaries found")
+                        : root.timerMode
+                        ? (root.query.trim() === ""
+                            ? "No active timers"
+                            : "Try 25m, 45s, 1:30, or 2h Focus")
                         : root.emojiMode ? "No emoji found"
                         : root.fileMode && root.fileNeedle.length < 2
                             ? "Type at least two characters after /"
@@ -859,7 +985,7 @@ Item {
                         color: root.config.accent
                         font.family: root.config.iconFontFamily
                         font.pointSize: root.config.fontSize(0.9)
-                        text: root.emojiMode ? "😀" : root.runMode ? root.iconRun : root.iconApps
+                        text: root.emojiMode ? "😀" : root.timerMode ? "󰔛" : root.runMode ? root.iconRun : root.iconApps
                     }
 
                     Text {
@@ -867,7 +993,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         color: root.config.muted
                         font.pointSize: root.config.fontSize(0.8)
-                        text: root.emojiMode ? "Emoji" : root.runMode ? "Run binary" : "Applications"
+                        text: root.emojiMode ? "Emoji" : root.timerMode ? "Timer" : root.runMode ? "Run binary" : "Applications"
                     }
 
                 }
@@ -969,6 +1095,16 @@ Item {
                 "qalc", "-t", root.normalizeExpression(root.calcExpression)
             ]
             calculatorProcess.running = true
+        }
+    }
+
+    Timer {
+        interval: 1000
+        repeat: true
+        running: root.opened && root.timerMode
+        onTriggered: {
+            root.timerClock = Date.now()
+            root.timerService.pruneExpired(root.timerClock)
         }
     }
 
