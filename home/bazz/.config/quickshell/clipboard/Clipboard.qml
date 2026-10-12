@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Window
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
@@ -20,6 +21,7 @@ PanelWindow {
     property string pendingImageId: ""
     property string activeTextId: ""
     property string pendingTextId: ""
+    property string previewEntryId: ""
 
     readonly property int panelWidth: 820
     readonly property int panelHeight: 510
@@ -60,11 +62,15 @@ PanelWindow {
 
     function close(): void {
         opened = false
+        previewDebounce.stop()
+        selectedIndex = -1
+        entries = []
         query = ""
         selectedText = ""
         previewReady = false
         pendingImageId = ""
         pendingTextId = ""
+        previewEntryId = ""
         if (textPreviewProcess.running)
             textPreviewProcess.signal(15)
         if (imagePreviewProcess.running)
@@ -111,51 +117,60 @@ PanelWindow {
     }
 
     function select(index): void {
-        if (index < 0 || index >= filteredEntries.length)
+        if (!opened || index < 0 || index >= filteredEntries.length)
             return
 
+        const entry = filteredEntries[index]
         selectedIndex = index
+        if (previewEntryId === entry.id)
+            return
+
+        previewEntryId = entry.id
         selectedText = ""
         previewReady = false
-
-        const entry = selectedEntry
-
-        if (!entry)
-            return
 
         if (entry.isImage) {
             pendingImageId = entry.id
             pendingTextId = ""
             if (textPreviewProcess.running)
                 textPreviewProcess.signal(15)
-            startPendingImagePreview()
         } else {
             pendingImageId = ""
             pendingTextId = entry.id
 
             if (imagePreviewProcess.running)
                 imagePreviewProcess.signal(15)
-            startPendingTextPreview()
         }
+
+        previewDebounce.restart()
     }
 
     function startPendingTextPreview(): void {
-        if (textPreviewProcess.running || pendingTextId === "")
+        if (!opened || previewDebounce.running
+                || textPreviewProcess.running || pendingTextId === "")
             return
 
         const entryId = pendingTextId
+        const entry = selectedEntry
         pendingTextId = ""
+
+        if (!entry || entry.id !== entryId || entry.isImage)
+            return
+
         activeTextId = entryId
         textPreviewProcess.command = [
-            "sh", "-lc",
-            "printf '%s\\n' \"$1\" | cliphist decode",
-            "clipboard-preview", selectedEntry.raw
+            "sh", "-c",
+            // Bound the collected output before it enters QML. Four bytes
+            // per character leave room for the 12,000-character preview.
+            "printf '%s\\n' \"$1\" | cliphist decode | head -c 48000",
+            "clipboard-preview", entry.raw
         ]
         textPreviewProcess.running = true
     }
 
     function startPendingImagePreview(): void {
-        if (imagePreviewProcess.running || pendingImageId === "")
+        if (!opened || previewDebounce.running
+                || imagePreviewProcess.running || pendingImageId === "")
             return
 
         const entryId = pendingImageId
@@ -435,6 +450,9 @@ PanelWindow {
                         ? "file://" + root.previewPath
                         : ""
                     fillMode: Image.PreserveAspectFit
+                    sourceSize.width: Math.ceil(width * Screen.devicePixelRatio)
+                    sourceSize.height: Math.ceil(height * Screen.devicePixelRatio)
+                    asynchronous: true
                     cache: false
                 }
 
@@ -527,6 +545,9 @@ PanelWindow {
 
         stdout: StdioCollector {
             onStreamFinished: {
+                if (!root.opened)
+                    return
+
                 root.entries = text.trim().split("\n")
                     .map(line => {
                         const fields = line.split("\t")
@@ -550,10 +571,21 @@ PanelWindow {
                     })
                     .filter(entry => entry !== null)
 
+                root.previewEntryId = ""
                 root.selectedIndex = root.filteredEntries.length > 0 ? 0 : -1
                 if (root.selectedIndex >= 0)
                     root.select(root.selectedIndex)
             }
+        }
+    }
+
+    Timer {
+        id: previewDebounce
+
+        interval: 100
+        onTriggered: {
+            root.startPendingImagePreview()
+            root.startPendingTextPreview()
         }
     }
 
@@ -563,7 +595,7 @@ PanelWindow {
 
         stdout: StdioCollector {
             onStreamFinished: {
-                if (root.selectedEntry
+                if (root.opened && root.selectedEntry
                         && root.selectedEntry.id === root.activeTextId) {
                     root.selectedText = text.slice(0, 12000)
                 }
@@ -581,7 +613,7 @@ PanelWindow {
         id: imagePreviewProcess
 
         onExited: exitCode => {
-            if (exitCode === 0 && root.selectedEntry
+            if (exitCode === 0 && root.opened && root.selectedEntry
                     && root.selectedEntry.id === root.activeImageId) {
                 root.previewReady = true
             }
@@ -604,7 +636,7 @@ PanelWindow {
         property string entryId: ""
 
         onExited: exitCode => {
-            if (exitCode === 0) {
+            if (exitCode === 0 && root.opened) {
                 root.entries = root.entries.filter(entry =>
                     entry.id !== deleteProcess.entryId)
                 root.selectedIndex = Math.min(

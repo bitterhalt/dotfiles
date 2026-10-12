@@ -51,7 +51,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         color: notificationService.dnd ? config.accent : config.muted
                         font.pointSize: config.fontSize(0.82)
-                        text: "Do Not Disturb"
+                        text: "DND"
                     }
 
                     Rectangle {
@@ -106,6 +106,7 @@ Item {
                     visible: notificationService.notificationCount > 0
                     clip: true
                     spacing: root.itemSpacing
+
                     // ScriptModel diffs by object, so delegates (and scroll
                     // position) survive when notifications come and go.
                     model: ScriptModel {

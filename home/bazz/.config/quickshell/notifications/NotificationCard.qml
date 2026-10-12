@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Window
 import Quickshell
 import Quickshell.Services.Notifications
 import Quickshell.Widgets
@@ -15,8 +16,7 @@ Rectangle {
     readonly property int appIconSize: 36
     readonly property bool hasImage: notification && notification.image && notification.image !== ""
     readonly property bool critical: notification && notification.urgency === NotificationUrgency.Critical
-    readonly property bool timerNotification:
-        notification && notification.appName === "QuickShell Timer"
+    readonly property bool timerNotification: notification && notification.appName === "QuickShell Timer"
     readonly property color criticalBorderColor: "#af3029"
     readonly property color criticalTextColor: "#ad8301"
     readonly property int actionCount: !compact && notification && notification.actions ? Math.min(notification.actions.length, 2) : 0
@@ -65,7 +65,10 @@ Rectangle {
 
             Image {
                 anchors.fill: parent
-                source: root.notification ? root.notification.image : ""
+                source: !root.critical && !root.timerNotification && root.hasImage
+                    ? root.notification.image : ""
+                sourceSize.width: Math.ceil(width * Screen.devicePixelRatio)
+                sourceSize.height: Math.ceil(height * Screen.devicePixelRatio)
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
             }
@@ -76,19 +79,15 @@ Rectangle {
             id: appIcon
 
             anchors.fill: parent
-            visible: !root.critical && !root.timerNotification
-                && !root.hasImage && source.toString() !== ""
+            visible: !root.critical && !root.timerNotification && !root.hasImage && source.toString() !== ""
             source: root.iconSource(root.notification ? root.notification.appIcon : "")
         }
 
         Text {
             anchors.centerIn: parent
-            visible: root.critical || root.timerNotification
-                || (!root.hasImage && !appIcon.visible)
-            color: root.critical ? root.criticalTextColor
-                : root.timerNotification ? config.accent : config.muted
-            font.family: root.timerNotification
-                ? config.textFontFamily : config.iconFontFamily
+            visible: root.critical || root.timerNotification || (!root.hasImage && !appIcon.visible)
+            color: root.critical ? root.criticalTextColor : root.timerNotification ? config.accent : config.muted
+            font.family: root.timerNotification ? config.textFontFamily : config.iconFontFamily
             font.pointSize: config.iconSize
             text: root.critical ? "󰀧" : root.timerNotification ? "⏰" : "󰂚"
         }

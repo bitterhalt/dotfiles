@@ -21,6 +21,8 @@ Item {
     // Popup geometry
     property int popupGap: 16
     property int popupRadius: 4
+    // History is bounded; ordinary entries are expired before critical ones.
+    property int notificationHistoryLimit: 100
     // Semantic palette supplied by ThemeService.
     // ThemeService falls back to the hardcoded palette when Pywal is absent.
     readonly property color bg: theme.bg

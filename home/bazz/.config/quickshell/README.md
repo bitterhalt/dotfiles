@@ -252,6 +252,13 @@ The project follows a few simple rules:
 
 This keeps dependencies explicit and avoids turning either `shell.qml` or `Config.qml` into a collection of unrelated feature logic.
 
+## Resource Usage
+
+- `Config.qml` sets `notificationHistoryLimit` (default: 100, minimum: 1). When history exceeds it, older ordinary notifications expire before critical ones; the newest toast is protected. An all-critical history is still bounded.
+- Notification images and clipboard image previews decode at their displayed pixel size, including screen scaling.
+- Launcher result calculations run only while the launcher is open and their mode is active. Timer rows remain unchanged between countdown ticks; only their remaining-time labels update.
+- Clipboard previews wait 100 ms after selection settles. Text preview output is capped at 48,000 bytes before collection and displayed at up to 12,000 characters. Copying still decodes the full entry. Closing the panel clears its in-memory entry list, not the `cliphist` database.
+
 ## Multi-monitor Status
 
 The bar itself is already created per screen:

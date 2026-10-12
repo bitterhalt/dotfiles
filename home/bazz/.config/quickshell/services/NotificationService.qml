@@ -7,6 +7,8 @@ Item {
     id: root
     visible: false
 
+    required property var config
+
     property bool dnd: false
     property var toastNotification: null
     property int toastSerial: 0
@@ -15,7 +17,44 @@ Item {
     readonly property var notifications: server.trackedNotifications.values
     readonly property int notificationCount: notifications.length
 
-    onNotificationsChanged: Qt.callLater(() => root.pruneReceivedTimes())
+    onNotificationsChanged: Qt.callLater(root.maintainHistory)
+    Connections {
+        target: root.config
+
+        function onNotificationHistoryLimitChanged() {
+            Qt.callLater(root.maintainHistory)
+        }
+    }
+
+    function maintainHistory() {
+        const limit = Math.max(1, config.notificationHistoryLimit)
+        const excess = notifications.length - limit
+
+        if (excess > 0) {
+            // Work on a snapshot: expiring an entry mutates the tracked model.
+            // Prefer keeping critical alerts, but still enforce a hard limit
+            // when the entire history consists of critical notifications.
+            const oldest = notifications.slice().sort((left, right) => {
+                // Do not immediately remove the newest visible alert when
+                // older history happens to consist entirely of criticals.
+                const leftToast = left === root.toastNotification
+                const rightToast = right === root.toastNotification
+                const leftCritical = left.urgency === NotificationUrgency.Critical
+                const rightCritical = right.urgency === NotificationUrgency.Critical
+                return Number(leftToast) - Number(rightToast)
+                    || Number(leftCritical) - Number(rightCritical)
+                    || root.receivedAt(left) - root.receivedAt(right)
+            })
+
+            for (let i = 0; i < excess; ++i) {
+                if (toastNotification === oldest[i])
+                    toastNotification = null
+                oldest[i].expire()
+            }
+        }
+
+        pruneReceivedTimes()
+    }
 
     function receive(notification): void {
         // Keep notifications alive so they can appear in the notification center.

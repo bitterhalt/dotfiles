@@ -132,11 +132,14 @@ Item {
 
     // Run mode: the first word picks the binary, the rest are its arguments
     // ("firefox --private-window"; quotes and backslashes are honored).
-    readonly property var runTokens: splitCommand(query)
+    readonly property var runTokens: opened && runMode ? splitCommand(query) : []
     readonly property string runName: runTokens.length > 0 ? runTokens[0] : ""
     readonly property var runArgs: runTokens.slice(1)
 
     readonly property var binaryResults: {
+        if (!opened || !runMode)
+            return []
+
         const value = runName.toLowerCase()
         const recent = new Set(recentBinaries)
 
@@ -171,6 +174,9 @@ Item {
     }
 
     readonly property var emojiResults: {
+        if (!opened || !emojiMode)
+            return []
+
         const value = query.trim().toLowerCase()
 
         return emojiEntries
@@ -190,9 +196,12 @@ Item {
             .slice(0, 100)
     }
 
-    readonly property var timerInput: parseTimer(query)
+    readonly property var timerInput: opened && timerMode ? parseTimer(query) : null
 
     readonly property var timerResults: {
+        if (!opened || !timerMode)
+            return []
+
         if (query.trim() !== "") {
             if (!timerInput)
                 return []
@@ -208,18 +217,21 @@ Item {
         }
 
         return timerService.timers
-            .filter(timer => timer.endAt > timerClock)
+            .slice()
             .sort((a, b) => a.endAt - b.endAt)
             .map(timer => ({
                 type: "timer-active",
                 text: timer.note || "Timer",
-                subtitle: formatRemaining(timer.endAt - timerClock),
+                endAt: timer.endAt,
                 icon: "󰔛",
                 unit: timer.unit
             }))
     }
 
     readonly property var results: {
+        if (!opened)
+            return []
+
         const value = query.trim().toLowerCase()
         let entries = []
 
@@ -233,6 +245,17 @@ Item {
             entries = []
         } else if (fileMode) {
             entries = fileResults
+        } else if (value === "") {
+            entries = applications
+                .map(entry => ({
+                    type: "application",
+                    entry: entry,
+                    text: entry.name || entry.id,
+                    subtitle: entry.genericName || entry.comment || "",
+                    icon: entry.icon || "",
+                    score: 0
+                }))
+                .sort((a, b) => a.text.localeCompare(b.text))
         } else {
             entries = applications
                 .map(entry => ({
@@ -246,19 +269,6 @@ Item {
                 .filter(item => item.score > 0)
                 .sort((a, b) => b.score - a.score
                     || a.text.localeCompare(b.text))
-
-            if (value === "") {
-                entries = applications
-                    .map(entry => ({
-                        type: "application",
-                        entry: entry,
-                        text: entry.name || entry.id,
-                        subtitle: entry.genericName || entry.comment || "",
-                        icon: entry.icon || "",
-                        score: 0
-                    }))
-                    .sort((a, b) => a.text.localeCompare(b.text))
-            }
         }
 
         if (!runMode && !timerMode && calculatorResult !== "") {
@@ -272,6 +282,9 @@ Item {
 
         return !runMode && value === "" ? entries : entries.slice(0, 100)
     }
+
+    onResultsChanged: selectedIndex = Math.max(0,
+        Math.min(selectedIndex, results.length - 1))
 
     // The launcher stays at a fixed size; its result list scrolls when needed.
     readonly property bool expanded: true
@@ -902,11 +915,16 @@ Item {
 
                         Text {
                             width: parent.width
-                            visible: (modelData.subtitle || "") !== ""
+                            visible: modelData.type === "timer-active"
+                                || (modelData.subtitle || "") !== ""
                             color: root.config.muted
                             font.pointSize: root.config.fontSize(0.74)
                             elide: Text.ElideRight
-                            text: modelData.subtitle || ""
+                            // The model does not depend on the clock: only
+                            // this label updates on each countdown tick.
+                            text: modelData.type === "timer-active"
+                                ? root.formatRemaining(modelData.endAt - root.timerClock)
+                                : modelData.subtitle || ""
                         }
 
                     }
@@ -993,7 +1011,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         color: root.config.muted
                         font.pointSize: root.config.fontSize(0.8)
-                        text: root.emojiMode ? "Emoji" : root.timerMode ? "Timer" : root.runMode ? "Run binary" : "Applications"
+                        text: root.emojiMode ? "Emoji" : root.timerMode ? "Timer" : root.runMode ? "Bin" : "Apps"
                     }
 
                 }

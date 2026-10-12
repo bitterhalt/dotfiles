@@ -85,6 +85,7 @@ ShellRoot {
 
   NotificationService {
     id: appNotificationService
+    config: appConfig
   }
 
   NotificationPopup {
