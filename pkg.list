@@ -22,7 +22,6 @@ chafa
 chaotic-keyring
 chaotic-mirrorlist
 cliphist
-cmd-polkit-git
 ddcutil
 discord
 dmidecode
@@ -104,6 +103,7 @@ pipewire-jack
 pipewire-pulse
 playerctl
 plocate
+polkit-gnome
 proton-authenticator-bin
 python-colorthief
 python-llfuse
