@@ -34,7 +34,7 @@ binds {
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "foot -a fzf_killer -e menu_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "foot -a fzf_pass -e menu_passmenu "; } // TODO: add Quickshell Menu?
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
-    Mod+Shift+T hotkey-overlay-title="Attach Tmux sessions" { spawn-sh "foot -a fzf_tmux -e menu_tmuxer"; }
+    Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "qs ipc call tmuxMenu toggle"; }
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
 
     // Submaps

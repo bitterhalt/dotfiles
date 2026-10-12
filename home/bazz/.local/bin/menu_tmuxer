@@ -17,7 +17,7 @@ choice=$(printf '%b\n' "$options" | menu "Tmux manager")
 case "$choice" in
 "Attach session")
   target=$(printf '%s\n' "$sessions" | menu "Attach to")
-  [[ -n "$target" ]] && "$TERMINAL" -e tmux attach-session -t "$target"
+  [[ -n "$target" ]] && tmux attach-session -t "$target"
   ;;
 
 "New session")

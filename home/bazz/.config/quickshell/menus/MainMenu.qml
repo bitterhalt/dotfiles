@@ -10,6 +10,7 @@ Item {
 
     required property var config
     required property var themeMenu
+    required property var tmuxMenu
     required property var targetScreen
 
     property string page: ""
@@ -156,6 +157,12 @@ Item {
         if (item.action === "saveTheme") {
             closeMenu()
             Qt.callLater(() => root.themeMenu.openSavePrompt())
+            return
+        }
+
+        if (item.action === "tmuxMenu") {
+            closeMenu()
+            root.tmuxMenu.openMenu()
             return
         }
 

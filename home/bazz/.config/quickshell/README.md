@@ -19,6 +19,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 - Idle-state toggle and notifications
 - System tray
 - Native power menu
+- Tmux session manager
 - Native screen recorder menu
 - Compact application launcher with calculator, file search, run, and emoji modes
 - Pywal-aware theming with fallback colors
@@ -54,6 +55,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   └── Scorer.js
 ├── menus
 │   ├── MainMenu.qml
+│   ├── TmuxMenu.qml
 │   └── ThemeMenu.qml
 ├── notifications
 │   ├── NotificationCard.qml

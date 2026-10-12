@@ -505,7 +505,7 @@ PanelWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 color: root.config.fg
                 font.pointSize: root.config.fontSize(0.78)
-                text: "Enter  Copy   Del  Delete   Esc  Close"
+                text: "Enter  Copy   Del  Delete"
             }
         }
 
