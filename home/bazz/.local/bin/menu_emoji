@@ -5,7 +5,7 @@ DMENU="${DMENU:-vicinae dmenu}"
 set -e
 
 EMOJI_DIR="$HOME/.local/share/emoji"
-EMOJI_FILE="$EMOJI_DIR/emoji"
+EMOJI_FILE="$EMOJI_DIR/emoji.txt"
 
 mkdir -p "$EMOJI_DIR"
 

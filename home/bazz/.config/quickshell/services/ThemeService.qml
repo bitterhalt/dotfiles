@@ -22,6 +22,9 @@ Item {
     property color accent: fallbackAccent
     property color urgent: fallbackUrgent
 
+    // Opacity applied to the foreground to produce the muted color (pywal only)
+    property real mutedOpacity: 0.6
+
     property bool pywalActive: false
 
     function applyFallback(): void {
@@ -56,8 +59,8 @@ Item {
             "foreground",
             "color0",
             "color1",
-            "color4",
-            "color8"
+            "color3",
+            "color4"
         ]
 
         for (let i = 0; i < required.length; ++i) {
@@ -80,7 +83,7 @@ Item {
         surface = colors.color0
         borderColor = colors.color1
         fg = colors.foreground
-        muted = colors.color8
+        muted = Qt.alpha(fg, mutedOpacity)
         accent = colors.color4
         urgent = colors.color3
         pywalActive = true

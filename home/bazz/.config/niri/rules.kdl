@@ -55,8 +55,17 @@ window-rule {
 
 window-rule {
     match app-id="fzf_clip"
+    match app-id="fzf_killer"
     open-floating true
     default-column-width { proportion 0.50; }
+    default-window-height { proportion 0.40; }
+    default-floating-position x=16 y=16 relative-to="top"
+}
+
+window-rule {
+    match app-id="fzf_killer"
+    open-floating true
+    default-column-width { proportion 0.20; }
     default-window-height { proportion 0.40; }
     default-floating-position x=16 y=16 relative-to="top"
 }

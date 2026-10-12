@@ -62,7 +62,7 @@
       "@bazz/fdsearch": {
          "entrypoints": {
             "search-files": {
-               "alias": "fds"
+               "alias": "fs"
             }
          }
       },

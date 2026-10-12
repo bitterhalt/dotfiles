@@ -145,7 +145,7 @@ Item {
                         implicitHeight: 6
 
                         radius: 2.5
-                        color: config.borderColor
+                        color: config.muted
 
                         Rectangle {
                             anchors {

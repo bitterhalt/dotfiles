@@ -56,10 +56,10 @@ run_menu() {
 
 menu_notes() {
   run_menu "Notes" \
-    "󰍉 Search|~/.local/bin/menu_notes" \
-    "󰎚 New Note|~/.local/bin/menu_notes -c" \
+    "󰍉 Search|foot -e ~/.local/bin/menu_notes" \
+    "󰎚 New Note|foot -e ~/.local/bin/menu_notes -c" \
     " TODO|foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" \
-    "󰩹 Delete|~/.local/bin/menu_notes -d"
+    "󰩹 Delete|foot -e ~/.local/bin/menu_notes -d"
 }
 
 menu_packages() {
