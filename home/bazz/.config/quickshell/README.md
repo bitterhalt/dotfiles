@@ -57,6 +57,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 ├── menus
 │   ├── MainMenu.qml
 │   ├── ProcessMenu.qml
+│   ├── PowerMenu.qml
 │   ├── processes.py
 │   ├── TmuxMenu.qml
 │   └── ThemeMenu.qml
@@ -98,7 +99,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 
 `launcher/Launcher.qml` contains the launcher UI and state; `Scorer.js` holds the matching logic. The centered panel is hosted by the main shell and controlled through `qs ipc call launcher toggle`.
 
-`menus/ProcessMenu.qml` lists your own processes by name and PID. Mod+F4 or `qs ipc call processMenu toggle` opens it; Ctrl+R refreshes the list without background polling. Enter selects a process, then asks for confirmation with Cancel selected by default. Confirming Force kill sends SIGKILL, like `menu_killer`. The Python helper checks ownership and process start time and uses a pidfd to avoid killing a reused PID. QuickShell itself can be selected; killing the current shell also closes the menu.
+Process menu: Mod+F4 or `qs ipc call processMenu toggle`; Ctrl+R refreshes. Confirmed kills send SIGKILL, including when selecting QuickShell itself.
 
 ## Configuration
 
@@ -152,17 +153,7 @@ This keeps feature modules independent from the source of the theme.
 
 ## Recorder
 
-The recorder is implemented entirely inside QuickShell.
-
-```text
-recorder/
-├── Recorder.qml
-└── RegionSelector.qml
-```
-
-`Recorder.qml` manages `gpu-screen-recorder`, displays the recording state in the bar, and provides a keyboard-driven recording menu.
-
-Available actions:
+Uses `gpu-screen-recorder`.
 
 ```text
 f  Fullscreen
@@ -185,11 +176,9 @@ qs ipc call recorder isRecording
 
 ## Power Menu
 
-Available actions include:
-
 ```text
 l  Lock
-s  Suspend
+z  Suspend
 R  Restart
 S  Shut down
 E  Log out

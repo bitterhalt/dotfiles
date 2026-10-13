@@ -73,6 +73,12 @@ ShellRoot {
     targetScreen: root.activeScreen
   }
 
+  PowerMenu {
+    id: appPowerMenu
+    config: appConfig
+    targetScreen: root.activeScreen
+  }
+
   TimerService {
     id: appTimerService
   }
@@ -212,6 +218,7 @@ ShellRoot {
       idleService: appIdleService
       recorderService: appRecorderService
       uiService: shellUiService
+      powerMenu: appPowerMenu
 
       visible: root.barVisible
     }

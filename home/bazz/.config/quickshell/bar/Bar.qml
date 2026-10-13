@@ -28,6 +28,7 @@ PanelWindow {
     required property var idleService
     required property var recorderService
     required property var uiService
+    required property var powerMenu
 
     screen: targetScreen
     implicitHeight: config.barHeight
@@ -150,7 +151,7 @@ PanelWindow {
             config: barWindow.config
             barWindow: barWindow
             popupManager: popupManager
-            uiService: barWindow.uiService
+            powerMenu: barWindow.powerMenu
         }
 
     }

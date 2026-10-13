@@ -11,7 +11,6 @@ Item {
 
     signal weatherActionRequested(string action)
     signal notificationCenterActionRequested(string action)
-    signal powerActionRequested(string action)
 
     IpcHandler {
         target: "weather"
@@ -45,19 +44,4 @@ Item {
         }
     }
 
-    IpcHandler {
-        target: "power"
-
-        function toggle(): void {
-            root.powerActionRequested("toggle")
-        }
-
-        function open(): void {
-            root.powerActionRequested("open")
-        }
-
-        function close(): void {
-            root.powerActionRequested("close")
-        }
-    }
 }
