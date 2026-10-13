@@ -1191,6 +1191,7 @@ Item {
                 "--",
                 fileProcess.needle,
                 Quickshell.env("HOME") + "/.config",
+                Quickshell.env("HOME") + "/Documents",
                 Quickshell.env("HOME") + "/.local/bin",
                 "/etc"
             ]
