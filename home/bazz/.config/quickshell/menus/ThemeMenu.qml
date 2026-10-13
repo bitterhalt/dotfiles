@@ -293,11 +293,13 @@ Item {
             Keys.onPressed: event => {
                 switch (event.key) {
                 case Qt.Key_Up:
+                case Qt.Key_Backtab:
                     root.selectPrevious()
                     event.accepted = true
                     return
 
                 case Qt.Key_Down:
+                case Qt.Key_Tab:
                     root.selectNext()
                     event.accepted = true
                     return

@@ -300,10 +300,12 @@ PanelWindow {
                 Keys.onPressed: event => {
                     switch (event.key) {
                     case Qt.Key_Down:
+                    case Qt.Key_Tab:
                         root.select(root.selectedIndex + 1)
                         event.accepted = true
                         break
                     case Qt.Key_Up:
+                    case Qt.Key_Backtab:
                         root.select(root.selectedIndex - 1)
                         event.accepted = true
                         break
