@@ -290,3 +290,7 @@ global shell → shell.qml
 ```
 
 Multi-monitor improvements are welcome, especially moving global feature state and duplicate IPC handlers out of per-screen bar instances.
+
+## Transparency
+
+This shell was developed with LLM assistance under my supervision. I direct the design, review the changes, and test them on my own desktop. These are personal dotfiles, so review and adapt them before using them on yours.
