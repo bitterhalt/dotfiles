@@ -3,15 +3,13 @@
 SESSION="system"
 TOP="btop"
 GTOP="amdgpu_top --smi"
-NETOP="nethogs"
 
 if tmux has-session -t "$SESSION" 2>/dev/null; then
-  tmux attach-session -t "$SESSION"
+  exec tmux attach-session -t "$SESSION"
 fi
 
 tmux new-session -d -s "$SESSION" -n logs "journalctl -f"
-tmux new-window -t "$SESSION" -n network "$NETOP"
 tmux new-window -t "$SESSION" -n monitor "$GTOP"
-tmux split-window -h -t "$SESSION:monitor" "$TOP"
+tmux split-window -v -t "$SESSION:monitor" "$TOP"
 
 tmux attach-session -t "$SESSION"
