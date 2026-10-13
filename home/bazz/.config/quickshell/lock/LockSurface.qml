@@ -163,6 +163,11 @@ Rectangle {
                 selectionColor: root.accent
                 selectedTextColor: bg
                 placeholderTextColor: root.config.muted
+                onTextChanged: root.context.currentText = this.text
+                onAccepted: {
+                    root.context.submitPassword();
+                }
+
                 // Fusion hides its centered placeholder while focused.
                 Text {
                     anchors.fill: parent
@@ -174,10 +179,6 @@ Rectangle {
                     font: passwordBox.font
                     color: passwordBox.placeholderTextColor
                     text: "Enter password"
-                }
-                onTextChanged: root.context.currentText = this.text
-                onAccepted: {
-                    root.context.submitPassword();
                 }
 
                 Connections {
@@ -341,28 +342,6 @@ Rectangle {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
             bottomMargin: 60
-        }
-
-        SequentialAnimation {
-            id: hintPulseAnimation
-
-            running: hintLabel.visible
-            loops: Animation.Infinite
-
-            NumberAnimation {
-                target: hintLabel
-                property: "opacity"
-                to: 0.5
-                duration: 2000
-            }
-
-            NumberAnimation {
-                target: hintLabel
-                property: "opacity"
-                to: 1
-                duration: 2000
-            }
-
         }
 
     }
