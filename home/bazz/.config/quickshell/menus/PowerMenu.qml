@@ -8,12 +8,13 @@ Item {
 
     required property var config
     required property var targetScreen
+    required property var lockService
 
     property bool opened: false
     property var menuScreen: null
     property int selectedIndex: 0
     readonly property var actions: [
-        { label: "Lock", icon: "󰌾", key: "l", command: "swaylock -C ~/.cache/wal/colors-swaylock" },
+        { label: "Lock", icon: "󰌾", key: "l", action: "lock" },
         { label: "Log out", icon: "󰍃", key: "E", command: "niri msg action quit" },
         { label: "Suspend", icon: "󰤄", key: "z", command: "systemctl suspend" },
         { label: "Restart", icon: "󰜉", key: "R", command: "systemctl reboot" },
@@ -50,9 +51,12 @@ Item {
     function activate(index) {
         if (index < 0 || index >= actions.length)
             return
-        const command = actions[index].command
+        const action = actions[index]
         closeMenu()
-        config.run(command)
+        if (action.action === "lock")
+            lockService.lock()
+        else
+            config.run(action.command)
     }
 
     PanelWindow {

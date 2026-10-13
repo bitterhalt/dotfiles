@@ -19,7 +19,7 @@ Item {
 
     function toggle(screen): void {
         if (disabled) {
-            Quickshell.execDetached(["swayidle"])
+            Quickshell.execDetached(["swayidle", "-w"])
             disabled = false
             notificationRequested("Enabled", screen || targetScreen)
         } else {

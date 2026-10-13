@@ -77,6 +77,11 @@ ShellRoot {
     id: appPowerMenu
     config: appConfig
     targetScreen: root.activeScreen
+    lockService: appLockService
+  }
+
+  LockService {
+    id: appLockService
   }
 
   TimerService {

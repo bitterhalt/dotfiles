@@ -19,6 +19,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 - Idle-state toggle and notifications
 - System tray
 - Native power menu
+- Password lock screen with swayidle integration, adapted from [Quicklock](https://github.com/FLchs/quicklock) (GPL-3.0)
 - Tmux session manager
 - Searchable process killer with PID display and force-kill confirmation
 - Native screen recorder menu
@@ -54,6 +55,11 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 ├── launcher
 │   ├── Launcher.qml
 │   └── Scorer.js
+├── lock
+│   ├── LockContext.qml
+│   └── LockSurface.qml
+├── lock.qml
+├── lock-test.qml
 ├── menus
 │   ├── MainMenu.qml
 │   ├── ProcessMenu.qml
@@ -75,6 +81,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── BatteryService.qml
 │   ├── BluetoothService.qml
 │   ├── IdleService.qml
+│   ├── LockService.qml
 │   ├── NiriService.qml
 │   ├── NotificationService.qml
 │   ├── RecorderService.qml
@@ -175,6 +182,8 @@ qs ipc call recorder isRecording
 ```
 
 ## Power Menu
+
+Locking: Mod+F11 or `qs ipc call lock lock`. Preview: `qs -p ~/.config/quickshell/lock-test.qml`.
 
 ```text
 l  Lock
