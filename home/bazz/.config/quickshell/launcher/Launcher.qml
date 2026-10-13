@@ -673,7 +673,7 @@ Item {
         implicitHeight: root.cardHeight
         exclusiveZone: 0
         focusable: true
-        WlrLayershell.namespace: "launcher"
+        WlrLayershell.namespace: "quickshell-launcher"
         WlrLayershell.layer: WlrLayer.Overlay
         WlrLayershell.keyboardFocus: visible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
         onVisibleChanged: {

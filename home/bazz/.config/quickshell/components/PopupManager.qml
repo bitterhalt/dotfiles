@@ -129,13 +129,13 @@ Item {
     PopupSurface {
         managerRef: manager
         hostKey: "weather"
-        surfaceNamespace: "weather"
+        surfaceNamespace: "quickshell-weather"
     }
 
     PopupSurface {
         managerRef: manager
         hostKey: "notificationCenter"
-        surfaceNamespace: "notifications"
+        surfaceNamespace: "quickshell-notifications"
     }
 
     PopupSurface {

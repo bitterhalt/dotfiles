@@ -29,7 +29,7 @@ Item {
 
         margins.top: root.config.popupGap
 
-        WlrLayershell.namespace: "notifications"
+        WlrLayershell.namespace: "quickshell-notifications"
         WlrLayershell.layer: WlrLayer.Overlay
 
         exclusiveZone: 0

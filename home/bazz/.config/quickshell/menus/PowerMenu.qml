@@ -68,7 +68,7 @@ Item {
         anchors.left: true
         margins.top: 0
         margins.left: screen ? Math.max(0, Math.round((screen.width - width) / 2)) : 0
-        WlrLayershell.namespace: "power-menu"
+        WlrLayershell.namespace: "quickshell-power-menu"
         WlrLayershell.layer: WlrLayer.Overlay
         WlrLayershell.keyboardFocus: visible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 

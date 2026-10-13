@@ -271,10 +271,10 @@ window-rule {
 // Add shadow to chosen layers
 layer-rule {
     geometry-corner-radius 4
-    match namespace="wlr_which_key"
-    match namespace="launcher"
-    match namespace="notifications"
-    match namespace="weather"
+    match namespace="quickshell-launcher"
+    match namespace="quickshell-notifications"
+    match namespace="quickshell-weather"
+    // match namespace="quickshell-osd"
     shadow {
       on
     }

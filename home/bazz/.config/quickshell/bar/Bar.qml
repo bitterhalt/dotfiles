@@ -12,6 +12,7 @@ import "modules/workspaces"
 import "../recorder"
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 
 PanelWindow {
     id: barWindow
@@ -33,6 +34,7 @@ PanelWindow {
     screen: targetScreen
     implicitHeight: config.barHeight
     color: config.bg
+    WlrLayershell.namespace: "quickshell-bar"
 
     anchors {
         top: true

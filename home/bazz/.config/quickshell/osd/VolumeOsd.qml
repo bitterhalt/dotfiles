@@ -80,15 +80,19 @@ Item {
             anchors {
                 top: true
                 left: true
-                right: true
             }
 
             margins.top: config.popupGap
+            margins.left: osd.targetScreen
+                ? Math.max(0, Math.round((osd.targetScreen.width - width) / 2))
+                : 0
 
             // OSDs should remain visible above fullscreen surfaces.
             WlrLayershell.layer: WlrLayer.Overlay
+            WlrLayershell.namespace: "quickshell-osd"
 
             exclusiveZone: 0
+            implicitWidth: 220
             implicitHeight: 42
             color: "transparent"
 
@@ -96,9 +100,7 @@ Item {
             mask: Region {}
 
             Rectangle {
-                width: 220
-                height: parent.height
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.fill: parent
 
                 color: config.surface
                 border.color: config.borderColor
