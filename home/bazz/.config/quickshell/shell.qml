@@ -68,6 +68,11 @@ ShellRoot {
     targetScreen: root.activeScreen
   }
 
+  ProcessMenu {
+    config: appConfig
+    targetScreen: root.activeScreen
+  }
+
   TimerService {
     id: appTimerService
   }

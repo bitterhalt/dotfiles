@@ -31,7 +31,7 @@ binds {
     Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "qs ipc call launcher toggle"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "qs ipc call power toggle"; }
     Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
-    Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "foot -a fzf_killer -e menu_killer"; }
+    Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "qs ipc call processMenu toggle"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "foot -a fzf_pass -e menu_passmenu "; } // TODO: add Quickshell Menu?
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
     Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "qs ipc call tmuxMenu toggle"; }

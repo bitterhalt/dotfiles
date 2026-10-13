@@ -20,6 +20,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 - System tray
 - Native power menu
 - Tmux session manager
+- Searchable process killer with PID display and force-kill confirmation
 - Native screen recorder menu
 - Compact application launcher with calculator, file search, run, emoji, and timer modes
 - Pywal-aware theming with fallback colors
@@ -55,6 +56,8 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   └── Scorer.js
 ├── menus
 │   ├── MainMenu.qml
+│   ├── ProcessMenu.qml
+│   ├── processes.py
 │   ├── TmuxMenu.qml
 │   └── ThemeMenu.qml
 ├── notifications
@@ -94,6 +97,8 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 `Config.qml` contains global shell configuration such as bar geometry, typography, popup styling, clock formats, and shared colors.
 
 `launcher/Launcher.qml` contains the launcher UI and state; `Scorer.js` holds the matching logic. The centered panel is hosted by the main shell and controlled through `qs ipc call launcher toggle`.
+
+`menus/ProcessMenu.qml` lists your own processes by name and PID. Mod+F4 or `qs ipc call processMenu toggle` opens it; Ctrl+R refreshes the list without background polling. Enter selects a process, then asks for confirmation with Cancel selected by default. Confirming Force kill sends SIGKILL, like `menu_killer`. The Python helper checks ownership and process start time and uses a pidfd to avoid killing a reused PID. QuickShell itself can be selected; killing the current shell also closes the menu.
 
 ## Configuration
 
