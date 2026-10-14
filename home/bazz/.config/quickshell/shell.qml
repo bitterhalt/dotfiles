@@ -15,6 +15,7 @@ import "bar/modules/bluetooth"
 import "notifications"
 import "launcher"
 import "clipboard"
+import "translator"
 
 ShellRoot {
   id: root
@@ -95,6 +96,11 @@ ShellRoot {
   }
 
   Clipboard {
+    config: appConfig
+    targetScreen: root.activeScreen
+  }
+
+  Translator {
     config: appConfig
     targetScreen: root.activeScreen
   }

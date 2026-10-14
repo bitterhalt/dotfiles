@@ -24,6 +24,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 - Searchable process killer with PID display and force-kill confirmation
 - Native screen recorder menu
 - Compact application launcher with calculator, file search, run, emoji, and timer modes
+- Lazy-loaded DeepL translator
 - Pywal-aware theming with fallback colors
 - QuickShell IPC controls for selected shell features
 
@@ -109,6 +110,8 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 Process menu: Mod+F4 or `qs ipc call processMenu toggle`; Ctrl+R refreshes. Confirmed kills send SIGKILL, including when selecting QuickShell itself.
 
 ## Configuration
+
+Translator: `qs ipc call translator toggle` (also `open` / `close`). Requires `DEEPL_API` in QuickShell's environment. Ctrl+Enter translates; Ctrl+Shift+C copies; Escape closes and clears text. Language choices last until the shell exits.
 
 Most global values can be adjusted in `Config.qml`.
 

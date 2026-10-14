@@ -13,6 +13,7 @@ Rectangle {
     property bool compact: false
     property bool showClose: true
     property bool dismissOnClick: false
+    property int bodyLineLimit: 3
     readonly property int appIconSize: 36
     readonly property bool hasImage: notification && notification.image && notification.image !== ""
     readonly property bool critical: notification && notification.urgency === NotificationUrgency.Critical
@@ -32,7 +33,7 @@ Rectangle {
     }
 
     implicitHeight: {
-        let h = compact ? 84 : 92;
+        let h = Math.max(compact ? 84 : 92, contentColumn.implicitHeight + 20);
         if (actionCount > 0)
             h += 34;
 
@@ -65,8 +66,7 @@ Rectangle {
 
             Image {
                 anchors.fill: parent
-                source: !root.critical && !root.timerNotification && root.hasImage
-                    ? root.notification.image : ""
+                source: !root.critical && !root.timerNotification && root.hasImage ? root.notification.image : ""
                 sourceSize.width: Math.ceil(width * Screen.devicePixelRatio)
                 sourceSize.height: Math.ceil(height * Screen.devicePixelRatio)
                 fillMode: Image.PreserveAspectCrop
@@ -130,7 +130,7 @@ Rectangle {
             font.pointSize: config.fontSize(0.86)
             textFormat: Text.PlainText
             wrapMode: Text.Wrap
-            maximumLineCount: root.compact ? 2 : 3
+            maximumLineCount: root.bodyLineLimit
             elide: Text.ElideRight
             text: root.notification ? (root.notification.body || "") : ""
         }

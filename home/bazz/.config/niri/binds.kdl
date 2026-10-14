@@ -23,16 +23,17 @@ binds {
     Mod+B hotkey-overlay-title="Toggle Bar" { spawn-sh "qs ipc call bar toggle"; }
     Mod+Ctrl+Q hotkey-overlay-title="Reload Quickshell" { spawn-sh "qs_toggle"; }
 
-    // Menus
+    // Shell/Menus
      Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "qs ipc call clipboard toggle"; }
     Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "qs ipc call notifications toggleDnd"; }
     Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "qs ipc call notificationCenter toggle"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
+    Mod+Ctrl+T hotkey-overlay-title="Open Translator" { spawn-sh "qs ipc call translator toggle"; }
     Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "qs ipc call launcher toggle"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "qs ipc call power toggle"; }
-    Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; }
+    // Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; } TODO: Make quickshell menu!
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "qs ipc call processMenu toggle"; }
-    Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "foot -a fzf_pass -e menu_passmenu "; } // TODO: add Quickshell Menu?
+    Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "foot -a fzf_pass -e menu_passmenu "; }
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
     Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "qs ipc call tmuxMenu toggle"; }
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }

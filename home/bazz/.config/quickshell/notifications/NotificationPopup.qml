@@ -12,6 +12,7 @@ Scope {
     // Active toasts, newest first. Delegates are keyed by the notification
     // object, so each toast keeps its own timer while others come and go.
     property var toasts: []
+    property var toastHeights: ({})
     // Non-transient toasts bumped off the stack remain in the center.
     property var overflowedNotifications: []
     readonly property int overflowCount: overflowedNotifications.length
@@ -20,11 +21,41 @@ Scope {
 
     readonly property int maxToasts: 3
     readonly property int toastWidth: 380
-    readonly property int toastHeight: 84
+    readonly property int defaultToastHeight: 84
     readonly property int toastSpacing: 8
     readonly property int chipHeight: 24
-    readonly property int slotHeight: toastHeight + toastSpacing
     readonly property int defaultToastTimeoutMs: 5000
+
+    onToastsChanged: {
+        const kept = {}
+        for (const notification of toasts) {
+            const key = String(notification.id)
+            if (toastHeights[key] !== undefined)
+                kept[key] = toastHeights[key]
+        }
+        toastHeights = kept
+    }
+
+    function recordHeight(notification, height) {
+        if (!notification || toasts.indexOf(notification) === -1)
+            return
+        const key = String(notification.id)
+        const measured = Math.ceil(height)
+        if (measured <= 0 || toastHeights[key] === measured)
+            return
+        const next = Object.assign({}, toastHeights)
+        next[key] = measured
+        toastHeights = next
+    }
+
+    function toastOffset(index) {
+        let offset = 0
+        for (let i = 0; i < index && i < toasts.length; ++i) {
+            const key = String(toasts[i].id)
+            offset += (toastHeights[key] || defaultToastHeight) + toastSpacing
+        }
+        return offset
+    }
 
     // expireTimeout is the raw D-Bus value in milliseconds (despite what the
     // Quickshell docs say): -1 = unspecified, 0 = never expire.
@@ -114,7 +145,7 @@ Scope {
             screen: root.targetScreen
             anchors.top: true
             anchors.left: true
-            margins.top: root.config.popupGap + slot * root.slotHeight
+            margins.top: root.config.popupGap + root.toastOffset(slot)
             margins.left: root.targetScreen
                 ? Math.max(
                     0,
@@ -149,6 +180,8 @@ Scope {
                 compact: true
                 showClose: false
                 dismissOnClick: false
+                onHeightChanged: root.recordHeight(toastWindow.modelData, height)
+                Component.onCompleted: root.recordHeight(toastWindow.modelData, height)
             }
 
             MouseArea {
@@ -184,7 +217,7 @@ Scope {
         screen: root.targetScreen
         anchors.top: true
         anchors.left: true
-        margins.top: root.config.popupGap + root.toasts.length * root.slotHeight
+        margins.top: root.config.popupGap + root.toastOffset(root.toasts.length)
         margins.left: root.targetScreen
             ? Math.max(
                 0,
