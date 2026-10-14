@@ -35,7 +35,7 @@ Item {
     property var binaries: []
     property var history: []
     readonly property string historyPath:
-        (Quickshell.env("HOME") || "") + "/.cache/fuzzel-runhistory"
+        (Quickshell.env("HOME") || "") + "/.cache/drun-history"
     readonly property int historyShown: 5
     readonly property int historyKept: 50
 
