@@ -23,9 +23,20 @@
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [Foot](https://codeberg.org/dnkl/foot)
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/58b9b8b5-9534-407b-962b-f83af91c4252" />
+## Screenshots
+> Desktop
+<img width="1920" height="1080" alt="2026-10-15-01-48-38" src="https://github.com/user-attachments/assets/c834c214-4282-4d3e-a188-8a7e93754e04" />
 
+> Blurred Overlay
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d362e791-b931-4ac9-9369-7f47868c4fa7" />
+
+> Launcher
+<img width="575" height="500" alt="2026-10-15-01-50-31_screenshot" src="https://github.com/user-attachments/assets/f661aaba-f745-4b1a-9be4-db96bb093f6f" />
+
+> Deepl Translator
+<img width="602" height="491" alt="2026-10-15-01-49-06_screenshot" src="https://github.com/user-attachments/assets/52ac1621-61bc-4db2-a8ec-b04b55dfadc8" />
+
+
 
 ### Keybinds
 
