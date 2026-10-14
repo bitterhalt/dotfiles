@@ -111,7 +111,7 @@ Rectangle {
         id: clockGroup
 
         anchors.horizontalCenter: parent.horizontalCenter
-        y: 60
+        y: 80
         spacing: 8
 
         Label {
