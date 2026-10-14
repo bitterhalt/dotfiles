@@ -170,6 +170,20 @@ Item {
             border.color: root.config.borderColor
             clip: true
 
+            Rectangle {
+                id: searchBackground
+
+                anchors.fill: searchInput
+                anchors.leftMargin: 8
+                anchors.rightMargin: 8
+                anchors.topMargin: 8
+                visible: root.killTarget === null
+                color: root.config.bg
+                radius: 4
+                border.width: 1
+                border.color: searchInput.activeFocus ? root.config.accent : root.config.borderColor
+            }
+
             TextInput {
                 id: searchInput
 
@@ -179,12 +193,14 @@ Item {
                 height: 42
                 leftPadding: 18
                 rightPadding: 18
+                topPadding: root.killTarget ? 0 : searchBackground.anchors.topMargin
+                bottomPadding: root.killTarget ? 0 : searchBackground.anchors.bottomMargin
                 verticalAlignment: TextInput.AlignVCenter
                 color: root.killTarget ? "transparent" : root.config.fg
                 cursorVisible: activeFocus && !root.killTarget
                 selectionColor: root.config.accent
                 selectedTextColor: root.config.bg
-                font.pointSize: root.config.fontSize(1.04)
+                font.pointSize: root.config.fontSize(1)
                 clip: true
                 readOnly: root.killTarget !== null
                 onTextChanged: {
@@ -226,10 +242,12 @@ Item {
                 anchors.fill: searchInput
                 anchors.leftMargin: 18
                 anchors.rightMargin: 18
+                anchors.topMargin: root.killTarget ? 0 : searchBackground.anchors.topMargin
+                anchors.bottomMargin: root.killTarget ? 0 : searchBackground.anchors.bottomMargin
                 verticalAlignment: Text.AlignVCenter
                 visible: root.killTarget !== null || searchInput.text === ""
                 color: root.killTarget ? root.config.fg : root.config.muted
-                font.pointSize: root.config.fontSize(1.04)
+                font.pointSize: root.config.fontSize(1)
                 elide: Text.ElideRight
                 text: root.killTarget ? "Kill " + root.killTarget.name + " (PID " + root.killTarget.pid + ")?" : "Kill process"
             }

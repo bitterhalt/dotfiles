@@ -266,36 +266,6 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
 
-            Item {
-                width: parent ? parent.width : 0
-                height: 30
-
-                Text {
-                    anchors.left: parent.left
-                    anchors.leftMargin: 8
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    color: root.config.fg
-                    font.pointSize: root.config.fontSize(1)
-                    font.weight: Font.DemiBold
-                    text: root.title
-                }
-
-                Text {
-                    anchors.right: parent.right
-                    anchors.rightMargin: 8
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    visible: root.page === "monitor"
-                    color: root.config.muted
-                    font.pointSize: root.config.fontSize(0.846)
-                    text: "Esc  Back"
-                }
-            }
-
-            PanelSeparator {
-                config: root.config
-            }
 
             Repeater {
                 model: root.currentItems

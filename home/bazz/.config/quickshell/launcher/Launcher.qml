@@ -713,6 +713,19 @@ Item {
                 }
             }
 
+            Rectangle {
+                id: searchBackground
+
+                anchors.fill: searchInput
+                anchors.leftMargin: 8
+                anchors.rightMargin: 8
+                anchors.topMargin: 8
+                color: root.config.bg
+                radius: 4
+                border.width: 1
+                border.color: searchInput.activeFocus ? root.config.accent : root.config.borderColor
+            }
+
             TextInput {
                 id: searchInput
 
@@ -722,12 +735,14 @@ Item {
                 height: root.inputHeight
                 leftPadding: 18
                 rightPadding: 18
+                topPadding: searchBackground.anchors.topMargin
+                bottomPadding: searchBackground.anchors.bottomMargin
                 focus: true
                 verticalAlignment: TextInput.AlignVCenter
                 color: root.config.fg
                 selectionColor: root.config.accent
                 selectedTextColor: root.config.bg
-                font.pointSize: root.config.fontSize(1.08)
+                font.pointSize: root.config.fontSize(1)
                 clip: true
                 onTextChanged: {
                     root.query = text;
@@ -827,20 +842,14 @@ Item {
             Text {
                 anchors.left: parent.left
                 anchors.leftMargin: 18
-                anchors.verticalCenter: searchInput.verticalCenter
+                anchors.verticalCenter: searchBackground.verticalCenter
                 visible: searchInput.text.length === 0
                 color: root.config.muted
-                font.pointSize: root.config.fontSize(1.08)
+                font.pointSize: root.config.fontSize(1)
                 text: root.placeholder
             }
 
-            Rectangle {
-                anchors.top: searchInput.bottom
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: root.expanded ? 1 : 0
-                color: root.config.borderColor
-            }
+
 
             ListView {
                 id: resultList
