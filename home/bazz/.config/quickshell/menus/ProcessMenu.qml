@@ -23,10 +23,10 @@ Item {
 
         if (killTarget)
             return [{
-            "name": "Cancel",
+            "name": "No",
             "action": "cancel"
         }, {
-            "name": "Kill",
+            "name": "Yes",
             "action": "kill"
         }];
 
