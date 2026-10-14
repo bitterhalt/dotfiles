@@ -287,9 +287,13 @@ Item {
         anchors {
             top: true
             left: true
-            right: true
-            bottom: true
         }
+
+        implicitWidth: menuCard.implicitWidth
+        implicitHeight: menuCard.implicitHeight
+        margins.top: root.config.popupGap
+        margins.left: root.targetScreen
+            ? Math.max(0, Math.round((root.targetScreen.width - width) / 2)) : 0
 
         visible: false
         color: "transparent"
@@ -297,14 +301,10 @@ Item {
         focusable: true
 
         WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.namespace: "quickshell-submenu"
         WlrLayershell.keyboardFocus: visible
             ? WlrKeyboardFocus.Exclusive
             : WlrKeyboardFocus.None
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: root.closeMenu()
-        }
 
         FocusScope {
             id: keyboardHandler
@@ -351,7 +351,6 @@ Item {
 
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: root.config.popupGap
 
             Item {
                 width: parent.width
@@ -500,6 +499,12 @@ Item {
             if (visible)
                 Qt.callLater(() => keyboardHandler.forceActiveFocus())
         }
+    }
+
+    PopupCatcher {
+        targetScreen: root.targetScreen
+        visible: menuWindow.visible
+        onDismissed: root.closeMenu()
     }
 
     IpcHandler {

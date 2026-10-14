@@ -109,9 +109,13 @@ Item {
         anchors {
             top: true
             left: true
-            right: true
-            bottom: true
         }
+
+        implicitWidth: menuCard.implicitWidth
+        implicitHeight: menuCard.implicitHeight
+        margins.top: root.config.popupGap
+        margins.left: root.barWindow.screen
+            ? Math.max(0, Math.round((root.barWindow.screen.width - width) / 2)) : 0
 
         visible: false
         color: "transparent"
@@ -119,14 +123,10 @@ Item {
         focusable: true
 
         WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.namespace: "quickshell-submenu"
         WlrLayershell.keyboardFocus: visible
             ? WlrKeyboardFocus.Exclusive
             : WlrKeyboardFocus.None
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: root.closeMenu()
-        }
 
         FocusScope {
             id: keyboardHandler
@@ -191,7 +191,6 @@ Item {
 
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: root.config.popupGap
 
             RecorderMenuItem {
                 index: 0
@@ -228,6 +227,12 @@ Item {
                 )
             }
         }
+    }
+
+    PopupCatcher {
+        targetScreen: root.barWindow.screen
+        visible: recorderMenu.visible
+        onDismissed: root.closeMenu()
     }
 
     component RecorderMenuItem: Item {

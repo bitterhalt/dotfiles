@@ -264,9 +264,13 @@ Item {
         anchors {
             top: true
             left: true
-            right: true
-            bottom: true
         }
+
+        implicitWidth: root.saveMode ? savePanel.implicitWidth : menuCard.implicitWidth
+        implicitHeight: root.saveMode ? savePanel.implicitHeight : menuCard.implicitHeight
+        margins.top: root.config.popupGap
+        margins.left: root.targetScreen
+            ? Math.max(0, Math.round((root.targetScreen.width - width) / 2)) : 0
 
         visible: false
         color: "transparent"
@@ -274,14 +278,10 @@ Item {
         focusable: true
 
         WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.namespace: "quickshell-submenu"
         WlrLayershell.keyboardFocus: visible
             ? WlrKeyboardFocus.Exclusive
             : WlrKeyboardFocus.None
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: root.closeMenu()
-        }
 
         FocusScope {
             id: keyboardHandler
@@ -330,7 +330,6 @@ Item {
 
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: root.config.popupGap
 
             Repeater {
                 model: root.menuEntries
@@ -437,7 +436,6 @@ Item {
 
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: root.config.popupGap
 
             Text {
                 width: parent.width
@@ -497,6 +495,12 @@ Item {
                 text: "Enter to save  •  Esc to cancel"
             }
         }
+    }
+
+    PopupCatcher {
+        targetScreen: root.targetScreen
+        visible: themeMenu.visible
+        onDismissed: root.closeMenu()
     }
 
     IpcHandler {

@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
+import "../components"
 
 Item {
     id: root
@@ -157,7 +158,7 @@ Item {
         anchors.left: true
         margins.top: root.config.popupGap
         margins.left: root.targetScreen ? Math.max(0, Math.round((root.targetScreen.width - width) / 2)) : 0
-        WlrLayershell.namespace: "quickshell-process-menu"
+        WlrLayershell.namespace: "quickshell-submenu"
         WlrLayershell.layer: WlrLayer.Overlay
         WlrLayershell.keyboardFocus: visible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
@@ -331,6 +332,12 @@ Item {
 
         }
 
+    }
+
+    PopupCatcher {
+        targetScreen: root.targetScreen
+        visible: root.opened
+        onDismissed: root.closeMenu()
     }
 
     IpcHandler {
