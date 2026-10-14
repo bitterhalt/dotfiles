@@ -18,13 +18,13 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 - Battery indicator
 - Idle-state toggle and notifications
 - System tray
-- Native power menu
-- Password lock screen with swayidle integration, adapted from [Quicklock](https://github.com/FLchs/quicklock) (GPL-3.0)
+- Power menu
+- Native Lock screen
 - Tmux session manager
 - Searchable process killer with PID display and force-kill confirmation
 - Native screen recorder menu
-- Compact application launcher with calculator, file search, run, emoji, and timer modes
-- Lazy-loaded DeepL translator
+- Application launcher with calculator, file search, run, emoji, and timer modes
+- DeepL translator (Personal API key needed)
 - Pywal-aware theming with fallback colors
 - QuickShell IPC controls for selected shell features
 
