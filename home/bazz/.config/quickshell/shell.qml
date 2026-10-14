@@ -61,6 +61,7 @@ ShellRoot {
     themeMenu: themeMenu
     tmuxMenu: tmuxMenu
     targetScreen: root.activeScreen
+    lockService: appLockService
   }
 
   TmuxMenu {
@@ -72,13 +73,6 @@ ShellRoot {
   ProcessMenu {
     config: appConfig
     targetScreen: root.activeScreen
-  }
-
-  PowerMenu {
-    id: appPowerMenu
-    config: appConfig
-    targetScreen: root.activeScreen
-    lockService: appLockService
   }
 
   LockService {
@@ -229,7 +223,7 @@ ShellRoot {
       idleService: appIdleService
       recorderService: appRecorderService
       uiService: shellUiService
-      powerMenu: appPowerMenu
+      powerMenu: mainMenu
 
       visible: root.barVisible
     }

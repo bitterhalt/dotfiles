@@ -12,9 +12,19 @@ Item {
     required property var themeMenu
     required property var tmuxMenu
     required property var targetScreen
+    required property var lockService
 
     property string page: ""
     property int selectedIndex: 0
+    property var menuScreen: null
+
+    readonly property var powerItems: [
+        { label: "Lock", icon: "󰌾", shortcut: "l", action: "lock" },
+        { label: "Log out", icon: "󰍃", shortcut: "E", command: "niri msg action quit" },
+        { label: "Suspend", icon: "󰤄", shortcut: "z", command: "systemctl suspend" },
+        { label: "Restart", icon: "󰜉", shortcut: "R", command: "systemctl reboot" },
+        { label: "Shut down", icon: "󰐥", shortcut: "S", command: "systemctl poweroff" }
+    ]
 
 
     readonly property var packagesItems: [
@@ -24,45 +34,47 @@ Item {
 
 
     readonly property var settingsItems: [
-        { label: "Niri", icon: "󰖲", command: "foot sh -c 'cd ~/.config/niri/ && nvim *'" },
-        { label: "Nvim", icon: "", command: "foot sh -c 'cd ~/.config/nvim && vopen .'" },
-        { label: "Pywal", icon: "󰏘", command: "foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" },
-        { label: "Quickshell", icon: "󰆍", command: "foot sh -c 'cd ~/.config/quickshell && vopen .'" },
-        { label: "Swayidle", icon: "󰒲", command: "foot sh -c 'cd ~/.config/swayidle/ && nvim config'" },
+        { label: "Niri", icon: "󰖲", shortcut: "n", command: "foot sh -c 'cd ~/.config/niri/ && nvim *'" },
+        { label: "Nvim", icon: "", shortcut: "v", command: "foot sh -c 'cd ~/.config/nvim && vopen .'" },
+        { label: "Pywal", icon: "󰏘", shortcut: "p", command: "foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" },
+        { label: "Quickshell", icon: "󰆍", shortcut: "q", command: "foot sh -c 'cd ~/.config/quickshell && vopen .'" },
+        { label: "Swayidle", icon: "󰒲", shortcut: "s", command: "foot sh -c 'cd ~/.config/swayidle/ && nvim config'" },
     ]
 
     readonly property var systemItems: [
-        { label: "Wiremix", icon: "󰓃", command: "foot -a wiremix -e wiremix" },
-        { label: "Bluetooth", icon: "󰂯", command: "foot -a bluetui -e bluetui" },
-        { label: "Wi-Fi", icon: "󰖩", command: "foot -a impala -e impala" },
-        { label: "Network Manager", icon: "󰲝", command: "foot -e nmtui" },
-        { label: "Update System", icon: "󰑐", command: "foot -a pop-upgrade -e sup" },
-        { label: "Monitor", icon: "󰨇", page: "monitor" },
+        { label: "Wiremix", icon: "󰓃", shortcut: "a", command: "foot -a wiremix -e wiremix" },
+        { label: "Bluetooth", icon: "󰂯", shortcut: "b", command: "foot -a bluetui -e bluetui" },
+        { label: "Wi-Fi", icon: "󰖩", shortcut: "w", command: "foot -a impala -e impala" },
+        { label: "Network Manager", icon: "󰲝", shortcut: "n", command: "foot -e nmtui" },
+        { label: "Update System", icon: "󰑐", shortcut: "u", command: "foot -a pop-upgrade -e sup" },
+        { label: "Monitor", icon: "󰨇", shortcut: "m", page: "monitor" },
     ]
 
     readonly property var monitorItems: [
-        { label: "Atop [AMD GPU Monitor]", icon: "󰾲", command: "foot -T atop -e amdgpu_top --smi" },
-        { label: "Btop [System Monitor]", icon: "󰨇", command: "foot -a btop -e btop" },
-        { label: "Nethogs [Network Monitor]", icon: "󰛳", command: "foot -a nethogs -e nethogs" },
-        { label: "Logs", icon: "󰌱", command: "foot -a foot -T journalctl -e journalctl -f" },
-        { label: "Combined", icon: "󰕮", command: "foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh" }
+        { label: "Atop [AMD GPU Monitor]", icon: "󰾲", shortcut: "a", command: "foot -T atop -e amdgpu_top --smi" },
+        { label: "Btop [System Monitor]", icon: "󰨇", shortcut: "b", command: "foot -a btop -e btop" },
+        { label: "Nethogs [Network Monitor]", icon: "󰛳", shortcut: "n", command: "foot -a nethogs -e nethogs" },
+        { label: "Logs", icon: "󰌱", shortcut: "l", command: "foot -a foot -T journalctl -e journalctl -f" },
+        { label: "Combined", icon: "󰕮", shortcut: "c", command: "foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh" }
     ]
 
     readonly property var notesItems: [
-        { label: "Search", icon: "󰍉", command: "foot -a fzf_notes -e ~/.local/bin/menu_notes" },
-        { label: "New Note", icon: "󰎚", command: "foot -e ~/.local/bin/menu_notes -c" },
-        { label: "TODO", icon: "", command: "foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" },
-        { label: "Delete", icon: "󰩹", command: "foot -e ~/.local/bin/menu_notes -d" }
+        { label: "Search", icon: "󰍉", shortcut: "s", command: "foot -a fzf_notes -e ~/.local/bin/menu_notes" },
+        { label: "New Note", icon: "󰎚", shortcut: "n", command: "foot -e ~/.local/bin/menu_notes -c" },
+        { label: "TODO", icon: "", shortcut: "t", command: "foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" },
+        { label: "Delete", icon: "󰩹", shortcut: "d", command: "foot -e ~/.local/bin/menu_notes -d" }
     ]
 
     readonly property var themingItems: [
-        { label: "Set wallpaper", icon: "󰸉", command: "swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/" },
-        { label: "Set theme", icon: "󰏘", action: "theme" },
-        { label: "Save theme", icon: "󰆓", action: "saveTheme" }
+        { label: "Set wallpaper", icon: "󰸉", shortcut: "w", command: "swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/" },
+        { label: "Set theme", icon: "󰏘", shortcut: "t", action: "theme" },
+        { label: "Save theme", icon: "󰆓", shortcut: "s", action: "saveTheme" }
     ]
 
     readonly property var currentItems: {
         switch (page) {
+        case "power":
+            return powerItems
         case "packages":
             return packagesItems
         case "settings":
@@ -82,6 +94,8 @@ Item {
 
     readonly property string title: {
         switch (page) {
+        case "power":
+            return "Power"
         case "packages":
             return "Packages"
         case "settings":
@@ -99,8 +113,9 @@ Item {
         }
     }
 
-    function openPage(name): void {
+    function openPage(name, screen): void {
         page = name
+        menuScreen = screen || targetScreen
         selectedIndex = 0
         menuWindow.visible = true
         Qt.callLater(() => keyboardHandler.forceActiveFocus())
@@ -108,6 +123,14 @@ Item {
 
     function closeMenu(): void {
         menuWindow.visible = false
+        menuScreen = null
+    }
+
+    function togglePower(screen): void {
+        if (menuWindow.visible && page === "power")
+            closeMenu()
+        else
+            openPage("power", screen)
     }
 
     function back(): void {
@@ -141,6 +164,12 @@ Item {
             return
 
         const item = currentItems[index]
+
+        if (item.action === "lock") {
+            closeMenu()
+            lockService.lock()
+            return
+        }
 
         if (item.page) {
             page = item.page
@@ -179,7 +208,7 @@ Item {
     PanelWindow {
         id: menuWindow
 
-        screen: root.targetScreen
+        screen: root.menuScreen || root.targetScreen
 
         anchors {
             top: true
@@ -189,8 +218,8 @@ Item {
         implicitWidth: menuCard.implicitWidth
         implicitHeight: menuCard.implicitHeight
         margins.top: root.config.popupGap
-        margins.left: root.targetScreen
-            ? Math.max(0, Math.round((root.targetScreen.width - width) / 2)) : 0
+        margins.left: screen
+            ? Math.max(0, Math.round((screen.width - width) / 2)) : 0
 
         visible: false
         color: "transparent"
@@ -211,6 +240,18 @@ Item {
 
             Keys.onPressed: event => {
                 switch (event.key) {
+                case Qt.Key_Left:
+                    if (root.page === "power") {
+                        root.selectPrevious()
+                        event.accepted = true
+                    }
+                    return
+                case Qt.Key_Right:
+                    if (root.page === "power") {
+                        root.selectNext()
+                        event.accepted = true
+                    }
+                    return
                 case Qt.Key_Up:
                 case Qt.Key_Backtab:
                     root.selectPrevious()
@@ -235,7 +276,7 @@ Item {
                     return
                 }
 
-                const key = event.text.toLowerCase()
+                const key = root.page === "power" ? event.text : event.text.toLowerCase()
 
                 for (let i = 0; i < root.currentItems.length; ++i) {
                     if (root.currentItems[i].shortcut === key) {
@@ -245,12 +286,6 @@ Item {
                     }
                 }
 
-                const number = Number(event.text)
-
-                if (number >= 1 && number <= root.currentItems.length) {
-                    root.activateIndex(number - 1)
-                    event.accepted = true
-                }
             }
         }
 
@@ -341,7 +376,7 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         color: root.config.fg
                         font.pointSize: root.config.fontSize(0.846)
-                        text: modelData.shortcut ?? (menuItem.index + 1)
+                        text: modelData.shortcut ?? ""
                     }
 
                     MouseArea {
@@ -365,9 +400,26 @@ Item {
     }
 
     PopupCatcher {
-        targetScreen: root.targetScreen
+        targetScreen: menuWindow.screen
         visible: menuWindow.visible
         onDismissed: root.closeMenu()
+    }
+
+    IpcHandler {
+        target: "power"
+
+        function toggle(): void {
+            root.togglePower(root.targetScreen)
+        }
+
+        function open(): void {
+            root.openPage("power")
+        }
+
+        function close(): void {
+            if (root.page === "power")
+                root.closeMenu()
+        }
     }
 
     IpcHandler {

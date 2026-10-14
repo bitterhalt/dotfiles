@@ -64,7 +64,6 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 ├── menus
 │   ├── MainMenu.qml
 │   ├── ProcessMenu.qml
-│   ├── PowerMenu.qml
 │   ├── processes.py
 │   ├── TmuxMenu.qml
 │   └── ThemeMenu.qml

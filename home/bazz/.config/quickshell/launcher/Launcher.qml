@@ -39,6 +39,19 @@ Item {
     readonly property int historyShown: 5
     readonly property int historyKept: 50
 
+    // App IDs only, newest first; separate from binary run history.
+    property var appHistory: []
+    property bool appHistoryReady: false
+    readonly property int appHistoryKept: 50
+    readonly property string appHistoryPath:
+        (Quickshell.env("HOME") || "") + "/.cache/quickshell-app-history.json"
+    readonly property var appHistoryRanks: {
+        const ranks = new Map()
+        for (let i = 0; i < appHistory.length; ++i)
+            ranks.set(appHistory[i], i)
+        return ranks
+    }
+
     // Nerd font glyphs
     readonly property string iconApps: String.fromCodePoint(0xF003B)
     readonly property string iconRun: String.fromCodePoint(0xF018D)
@@ -255,7 +268,8 @@ Item {
                     icon: entry.icon || "",
                     score: 0
                 }))
-                .sort((a, b) => a.text.localeCompare(b.text))
+                .sort((a, b) => applicationRank(a.entry.id) - applicationRank(b.entry.id)
+                    || a.text.localeCompare(b.text))
         } else {
             entries = applications
                 .map(entry => ({
@@ -268,6 +282,7 @@ Item {
                 }))
                 .filter(item => item.score > 0)
                 .sort((a, b) => b.score - a.score
+                    || applicationRank(a.entry.id) - applicationRank(b.entry.id)
                     || a.text.localeCompare(b.text))
         }
 
@@ -364,6 +379,14 @@ Item {
         setMode(modes[nextIndex].id)
     }
 
+    function openFileSearch(): void {
+        setMode("apps")
+        searchInput.text = "/"
+        searchInput.cursorPosition = 1
+        selectedIndex = 0
+        searchInput.forceActiveFocus()
+    }
+
     function navigateResults(direction): void {
         if (direction > 0)
             selectNext()
@@ -412,6 +435,7 @@ Item {
             timerClock = Date.now()
         } else if (item.type === "application") {
             item.entry.execute()
+            recordApplication(item.entry.id)
             finalizeClose()
         } else if (item.type === "calculator") {
             Quickshell.execDetached(["wl-copy", item.text])
@@ -555,6 +579,51 @@ Item {
             ...dirs
         ]
         binaryProcess.running = true
+    }
+
+    function applicationRank(id): int {
+        const rank = appHistoryRanks.get(id)
+        return rank === undefined ? appHistoryKept : rank
+    }
+
+    function normalizeAppHistory(ids): var {
+        const seen = new Set()
+        const next = []
+        for (const id of ids) {
+            if (typeof id !== "string" || id === "" || seen.has(id))
+                continue
+            seen.add(id)
+            next.push(id)
+            if (next.length === appHistoryKept)
+                break
+        }
+        return next
+    }
+
+    function restoreAppHistory(value): void {
+        let stored = []
+        try {
+            const parsed = JSON.parse(value)
+            if (Array.isArray(parsed))
+                stored = parsed
+        } catch (error) {}
+
+        // Preserve launches made before the initial asynchronous load finishes.
+        const pending = !appHistoryReady && appHistory.length > 0
+        appHistory = normalizeAppHistory(appHistoryReady ? stored : appHistory.concat(stored))
+        appHistoryReady = true
+        if (pending)
+            appHistoryFile.setText(JSON.stringify(appHistory))
+    }
+
+    function recordApplication(id): void {
+        const installed = new Set(applications.map(entry => entry.id))
+        if (!installed.has(id))
+            return
+        appHistory = normalizeAppHistory([id].concat(
+            appHistory.filter(previous => installed.has(previous))))
+        if (appHistoryReady)
+            appHistoryFile.setText(JSON.stringify(appHistory))
     }
 
     // Same history file/format as menu_run: one name per line, newest last.
@@ -814,6 +883,12 @@ Item {
                     case Qt.Key_T:
                         if (control) {
                             root.setMode("timer");
+                            event.accepted = true;
+                        }
+                        break;
+                    case Qt.Key_S:
+                        if (control) {
+                            root.openFileSearch();
                             event.accepted = true;
                         }
                         break;
@@ -1271,6 +1346,20 @@ Item {
 
                 root.finalizeClose()
             }
+        }
+    }
+
+    FileView {
+        id: appHistoryFile
+
+        path: root.appHistoryPath
+        atomicWrites: true
+        printErrors: false
+        onLoaded: root.restoreAppHistory(text())
+        onLoadFailed: {
+            root.appHistoryReady = true
+            if (root.appHistory.length > 0)
+                setText(JSON.stringify(root.appHistory))
         }
     }
 

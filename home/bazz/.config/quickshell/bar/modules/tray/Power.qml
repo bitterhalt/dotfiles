@@ -22,6 +22,6 @@ Item {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         cursorShape: Qt.PointingHandCursor
-        onClicked: root.powerMenu.toggleMenu(root.barWindow.screen)
+        onClicked: root.powerMenu.togglePower(root.barWindow.screen)
     }
 }
