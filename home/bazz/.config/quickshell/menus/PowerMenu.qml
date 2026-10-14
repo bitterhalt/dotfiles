@@ -18,7 +18,7 @@ Item {
         { label: "Log out", icon: "󰍃", key: "E", command: "niri msg action quit" },
         { label: "Suspend", icon: "󰤄", key: "z", command: "systemctl suspend" },
         { label: "Restart", icon: "󰜉", key: "R", command: "systemctl reboot" },
-        { label: "Shut down", icon: "󰐥", key: "S", command: "systemctl poweroff", destructive: true }
+        { label: "Shut down", icon: "󰐥", key: "S", command: "systemctl poweroff" }
     ]
     readonly property int padding: 12
     readonly property int tileHeight: 110
@@ -135,18 +135,13 @@ Item {
                         required property var modelData
                         required property int index
                         readonly property bool selected: root.selectedIndex === index
-                        readonly property bool danger: selected && modelData.destructive === true
-                        readonly property color foreground: danger ? root.config.bg : root.config.fg
 
                         width: root.tileWidth
                         height: root.tileHeight
                         radius: root.config.popupRadius * 2
-                        color: danger ? root.config.urgent
-                            : selected ? root.config.borderColor : root.config.surface
+                        color: selected ? root.config.borderColor : root.config.surface
                         border.width: 1
-                        border.color: danger ? root.config.urgent
-                            : selected ? root.config.accent
-                            : Qt.rgba(root.config.fg.r, root.config.fg.g, root.config.fg.b, 0.18)
+                        border.color: root.config.borderColor
 
                         Rectangle {
                             anchors.top: parent.top
@@ -155,10 +150,10 @@ Item {
                             width: 20
                             height: 20
                             radius: 3
-                            color: tile.danger ? root.config.bg : root.config.borderColor
+                            color: root.config.borderColor
                             Text {
                                 anchors.centerIn: parent
-                                color: tile.danger ? root.config.urgent : root.config.fg
+                                color: root.config.fg
                                 font.pointSize: root.config.fontSize(0.75)
                                 text: tile.modelData.key
                             }
@@ -171,7 +166,7 @@ Item {
                             Text {
                                 width: parent.width
                                 horizontalAlignment: Text.AlignHCenter
-                                color: tile.foreground
+                                color: root.config.accent
                                 font.family: root.config.iconFontFamily
                                 font.pointSize: root.config.iconSize * 1.8
                                 text: tile.modelData.icon
@@ -179,7 +174,7 @@ Item {
                             Text {
                                 width: parent.width
                                 horizontalAlignment: Text.AlignHCenter
-                                color: tile.foreground
+                                color: root.config.fg
                                 font.pointSize: root.config.fontSize(0.95)
                                 elide: Text.ElideRight
                                 text: tile.modelData.label

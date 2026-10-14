@@ -31,7 +31,7 @@ Item {
                 height: 8
                 radius: 4
                 color: modelData.is_urgent ? config.urgent : (modelData.is_active ? config.accent : config.fg)
-                opacity: modelData.is_active ? 1 : 0.8
+                opacity: modelData.is_active ? 1 : 0.7
 
                 MouseArea {
                     anchors.fill: parent
