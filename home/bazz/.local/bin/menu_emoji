@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DMENU="${DMENU:-vicinae dmenu}"
+DMENU="${DMENU:-fuzzel -d}"
 
 set -e
 

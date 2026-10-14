@@ -1,8 +1,8 @@
+import "../components"
 import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
-import "../components"
 
 Item {
     id: root
@@ -26,7 +26,7 @@ Item {
             "name": "Cancel",
             "action": "cancel"
         }, {
-            "name": "Force kill",
+            "name": "Kill",
             "action": "kill"
         }];
 
@@ -141,7 +141,7 @@ Item {
                 root.selectedIndex = 0;
                 root.refresh();
             } else {
-                root.errorText = "Could not kill process; it may have exited. Esc to go back.";
+                root.errorText = "Could not kill process";
             }
         }
     }
@@ -150,7 +150,7 @@ Item {
         screen: root.targetScreen
         visible: root.opened
         color: "transparent"
-        implicitWidth: 360
+        implicitWidth: 220
         implicitHeight: 42 + 7 * root.rowHeight + 32 + root.config.barModuleSpacing * 2
         exclusiveZone: 0
         focusable: true
@@ -231,7 +231,7 @@ Item {
                 color: root.killTarget ? root.config.fg : root.config.muted
                 font.pointSize: root.config.fontSize(1.04)
                 elide: Text.ElideRight
-                text: root.killTarget ? "Kill " + root.killTarget.name + " (PID " + root.killTarget.pid + ")?" : "Search processes or PID…"
+                text: root.killTarget ? "Kill " + root.killTarget.name + " (PID " + root.killTarget.pid + ")?" : "Kill process"
             }
 
             ListView {
