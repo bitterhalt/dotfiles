@@ -1106,24 +1106,6 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 8
 
-                    Text {
-                        visible: root.actionLabel !== ""
-                        height: root.capHeight
-                        verticalAlignment: Text.AlignVCenter
-                        color: root.config.fg
-                        font.pointSize: root.config.fontSize(0.8)
-                        text: root.actionLabel
-                    }
-
-
-                    Rectangle {
-                        visible: root.actionLabel !== ""
-                        anchors.verticalCenter: parent.verticalCenter
-                        width: 1
-                        height: 14
-                        color: root.config.borderColor
-                    }
-
                     Repeater {
                         model: root.modes
 
