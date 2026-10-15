@@ -273,9 +273,10 @@ layer-rule {
     geometry-corner-radius 4
     match namespace="quickshell-launcher"
     match namespace="quickshell-notifications"
-    match namespace="quickshell-submenu"
-    match namespace="quickshell-weather"
+    match namespace="quickshell-notification-center"
+    // match namespace="quickshell-submenu"
     // match namespace="quickshell-osd"
+    match namespace="quickshell-weather"
     shadow {
       on
     }
