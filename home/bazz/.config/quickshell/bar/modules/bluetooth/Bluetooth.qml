@@ -26,7 +26,7 @@ Item {
     readonly property int connectedCount: connectedRows.length
 
     function toggleDevice(row) {
-        bluetoothService.toggleDevice(row)
+        bluetoothService.toggleDevice(row);
     }
 
     width: 24
@@ -72,7 +72,7 @@ Item {
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     color: config.fg
-                    font.pointSize: config.fontSize(1.08)
+                    font.pointSize: config.fontSize(1)
                     font.weight: Font.DemiBold
                     text: "Bluetooth"
                 }

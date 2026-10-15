@@ -67,7 +67,7 @@ PopoutPanel {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             color: root.config.fg
-            font.pointSize: root.config.fontSize(1.08)
+            font.pointSize: root.config.fontSize(1)
             font.weight: Font.DemiBold
             text: root.passwordMode ? "Connect to Wi-Fi" : (root.actionMode ? "Wi-Fi network" : "Network")
         }
