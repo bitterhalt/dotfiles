@@ -1,5 +1,5 @@
 import "../components"
-import "../idle/Duration.js" as Duration
+import "../services/idle/Duration.js" as Duration
 import QtQuick
 import QtQuick.Controls.Basic
 import Quickshell

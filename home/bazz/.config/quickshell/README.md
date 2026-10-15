@@ -53,9 +53,6 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── PopupManager.qml
 │   ├── SectionHeader.qml
 │   └── ToggleSwitch.qml
-├── idle
-│   ├── Duration.js
-│   └── suspend.sh
 ├── launcher
 │   ├── Launcher.qml
 │   └── Scorer.js
@@ -82,6 +79,9 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── Recorder.qml
 │   └── RegionSelector.qml
 ├── services
+│   ├── idle
+│   │   ├── Duration.js
+│   │   └── suspend.sh
 │   ├── BatteryService.qml
 │   ├── BluetoothService.qml
 │   ├── IdleService.qml
@@ -238,7 +238,7 @@ notify-send
 
 Additional modules may rely on system services or tools such as NetworkManager, Bluetooth/BlueZ, UPower, and Python.
 
-Idle Settings lives under System (`i`), also available through `qs ipc call idle settings`. Durations accept `30s`, `30m`, `2h`, and `0` to disable an automatic action; they are saved to `~/.cache/quickshell-idle.json` and restored on login. Clicking the bar's idle icon or `qs ipc call idle toggle` pauses and resumes automatic idle. Suspend always locks the session first through `idle/suspend.sh`.
+Idle Settings lives under System (`i`), also available through `qs ipc call idle settings`. Durations accept `30s`, `30m`, `2h`, and `0` to disable an automatic action; they are saved to `~/.cache/quickshell-idle.json` and restored on login. Clicking the bar's idle icon or `qs ipc call idle toggle` pauses and resumes automatic idle. Suspend always locks the session first through `services/idle/suspend.sh`.
 
 The configured icon font is:
 

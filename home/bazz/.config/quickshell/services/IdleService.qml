@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
-import "../idle/Duration.js" as Duration
+import "idle/Duration.js" as Duration
 
 Item {
     id: root
@@ -149,7 +149,7 @@ Item {
 
     Process {
         id: suspendProcess
-        command: ["bash", Quickshell.env("HOME") + "/.config/quickshell/idle/suspend.sh"]
+        command: ["bash", Quickshell.env("HOME") + "/.config/quickshell/services/idle/suspend.sh"]
         onExited: exitCode => {
             if (exitCode !== 0)
                 root.errorText = "Suspend failed"
