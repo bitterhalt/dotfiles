@@ -9,6 +9,7 @@
 🙂 slightly smiling face
 🙃 upside-down face
 🫠 melting face
+🫫 cracking face
 😉 winking face
 😊 smiling face with smiling eyes
 😇 smiling face with halo
@@ -343,6 +344,18 @@
 👎🏽 thumbs down: medium skin tone
 👎🏾 thumbs down: medium-dark skin tone
 👎🏿 thumbs down: dark skin tone
+🫹 leftwards thumb sign
+🫹🏻 leftwards thumb sign: light skin tone
+🫹🏼 leftwards thumb sign: medium-light skin tone
+🫹🏽 leftwards thumb sign: medium skin tone
+🫹🏾 leftwards thumb sign: medium-dark skin tone
+🫹🏿 leftwards thumb sign: dark skin tone
+🫺 rightwards thumb sign
+🫺🏻 rightwards thumb sign: light skin tone
+🫺🏼 rightwards thumb sign: medium-light skin tone
+🫺🏽 rightwards thumb sign: medium skin tone
+🫺🏾 rightwards thumb sign: medium-dark skin tone
+🫺🏿 rightwards thumb sign: dark skin tone
 ✊ raised fist
 ✊🏻 raised fist: light skin tone
 ✊🏼 raised fist: medium-light skin tone
@@ -2704,6 +2717,7 @@
 🦪 oyster
 🐌 snail
 🦋 butterfly
+🫌 monarch butterfly
 🐛 bug
 🐜 ant
 🐝 honeybee
@@ -2775,6 +2789,7 @@
 🌶️ hot pepper
 🫑 bell pepper
 🥒 cucumber
+🫝 pickle
 🥬 leafy green
 🥦 broccoli
 🧄 garlic
@@ -2995,6 +3010,7 @@
 🚦 vertical traffic light
 🛑 stop sign
 🚧 construction
+🛙 lighthouse
 ⚓ anchor
 🛟 ring buoy
 ⛵ sailboat
@@ -3094,6 +3110,7 @@
 ☃️ snowman
 ⛄ snowman without snow
 ☄️ comet
+🪋 meteor
 🔥 fire
 💧 droplet
 🌊 water wave
@@ -3344,6 +3361,7 @@
 🖌️ paintbrush
 🖍️ crayon
 📝 memo
+🪌 eraser
 💼 briefcase
 📁 file folder
 📂 open file folder
@@ -3373,6 +3391,7 @@
 🔐 locked with key
 🔑 key
 🗝️ old key
+🪍 net with handle
 🔨 hammer
 🪓 axe
 ⛏️ pick
@@ -3781,7 +3800,7 @@
 🇬🇼 flag: Guinea-Bissau
 🇬🇾 flag: Guyana
 🇭🇰 flag: Hong Kong SAR China
-🇭🇲 flag: Heard & McDonald Islands
+🇭🇲 flag: Heard Island & McDonald Islands
 🇭🇳 flag: Honduras
 🇭🇷 flag: Croatia
 🇭🇹 flag: Haiti
@@ -3885,7 +3904,7 @@
 🇸🇩 flag: Sudan
 🇸🇪 flag: Sweden
 🇸🇬 flag: Singapore
-🇸🇭 flag: St. Helena
+🇸🇭 flag: St. Helena, Ascension & Tristan da Cunha
 🇸🇮 flag: Slovenia
 🇸🇯 flag: Svalbard & Jan Mayen
 🇸🇰 flag: Slovakia
@@ -3903,7 +3922,7 @@
 🇹🇦 flag: Tristan da Cunha
 🇹🇨 flag: Turks & Caicos Islands
 🇹🇩 flag: Chad
-🇹🇫 flag: French Southern Territories
+🇹🇫 flag: French Southern and Antarctic Lands
 🇹🇬 flag: Togo
 🇹🇭 flag: Thailand
 🇹🇯 flag: Tajikistan
