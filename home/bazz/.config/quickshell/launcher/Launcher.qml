@@ -5,6 +5,7 @@ import Quickshell.Wayland
 import Quickshell.Widgets
 
 import "Scorer.js" as Scorer
+import "Emoji.js" as Emoji
 
 Item {
     id: root
@@ -29,6 +30,12 @@ Item {
     readonly property bool emojiMode: mode === "emoji"
     readonly property bool timerMode: mode === "timer"
     property var emojiEntries: []
+    property var emojiHistory: []
+    property bool emojiHistoryReady: false
+    readonly property string emojiHistoryPath:
+        (Quickshell.env("XDG_CACHE_HOME") || Quickshell.env("HOME") + "/.cache")
+        + "/quickshell-emoji-history.json"
+    readonly property var emojiBrowseEntries: Emoji.browse(emojiEntries, emojiHistory, 100)
     property double timerClock: Date.now()
 
     // Run-mode data
@@ -192,21 +199,16 @@ Item {
 
         const value = query.trim().toLowerCase()
 
-        return emojiEntries
+        const entries = value === "" ? emojiBrowseEntries : Emoji.search(emojiEntries, value, 100)
+        return entries
             .map(entry => ({
                 type: "emoji",
                 text: entry.name,
                 emoji: entry.emoji,
                 subtitle: "",
                 icon: "",
-                score: value === ""
-                    ? 0
-                    : entry.emoji.includes(value)
-                        ? 10000
-                        : Scorer.scoreEmoji(entry.name, value)
+                score: 0
             }))
-            .filter(item => value === "" || item.score > 0)
-            .slice(0, 100)
     }
 
     readonly property var timerInput: opened && timerMode ? parseTimer(query) : null
@@ -448,6 +450,7 @@ Item {
             finalizeClose()
         } else if (item.type === "emoji") {
             Quickshell.execDetached(["wl-copy", item.emoji])
+            recordEmoji(item.emoji)
             finalizeClose()
         }
     }
@@ -624,6 +627,22 @@ Item {
             appHistory.filter(previous => installed.has(previous))))
         if (appHistoryReady)
             appHistoryFile.setText(JSON.stringify(appHistory))
+    }
+
+    function restoreEmojiHistory(value): void {
+        const stored = Emoji.parseHistory(value)
+        // Preserve selections made before the initial asynchronous load finishes.
+        const pending = !emojiHistoryReady && emojiHistory.length > 0
+        emojiHistory = Emoji.normalizeHistory(emojiHistoryReady ? stored : emojiHistory.concat(stored))
+        emojiHistoryReady = true
+        if (pending)
+            emojiHistoryFile.setText(JSON.stringify(emojiHistory))
+    }
+
+    function recordEmoji(character): void {
+        emojiHistory = Emoji.normalizeHistory([character].concat(emojiHistory))
+        if (emojiHistoryReady)
+            emojiHistoryFile.setText(JSON.stringify(emojiHistory))
     }
 
     // Same history file/format as menu_run: one name per line, newest last.
@@ -1387,6 +1406,19 @@ Item {
         }
 
         onLoadFailed: root.emojiEntries = []
+    }
+
+    FileView {
+        id: emojiHistoryFile
+        path: root.emojiHistoryPath
+        atomicWrites: true
+        printErrors: false
+        onLoaded: root.restoreEmojiHistory(text())
+        onLoadFailed: {
+            root.emojiHistoryReady = true
+            if (root.emojiHistory.length > 0)
+                setText(JSON.stringify(root.emojiHistory))
+        }
     }
 
     IpcHandler {

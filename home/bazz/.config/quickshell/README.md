@@ -55,6 +55,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── SectionHeader.qml
 │   └── ToggleSwitch.qml
 ├── launcher
+│   ├── Emoji.js
 │   ├── Launcher.qml
 │   └── Scorer.js
 ├── lock
@@ -114,6 +115,8 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 `Config.qml` contains global shell configuration such as bar geometry, typography, popup styling, clock formats, and shared colors.
 
 `launcher/Launcher.qml` contains the launcher UI and state; `Scorer.js` holds the matching logic. The centered panel is hosted by the main shell and controlled through `qs ipc call launcher toggle`.
+
+Emoji search accepts words in any order, with exact matches first. An empty search shows recently copied emoji first (last 20 saved in `~/.cache/quickshell-emoji-history.json`, or under `XDG_CACHE_HOME`). App search is unaffected.
 
 Process menu: Mod+F4 or `qs ipc call processMenu toggle`; Ctrl+R refreshes. Confirmed kills send SIGKILL, including when selecting QuickShell itself.
 
