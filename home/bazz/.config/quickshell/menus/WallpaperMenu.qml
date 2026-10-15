@@ -144,7 +144,7 @@ PanelWindow {
     anchors.left: true
     margins.top: config.popupGap
     margins.left: targetScreen ? Math.max(0, Math.round((targetScreen.width - width) / 2)) : 0
-    WlrLayershell.namespace: "quickshell-submenu"
+    WlrLayershell.namespace: "quickshell-wallpaper-picker"
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
