@@ -21,8 +21,14 @@ Item {
 
     MouseArea {
         anchors.fill: parent
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         cursorShape: Qt.PointingHandCursor
-        onClicked: idleService.toggle(barWindow.screen)
+        onClicked: mouse => {
+            if (mouse.button === Qt.RightButton)
+                idleService.openSettings(barWindow.screen)
+            else
+                idleService.toggle(barWindow.screen)
+        }
     }
 
     IdleNotifier {

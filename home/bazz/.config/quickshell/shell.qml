@@ -62,6 +62,7 @@ ShellRoot {
     tmuxMenu: tmuxMenu
     targetScreen: root.activeScreen
     lockService: appLockService
+    idleService: appIdleService
   }
 
   TmuxMenu {
@@ -157,7 +158,21 @@ ShellRoot {
 
   IdleService {
     id: appIdleService
+    config: appConfig
+    lockService: appLockService
     targetScreen: root.activeScreen
+  }
+
+  IdleSettings {
+    id: idleSettings
+    config: appConfig
+    idleService: appIdleService
+    targetScreen: root.activeScreen
+  }
+
+  Connections {
+    target: appIdleService
+    function onSettingsRequested(screen) { idleSettings.openMenu(screen) }
   }
 
   RecorderService {

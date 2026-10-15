@@ -129,19 +129,19 @@ Item {
     PopupSurface {
         managerRef: manager
         hostKey: "weather"
-        surfaceNamespace: "quickshell-weather"
+        surfaceNamespace: "quickshell-submenu"
     }
 
     PopupSurface {
         managerRef: manager
         hostKey: "notificationCenter"
-        surfaceNamespace: "quickshell-notifications"
+        surfaceNamespace: "quickshell-submenu"
     }
 
     PopupSurface {
         managerRef: manager
         hostKey: ""
-        surfaceNamespace: "quickshell-popup"
+        surfaceNamespace: "quickshell-submenu"
     }
 
     // The full-screen surface only catches outside clicks. It lives below the

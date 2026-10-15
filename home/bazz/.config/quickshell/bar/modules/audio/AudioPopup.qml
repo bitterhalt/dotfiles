@@ -17,33 +17,6 @@ PopoutPanel {
         audioItem.showStreams = false;
     }
 
-    Item {
-        width: parent.width
-        height: 24
-
-        Text {
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            color: config.fg
-            font.pointSize: config.fontSize(1)
-            font.weight: Font.DemiBold
-            text: "Sound"
-        }
-
-        Text {
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            color: config.muted
-            font.pointSize: config.fontSize(0.77)
-            text: Pipewire.ready ? "PipeWire" : "Loading…"
-        }
-
-    }
-
-    PanelSeparator {
-        config: audioItem.config
-    }
-
     // ----------------------------------------------------------
     // Output volume
     // ----------------------------------------------------------

@@ -16,7 +16,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 - PipeWire audio controls and stream/device management
 - Volume OSD
 - Battery indicator
-- Idle-state toggle and notifications
+- Native idle monitoring with editable timeouts
 - System tray
 - Power menu
 - Native Lock screen
@@ -53,6 +53,9 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── PopupManager.qml
 │   ├── SectionHeader.qml
 │   └── ToggleSwitch.qml
+├── idle
+│   ├── Duration.js
+│   └── suspend.sh
 ├── launcher
 │   ├── Launcher.qml
 │   └── Scorer.js
@@ -63,6 +66,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 ├── lock-test.qml
 ├── menus
 │   ├── MainMenu.qml
+│   ├── IdleSettings.qml
 │   ├── ProcessMenu.qml
 │   ├── processes.py
 │   ├── TmuxMenu.qml
@@ -233,6 +237,8 @@ notify-send
 ```
 
 Additional modules may rely on system services or tools such as NetworkManager, Bluetooth/BlueZ, UPower, and Python.
+
+Idle Settings lives under System (`i`), also available through `qs ipc call idle settings`. Durations accept `30s`, `30m`, `2h`, and `0` to disable an automatic action; they are saved to `~/.cache/quickshell-idle.json` and restored on login. Clicking the bar's idle icon or `qs ipc call idle toggle` pauses and resumes automatic idle. Suspend always locks the session first through `idle/suspend.sh`.
 
 The configured icon font is:
 

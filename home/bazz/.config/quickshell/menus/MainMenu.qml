@@ -13,6 +13,7 @@ Item {
     required property var tmuxMenu
     required property var targetScreen
     required property var lockService
+    required property var idleService
 
     property string page: ""
     property int selectedIndex: 0
@@ -21,7 +22,7 @@ Item {
     readonly property var powerItems: [
         { label: "Lock", icon: "󰌾", shortcut: "l", action: "lock" },
         { label: "Log out", icon: "󰍃", shortcut: "E", command: "niri msg action quit" },
-        { label: "Sleep", icon: "󰤄", shortcut: "z", command: "systemctl suspend" },
+        { label: "Sleep", icon: "󰤄", shortcut: "z", action: "suspend" },
         { label: "Restart", icon: "󰜉", shortcut: "R", command: "systemctl reboot" },
         { label: "Shut down", icon: "󰐥", shortcut: "S", command: "systemctl poweroff" }
     ]
@@ -38,7 +39,6 @@ Item {
         { label: "Nvim", icon: "", shortcut: "v", command: "foot sh -c 'cd ~/.config/nvim && vopen .'" },
         { label: "Pywal", icon: "󰏘", shortcut: "p", command: "foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" },
         { label: "Quickshell", icon: "󰆍", shortcut: "q", command: "foot sh -c 'cd ~/.config/quickshell && vopen .'" },
-        { label: "Swayidle", icon: "󰒲", shortcut: "s", command: "foot sh -c 'cd ~/.config/swayidle/ && nvim config'" },
     ]
 
     readonly property var systemItems: [
@@ -47,6 +47,7 @@ Item {
         { label: "Wi-Fi", icon: "󰖩", shortcut: "w", command: "foot -a impala -e impala" },
         { label: "Network Manager", icon: "󰲝", shortcut: "n", command: "foot -e nmtui" },
         { label: "Update System", icon: "󰑐", shortcut: "u", command: "foot -a pop-upgrade -e sup" },
+        { label: "Idle Settings", icon: "󰤄", shortcut: "i", action: "idleSettings" },
         { label: "Monitor", icon: "󰨇", shortcut: "m", page: "monitor" },
     ]
 
@@ -164,6 +165,19 @@ Item {
             return
 
         const item = currentItems[index]
+
+        if (item.action === "idleSettings") {
+            const screen = menuWindow.screen
+            closeMenu()
+            idleService.openSettings(screen)
+            return
+        }
+
+        if (item.action === "suspend") {
+            closeMenu()
+            idleService.suspend()
+            return
+        }
 
         if (item.action === "lock") {
             closeMenu()
