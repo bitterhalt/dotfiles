@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+OPTIONS="Weather\nMoon\nSunshine\nAll (tmux split)"
+FLAGS="-d -a top --y 24 -w 25 --line-height 26 --minimal-lines"
+
+if ! command -v linecast &>/dev/null; then
+  notify-send -a "Linecast" -t 10000 \
+    "Linecast not installed" \
+    "Install linecast to use the weather menu"
+  exit 1
+fi
+
+CHOICE=$(echo -e "$OPTIONS" | fuzzel $FLAGS)
+
+[ -z "$CHOICE" ] && exit 0
+
+case "$CHOICE" in
+"Weather")
+  $TERMINAL -a Linecast -T Weather-Peek -e linecast weather
+  ;;
+"Moon")
+  $TERMINAL -a Linecast -T Weather-Peek -e linecast moon
+  ;;
+"Sunshine")
+  $TERMINAL -a Linecast -T Weather-Peek -e linecast sunshine
+  ;;
+"All (tmux split)")
+  $TERMINAL -a Linecast -T Weather-Peek -e ~/.local/bin/tmux-linecast.sh
+  ;;
+*)
+  exit 1
+  ;;
+esac

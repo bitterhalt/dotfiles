@@ -4,26 +4,25 @@ set -euo pipefail
 
 NOTES_DIR="$HOME/Documents/personal/notes"
 EDITOR="${EDITOR:-nvim}"
+TERMINAL="${TERMINAL:-foot}"
+DMENU="fuzzel -d -a top --y 24 -w 40"
 
 mkdir -p "$NOTES_DIR"
 cd "$NOTES_DIR" || exit 1
 
-list_notes() {
-  find . -type f -name "*.md" | sed 's|^\./||' | sort -f
-}
-
 search_notes() {
   local selection
-  selection=$(list_notes | fzf --border-label=" Search notes " --reverse \
-    --preview 'head -n 50 {}' --preview-window=right:50% || true)
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU -l 10)
   if [ -n "$selection" ] && [ -f "$selection" ]; then
-    exec "$EDITOR" "$NOTES_DIR/$selection"
+    exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/$selection"
   fi
 }
 
 create_note() {
   local note_name
-  read -r -p "Note name (e.g., work/meeting-minutes): " note_name
+  note_name=$(echo -n | $DMENU \
+    --placeholder "e.g., work/meeting-minutes" \
+    --minimal-lines)
   if [ -z "$note_name" ]; then
     exit 0
   fi
@@ -32,19 +31,21 @@ create_note() {
   fi
   local full_path="$NOTES_DIR/$note_name"
   mkdir -p "$(dirname "$full_path")"
-  exec "$EDITOR" "$full_path"
+  exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$full_path"
 }
 
 delete_note() {
   local selection
-  selection=$(list_notes | fzf --border-label=" Delete note " --reverse \
-    --preview 'head -n 50 {}' --preview-window=right:50% || true)
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU \
+    --placeholder "Delete Note")
   if [ -z "$selection" ] || [ ! -f "$selection" ]; then
     exit 0
   fi
   local confirm
-  confirm=$(printf "No\nYes\n" | fzf --border-label=" Trash '$selection'? > " --reverse || true)
-  if [[ "$confirm" == "Yes" ]]; then
+  confirm=$(echo -e "n ➜ No\ny ➜ Yes" | $DMENU \
+    --placeholder "Trash '$selection'? " \
+    --minimal-lines)
+  if [[ "$confirm" == *"Yes"* ]]; then
     trash-put "$NOTES_DIR/$selection"
   fi
 }

@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-# ==========================================================
-# Description: expandable wlr-which-key clone using Vicinae
-# ==========================================================
+# ========================================================
+# Description: expandable wlr-which-key clone using fuzzel
+# ========================================================
 
-DMENU="${DMENU:-vicinae dmenu}"
+FLAGS="-d -a top --y 24 -w 25 -l 9 --minimal-lines"
+BROWSER="brave-origin"
 
 run_menu() {
   local is_submenu=false
@@ -19,20 +20,20 @@ run_menu() {
   local items=("$@")
 
   while true; do
-    local menu_input=""
+    local fuzzel_input=""
     local i=1
     for item in "${items[@]}"; do
       local label="${item%%|*}"
-      menu_input+="$i ➜ $label\n"
+      fuzzel_input+="$i ➜ $label\n"
       ((i++))
     done
 
     if [ "$is_submenu" = true ]; then
-      menu_input=".. Back\n$menu_input"
+      fuzzel_input=".. Back\n$fuzzel_input"
     fi
 
     local choice
-    choice=$(printf '%b' "$menu_input" | $DMENU --placeholder "$menu_title")
+    choice=$(echo -e -n "$fuzzel_input" | fuzzel $FLAGS --placeholder "Edit settings")
 
     if [ -z "$choice" ]; then exit 0; fi
     if [[ "$choice" == *"Back"* ]]; then return 0; fi
@@ -54,44 +55,45 @@ run_menu() {
   done
 }
 
+# Top-level menus
+
 menu_notes() {
   run_menu "Notes" \
-    "󰍉 Search|foot -e ~/.local/bin/menu_notes" \
-    "󰎚 New Note|foot -e ~/.local/bin/menu_notes -c" \
+    "󰍉 Search|fuzzel_notes" \
+    "󰎚 New Note|fuzzel_notes -c" \
     " TODO|foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" \
-    "󰩹 Delete|foot -e ~/.local/bin/menu_notes -d"
+    "󰩹 Delete|fuzzel_notes -d"
 }
 
 menu_packages() {
   run_menu "Packages" \
     "Install Packages|foot -a pacseek -T pacseek -e pacseek -m" \
-    "Update|foot -a pop-upgrade -e sup"
+    "Update|foot -a pop-upgrade -e sysup"
 }
 
 menu_pass() {
   run_menu "Pass" \
-    "Passwords|~/.local/bin/menu_passmenu" \
+    "Passwords|fuzzel_passmenu" \
     "Authenticator|proton-authenticator"
 }
 
 menu_settings() {
-  run_menu "Edit configs" \
+  run_menu "Settings" \
     "Bash|foot -e nvim ~/.bashrc ~/.config/shell/aliases ~/.config/shell/inputrc" \
     "Foot|foot -e nvim ~/.config/foot/foot.ini" \
+    "Fuzzel|foot sh -c ' nvim ~/.config/fuzzel/fuzzel.ini ~/.local/bin/fuzzel_* '" \
     "Mako|foot sh -c 'cd ~/.config/mako/ && nvim *'" \
     "Niri|foot sh -c 'cd ~/.config/niri/ && nvim *'" \
     "Nvim|foot sh -c 'cd ~/.config/nvim && vopen .'" \
     "Pywal|foot -e nvim ~/.local/bin/setbg ~/.config/wal/templates/*" \
-    "Quicshell|foot sh -c 'cd ~/.config/quickshell && vopen .'" \
     "Swayidle|foot sh -c 'cd ~/.config/swayidle/ && nvim config'" \
-    "Dmenus|foot sh -c 'nvim ~/.local/bin/menu_*'" \
     "Waybar|foot sh -c 'cd ~/.config/waybar/ && vopen .'"
 }
 
 menu_system() {
-  run_menu "Settings" \
+  run_menu "System" \
     "󰓃 Wiremix|foot -a wiremix -e wiremix" \
-    "󰂯 Bluetooth|foot -a bluetui -e bluetui" \
+    "󰂯 Bluetooth [Bluetui]|foot -a bluetui -e bluetui" \
     "󰖩 Wi-Fi|foot -a impala -e impala" \
     "󰲝 Network Manager|foot -e nmtui" \
     "󰑐 Update System|foot -a pop-upgrade -e sysup" \
@@ -101,15 +103,15 @@ menu_system() {
 menu_theming() {
   run_menu "Theming" \
     "Set wallpaper|swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/" \
-    "Set theme|~/.local/bin/menu_theme" \
-    "Save theme|~/.local/bin/menu_theme -s"
+    "Set theme|fuzzel_theme" \
+    "Save theme|fuzzel_theme -s"
 }
 
 submenu_monitor() {
   run_menu -sub "Monitor" \
-    "Atop [AMD GPU Monitor]|foot -T atop -e amdgpu_top --smi" \
-    "Btop [System Monitor]|foot -a btop -e btop" \
-    "Nethogs [Network Monitor]|foot -a nethogs -e nethogs" \
+    "Atop|foot -T atop -e amdgpu_top --smi" \
+    "Btop|foot -a btop -e btop" \
+    "Htop|foot -a htop -e htop" \
     "Logs|foot -a foot -T journalctl -e journalctl -f" \
     "Combined|foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh"
 }

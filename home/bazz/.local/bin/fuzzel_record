@@ -2,16 +2,10 @@
 
 set -euo pipefail
 
-DMENU="${DMENU:-vicinae dmenu}"
+FLAGS="-d -a top --y 24 -w 35 --minimal-lines --placeholder Choose"
 
 while true; do
-  MENU="1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional"
-
-  if [ -f /tmp/gpu-recorder.pid ]; then
-    MENU="$MENU\n3 ➜ 󰙦 Stop"
-  fi
-
-  SUB=$(printf '%b\n' "$MENU" | $DMENU --placeholder "Choose")
+  SUB=$(echo -e "1 ➜ 󰑋 Record Screen\n2 ➜ 󰩬 Record Regional\n3 ➜ 󰙦 Stop" | fuzzel $FLAGS)
 
   if [ -z "$SUB" ]; then
     exit 0

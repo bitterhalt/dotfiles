@@ -46,6 +46,7 @@ gdu
 gimp
 git
 gnome-bluetooth-3.0
+gnome-keyring
 gnome-themes-extra
 gparted
 gpu-screen-recorder
@@ -74,7 +75,6 @@ ly
 man-db
 man-pages
 mangohud
-matugen
 meld
 mesa-utils
 mpv
@@ -146,7 +146,6 @@ ttf-nerd-fonts-symbols-mono
 tumbler
 unrar
 unzip
-vicinae-bin
 video-trimmer
 vulkan-radeon
 waybar
