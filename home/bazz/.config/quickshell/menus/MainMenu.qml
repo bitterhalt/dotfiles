@@ -14,6 +14,7 @@ Item {
     required property var targetScreen
     required property var lockService
     required property var idleService
+    required property var wallpaperPicker
 
     property string page: ""
     property int selectedIndex: 0
@@ -67,7 +68,7 @@ Item {
     ]
 
     readonly property var themingItems: [
-        { label: "Set wallpaper", icon: "󰸉", shortcut: "w", command: "swayimg --appid swayimg-setwall -g ~/Pictures/wallpaper/" },
+        { label: "Set wallpaper", icon: "󰸉", shortcut: "w", action: "wallpaper" },
         { label: "Set theme", icon: "󰏘", shortcut: "t", action: "theme" },
         { label: "Save theme", icon: "󰆓", shortcut: "s", action: "saveTheme" }
     ]
@@ -165,6 +166,13 @@ Item {
             return
 
         const item = currentItems[index]
+
+        if (item.action === "wallpaper") {
+            const screen = menuWindow.screen
+            closeMenu()
+            wallpaperPicker.openMenu(screen)
+            return
+        }
 
         if (item.action === "idleSettings") {
             const screen = menuWindow.screen

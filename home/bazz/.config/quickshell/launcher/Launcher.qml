@@ -1052,7 +1052,7 @@ Item {
                             : "No applications found"
             }
 
-            // Footer: current mode on the left, action + mode hints on the right.
+            // Footer: current mode on the left, mode hints on the right.
             Item {
                 id: footer
 

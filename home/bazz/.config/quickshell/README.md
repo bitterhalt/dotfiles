@@ -26,6 +26,7 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 - Application launcher with calculator, file search, run, emoji, and timer modes
 - DeepL translator (Personal API key needed)
 - Pywal-aware theming with fallback colors
+- Wallpaper picker with cached previews and optional Pywal colours
 - QuickShell IPC controls for selected shell features
 
 ## Structure
@@ -67,7 +68,8 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── ProcessMenu.qml
 │   ├── processes.py
 │   ├── TmuxMenu.qml
-│   └── ThemeMenu.qml
+│   ├── ThemeMenu.qml
+│   └── WallpaperMenu.qml
 ├── notifications
 │   ├── NotificationCard.qml
 │   ├── NotificationCenter.qml
@@ -92,6 +94,9 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── ShellUiService.qml
 │   ├── ThemeService.qml
 │   └── WeatherService.qml
+├── wallpaper
+│   ├── Wallpaper.qml
+│   └── setbg.py
 ├── weather
 │   ├── WeatherPopup.qml
 │   └── weather.py
@@ -113,6 +118,8 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 Process menu: Mod+F4 or `qs ipc call processMenu toggle`; Ctrl+R refreshes. Confirmed kills send SIGKILL, including when selecting QuickShell itself.
 
 ## Configuration
+
+Wallpaper: Theming → Set wallpaper or `qs ipc call wallpaper toggle` (also `open` / `close`). Browses `~/Pictures/wallpaper/`, including subfolders. Arrow keys select; `b` sets wallpaper, `p` also generates Pywal colours, and Ctrl+P prompts for a fixed Pywal background (default `121212`). Tab/Shift+Tab switches between search and the grid; Up/Down or Enter leaves search for browsing. Footer hints are clickable. The picker unloads on close; an in-progress apply continues. Requires ImageMagick (`magick`), `awww`, and `wal` for theming. Your existing Bash/Fuzzel/Swayimg workflow is unchanged.
 
 Translator: `qs ipc call translator toggle` (also `open` / `close`). Requires `DEEPL_API` in QuickShell's environment. Ctrl+Enter translates; Ctrl+Shift+C copies; Escape closes and clears text. Language choices last until the shell exits.
 

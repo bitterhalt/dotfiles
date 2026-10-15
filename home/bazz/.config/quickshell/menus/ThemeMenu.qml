@@ -180,7 +180,6 @@ Item {
                 + "| awk '!seen[$0]++' | head -4 | tac); "
                 + "printf '%s\\n' \"$trimmed\" > \"$history\"; "
                 + "wal -e -n --theme \"$theme\" "
-                + "&& vicinae theme set pywal "
                 + "&& xrdb -merge -quiet "
                 + shellQuote(
                     Quickshell.env("HOME")

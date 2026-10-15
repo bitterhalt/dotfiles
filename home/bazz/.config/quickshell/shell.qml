@@ -16,6 +16,7 @@ import "notifications"
 import "launcher"
 import "clipboard"
 import "translator"
+import "wallpaper"
 
 ShellRoot {
   id: root
@@ -63,6 +64,7 @@ ShellRoot {
     targetScreen: root.activeScreen
     lockService: appLockService
     idleService: appIdleService
+    wallpaperPicker: appWallpaperPicker
   }
 
   TmuxMenu {
@@ -96,6 +98,12 @@ ShellRoot {
   }
 
   Translator {
+    config: appConfig
+    targetScreen: root.activeScreen
+  }
+
+  Wallpaper {
+    id: appWallpaperPicker
     config: appConfig
     targetScreen: root.activeScreen
   }
