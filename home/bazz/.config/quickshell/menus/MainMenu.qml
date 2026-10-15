@@ -21,7 +21,7 @@ Item {
     readonly property var powerItems: [
         { label: "Lock", icon: "󰌾", shortcut: "l", action: "lock" },
         { label: "Log out", icon: "󰍃", shortcut: "E", command: "niri msg action quit" },
-        { label: "Suspend", icon: "󰤄", shortcut: "z", command: "systemctl suspend" },
+        { label: "Sleep", icon: "󰤄", shortcut: "z", command: "systemctl suspend" },
         { label: "Restart", icon: "󰜉", shortcut: "R", command: "systemctl reboot" },
         { label: "Shut down", icon: "󰐥", shortcut: "S", command: "systemctl poweroff" }
     ]
