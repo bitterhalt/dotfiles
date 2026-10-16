@@ -15,14 +15,30 @@ Item {
     property string activeKey: ""
     readonly property bool barPopupActive: ["audio", "bluetooth", "network"].includes(activeKey)
     property var hostComponent: null
-    property var hostAnchor: null
+    property real hostAnchorCenter: -1
+    property var anchorRightOffsets: new Map()
     property bool hostFocusable: false
     property bool hostCentered: false
 
     function openHost(key, component, anchorItem, focusable, centered) {
         activeKey = key
         hostComponent = component
-        hostAnchor = anchorItem
+        // The bar's backing window can disappear or lose its geometry while
+        // hidden. Keep a snapshot instead of querying that window in popupX().
+        const screenWidth = barWindow.screen ? barWindow.screen.width : 0
+        const savedOffset = anchorRightOffsets.get(key)
+        hostAnchorCenter = anchorItem && screenWidth > 0 && Number.isFinite(savedOffset)
+            ? screenWidth - savedOffset : -1
+        if (anchorItem && barWindow.visible && barWindow.backingWindowVisible) {
+            try {
+                const pos = barWindow.itemPosition(anchorItem)
+                if (Number.isFinite(pos.x)) {
+                    hostAnchorCenter = pos.x + anchorItem.width / 2
+                    if (screenWidth > 0)
+                        anchorRightOffsets.set(key, screenWidth - hostAnchorCenter)
+                }
+            } catch (_) {}
+        }
         hostFocusable = focusable === true
         hostCentered = centered === true
         hostVisible = true
@@ -46,7 +62,7 @@ Item {
         hostCentered = false
         activeKey = ""
         hostComponent = null
-        hostAnchor = null
+        hostAnchorCenter = -1
     }
 
     function popupX(popupWidth) {
@@ -57,22 +73,14 @@ Item {
         if (hostCentered)
             return Math.round((screenWidth - popupWidth) / 2)
 
-        if (hostAnchor) {
-            try {
-                const pos = barWindow.itemPosition(hostAnchor)
-                const centeredX =
-                    pos.x + hostAnchor.width / 2 - popupWidth / 2
+        if (hostAnchorCenter >= 0)
+            return Math.max(config.popupGap, Math.min(
+                screenWidth - popupWidth - config.popupGap,
+                hostAnchorCenter - popupWidth / 2
+            ))
 
-                return Math.max(
-                    config.popupGap,
-                    Math.min(
-                        screenWidth - popupWidth - config.popupGap,
-                        centeredX
-                    )
-                )
-            } catch (_) {
-            }
-        }
+        if (barPopupActive)
+            return Math.max(config.popupGap, screenWidth - popupWidth - config.popupGap)
 
         return Math.round((screenWidth - popupWidth) / 2)
     }
