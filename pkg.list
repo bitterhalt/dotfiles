@@ -118,7 +118,6 @@ ripgrep
 rsync
 rust
 sassc
-satty
 screenkey
 slurp
 smartmontools
@@ -150,6 +149,7 @@ video-trimmer
 vulkan-radeon
 waybar
 wayland-protocols
+waytator
 wev
 wget
 wine
