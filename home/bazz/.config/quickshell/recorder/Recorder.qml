@@ -77,11 +77,24 @@ Item {
     }
 
     Text {
+        id: recordingLabel
+
         anchors.centerIn: parent
         color: config.accent
-        font.family: config.iconFontFamily
-        font.pointSize: config.iconSize * 1.15
-        text: "󰑋"
+        font.pointSize: config.fontSize(1)
+        font.weight: Font.DemiBold
+        text: "REC"
+
+        SequentialAnimation on opacity {
+            running: root.runningNow && root.visible
+            loops: Animation.Infinite
+            onRunningChanged: if (!running) recordingLabel.opacity = 1
+
+            PauseAnimation { duration: 500 }
+            NumberAnimation { from: 1; to: 0; duration: 100 }
+            PauseAnimation { duration: 400 }
+            PropertyAction { value: 1 }
+        }
     }
 
     MouseArea {
