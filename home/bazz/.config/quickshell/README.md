@@ -1,90 +1,102 @@
 # QuickShell Config
 
-A modular [QuickShell](https://quickshell.org/) desktop shell configuration built for **Niri + Wayland**.
-
-The goal is to keep the shell small, understandable, and easy to extend: shared UI lives in `components/`, system state lives in `services/`, and each feature owns its own module.
+A personal [QuickShell](https://quickshell.org/) desktop shell for **Niri + Wayland**.
 
 ## Features
 
-- Per-screen QuickShell bar
-- Niri workspaces and focused window title
-- Clock with configurable primary and alternative formats
-- Weather display and popup
-- Notification indicator and notification center
-- Network manager and popup
-- Bluetooth manager and connection notifications
-- PipeWire audio controls and stream/device management
-- Volume OSD
-- Battery indicator
-- Native idle monitoring with editable timeouts
-- System tray
-- Power menu
-- Native Lock screen
-- Tmux session manager
-- Searchable process killer with PID display and force-kill confirmation
-- Native screen recorder menu
-- Application launcher with calculator, file search, run, emoji, and timer modes
-- DeepL translator (Personal API key needed)
-- Pywal-aware theming with fallback colors
-- Wallpaper picker with cached previews and optional Pywal colours
-- QuickShell IPC controls for selected shell features
+- Per-screen bar with workspaces, window title, clock, weather, battery, and system tray
+- Network, Bluetooth, and PipeWire audio controls
+- Notifications, history, and do-not-disturb mode
+- Bluetooth connection and low-battery alerts
+- Application launcher with file search, calculator, run, emoji, and timer modes
+- Clipboard history
+- Lock screen and power menu
+- Idle monitoring with editable timeouts
+- Fullscreen and region recording
+- Wallpaper picker and Pywal themes
+- DeepL translator
+- Tmux session manager and process killer
+- Keyboard shortcuts and IPC controls
 
 ## Structure
 
 ```text
-.
+quickshell/
+├── shell.qml
 ├── Config.qml
-├── bar
+├── bar/
 │   ├── Bar.qml
-│   └── modules
-│       ├── audio
-│       ├── battery
-│       ├── bluetooth
-│       ├── clock
-│       ├── idle
-│       ├── network
-│       ├── tray
-│       ├── window
-│       └── workspaces
-├── clipboard
+│   └── modules/
+│       ├── audio/
+│       │   ├── Audio.qml
+│       │   ├── AudioPopup.qml
+│       │   └── Model.js
+│       ├── battery/
+│       │   └── Battery.qml
+│       ├── bluetooth/
+│       │   ├── Bluetooth.qml
+│       │   ├── BluetoothNotifier.qml
+│       │   └── Model.js
+│       ├── clock/
+│       │   └── Clock.qml
+│       ├── idle/
+│       │   ├── Idle.qml
+│       │   └── IdleNotifier.qml
+│       ├── network/
+│       │   ├── Model.js
+│       │   ├── Network.qml
+│       │   ├── NetworkPopup.qml
+│       │   └── NetworkRow.qml
+│       ├── tray/
+│       │   ├── Power.qml
+│       │   ├── Tray.qml
+│       │   └── TrayMenu.qml
+│       ├── window/
+│       │   └── WindowTitle.qml
+│       └── workspaces/
+│           └── Workspaces.qml
+├── clipboard/
 │   └── Clipboard.qml
-├── components
+├── components/
 │   ├── PanelSeparator.qml
 │   ├── PopoutPanel.qml
+│   ├── PopupCatcher.qml
 │   ├── PopupManager.qml
 │   ├── SectionHeader.qml
 │   └── ToggleSwitch.qml
-├── launcher
+├── launcher/
 │   ├── Emoji.js
 │   ├── Launcher.qml
-│   └── Scorer.js
-├── lock
+│   ├── Scorer.js
+│   └── tests/
+│       └── tst_emoji.qml
+├── lock/
 │   ├── LockContext.qml
-│   └── LockSurface.qml
+│   ├── LockSurface.qml
+│   ├── lock.sh
+│   └── pam/
+│       └── quickshell-lock
 ├── lock.qml
 ├── lock-test.qml
-├── menus
-│   ├── MainMenu.qml
+├── menus/
 │   ├── IdleSettings.qml
+│   ├── MainMenu.qml
 │   ├── ProcessMenu.qml
 │   ├── processes.py
-│   ├── TmuxMenu.qml
 │   ├── ThemeMenu.qml
+│   ├── TmuxMenu.qml
 │   └── WallpaperMenu.qml
-├── notifications
+├── notifications/
 │   ├── NotificationCard.qml
 │   ├── NotificationCenter.qml
 │   ├── NotificationIndicator.qml
 │   └── NotificationPopup.qml
-├── osd
+├── osd/
 │   └── VolumeOsd.qml
-├── recorder
+├── recorder/
 │   ├── Recorder.qml
 │   └── RegionSelector.qml
-├── services
-│   ├── idle
-│   │   ├── Duration.js
-│   │   └── suspend.sh
+├── services/
 │   ├── BatteryService.qml
 │   ├── BluetoothService.qml
 │   ├── IdleService.qml
@@ -94,239 +106,46 @@ The goal is to keep the shell small, understandable, and easy to extend: shared 
 │   ├── RecorderService.qml
 │   ├── ShellUiService.qml
 │   ├── ThemeService.qml
-│   └── WeatherService.qml
-├── wallpaper
+│   ├── TimerService.qml
+│   ├── WeatherService.qml
+│   ├── bluetooth/
+│   │   ├── BatteryWarning.js
+│   │   └── tests/
+│   │       └── tst_batterywarning.qml
+│   └── idle/
+│       ├── Duration.js
+│       ├── suspend.sh
+│       └── tests/
+│           └── tst_duration.qml
+├── translator/
+│   ├── Languages.js
+│   ├── Translator.qml
+│   ├── TranslatorButton.qml
+│   ├── TranslatorWindow.qml
+│   ├── deepl.py
+│   ├── test_deepl.py
+│   └── tests/
+│       └── tst_languages.qml
+├── wallpaper/
 │   ├── Wallpaper.qml
-│   └── setbg.py
-├── weather
-│   ├── WeatherPopup.qml
-│   └── weather.py
-└── shell.qml
+│   ├── setbg.py
+│   └── test_setbg.py
+└── weather/
+    ├── WeatherPopup.qml
+    └── weather.py
 ```
 
-### Layout
+## Requirements
 
-`ShellRoot` in `shell.qml` owns shared services and creates one `Bar` instance for every screen exposed by `Quickshell.screens`. Polling and other machine-wide state, such as battery and weather data, stays in one shell-owned service and is passed to each bar.
+QuickShell, Niri, PipeWire, NetworkManager, BlueZ, and UPower.
 
-`Bar.qml` is primarily responsible for arranging modules under `bar/modules/`. Cross-shell notification and weather UI use top-level feature directories instead of being owned by one bar.
-
-`Clipboard.qml` is a standalone shell panel controlled by the `clipboard` IPC target. It reads and decodes local `cliphist` entries and never sends clipboard contents to external services.
-
-`Config.qml` contains global shell configuration such as bar geometry, typography, popup styling, clock formats, and shared colors.
-
-`launcher/Launcher.qml` contains the launcher UI and state; `Scorer.js` holds the matching logic. The centered panel is hosted by the main shell and controlled through `qs ipc call launcher toggle`.
-
-Emoji search accepts words in any order, with exact matches first. An empty search shows recently copied emoji first (last 20 saved in `~/.cache/quickshell-emoji-history.json`, or under `XDG_CACHE_HOME`). App search is unaffected.
-
-Process menu: Mod+F4 or `qs ipc call processMenu toggle`; Ctrl+R refreshes. Confirmed kills send SIGKILL, including when selecting QuickShell itself.
-
-## Configuration
-
-Wallpaper: Theming → Set wallpaper or `qs ipc call wallpaper toggle` (also `open` / `close`). Browses `~/Pictures/wallpaper/`, including subfolders. Arrow keys select; `b` sets wallpaper, `p` also generates Pywal colours, and Ctrl+P prompts for a fixed Pywal background (default `121212`). Tab/Shift+Tab switches between search and the grid; Up/Down or Enter leaves search for browsing. Footer hints are clickable. The picker unloads on close; an in-progress apply continues. Requires ImageMagick (`magick`), `awww`, and `wal` for theming. Your existing Bash/Fuzzel/Swayimg workflow is unchanged.
-
-Translator: `qs ipc call translator toggle` (also `open` / `close`). Requires `DEEPL_API` in QuickShell's environment. Ctrl+Enter translates; Ctrl+Shift+C copies; Escape closes and clears text. Language choices last until the shell exits.
-
-Most global values can be adjusted in `Config.qml`.
-
-UI text uses native font rendering; icons and emoji keep Qt's default rendering. Avoid a global `QML_DISABLE_DISTANCEFIELD` override if you want to preserve that split.
-
-Bluetooth battery warnings use the same toast as connection notices, including for mice and keyboards. In `Config.qml`, `bluetoothBatteryWarningPercent` defaults to 20, `bluetoothBatteryCriticalPercent` to 10, and `bluetoothBatteryRearmMargin` to 5. Set a threshold to `0` to disable it; raise it above a connected device's battery level to test. Requires battery data from the device/BlueZ.
-
-For example:
-
-```qml
-// Typography
-property real fontScale: 1.0
-property real iconScale: 1.0
-property string iconFontFamily: "Symbols Nerd Font Mono"
-
-// Bar
-property int barHeight: 34
-property int barEdgeMargin: 10
-property int barModuleSpacing: 8
-property int workspaceTitleGap: 10
-property int barItemPadding: 6
-
-// Clock
-property string clockFormat: "HH:mm"
-property string clockAlternativeFormat: "ddd, dd.MM"
-
-// Popups
-property int popupGap: 8
-property int popupRadius: 4
-```
-
-Module-specific values intentionally remain inside their modules. `Config.qml` is meant for settings that affect the shell globally rather than every implementation detail.
-
-## Theme
-
-`ThemeService.qml` provides the shared color palette.
-
-The shell can use colors generated by Pywal and falls back to its built-in palette when a generated theme is unavailable.
-
-Shared colors are exposed through `Config.qml`, so modules generally use values such as:
-
-```qml
-config.bg
-config.surface
-config.borderColor
-config.fg
-config.muted
-config.accent
-config.urgent
-```
-
-This keeps feature modules independent from the source of the theme.
-
-## Recorder
-
-Uses `gpu-screen-recorder`.
-
-```text
-f  Fullscreen
-r  Region
-s  Stop
-```
-
-### Recorder IPC
-
-```bash
-qs ipc call recorder toggle
-qs ipc call recorder open
-qs ipc call recorder close
-
-qs ipc call recorder fullscreen
-qs ipc call recorder region
-qs ipc call recorder stop
-qs ipc call recorder isRecording
-```
-
-## Power Menu
-
-Locking: Mod+F11 or `qs ipc call lock lock`. Preview: `qs -p ~/.config/quickshell/lock-test.qml`.
-
-```text
-l  Lock
-z  Suspend
-R  Restart
-S  Shut down
-E  Log out
-```
-
-IPC:
-
-```bash
-qs ipc call power toggle
-qs ipc call power open
-qs ipc call power close
-```
-
-## Bar IPC
-
-```bash
-qs ipc call bar toggle
-qs ipc call bar show
-qs ipc call bar hide
-qs ipc call bar isVisible
-```
-
-For example, a Niri keybind can toggle the bar on and off with:
-
-```kdl
-Mod+B hotkey-overlay-title="Toggle Bar" {
-    spawn-sh "qs ipc call bar toggle";
-}
-```
-
-## Dependencies
-
-The exact dependencies depend on which modules you use, but the current configuration expects the following core tools:
-
-```text
-quickshell
-niri
-PipeWire
-gpu-screen-recorder
-notify-send
-```
-
-Additional modules may rely on system services or tools such as NetworkManager, Bluetooth/BlueZ, UPower, and Python.
-
-Idle Settings lives under System (`i`), also available through `qs ipc call idle settings`. Durations accept `30s`, `30m`, `2h`, and `0` to disable an automatic action; they are saved to `~/.cache/quickshell-idle.json` and restored on login. Clicking the bar's idle icon or `qs ipc call idle toggle` pauses and resumes automatic idle. Suspend always locks the session first through `services/idle/suspend.sh`.
-
-The configured icon font is:
-
-```text
-Symbols Nerd Font Mono
-```
-
-The weather feature keeps its helper at `weather/weather.py`.
-
-## Design Notes
-
-The project follows a few simple rules:
-
-- **`shell.qml` owns application-wide objects.**
-- **`Bar.qml` arranges the bar rather than implementing features.**
-- **`services/` owns shared system state.**
-- **`components/` contains reusable presentation components.**
-- **`bar/modules/` contains self-contained bar features.**
-- **Cross-shell feature UI uses a top-level feature directory.**
-- **Feature-specific helpers stay beside the feature that uses them.**
-- **`Config.qml` stores global policy, while features own implementation details.**
-
-This keeps dependencies explicit and avoids turning either `shell.qml` or `Config.qml` into a collection of unrelated feature logic.
-
-## Multi-monitor Status
-
-The bar itself is already created per screen:
-
-```qml
-Variants {
-    model: Quickshell.screens
-
-    Bar {
-        required property var modelData
-        targetScreen: modelData
-    }
-}
-```
-
-This means connecting another display should create another bar automatically.
-
-Machine-wide weather, battery, idle, Bluetooth, notification, and recorder state is owned by services under `ShellRoot` and passed into each bar. Niri's focused output selects the screen for global toasts and keyboard-driven IPC menus; direct clicks continue to use the clicked bar's screen.
-
-## Installation
-
-Place the configuration in your QuickShell configuration directory:
-
-```bash
-~/.config/quickshell/
-```
-
-## Contributing
-
-Keep changes scoped to the feature they belong to.
-
-If a component is only used by one feature, keep it inside that feature's directory. Move something into `components/` only when it is genuinely reusable by multiple parts of the shell.
-
-For larger architectural changes, preserve the separation between:
-
-```text
-shared state → services/
-shared UI    → components/
-bar UI       → bar/modules/
-global UI    → top-level feature directories
-global shell → shell.qml
-```
-
-Multi-monitor improvements are welcome, especially moving global feature state and duplicate IPC handlers out of per-screen bar instances.
+Feature helpers use Python, `wl-clipboard`, `cliphist`, `gpu-screen-recorder`, ImageMagick, `awww`, and Pywal. The translator requires `DEEPL_API` in the shell's environment.
 
 ## Transparency
 
 This shell was developed with LLM assistance under my supervision. I direct the design, review the changes, and test them on my own desktop. These are personal dotfiles, so review and adapt them before using them on yours.
 
-# TODO
+## TODO
 
 - [ ] Make all bar popups keyboard-driven = BT, Network, Audio
 - [ ] Add audio popup more features from wiremix = Tab layout with proper arrow and tab navication. Tabs = [Outputs] [Inputs] [Config to disable/enable devices]
