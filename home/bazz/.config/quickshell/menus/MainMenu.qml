@@ -60,13 +60,6 @@ Item {
         { label: "Combined", icon: "󰕮", shortcut: "c", command: "foot -a Sysmon -T Sysmon -e ~/.local/bin/tmux-sysmon.sh" }
     ]
 
-    readonly property var notesItems: [
-        { label: "Search", icon: "󰍉", shortcut: "s", command: "foot -a fzf_notes -e ~/.local/bin/menu_notes" },
-        { label: "New Note", icon: "󰎚", shortcut: "n", command: "foot -e ~/.local/bin/menu_notes -c" },
-        { label: "TODO", icon: "", shortcut: "t", command: "foot -a noteterm -T Notes sh -c 'cd ~/Documents/personal/notes/ && nvim todo.md'" },
-        { label: "Delete", icon: "󰩹", shortcut: "d", command: "foot -e ~/.local/bin/menu_notes -d" }
-    ]
-
     readonly property var themingItems: [
         { label: "Set wallpaper", icon: "󰸉", shortcut: "w", action: "wallpaper" },
         { label: "Set theme", icon: "󰏘", shortcut: "t", action: "theme" },
@@ -85,8 +78,6 @@ Item {
             return systemItems
         case "monitor":
             return monitorItems
-        case "notes":
-            return notesItems
         case "theming":
             return themingItems
         default:
@@ -106,8 +97,6 @@ Item {
             return "Settings"
         case "monitor":
             return "Monitor"
-        case "notes":
-            return "Notes"
         case "theming":
             return "Theming"
         default:
@@ -462,9 +451,6 @@ Item {
 
         function theming(): void {
             root.openPage("theming")
-        }
-        function notes(): void {
-            root.openPage("notes")
         }
         function close(): void {
             root.closeMenu()

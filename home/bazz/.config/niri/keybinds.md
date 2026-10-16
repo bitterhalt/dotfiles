@@ -49,11 +49,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Ctrl+T` | Open Translator |
 | `Mod+D` | Run Application Launcher |
 | `Mod+Escape` | Open Power Menu |
-
-## Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; } TODO: Make quickshell menu!
-
-| Key | Action |
-| --- | ------ |
+| `Mod+F3` | Launch program |
 | `Mod+F4` | Process Killer |
 | `Mod+F5` | Passwords and AUTH |
 | `Mod+F8` | Screen Record Menu |
