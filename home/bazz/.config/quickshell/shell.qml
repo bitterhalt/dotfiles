@@ -148,12 +148,13 @@ ShellRoot {
 
   BluetoothService {
     id: appBluetoothService
+    config: appConfig
   }
 
   BluetoothNotifier {
     config: appConfig
     targetScreen: root.activeScreen
-    devices: appBluetoothService.devices
+    bluetoothService: appBluetoothService
   }
 
   WeatherService {

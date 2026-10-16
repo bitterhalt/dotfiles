@@ -23,6 +23,10 @@ Item {
     property int popupRadius: 4
     // History is bounded; ordinary entries are expired before critical ones.
     property int notificationHistoryLimit: 100
+    // Bluetooth battery percentages; 0 disables a warning. Keep critical <= low.
+    property int bluetoothBatteryWarningPercent: 20
+    property int bluetoothBatteryCriticalPercent: 10
+    property int bluetoothBatteryRearmMargin: 5
     // Native idle defaults, in seconds. Menu overrides are saved separately.
     property int idleLockTimeout: 1200
     property int idleOffTimeout: 1800

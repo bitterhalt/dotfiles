@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
@@ -8,9 +10,16 @@ Item {
 
     required property var config
     required property var targetScreen
-    required property var devices
+    required property var bluetoothService
+    readonly property var devices: bluetoothService.devices
     property string deviceName: ""
     property string deviceIcon: ""
+    property string statusText: "Connected"
+    property bool batteryAlert: false
+    // Match critical notification cards, regardless of the current theme.
+    readonly property color criticalBorderColor: "#af3029"
+    readonly property color criticalTextColor: "#ad8301"
+    property var batteryQueue: []
 
     function deviceLabel(device) {
         if (!device)
@@ -25,13 +34,43 @@ Item {
     }
 
     function showConnected(device) {
-        if (!device || shouldIgnore(device))
+        if (!device || shouldIgnore(device) || (toast.visible && batteryAlert))
             return ;
 
         deviceName = deviceLabel(device);
         deviceIcon = device.icon || "";
+        statusText = "Connected";
+        batteryAlert = false;
         toast.visible = true;
         toastTimer.restart();
+    }
+
+    function showBatteryWarning(device, percent, critical) {
+        const warning = {
+            name: deviceLabel(device), icon: device.icon || "",
+            status: (critical ? "Battery critical" : "Battery low") + " · " + percent + "%"
+        }
+        if (toast.visible && batteryAlert) {
+            batteryQueue = batteryQueue.concat([warning]);
+            return;
+        }
+        showBatteryToast(warning);
+    }
+
+    function showBatteryToast(warning) {
+        deviceName = warning.name;
+        deviceIcon = warning.icon;
+        statusText = warning.status;
+        batteryAlert = true;
+        toast.visible = true;
+        toastTimer.restart();
+    }
+
+    Connections {
+        target: root.bluetoothService
+        function onBatteryWarning(device, percent, critical) {
+            root.showBatteryWarning(device, percent, critical);
+        }
     }
 
     visible: false
@@ -40,6 +79,7 @@ Item {
         model: root.devices
 
         delegate: Item {
+            id: connectionWatcher
             required property var modelData
 
             visible: false
@@ -48,12 +88,12 @@ Item {
 
             Connections {
                 function onConnectedChanged() {
-                    if (modelData.connected)
-                        root.showConnected(modelData);
+                    if (connectionWatcher.modelData.connected)
+                        root.showConnected(connectionWatcher.modelData);
 
                 }
 
-                target: modelData
+                target: connectionWatcher.modelData
             }
 
         }
@@ -68,7 +108,7 @@ Item {
         WlrLayershell.namespace: "quickshell-notifications"
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
-        implicitWidth: 200
+        implicitWidth: root.batteryAlert ? 200 : 200
         implicitHeight: 62
         visible: false
         color: "transparent"
@@ -80,8 +120,8 @@ Item {
         Rectangle {
             anchors.fill: parent
             radius: root.config.popupRadius
-            color: root.config.surface
-            border.color: root.config.borderColor
+            color: root.batteryAlert ? root.config.bg : root.config.surface
+            border.color: root.batteryAlert ? root.criticalBorderColor : root.config.borderColor
             border.width: 1
 
             Item {
@@ -99,16 +139,16 @@ Item {
                     anchors.centerIn: parent
                     implicitSize: 26
                     source: root.deviceIcon ? Quickshell.iconPath(root.deviceIcon) : ""
-                    visible: source.toString() !== ""
+                    visible: !root.batteryAlert && source.toString() !== ""
                 }
 
                 Text {
                     anchors.centerIn: parent
                     visible: !imageIcon.visible
-                    color: root.config.accent
+                    color: root.batteryAlert ? root.criticalTextColor : root.config.accent
                     font.family: root.config.iconFontFamily
                     font.pointSize: root.config.iconSize
-                    text: "󰂯"
+                    text: root.batteryAlert ? "󰀧" : "󰂯"
                 }
 
             }
@@ -123,7 +163,7 @@ Item {
 
                 Text {
                     width: parent.width
-                    color: root.config.fg
+                    color: root.batteryAlert ? root.criticalTextColor : root.config.fg
                     font.pointSize: root.config.fontSize(0.92)
                     font.weight: Font.DemiBold
                     elide: Text.ElideRight
@@ -131,9 +171,9 @@ Item {
                 }
 
                 Text {
-                    color: root.config.muted
+                    color: root.batteryAlert ? root.criticalTextColor : root.config.muted
                     font.pointSize: root.config.fontSize(0.8)
-                    text: "Connected"
+                    text: root.statusText
                 }
 
             }
@@ -150,7 +190,16 @@ Item {
 
         interval: 5000
         repeat: false
-        onTriggered: toast.visible = false
+        onTriggered: {
+            if (root.batteryQueue.length > 0) {
+                const next = root.batteryQueue[0];
+                root.batteryQueue = root.batteryQueue.slice(1);
+                root.showBatteryToast(next);
+            } else {
+                toast.visible = false;
+                root.batteryAlert = false;
+            }
+        }
     }
 
 }
