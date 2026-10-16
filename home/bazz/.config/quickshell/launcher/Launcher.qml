@@ -995,7 +995,7 @@ Item {
                         visible: modelData.type === "calculator" || modelData.type === "file" || modelData.type === "binary" || modelData.type === "emoji" || modelData.type === "timer-start" || modelData.type === "timer-active"
                         color: root.config.accent
                         font.family: modelData.type === "emoji" ? root.config.textFontFamily : root.config.iconFontFamily
-                        font.pointSize: root.config.iconSize
+                        font.pointSize: root.config.iconSize * 1.5
                         text: modelData.type === "emoji" ? modelData.emoji : modelData.type === "file" ? "󰈔" : modelData.type === "binary" ? (modelData.recent ? root.iconStar : root.iconRun) : modelData.type === "timer-start" || modelData.type === "timer-active" ? "󰔛" : "󰃬"
                     }
 
