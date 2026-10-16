@@ -54,6 +54,14 @@ window-rule {
 }
 
 window-rule {
+    match app-id="keybind-cc"
+    open-floating true
+    default-column-width { proportion 0.40; }
+    default-window-height { proportion 0.95; }
+    default-floating-position x=16 y=16 relative-to="top"
+}
+
+window-rule {
     match app-id="fzf_notes"
     open-floating true
     default-column-width { proportion 0.50; }

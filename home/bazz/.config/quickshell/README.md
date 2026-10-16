@@ -326,6 +326,6 @@ This shell was developed with LLM assistance under my supervision. I direct the 
 
 # TODO
 
-- [ ] Simple Keybind parser
-- [ ] Make all bar popups keyboard-driven BT, Network, Audio
+- [ ] Make all bar popups keyboard-driven = BT, Network, Audio
 - [ ] Add audio popup more features from wiremix = Tab layout with proper arrow and tab navication. Tabs = [Outputs] [Inputs] [Config to disable/enable devices]
+- [ ] Weather widget looks overhaul = At the moment it's just copy of Waybar tooltip so it need some makeup

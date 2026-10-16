@@ -30,7 +30,7 @@ binds {
     Mod+Ctrl+T hotkey-overlay-title="Open Translator" { spawn-sh "qs ipc call translator toggle"; }
     Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "qs ipc call launcher toggle"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "qs ipc call power toggle"; }
-    // Mod+F3 { spawn-sh "~/.config/niri/scripts/keybinds.sh"; } TODO: Make quickshell menu!
+    Mod+F3 { spawn-sh "foot -a keybind-cc -e nvim ~/.config/niri/keybinds.md"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "qs ipc call processMenu toggle"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "foot -a fzf_pass -e menu_passmenu "; }
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
