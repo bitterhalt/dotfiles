@@ -10,7 +10,7 @@ PopoutPanel {
     required property var audioItem
 
     config: audioItem.config
-    contentWidth: 340
+    contentWidth: 300
     Component.onDestruction: {
         audioItem.showOutputs = false;
         audioItem.showInputs = false;
@@ -68,7 +68,7 @@ PopoutPanel {
 
             Column {
                 x: 36
-                width: parent.width - 88
+                width: parent.width - 42
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: 0
 
@@ -87,20 +87,6 @@ PopoutPanel {
                     font.pointSize: config.fontSize(0.77)
                     elide: Text.ElideRight
                     text: audioItem.sink ? Model.label(audioItem.sink) : "No output device"
-                }
-
-            }
-
-            Row {
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 6
-
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: config.fg
-                    font.pointSize: config.fontSize(0.92)
-                    text: `${audioItem.volume}%`
                 }
 
             }
@@ -249,7 +235,7 @@ PopoutPanel {
 
             Column {
                 x: 36
-                width: parent.width - 88
+                width: parent.width - 42
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: 0
 
@@ -268,20 +254,6 @@ PopoutPanel {
                     font.pointSize: config.fontSize(0.77)
                     elide: Text.ElideRight
                     text: audioItem.source ? Model.label(audioItem.source) : "No input device"
-                }
-
-            }
-
-            Row {
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 6
-
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: config.fg
-                    font.pointSize: config.fontSize(0.92)
-                    text: audioItem.sourceAudio ? `${Math.round(audioItem.sourceAudio.volume * 100)}%` : "—"
                 }
 
             }
@@ -529,19 +501,11 @@ PopoutPanel {
             Text {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
-                width: parent.width - 78
+                width: parent.width
                 color: streamRow.config.fg
                 font.pointSize: streamRow.config.fontSize(0.85)
                 elide: Text.ElideRight
                 text: streamRow.media !== "" ? `${streamRow.name} — ${streamRow.media}` : streamRow.name
-            }
-
-            Text {
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                color: streamRow.config.muted
-                font.pointSize: streamRow.config.fontSize(0.77)
-                text: streamRow.nodeAudio ? `${Math.round(streamRow.nodeAudio.volume * 100)}%` : "—"
             }
 
         }
