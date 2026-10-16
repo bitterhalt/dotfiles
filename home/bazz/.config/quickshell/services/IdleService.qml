@@ -158,7 +158,7 @@ Item {
 
     FileView {
         id: settingsFile
-        path: (Quickshell.env("XDG_CACHE_HOME") || Quickshell.env("HOME") + "/.cache")
+        path: (Quickshell.env("XDG_DATA_HOME") || Quickshell.env("HOME") + "/.local/share")
             + "/quickshell-idle.json"
         atomicWrites: true
         printErrors: false
