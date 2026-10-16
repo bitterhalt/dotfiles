@@ -32,3 +32,4 @@ vim/.vim
 vim/autoload/plug.vim.old
 vim/vim
 void-updater.sh
+40-secrets.conf
