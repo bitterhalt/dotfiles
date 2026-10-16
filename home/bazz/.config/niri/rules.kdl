@@ -275,6 +275,7 @@ layer-rule {
     match namespace="quickshell-notifications"
     match namespace="quickshell-notification-center"
     match namespace="quickshell-wallpaper-picker"
+    match namespace="quickshell-barpopup"
     // match namespace="quickshell-submenu"
     // match namespace="quickshell-osd"
     match namespace="quickshell-weather"

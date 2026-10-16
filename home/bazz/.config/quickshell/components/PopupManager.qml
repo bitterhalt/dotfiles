@@ -13,6 +13,7 @@ Item {
 
     property bool hostVisible: false
     property string activeKey: ""
+    readonly property bool barPopupActive: ["audio", "bluetooth", "network"].includes(activeKey)
     property var hostComponent: null
     property var hostAnchor: null
     property bool hostFocusable: false
@@ -88,6 +89,8 @@ Item {
             && (hostKey === ""
                 ? managerRef.activeKey !== "weather"
                     && managerRef.activeKey !== "notificationCenter"
+                    && !managerRef.barPopupActive
+                : hostKey === "barPopup" ? managerRef.barPopupActive
                 : managerRef.activeKey === hostKey)
         color: "transparent"
         exclusiveZone: 0
@@ -136,6 +139,12 @@ Item {
         managerRef: manager
         hostKey: "notificationCenter"
         surfaceNamespace: "quickshell-notification-center"
+    }
+
+    PopupSurface {
+        managerRef: manager
+        hostKey: "barPopup"
+        surfaceNamespace: "quickshell-barpopup"
     }
 
     PopupSurface {

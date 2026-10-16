@@ -62,7 +62,7 @@ Item {
         color: "transparent"
         exclusiveZone: 0
         focusable: true
-        WlrLayershell.namespace: "quickshell-submenu"
+        WlrLayershell.namespace: "quickshell-barpopup"
         WlrLayershell.layer: WlrLayer.Overlay
         WlrLayershell.keyboardFocus: visible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
