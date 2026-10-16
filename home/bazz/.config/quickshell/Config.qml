@@ -17,7 +17,7 @@ Item {
     property int barItemPadding: 6
     // Clock
     property string clockFormat: "HH:mm"
-    property string clockAlternativeFormat: "ddd, dd.MM"
+    property string clockAlternativeFormat: "dddd, d MMMM"
     // Popup geometry
     property int popupGap: 16
     property int popupRadius: 4

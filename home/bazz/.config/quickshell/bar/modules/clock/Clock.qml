@@ -86,7 +86,7 @@ Item {
             clock.date,
             config.clockAlternativeFormat
           )
-          const weekday = Qt.formatDateTime(clock.date, "ddd")
+          const weekday = Qt.formatDateTime(clock.date, "dddd")
 
           return formatted.replace(
             weekday,
