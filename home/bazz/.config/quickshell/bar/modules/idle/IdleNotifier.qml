@@ -75,6 +75,7 @@ Item {
                 spacing: 1
 
                 Text {
+                    renderType: Text.NativeRendering
                     width: parent.width
                     color: root.config.fg
                     font.pointSize: root.config.fontSize(0.92)
@@ -84,6 +85,7 @@ Item {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     color: root.config.muted
                     font.pointSize: root.config.fontSize(0.80)
                     text: root.state

@@ -384,6 +384,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.left: parent.left
                         anchors.leftMargin: 38
                         anchors.right: parent.right
@@ -437,6 +438,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
 
             Text {
+                renderType: Text.NativeRendering
                 width: parent.width
                 color: root.config.fg
                 font.pointSize: root.config.fontSize(1)
@@ -455,6 +457,7 @@ Item {
                     : root.config.borderColor
 
                 TextInput {
+                    renderType: Text.NativeRendering
                     id: saveInput
 
                     anchors.fill: parent
@@ -476,6 +479,7 @@ Item {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.left: parent.left
                     anchors.leftMargin: 9
                     anchors.verticalCenter: parent.verticalCenter
@@ -488,6 +492,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 width: parent.width
                 color: root.config.muted
                 font.pointSize: root.config.fontSize(0.77)

@@ -351,6 +351,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.left: parent.left
                         anchors.leftMargin: 38
                         anchors.right: keyHint.left
@@ -377,6 +378,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         id: keyHint
 
                         anchors.right: parent.right

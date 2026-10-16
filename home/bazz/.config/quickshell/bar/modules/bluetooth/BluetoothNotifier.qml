@@ -162,6 +162,8 @@ Item {
                 spacing: 1
 
                 Text {
+
+                    renderType: Text.NativeRendering
                     width: parent.width
                     color: root.batteryAlert ? root.criticalTextColor : root.config.fg
                     font.pointSize: root.config.fontSize(0.92)
@@ -171,6 +173,7 @@ Item {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     color: root.batteryAlert ? root.criticalTextColor : root.config.muted
                     font.pointSize: root.config.fontSize(0.8)
                     text: root.statusText

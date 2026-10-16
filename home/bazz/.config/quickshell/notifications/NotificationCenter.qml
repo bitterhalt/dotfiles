@@ -34,6 +34,7 @@ Item {
                 height: 32
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     color: config.fg
@@ -48,6 +49,7 @@ Item {
                     spacing: 12
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.verticalCenter: parent.verticalCenter
                         color: notificationService.dnd ? config.accent : config.muted
                         font.pointSize: config.fontSize(0.82)
@@ -92,6 +94,7 @@ Item {
                 height: parent.height - 76
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.centerIn: parent
                     visible: notificationService.notificationCount === 0
                     color: config.muted
@@ -132,6 +135,7 @@ Item {
                 visible: notificationService.notificationCount > 0
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.centerIn: parent
                     color: clearMouse.containsMouse ? config.fg : config.muted
                     font.pointSize: config.fontSize(0.82)

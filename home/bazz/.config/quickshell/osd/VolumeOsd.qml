@@ -169,6 +169,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         Layout.preferredWidth: 38
 
                         horizontalAlignment: Text.AlignRight

@@ -11,13 +11,25 @@ Item {
     height: barWindow.height
     visible: battery.present
 
-    Text {
+    Row {
         id: batteryText
 
         anchors.centerIn: parent
-        color: config.fg
-        font.pointSize: config.fontSize(1)
-        text: `${battery.capacity}% ${battery.icon}`
+
+        Text {
+            renderType: Text.NativeRendering
+            anchors.verticalCenter: parent.verticalCenter
+            color: config.fg
+            font.pointSize: config.fontSize(1)
+            text: `${battery.capacity}% `
+        }
+
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            color: config.fg
+            font.pointSize: config.fontSize(1)
+            text: battery.icon
+        }
     }
 
 }

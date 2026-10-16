@@ -69,6 +69,7 @@ Item {
                 height: 28
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     color: config.fg
@@ -83,6 +84,7 @@ Item {
                     spacing: 8
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.verticalCenter: parent.verticalCenter
                         color: config.muted
                         font.pointSize: config.fontSize(0.85)
@@ -109,6 +111,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 width: parent.width
                 visible: !root.adapter || !root.adapter.enabled
                 horizontalAlignment: Text.AlignHCenter
@@ -147,6 +150,7 @@ Item {
                 }
 
                 SectionHeader {
+                    renderType: Text.NativeRendering
                     config: root.config
                     visible: root.pairedRows.length > 0
                     text: "PAIRED"
@@ -172,6 +176,7 @@ Item {
                     height: 20
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
                         color: config.muted
@@ -182,6 +187,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
                         color: config.muted
@@ -207,6 +213,7 @@ Item {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     width: parent.width
                     visible: root.deviceRows.length === 0
                     horizontalAlignment: Text.AlignHCenter
@@ -271,6 +278,7 @@ Item {
             spacing: 0
 
             Text {
+                renderType: Text.NativeRendering
                 width: parent.width
                 color: deviceRow.config.fg
                 font.pointSize: deviceRow.config.fontSize(0.92)
@@ -280,6 +288,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 width: parent.width
                 color: deviceRow.config.muted
                 font.pointSize: deviceRow.config.fontSize(0.77)
@@ -301,6 +310,7 @@ Item {
         }
 
         Text {
+            renderType: Text.NativeRendering
             anchors.right: parent.right
             anchors.rightMargin: 6
             anchors.verticalCenter: parent.verticalCenter

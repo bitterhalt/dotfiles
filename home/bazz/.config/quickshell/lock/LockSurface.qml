@@ -150,6 +150,7 @@ Rectangle {
             Layout.alignment: Qt.AlignHCenter
 
             TextField {
+                renderType: Text.NativeRendering
                 id: passwordBox
 
                 horizontalAlignment: TextInput.AlignHCenter
@@ -170,6 +171,7 @@ Rectangle {
 
                 // Fusion hides its centered placeholder while focused.
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.fill: parent
                     anchors.leftMargin: passwordBox.leftPadding
                     anchors.rightMargin: passwordBox.rightPadding
@@ -297,6 +299,7 @@ Rectangle {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 text: "Retry"
                 color: root.config.muted
                 font.pointSize: 9
@@ -307,6 +310,7 @@ Rectangle {
 
         // Status message
         Label {
+            renderType: Text.NativeRendering
             id: statusLabel
 
             visible: text !== ""
@@ -331,6 +335,7 @@ Rectangle {
 
     // Hint label - shown before any auth attempt
     Label {
+        renderType: Text.NativeRendering
         id: hintLabel
 
         visible: !root.context.pamActivated
@@ -378,6 +383,7 @@ Rectangle {
         }
 
         Text {
+            renderType: Text.NativeRendering
             text: "Cancel"
             color: root.config.muted
             font.pointSize: 9

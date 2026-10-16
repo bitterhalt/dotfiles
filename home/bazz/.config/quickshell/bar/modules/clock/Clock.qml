@@ -42,6 +42,7 @@ Item {
   Text {
     id: clockText
 
+    renderType: Text.NativeRendering
     anchors.left: parent.left
     anchors.verticalCenter: parent.verticalCenter
 
@@ -76,6 +77,7 @@ Item {
       Text {
         id: dateText
 
+        renderType: Text.NativeRendering
         color: config.fg
         font.pointSize: config.fontSize(1)
         font.weight: Font.DemiBold
@@ -97,13 +99,28 @@ Item {
         }
       }
 
-      Text {
+      Row {
         id: weatherText
 
-        color: config.fg
-        font.pointSize: config.fontSize(1)
-        font.weight: Font.DemiBold
-        text: weatherData.text
+        readonly property int separator: weatherData.text.indexOf(" ")
+
+        Text {
+          anchors.verticalCenter: parent.verticalCenter
+          color: config.fg
+          font.pointSize: config.fontSize(1)
+          font.weight: Font.DemiBold
+          text: weatherText.separator < 0 ? weatherData.text
+            : weatherData.text.slice(0, weatherText.separator)
+        }
+
+        Text {
+          renderType: Text.NativeRendering
+          anchors.verticalCenter: parent.verticalCenter
+          color: config.fg
+          font.pointSize: config.fontSize(1)
+          font.weight: Font.DemiBold
+          text: weatherText.separator < 0 ? "" : weatherData.text.slice(weatherText.separator)
+        }
       }
     }
   }

@@ -13,6 +13,7 @@ Item {
     Text {
         id: windowTitle
 
+        renderType: Text.NativeRendering
         anchors.left: parent.left
         anchors.leftMargin: config.workspaceTitleGap
         anchors.verticalCenter: parent.verticalCenter

@@ -77,6 +77,7 @@ Item {
     }
 
     Text {
+        renderType: Text.NativeRendering
         id: recordingLabel
 
         anchors.centerIn: parent
@@ -286,6 +287,7 @@ Item {
         }
 
         Text {
+            renderType: Text.NativeRendering
             anchors.left: parent.left
             anchors.leftMargin: 38
             anchors.verticalCenter: parent.verticalCenter
@@ -297,6 +299,7 @@ Item {
         }
 
         Text {
+            renderType: Text.NativeRendering
             anchors.right: parent.right
             anchors.rightMargin: 6
             anchors.verticalCenter: parent.verticalCenter

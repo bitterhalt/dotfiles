@@ -185,6 +185,7 @@ Item {
             }
 
             TextInput {
+                renderType: Text.NativeRendering
                 id: searchInput
 
                 anchors.top: parent.top
@@ -239,6 +240,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.fill: searchInput
                 anchors.leftMargin: 18
                 anchors.rightMargin: 18
@@ -277,6 +279,7 @@ Item {
                     color: index === root.selectedIndex ? root.config.borderColor : "transparent"
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.left: parent.left
                         anchors.leftMargin: 14
                         anchors.right: pidLabel.left
@@ -289,6 +292,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         id: pidLabel
 
                         anchors.right: parent.right
@@ -313,6 +317,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.centerIn: resultList
                 visible: root.rows.length === 0
                 color: root.config.muted
@@ -336,6 +341,7 @@ Item {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.fill: parent
                     anchors.leftMargin: 14
                     anchors.rightMargin: 14

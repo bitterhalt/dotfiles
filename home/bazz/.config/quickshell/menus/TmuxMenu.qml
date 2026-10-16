@@ -357,6 +357,7 @@ Item {
                 height: 30
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.left: parent.left
                     anchors.leftMargin: 8
                     anchors.verticalCenter: parent.verticalCenter
@@ -367,6 +368,7 @@ Item {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.right: parent.right
                     anchors.rightMargin: 8
                     anchors.verticalCenter: parent.verticalCenter
@@ -415,6 +417,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.left: parent.left
                         anchors.leftMargin: 44
                         anchors.right: parent.right
@@ -455,6 +458,7 @@ Item {
                         : root.config.borderColor
 
                     TextInput {
+                        renderType: Text.NativeRendering
                         id: sessionInput
 
                         anchors.fill: parent
@@ -473,6 +477,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         anchors.left: parent.left
                         anchors.leftMargin: 10
                         anchors.verticalCenter: parent.verticalCenter
@@ -487,6 +492,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 visible: root.promptError !== ""
                 width: parent.width
                 color: root.config.urgent

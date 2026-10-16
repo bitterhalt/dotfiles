@@ -240,6 +240,7 @@ PanelWindow {
             TranslatorButton {
                 id: swapButton
                 config: root.config
+                iconOnly: true
                 text: "⇄"
                 ToolTip.visible: hovered
                 ToolTip.text: "Swap languages and input/output"
@@ -286,6 +287,7 @@ PanelWindow {
                     clip: true
 
                     TextArea {
+                        renderType: Text.NativeRendering
                         id: sourceInput
                         placeholderText: "Type or paste text…"
                         placeholderTextColor: root.config.muted
@@ -332,6 +334,7 @@ PanelWindow {
                     clip: true
 
                     TextArea {
+                        renderType: Text.NativeRendering
                         id: outputArea
                         text: root.translation
                         placeholderText: root.busy ? "Translating…" : "Translation"
@@ -364,6 +367,7 @@ PanelWindow {
                 spacing: 8
 
                 TextField {
+                    renderType: Text.NativeRendering
                     id: languageSearch
                     width: parent.width
                     height: 34
@@ -416,6 +420,7 @@ PanelWindow {
                         radius: 4
                         color: index === root.pickerIndex ? root.config.borderColor : "transparent"
                         Text {
+                            renderType: Text.NativeRendering
                             anchors.fill: parent
                             anchors.leftMargin: 10
                             anchors.rightMargin: 10
@@ -449,6 +454,7 @@ PanelWindow {
                 color: root.config.borderColor
             }
             Text {
+                renderType: Text.NativeRendering
                 anchors.left: parent.left
                 anchors.leftMargin: 14
                 anchors.right: footerActions.left

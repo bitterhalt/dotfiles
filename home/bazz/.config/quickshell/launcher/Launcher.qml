@@ -741,6 +741,7 @@ Item {
         border.color: edgeColor
 
         Text {
+            renderType: Text.NativeRendering
             id: capText
 
             anchors.centerIn: parent
@@ -815,6 +816,7 @@ Item {
             }
 
             TextInput {
+                renderType: Text.NativeRendering
                 id: searchInput
 
                 anchors.top: parent.top
@@ -934,6 +936,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.left: parent.left
                 anchors.leftMargin: 18
                 anchors.verticalCenter: searchBackground.verticalCenter
@@ -1008,6 +1011,7 @@ Item {
                         spacing: 1
 
                         Text {
+                            renderType: Text.NativeRendering
                             width: parent.width
                             color: root.config.fg
                             font.pointSize: root.config.fontSize(0.96)
@@ -1017,6 +1021,7 @@ Item {
                         }
 
                         Text {
+                            renderType: Text.NativeRendering
                             width: parent.width
                             visible: modelData.type === "timer-active"
                                 || (modelData.subtitle || "") !== ""
@@ -1047,6 +1052,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.top: searchInput.bottom
                 anchors.topMargin: 18
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -1110,6 +1116,7 @@ Item {
                     }
 
                     Text {
+                        renderType: Text.NativeRendering
                         height: root.capHeight
                         verticalAlignment: Text.AlignVCenter
                         color: root.config.muted
@@ -1145,6 +1152,7 @@ Item {
                                 spacing: 5
 
                                 Text {
+                                    renderType: Text.NativeRendering
                                     height: root.capHeight
                                     verticalAlignment: Text.AlignVCenter
                                     color: hint.active ? root.config.accent : root.config.muted

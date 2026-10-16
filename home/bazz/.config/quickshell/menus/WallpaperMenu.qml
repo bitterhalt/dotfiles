@@ -219,6 +219,7 @@ PanelWindow {
             spacing: 8
 
             TextField {
+                renderType: Text.NativeRendering
                 id: search
                 Layout.fillWidth: true
                 Layout.preferredHeight: 34
@@ -301,6 +302,7 @@ PanelWindow {
                         }
 
                         Text {
+                            renderType: Text.NativeRendering
                             anchors.centerIn: parent
                             visible: tile.thumbnail === ""
                             text: "No preview"
@@ -309,6 +311,7 @@ PanelWindow {
                         }
 
                         Text {
+                            renderType: Text.NativeRendering
                             anchors.left: parent.left
                             anchors.right: parent.right
                             anchors.bottom: parent.bottom
@@ -332,6 +335,7 @@ PanelWindow {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.centerIn: parent
                     visible: visibleEntries.count === 0
                     text: scanProcess.running ? "Loading wallpapers…"
@@ -342,6 +346,7 @@ PanelWindow {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 Layout.fillWidth: true
                 text: root.selected ? root.selected.name : root.controller.directory
                 elide: Text.ElideMiddle
@@ -355,11 +360,13 @@ PanelWindow {
                 spacing: 8
 
                 Text {
+                    renderType: Text.NativeRendering
                     text: "Fixed background"
                     color: root.config.fg
                     font.pointSize: root.config.fontSize(0.85)
                 }
                 TextField {
+                    renderType: Text.NativeRendering
                     id: backgroundInput
                     Layout.fillWidth: true
                     Layout.preferredHeight: 32
@@ -380,6 +387,7 @@ PanelWindow {
                     }
                 }
                 Text {
+                    renderType: Text.NativeRendering
                     text: "Enter: apply · Esc: cancel"
                     color: root.config.muted
                     font.pointSize: root.config.fontSize(0.78)
@@ -397,6 +405,7 @@ PanelWindow {
                 Layout.preferredHeight: 30
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     width: Math.max(0, parent.width - actionTips.width - 12)
@@ -442,6 +451,7 @@ PanelWindow {
                                 id: hintRow
                                 spacing: 5
                                 Text {
+                                    renderType: Text.NativeRendering
                                     height: 20
                                     verticalAlignment: Text.AlignVCenter
                                     text: hint.modelData.label
@@ -489,6 +499,7 @@ PanelWindow {
         border.color: edgeColor
 
         Text {
+            renderType: Text.NativeRendering
             id: capText
             anchors.centerIn: parent
             text: parent.label

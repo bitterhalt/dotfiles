@@ -5,6 +5,7 @@ Button {
     id: root
 
     required property var config
+    property bool iconOnly: false
 
     implicitHeight: 30
     implicitWidth: label.implicitWidth + 20
@@ -13,6 +14,7 @@ Button {
     contentItem: Text {
         id: label
 
+        renderType: root.iconOnly ? Text.QtRendering : Text.NativeRendering
         text: root.text
         font.pointSize: root.config.fontSize(0.88)
         color: root.enabled ? root.config.fg : root.config.muted

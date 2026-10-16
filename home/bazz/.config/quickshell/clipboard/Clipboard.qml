@@ -276,6 +276,7 @@ PanelWindow {
             TextInput {
                 id: searchInput
 
+                renderType: Text.NativeRendering
                 anchors.left: parent.left
                 anchors.leftMargin: 18
                 anchors.right: parent.right
@@ -329,6 +330,7 @@ PanelWindow {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.left: searchInput.left
                 anchors.verticalCenter: searchInput.verticalCenter
                 visible: searchInput.text.length === 0
@@ -411,6 +413,7 @@ PanelWindow {
                             spacing: 2
 
                             Text {
+                                renderType: Text.NativeRendering
                                 width: parent.width
                                 color: root.config.fg
                                 font.pointSize: root.config.fontSize(0.88)
@@ -419,6 +422,7 @@ PanelWindow {
                             }
 
                             Text {
+                                renderType: Text.NativeRendering
                                 width: parent.width
                                 color: root.config.muted
                                 font.pointSize: root.config.fontSize(0.70)
@@ -466,6 +470,7 @@ PanelWindow {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.fill: parent
                     anchors.margins: 18
                     visible: root.selectedEntry
@@ -479,6 +484,7 @@ PanelWindow {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.centerIn: parent
                     visible: !root.selectedEntry
                     color: root.config.muted
@@ -512,6 +518,7 @@ PanelWindow {
                 spacing: 8
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.verticalCenter: parent.verticalCenter
                     color: root.config.muted
                     font.pointSize: root.config.fontSize(0.78)
@@ -519,6 +526,7 @@ PanelWindow {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.verticalCenter: parent.verticalCenter
                     color: root.config.muted
                     font.pointSize: root.config.fontSize(0.72)
@@ -527,6 +535,7 @@ PanelWindow {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.right: parent.right
                 anchors.rightMargin: 14
                 anchors.verticalCenter: parent.verticalCenter

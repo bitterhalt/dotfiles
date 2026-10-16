@@ -1,6 +1,7 @@
 import QtQuick
 
 Text {
+    renderType: Text.NativeRendering
     required property var config
 
     color: config.muted

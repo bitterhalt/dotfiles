@@ -261,6 +261,7 @@ Scope {
             border.width: 1
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.centerIn: parent
                 color: root.config.muted
                 font.pointSize: root.config.fontSize(0.78)

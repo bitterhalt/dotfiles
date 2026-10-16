@@ -106,6 +106,7 @@ Rectangle {
         spacing: 2
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             color: root.critical ? root.criticalTextColor : config.muted
             font.pointSize: config.fontSize(0.78)
@@ -114,6 +115,7 @@ Rectangle {
         }
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             color: root.critical ? root.criticalTextColor : config.fg
             font.pointSize: config.fontSize(0.96)
@@ -123,6 +125,7 @@ Rectangle {
         }
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             visible: text.length > 0
             color: root.critical ? root.criticalTextColor : config.fg
@@ -138,6 +141,7 @@ Rectangle {
     }
 
     Text {
+        renderType: Text.NativeRendering
         id: timeText
 
         visible: !root.compact
@@ -219,6 +223,7 @@ Rectangle {
                 color: actionMouse.containsMouse ? config.borderColor : config.surface
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.centerIn: parent
                     width: parent.width - 12
                     horizontalAlignment: Text.AlignHCenter

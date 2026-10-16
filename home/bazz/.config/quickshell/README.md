@@ -128,6 +128,8 @@ Translator: `qs ipc call translator toggle` (also `open` / `close`). Requires `D
 
 Most global values can be adjusted in `Config.qml`.
 
+UI text uses native font rendering; icons and emoji keep Qt's default rendering. Avoid a global `QML_DISABLE_DISTANCEFIELD` override if you want to preserve that split.
+
 Bluetooth battery warnings use the same toast as connection notices, including for mice and keyboards. In `Config.qml`, `bluetoothBatteryWarningPercent` defaults to 20, `bluetoothBatteryCriticalPercent` to 10, and `bluetoothBatteryRearmMargin` to 5. Set a threshold to `0` to disable it; raise it above a connected device's battery level to test. Requires battery data from the device/BlueZ.
 
 For example:

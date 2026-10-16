@@ -80,6 +80,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 8
@@ -115,6 +116,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 8
@@ -125,6 +127,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 8
@@ -218,6 +221,7 @@ Item {
         implicitHeight: 36
 
         Text {
+            renderType: Text.NativeRendering
             anchors.left: parent.left
             anchors.leftMargin: 8
             anchors.verticalCenter: parent.verticalCenter
@@ -238,6 +242,7 @@ Item {
             border.color: input.activeFocus ? row.config.accent : row.config.borderColor
 
             TextInput {
+                renderType: Text.NativeRendering
                 id: input
 
                 anchors.fill: parent
@@ -268,6 +273,7 @@ Item {
     }
 
     component ButtonLabel: Text {
+        renderType: Text.NativeRendering
         required property var config
 
         horizontalAlignment: Text.AlignHCenter

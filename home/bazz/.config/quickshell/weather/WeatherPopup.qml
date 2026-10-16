@@ -59,6 +59,7 @@ Item {
           spacing: 1
 
           Text {
+            renderType: Text.NativeRendering
             width: parent.width
             color: config.fg
             font.pointSize: config.fontSize(1.154)
@@ -71,6 +72,7 @@ Item {
             spacing: 8
 
             Text {
+              renderType: Text.NativeRendering
               color: config.fg
               font.pointSize: config.fontSize(1.846)
               font.weight: Font.DemiBold
@@ -84,12 +86,14 @@ Item {
               spacing: 0
 
               Text {
+                renderType: Text.NativeRendering
                 color: config.muted
                 font.pointSize: config.fontSize(0.923)
                 text: weatherData.data.condition ?? ""
               }
 
               Text {
+                renderType: Text.NativeRendering
                 color: config.muted
                 font.pointSize: config.fontSize(0.846)
                 text: weatherData.data.available
@@ -143,58 +147,46 @@ Item {
         columnSpacing: 10
         rowSpacing: 7
 
-        Text {
-          width: 163
-          color: config.fg
-          font.pointSize: config.fontSize(0.923)
-          text: weatherData.data.available
-          ? `💧  Humidity   ${weatherData.data.humidity}%`
-          : ""
+        WeatherDetail {
+          config: root.config
+          available: weatherData.data.available ?? false
+          icon: "💧"
+          text: `Humidity   ${weatherData.data.humidity}%`
         }
 
-        Text {
-          width: 163
-          color: config.fg
-          font.pointSize: config.fontSize(0.923)
-          text: weatherData.data.available
-          ? `💨  Wind   ${weatherData.data.wind} km/h ${weatherData.data.windDirection}`
-          : ""
+        WeatherDetail {
+          config: root.config
+          available: weatherData.data.available ?? false
+          icon: "💨"
+          text: `Wind   ${weatherData.data.wind} km/h ${weatherData.data.windDirection}`
         }
 
-        Text {
-          width: 163
-          color: config.fg
-          font.pointSize: config.fontSize(0.923)
-          text: weatherData.data.available
-          ? `👀  Visibility   ${weatherData.data.visibility} km`
-          : ""
+        WeatherDetail {
+          config: root.config
+          available: weatherData.data.available ?? false
+          icon: "👀"
+          text: `Visibility   ${weatherData.data.visibility} km`
         }
 
-        Text {
-          width: 163
-          color: config.fg
-          font.pointSize: config.fontSize(0.923)
-          text: weatherData.data.available
-          ? `🌞  UV index   ${weatherData.data.uv}`
-          : ""
+        WeatherDetail {
+          config: root.config
+          available: weatherData.data.available ?? false
+          icon: "🌞"
+          text: `UV index   ${weatherData.data.uv}`
         }
 
-        Text {
-          width: 163
-          color: config.fg
-          font.pointSize: config.fontSize(0.923)
-          text: weatherData.data.available
-          ? `🌅  Sunrise   ${weatherData.data.sunrise}`
-          : ""
+        WeatherDetail {
+          config: root.config
+          available: weatherData.data.available ?? false
+          icon: "🌅"
+          text: `Sunrise   ${weatherData.data.sunrise}`
         }
 
-        Text {
-          width: 163
-          color: config.fg
-          font.pointSize: config.fontSize(0.923)
-          text: weatherData.data.available
-          ? `🌇  Sunset   ${weatherData.data.sunset}`
-          : ""
+        WeatherDetail {
+          config: root.config
+          available: weatherData.data.available ?? false
+          icon: "🌇"
+          text: `Sunset   ${weatherData.data.sunset}`
         }
       }
 
@@ -217,6 +209,7 @@ Item {
         }
 
         Text {
+          renderType: Text.NativeRendering
           anchors.verticalCenter: parent.verticalCenter
           color: config.fg
           font.pointSize: config.fontSize(0.923)
@@ -233,6 +226,7 @@ Item {
       }
 
       Text {
+        renderType: Text.NativeRendering
         color: config.muted
         font.pointSize: config.fontSize(0.846)
         font.weight: Font.DemiBold
@@ -252,6 +246,7 @@ Item {
             height: 25
 
             Text {
+              renderType: Text.NativeRendering
               x: 0
               width: 36
               anchors.verticalCenter: parent.verticalCenter
@@ -272,6 +267,7 @@ Item {
             }
 
             Text {
+              renderType: Text.NativeRendering
               x: 92
               width: 84
               anchors.verticalCenter: parent.verticalCenter
@@ -280,20 +276,60 @@ Item {
               text: `${modelData.high}° / ${modelData.low}°`
             }
 
-            Text {
+            Item {
               x: 250
               width: 70
-
+              height: rainValue.implicitHeight
               anchors.verticalCenter: parent.verticalCenter
-              horizontalAlignment: Text.AlignRight
 
-              color: config.muted
-              font.pointSize: config.fontSize(0.923)
-              text: `🌧 ${modelData.rain}%`
+              Text {
+                anchors.right: rainValue.left
+                anchors.rightMargin: 4
+                anchors.verticalCenter: parent.verticalCenter
+                color: config.muted
+                font.pointSize: config.fontSize(0.923)
+                text: "🌧"
+              }
+
+              Text {
+                id: rainValue
+                renderType: Text.NativeRendering
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                color: config.muted
+                font.pointSize: config.fontSize(0.923)
+                text: `${modelData.rain}%`
+              }
             }
           }
         }
       }
+    }
+  }
+
+  component WeatherDetail: Row {
+    id: detail
+
+    required property var config
+    property bool available: true
+    property string icon: ""
+    property string text: ""
+    width: 163
+    spacing: 8
+
+    Text {
+      anchors.verticalCenter: parent.verticalCenter
+      color: detail.config.fg
+      font.pointSize: detail.config.fontSize(0.923)
+      text: detail.available ? detail.icon : ""
+    }
+
+    Text {
+      renderType: Text.NativeRendering
+      anchors.verticalCenter: parent.verticalCenter
+      color: detail.config.fg
+      font.pointSize: detail.config.fontSize(0.923)
+      text: detail.available ? detail.text : ""
     }
   }
 }

@@ -71,6 +71,7 @@ Item {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     anchors.left: parent.left
                     anchors.leftMargin: 10
                     anchors.verticalCenter: parent.verticalCenter
@@ -168,6 +169,7 @@ Item {
             }
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.left: leading.right
                 anchors.leftMargin: 8
                 anchors.right: arrow.left

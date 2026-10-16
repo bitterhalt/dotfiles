@@ -73,6 +73,7 @@ PopoutPanel {
                 spacing: 0
 
                 Text {
+                    renderType: Text.NativeRendering
                     width: parent.width
                     color: config.fg
                     font.pointSize: config.fontSize(0.92)
@@ -82,6 +83,7 @@ PopoutPanel {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     width: parent.width
                     color: config.muted
                     font.pointSize: config.fontSize(0.77)
@@ -240,6 +242,7 @@ PopoutPanel {
                 spacing: 0
 
                 Text {
+                    renderType: Text.NativeRendering
                     width: parent.width
                     color: config.fg
                     font.pointSize: config.fontSize(0.92)
@@ -249,6 +252,7 @@ PopoutPanel {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     width: parent.width
                     color: config.muted
                     font.pointSize: config.fontSize(0.77)
@@ -367,6 +371,7 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             color: config.muted
@@ -451,6 +456,7 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             x: 36
             width: parent.width - 80
             anchors.verticalCenter: parent.verticalCenter
@@ -462,6 +468,7 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             anchors.right: parent.right
             anchors.rightMargin: 6
             anchors.verticalCenter: parent.verticalCenter
@@ -499,6 +506,7 @@ PopoutPanel {
             height: 28
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width

@@ -64,6 +64,7 @@ PopoutPanel {
         height: 28
 
         Text {
+            renderType: Text.NativeRendering
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             color: root.config.fg
@@ -79,6 +80,7 @@ PopoutPanel {
             visible: !root.passwordMode && !root.actionMode && root.network.wifiDevice !== null
 
             Text {
+                renderType: Text.NativeRendering
                 anchors.verticalCenter: parent.verticalCenter
                 color: root.config.muted
                 font.pointSize: root.config.fontSize(0.85)
@@ -105,6 +107,7 @@ PopoutPanel {
         visible: !root.passwordMode
 
         SectionHeader {
+            renderType: Text.NativeRendering
             config: root.config
             visible: root.network.connectionKind !== "disconnected"
             text: "CONNECTED"
@@ -131,6 +134,7 @@ PopoutPanel {
                 spacing: 0
 
                 Text {
+                    renderType: Text.NativeRendering
                     color: root.config.fg
                     font.pointSize: root.config.fontSize(0.92)
                     font.weight: Font.DemiBold
@@ -138,6 +142,7 @@ PopoutPanel {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     color: root.config.muted
                     font.pointSize: root.config.fontSize(0.77)
                     text: root.network.wiredDevice ? root.network.wiredDevice.name : ""
@@ -174,6 +179,7 @@ PopoutPanel {
                 spacing: 0
 
                 Text {
+                    renderType: Text.NativeRendering
                     width: parent.width
                     color: root.config.fg
                     font.pointSize: root.config.fontSize(0.92)
@@ -183,6 +189,7 @@ PopoutPanel {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     color: root.config.muted
                     font.pointSize: root.config.fontSize(0.77)
                     text: "Connected"
@@ -208,6 +215,7 @@ PopoutPanel {
         }
 
         SectionHeader {
+            renderType: Text.NativeRendering
             config: root.config
             visible: Networking.wifiEnabled && root.network.wifiDevice !== null
             text: "AVAILABLE NETWORKS"
@@ -231,6 +239,7 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             visible: !root.network.wifiDevice
             horizontalAlignment: Text.AlignHCenter
@@ -242,6 +251,7 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             visible: root.network.wifiDevice && !Networking.wifiEnabled
             horizontalAlignment: Text.AlignHCenter
@@ -253,6 +263,7 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             visible: root.network.wifiDevice && Networking.wifiEnabled && root.network.networkRows.length === 0
             horizontalAlignment: Text.AlignHCenter
@@ -275,6 +286,7 @@ PopoutPanel {
         visible: root.actionMode
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             color: root.config.fg
             font.pointSize: root.config.fontSize(0.92)
@@ -284,6 +296,7 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             color: root.config.muted
             font.pointSize: root.config.fontSize(0.77)
             text: parent.selectedNetwork && parent.selectedNetwork.connected ? "Connected" : "Saved network"
@@ -319,6 +332,7 @@ PopoutPanel {
                 }
 
                 contentItem: Text {
+                    renderType: Text.NativeRendering
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     color: root.config.fg
@@ -350,6 +364,7 @@ PopoutPanel {
                 }
 
                 contentItem: Text {
+                    renderType: Text.NativeRendering
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     color: root.config.urgent
@@ -378,6 +393,7 @@ PopoutPanel {
             }
 
             contentItem: Text {
+                renderType: Text.NativeRendering
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 color: root.config.fg
@@ -395,6 +411,7 @@ PopoutPanel {
         visible: root.passwordMode
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             color: root.config.fg
             font.pointSize: root.config.fontSize(0.92)
@@ -404,12 +421,14 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             color: root.config.muted
             font.pointSize: root.config.fontSize(0.77)
             text: "Enter network password"
         }
 
         TextField {
+            renderType: Text.NativeRendering
             id: wifiPassword
 
             width: parent.width
@@ -443,6 +462,7 @@ PopoutPanel {
         }
 
         Text {
+            renderType: Text.NativeRendering
             width: parent.width
             visible: root.errorText !== ""
             color: root.config.urgent
@@ -469,6 +489,7 @@ PopoutPanel {
                 }
 
                 contentItem: Text {
+                    renderType: Text.NativeRendering
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     color: root.config.fg
@@ -503,6 +524,7 @@ PopoutPanel {
                 }
 
                 contentItem: Text {
+                    renderType: Text.NativeRendering
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     color: root.config.fg
