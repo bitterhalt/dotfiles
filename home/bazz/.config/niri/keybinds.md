@@ -62,7 +62,6 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | --- | ------ |
 | `Mod+F1` | System Menu |
 | `Mod+F12` | System Configs |
-| `Mod+N` | Open Notes |
 | `Mod+Shift+W` | Set Wallpaper |
 | `Mod+U` | Install and Mange Packages |
 
