@@ -20,6 +20,7 @@ function deviceRows(nodes, sink, defaultId) {
     result.push({
       id: Number(node.id),
       name: label(node),
+      kind: sink ? "output" : "input",
       active: Number(node.id) === Number(defaultId),
     });
   }
@@ -43,6 +44,7 @@ function playbackStreams(nodes) {
 
     result.push({
       id: Number(node.id),
+      kind: "playback",
       name: String(
         (node.properties && node.properties["application.name"])
         || node.description
@@ -65,4 +67,14 @@ function playbackStreams(nodes) {
   });
 
   return result;
+}
+
+function selectionIndex(rows, key) {
+  if (rows.length === 0) return -1;
+  const index = rows.findIndex(row => String(row.id) === key);
+  return index < 0 ? 0 : index;
+}
+
+function clampVolume(value) {
+  return Math.max(0, Math.min(1.5, value));
 }

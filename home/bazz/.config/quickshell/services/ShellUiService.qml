@@ -11,6 +11,14 @@ Item {
 
     signal weatherActionRequested(string action)
     signal notificationCenterActionRequested(string action)
+    signal audioActionRequested(string action)
+
+    IpcHandler {
+        target: "audio"
+        function toggle(): void { root.audioActionRequested("toggle") }
+        function open(): void { root.audioActionRequested("open") }
+        function close(): void { root.audioActionRequested("close") }
+    }
 
     IpcHandler {
         target: "weather"

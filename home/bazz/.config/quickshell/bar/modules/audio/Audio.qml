@@ -12,9 +12,7 @@ Item {
     required property var barWindow
     required property var popupManager
     required property var volumeOsd
-    property bool showOutputs: false
-    property bool showInputs: false
-    property bool showStreams: false
+    required property var uiService
     readonly property var sink: Pipewire.defaultAudioSink
     readonly property var sinkAudio: sink ? sink.audio : null
     readonly property var source: Pipewire.defaultAudioSource
@@ -55,7 +53,7 @@ Item {
 
     function setOutput(id) {
         var node = nodeForId(id);
-        if (!node)
+        if (!node || !node.audio || node.isStream || !node.isSink)
             return ;
 
         // A default-device change can emit a burst of synthetic volume
@@ -68,10 +66,52 @@ Item {
 
     function setInput(id) {
         var node = nodeForId(id);
-        if (!node)
+        if (!node || !node.audio || node.isStream || node.isSink)
             return ;
 
         Pipewire.preferredDefaultAudioSource = node;
+    }
+
+    function setVolume(id, value) {
+        const node = nodeForId(id);
+        if (!node || !node.audio || !Number.isFinite(value))
+            return;
+        if (volumeOsd)
+            volumeOsd.suppress(600);
+        node.audio.volume = Model.clampVolume(value);
+    }
+
+    function adjustVolume(id, delta) {
+        const node = nodeForId(id);
+        if (node && node.audio)
+            setVolume(id, node.audio.volume + delta);
+    }
+
+    function toggleMute(id) {
+        const node = nodeForId(id);
+        if (!node || !node.audio)
+            return;
+        if (volumeOsd)
+            volumeOsd.suppress(600);
+        node.audio.muted = !node.audio.muted;
+    }
+
+    function closePopup() {
+        popupManager.closeHost("audio");
+    }
+
+    Connections {
+        target: root.uiService
+        function onAudioActionRequested(action) {
+            if (action === "close" || root.barWindow.screen !== root.uiService.targetScreen) {
+                root.closePopup();
+                return;
+            }
+            if (action === "open")
+                root.popupManager.openHost("audio", audioPopupComponent, root, true);
+            else if (action === "toggle")
+                root.popupManager.toggleHost("audio", audioPopupComponent, root, true);
+        }
     }
 
     width: 24
@@ -96,7 +136,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onClicked: (mouse) => {
             if (mouse.button === Qt.LeftButton) {
-                popupManager.toggleHost("audio", audioPopupComponent, root);
+                popupManager.toggleHost("audio", audioPopupComponent, root, true);
             } else if (root.sinkAudio) {
                 if (volumeOsd)
                     volumeOsd.suppress(600);

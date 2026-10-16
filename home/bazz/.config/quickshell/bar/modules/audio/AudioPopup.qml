@@ -1,605 +1,325 @@
-import "../../../components"
-import "Model.js" as Model
+pragma ComponentBehavior: Bound
+
 import QtQuick
-import QtQuick.Controls
-import Quickshell.Services.Pipewire
+import "../../../components"
 
 PopoutPanel {
     id: root
 
     required property var audioItem
-
     config: audioItem.config
-    contentWidth: 300
-    Component.onDestruction: {
-        audioItem.showOutputs = false;
-        audioItem.showInputs = false;
-        audioItem.showStreams = false;
+    contentWidth: Math.min(440, audioItem.barWindow.screen
+        ? audioItem.barWindow.screen.width - config.popupGap * 2 : 440)
+    padding: 12
+    readonly property int chromeHeight: 98
+    readonly property real desiredBodyHeight: popupState.helpOpen ? helpRows.implicitHeight
+        : popupState.contextOpen ? optionRows.implicitHeight
+        : Math.max(76, popupState.rows.length * 80 - 4)
+    readonly property real maximumBodyHeight: Math.max(76, Math.min(396,
+        root.audioItem.barWindow.screen
+            ? root.audioItem.barWindow.screen.height - root.config.popupGap - root.padding * 2 - chromeHeight - 24
+            : 396))
+
+    AudioPopupState {
+        id: popupState
+        objectName: "audioPopupState"
+        audioItem: root.audioItem
+        onCloseRequested: root.audioItem.closePopup()
+        onSelectionMoved: Qt.callLater(() => {
+            if (popupState.selectedIndex >= 0)
+                rowsView.positionViewAtIndex(popupState.selectedIndex, ListView.Contain);
+        })
     }
 
-    // ----------------------------------------------------------
-    // Output volume
-    // ----------------------------------------------------------
-    Column {
+    FocusScope {
+        id: keyboardHandler
+        objectName: "audioKeyboard"
         width: parent.width
-        spacing: 7
+        height: root.chromeHeight + Math.min(root.desiredBodyHeight, root.maximumBodyHeight)
+        focus: true
+        Component.onCompleted: Qt.callLater(() => forceActiveFocus())
+        Keys.onPressed: event => {
+            if (popupState.handleKey(event.key, event.modifiers, event.text))
+                event.accepted = true;
+        }
 
         Item {
-            width: parent.width
-            height: 38
-
-            HoverHandler {
-                id: outputHover
-            }
-
-            Rectangle {
-                anchors.fill: parent
-                radius: 3
-                color: outputHover.hovered ? config.borderColor : "transparent"
-            }
-
-            Item {
-                width: 26
-                height: parent.height
-
-                Text {
-                    anchors.centerIn: parent
-                    color: config.fg
-                    opacity: audioItem.muted ? 0.5 : 1
-                    font.family: config.iconFontFamily
-                    font.pointSize: config.iconSize
-                    text: audioItem.icon
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        if (audioItem.sinkAudio) {
-                            if (audioItem.volumeOsd)
-                                audioItem.volumeOsd.suppress(600);
-
-                            audioItem.sinkAudio.muted = !audioItem.sinkAudio.muted;
-                        }
-                    }
-                }
-
-            }
-
-            Column {
-                x: 36
-                width: parent.width - 42
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 0
-
-                Text {
-                    renderType: Text.NativeRendering
-                    width: parent.width
-                    color: config.fg
-                    font.pointSize: config.fontSize(0.92)
-                    font.weight: Font.DemiBold
-                    elide: Text.ElideRight
-                    text: "Output"
-                }
-
-                Text {
-                    renderType: Text.NativeRendering
-                    width: parent.width
-                    color: config.muted
-                    font.pointSize: config.fontSize(0.77)
-                    elide: Text.ElideRight
-                    text: audioItem.sink ? Model.label(audioItem.sink) : "No output device"
-                }
-
-            }
-
-            MouseArea {
-                id: outputDeviceMouse
-
-                anchors.fill: parent
-                anchors.leftMargin: 30
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    audioItem.showOutputs = !audioItem.showOutputs;
-                    if (audioItem.showOutputs) {
-                        audioItem.showInputs = false;
-                        audioItem.showStreams = false;
-                    }
-                }
-            }
-
-        }
-
-        Slider {
-            id: outputSlider
-
-            width: parent.width
-            height: 18
-            from: 0
-            to: 1.5
-            stepSize: 0.01
-            enabled: audioItem.sinkAudio !== null
-            value: audioItem.sinkAudio ? audioItem.sinkAudio.volume : 0
-            onMoved: {
-                if (audioItem.sinkAudio) {
-                    if (audioItem.volumeOsd)
-                        audioItem.volumeOsd.suppress(600);
-
-                    audioItem.sinkAudio.volume = value;
-                }
-            }
-
-            background: Rectangle {
-                x: outputSlider.leftPadding
-                y: outputSlider.topPadding + outputSlider.availableHeight / 2 - height / 2
-                width: outputSlider.availableWidth
-                height: 4
-                radius: 2
-                color: config.borderColor
-
-                Rectangle {
-                    width: outputSlider.visualPosition * parent.width
-                    height: parent.height
-                    radius: parent.radius
-                    color: config.accent
-                }
-
-            }
-
-            handle: Rectangle {
-                x: outputSlider.leftPadding + outputSlider.visualPosition * (outputSlider.availableWidth - width)
-                y: outputSlider.topPadding + outputSlider.availableHeight / 2 - height / 2
-                width: 12
-                height: 12
-                radius: 6
-                color: outputSlider.pressed ? config.fg : config.accent
-            }
-
-        }
-
-    }
-
-    Column {
-        width: parent.width
-        spacing: 2
-        visible: audioItem.showOutputs
-
-        Repeater {
-            model: audioItem.outputRows
-
-            delegate: DeviceRow {
-                required property var modelData
-
-                width: parent ? parent.width : 0
-                config: audioItem.config
-                row: modelData
-                icon: "󰓃"
-                onActivated: {
-                    audioItem.setOutput(modelData.id);
-                    audioItem.showOutputs = false;
-                }
-            }
-
-        }
-
-    }
-
-    PanelSeparator {
-        config: audioItem.config
-    }
-
-    // ----------------------------------------------------------
-    // Input volume and device
-    // ----------------------------------------------------------
-    Column {
-        width: parent.width
-        spacing: 7
-
-        Item {
-            width: parent.width
-            height: 38
-
-            HoverHandler {
-                id: inputHover
-            }
-
-            Rectangle {
-                anchors.fill: parent
-                radius: 3
-                color: inputHover.hovered ? config.borderColor : "transparent"
-            }
-
-            Item {
-                width: 26
-                height: parent.height
-
-                Text {
-                    anchors.centerIn: parent
-                    color: config.fg
-                    opacity: audioItem.sourceAudio && audioItem.sourceAudio.muted ? 0.5 : 1
-                    font.family: config.iconFontFamily
-                    font.pointSize: config.iconSize
-                    text: audioItem.sourceAudio && audioItem.sourceAudio.muted ? "󰍭" : "󰍬"
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        if (audioItem.sourceAudio)
-                            audioItem.sourceAudio.muted = !audioItem.sourceAudio.muted;
-
-                    }
-                }
-
-            }
-
-            Column {
-                x: 36
-                width: parent.width - 42
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 0
-
-                Text {
-                    renderType: Text.NativeRendering
-                    width: parent.width
-                    color: config.fg
-                    font.pointSize: config.fontSize(0.92)
-                    font.weight: Font.DemiBold
-                    elide: Text.ElideRight
-                    text: "Microphone"
-                }
-
-                Text {
-                    renderType: Text.NativeRendering
-                    width: parent.width
-                    color: config.muted
-                    font.pointSize: config.fontSize(0.77)
-                    elide: Text.ElideRight
-                    text: audioItem.source ? Model.label(audioItem.source) : "No input device"
-                }
-
-            }
-
-            MouseArea {
-                id: inputDeviceMouse
-
-                anchors.fill: parent
-                anchors.leftMargin: 30
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    audioItem.showInputs = !audioItem.showInputs;
-                    if (audioItem.showInputs) {
-                        audioItem.showOutputs = false;
-                        audioItem.showStreams = false;
-                    }
-                }
-            }
-
-        }
-
-        Slider {
-            id: inputSlider
-
-            width: parent.width
-            height: 18
-            from: 0
-            to: 1.5
-            stepSize: 0.01
-            enabled: audioItem.sourceAudio !== null
-            value: audioItem.sourceAudio ? audioItem.sourceAudio.volume : 0
-            onMoved: {
-                if (audioItem.sourceAudio)
-                    audioItem.sourceAudio.volume = value;
-
-            }
-
-            background: Rectangle {
-                x: inputSlider.leftPadding
-                y: inputSlider.topPadding + inputSlider.availableHeight / 2 - height / 2
-                width: inputSlider.availableWidth
-                height: 4
-                radius: 2
-                color: config.borderColor
-
-                Rectangle {
-                    width: inputSlider.visualPosition * parent.width
-                    height: parent.height
-                    radius: parent.radius
-                    color: config.accent
-                }
-
-            }
-
-            handle: Rectangle {
-                x: inputSlider.leftPadding + inputSlider.visualPosition * (inputSlider.availableWidth - width)
-                y: inputSlider.topPadding + inputSlider.availableHeight / 2 - height / 2
-                width: 12
-                height: 12
-                radius: 6
-                color: inputSlider.pressed ? config.fg : config.accent
-            }
-
-        }
-
-    }
-
-    Column {
-        width: parent.width
-        spacing: 2
-        visible: audioItem.showInputs
-
-        Repeater {
-            model: audioItem.inputRows
-
-            delegate: DeviceRow {
-                required property var modelData
-
-                width: parent ? parent.width : 0
-                config: audioItem.config
-                row: modelData
-                icon: "󰍬"
-                onActivated: {
-                    audioItem.setInput(modelData.id);
-                    audioItem.showInputs = false;
-                }
-            }
-
-        }
-
-    }
-
-    // ----------------------------------------------------------
-    // Application streams
-    // ----------------------------------------------------------
-    PanelSeparator {
-        config: audioItem.config
-        visible: audioItem.streamRows.length > 0
-    }
-
-    Item {
-        width: parent.width
-        height: audioItem.streamRows.length > 0 ? 28 : 0
-        visible: height > 0
-
-        Rectangle {
-            anchors.fill: parent
-            radius: 3
-            color: applicationsMouse.containsMouse ? config.borderColor : "transparent"
-        }
-
-        Text {
-            renderType: Text.NativeRendering
+            id: header
             anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            color: config.muted
-            font.pointSize: config.fontSize(0.77)
-            font.weight: Font.DemiBold
-            text: "APPLICATIONS"
-        }
-
-        Text {
             anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            color: config.muted
-            font.family: config.iconFontFamily
-            font.pointSize: config.iconSize
-            text: audioItem.showStreams ? "󰅀" : "󰅂"
-        }
-
-        MouseArea {
-            id: applicationsMouse
-
-            anchors.fill: parent
-            hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
-            onClicked: {
-                audioItem.showStreams = !audioItem.showStreams;
-                if (audioItem.showStreams) {
-                    audioItem.showOutputs = false;
-                    audioItem.showInputs = false;
-                }
-            }
-        }
-
-    }
-
-    Column {
-        width: parent.width
-        spacing: 8
-        visible: audioItem.showStreams
-
-        Repeater {
-            model: audioItem.streamRows
-
-            delegate: StreamRow {
-                required property var modelData
-
-                width: parent ? parent.width : 0
-                config: audioItem.config
-                node: audioItem.nodeForId(modelData.id)
-                name: modelData.name
-                media: modelData.media
-                volumeOsd: audioItem.volumeOsd
-            }
-
-        }
-
-    }
-
-    component DeviceRow: Item {
-        id: deviceRow
-
-        required property var config
-        required property var row
-        property string icon: ""
-
-        signal activated()
-
-        implicitHeight: 38
-
-        Rectangle {
-            anchors.fill: parent
-            radius: 3
-            color: rowMouse.containsMouse ? deviceRow.config.borderColor : "transparent"
-        }
-
-        Text {
-            x: 6
-            anchors.verticalCenter: parent.verticalCenter
-            color: deviceRow.row.active ? deviceRow.config.accent : deviceRow.config.fg
-            font.family: deviceRow.config.iconFontFamily
-            font.pointSize: deviceRow.config.iconSize
-            text: deviceRow.icon
-        }
-
-        Text {
-            renderType: Text.NativeRendering
-            x: 36
-            width: parent.width - 80
-            anchors.verticalCenter: parent.verticalCenter
-            color: deviceRow.config.fg
-            font.pointSize: deviceRow.config.fontSize(0.88)
-            font.weight: deviceRow.row.active ? Font.DemiBold : Font.Normal
-            elide: Text.ElideRight
-            text: deviceRow.row.name
-        }
-
-        Text {
-            renderType: Text.NativeRendering
-            anchors.right: parent.right
-            anchors.rightMargin: 6
-            anchors.verticalCenter: parent.verticalCenter
-            visible: deviceRow.row.active
-            color: deviceRow.config.muted
-            font.pointSize: deviceRow.config.fontSize(0.72)
-            text: "Default"
-        }
-
-        MouseArea {
-            id: rowMouse
-
-            anchors.fill: parent
-            hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
-            onClicked: deviceRow.activated()
-        }
-
-    }
-
-    component StreamRow: Column {
-        id: streamRow
-
-        required property var config
-        required property var node
-        required property var volumeOsd
-        property string name: ""
-        property string media: ""
-        readonly property var nodeAudio: node && node.audio ? node.audio : null
-
-        spacing: 4
-
-        Item {
-            width: parent.width
             height: 28
 
             Text {
                 renderType: Text.NativeRendering
                 anchors.left: parent.left
+                anchors.leftMargin: 6
+                anchors.right: helpHint.left
+                anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
-                width: parent.width
-                color: streamRow.config.fg
-                font.pointSize: streamRow.config.fontSize(0.85)
+                text: popupState.title
                 elide: Text.ElideRight
-                text: streamRow.media !== "" ? `${streamRow.name} — ${streamRow.media}` : streamRow.name
+                color: root.config.fg
+                font.pointSize: root.config.fontSize(0.94)
+                font.weight: Font.DemiBold
             }
-
-        }
-
-        Row {
-            width: parent.width
-            height: 18
-            spacing: 8
-
-            Item {
-                width: 20
-                height: parent.height
-
-                Text {
-                    anchors.centerIn: parent
-                    color: streamRow.config.fg
-                    opacity: streamRow.nodeAudio && streamRow.nodeAudio.muted ? 0.5 : 1
-                    font.family: streamRow.config.iconFontFamily
-                    font.pointSize: streamRow.config.iconSize
-                    text: streamRow.nodeAudio && streamRow.nodeAudio.muted ? "󰝟" : "󰕾"
-                }
-
+            Text {
+                id: helpHint
+                renderType: Text.NativeRendering
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                anchors.verticalCenter: parent.verticalCenter
+                text: popupState.contextOpen || popupState.helpOpen
+                    ? "Esc Back" : "? Help · Esc Close"
+                color: helpMouse.containsMouse ? root.config.fg : root.config.muted
+                font.pointSize: root.config.fontSize(0.74)
                 MouseArea {
+                    id: helpMouse
                     anchors.fill: parent
+                    hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
-                        if (streamRow.nodeAudio) {
-                            if (streamRow.volumeOsd)
-                                streamRow.volumeOsd.suppress(600);
+                        keyboardHandler.forceActiveFocus();
+                        if (popupState.contextOpen || popupState.helpOpen)
+                            popupState.goBack();
+                        else
+                            popupState.helpOpen = true;
+                    }
+                }
+            }
+        }
 
-                            streamRow.nodeAudio.muted = !streamRow.nodeAudio.muted;
+        Item {
+            id: content
+            anchors.top: header.bottom
+            anchors.topMargin: 6
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: status.top
+            anchors.bottomMargin: 6
+
+            ListView {
+                id: rowsView
+                objectName: "audioRows"
+                anchors.fill: parent
+                visible: !popupState.contextOpen && !popupState.helpOpen
+                clip: true
+                spacing: 4
+                model: popupState.rows
+                keyNavigationEnabled: false
+                cacheBuffer: 80
+                delegate: AudioVolumeRow {
+                    id: entry
+                    required property var modelData
+                    required property int index
+                    width: rowsView.width
+                    height: 76
+                    config: root.config
+                    row: entry.modelData
+                    node: root.audioItem.nodeForId(entry.modelData.id)
+                    selected: entry.index === popupState.selectedIndex
+                    onPicked: {
+                        popupState.selectRow(entry.index);
+                        keyboardHandler.forceActiveFocus();
+                    }
+                    onOptionsRequested: {
+                        popupState.selectRow(entry.index);
+                        popupState.activateSelected();
+                        keyboardHandler.forceActiveFocus();
+                    }
+                    onMuteRequested: root.audioItem.toggleMute(entry.modelData.id)
+                    onVolumeRequested: value => root.audioItem.setVolume(entry.modelData.id, value)
+                }
+                Text {
+                    renderType: Text.NativeRendering
+                    anchors.centerIn: parent
+                    visible: popupState.rows.length === 0
+                    text: popupState.tabIndex === 2 ? "No playback streams"
+                        : popupState.tabIndex === 1
+                            ? "No input devices" : "No output devices"
+                    color: root.config.muted
+                    font.pointSize: root.config.fontSize(0.86)
+                }
+            }
+
+            Column {
+                id: optionRows
+                anchors.left: parent.left
+                anchors.right: parent.right
+                spacing: 4
+                visible: popupState.contextOpen && !popupState.helpOpen
+                Repeater {
+                    model: popupState.contextActions
+                    delegate: ChoiceRow {
+                        required property var modelData
+                        required property int index
+                        width: parent.width
+                        height: 40
+                        config: root.config
+                        title: modelData.name
+                        selected: index === popupState.contextIndex
+                        onActivated: {
+                            popupState.contextIndex = index;
+                            popupState.activateSelected();
+                            keyboardHandler.forceActiveFocus();
                         }
                     }
                 }
-
             }
 
-            Slider {
-                id: streamSlider
-
-                width: parent.width - 28
-                height: parent.height
-                from: 0
-                to: 1.5
-                stepSize: 0.01
-                enabled: streamRow.nodeAudio !== null
-                value: streamRow.nodeAudio ? streamRow.nodeAudio.volume : 0
-                onMoved: {
-                    if (streamRow.nodeAudio) {
-                        if (streamRow.volumeOsd)
-                            streamRow.volumeOsd.suppress(600);
-
-                        streamRow.nodeAudio.volume = value;
+            Column {
+                id: helpRows
+                anchors.left: parent.left
+                anchors.right: parent.right
+                spacing: 8
+                visible: popupState.helpOpen
+                Repeater {
+                    model: [
+                        {name: "Select row", key: "↑ / ↓   k / j"},
+                        {name: "Adjust volume", key: "← / →   h / l"},
+                        {name: "Toggle mute", key: "m"},
+                        {name: "Set default output / input", key: "d"},
+                        {name: "Open options", key: "Enter / c"},
+                        {name: "Previous tab", key: "Shift+Tab / H"},
+                        {name: "Next tab", key: "Tab / L"},
+                        {name: "Show / hide help", key: "?"},
+                        {name: "Back / close", key: "Esc"}
+                    ]
+                    delegate: Item {
+                        id: helpRow
+                        required property var modelData
+                        width: parent.width
+                        height: 20
+                        Text {
+                            renderType: Text.NativeRendering
+                            anchors.left: parent.left
+                            anchors.leftMargin: 6
+                            text: helpRow.modelData.name
+                            color: root.config.fg
+                            font.pointSize: root.config.fontSize(0.8)
+                        }
+                        Text {
+                            renderType: Text.NativeRendering
+                            anchors.right: parent.right
+                            anchors.rightMargin: 6
+                            text: helpRow.modelData.key
+                            color: root.config.muted
+                            font.pointSize: root.config.fontSize(0.78)
+                        }
                     }
                 }
-
-                background: Rectangle {
-                    x: streamSlider.leftPadding
-                    y: streamSlider.topPadding + streamSlider.availableHeight / 2 - height / 2
-                    width: streamSlider.availableWidth
-                    height: 4
-                    radius: 2
-                    color: streamRow.config.borderColor
-
-                    Rectangle {
-                        width: streamSlider.visualPosition * parent.width
-                        height: parent.height
-                        radius: parent.radius
-                        color: streamRow.config.accent
-                    }
-
-                }
-
-                handle: Rectangle {
-                    x: streamSlider.leftPadding + streamSlider.visualPosition * (streamSlider.availableWidth - width)
-                    y: streamSlider.topPadding + streamSlider.availableHeight / 2 - height / 2
-                    width: 10
-                    height: 10
-                    radius: 5
-                    color: streamSlider.pressed ? streamRow.config.fg : streamRow.config.accent
-                }
-
             }
-
         }
 
+        Text {
+            id: status
+            renderType: Text.NativeRendering
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: footer.top
+            anchors.bottomMargin: 6
+            height: 20
+            text: popupState.helpOpen ? "Volume range: 0–150% · keyboard step: 5%"
+                : popupState.selectedRow && popupState.selectedRow.kind !== "playback" && !popupState.selectedRow.active
+                    ? "← → Volume · m Mute · d Default · Enter Options"
+                    : "← → Volume · m Mute · Enter Options"
+            color: root.config.muted
+            font.pointSize: root.config.fontSize(0.72)
+            elide: Text.ElideRight
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        Item {
+            id: footer
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            height: 32
+
+            Rectangle {
+                anchors.top: parent.top
+                width: parent.width
+                height: 1
+                color: root.config.borderColor
+            }
+            Row {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                Repeater {
+                    model: popupState.tabs
+                    delegate: Item {
+                        id: tab
+                        required property string modelData
+                        required property int index
+                        width: parent.width / popupState.tabs.length
+                        height: 26
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: 2
+                            radius: 4
+                            color: tabMouse.containsMouse || popupState.tabIndex === tab.index
+                                ? root.config.borderColor : "transparent"
+                        }
+                        Text {
+                            renderType: Text.NativeRendering
+                            anchors.centerIn: parent
+                            text: tab.modelData
+                            color: popupState.tabIndex === tab.index ? root.config.accent : root.config.muted
+                            font.pointSize: root.config.fontSize(0.82)
+                            font.weight: popupState.tabIndex === tab.index ? Font.DemiBold : Font.Normal
+                        }
+                        MouseArea {
+                            id: tabMouse
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                popupState.setTab(tab.index);
+                                keyboardHandler.forceActiveFocus();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
+    component ChoiceRow: Item {
+        id: choice
+        required property var config
+        property string title: ""
+        property bool selected: false
+        signal activated()
+        height: 50
+
+        Rectangle {
+            anchors.fill: parent
+            radius: 4
+            color: choiceMouse.containsMouse || choice.selected ? choice.config.borderColor : "transparent"
+            border.width: 1
+            border.color: choice.selected ? choice.config.accent : "transparent"
+        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 8
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 2
+            Text {
+                renderType: Text.NativeRendering
+                width: parent.width
+                text: choice.title
+                color: choice.config.fg
+                font.pointSize: choice.config.fontSize(0.88)
+                elide: Text.ElideRight
+            }
+        }
+        MouseArea {
+            id: choiceMouse
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: choice.activated()
+        }
+    }
 }

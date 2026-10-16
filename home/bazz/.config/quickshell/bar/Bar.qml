@@ -135,6 +135,7 @@ PanelWindow {
             barWindow: barWindow
             popupManager: popupManager
             volumeOsd: barWindow.volumeOsd
+            uiService: barWindow.uiService
         }
 
         Idle {

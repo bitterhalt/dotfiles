@@ -6,6 +6,7 @@ A personal [QuickShell](https://quickshell.org/) desktop shell for **Niri + Wayl
 
 - Per-screen bar with workspaces, window title, clock, weather, battery, and system tray
 - Network, Bluetooth, and PipeWire audio controls
+- Keyboard-driven audio tabs: Outputs, Inputs, and Playback
 - Notifications, history, and do-not-disturb mode
 - Bluetooth connection and low-battery alerts
 - Application launcher with file search, calculator, run, emoji, and timer modes
@@ -30,7 +31,12 @@ quickshell/
 │       ├── audio/
 │       │   ├── Audio.qml
 │       │   ├── AudioPopup.qml
-│       │   └── Model.js
+│       │   ├── AudioPopupState.qml
+│       │   ├── AudioVolumeRow.qml
+│       │   ├── Model.js
+│       │   └── tests/
+│       │       ├── AudioFixture.qml
+│       │       └── tst_audio.qml
 │       ├── battery/
 │       │   └── Battery.qml
 │       ├── bluetooth/
@@ -147,6 +153,5 @@ This shell was developed with LLM assistance under my supervision. I direct the 
 
 ## TODO
 
-- [ ] Make all bar popups keyboard-driven = BT, Network, Audio
-- [ ] Add audio popup more features from wiremix = Tab layout with proper arrow and tab navication. Tabs = [Outputs] [Inputs] [Config to disable/enable devices]
+- [ ] Make remaining bar popups keyboard-driven: Bluetooth and Network
 - [ ] Weather widget looks overhaul = At the moment it's just copy of Waybar tooltip so it need some makeup
