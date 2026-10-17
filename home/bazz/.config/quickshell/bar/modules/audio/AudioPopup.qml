@@ -89,7 +89,7 @@ PopoutPanel {
                 anchors.rightMargin: 6
                 anchors.verticalCenter: parent.verticalCenter
                 text: popupState.contextOpen || popupState.helpOpen || popupState.profileCardKey !== ""
-                    ? "Esc Back" : "? Help · Esc Close"
+                    ? "Esc Back" : "? Help"
                 color: helpMouse.containsMouse ? root.config.fg : root.config.muted
                 font.pointSize: root.config.fontSize(0.74)
                 MouseArea {
@@ -226,7 +226,6 @@ PopoutPanel {
                         {name: "Toggle mute", key: "m"},
                         {name: "Set default output / input", key: "d"},
                         {name: "Open options", key: "Enter / c"},
-                        {name: "Refresh Config", key: "r"},
                         {name: "Previous tab", key: "Shift+Tab / H"},
                         {name: "Next tab", key: "Tab / L"},
                         {name: "Show / hide help", key: "?"},
@@ -271,7 +270,7 @@ PopoutPanel {
                     ? (popupState.profiles && (popupState.profiles.errorText
                         || (popupState.profiles.changing ? "Applying profile…" : "")
                         || (popupState.profiles.loading ? "Loading cards…" : "")))
-                        || (popupState.profileCardKey !== "" ? "Enter Apply profile · Esc Back" : "Enter Profiles · r Refresh")
+                        || (popupState.profileCardKey !== "" ? "Enter Apply profile · Esc Back" : "Enter Profiles")
                 : popupState.selectedRow && popupState.selectedRow.kind !== "playback" && !popupState.selectedRow.active
                     ? "← → Volume · m Mute · d Default · Enter Options"
                     : "← → Volume · m Mute · Enter Options"

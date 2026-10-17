@@ -36,7 +36,9 @@ Item {
         visible: root.selected
     }
 
-    HoverHandler { id: rowHover }
+    HoverHandler {
+        id: rowHover
+    }
 
     MouseArea {
         id: rowMouse
@@ -79,7 +81,8 @@ Item {
         renderType: Text.NativeRendering
         x: 38
         y: 6
-        width: Math.max(0, parent.width - x - (defaultLabel.visible ? defaultLabel.width + 18 : 8))
+        width: Math.max(0, Math.min(slider.width,
+            parent.width - x - (defaultLabel.visible ? defaultLabel.width + 18 : 8)))
         color: rowHover.hovered ? Qt.lighter(root.config.fg, 1.15) : root.config.fg
         font.pointSize: root.config.fontSize(0.9)
         font.weight: root.selected ? Font.DemiBold : Font.Normal
@@ -129,9 +132,9 @@ Item {
         enabled: root.nodeAudio !== null
         value: root.nodeAudio ? root.nodeAudio.volume : 0
         onPressedChanged: {
-            if (pressed) {
+            if (pressed)
                 root.picked();
-            }
+
         }
         onMoved: root.volumeRequested(value)
 
