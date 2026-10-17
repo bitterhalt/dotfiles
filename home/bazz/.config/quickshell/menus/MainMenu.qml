@@ -108,6 +108,7 @@ Item {
         page = name
         menuScreen = screen || targetScreen
         selectedIndex = 0
+        menuCard.prepareLayout()
         menuWindow.visible = true
         Qt.callLater(() => keyboardHandler.forceActiveFocus())
     }
@@ -128,6 +129,7 @@ Item {
         if (page === "monitor") {
             page = "system"
             selectedIndex = 0
+            menuCard.prepareLayout()
             return
         }
 
@@ -185,6 +187,7 @@ Item {
         if (item.page) {
             page = item.page
             selectedIndex = 0
+            menuCard.prepareLayout()
             return
         }
 
@@ -230,7 +233,7 @@ Item {
         implicitHeight: menuCard.implicitHeight
         margins.top: root.config.popupGap
         margins.left: screen
-            ? Math.max(0, Math.round((screen.width - width) / 2)) : 0
+            ? Math.max(0, Math.round((screen.width - menuCard.implicitWidth) / 2)) : 0
 
         visible: false
         color: "transparent"

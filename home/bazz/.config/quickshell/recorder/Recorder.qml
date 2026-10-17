@@ -24,6 +24,7 @@ Item {
 
     function openMenu(): void {
         selectedIndex = 0
+        menuCard.prepareLayout()
         recorderMenu.visible = true
         Qt.callLater(() => keyboardHandler.forceActiveFocus())
     }
@@ -129,7 +130,7 @@ Item {
         implicitHeight: menuCard.implicitHeight
         margins.top: root.config.popupGap
         margins.left: root.barWindow.screen
-            ? Math.max(0, Math.round((root.barWindow.screen.width - width) / 2)) : 0
+            ? Math.max(0, Math.round((root.barWindow.screen.width - menuCard.implicitWidth) / 2)) : 0
 
         visible: false
         color: "transparent"
@@ -228,7 +229,7 @@ Item {
                 label: "Stop"
                 keyHint: "s"
                 visible: root.runningNow
-                height: visible ? 32 : 0
+                height: root.runningNow ? 32 : 0
                 onTriggered: root.stop()
             }
         }

@@ -9,6 +9,10 @@ Item {
     property int spacing: 8
     default property alias contentData: panelContent.data
 
+    function prepareLayout() {
+        panelContent.forceLayout()
+    }
+
     implicitWidth: contentWidth
     implicitHeight: panelContent.implicitHeight + padding * 2
     width: implicitWidth

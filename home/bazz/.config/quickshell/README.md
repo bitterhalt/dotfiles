@@ -72,7 +72,9 @@ quickshell/
 │   ├── PopupCatcher.qml
 │   ├── PopupManager.qml
 │   ├── SectionHeader.qml
-│   └── ToggleSwitch.qml
+│   ├── ToggleSwitch.qml
+│   └── tests/
+│       └── tst_popoutpanel.qml
 ├── launcher/
 │   ├── Emoji.js
 │   ├── Launcher.qml
