@@ -16,7 +16,7 @@ Item {
     signal volumeRequested(real value)
 
     objectName: "audioVolumeRow"
-    implicitHeight: 76
+    implicitHeight: 60
 
     FontMetrics {
         id: volumeMetrics
@@ -25,10 +25,18 @@ Item {
     }
 
     Rectangle {
-        anchors.fill: parent
-        radius: 4
-        color: rowMouse.containsMouse || root.selected ? root.config.borderColor : "transparent"
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.topMargin: 6
+        anchors.bottomMargin: 6
+        width: 2
+        radius: 1
+        color: root.config.accent
+        visible: root.selected
     }
+
+    HoverHandler { id: rowHover }
 
     MouseArea {
         id: rowMouse
@@ -42,13 +50,13 @@ Item {
 
     Item {
         x: 6
-        y: 6
+        y: 3
         width: 26
         height: 28
 
         Text {
             anchors.centerIn: parent
-            color: root.config.fg
+            color: rowHover.hovered ? Qt.lighter(root.config.fg, 1.15) : root.config.fg
             opacity: root.nodeAudio && root.nodeAudio.muted ? 0.5 : 1
             font.family: root.config.iconFontFamily
             font.pointSize: root.config.iconSize
@@ -70,11 +78,11 @@ Item {
     Text {
         renderType: Text.NativeRendering
         x: 38
-        y: 8
+        y: 6
         width: Math.max(0, parent.width - x - (defaultLabel.visible ? defaultLabel.width + 18 : 8))
-        color: root.config.fg
+        color: rowHover.hovered ? Qt.lighter(root.config.fg, 1.15) : root.config.fg
         font.pointSize: root.config.fontSize(0.9)
-        font.weight: root.row.active ? Font.DemiBold : Font.Normal
+        font.weight: root.selected ? Font.DemiBold : Font.Normal
         elide: Text.ElideRight
         text: root.row.name
     }
@@ -85,7 +93,7 @@ Item {
         renderType: Text.NativeRendering
         anchors.right: parent.right
         anchors.rightMargin: 8
-        y: 9
+        y: 7
         visible: !!root.row.active
         text: "Default"
         color: root.config.accent
@@ -95,7 +103,7 @@ Item {
     Text {
         renderType: Text.NativeRendering
         x: 38
-        y: 29
+        y: 24
         width: parent.width - x - 8
         color: root.config.muted
         font.pointSize: root.config.fontSize(0.75)
@@ -112,7 +120,7 @@ Item {
         anchors.right: volumeText.left
         anchors.rightMargin: 8
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 6
+        anchors.bottomMargin: 4
         height: 18
         from: 0
         to: 1.5
@@ -133,9 +141,7 @@ Item {
             width: slider.availableWidth
             height: 4
             radius: 2
-            color: root.selected || rowMouse.containsMouse
-                ? root.config.bg
-                : root.config.borderColor
+            color: root.config.muted
 
             Rectangle {
                 width: slider.visualPosition * parent.width

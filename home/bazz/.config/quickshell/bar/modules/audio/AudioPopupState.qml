@@ -5,8 +5,12 @@ Item {
     id: root
 
     required property var audioItem
-    readonly property var tabs: ["Outputs", "Inputs", "Playback"]
+    property var profiles: null
+    readonly property var tabs: ["Outputs", "Inputs", "Playback", "Config"]
     property int tabIndex: 0
+    property string profileCardKey: ""
+    readonly property var profileCard: profiles && profileCardKey !== ""
+        ? profiles.cards.find(card => card.id === profileCardKey) || null : null
     property string selectedKey: ""
     property bool contextOpen: false
     property int contextIndex: 0
@@ -16,17 +20,28 @@ Item {
             return audioItem.outputRows;
         if (tabIndex === 1)
             return audioItem.inputRows;
-        return audioItem.streamRows;
+        if (tabIndex === 2)
+            return audioItem.streamRows;
+        return profileCardKey !== "" ? (profileCard ? profileCard.profiles : [])
+            : profiles ? profiles.cards : [];
     }
-    readonly property int selectedIndex: Model.selectionIndex(rows, selectedKey)
+    readonly property int selectedIndex: {
+        if (profileCardKey !== "" && selectedKey === "") {
+            const activeIndex = rows.findIndex(row => row.active);
+            if (activeIndex >= 0)
+                return activeIndex;
+        }
+        return Model.selectionIndex(rows, selectedKey);
+    }
     readonly property var selectedRow: selectedIndex >= 0 ? rows[selectedIndex] : null
-    readonly property var contextActions: selectedRow ? (
+    readonly property var contextActions: selectedRow && tabIndex !== 3 ? (
         selectedRow.kind === "playback" || selectedRow.active
             ? [{name: "Toggle mute", action: "mute"}]
             : [{name: "Toggle mute", action: "mute"}, {name: "Set as default", action: "default"}]
     ) : []
     readonly property string title: helpOpen ? "Audio help"
         : contextOpen ? "Options · " + (selectedRow ? selectedRow.name : "")
+        : profileCard ? profileCard.name
         : tabs[tabIndex]
 
     signal selectionMoved()
@@ -36,10 +51,19 @@ Item {
     onSelectedIndexChanged: selectionMoved()
     onContextActionsChanged: contextIndex = Math.max(0, Math.min(contextIndex, contextActions.length - 1))
     onRowsChanged: {
+        if (profileCardKey !== "")
+            Qt.callLater(root.checkProfileCard);
         // Never silently retarget an open action menu when a device disappears.
         if (contextOpen && !rows.some(row => String(row.id) === selectedKey))
             contextOpen = false;
         selectionMoved();
+    }
+
+    function checkProfileCard() {
+        if (profileCardKey !== "" && profiles && !profiles.loading && !profiles.changing && !profileCard) {
+            profileCardKey = "";
+            selectedKey = "";
+        }
     }
 
     function selectRow(index) {
@@ -62,6 +86,7 @@ Item {
             return;
         contextOpen = false;
         helpOpen = false;
+        profileCardKey = "";
         tabIndex = index;
         selectedKey = "";
         selectionMoved();
@@ -72,7 +97,7 @@ Item {
     }
 
     function setDefault() {
-        if (!selectedRow || selectedRow.active)
+        if (!selectedRow || selectedRow.active || tabIndex === 3)
             return;
         if (selectedRow.kind === "output")
             audioItem.setOutput(selectedRow.id);
@@ -81,17 +106,31 @@ Item {
     }
 
     function toggleMute() {
-        if (selectedRow)
+        if (selectedRow && tabIndex !== 3)
             audioItem.toggleMute(selectedRow.id);
     }
 
     function adjustVolume(delta) {
-        if (selectedRow)
+        if (selectedRow && tabIndex !== 3)
             audioItem.adjustVolume(selectedRow.id, delta);
     }
 
     function activateSelected() {
-        if (contextOpen) {
+        if (tabIndex === 3) {
+            if (!selectedRow || !profiles || profiles.changing)
+                return;
+            if (profileCardKey === "") {
+                const card = selectedRow.id;
+                selectedKey = "";
+                profileCardKey = card;
+                selectionMoved();
+            } else if (selectedRow.available) {
+                if (selectedRow.active)
+                    leaveProfiles();
+                else
+                    profiles.setProfile(profileCardKey, selectedRow.id);
+            }
+        } else if (contextOpen) {
             const action = contextActions[contextIndex];
             contextOpen = false;
             if (action && action.action === "mute")
@@ -105,11 +144,28 @@ Item {
         }
     }
 
+    function leaveProfiles() {
+        const card = profileCardKey;
+        profileCardKey = "";
+        selectedKey = card;
+        selectionMoved();
+    }
+
+    Connections {
+        target: root.profiles
+        function onProfileApplied(cardName) {
+            if (root.profileCardKey === cardName)
+                root.leaveProfiles();
+        }
+    }
+
     function goBack() {
         if (helpOpen)
             helpOpen = false;
         else if (contextOpen)
             contextOpen = false;
+        else if (profileCardKey !== "")
+            leaveProfiles();
         else
             closeRequested();
     }
@@ -128,6 +184,9 @@ Item {
             cycleTab(1);
         } else if (helpOpen) {
             return false;
+        } else if (tabIndex === 3 && key === Qt.Key_R) {
+            if (profiles)
+                profiles.refresh();
         } else if (key === Qt.Key_Up || key === Qt.Key_K) {
             moveSelection(-1);
         } else if (key === Qt.Key_Down || key === Qt.Key_J) {

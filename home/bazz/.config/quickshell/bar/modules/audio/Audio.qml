@@ -157,10 +157,16 @@ Item {
     }
 
     Component {
+        id: profileBackendComponent
+        AudioProfiles {}
+    }
+
+    Component {
         id: audioPopupComponent
 
         AudioPopup {
             audioItem: root
+            profileBackend: profileBackendComponent
         }
 
     }

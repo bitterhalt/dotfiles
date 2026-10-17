@@ -3,6 +3,7 @@ import QtQuick.Window
 import QtTest
 import ".."
 import "../Model.js" as Model
+import "../Profiles.js" as Profiles
 
 Item {
     id: host
@@ -12,6 +13,7 @@ Item {
     Component { id: fixtureComponent; AudioFixture {} }
     Component { id: stateComponent; AudioPopupState {} }
     Component { id: popupComponent; AudioPopup {} }
+    Component { id: profileComponent; ProfileFixture {} }
 
     TestCase {
         id: test
@@ -20,11 +22,13 @@ Item {
         property var fixture: null
         property var controls: null
         property var popup: null
+        property var profiles: null
 
         function init() {
             failOnWarning(/TypeError|Binding loop/);
             fixture = createTemporaryObject(fixtureComponent, host);
-            controls = createTemporaryObject(stateComponent, host, {audioItem: fixture});
+            profiles = createTemporaryObject(profileComponent, host);
+            controls = createTemporaryObject(stateComponent, host, {audioItem: fixture, profiles: profiles});
             verify(fixture !== null && controls !== null);
             controls.closeRequested.connect(() => fixture.closePopup());
         }
@@ -38,10 +42,13 @@ Item {
             wait(0);
             if (fixture)
                 fixture.destroy();
+            if (profiles)
+                profiles.destroy();
             wait(0);
             popup = null;
             controls = null;
             fixture = null;
+            profiles = null;
         }
 
         function press(key, modifiers, text) {
@@ -62,9 +69,9 @@ Item {
             compare(controls.tabIndex, 0);
             press(Qt.Key_Tab); compare(controls.tabIndex, 1);
             press(Qt.Key_Tab, Qt.ShiftModifier); compare(controls.tabIndex, 0);
-            press(Qt.Key_Backtab); compare(controls.tabIndex, 2);
+            press(Qt.Key_Backtab); compare(controls.tabIndex, 3);
             press(Qt.Key_L, Qt.ShiftModifier); compare(controls.tabIndex, 0);
-            press(Qt.Key_H, Qt.ShiftModifier); compare(controls.tabIndex, 2);
+            press(Qt.Key_H, Qt.ShiftModifier); compare(controls.tabIndex, 3);
         }
 
         function test_volume_and_mute() {
@@ -153,7 +160,7 @@ Item {
         }
 
         function test_popup_keyboard_and_live_slider() {
-            popup = createTemporaryObject(popupComponent, host, {audioItem: fixture});
+            popup = createTemporaryObject(popupComponent, host, {audioItem: fixture, profileBackend: profileComponent});
             verify(popup !== null);
             const keyboard = findChild(popup, "audioKeyboard");
             const popupControls = findChild(popup, "audioPopupState");
@@ -163,6 +170,7 @@ Item {
             const slider = findChild(popup, "audioVolumeSlider");
             verify(slider !== null);
             compare(slider.value, 0.55);
+            compare(slider.background.color, fixture.config.muted);
             const percent = findChild(popup, "audioVolumePercent");
             compare(percent.text, "55%");
             fixture.speakerAudio.volume = 1.5;
@@ -172,6 +180,8 @@ Item {
             compare(popupControls.tabIndex, 1);
             keyClick(Qt.Key_Tab, Qt.ShiftModifier);
             compare(popupControls.tabIndex, 0);
+            const currentSlider = findChild(popup, "audioVolumeSlider");
+            compare(currentSlider.background.color, fixture.config.muted);
             keyClick(Qt.Key_Escape);
             verify(fixture.closed);
         }
@@ -188,7 +198,7 @@ Item {
         }
 
         function test_popup_mouse_controls() {
-            popup = createTemporaryObject(popupComponent, host, {audioItem: fixture});
+            popup = createTemporaryObject(popupComponent, host, {audioItem: fixture, profileBackend: profileComponent});
             const keyboard = findChild(popup, "audioKeyboard");
             const popupControls = findChild(popup, "audioPopupState");
             tryVerify(() => keyboard.activeFocus);
@@ -207,7 +217,7 @@ Item {
             waitForPolish(host.Window.window);
             keyClick(Qt.Key_D);
             compare(fixture.calls.filter(call => call.action === "input").length, 0);
-            compare(findText(popup, "Config"), null);
+            verify(findText(popup, "Config") !== null);
             compare(findText(popup, "Tab"), null);
         }
 
@@ -228,11 +238,11 @@ Item {
         }
 
         function test_adaptive_height_and_scroll_limit() {
-            popup = createTemporaryObject(popupComponent, host, {audioItem: fixture});
+            popup = createTemporaryObject(popupComponent, host, {audioItem: fixture, profileBackend: profileComponent});
             const popupControls = findChild(popup, "audioPopupState");
             waitForPolish(host.Window.window);
             const twoDeviceHeight = popup.implicitHeight;
-            verify(twoDeviceHeight < 300);
+            verify(twoDeviceHeight < 250);
             popupControls.setTab(1);
             waitForPolish(host.Window.window);
             verify(popup.implicitHeight < twoDeviceHeight);
@@ -250,6 +260,98 @@ Item {
             popupControls.selectRow(9);
             const list = findChild(popup, "audioRows");
             tryVerify(() => list.contentY > 0);
+        }
+
+        function test_profile_parser_and_off_devices() {
+            const cards = profiles.cards;
+            compare(cards.length, 2);
+            compare(cards[0].id, "alsa_card.hdmi");
+            compare(cards[0].media, "Off");
+            compare(cards[0].profiles[2].available, false);
+            compare(cards[1].profiles[0].available, true);
+            const arrayFormat = Profiles.parse(JSON.stringify([{name: "card", active_profile: {name: "off"},
+                profiles: [{name: "off", description: "Off"}]}]));
+            compare(arrayFormat[0].profiles[0].active, true);
+            let rejected = false;
+            try { Profiles.parse('{}'); } catch (error) { rejected = true; }
+            verify(rejected);
+            verify(Profiles.isCardEvent("Event 'change' on card #42"));
+            verify(Profiles.isCardEvent("Event 'new' on server #4294967295"));
+            verify(!Profiles.isCardEvent("Event 'change' on sink #12"));
+            verify(!Profiles.isCardEvent("Event 'change' on sink-input #33"));
+        }
+
+        function test_profile_selection_and_unavailable_guard() {
+            controls.setTab(3);
+            compare(controls.rows.length, 2);
+            press(Qt.Key_Return);
+            compare(controls.profileCardKey, "alsa_card.hdmi");
+            compare(controls.selectedRow.id, "off");
+            controls.selectRow(2);
+            press(Qt.Key_Return);
+            compare(profiles.calls.length, 0);
+            verify(controls.profileCardKey !== "");
+            controls.selectRow(1);
+            press(Qt.Key_Return);
+            compare(profiles.calls[0].card, "alsa_card.hdmi");
+            compare(profiles.calls[0].profile, "hdmi");
+            compare(controls.profileCardKey, "");
+            compare(controls.selectedRow.media, "Digital Stereo (HDMI)");
+            press(Qt.Key_Return);
+            compare(controls.selectedRow.id, "hdmi");
+            controls.selectRow(0);
+            press(Qt.Key_Return);
+            compare(controls.selectedRow.media, "Off");
+            compare(fixture.calls.length, 0);
+        }
+
+        function test_config_no_volume_actions_and_refresh() {
+            controls.setTab(3);
+            press(Qt.Key_M); press(Qt.Key_D); press(Qt.Key_Right);
+            compare(fixture.calls.length, 0);
+            press(Qt.Key_R);
+            compare(profiles.calls[0].action, "refresh");
+            press(Qt.Key_Return);
+            profiles.changing = true;
+            controls.selectRow(1);
+            press(Qt.Key_Return);
+            compare(profiles.calls.length, 1);
+            profiles.changing = false;
+            press(Qt.Key_Escape);
+            compare(controls.profileCardKey, "");
+            verify(!fixture.closed);
+            press(Qt.Key_Escape);
+            verify(fixture.closed);
+        }
+
+        function test_profile_card_hot_unplug() {
+            controls.setTab(3);
+            press(Qt.Key_Return);
+            profiles.source = profiles.source.slice(1);
+            tryCompare(controls, "profileCardKey", "");
+            compare(controls.rows.length, 1);
+        }
+
+        function test_popup_config_backend_lifecycle() {
+            popup = createTemporaryObject(popupComponent, host, {audioItem: fixture, profileBackend: profileComponent});
+            compare(findChild(popup, "audioProfiles"), null);
+            const popupControls = findChild(popup, "audioPopupState");
+            popupControls.setTab(3);
+            const backend = findChild(popup, "audioProfiles");
+            verify(backend !== null);
+            verify(backend.active);
+            waitForPolish(host.Window.window);
+            const card = findText(popup, "HDMI");
+            mouseClick(card, card.width / 2, card.height / 2);
+            compare(popupControls.profileCardKey, "alsa_card.hdmi");
+            popupControls.selectRow(1);
+            popupControls.activateSelected();
+            compare(backend.calls[0].profile, "hdmi");
+            compare(popupControls.profileCardKey, "");
+            popupControls.setTab(0);
+            verify(!backend.active);
+            popupControls.setTab(3);
+            verify(backend.active);
         }
     }
 }

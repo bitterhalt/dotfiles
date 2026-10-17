@@ -6,7 +6,7 @@ A personal [QuickShell](https://quickshell.org/) desktop shell for **Niri + Wayl
 
 - Per-screen bar with workspaces, window title, clock, weather, battery, and system tray
 - Network, Bluetooth, and PipeWire audio controls
-- Keyboard-driven audio tabs: Outputs, Inputs, and Playback
+- Keyboard-driven audio tabs: Outputs, Inputs, Playback, and card profiles
 - Notifications, history, and do-not-disturb mode
 - Bluetooth connection and low-battery alerts
 - Application launcher with file search, calculator, run, emoji, and timer modes
@@ -32,10 +32,13 @@ quickshell/
 │       │   ├── Audio.qml
 │       │   ├── AudioPopup.qml
 │       │   ├── AudioPopupState.qml
+│       │   ├── AudioProfiles.qml
 │       │   ├── AudioVolumeRow.qml
 │       │   ├── Model.js
+│       │   ├── Profiles.js
 │       │   └── tests/
 │       │       ├── AudioFixture.qml
+│       │       ├── ProfileFixture.qml
 │       │       └── tst_audio.qml
 │       ├── battery/
 │       │   └── Battery.qml
@@ -145,7 +148,7 @@ quickshell/
 
 QuickShell, Niri, PipeWire, NetworkManager, BlueZ, and UPower.
 
-Feature helpers use Python, `wl-clipboard`, `cliphist`, `gpu-screen-recorder`, ImageMagick, `awww`, and Pywal. The translator requires `DEEPL_API` in the shell's environment.
+Feature helpers use Python, `wl-clipboard`, `cliphist`, `gpu-screen-recorder`, ImageMagick, `awww`, and Pywal. Audio card profiles require `pactl` and PipeWire's PulseAudio compatibility service. The translator requires `DEEPL_API` in the shell's environment.
 
 ## Transparency
 
