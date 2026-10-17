@@ -143,7 +143,7 @@ PopoutPanel {
                             config: root.config
                             row: entry.modelData
                             node: root.audioItem.nodeForId(entry.modelData.id)
-                            selected: entry.index === popupState.selectedIndex
+                            selected: popupState.rows.length > 1 && entry.index === popupState.selectedIndex
                             onPicked: {
                                 popupState.selectRow(entry.index);
                                 keyboardHandler.forceActiveFocus();
@@ -164,7 +164,7 @@ PopoutPanel {
                             title: entry.modelData.name + (entry.modelData.available === false ? " (unavailable)" : "")
                             subtitle: entry.modelData.kind === "card" ? entry.modelData.media
                                 : entry.modelData.active ? "Active" : ""
-                            selected: entry.index === popupState.selectedIndex
+                            selected: popupState.rows.length > 1 && entry.index === popupState.selectedIndex
                             enabled: entry.modelData.available !== false && !(popupState.profiles && popupState.profiles.changing)
                             onActivated: {
                                 popupState.selectRow(entry.index);
@@ -203,7 +203,7 @@ PopoutPanel {
                         height: 40
                         config: root.config
                         title: modelData.name
-                        selected: index === popupState.contextIndex
+                        selected: popupState.contextActions.length > 1 && index === popupState.contextIndex
                         onActivated: {
                             popupState.contextIndex = index;
                             popupState.activateSelected();

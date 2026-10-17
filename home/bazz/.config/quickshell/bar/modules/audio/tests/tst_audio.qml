@@ -55,6 +55,15 @@ Item {
             return controls.handleKey(key, modifiers || Qt.NoModifier, text || "");
         }
 
+        function volumeRows(item, found) {
+            for (const child of item.children || []) {
+                if (child.objectName === "audioVolumeRow")
+                    found.push(child);
+                volumeRows(child, found);
+            }
+            return found;
+        }
+
         function test_models() {
             compare(fixture.outputRows.length, 2);
             compare(fixture.inputRows.length, 1);
@@ -260,6 +269,23 @@ Item {
             popupControls.selectRow(9);
             const list = findChild(popup, "audioRows");
             tryVerify(() => list.contentY > 0);
+        }
+
+        function test_single_row_list_hides_selection_marker() {
+            popup = createTemporaryObject(popupComponent, host, {audioItem: fixture, profileBackend: profileComponent});
+            const popupControls = findChild(popup, "audioPopupState");
+            popupControls.setTab(1);
+            waitForPolish(host.Window.window);
+            compare(popupControls.rows.length, 1);
+            tryVerify(() => volumeRows(popup, []).length === 1);
+            verify(!volumeRows(popup, [])[0].selected);
+            popupControls.setTab(0);
+            waitForPolish(host.Window.window);
+            compare(popupControls.rows.length, 2);
+            tryVerify(() => volumeRows(popup, []).length === 2);
+            compare(volumeRows(popup, []).filter((row) => {
+                return row.selected;
+            }).length, 1);
         }
 
         function test_profile_parser_and_off_devices() {
