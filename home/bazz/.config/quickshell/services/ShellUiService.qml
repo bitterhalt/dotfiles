@@ -12,12 +12,28 @@ Item {
     signal weatherActionRequested(string action)
     signal notificationCenterActionRequested(string action)
     signal audioActionRequested(string action)
+    signal bluetoothActionRequested(string action)
+    signal networkActionRequested(string action)
+
+    IpcHandler {
+        target: "bluetooth"
+        function toggle(): void { root.bluetoothActionRequested("toggle") }
+        function open(): void { root.bluetoothActionRequested("open") }
+        function close(): void { root.bluetoothActionRequested("close") }
+    }
 
     IpcHandler {
         target: "audio"
         function toggle(): void { root.audioActionRequested("toggle") }
         function open(): void { root.audioActionRequested("open") }
         function close(): void { root.audioActionRequested("close") }
+    }
+
+    IpcHandler {
+        target: "network"
+        function toggle(): void { root.networkActionRequested("toggle") }
+        function open(): void { root.networkActionRequested("open") }
+        function close(): void { root.networkActionRequested("close") }
     }
 
     IpcHandler {

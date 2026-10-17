@@ -5,7 +5,7 @@ A personal [QuickShell](https://quickshell.org/) desktop shell for **Niri + Wayl
 ## Features
 
 - Per-screen bar with workspaces, window title, clock, weather, battery, and system tray
-- Network, Bluetooth, and PipeWire audio controls
+- Keyboard-driven Network and Bluetooth popups, plus PipeWire audio controls
 - Keyboard-driven audio tabs: Outputs, Inputs, Playback, and card profiles
 - Notifications, history, and do-not-disturb mode
 - Bluetooth connection and low-battery alerts
@@ -18,6 +18,8 @@ A personal [QuickShell](https://quickshell.org/) desktop shell for **Niri + Wayl
 - DeepL translator
 - Tmux session manager and process killer
 - Keyboard shortcuts and IPC controls
+
+Network and Bluetooth popups can also be opened with `qs ipc call network toggle` and `qs ipc call bluetooth toggle`.
 
 ## Structure
 
@@ -45,7 +47,9 @@ quickshell/
 │       ├── bluetooth/
 │       │   ├── Bluetooth.qml
 │       │   ├── BluetoothNotifier.qml
-│       │   └── Model.js
+│       │   ├── Model.js
+│       │   └── tests/
+│       │       └── tst_model.qml
 │       ├── clock/
 │       │   └── Clock.qml
 │       ├── idle/
@@ -55,7 +59,9 @@ quickshell/
 │       │   ├── Model.js
 │       │   ├── Network.qml
 │       │   ├── NetworkPopup.qml
-│       │   └── NetworkRow.qml
+│       │   ├── NetworkRow.qml
+│       │   └── tests/
+│       │       └── tst_model.qml
 │       ├── tray/
 │       │   ├── Power.qml
 │       │   ├── Tray.qml
@@ -158,5 +164,4 @@ This shell was developed with LLM assistance under my supervision. I direct the 
 
 ## TODO
 
-- [ ] Make remaining bar popups keyboard-driven: Bluetooth and Network
 - [ ] Weather widget looks overhaul = At the moment it's just copy of Waybar tooltip so it need some makeup

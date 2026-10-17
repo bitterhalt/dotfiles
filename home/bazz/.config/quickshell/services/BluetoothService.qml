@@ -121,6 +121,18 @@ Item {
             device.pair()
     }
 
+    function toggleTrust(row): void {
+        const device = deviceForAddress(row.address)
+        if (device && device.paired)
+            device.trusted = !device.trusted
+    }
+
+    function forgetDevice(row): void {
+        const device = deviceForAddress(row.address)
+        if (device && device.paired)
+            device.forget()
+    }
+
     Connections {
         target: root.adapter
         ignoreUnknownSignals: true

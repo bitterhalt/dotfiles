@@ -305,17 +305,17 @@ Item {
             compare(fixture.calls.length, 0);
         }
 
-        function test_config_no_volume_actions_and_refresh() {
+        function test_config_no_volume_actions_or_refresh_key() {
             controls.setTab(3);
             press(Qt.Key_M); press(Qt.Key_D); press(Qt.Key_Right);
             compare(fixture.calls.length, 0);
-            press(Qt.Key_R);
-            compare(profiles.calls[0].action, "refresh");
+            verify(!press(Qt.Key_R));
+            compare(profiles.calls.length, 0);
             press(Qt.Key_Return);
             profiles.changing = true;
             controls.selectRow(1);
             press(Qt.Key_Return);
-            compare(profiles.calls.length, 1);
+            compare(profiles.calls.length, 0);
             profiles.changing = false;
             press(Qt.Key_Escape);
             compare(controls.profileCardKey, "");

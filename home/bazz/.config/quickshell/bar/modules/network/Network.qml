@@ -9,11 +9,13 @@ Item {
     required property var config
     required property var barWindow
     required property var popupManager
+    required property var uiService
     readonly property var networkDevices: Networking.devices ? Networking.devices.values : []
     readonly property var wifiDevice: findDevice(DeviceType.Wifi)
     readonly property var wiredDevice: findDevice(DeviceType.Wired)
     readonly property var wifiNetworkObjects: wifiDevice && wifiDevice.networks ? wifiDevice.networks.values : []
     readonly property var networkRows: Model.rows(wifiNetworkObjects)
+    readonly property var selectableRows: networkRows
     readonly property var connectedWifi: {
         for (var i = 0; i < wifiNetworkObjects.length; ++i) {
             if (wifiNetworkObjects[i] && wifiNetworkObjects[i].connected)
@@ -44,6 +46,22 @@ Item {
         return "󰤯";
     }
 
+    Connections {
+        target: root.uiService
+        function onNetworkActionRequested(action) {
+            if (root.barWindow.screen !== root.uiService.targetScreen) {
+                root.popupManager.closeHost("network");
+                return;
+            }
+            if (action === "open")
+                root.popupManager.openHost("network", networkPopupComponent, root, true);
+            else if (action === "toggle")
+                root.popupManager.toggleHost("network", networkPopupComponent, root, true);
+            else if (action === "close")
+                root.popupManager.closeHost("network");
+        }
+    }
+
     function findDevice(type) {
         var fallback = null;
         for (var i = 0; i < networkDevices.length; ++i) {
@@ -62,13 +80,7 @@ Item {
     }
 
     function networkForSsid(ssid) {
-        for (var i = 0; i < wifiNetworkObjects.length; ++i) {
-            var network = wifiNetworkObjects[i];
-            if (network && network.name === ssid)
-                return network;
-
-        }
-        return null;
+        return Model.networkForSsid(wifiNetworkObjects, ssid);
     }
 
     width: 24
@@ -89,7 +101,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onClicked: (mouse) => {
             if (mouse.button === Qt.LeftButton)
-                popupManager.toggleHost("network", networkPopupComponent, root);
+                popupManager.toggleHost("network", networkPopupComponent, root, true);
             else if (wifiDevice)
                 Networking.wifiEnabled = !Networking.wifiEnabled;
         }

@@ -121,6 +121,7 @@ PanelWindow {
             config: barWindow.config
             barWindow: barWindow
             popupManager: popupManager
+            uiService: barWindow.uiService
         }
 
         Bluetooth {
@@ -128,6 +129,7 @@ PanelWindow {
             barWindow: barWindow
             popupManager: popupManager
             bluetoothService: barWindow.bluetoothService
+            uiService: barWindow.uiService
         }
 
         Audio {

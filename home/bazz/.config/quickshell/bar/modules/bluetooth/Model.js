@@ -6,6 +6,7 @@ function row(device) {
         name: String(device.name || device.deviceName || device.address || "Unknown device"),
         icon: String(device.icon || ""),
         paired: !!device.paired,
+        trusted: !!device.trusted,
         connected: !!device.connected,
         pairing: !!device.pairing,
         batteryAvailable: !!device.batteryAvailable,

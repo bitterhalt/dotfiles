@@ -177,10 +177,6 @@ Item {
             cycleTab(1);
         } else if (helpOpen) {
             return false;
-        } else if (tabIndex === 3 && key === Qt.Key_R) {
-            if (profiles)
-                profiles.refresh();
-
         } else if (key === Qt.Key_Up || key === Qt.Key_K)
             moveSelection(-1);
         else if (key === Qt.Key_Down || key === Qt.Key_J)

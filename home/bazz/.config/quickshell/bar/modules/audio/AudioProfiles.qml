@@ -85,7 +85,7 @@ Item {
         stderr: StdioCollector {}
         onExited: {
             if (root.active && !subscription.running)
-                root.monitorError = "Profile monitoring stopped · r to refresh";
+                root.monitorError = "Profile monitoring stopped";
         }
     }
 

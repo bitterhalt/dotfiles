@@ -11,7 +11,7 @@ function strengthIcon(strength) {
 }
 
 function rows(networks) {
-    var strongest = {}
+    var strongest = Object.create(null)
 
     for (var i = 0; i < networks.length; ++i) {
         var network = networks[i]
@@ -28,7 +28,8 @@ function rows(networks) {
         }
 
         var old = strongest[row.ssid]
-        if (!old || row.connected || row.strength > old.strength)
+        if (!old || (row.connected && !old.connected)
+                || (row.connected === old.connected && row.strength > old.strength))
             strongest[row.ssid] = row
     }
 
@@ -47,4 +48,17 @@ function rows(networks) {
     })
 
     return result
+}
+
+function networkForSsid(networks, ssid) {
+    var best = null
+    for (const network of networks) {
+        if (!network || network.name !== ssid)
+            continue
+        if (!best || (network.connected && !best.connected)
+                || (!!network.connected === !!best.connected
+                    && network.signalStrength > best.signalStrength))
+            best = network
+    }
+    return best
 }

@@ -11,6 +11,7 @@ Item {
     required property var barWindow
     required property var popupManager
     required property var bluetoothService
+    required property var uiService
     readonly property var adapter: bluetoothService.adapter
     readonly property var deviceObjects: bluetoothService.devices
     readonly property var deviceRows: Model.rows(deviceObjects)
@@ -24,13 +25,125 @@ Item {
         return !row.paired && !row.connected;
     })
     readonly property int connectedCount: connectedRows.length
+    readonly property var popupRows: connectedRows.concat(pairedRows, availableRows)
+    property string selectedAddress: ""
+    property bool confirmForget: false
+    property string forgetAddress: ""
+    readonly property var forgetTarget: popupRows.find(row => row.address === forgetAddress) || null
+    property bool helpOpen: false
+
+    function selectDevice(index) {
+        if (popupRows.length === 0) {
+            selectedAddress = "";
+            return ;
+        }
+        selectedAddress = popupRows[Math.max(0, Math.min(popupRows.length - 1, index))].address;
+    }
+
+    function selectedDevice() {
+        return popupRows.find((row) => {
+            return row.address === selectedAddress;
+        }) || null;
+    }
+
+    function handlePopupKey(event) {
+        if (event.modifiers & (Qt.ControlModifier | Qt.AltModifier | Qt.MetaModifier))
+            return false;
+
+        if (confirmForget) {
+            if (event.key === Qt.Key_Escape) {
+                cancelForget();
+            } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                const row = forgetTarget;
+                cancelForget();
+                if (adapter && adapter.enabled && row && row.paired)
+                    bluetoothService.forgetDevice(row);
+            }
+            event.accepted = true;
+            return true;
+        }
+        if (event.key === Qt.Key_Escape) {
+            if (helpOpen)
+                helpOpen = false;
+            else
+                popupManager.closeHost("bluetooth");
+        } else if (event.key === Qt.Key_Question || event.text === "?") {
+            helpOpen = !helpOpen;
+        } else if (helpOpen || !adapter || !adapter.enabled) {
+            return false;
+        } else if (event.key === Qt.Key_Up || event.key === Qt.Key_K) {
+            const index = popupRows.findIndex((row) => {
+                return row.address === selectedAddress;
+            });
+            selectDevice(index <= 0 ? 0 : index - 1);
+        } else if (event.key === Qt.Key_Down || event.key === Qt.Key_J) {
+            const index = popupRows.findIndex((row) => {
+                return row.address === selectedAddress;
+            });
+            selectDevice(index < 0 ? 0 : Math.min(popupRows.length - 1, index + 1));
+        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+            const row = selectedDevice();
+            if (row) {
+                toggleDevice(row);
+            }
+        } else if (event.key === Qt.Key_T) {
+            const row = selectedDevice();
+            if (row && row.paired)
+                bluetoothService.toggleTrust(row);
+
+        } else if (event.key === Qt.Key_F) {
+            const row = selectedDevice();
+            if (row && row.paired) {
+                forgetAddress = row.address;
+                confirmForget = true;
+            }
+
+        } else {
+            return false;
+        }
+        event.accepted = true;
+        return true;
+    }
 
     function toggleDevice(row) {
+        if (confirmForget || helpOpen || !adapter || !adapter.enabled)
+            return;
         bluetoothService.toggleDevice(row);
     }
 
+    function cancelForget() {
+        confirmForget = false;
+        forgetAddress = "";
+    }
+
+    onPopupRowsChanged: Qt.callLater(() => {
+        if (confirmForget && !forgetTarget)
+            cancelForget();
+        if (popupRows.length > 0 && !popupRows.some((row) => {
+            return row.address === selectedAddress;
+        }))
+            selectedAddress = popupRows[0].address;
+
+    })
     width: 24
     height: barWindow.height
+
+    Connections {
+        function onBluetoothActionRequested(action) {
+            if (root.barWindow.screen !== root.uiService.targetScreen) {
+                root.popupManager.closeHost("bluetooth");
+                return ;
+            }
+            if (action === "open")
+                root.popupManager.openHost("bluetooth", bluetoothPopupComponent, root, true);
+            else if (action === "toggle")
+                root.popupManager.toggleHost("bluetooth", bluetoothPopupComponent, root, true);
+            else if (action === "close")
+                root.popupManager.closeHost("bluetooth");
+        }
+
+        target: root.uiService
+    }
 
     Text {
         anchors.centerIn: parent
@@ -47,7 +160,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onClicked: (mouse) => {
             if (mouse.button === Qt.LeftButton)
-                popupManager.toggleHost("bluetooth", bluetoothPopupComponent, root);
+                popupManager.toggleHost("bluetooth", bluetoothPopupComponent, root, true);
             else if (root.adapter)
                 root.adapter.enabled = !root.adapter.enabled;
         }
@@ -61,8 +174,28 @@ Item {
 
             config: root.config
             contentWidth: 330
-            Component.onCompleted: root.bluetoothService.beginDiscovery()
-            Component.onDestruction: root.bluetoothService.endDiscovery()
+            focus: true
+            Component.onCompleted: {
+                root.cancelForget();
+                root.helpOpen = false;
+                root.bluetoothService.beginDiscovery();
+                Qt.callLater(() => {
+                    return forceActiveFocus();
+                });
+                if (root.popupRows.length > 0 && !root.popupRows.some((row) => {
+                    return row.address === root.selectedAddress;
+                }))
+                    root.selectedAddress = root.popupRows[0].address;
+
+            }
+            Component.onDestruction: {
+                root.cancelForget();
+                root.helpOpen = false;
+                root.bluetoothService.endDiscovery();
+            }
+            Keys.onPressed: (event) => {
+                return root.handlePopupKey(event);
+            }
 
             Item {
                 width: parent.width
@@ -124,7 +257,7 @@ Item {
 
             Column {
                 width: parent.width
-                spacing: 4
+                spacing: 2
                 visible: root.adapter && root.adapter.enabled
 
                 SectionHeader {
@@ -144,6 +277,9 @@ Item {
                         row: modelData
                         actionText: "Disconnect"
                         highlighted: true
+                        trusted: modelData.trusted
+                        selected: modelData.address === root.selectedAddress
+                        onFocused: root.selectedAddress = modelData.address
                         onActivated: root.toggleDevice(modelData)
                     }
 
@@ -166,6 +302,9 @@ Item {
                         config: root.config
                         row: modelData
                         actionText: modelData.pairing ? "Cancel" : "Connect"
+                        trusted: modelData.trusted
+                        selected: modelData.address === root.selectedAddress
+                        onFocused: root.selectedAddress = modelData.address
                         onActivated: root.toggleDevice(modelData)
                     }
 
@@ -173,7 +312,7 @@ Item {
 
                 Item {
                     width: parent.width
-                    height: 20
+                    height: 18
 
                     Text {
                         renderType: Text.NativeRendering
@@ -207,6 +346,9 @@ Item {
                         config: root.config
                         row: modelData
                         actionText: modelData.pairing ? "Cancel" : "Pair"
+                        trusted: modelData.trusted
+                        selected: modelData.address === root.selectedAddress
+                        onFocused: root.selectedAddress = modelData.address
                         onActivated: root.toggleDevice(modelData)
                     }
 
@@ -226,6 +368,26 @@ Item {
 
             }
 
+            Text {
+                renderType: Text.NativeRendering
+                width: parent.width
+                visible: root.confirmForget
+                color: root.config.urgent
+                font.pointSize: root.config.fontSize(0.8)
+                text: "Forget " + (root.forgetTarget ? root.forgetTarget.name : "device") + "? Enter Confirm · Esc Cancel"
+                wrapMode: Text.WordWrap
+            }
+
+            Text {
+                renderType: Text.NativeRendering
+                width: parent.width
+                visible: root.helpOpen
+                color: root.config.muted
+                font.pointSize: root.config.fontSize(0.78)
+                text: "↑/↓ or j/k Select · Enter Connect/Pair · t Trust/Untrust · f Forget · ?/Esc Back"
+                wrapMode: Text.WordWrap
+            }
+
         }
 
     }
@@ -237,15 +399,36 @@ Item {
         required property var row
         property string actionText: ""
         property bool highlighted: false
+        property bool trusted: false
+        property bool selected: false
+        readonly property string detailText: {
+            if (deviceRow.row.pairing)
+                return "Pairing…";
+
+            if (deviceRow.row.connected) {
+                if (deviceRow.row.batteryAvailable)
+                    return `Connected  ·  ${Math.round(deviceRow.row.battery * 100)}%`;
+
+                return "Connected";
+            }
+            return "";
+        }
 
         signal activated()
+        signal focused()
 
-        implicitHeight: 42
+        implicitHeight: detailText === "" ? 28 : 36
 
         Rectangle {
-            anchors.fill: parent
-            radius: 3
-            color: deviceMouse.containsMouse ? deviceRow.config.borderColor : "transparent"
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.topMargin: 3
+            anchors.bottomMargin: 3
+            width: 2
+            radius: 1
+            color: deviceRow.config.accent
+            visible: deviceRow.selected
         }
 
         Item {
@@ -273,50 +456,69 @@ Item {
 
         Column {
             x: 38
-            width: parent.width - 112
+            width: Math.max(0, parent.width - x - actionColumn.width - 12)
             anchors.verticalCenter: parent.verticalCenter
             spacing: 0
 
-            Text {
-                renderType: Text.NativeRendering
+            Row {
                 width: parent.width
-                color: deviceRow.config.fg
-                font.pointSize: deviceRow.config.fontSize(0.92)
-                font.weight: Font.DemiBold
-                elide: Text.ElideRight
-                text: deviceRow.row.name
+                spacing: 4
+
+                Text {
+                    id: trustedStar
+                    width: deviceRow.trusted ? 12 : 0
+                    color: deviceRow.config.accent
+                    font.pointSize: deviceRow.config.fontSize(0.78)
+                    font.weight: Font.DemiBold
+                    text: "★"
+                    visible: deviceRow.trusted
+                }
+
+                Text {
+                    renderType: Text.NativeRendering
+                    width: Math.max(0, parent.width - trustedStar.width - (deviceRow.trusted ? 4 : 0))
+                    color: deviceMouse.containsMouse ? Qt.lighter(deviceRow.config.fg, 1.15) : deviceRow.config.fg
+                    font.pointSize: deviceRow.config.fontSize(0.92)
+                    font.weight: deviceRow.selected || deviceRow.highlighted ? Font.DemiBold : Font.Normal
+                    elide: Text.ElideRight
+                    text: deviceRow.row.name
+                }
+
             }
 
             Text {
                 renderType: Text.NativeRendering
                 width: parent.width
+                visible: deviceRow.detailText !== ""
                 color: deviceRow.config.muted
                 font.pointSize: deviceRow.config.fontSize(0.77)
                 elide: Text.ElideRight
-                text: {
-                    if (deviceRow.row.pairing)
-                        return "Pairing…";
-
-                    if (deviceRow.row.connected) {
-                        if (deviceRow.row.batteryAvailable)
-                            return `Connected  ·  ${Math.round(deviceRow.row.battery * 100)}%`;
-
-                        return "Connected";
-                    }
-                    return deviceRow.row.paired ? "Paired" : "Not paired";
-                }
+                text: deviceRow.detailText
             }
 
         }
 
-        Text {
-            renderType: Text.NativeRendering
+        Item {
+            id: actionColumn
+
             anchors.right: parent.right
             anchors.rightMargin: 6
-            anchors.verticalCenter: parent.verticalCenter
-            color: deviceRow.highlighted ? deviceRow.config.accent : deviceRow.config.muted
-            font.pointSize: deviceRow.config.fontSize(0.77)
-            text: deviceRow.actionText
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: 72
+
+            Text {
+                renderType: Text.NativeRendering
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width
+                horizontalAlignment: Text.AlignRight
+                color: deviceRow.highlighted ? deviceRow.config.accent : deviceRow.config.muted
+                font.pointSize: deviceRow.config.fontSize(0.77)
+                elide: Text.ElideRight
+                text: deviceRow.actionText
+            }
+
         }
 
         MouseArea {
@@ -325,7 +527,11 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
-            onClicked: deviceRow.activated()
+            onEntered: deviceRow.focused()
+            onClicked: {
+                deviceRow.focused();
+                deviceRow.activated();
+            }
         }
 
     }

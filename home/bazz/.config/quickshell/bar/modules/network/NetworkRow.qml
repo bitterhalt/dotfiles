@@ -5,8 +5,10 @@ Item {
 
     required property var config
     required property var row
+    property bool selected: false
 
     signal activated()
+    signal focused()
 
     function strengthIcon(strength) {
         if (strength >= 0.75)
@@ -24,24 +26,35 @@ Item {
     implicitHeight: 40
 
     Rectangle {
-        anchors.fill: parent
-        radius: 3
-        color: rowMouse.containsMouse ? root.config.borderColor : "transparent"
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.topMargin: 3
+        anchors.bottomMargin: 3
+        width: 2
+        radius: 1
+        color: root.config.accent
+        visible: root.selected
     }
 
-    Text {
-        x: 6
-        anchors.verticalCenter: parent.verticalCenter
-        color: root.config.fg
-        font.family: root.config.iconFontFamily
-        font.pointSize: root.config.iconSize
-        text: strengthIcon(root.row.strength)
+    Item {
+        x: 4
+        width: 28
+        height: parent.height
+
+        Text {
+            anchors.centerIn: parent
+            color: rowMouse.containsMouse ? Qt.lighter(root.config.fg, 1.15) : root.config.fg
+            font.family: root.config.iconFontFamily
+            font.pointSize: root.config.iconSize
+            text: root.strengthIcon(root.row.strength)
+        }
     }
 
     Text {
         renderType: Text.NativeRendering
-        x: 36
-        width: parent.width - 42
+        x: 38
+        width: parent.width - 44
         anchors.verticalCenter: parent.verticalCenter
         color: root.config.fg
         font.pointSize: root.config.fontSize(0.92)
@@ -56,7 +69,11 @@ Item {
         hoverEnabled: true
         enabled: root.enabled
         cursorShape: root.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
-        onClicked: root.activated()
+        onEntered: root.focused()
+        onClicked: {
+            root.focused();
+            root.activated();
+        }
     }
 
 }
