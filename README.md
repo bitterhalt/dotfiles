@@ -25,17 +25,28 @@
 
 ## Screenshots
 
-> Desktop
-> <img width="1920" height="1080" alt="2026-10-15-01-48-38" src="https://github.com/user-attachments/assets/c834c214-4282-4d3e-a188-8a7e93754e04" />
+<img width="1920" height="1080" alt="2026-10-15-01-48-38" src="https://github.com/user-attachments/assets/c834c214-4282-4d3e-a188-8a7e93754e04" />
 
-> Blurred Overlay
-> <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d362e791-b931-4ac9-9369-7f47868c4fa7" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d362e791-b931-4ac9-9369-7f47868c4fa7" />
 
+## Widgets
 > Launcher
-> <img width="575" height="500" alt="2026-10-15-01-50-31_screenshot" src="https://github.com/user-attachments/assets/f661aaba-f745-4b1a-9be4-db96bb093f6f" />
+<img width="487" height="468" alt="image" src="https://github.com/user-attachments/assets/06762e68-4f05-4266-9ac0-2ef6d6397d18" />
+
+> Notification History
+<img width="630" height="482" alt="image" src="https://github.com/user-attachments/assets/685ab9e9-c21b-4ea1-a60b-15440357988c" />
+
+> Wifi
+<img width="326" height="350" alt="image" src="https://github.com/user-attachments/assets/9ca1f7f9-0422-47b2-93ca-fb44a4bafaef" />
+
+> BT
+<img width="371" height="345" alt="image" src="https://github.com/user-attachments/assets/4900c6e1-ea47-4c93-ba7a-a83b6cf94dd4" />
+
+> Audio
+<img width="533" height="297" alt="image" src="https://github.com/user-attachments/assets/d59e9d98-736e-402a-a3d8-9fc6313afd2d" />
 
 > Deepl Translator
-> <img width="602" height="491" alt="2026-10-15-01-49-06_screenshot" src="https://github.com/user-attachments/assets/52ac1621-61bc-4db2-a8ec-b04b55dfadc8" />
+<img width="602" height="491" alt="2026-10-15-01-49-06_screenshot" src="https://github.com/user-attachments/assets/52ac1621-61bc-4db2-a8ec-b04b55dfadc8" />
 
 ### Keybinds
 
