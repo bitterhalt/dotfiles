@@ -166,4 +166,6 @@ This shell was developed with LLM assistance under my supervision. I direct the 
 
 ## TODO
 
-- [ ] Weather widget looks overhaul = At the moment it's just copy of Waybar tooltip so it need some makeup
+- [ ] 1. Some sort of clock popup to replace notications when checking clock in barless mode
+- [ ] 2. Weather widget looks overhaul = At the moment it's just copy of Waybar tooltip so it need some makeup
+- [ ] 3. Barless mode: Draw a watermark-like text in bottom righ with text "Zen Mode is enabled"

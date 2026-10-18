@@ -6,6 +6,7 @@ PanelWindow {
     id: root
 
     required property var targetScreen
+
     signal dismissed()
 
     screen: targetScreen
@@ -25,4 +26,5 @@ PanelWindow {
         anchors.fill: parent
         onClicked: root.dismissed()
     }
+
 }

@@ -335,8 +335,8 @@ PanelWindow {
                 anchors.verticalCenter: searchInput.verticalCenter
                 visible: searchInput.text.length === 0
                 color: root.config.muted
-                font.pointSize: root.config.fontSize(1.04)
-                text: "Search clipboard…"
+                font.pointSize: root.config.fontSize(1.0)
+                text: "Search clipboard"
             }
 
         }
@@ -539,9 +539,9 @@ PanelWindow {
                 anchors.right: parent.right
                 anchors.rightMargin: 14
                 anchors.verticalCenter: parent.verticalCenter
-                color: root.config.fg
+                color: root.config.muted
                 font.pointSize: root.config.fontSize(0.78)
-                text: "Enter  Copy   Del  Delete"
+                text: "Enter:  Copy   Del:  Delete"
             }
         }
 
