@@ -1,3 +1,4 @@
 [submodule "home/bazz/.config/quickshell"]
 	path = home/bazz/.config/quickshell
 	url = https://github.com/bitterhalt/slimshell.git
+	branch = master
