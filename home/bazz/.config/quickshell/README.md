@@ -9,7 +9,7 @@ A personal [QuickShell](https://quickshell.org/) desktop shell for **Niri + Wayl
 - Keyboard-driven audio tabs: Outputs, Inputs, Playback, and card profiles
 - Notifications, history, and do-not-disturb mode
 - Bluetooth connection and low-battery alerts
-- Application launcher with file search, calculator, run, emoji, and timer modes
+- Application launcher with Apps, Run, Emoji, and Timer modes (`Ctrl+A` / `Ctrl+B` / `Ctrl+E` / `Ctrl+T`, or cycle with `Ctrl+←` / `Ctrl+→`)
 - Clipboard history
 - Lock screen and power menu
 - Idle monitoring with editable timeouts
@@ -20,6 +20,8 @@ A personal [QuickShell](https://quickshell.org/) desktop shell for **Niri + Wayl
 - Keyboard shortcuts and IPC controls
 
 Network and Bluetooth popups can also be opened with `qs ipc call network toggle` and `qs ipc call bluetooth toggle`.
+
+In the launcher, `/needle` searches files and `=expression` calculates with `qalc` (plain math works too). The modes are Apps (desktop entries), Run (binaries, recently used first), Emoji (search by name; Enter copies it), and Timer (`25m Focus`, `45s`, `1:30`, `2h`; selecting a running timer cancels it). Enter activates the selected row and Esc closes.
 
 ## Structure
 

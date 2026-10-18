@@ -18,13 +18,8 @@ Item {
 
     property bool opened: false
     property bool quitOnClose: false
-    // Modes, switched with Ctrl+<key>.
-    readonly property var modes: [
-        { id: "apps", label: "Apps", name: "Applications", key: "A" },
-        { id: "run", label: "Run", name: "Run binary", key: "B" },
-        { id: "emoji", label: "Emoji", name: "Emoji", key: "E" },
-        { id: "timer", label: "Timer", name: "Timer", key: "T" }
-    ]
+    // Mode order for Ctrl+← / Ctrl+→ cycling.
+    readonly property var modes: ["apps", "run", "emoji", "timer"]
     property string mode: "apps"
     readonly property bool runMode: mode === "run"
     readonly property bool emojiMode: mode === "emoji"
@@ -375,10 +370,10 @@ Item {
     }
 
     function cycleMode(direction): void {
-        const currentIndex = modes.findIndex(item => item.id === mode)
+        const currentIndex = modes.indexOf(mode)
         const nextIndex = (currentIndex + direction + modes.length)
             % modes.length
-        setMode(modes[nextIndex].id)
+        setMode(modes[nextIndex])
     }
 
     function openFileSearch(): void {
@@ -727,30 +722,6 @@ Item {
         }
     }
 
-    component KeyCap: Rectangle {
-        property string label: ""
-        property color edgeColor: "gray"
-        property color textColor: "gray"
-        property real fontPointSize: 9
-
-        implicitHeight: 20
-        implicitWidth: Math.max(implicitHeight, capText.implicitWidth + 12)
-        radius: 4
-        color: "transparent"
-        border.width: 1
-        border.color: edgeColor
-
-        Text {
-            renderType: Text.NativeRendering
-            id: capText
-
-            anchors.centerIn: parent
-            color: parent.textColor
-            font.pointSize: parent.fontPointSize
-            text: parent.label
-        }
-    }
-
     PanelWindow {
         id: launcherWindow
 
@@ -1077,7 +1048,7 @@ Item {
                             : "No applications found"
             }
 
-            // Footer: current mode on the left, mode hints on the right.
+            // Footer: current mode indicator.
             Item {
                 id: footer
 
@@ -1122,68 +1093,6 @@ Item {
                         color: root.config.muted
                         font.pointSize: root.config.fontSize(0.8)
                         text: root.emojiMode ? "Emoji" : root.timerMode ? "Timer" : root.runMode ? "Bin" : "Apps"
-                    }
-
-                }
-
-                Row {
-                    anchors.right: parent.right
-                    anchors.rightMargin: 14
-                    anchors.verticalCenter: parent.verticalCenter
-                    spacing: 8
-
-                    Repeater {
-                        model: root.modes
-
-                        delegate: Item {
-                            id: hint
-
-                            required property var modelData
-                            readonly property bool active: root.mode === modelData.id
-
-                            anchors.verticalCenter: parent.verticalCenter
-                            visible: !active
-                            width: visible ? hintRow.width : 0
-                            height: root.capHeight
-
-                            Row {
-                                id: hintRow
-
-                                spacing: 5
-
-                                Text {
-                                    renderType: Text.NativeRendering
-                                    height: root.capHeight
-                                    verticalAlignment: Text.AlignVCenter
-                                    color: hint.active ? root.config.accent : root.config.muted
-                                    font.pointSize: root.config.fontSize(0.8)
-                                    text: hint.modelData.label
-                                }
-
-                                KeyCap {
-                                    label: "Ctrl"
-                                    edgeColor: hint.active ? root.config.accent : root.config.borderColor
-                                    textColor: root.config.muted
-                                    fontPointSize: root.config.fontSize(0.74)
-                                }
-
-                                KeyCap {
-                                    label: hint.modelData.key
-                                    edgeColor: hint.active ? root.config.accent : root.config.borderColor
-                                    textColor: root.config.muted
-                                    fontPointSize: root.config.fontSize(0.74)
-                                }
-
-                            }
-
-                            MouseArea {
-                                anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: root.setMode(hint.modelData.id)
-                            }
-
-                        }
-
                     }
 
                 }
