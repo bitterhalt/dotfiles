@@ -83,6 +83,30 @@ Item {
             press(Qt.Key_H, Qt.ShiftModifier); compare(controls.tabIndex, 3);
         }
 
+        function test_ctrl_arrows_switch_tabs() {
+            compare(controls.tabIndex, 0);
+            press(Qt.Key_Right, Qt.ControlModifier); compare(controls.tabIndex, 1);
+            press(Qt.Key_Left, Qt.ControlModifier); compare(controls.tabIndex, 0);
+            press(Qt.Key_Left, Qt.ControlModifier); compare(controls.tabIndex, 3);
+            press(Qt.Key_Right, Qt.ControlModifier); compare(controls.tabIndex, 0);
+            press(Qt.Key_Right); compare(fixture.speakerAudio.volume, 0.55);
+            press(Qt.Key_Right, Qt.ControlModifier); compare(fixture.speakerAudio.volume, 0.55);
+            compare(controls.tabIndex, 1);
+            press(Qt.Key_Return);
+            verify(controls.contextOpen);
+            press(Qt.Key_Left, Qt.ControlModifier);
+            verify(!controls.contextOpen);
+            compare(controls.tabIndex, 0);
+            press(Qt.Key_Question, Qt.ShiftModifier, "?");
+            verify(controls.helpOpen);
+            press(Qt.Key_Right, Qt.ControlModifier);
+            verify(!controls.helpOpen);
+            compare(controls.tabIndex, 1);
+            verify(!press(Qt.Key_Right, Qt.AltModifier));
+            verify(!press(Qt.Key_Left, Qt.MetaModifier));
+            compare(controls.tabIndex, 1);
+        }
+
         function test_volume_and_mute() {
             press(Qt.Key_Right); compare(fixture.speakerAudio.volume, 0.55);
             press(Qt.Key_H); compare(fixture.speakerAudio.volume, 0.5);
@@ -188,6 +212,10 @@ Item {
             keyClick(Qt.Key_Tab);
             compare(popupControls.tabIndex, 1);
             keyClick(Qt.Key_Tab, Qt.ShiftModifier);
+            compare(popupControls.tabIndex, 0);
+            keyClick(Qt.Key_Right, Qt.ControlModifier);
+            compare(popupControls.tabIndex, 1);
+            keyClick(Qt.Key_Left, Qt.ControlModifier);
             compare(popupControls.tabIndex, 0);
             const currentSlider = findChild(popup, "audioVolumeSlider");
             compare(currentSlider.background.color, fixture.config.muted);

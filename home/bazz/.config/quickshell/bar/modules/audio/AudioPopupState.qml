@@ -164,6 +164,12 @@ Item {
     }
 
     function handleKey(key, modifiers, text) {
+        if ((modifiers & Qt.ControlModifier) && (key === Qt.Key_Left || key === Qt.Key_Right)) {
+            // Same as the launcher: Ctrl+←/→ walks the tabs.
+            cycleTab(key === Qt.Key_Left ? -1 : 1);
+            return true;
+        }
+
         if (modifiers & (Qt.ControlModifier | Qt.AltModifier | Qt.MetaModifier))
             return false;
 

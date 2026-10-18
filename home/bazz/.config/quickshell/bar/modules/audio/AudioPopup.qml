@@ -226,8 +226,8 @@ PopoutPanel {
                         {name: "Toggle mute", key: "m"},
                         {name: "Set default output / input", key: "d"},
                         {name: "Open options", key: "Enter / c"},
-                        {name: "Previous tab", key: "Shift+Tab / H"},
-                        {name: "Next tab", key: "Tab / L"},
+                        {name: "Previous tab", key: "Ctrl+← / Shift+Tab / H"},
+                        {name: "Next tab", key: "Ctrl+→ / Tab / L"},
                         {name: "Show / hide help", key: "?"},
                         {name: "Back / close", key: "Esc"}
                     ]
