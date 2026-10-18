@@ -61,3 +61,4 @@ application/x-desktop=text.desktop;nvim.desktop;
 text/plain=nvim.desktop;
 x-scheme-handler/ror2mm=amethystmodmanager-ror2mm.desktop
 x-scheme-handler/modl=amethystmodmanager-modl.desktop
+x-scheme-handler/nxm=amethystmodmanager-nxm.desktop
