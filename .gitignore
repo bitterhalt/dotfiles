@@ -12,6 +12,7 @@
 .uuid
 .venv/
 .vscode/
+AGENTS.md
 /home/bazz/.config/service/turnstile-ready/run
 /home/bazz/.local/bin/appimage/
 /home/bazz/.local/bin/personal/
