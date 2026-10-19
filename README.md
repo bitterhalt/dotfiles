@@ -1,4 +1,3 @@
-
 # Dotfiles
 
 ![image](https://camo.githubusercontent.com/08b36d190a492dc14e60d5067ed753fff78b20c4f37d79f187b36e6d0fda010f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7374617475732d776f726b732532306f6e2532306d792532306d616368696e652d677265656e)
@@ -49,7 +48,7 @@
 <details>
 <summary>Notification History</summary>
 
-<img width="630" height="482" alt="image" src="https://github.com/user-attachments/assets/685ab9e9-c21b-4ea1-a60b-15440357988c" />
+<img width="414" height="489" alt="image" src="https://github.com/user-attachments/assets/7ff5adba-1ca4-4802-84c1-ee5872689447" />
 
 </details>
 
