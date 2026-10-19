@@ -47,6 +47,8 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Ctrl+H` | Show Notfication History |
 | `Mod+Ctrl+P` | Color Picker |
 | `Mod+Ctrl+T` | Open Translator |
+| `Mod+Ctrl+N` | Network Menu |
+| `Mod+Ctrl+B` | Bluetooth Menu |
 | `Mod+D` | Run Application Launcher |
 | `Mod+N` | Brwose Notes |
 | `Mod+Escape` | Open Power Menu |
