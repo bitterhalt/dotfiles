@@ -5,14 +5,14 @@ set -euo pipefail
 NOTES_DIR="$HOME/Documents/personal/notes"
 EDITOR="${EDITOR:-nvim}"
 TERMINAL="${TERMINAL:-foot}"
-DMENU="fuzzel -d -a top --y 24 -w 40"
+DMENU="dmenu-runner"
 
 mkdir -p "$NOTES_DIR"
 cd "$NOTES_DIR" || exit 1
 
 search_notes() {
   local selection
-  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU -l 10)
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU -p Search -l 10)
   if [ -n "$selection" ] && [ -f "$selection" ]; then
     exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/$selection"
   fi
@@ -21,7 +21,7 @@ search_notes() {
 create_note() {
   local note_name
   note_name=$(echo -n | $DMENU \
-    --placeholder "e.g., work/meeting-minutes" \
+    -p "e.g., work/meeting-minutes" \
     --minimal-lines)
   if [ -z "$note_name" ]; then
     exit 0
@@ -34,16 +34,32 @@ create_note() {
   exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$full_path"
 }
 
+landing_menu() {
+  local selection
+  selection=$(printf '%s\n' \
+    'Search' \
+    'New Note' \
+    'TODO' \
+    'Delete' | "$DMENU" -p "Notes" -l 4 --minimal-lines) || return 0
+
+  case "$selection" in
+  'Search') search_notes ;;
+  'New Note') create_note ;;
+  'TODO') exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/todo.md" ;;
+  'Delete') delete_note ;;
+  esac
+}
+
 delete_note() {
   local selection
   selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU \
-    --placeholder "Delete Note")
+    -p "Delete Note")
   if [ -z "$selection" ] || [ ! -f "$selection" ]; then
     exit 0
   fi
   local confirm
   confirm=$(echo -e "n ➜ No\ny ➜ Yes" | $DMENU \
-    --placeholder "Trash '$selection'? " \
+    -p "Trash '$selection'? " \
     --minimal-lines)
   if [[ "$confirm" == *"Yes"* ]]; then
     trash-put "$NOTES_DIR/$selection"
@@ -51,6 +67,9 @@ delete_note() {
 }
 
 case "${1:-}" in
+-s | --search)
+  search_notes
+  ;;
 -c | --create)
   create_note
   ;;
@@ -58,6 +77,6 @@ case "${1:-}" in
   delete_note
   ;;
 *)
-  search_notes
+  landing_menu
   ;;
 esac

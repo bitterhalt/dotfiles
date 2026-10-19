@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dmenu="fuzzel -d -a top --y 24 --x 24 -w 25 --minimal-lines"
+menu="dmenu-runner --minimal-lines"
 sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 
 if [ -n "$sessions" ]; then
@@ -10,16 +10,16 @@ else
 fi
 
 choice=$(echo -e "$menu_options" |
-  $dmenu "Tmux manager:")
+  $menu "Tmux manager:")
 
 case "$choice" in
 "Attach session")
-  target=$(echo "$sessions" | $dmenu "Attach to:")
+  target=$(echo "$sessions" | $menu "Attach to:")
   [ -n "$target" ] && "$TERMINAL" -e tmux attach-session -t "$target"
   ;;
 
 "New session")
-  session_name=$(echo "" | $dmenu "Name (optional):")
+  session_name=$(echo "" | $menu "Name (optional):")
   if [ -z "$session_name" ]; then
     "$TERMINAL" -e tmux new-session
   else
@@ -28,10 +28,10 @@ case "$choice" in
   ;;
 
 "Delete session")
-  target=$(echo "$sessions" | $dmenu "Kill session:")
+  target=$(echo "$sessions" | $menu "Kill session:")
 
   if [ -n "$target" ]; then
-    confirm=$(echo -e "Yes\nNo" | $dmenu "Delete $target?")
+    confirm=$(echo -e "Yes\nNo" | $menu "Delete $target?")
 
     if [ "$confirm" = "Yes" ]; then
       tmux kill-session -t "$target"
