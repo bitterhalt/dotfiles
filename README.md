@@ -40,6 +40,13 @@
 </details>
 
 <details>
+<summary>Wallpaper Browser</summary>
+
+<img width="678" height="578" alt="image" src="https://github.com/user-attachments/assets/a7130aa9-318b-429a-a393-94dbae78361c" />
+
+</details>
+
+<details>
 <summary>Notification History</summary>
 
 <img width="630" height="482" alt="image" src="https://github.com/user-attachments/assets/685ab9e9-c21b-4ea1-a60b-15440357988c" />
