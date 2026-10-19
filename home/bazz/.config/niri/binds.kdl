@@ -28,6 +28,8 @@ binds {
     Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "qs ipc call notificationCenter toggle"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
     Mod+Ctrl+T hotkey-overlay-title="Open Translator" { spawn-sh "qs ipc call translator toggle"; }
+    Mod+Ctrl+N hotkey-overlay-title="Network Menu" { spawn-sh "qs ipc call network toggle"; }
+    Mod+Ctrl+B hotkey-overlay-title="Bluetooth Menu" { spawn-sh "qs ipc call bluetooth toggle"; }
     Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "qs ipc call launcher toggle"; }
     Mod+N hotkey-overlay-title="Brwose Notes" { spawn-sh "menu_notes"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "qs ipc call power toggle"; }

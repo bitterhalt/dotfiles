@@ -1,25 +1,32 @@
 #!/usr/bin/env bash
 
-menu="dmenu-runner --minimal-lines"
+TERMINAL="${TERMINAL:-foot}"
+menu=(dmenu-runner --minimal-lines)
+
 sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 
 if [ -n "$sessions" ]; then
-  menu_options="Attach session\nNew session\nDelete session"
+  options=("Attach session" "New session" "Delete session")
 else
-  menu_options="New session"
+  options=("New session")
 fi
 
-choice=$(echo -e "$menu_options" |
-  $menu "Tmux manager:")
+choice=$(printf '%s\n' "${options[@]}" |
+  "${menu[@]}" -p "Tmux manager:") || exit 0
 
 case "$choice" in
 "Attach session")
-  target=$(echo "$sessions" | $menu "Attach to:")
-  [ -n "$target" ] && "$TERMINAL" -e tmux attach-session -t "$target"
+  target=$(printf '%s\n' "$sessions" |
+    "${menu[@]}" -p "Attach to:") || exit 0
+
+  [ -n "$target" ] &&
+    "$TERMINAL" -e tmux attach-session -t "=$target"
   ;;
 
 "New session")
-  session_name=$(echo "" | $menu "Name (optional):")
+  session_name=$("${menu[@]}" -l 0 \
+    -p "Name (optional):" </dev/null) || exit 0
+
   if [ -z "$session_name" ]; then
     "$TERMINAL" -e tmux new-session
   else
@@ -28,14 +35,16 @@ case "$choice" in
   ;;
 
 "Delete session")
-  target=$(echo "$sessions" | $menu "Kill session:")
+  target=$(printf '%s\n' "$sessions" |
+    "${menu[@]}" -p "Kill session:") || exit 0
 
-  if [ -n "$target" ]; then
-    confirm=$(echo -e "Yes\nNo" | $menu "Delete $target?")
+  [ -n "$target" ] || exit 0
 
-    if [ "$confirm" = "Yes" ]; then
-      tmux kill-session -t "$target"
-    fi
+  confirm=$(printf '%s\n' No Yes |
+    "${menu[@]}" -p "Delete $target?") || exit 0
+
+  if [ "$confirm" = "Yes" ]; then
+    tmux kill-session -t "=$target"
   fi
   ;;
 esac
