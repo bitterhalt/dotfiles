@@ -32,7 +32,7 @@ binds {
     Mod+N hotkey-overlay-title="Brwose Notes" { spawn-sh "menu_notes"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "qs ipc call power toggle"; }
     Mod+F3 { spawn-sh "foot -a keybind-cc -e nvim ~/.config/niri/keybinds.md"; }
-    Mod+F4  hotkey-overlay-title="Process Killer" { spawn-sh "qs ipc call processMenu toggle"; }
+    Mod+F4  hotkey-overlay-title="Process Killer" { spawn "menu_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_passmenu"; }
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
     Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "menu_tmuxer"; }
