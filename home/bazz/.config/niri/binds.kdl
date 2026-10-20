@@ -53,14 +53,14 @@ binds {
     Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "waytator --screenshot area"; }
 
     // Media - Volume
-    XF86AudioRaiseVolume hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "volume.sh up"; }
-    XF86AudioLowerVolume hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "volume.sh down"; }
-    Mod+WheelScrollDown hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "volume.sh down"; }
-    Mod+WheelScrollUp hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "volume.sh up"; }
-    Ctrl+Shift+Up hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "volume.sh up"; }
-    Ctrl+Shift+Down hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "volume.sh down"; }
-    XF86AudioMute hotkey-overlay-title="Mute Audio" allow-when-locked=true { spawn-sh "volume.sh mute"; }
-    XF86AudioMicMute hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioRaiseVolume hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "qs ipc call volume up"; }
+    XF86AudioLowerVolume hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "qs ipc call volume down"; }
+    Mod+WheelScrollDown cooldown-ms=100 hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "qs ipc call volume down"; }
+    Mod+WheelScrollUp cooldown-ms=100 hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "qs ipc call volume up"; }
+    Ctrl+Shift+Up hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "qs ipc call volume up"; }
+    Ctrl+Shift+Down hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "qs ipc call volume down"; }
+    XF86AudioMute hotkey-overlay-title="Mute Audio" allow-when-locked=true { spawn-sh "qs ipc call volume mute"; }
+    XF86AudioMicMute hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
     Mod+F10 hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     // Media - Playback
