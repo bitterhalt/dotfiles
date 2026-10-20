@@ -82,6 +82,19 @@ push() {
     exit 1
   }
 
+  # Auto-commit with a date if there are uncommitted changes
+  if [[ -n $(git status --porcelain) ]]; then
+    commit_message="Auto-commit: $(date '+%Y-%m-%d %H:%M:%S')"
+    echo -e "${YELLOW}[!] Uncommitted changes found, committing as:${RESET} $commit_message"
+    git add -A
+    if git commit -m "$commit_message"; then
+      echo -e "${GREEN}[✓] Auto-commit complete.${RESET}"
+    else
+      echo -e "${RED}[x] Auto-commit failed, aborting push.${RESET}"
+      exit 1
+    fi
+  fi
+
   if git push; then
     echo -e "${GREEN}[✓] Push complete.${RESET}"
   else
