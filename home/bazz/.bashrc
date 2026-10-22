@@ -2,7 +2,13 @@
 
 [[ $- != *i* ]] && return
 
-PS1="[\u@\h \W]\$ "
+# Git status
+GIT_PS1_SHOWDIRTYSTATE=1     # * unstaged, + staged
+GIT_PS1_SHOWUNTRACKEDFILES=1 # % untracked
+GIT_PS1_SHOWUPSTREAM=auto    # < behind, > ahead, <> diverged, = in sync
+
+# Prompt
+PS1='\[\e[1;35m\]\w\[\e[0m\]\[\e[90m\]$(__git_ps1 " Git:%s")\[\e[0m\]\n\[\e[34m\]\$\[\e[0m\] '
 
 set -o vi
 
@@ -20,7 +26,7 @@ shopt -s histappend
 shopt -s no_empty_cmd_completion
 
 eval "$(fzf --bash)"
-eval "$(starship init bash)"
+# eval "$(starship init bash)"
 eval "$(zoxide init --cmd cd bash)"
 
 bind "set show-all-if-ambiguous on"
@@ -42,3 +48,4 @@ tmux* | screen*)
 esac
 
 source "$HOME/.config/shell/aliases"
+source /usr/share/git/completion/git-prompt.sh
