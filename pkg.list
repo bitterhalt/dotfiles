@@ -103,7 +103,6 @@ pipewire-jack
 pipewire-pulse
 playerctl
 plocate
-polkit-gnome
 proton-authenticator-bin
 python-colorthief
 python-llfuse
