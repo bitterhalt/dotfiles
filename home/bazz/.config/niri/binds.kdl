@@ -38,7 +38,7 @@ binds {
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_passmenu"; }
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
     Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "menu_tmuxer"; }
-    Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
+    Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "foot -a Linecast -T Weather-Peek -e linecast weather"; }
 
     // Submaps
     Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "qs ipc call menu system"; }
@@ -68,8 +68,7 @@ binds {
     XF86AudioStop hotkey-overlay-title="Stop Playback" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --stop"; }
     XF86AudioPrev hotkey-overlay-title="Previous Track" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --prv"; }
     XF86AudioNext hotkey-overlay-title="Next Track" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --nxt"; }
-    Mod+Shift+M  hotkey-overlay-title="Show Current Track" { spawn-sh "~/.config/niri/scripts/mediactrl.sh --noti"; }
-    Mod+Ctrl+S hotkey-overlay-title="Open Wiremix" { spawn-sh "qs ipc call audio toggle"; }
+    Mod+Ctrl+S hotkey-overlay-title="Open Audio Mixer" { spawn-sh "qs ipc call audio toggle"; }
 
     // Hardware - Brightness
     XF86MonBrightnessUp hotkey-overlay-title="Increase Brightness" allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
