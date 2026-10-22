@@ -103,8 +103,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `XF86AudioStop` | Stop Playback |
 | `XF86AudioPrev` | Previous Track |
 | `XF86AudioNext` | Next Track |
-| `Mod+Shift+M` | Show Current Track |
-| `Mod+Ctrl+S` | Open Wiremix |
+| `Mod+Ctrl+S` | Open Audio Mixer |
 
 ## Hardware - Brightness
 
