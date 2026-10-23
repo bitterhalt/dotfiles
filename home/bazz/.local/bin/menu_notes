@@ -37,16 +37,16 @@ create_note() {
 landing_menu() {
   local selection
   selection=$(printf '%s\n' \
-    'Search' \
-    'New Note' \
-    'TODO' \
-    'Delete' | "$DMENU" -p "Notes" -l 4 --minimal-lines) || return 0
+    '󰍉 Search' \
+    '󰎚 New Note' \
+    ' TODO' \
+    '󰩹 Delete' | "$DMENU" -p "Choose" -l 4 --minimal-lines) || return 0
 
   case "$selection" in
-  'Search') search_notes ;;
-  'New Note') create_note ;;
-  'TODO') exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/todo.md" ;;
-  'Delete') delete_note ;;
+  '󰍉 Search') search_notes ;;
+  '󰎚 New Note') create_note ;;
+  ' TODO') exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/todo.md" ;;
+  '󰩹 Delete') delete_note ;;
   esac
 }
 
