@@ -43,7 +43,7 @@ binds {
     // Submaps
     Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "qs ipc call menu system"; }
     Mod+F12 hotkey-overlay-title="System Configs" { spawn-sh "qs ipc call menu settings"; }
-    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs ipc call menu theming"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs ipc call wallpaper toggle"; }
     Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "qs ipc call menu packages"; }
 
     // Screen Recording

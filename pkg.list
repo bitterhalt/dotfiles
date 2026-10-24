@@ -56,12 +56,14 @@ grub-btrfs
 gst-libav
 gst-plugin-pipewire
 gvfs
+hellwal
 htop
 imagemagick
 impala
 inotify-tools
 iwd
 jq
+lazygit
 lf
 libpulse
 libva-utils

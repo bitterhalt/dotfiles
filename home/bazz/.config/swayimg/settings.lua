@@ -27,7 +27,7 @@ swayimg.text.status_timeout = 3
 --------------------------------------------------------------------------------
 -- Colors - Load from Pywal
 --------------------------------------------------------------------------------
-local colors_path = os.getenv("HOME") .. "/.cache/wal/colors.lua"
+local colors_path = os.getenv("HOME") .. "/.cache/hellwal/colors.lua"
 local colors = nil
 
 local f = io.open(colors_path, "r")
@@ -57,8 +57,8 @@ swayimg.text.background = 0x00000000
 swayimg.text.shadow = 0xd0000000
 
 -- Gallery
-swayimg.gallery.border_color = hex_to_argb(colors.color1)
-swayimg.gallery.selected_color = hex_to_argb(colors.color8)
+swayimg.gallery.border_color = hex_to_argb(colors.selection_bg)
+swayimg.gallery.selected_color = hex_to_argb(colors.color6)
 swayimg.gallery.unselected_color = hex_to_argb(colors.color0)
 swayimg.gallery.window_color = hex_to_argb(colors.color0)
 
