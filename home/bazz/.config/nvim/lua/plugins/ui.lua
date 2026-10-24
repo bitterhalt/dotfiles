@@ -2,8 +2,9 @@ return {
 
   -- Theme
   {
-    "RedsXDD/neopywal.nvim",
+    "bitterhalt/neopywal.nvim",
     config = function()
+      require("neopywal").setup({ use_palette = "hellwal" })
       vim.cmd.colorscheme("neopywal")
     end,
   },
