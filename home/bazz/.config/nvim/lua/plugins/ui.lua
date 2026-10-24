@@ -2,10 +2,12 @@ return {
 
   -- Theme
   {
-    "bitterhalt/neopywal.nvim",
+    "bitterhalt/neohellwal.nvim",
+    lazy = false,
+    priority = 1000,
     config = function()
-      require("neopywal").setup({ use_palette = "hellwal" })
-      vim.cmd.colorscheme("neopywal")
+      require("neohellwal").setup()
+      vim.cmd.colorscheme("neohellwal-dark")
     end,
   },
 
