@@ -14,7 +14,7 @@
 - Distro: [Arch](https://archlinux.org)
 - Bar and widgets: [My Quickshell config](https://github.com/bitterhalt/slimshell)
 - WM: [Niri](https://github.com/niri-wm/niri)
-- Colors [Pywal16](https://github.com/eylles/pywal16)
+- Colors [Hellwal](https://github.com/danihek/hellwal)
 - Editor: [NeoVim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
