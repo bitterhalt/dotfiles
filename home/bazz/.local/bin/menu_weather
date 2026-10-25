@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+OPTIONS="Weather
+Moon
+Sunshine
+Sky
+Tides
+Radar
+Maps
+Weather (Month)
+Weather (Year)
+Sunshine (Year)"
+
+if ! command -v linecast &>/dev/null; then
+  notify-send -a "Linecast" -t 10000 \
+    "Linecast not installed" \
+    "Install linecast to use the weather menu"
+  exit 1
+fi
+
+CHOICE=$(printf '%s\n' "$OPTIONS" | dmenu-runner -l 10)
+
+[ -z "$CHOICE" ] && exit 0
+
+case "$CHOICE" in
+"Weather") args=(weather) ;;
+"Moon") args=(moon) ;;
+"Sunshine") args=(sunshine) ;;
+"Sky") args=(sky) ;;
+"Tides") args=(tides) ;;
+"Radar") args=(radar) ;;
+"Maps") args=(maps) ;;
+"Weather (Month)") args=(weather --month) ;;
+"Weather (Year)") args=(weather --year) ;;
+"Sunshine (Year)") args=(sunshine --year) ;;
+*) exit 0 ;;
+esac
+
+exec "${TERMINAL:-foot}" -a Linecast \
+  -T Weather-Peek -e linecast "${args[@]}"

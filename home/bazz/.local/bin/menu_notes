@@ -40,7 +40,7 @@ landing_menu() {
     '󰍉 Search' \
     '󰎚 New Note' \
     ' TODO' \
-    '󰩹 Delete' | "$DMENU" -p "Choose" -l 4 --minimal-lines) || return 0
+    '󰩹 Delete' | "$DMENU" -p "Choose" --minimal-lines) || return 0
 
   case "$selection" in
   '󰍉 Search') search_notes ;;

@@ -107,6 +107,7 @@ playerctl
 plocate
 proton-authenticator-bin
 python-colorthief
+python-filelock
 python-llfuse
 python-pipx
 python-pydbus

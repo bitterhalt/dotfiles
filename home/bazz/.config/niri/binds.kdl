@@ -38,7 +38,7 @@ binds {
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_passmenu"; }
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
     Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "menu_tmuxer"; }
-    Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "foot -a Linecast -T Weather-Peek -e linecast weather"; }
+    Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn "menu_weather"; }
 
     // Submaps
     Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "qs ipc call menu system"; }
