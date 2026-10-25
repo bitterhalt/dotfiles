@@ -42,3 +42,25 @@ function rename_image()
 		end
 	end
 end
+
+function run_hellwal()
+	local image = nil
+	local mode = swayimg.mode
+	if mode == "gallery" then
+		image = swayimg.gallery.get_image()
+	elseif mode == "viewer" then
+		image = swayimg.viewer.get_image()
+	end
+
+	if not image or not image.path then
+		return
+	end
+
+	os.execute(
+		string.format(
+			"( out=$(setbg -p %s 2>&1) || notify-send 'Wallpaper failed' \"$out\" ) >/dev/null 2>&1 &",
+			shellescape(image.path)
+		)
+	)
+	swayimg.text.status = "Applying wallpaper + hellwal..."
+end

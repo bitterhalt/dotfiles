@@ -1,0 +1,140 @@
+#!/usr/bin/env bash
+
+get_resolution() {
+  if ! command -v wlr-randr >/dev/null 2>&1; then
+    echo "Error: wlr-randr is not installed." >&2
+    return 1
+  fi
+
+  local out
+  out=$(wlr-randr | awk '
+    /^[^[:space:]]/ { enabled = 0 }
+    /Enabled: yes/ { enabled = 1 }
+    /current/ {
+      if (enabled && match($0, /[0-9]+x[0-9]+/)) {
+        split(substr($0, RSTART, RLENGTH), r, "x")
+        print r[1], r[2]
+        exit
+      }
+    }
+  ')
+
+  if [[ -n "$out" ]]; then
+    local res=($out)
+    echo "${res[0]} ${res[1]}"
+    return 0
+  fi
+
+  return 1
+}
+
+_apply_wallpaper() {
+  local path="$1"
+
+  [[ -f "$path" ]] || {
+    echo "Error: '$path' does not exist." >&2
+    return 1
+  }
+
+  local res_data
+  res_data=$(get_resolution) || {
+    echo "Error: failed to detect resolution." >&2
+    return 1
+  }
+
+  local res=($res_data)
+  local w="${res[0]}"
+  local h="${res[1]}"
+
+  local dir="$HOME/.local/share/wall/"
+  local out="${dir}wallpaper.png"
+  local lockscreen="${dir}lockscreen.png"
+
+  mkdir -p "$dir"
+
+  magick "$path" \
+    -resize "${w}x${h}^" \
+    -gravity center \
+    -extent "${w}x${h}" \
+    "$out" || return 1
+
+  awww img "$out" \
+    --transition-type=any \
+    --transition-step=60 \
+    --transition-fps=60 \
+    --transition-duration=.7
+
+  magick "$out" \
+    -blur 0x55 \
+    -modulate 80 \
+    "$lockscreen" || return 1
+
+  awww img -n overview "$lockscreen" --transition-type=none
+}
+
+_refresh_portals() {
+  local portals=(
+    "xdg-desktop-portal-gtk"
+    "xdg-desktop-portal-gnome"
+    "xdg-desktop-portal-hyprland"
+    "xdg-desktop-portal-wlr"
+  )
+
+  for portal in "${portals[@]}"; do
+    if systemctl --user is-active "$portal" >/dev/null 2>&1; then
+      echo "Restarting $portal via systemd..."
+      systemctl --user restart "$portal"
+    else
+      if pgrep -f "$portal" >/dev/null 2>&1; then
+        echo "Killing active instance of $portal..."
+        pkill -f "$portal"
+        sleep 0.2
+      fi
+
+      for libdir in /usr/lib /usr/libexec /usr/lib/xdg-desktop-portal; do
+        if [[ -x "$libdir/$portal" ]]; then
+          echo "Manually starting $portal from $libdir..."
+          "$libdir/$portal" &>/dev/null &
+          break
+        fi
+      done
+    fi
+  done
+
+  if systemctl --user is-active xdg-desktop-portal >/dev/null 2>&1; then
+    systemctl --user restart xdg-desktop-portal
+  else
+    pkill -f xdg-desktop-portal
+    for libdir in /usr/lib /usr/libexec; do
+      if [[ -x "$libdir/xdg-desktop-portal" ]]; then
+        "$libdir/xdg-desktop-portal" &>/dev/null &
+        break
+      fi
+    done
+  fi
+}
+
+setwall() {
+  _apply_wallpaper "$1"
+}
+
+hellwal_theme() {
+  _apply_wallpaper "$1" || return 1
+  hellwal -i "$HOME/.local/share/wall/wallpaper.png" --comfort-mode --dark-offset 0.3
+  _refresh_portals
+}
+
+case "$1" in
+-w)
+  shift
+  setwall "$1"
+  ;;
+-p)
+  shift
+  hellwal_theme "$1"
+  ;;
+*)
+  echo "Usage: $0 {-w|-p} path/to/wallpaper"
+  exit 1
+  ;;
+esac

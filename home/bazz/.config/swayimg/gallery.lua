@@ -10,8 +10,7 @@ swayimg.gallery.pstore = true
 
 swayimg.gallery.text = {
 	topleft = {
-		"[b] -> Set Wallpaper",
-		"[p] -> Wallpaper with Pywal",
+		"[b] -> Set Wallpaper with Hellwal",
 		"[Shift+p] -> Wallpaper with Pywal alternative",
 	},
 	topright = {
@@ -91,13 +90,7 @@ end)
 
 swayimg.gallery.on_key("b", function()
 	with_image(function(image)
-		os.execute("setbg -w " .. shellescape(image.path) .. " & disown")
-	end)
-end)
-
-swayimg.gallery.on_key("p", function()
-	with_image(function(image)
-		os.execute("setbg -p " .. shellescape(image.path) .. " & disown")
+		os.execute("~/.config/swayimg/setbg.sh -p " .. shellescape(image.path) .. " & disown")
 	end)
 end)
 

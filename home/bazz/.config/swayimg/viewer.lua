@@ -147,13 +147,7 @@ end)
 
 swayimg.viewer.on_key("b", function()
 	with_image(function(image)
-		os.execute("setbg -w " .. shellescape(image.path) .. " & disown")
-	end)
-end)
-
-swayimg.viewer.on_key("p", function()
-	with_image(function(image)
-		os.execute("setbg -p " .. shellescape(image.path) .. " & disown")
+		os.execute("~/.config/swayimg/setbg.sh -p " .. shellescape(image.path) .. " & disown")
 	end)
 end)
 
