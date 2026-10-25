@@ -7,7 +7,7 @@ return {
     priority = 1000,
     config = function()
       require("neohellwal").setup()
-      vim.cmd.colorscheme("neohellwal-dark")
+      vim.cmd.colorscheme("neohellwal")
     end,
   },
 
