@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-# Stop existing cliphist watchers
 pkill -f '^wl-paste --type (text|image) --watch cliphist store$' || true
+cliphist wipe
 
-# Restart watchers
 wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
