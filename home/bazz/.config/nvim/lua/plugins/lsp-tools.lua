@@ -19,18 +19,20 @@ return {
           },
         },
       })
+
       mason_tool_installer.setup({
         ensure_installed = {
-          "prettier", -- prettier formatter
-          "stylua", -- lua formatter
-          "eslint_d", -- js linter
-          "shfmt", -- Shell formatter
+          "prettier",
+          "stylua",
+          "eslint_d",
+          "shfmt",
           "shellcheck",
         },
       })
     end,
   },
 
+  -- Mason LSP Config
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = true,
@@ -145,7 +147,7 @@ return {
     end,
   },
 
-  -- nvim-lspconfig
+  -- Nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -183,18 +185,17 @@ return {
     },
   },
 
-  -- nvim-cmp
+  -- Nvim-cmp
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-buffer", -- text from currrent buffer
-      "hrsh7th/cmp-path", -- file system paths
-      "hrsh7th/cmp-nvim-lsp", --  nvim language servers
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lsp",
       {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
-        -- install jsregexp (optional!).
         build = "make install_jsregexp",
       },
       "rafamadriz/friendly-snippets",
@@ -205,22 +206,65 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
+
       require("luasnip.loaders.from_vscode").lazy_load()
 
+      -- Follow the current Neopywal colorscheme
+      vim.api.nvim_set_hl(0, "CmpMenu", { link = "NormalFloat" })
+      vim.api.nvim_set_hl(0, "CmpBorder", { link = "NormalFloat" })
+      vim.api.nvim_set_hl(0, "CmpSelected", { link = "Visual" })
+
+      local function setup_cmp_colors()
+        local normal = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
+        local bg = normal.bg or 0x121212
+
+        local function lighten(color, amount)
+          local r = math.min(255, math.floor(bit.rshift(color, 16) + amount))
+          local g = math.min(255, math.floor(bit.band(bit.rshift(color, 8), 255) + amount))
+          local b = math.min(255, math.floor(bit.band(color, 255) + amount))
+
+          return string.format("#%02x%02x%02x", r, g, b)
+        end
+
+        vim.api.nvim_set_hl(0, "CmpMenu", {
+          bg = lighten(bg, 18),
+          fg = normal.fg,
+        })
+
+        vim.api.nvim_set_hl(0, "CmpSelected", {
+          bg = lighten(bg, 40),
+          fg = normal.fg,
+          bold = true,
+        })
+      end
+
+      setup_cmp_colors()
+
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = setup_cmp_colors,
+      })
       cmp.setup({
         completion = {
           completeopt = "menu,menuone,preview,noselect",
         },
-        snippet = { -- configure how nvim-cmp interacts with snippet engine
+
+        snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
+
         window = {
           completion = cmp.config.window.bordered({
-            winhighlight = "FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
+            winblend = 0,
+            winhighlight = "Normal:CmpMenu,FloatBorder:CmpMenu,CursorLine:CmpSelected,Search:None",
+          }),
+          documentation = cmp.config.window.bordered({
+            winblend = 0,
+            winhighlight = "Normal:CmpMenu,FloatBorder:CmpMenu",
           }),
         },
+
         mapping = cmp.mapping.preset.insert({
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -232,7 +276,6 @@ return {
           }),
         }),
 
-        -- sources for autocompletion
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
@@ -240,7 +283,6 @@ return {
           { name = "path" },
         }),
 
-        -- configure lspkind for vs-code like pictograms in completion menu
         formatting = {
           format = lspkind.cmp_format({
             maxwidth = 50,
