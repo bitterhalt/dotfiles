@@ -49,8 +49,8 @@ binds {
     // Screen Recording
     // Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
     Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "qs ipc call recorder stop"; }
-    Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { spawn-sh "waytator --screenshot screen --notify"; }
-    Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "waytator --screenshot area"; }
+    Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { spawn-sh "wl-shot -f"; }
+    Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "wl-shot -re"; }
 
     // Media - Volume
     XF86AudioRaiseVolume hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "qs ipc call volume up"; }

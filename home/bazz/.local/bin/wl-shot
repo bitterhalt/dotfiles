@@ -9,7 +9,7 @@ SAVEDIR="${HOME}/Pictures/Screenshots"
 mkdir -p -- "$SAVEDIR"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FILENAME="$SAVEDIR/${TIMESTAMP}_screenshot.png"
-NOTI="notify-send -a wl-shot -t 5000"
+NOTI="notify-send -a wl-shot -t 5000 -i camera"
 
 fullscreen() {
   grim "$FILENAME"
