@@ -1,8 +1,7 @@
 --------------------------------------------------------------------------------
 -- Viewer mode
 --------------------------------------------------------------------------------
-swayimg.viewer.default_position = "center"
-swayimg.viewer.autocenter = true
+swayimg.viewer.autopos = "center"
 swayimg.viewer.loop = true
 swayimg.viewer.preload = 1
 
@@ -101,42 +100,27 @@ swayimg.viewer.on_key("c", function()
 	swayimg.viewer.set_fix_scale("width")
 end)
 
-swayimg.viewer.on_mouse("ScrollLeft", function()
-	local wnd = swayimg.get_window_size()
-	local pos = swayimg.viewer.get_position()
-	swayimg.viewer.set_abs_position(math.floor(pos.x - wnd.width * 0.05), pos.y)
-end)
+swayimg.viewer.on_scroll(function(kmods, horizontal, vertical)
+	horizontal = horizontal or 0
+	vertical = vertical or 0
 
-swayimg.viewer.on_mouse("ScrollRight", function()
-	local wnd = swayimg.get_window_size()
-	local pos = swayimg.viewer.get_position()
-	swayimg.viewer.set_abs_position(math.floor(pos.x + wnd.width * 0.05), pos.y)
+	if kmods == "Ctrl" then
+		-- zoom around the mouse pointer
+		if vertical ~= 0 then
+			local mouse = swayimg.get_mouse_pos()
+			local scale = swayimg.viewer.scale
+			swayimg.viewer.set_abs_scale(scale - scale * vertical / 10, mouse.x, mouse.y)
+		end
+	else
+		-- pan by 5% of the window per wheel notch
+		local wnd = swayimg.get_window_size()
+		local pos = swayimg.viewer.get_position()
+		swayimg.viewer.set_abs_position(
+			math.floor(pos.x + wnd.width * 0.05 * horizontal),
+			math.floor(pos.y + wnd.height * 0.05 * vertical)
+		)
+	end
 end)
-
-swayimg.viewer.on_mouse("ScrollUp", function()
-	local wnd = swayimg.get_window_size()
-	local pos = swayimg.viewer.get_position()
-	swayimg.viewer.set_abs_position(pos.x, math.floor(pos.y - wnd.height * 0.05))
-end)
-
-swayimg.viewer.on_mouse("ScrollDown", function()
-	local wnd = swayimg.get_window_size()
-	local pos = swayimg.viewer.get_position()
-	swayimg.viewer.set_abs_position(pos.x, math.floor(pos.y + wnd.height * 0.05))
-end)
-
-swayimg.viewer.on_mouse("Ctrl-ScrollUp", function()
-	local pos = swayimg.get_mouse_pos()
-	local scale = swayimg.viewer.scale
-	swayimg.viewer.set_abs_scale(scale + scale / 10, pos.x, pos.y)
-end)
-
-swayimg.viewer.on_mouse("Ctrl-ScrollDown", function()
-	local pos = swayimg.get_mouse_pos()
-	local scale = swayimg.viewer.scale
-	swayimg.viewer.set_abs_scale(scale - scale / 10, pos.x, pos.y)
-end)
-
 swayimg.viewer.on_mouse("MouseSide", function()
 	swayimg.viewer.open("prev")
 end)

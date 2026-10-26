@@ -13,7 +13,7 @@ layout {
     }
 
     shadow {
-        color "%%color0.hex%%70"
+        color "0007"
     }
 
     tab-indicator {
