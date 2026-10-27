@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 notify-send \
+  -i clock \
   -a time-noti \
   -t 5000 \
   "$(date '+%H:%M')" \

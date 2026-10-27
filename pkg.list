@@ -66,6 +66,7 @@ jq
 lazygit
 lf
 libpulse
+libqalculate
 libva-utils
 libvips
 linux
@@ -85,7 +86,6 @@ net-tools
 nethogs
 networkmanager
 niri
-noctalia
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra

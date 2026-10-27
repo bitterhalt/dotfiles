@@ -89,7 +89,7 @@ window-rule {
 window-rule {
     match app-id="Linecast" title="Weather-Peek"
     open-floating true
-    default-column-width { proportion 0.60; }
+    default-column-width { proportion 0.45; }
     default-window-height { proportion 0.60; }
     default-floating-position x=16 y=16 relative-to="top"
 }
