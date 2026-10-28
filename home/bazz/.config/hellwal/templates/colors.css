@@ -1,13 +1,8 @@
 @define-color background #%%background%%;
 @define-color foreground #%%foreground%%;
-@define-color cursor #%%cursor%%;
-@define-color border #%%border%%;
 
-@define-color accent #%%accent.hex%%;
-@define-color accent_foreground #%%accent_foreground.hex%%;
 @define-color selection_background #%%selection_background.hex%%;
 @define-color selection_foreground #%%selection_foreground.hex%%;
-@define-color cursor_text #%%cursor_text.hex%%;
 
 @define-color color0 #%%color0.hex%%;
 @define-color color1 #%%color1.hex%%;
