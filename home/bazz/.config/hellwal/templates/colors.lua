@@ -3,7 +3,7 @@ return {
 	background = "#%%background%%",
 	foreground = "#%%foreground%%",
 	cursor = "#%%cursor%%",
-	selection_bg = "#%%selection_background%%",
+	selection_bg = "#%%color6%%",
 
 	color0 = "#%%color0%%",
 	color1 = "#%%color1%%",

@@ -281,13 +281,12 @@ window-rule {
 layer-rule {
     geometry-corner-radius 4
     match namespace="slim-launcher"
-    match namespace="slim-notifications"
-    match namespace="slim-notification-center"
-    match namespace="slim-wallpaper-picker"
-    match namespace="slim-barpopup"
+    // match namespace="slim-notifications"
+    // match namespace="slim-notification-center"
+    // match namespace="slim-wallpaper-picker"
+    // match namespace="slim-barpopup"
     // match namespace="slim-submenu"
     // match namespace="slim-osd"
-    match namespace="slim-weather"
     shadow {
       on
     }

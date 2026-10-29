@@ -1,13 +1,13 @@
 layout {
 
     focus-ring {
-        active-color   "%%selection_background.hex%%"
+        active-color   "%%color6.hex%%"
         inactive-color "%%background.hex%%"
         urgent-color   "%%color1.hex%%"
     }
 
     border {
-        active-color   "%%selection_background.hex%%"
+        active-color   "%%color6.hex%%"
         inactive-color "%%background.hex%%"
         urgent-color   "%%color1.hex%%"
     }
@@ -17,8 +17,8 @@ layout {
     }
 
     tab-indicator {
-        active-color   "%%selection_background.hex%%"
-        inactive-color "%%selection_background.hex%%60"
+        active-color   "%%color6.hex%%"
+        inactive-color "%%color6.hex%%60"
         urgent-color   "%%color1.hex%%"
     }
 

@@ -1,9 +1,6 @@
 @define-color background #%%background%%;
 @define-color foreground #%%foreground%%;
 
-@define-color selection_background #%%selection_background.hex%%;
-@define-color selection_foreground #%%selection_foreground.hex%%;
-
 @define-color color0 #%%color0.hex%%;
 @define-color color1 #%%color1.hex%%;
 @define-color color2 #%%color2.hex%%;
