@@ -70,17 +70,30 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+
     config = function()
       require("fzf-lua").setup({
+        { "default", "hide" },
+
         winopts = {
           fullscreen = false,
         },
+
+        grep = {
+          fzf_opts = {
+            ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-grep-history",
+          },
+        },
       })
     end,
+
     keys = {
       { "<leader>ff", "<Cmd>FzfLua files<CR>", desc = "Search files" },
       { "<leader><tab>", "<Cmd>FzfLua buffers<CR>", desc = "Search buffers" },
-      { "<leader>fw", "<Cmd>FzfLua live_grep<CR>", desc = "Search for a pattern" },
+
+      { "<leader>fw", "<Cmd>FzfLua live_grep resume=true<CR>", desc = "Resume live grep" },
+      { "<leader>fW", "<Cmd>FzfLua live_grep<CR>", desc = "New live grep" },
+
       { "<leader>fr", "<Cmd>FzfLua oldfiles<CR>", desc = "Search recent files" },
       { "<leader>fz", "<Cmd>FzfLua zoxide<CR>", desc = "List recent directories" },
     },
