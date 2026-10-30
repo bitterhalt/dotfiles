@@ -58,6 +58,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+F8` | Screen Record Menu |
 | `Mod+Shift+T` | Tmux Helper |
 | `Mod+Ctrl+W` | Display Weather |
+| `Mod+Ctrl+I` | Idle Setting |
 
 ## Submaps
 
