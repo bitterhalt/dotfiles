@@ -45,4 +45,4 @@ vim.keymap.set("n", "<leader>bt", "<CMD>:tab sball<CR>")
 vim.keymap.set("n", "<leader>bc", "<CMD>:tabo<CR>")
 
 -- Close buffers
-vim.keymap.set("n", "<S-q>", "<cmd>bdelete<CR>")
+vim.keymap.set("n", "<S-q>", "<cmd>bd<CR>")

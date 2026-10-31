@@ -3,6 +3,7 @@ return {
   -- Tfm (file manager)
   {
     "rolv-apneseth/tfm.nvim",
+    lazy = false,
     cmd = "Tfm",
     opts = {
       file_manager = "lf",
@@ -96,46 +97,6 @@ return {
 
       { "<leader>fr", "<Cmd>FzfLua oldfiles<CR>", desc = "Search recent files" },
       { "<leader>fz", "<Cmd>FzfLua zoxide<CR>", desc = "List recent directories" },
-    },
-  },
-
-  -- Persistence
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    config = true,
-    keys = {
-      {
-        "<leader>ss",
-        function()
-          require("persistence").load()
-        end,
-        desc = "Restore last session",
-      },
-      {
-        "<leader>sl",
-        function()
-          local persistence = require("persistence")
-          local fzf = require("fzf-lua")
-          local sessions = persistence.list()
-
-          if #sessions == 0 then
-            vim.notify("No sessions found", vim.log.levels.WARN)
-            return
-          end
-
-          fzf.fzf_exec(sessions, {
-            actions = {
-              ["default"] = function(selected)
-                if selected and selected[1] then
-                  persistence.load({ last = false, file = selected[1] })
-                end
-              end,
-            },
-          })
-        end,
-        desc = "Select session (fzf-lua)",
-      },
     },
   },
 
