@@ -49,16 +49,33 @@ return {
       },
       buffers = {
         enabled = true,
-        max_name_length = 20,
+        max_name_length = 15, -- follows min_width when omitted
+        min_width = 15, -- fixed buffer slot width (columns)
         close_icon = "×", -- empty string hides the close button
         modified_icon = "󰧞",
         exclude_filetypes = {}, -- e.g. { "qf", "help" }
         exclude_buftypes = {}, -- e.g. { "terminal" }
       },
-      diagnostics = { enabled = true, error = "E!", warn = "W!" },
+      diagnostics = { enabled = true, error = " ", warn = " " },
       git = { enabled = true, icon = "", max_length = 24 },
       cursor = { enabled = true, separator = " | ", progress = false },
       highlights = {},
+    },
+    keys = {
+      {
+        "<leader>bp",
+        function()
+          require("slimline").toggle_pin()
+        end,
+        desc = "Toggle buffer pin",
+      },
+      {
+        "<leader>bn",
+        function()
+          require("slimline").next_pin()
+        end,
+        desc = "Next pinned buffer",
+      },
     },
   },
 }
