@@ -10,7 +10,7 @@ return {
       replace_netrw = true,
       enable_cmds = true,
       ui = {
-        border = "single",
+        border = "rounded",
         height = 1,
         width = 1,
         x = 0.5,
