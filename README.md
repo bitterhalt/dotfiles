@@ -25,64 +25,15 @@
 
 ## Screenshots
 
-<img width="1920" height="1080" alt="2026-10-15-01-48-38" src="https://github.com/user-attachments/assets/c834c214-4282-4d3e-a188-8a7e93754e04" />
+![Slimshell desktop](https://raw.githubusercontent.com/bitterhalt/slimshell/master/assets/desk.png)
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d362e791-b931-4ac9-9369-7f47868c4fa7" />
+![Slimshell desktop](https://raw.githubusercontent.com/bitterhalt/slimshell/master/assets/lock.png)
 
-## Widgets
+> More in [gallery](https://github.com/bitterhalt/slimshell#gallery)
 
-<details>
-<summary>Launcher</summary>
+## Binds
 
-<img width="487" height="468" alt="image" src="https://github.com/user-attachments/assets/06762e68-4f05-4266-9ac0-2ef6d6397d18" />
-
-</details>
-
-<details>
-<summary>Wallpaper Browser</summary>
-
-<img width="678" height="578" alt="image" src="https://github.com/user-attachments/assets/a7130aa9-318b-429a-a393-94dbae78361c" />
-
-</details>
-
-<details>
-<summary>Notification History</summary>
-
-<img width="414" height="489" alt="image" src="https://github.com/user-attachments/assets/7ff5adba-1ca4-4802-84c1-ee5872689447" />
-
-</details>
-
-<details>
-<summary>Wifi</summary>
-
-<img width="326" height="350" alt="image" src="https://github.com/user-attachments/assets/9ca1f7f9-0422-47b2-93ca-fb44a4bafaef" />
-
-</details>
-
-<details>
-<summary>BT</summary>
-
-<img width="371" height="345" alt="image" src="https://github.com/user-attachments/assets/4900c6e1-ea47-4c93-ba7a-a83b6cf94dd4" />
-
-</details>
-
-<details>
-<summary>Audio</summary>
-
-<img width="533" height="297" alt="image" src="https://github.com/user-attachments/assets/d59e9d98-736e-402a-a3d8-9fc6313afd2d" />
-
-</details>
-
-<details>
-<summary>Deepl Translator</summary>
-
-<img width="602" height="491" alt="2026-10-15-01-49-06_screenshot" src="https://github.com/user-attachments/assets/52ac1621-61bc-4db2-a8ec-b04b55dfadc8" />
-
-</details>
-
-### Keybinds
-
-Go to ➡️ **[Keybindings](home/bazz/.config/niri/keybinds.md)**
+- **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 
 ---
 
