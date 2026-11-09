@@ -56,7 +56,12 @@ return {
         exclude_filetypes = {}, -- e.g. { "qf", "help" }
         exclude_buftypes = {}, -- e.g. { "terminal" }
       },
-      diagnostics = { enabled = true, error = " ", warn = " " },
+      diagnostics = {
+        enabled = true,
+        error = " ",
+        warn = " ",
+        colors = { error = "#ff5555", warn = "#f1c40f" },
+      },
       git = { enabled = true, icon = "", max_length = 24 },
       cursor = { enabled = true, separator = " | ", progress = false },
       highlights = {},
