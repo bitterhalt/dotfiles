@@ -76,6 +76,13 @@ return {
         end,
         desc = "Next pinned buffer",
       },
+      {
+        "<leader>bh",
+        function()
+          require("slimline").toggle_buffers()
+        end,
+        desc = "Toggle Slimline buffers",
+      },
     },
   },
 }

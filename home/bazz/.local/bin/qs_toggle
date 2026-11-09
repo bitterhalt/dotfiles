@@ -1,4 +1,1 @@
-#!/usr/bin/env bash
-
-pkill -x qs
-qs --no-detailed-logs &
+/home/bazz/Documents/projects/quickshell/scripts/qs_toggle

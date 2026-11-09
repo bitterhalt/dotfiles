@@ -9,15 +9,8 @@ swayimg.gallery.preload = false
 swayimg.gallery.pstore = true
 
 swayimg.gallery.text = {
-	topleft = {
-		"[b] -> Set Wallpaper with Hellwal",
-		"[Shift+p] -> Wallpaper with Pywal alternative",
-	},
-	topright = {
-		"[e] -> Edit",
-		"[y] -> Copy to Clipboard",
-		"[r] -> Rename File",
-	},
+	topleft = {},
+	topright = {},
 	bottomleft = { "{list.index} of {list.total}" },
 	bottomright = { "{name}" },
 }

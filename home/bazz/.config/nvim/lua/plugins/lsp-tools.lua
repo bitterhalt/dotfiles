@@ -91,7 +91,6 @@ return {
           html = { "prettier" },
           json = { "prettier" },
           jsonc = { "prettier" },
-          qml = { "qmlformat" },
           yaml = { "prettier" },
           markdown = { "prettier" },
           graphql = { "prettier" },
