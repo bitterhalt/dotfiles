@@ -5,7 +5,6 @@
 - Philosophy:
   - Keyboard driven workflow
   - Less clutter - a clear working environment
-  - Low resource usage
   - Simplicity
   - Speed before eye candy
 
