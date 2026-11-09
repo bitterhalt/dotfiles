@@ -42,23 +42,26 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 | Key | Action |
 | --- | ------ |
+| `Mod+Ctrl+B` | Bluetooth Menu |
 | `Mod+Ctrl+C` | Open Clipboard |
 | `Mod+Ctrl+D` | Hide Notification Pop-ups |
+| `Mod+Ctrl+E` | Emoji Picker |
 | `Mod+Ctrl+H` | Show Notfication History |
+| `Mod+Ctrl+I` | Idle Setting |
+| `Mod+Ctrl+N` | Network Menu |
 | `Mod+Ctrl+P` | Color Picker |
 | `Mod+Ctrl+T` | Open Translator |
-| `Mod+Ctrl+N` | Network Menu |
-| `Mod+Ctrl+B` | Bluetooth Menu |
+| `Mod+Ctrl+W` | Display Weather |
 | `Mod+D` | Run Application Launcher |
-| `Mod+N` | Brwose Notes |
 | `Mod+Escape` | Open Power Menu |
 | `Mod+F3` | Launch program |
 | `Mod+F4` | Process Killer |
 | `Mod+F5` | Passwords and AUTH |
 | `Mod+F8` | Screen Record Menu |
+| `Mod+N` | Browse Notes |
+| `Mod+S` | Find Files |
+| `Mod+Shift+D` | Run Launcher |
 | `Mod+Shift+T` | Tmux Helper |
-| `Mod+Ctrl+W` | Display Weather |
-| `Mod+Ctrl+I` | Idle Setting |
 
 ## Submaps
 
