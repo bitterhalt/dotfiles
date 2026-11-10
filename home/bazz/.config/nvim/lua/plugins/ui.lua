@@ -49,6 +49,7 @@ return {
       },
       buffers = {
         enabled = true,
+        position = "bottom", -- "top" moves the buffer list to the tabline
         max_name_length = 15, -- follows min_width when omitted
         min_width = 15, -- fixed buffer slot width (columns)
         close_icon = "×", -- empty string hides the close button
@@ -58,13 +59,16 @@ return {
       },
       diagnostics = {
         enabled = true,
-        error = " ",
-        warn = " ",
+        -- error = "E ",
+        -- warn = "W ",
         colors = { error = "#ff5555", warn = "#f1c40f" },
       },
       git = { enabled = true, icon = "", max_length = 24 },
       cursor = { enabled = true, separator = " | ", progress = false },
-      highlights = {},
+      highlights = {
+        -- SlimlineActive = { bold = true },
+        SlimlinePin = { fg = "#ff79c6" },
+      },
     },
     keys = {
       {
@@ -87,6 +91,13 @@ return {
           require("slimline").toggle_buffers()
         end,
         desc = "Toggle Slimline buffers",
+      },
+      {
+        "<leader>bd",
+        function()
+          require("slimline").close_buffer()
+        end,
+        desc = "Close buffer",
       },
     },
   },
