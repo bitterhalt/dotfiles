@@ -12,7 +12,7 @@ else
 fi
 
 choice=$(printf '%s\n' "${options[@]}" |
-  "${menu[@]}" -p "Tmux manager:") || exit 0
+  "${menu[@]}" -p "Tmux manager") || exit 0
 
 case "$choice" in
 "Attach session")

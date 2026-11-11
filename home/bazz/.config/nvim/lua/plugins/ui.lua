@@ -61,16 +61,31 @@ return {
         enabled = true,
         -- error = "E ",
         -- warn = "W ",
-        colors = { error = "#ff5555", warn = "#f1c40f" },
+        colors = { error = "#cc241d", warn = "#d79921" },
       },
       git = { enabled = true, icon = "", max_length = 24 },
       cursor = { enabled = true, separator = " | ", progress = false },
       highlights = {
         -- SlimlineActive = { bold = true },
-        SlimlinePin = { fg = "#ff79c6" },
+        SlimlinePin = { fg = "#b16286" },
+        -- SlimlineSaved = { fg = "#98971a" },
       },
     },
     keys = {
+      {
+        "<S-l>",
+        function()
+          require("slimline").next_buffer()
+        end,
+        desc = "Next buffer",
+      },
+      {
+        "<S-h>",
+        function()
+          require("slimline").prev_buffer()
+        end,
+        desc = "Previous buffer",
+      },
       {
         "<leader>bp",
         function()

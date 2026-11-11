@@ -58,7 +58,6 @@ window-rule {
     open-floating true
     default-column-width { proportion 0.40; }
     default-window-height { proportion 0.95; }
-    default-floating-position x=16 y=16 relative-to="top"
 }
 
 window-rule {

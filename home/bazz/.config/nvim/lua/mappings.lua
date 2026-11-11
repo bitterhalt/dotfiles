@@ -5,8 +5,8 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>")
 
 -- move between buffers
-vim.keymap.set("n", "<S-l>", "<CMD>:bnext<CR>")
-vim.keymap.set("n", "<S-h>", "<CMD>:bprevious<CR>")
+-- vim.keymap.set("n", "<S-l>", "<CMD>:bnext<CR>")
+-- vim.keymap.set("n", "<S-h>", "<CMD>:bprevious<CR>")
 
 -- Move around splits using Ctrl + {h,j,k,l}
 vim.keymap.set("n", "<C-h>", "<C-w>h")

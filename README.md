@@ -30,7 +30,7 @@
 
 > More in [gallery](https://github.com/bitterhalt/slimshell#gallery)
 
-## Binds
+### Binds
 
 - **[Keybindings](home/bazz/.config/niri/keybinds.md)**
 
