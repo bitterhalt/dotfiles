@@ -1,1 +1,5 @@
-/home/bazz/Documents/projects/quickshell/scripts/qs_toggle
+#!/usr/bin/env bash
+
+pkill -x qs
+sleep 0.500
+qs --no-detailed-logs &
