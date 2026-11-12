@@ -12,7 +12,7 @@ cd "$NOTES_DIR" || exit 1
 
 search_notes() {
   local selection
-  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU --hide-prompt -l 10)
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU -p Search -l 10)
   if [ -n "$selection" ] && [ -f "$selection" ]; then
     exec "$TERMINAL" -a noteterm -T Notes -e "$EDITOR" "$NOTES_DIR/$selection"
   fi
@@ -21,7 +21,7 @@ search_notes() {
 create_note() {
   local note_name
   note_name=$(echo -n | $DMENU \
-    --hide-prompt \
+    -p "e.g., work/meeting-minutes" \
     --minimal-lines)
   if [ -z "$note_name" ]; then
     exit 0
@@ -40,7 +40,7 @@ landing_menu() {
     '󰍉 Search' \
     '󰎚 New Note' \
     ' TODO' \
-    '󰩹 Delete' | "$DMENU" --hide-prompt --minimal-lines) || return 0
+    '󰩹 Delete' | "$DMENU" -p "Choose" --minimal-lines) || return 0
 
   case "$selection" in
   '󰍉 Search') search_notes ;;
@@ -59,7 +59,7 @@ delete_note() {
   fi
   local confirm
   confirm=$(echo -e "n ➜ No\ny ➜ Yes" | $DMENU \
-    --hide-prompt \
+    -p "Trash '$selection'? " \
     --minimal-lines)
   if [[ "$confirm" == *"Yes"* ]]; then
     trash-put "$NOTES_DIR/$selection"
