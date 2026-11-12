@@ -41,7 +41,7 @@ binds {
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
     Mod+N hotkey-overlay-title="Browse Notes" { spawn-sh "menu_notes"; }
     Mod+S hotkey-overlay-title="Find Files" { spawn-sh "qs ipc call launcher search"; }
-    Mod+Shift+D hotkey-overlay-title="Run Launcher" { spawn-sh "qs ipc call launcher run"; }
+    Mod+Shift+D hotkey-overlay-title="Run Launcher" { spawn-sh "menu_run"; }
     Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "menu_tmuxer"; }
 
     // Submaps
