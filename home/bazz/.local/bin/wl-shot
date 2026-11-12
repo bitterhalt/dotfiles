@@ -9,20 +9,26 @@ SAVEDIR="${HOME}/Pictures/Screenshots"
 mkdir -p -- "$SAVEDIR"
 TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
 FILENAME="$SAVEDIR/${TIMESTAMP}_screenshot.png"
-NOTI="notify-send -a wl-shot -t 5000 -i camera"
 
-fullscreen() {
-  grim "$FILENAME"
-  $NOTI "Screenshot" "Saved as $FILENAME"
+# Notify with the screenshot itself as the preview image
+notify() {
+  notify-send -a wl-shot -t 5000 -i "$FILENAME" "Screenshot" "Saved as $FILENAME"
+}
+
+finish() {
+  notify
   wl-copy <"$FILENAME"
   pw-play "$HOME/.local/share/Sounds/camera-shutter.oga"
 }
 
+fullscreen() {
+  grim "$FILENAME"
+  finish
+}
+
 region() {
   grim -g "$(slurp)" "$FILENAME"
-  $NOTI "Screenshot" "Saved as $FILENAME"
-  wl-copy <"$FILENAME"
-  pw-play "$HOME/.local/share/Sounds/camera-shutter.oga"
+  finish
 }
 
 region-edit() {
@@ -32,9 +38,7 @@ region-edit() {
 timer() {
   sleep 5
   grim "$FILENAME"
-  $NOTI "Screenshot" "Saved as $FILENAME"
-  wl-copy <"$FILENAME"
-  pw-play "$HOME/.local/share/Sounds/camera-shutter.oga"
+  finish
 }
 
 print_help() {
@@ -42,7 +46,8 @@ print_help() {
   echo "Options:"
   echo "  -f,  --fullscreen           Capture the fullscreen."
   echo "  -r,  --region               Select a region to capture."
-  echo "  -t,  --timer                Capture fullscreen after a 3-second delay."
+  echo "  -re, --region-edit          Select a region and edit it in satty."
+  echo "  -t,  --timer                Capture fullscreen after a 5-second delay."
   echo "  -h,  --help                 Show this help message."
 }
 

@@ -14,7 +14,7 @@ set -o vi
 
 export HISTSIZE="50000"
 export HISTFILESIZE="${HISTSIZE}"
-export HISTCONTROL="ignoreboth:erasedups"
+export HISTCONTROL="ignoredups:erasedups"
 export HISTIGNORE="ls:ll:exit:clear:cd:top:htop*:history*:rm*"
 export LC_COLLATE="C"
 export MANPAGER="nvim +Man!"
