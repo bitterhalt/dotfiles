@@ -3,6 +3,7 @@
 #-----------------------------------------------------#
 source ~/.config/lf/functions
 set previewer ~/.config/lf/preview.sh
+set cleaner ~/.config/lf/cleaner.sh
 
 set dircounts
 set drawbox
