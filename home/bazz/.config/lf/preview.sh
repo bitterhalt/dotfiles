@@ -10,11 +10,7 @@ image() {
     key="$(stat --printf '%n\0%Y\0%s' -- "$file" | sha256sum | awk '{print $1}')"
     local cached="$HOME/.cache/lf/preview.$key.png"
     if [ ! -f "$cached" ]; then
-      if command -v magick >/dev/null 2>&1; then
-        magick "${file}[0]" -auto-orient -resize '1000x1000>' "$cached" 2>/dev/null
-      elif command -v convert >/dev/null 2>&1; then
-        convert "${file}[0]" -auto-orient -resize '1000x1000>' "$cached" 2>/dev/null
-      fi
+      vipsthumbnail "$file" --size '1000x1000>' -o "$cached" 2>/dev/null
     fi
     [ -f "$cached" ] && thumb="$cached"
     kitten icat --clear --stdin=no --transfer-mode=memory \
@@ -76,10 +72,7 @@ case "$(printf "%s\n" "$REAL" | awk '{print tolower($0)}')" in
   image "$1" "$2" "$3" "$4" "$5"
   ;;
 *.svg)
-  if [ ! -f "${CACHE}.jpg" ]; then
-    convert "$1" "${CACHE}.jpg"
-  fi
-  image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
+  image "$1" "$2" "$3" "$4" "$5"
   ;;
 *.md)
   batorcat "$1"
