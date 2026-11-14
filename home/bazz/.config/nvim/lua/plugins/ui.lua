@@ -67,6 +67,13 @@ return {
         desc = "Previous buffer",
       },
       {
+        "<leader>bm",
+        function()
+          require("slimline").toggle_position()
+        end,
+        desc = "Toggle Slimline buffer position",
+      },
+      {
         "<leader>bp",
         function()
           require("slimline").toggle_pin()

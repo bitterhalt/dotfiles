@@ -1,0 +1,7 @@
+new_tab Quickshell
+layout splits
+cd ~/.config/quickshell/
+launch --title "opencode" opencode .
+
+cd ~/.config/quickshell/
+launch vopen .

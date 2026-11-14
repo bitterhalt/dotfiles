@@ -1,0 +1,7 @@
+new_tab Logs
+launch journalctl -f
+
+new_tab Monitor
+launch amdgpu_top --smi
+launch --location=hsplit btop
+focus

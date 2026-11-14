@@ -1,9 +1,9 @@
 binds {
-    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "foot"; }
-    Mod+Shift+Delete hotkey-overlay-title="BTOP" { spawn-sh "foot -a btop -T poptop -e btop"; }
-    Mod+Ctrl+Delete hotkey-overlay-title="HTOP" { spawn-sh "foot -a htop -T poptop -e htop"; }
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn-sh "kitty -1"; }
+    Mod+Shift+Delete hotkey-overlay-title="BTOP" { spawn-sh "kitty -1 --app-id btop -T poptop -e btop"; }
+    Mod+Ctrl+Delete hotkey-overlay-title="HTOP" { spawn-sh "kitty -1 --app-id htop -T poptop -e htop"; }
     Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "qs ipc call idle toggle"; }
-    Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "foot -T nvim -e nvim"; }
+    Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "kitty -1 -T nvim -e nvim"; }
     Mod+F11 hotkey-overlay-title="Lock Screen" { spawn-sh "qs -n -d -p ~/.config/quickshell/lock.qml --no-detailed-logs"; }
     Mod+Shift+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
     Mod+T hotkey-overlay-title="Display Time" { spawn "noti_time"; }
@@ -15,7 +15,7 @@ binds {
     Mod+A hotkey-overlay-title="Launch Daily Applications" { spawn-sh "~/.config/niri/scripts/apps.sh"; }
 
     // File managers
-    Mod+E hotkey-overlay-title="TUI Filemanager" { spawn-sh "foot -T lf -e lf"; }
+    Mod+E hotkey-overlay-title="TUI Filemanager" { spawn-sh "kitty -1 -T lf -e lf"; }
     Mod+Shift+E hotkey-overlay-title="GUI Filemanager" { spawn "thunar"; }
 
     // Shell
@@ -35,7 +35,7 @@ binds {
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
     Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "qs ipc call launcher toggle"; }
     Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "qs ipc call power toggle"; }
-    Mod+F3 { spawn-sh "foot -a keybind-cc -e nvim ~/.config/niri/keybinds.md"; }
+    Mod+F3 { spawn-sh "kitty -1 --app-id keybind-cc -e nvim ~/.config/niri/keybinds.md"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn "menu_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_passmenu"; }
     Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
