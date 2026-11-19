@@ -61,7 +61,7 @@ function M.setup(config)
 		{ key = "PageUp", mods = "CTRL|SHIFT", action = only_in_unix(act.SwitchWorkspaceRelative(1)) },
 		{ key = "PageDown", mods = "CTRL|SHIFT", action = only_in_unix(act.SwitchWorkspaceRelative(-1)) },
 
-		-- Change workspace selector - only active in "unix" domain)
+		-- Workspace selector - only active in "unix" domain)
 		{
 			key = "w",
 			mods = "CTRL|SHIFT",
@@ -93,6 +93,34 @@ function M.setup(config)
 					pane
 				)
 			end),
+		},
+
+		-- Rename current workspace (only active in "unix" domain)
+		{
+			key = "r",
+			mods = "CTRL|SHIFT",
+			action = only_in_unix(act.PromptInputLine({
+				description = "Rename current workspace:",
+				action = wezterm.action_callback(function(window, pane, line)
+					if line and line ~= "" then
+						wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+					end
+				end),
+			})),
+		},
+
+		-- Create / switch to named workspace (only active in "unix" domain)
+		{
+			key = "a",
+			mods = "CTRL|SHIFT",
+			action = only_in_unix(act.PromptInputLine({
+				description = "Give name for new workspace:",
+				action = wezterm.action_callback(function(window, pane, line)
+					if line and line ~= "" then
+						window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
+					end
+				end),
+			})),
 		},
 
 		-- Switch to monitoring workspace (btop + amdgpu_top split inside "unix" domain)
@@ -131,32 +159,43 @@ function M.setup(config)
 			end),
 		},
 
-		-- Rename current workspace (only active in "unix" domain)
+		-- Dotfiles workspace
 		{
-			key = "r",
+			key = "d",
 			mods = "CTRL|SHIFT",
-			action = only_in_unix(act.PromptInputLine({
-				description = "Rename current workspace:",
-				action = wezterm.action_callback(function(window, pane, line)
-					if line and line ~= "" then
-						wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
-					end
-				end),
-			})),
-		},
+			action = wezterm.action_callback(function(window, pane)
+				if pane:get_domain_name() ~= "unix" then
+					return
+				end
 
-		-- Create / switch to named workspace (only active in "unix" domain)
-		{
-			key = "s",
-			mods = "CTRL|SHIFT",
-			action = only_in_unix(act.PromptInputLine({
-				description = "Give name for new workspace:",
-				action = wezterm.action_callback(function(window, pane, line)
-					if line and line ~= "" then
-						window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
+				local dir = wezterm.home_dir .. "/Documents/projects/dotfiles"
+
+				-- Only build it once, afterwards just switch to it
+				local exists = false
+				for _, mux_win in ipairs(wezterm.mux.all_windows()) do
+					if mux_win:get_workspace() == "dotfiles" then
+						exists = true
+						break
 					end
-				end),
-			})),
+				end
+
+				if not exists then
+					local _, left_pane, mux_win = wezterm.mux.spawn_window({
+						domain = { DomainName = "unix" },
+						cwd = dir,
+						args = { "opencode" },
+					})
+					mux_win:set_workspace("dotfiles")
+
+					left_pane:split({
+						direction = "Right",
+						cwd = dir,
+						args = { "nvim" },
+					})
+				end
+
+				window:perform_action(act.SwitchToWorkspace({ name = "dotfiles" }), pane)
+			end),
 		},
 	}
 end
