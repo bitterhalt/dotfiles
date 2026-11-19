@@ -4,8 +4,24 @@ set -euo pipefail
 DOTFILES="$HOME/Documents/projects/dotfiles"
 cd "$DOTFILES"
 
-echo "=== 1. Stowing Dotfiles Packages ==="
-stow -v apps bin desktop env shell
+case "${1:-add}" in
+add) ;;
+*)
+  echo "usage: dotter [add]" >&2
+  exit 2
+  ;;
+esac
+
+# ~/.stowrc (a symlink to env/.stowrc) supplies --target and the ignore
+# rules. Without it stow would target ~/Documents/projects and deploy the
+# private environment file, so refuse to run.
+if [[ ! -f "$HOME/.stowrc" ]]; then
+  echo "Missing ~/.stowrc (expected symlink to $DOTFILES/env/.stowrc)" >&2
+  exit 1
+fi
+
+echo "=== 1. Restowing Dotfiles Packages ==="
+stow -R -v apps bin desktop env shell
 
 echo -e "\n=== 2. Exporting Package Manifests ==="
 echo "Dumping pacman package list..."
@@ -24,24 +40,12 @@ if command -v niri_keybind_parser.py &>/dev/null; then
   niri_keybind_parser.py || true
 fi
 
-echo -e "\n=== 4. Git Sync ==="
+echo -e "\n=== 4. Repository Status ==="
 if [[ -n $(git status --porcelain) ]]; then
-  echo "Changes detected in dotfiles repository (including package lists)."
   git status -s
-
-  read -p "Do you want to commit and push these changes? (y/N) " -n 1 -r
-  echo
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    read -p "Enter commit message (default: 'update dotfiles and manifests'): " msg
-    msg=${msg:-"update dotfiles and manifests"}
-
-    git add .
-    git commit -m "$msg"
-    git push
-    echo "[✓] Dotfiles successfully committed and pushed!"
-  fi
+  echo "Commit and push from lazygit when ready."
 else
-  echo "[✓] Working tree is clean. No changes to commit."
+  echo "[✓] Working tree is clean."
 fi
 
 echo -e "\n=== Dotter completed successfully! ==="
