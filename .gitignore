@@ -14,3 +14,9 @@ id_rsa*
 desktop/.config/quickshell/tests/
 desktop/.config/quickshell/lock-test.qml
 /AGENTS.md
+
+# OpenCode local service credentials
+apps/.config/opencode/service.json
+
+# Runtime state, regenerated locally
+apps/.config/htop/htop_history
