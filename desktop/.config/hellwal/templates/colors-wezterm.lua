@@ -1,0 +1,40 @@
+return {
+	foreground = "#%%color7%%",
+	background = "#%%color0%%",
+	cursor_bg = "#%%color7%%",
+	cursor_fg = "#%%color0%%",
+	cursor_border = "#%%color7%%",
+	selection_fg = "#%%color0%%",
+	selection_bg = "#%%color8%%",
+	split = "#%%color7%%",
+
+	ansi = {
+		"#%%color0%%",
+		"#%%color1%%",
+		"#%%color2%%",
+		"#%%color3%%",
+		"#%%color4%%",
+		"#%%color5%%",
+		"#%%color6%%",
+		"#%%color7%%",
+	},
+	brights = {
+		"#%%color8%%",
+		"#%%color9%%",
+		"#%%color10%%",
+		"#%%color11%%",
+		"#%%color12%%",
+		"#%%color13%%",
+		"#%%color14%%",
+		"#%%color15%%",
+	},
+
+	tab_bar = {
+		background = "#%%color0%%",
+		active_tab = { bg_color = "#%%color6%%", fg_color = "#%%color0%%", intensity = "Bold", italic = true },
+		inactive_tab = { bg_color = "#%%color6%%", fg_color = "#%%color0%%" },
+		inactive_tab_hover = { bg_color = "#%%color14%%", fg_color = "#%%color0%%" },
+		new_tab = { bg_color = "#%%color0%%", fg_color = "#%%color7%%" },
+		new_tab_hover = { bg_color = "#%%color8%%", fg_color = "#%%color7%%" },
+	},
+}

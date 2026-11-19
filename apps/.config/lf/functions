@@ -1,0 +1,134 @@
+#-----------------------------------------------------#
+#                     Open                           #
+#-----------------------------------------------------#
+cmd open ${{
+  case $(file --mime-type "$f" -bL) in
+    text/plain) $EDITOR "$f" ;;
+    text/x-shellscript) $EDITOR "$f" ;;
+    application/javascript) $EDITOR "$f" ;;
+    application/json) $EDITOR "$f" ;;
+    inode/x-empty) $EDITOR "$f" ;;
+    application/octet-stream) xdg-open "$f" ;;
+    audio/*|video/x-ms-asf) mpv --no-config  --audio-display=no "$f" ;;
+	  video/*) setsid -f mpv "$f" -quiet >/dev/null 2>&1 ;;
+    image/*) setsid -f swayimg >/dev/null 2>&1 "$f" ;;
+    text/*) $EDITOR "$f" ;;
+    *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+  esac
+}}
+
+#-----------------------------------------------------#
+#                     Chmod                           #
+#-----------------------------------------------------#
+cmd chmod %{{
+	printf "Mode Bits: "
+	read and
+
+	for file in "$fx"
+	do
+		chmod $and "$file"
+	done
+	lf -remote 'send reload'
+}}
+
+#-----------------------------------------------------#
+#                     Zoxide                          #
+#-----------------------------------------------------#
+cmd zi ${{
+    result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+#-----------------------------------------------------#
+#                     Yank names or paths             #
+#-----------------------------------------------------#
+cmd yank-path $printf '%s' "$fx" | wl-copy
+cmd yank-basename $basename -a -- $fx | head -c-1 | wl-copy
+
+#-----------------------------------------------------#
+#                     Make files                      #
+#-----------------------------------------------------#
+# Make dir
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+# Make file
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  $EDITOR $ans
+}}
+
+#-----------------------------------------------------#
+#                      Trash items                    #
+#-----------------------------------------------------#
+cmd trash %{{
+	files=()
+	while read -r line; do files+=("$line"); done <<< "$fx"
+	len=${#files[@]}
+
+	if [[ $len == 1 ]]; then
+		echo -n "trash '$fx' ?"
+	else
+		echo -n "trash $len items?"
+	fi
+	echo -n " [y/N] "
+	read -n 1 ans
+	ans="${ans,,}"
+	echo
+	if [[ $ans == y ]]; then
+		trash-put $fx
+		if [[ $len == 1 ]]; then
+			echo "trashed '$files'"
+		else
+			echo "trashed $len items"
+		fi
+	else
+		echo
+	fi
+}}
+
+#-----------------------------------------------------#
+#                      Bulkrename                     #
+#-----------------------------------------------------#
+cmd bulkrename ${{
+    tmpfile_old="$(mktemp)"
+    tmpfile_new="$(mktemp)"
+
+    [ -n "$fs" ] && fs=$(basename -a $fs) || fs=$(ls)
+
+    echo "$fs" > "$tmpfile_old"
+    echo "$fs" > "$tmpfile_new"
+    $EDITOR "$tmpfile_new"
+
+    [ "$(wc -l < "$tmpfile_old")" -eq "$(wc -l < "$tmpfile_new")" ] || { rm -f "$tmpfile_old" "$tmpfile_new"; exit 1; }
+
+    paste "$tmpfile_old" "$tmpfile_new" | while IFS="$(printf '\t')" read -r src dst
+    do
+        [ "$src" = "$dst" ] || [ -e "$dst" ] || mv -- "$src" "$dst"
+    done
+
+    rm -f "$tmpfile_old" "$tmpfile_new"
+    lf -remote "send $id unselect"
+}}
+
+#-----------------------------------------------------#
+#                      Unarchive                      #
+#-----------------------------------------------------#
+cmd unarchive &{{
+    set -f
+    atool -x $fx
+  lf -remote "send $id echo 'Unarchive complete for $f'"
+}}
+
+#-----------------------------------------------------#
+#                      Edit lf config                 #
+#-----------------------------------------------------#
+cmd edit-config ${{
+    $EDITOR ~/.config/lf/lfrc
+    lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+

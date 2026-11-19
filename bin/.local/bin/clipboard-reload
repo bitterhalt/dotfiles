@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+pkill -f '^wl-paste --type (text|image) --watch cliphist store$' || true
+cliphist wipe
+
+wl-paste --type text --watch cliphist store &
+wl-paste --type image --watch cliphist store &

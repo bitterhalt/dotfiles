@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Video Viewer
+Exec=/usr/bin/mpv -quiet %f
+MimeType=video/mp4;video/mpeg;video/x-msvideo;video/quicktime;video/x-matroska;video/webm;video/x-flv;video/ogg;

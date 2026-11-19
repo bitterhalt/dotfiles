@@ -1,0 +1,5 @@
+# Password-only lock authentication, using the system faillock settings.
+auth required pam_faillock.so preauth
+auth [success=1 default=bad] pam_unix.so try_first_pass
+auth [default=die] pam_faillock.so authfail
+auth required pam_faillock.so authsucc

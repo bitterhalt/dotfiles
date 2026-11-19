@@ -1,0 +1,5 @@
+--restrict-filenames
+--trim-filenames 200
+-o /mnt/wd1tb/youtube/%(title)s.%(ext)s
+--format bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best
+--sub-lang en.*,en-US

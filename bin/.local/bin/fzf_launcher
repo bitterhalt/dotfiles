@@ -1,0 +1,267 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import shlex
+import subprocess
+import sys
+from argparse import ArgumentParser
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import lru_cache
+from pathlib import Path
+
+APP_DIRS = [
+    Path("/usr/share/applications"),
+    Path(os.path.expanduser("~/.local/share/applications")),
+]
+
+CACHE_DIR = Path(os.path.expanduser("~/.cache/fzlauncher"))
+CACHE_FILE = CACHE_DIR / "apps.json"
+STAMP_FILE = CACHE_DIR / "stamp.json"
+
+VERSION = "1.1.0"
+
+
+def strip_field_codes(cmd: str) -> str:
+    idx = cmd.find(" %")
+    return cmd if idx == -1 else cmd[:idx]
+
+
+def fast_parse(path: Path) -> dict[str, str | bool | Path] | None:
+    name = exec_ = None
+    no_display = False
+    terminal = False
+    is_desktop_entry = False
+
+    try:
+        with path.open("r", encoding="utf-8", errors="ignore") as fh:
+            for line in fh:
+                line = line.strip()
+                if line == "[Desktop Entry]":
+                    is_desktop_entry = True
+                    continue
+
+                if not is_desktop_entry:
+                    continue
+
+                if line.startswith("NoDisplay=true"):
+                    no_display = True
+                    break
+                elif line.startswith("Name=") and name is None:
+                    name = line[5:]
+                elif line.startswith("Exec=") and exec_ is None:
+                    exec_ = line[5:]
+                elif line == "Terminal=true":
+                    terminal = True
+
+    except Exception as e:
+        if os.getenv("DEBUG"):
+            print(f"Parse error in {path}: {e}", file=sys.stderr)
+        return None
+
+    if not all([is_desktop_entry, name, exec_]) or no_display:
+        return None
+
+    return {
+        "name": name,
+        "exec": strip_field_codes(exec_), # type: ignore | god i fucking hate type checking
+        "desktop_file": str(path),
+        "terminal": terminal,
+    }
+
+
+@lru_cache(maxsize=1)
+def get_desktop_files_cached() -> tuple[Path, ...]:
+    files: list[Path] = []
+    for path in APP_DIRS:
+        if path.exists():
+            files.extend(path.rglob("*.desktop"))
+    return tuple(files)
+
+
+def get_latest_mtime() -> int:
+    files = get_desktop_files_cached()
+    if not files:
+        return 0
+    try:
+        return max(p.stat().st_mtime_ns for p in files if p.exists())
+    except Exception:
+        return 0
+
+
+def cache_still_valid() -> bool:
+    if not (CACHE_FILE.exists() and STAMP_FILE.exists()):
+        return False
+
+    try:
+        stamp_data = json.loads(STAMP_FILE.read_text())
+        latest_mtime = get_latest_mtime()
+        return stamp_data.get("source_mtime_ns") == latest_mtime
+    except Exception:
+        return False
+
+
+def write_cache(apps: dict[str, dict]) -> None:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    try:
+        CACHE_FILE.write_text(json.dumps(apps, ensure_ascii=False, indent=2))
+    except Exception as e:
+        if os.getenv("DEBUG"):
+            print(f"Could not write cache: {e}", file=sys.stderr)
+        return
+
+    try:
+        latest_mtime = get_latest_mtime()
+        stamp = {"source_mtime_ns": latest_mtime}
+        STAMP_FILE.write_text(json.dumps(stamp, indent=2))
+    except Exception as e:
+        if os.getenv("DEBUG"):
+            print(f"Could not write cache stamp: {e}", file=sys.stderr)
+
+
+def build_cache_parallel() -> dict[str, dict]:
+    files = get_desktop_files_cached()
+    max_workers = min(32, (os.cpu_count() or 1) * 2)
+
+    apps = {}
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        future_to_path = {
+            pool.submit(fast_parse, path): path for path in files if path.is_file()
+        }
+
+        for future in as_completed(future_to_path):
+            try:
+                if data := future.result():
+                    key = data["name"]
+                    # Disambiguate duplicate names
+                    counter = 1
+                    while key in apps:
+                        counter += 1
+                        key = f'{data["name"]} ({counter})'
+
+                    # Store full metadata
+                    apps[key] = {
+                        "exec": data["exec"],
+                        "desktop_file": data["desktop_file"],
+                        "terminal": data["terminal"],
+                    }
+            except Exception:
+                continue
+    return apps
+
+
+class AppCache:
+    def __init__(self):
+        self._cache: dict[str, dict] | None = None
+
+    def get(self, force_rebuild: bool = False) -> dict[str, dict]:
+        if self._cache is None or force_rebuild:
+            self._cache = self._build_app_cache(force_rebuild)
+        return self._cache
+
+    def _build_app_cache(self, force_rebuild: bool = False) -> dict[str, dict]:
+        if not force_rebuild and cache_still_valid():
+            try:
+                raw = json.loads(CACHE_FILE.read_text())
+                # Ensure all entries have required keys
+                for key, val in raw.items():
+                    if not isinstance(val, dict) or not all(
+                        k in val for k in ("exec", "desktop_file", "terminal")
+                    ):
+                        raise ValueError("Cache entry malformed")
+                return raw
+            except Exception as e:
+                if os.getenv("DEBUG"):
+                    print(f"Cache load failed: {e}", file=sys.stderr)
+
+        apps = build_cache_parallel()
+        write_cache(apps)
+        return apps
+
+    def invalidate(self) -> None:
+        self._cache = None
+
+
+def select_with_fzf(apps: dict[str, dict]) -> str | None:
+    app_names = "\n".join(sorted(apps.keys()))
+
+    fzf_cmd_with_colors = """
+[ -f ~/.cache/wal/colors-fzf.sh ] && . ~/.cache/wal/colors-fzf.sh
+fzf --margin=0 --padding=0 --prompt='Launch: '
+"""
+    
+    fzf_cmd_plain = "fzf --margin=0 --padding=0 --prompt='Launch: '"
+    
+    for cmd in [fzf_cmd_with_colors, fzf_cmd_plain]:
+        try:
+            proc = subprocess.run(
+                ["bash", "-c", cmd],
+                input=app_names,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            return proc.stdout.strip() or None
+        except subprocess.CalledProcessError as e:
+            if e.returncode == 130:  # Ctrl+C
+                return None
+            if os.getenv("DEBUG"):
+                print(f"fzf command failed: {cmd}, error: {e}", file=sys.stderr)
+            continue
+    
+    print("fzf failed: Command not found or configuration error", file=sys.stderr)
+    return None
+
+
+def launch(name: str, apps: dict[str, dict]) -> None:
+    if name not in apps:
+        print(f"Application '{name}' not found in cache.", file=sys.stderr)
+        return
+
+    entry = apps[name]
+    cmd = entry["exec"]
+    terminal = entry["terminal"]
+
+    if terminal:
+        term = shlex.split(os.getenv("TERMINAL") or "xterm -e")
+        args = term + shlex.split(cmd)
+    else:
+        args = shlex.split(cmd)
+
+    try:
+        subprocess.Popen(
+            args,
+            start_new_session=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        if os.getenv("DEBUG"):
+            print(f"Launched: {' '.join(args)}", file=sys.stderr)
+    except Exception as e:
+        print(
+            f"Failed to launch '{name}' with command '{' '.join(args)}': {e}",
+            file=sys.stderr,
+        )
+
+
+def main() -> None:
+    parser = ArgumentParser(description="Fast desktop app launcher using fzf")
+    parser.add_argument("--rebuild", action="store_true", help="Force rebuild cache")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
+    args = parser.parse_args()
+
+    app_cache = AppCache()
+    apps = app_cache.get(force_rebuild=args.rebuild)
+
+    if not apps:
+        print("No applications found. Scanned directories:", file=sys.stderr)
+        for app_dir in APP_DIRS:
+            print(f"- {app_dir} (exists: {app_dir.exists()})", file=sys.stderr)
+        sys.exit(1)
+
+    if selected_app := select_with_fzf(apps):
+        launch(selected_app, apps)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,28 @@
+// Ask the applications to omit their client-side decorations
+prefer-no-csd
+
+// Don't show hotkey-overlay on startup
+hotkey-overlay {
+    skip-at-startup
+}
+
+// Screenshots path. Only needed if you use buildin tool
+screenshot-path "~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S.png"
+
+// No hot corners please
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+// Overview
+overview {
+    zoom 0.40
+    workspace-shadow {
+        softness 10
+        spread 5
+        offset x=0 y=0
+    }
+}
+

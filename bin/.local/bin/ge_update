@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+githubReleaseUrl="https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest"
+compatibilityToolsDir=compatibilitytools.d/
+steamNativeDir=$HOME/.steam/root/
+steamFlatpakDir=$HOME/.var/app/com.valvesoftware.Steam/data/Steam/
+tmpDir=/tmp/proton-ge-custom
+
+if [ -d "$steamNativeDir" ]; then
+  dir="$steamNativeDir$compatibilityToolsDir"
+elif [ -d "$steamFlatpakDir" ]; then
+  dir="$steamFlatpakDir$compatibilityToolsDir"
+else
+  echo "steam not installed or installation not supported"
+  echo "folders searched:"
+  echo "- $steamNativeDir$compatibilityToolsDir"
+  echo "- $steamFlatpakDir$compatibilityToolsDir"
+  exit 1
+fi
+
+# make steam directory if it does not exist
+mkdir -p $dir
+
+latestRelease=$(curl -s $githubReleaseUrl)
+version=$(echo "$latestRelease" | grep tag_name | cut -d\" -f4)
+
+# check if version already installed
+if [ -d "$dir$version" ]; then
+  echo "Latest Proton-GE version $version already installed"
+  exit 0
+fi
+
+# make temp working directory
+mkdir $tmpDir
+cd $tmpDir
+
+echo "Installing latest version $version"
+
+# download tarball
+curl -sLOJ "$(echo "$latestRelease" | grep browser_download_url | cut -d\" -f4 | grep .tar.gz)"
+
+# download checksum
+curl -sLOJ "$(echo "$latestRelease" | grep browser_download_url | cut -d\" -f4 | grep .sha512sum)"
+
+# check tarball with checksum
+sha512sum -c ./*.sha512sum
+
+# extract proton tarball to steam directory
+tar -xf GE-Proton*.tar.gz -C $dir
+
+# copy release notes
+echo -e "$(echo "$latestRelease" | grep body | cut -d\" -f4)" >>"$dir$version/release_note.txt"
+
+cd ..
+rm -r $tmpDir
+
+echo "Proton-GE $version installed"

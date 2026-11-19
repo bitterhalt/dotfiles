@@ -1,0 +1,43 @@
+{
+  "appearance": {
+    "fontScale": 1,
+    "iconScale": 1,
+    "iconFontFamily": "Symbols Nerd Font Mono"
+  },
+  "bar": {
+    "height": 32,
+    "showTray": true
+  },
+  "clock": {
+    "format": "HH:mm",
+    "alternativeFormat": "ddd, d MMMM"
+  },
+  "audio": {
+    "maxVolume": 1.1
+  },
+  "launcher": {
+    "enabled": true
+  },
+  "popups": {
+    "gap": 16,
+    "radius": 4
+  },
+  "animations": {
+    "enabled": true
+  },
+  "notifications": {
+    "historyLimit": 20,
+    "historyExcludedApps": [
+      "time-noti",
+      "niri",
+      "thunar",
+      "Media-notify",
+      "wl-color-picker"
+    ]
+  },
+  "bluetooth": {
+    "batteryWarningPercent": 20,
+    "batteryCriticalPercent": 10,
+    "batteryRearmMargin": 5
+  }
+}

@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+HISTORY_FILE="$HOME/.cache/dm-runhistory"
+PROMPT="dmenu-runner"
+
+mkdir -p "$(dirname "$HISTORY_FILE")"
+touch "$HISTORY_FILE"
+
+all_binaries=$(
+  echo "$PATH" |
+    tr ':' '\n' |
+    xargs -I {} find {} -maxdepth 1 -executable -type f 2>/dev/null |
+    awk -F/ '{print $NF}' |
+    sort -u
+)
+
+# Remove deleted binaries and deduplicate history.
+grep -Fx -f <(printf '%s\n' "$all_binaries") "$HISTORY_FILE" |
+  awk '!seen[$0]++' >"$HISTORY_FILE.tmp"
+
+mv "$HISTORY_FILE.tmp" "$HISTORY_FILE"
+
+# Get the five most recently used unique binaries.
+hist=$(tac "$HISTORY_FILE" | head -n 5)
+
+# Mark history entries with a star.
+history_display=$(printf '%s\n' "$hist" | sed 's/^/⭐ /')
+
+# Hide history entries from the remaining list.
+filtered_binaries=$(
+  comm -23 \
+    <(printf '%s\n' "$all_binaries" | sort) \
+    <(printf '%s\n' "$hist" | sort)
+)
+
+choice=$(
+  printf '%s\n%s\n' "$history_display" "$filtered_binaries" |
+    sed '/^$/d' |
+    "$PROMPT"
+)
+
+if [ -n "$choice" ]; then
+  choice="${choice#⭐ }"
+  echo "$choice" >>"$HISTORY_FILE"
+  setsid "$choice" >/dev/null 2>&1 &
+fi

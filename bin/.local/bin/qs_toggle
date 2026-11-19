@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pkill -x qs
+sleep 0.500
+qs --no-detailed-logs &

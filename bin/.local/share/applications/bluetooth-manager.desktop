@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Bluetui
+Exec=foot -a bluetui -e bluetui %u

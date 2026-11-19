@@ -1,0 +1,198 @@
+binds {
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn-sh "wezterm start --always-new-process"; }
+    Mod+Shift+Return hotkey-overlay-title="Open Terminal as Session" { spawn-sh "wezterm"; }
+    Mod+Shift+Delete hotkey-overlay-title="TOP" { spawn-sh "$TERMINAL --class poptop -e btop"; }
+    Mod+Ctrl+Delete hotkey-overlay-title="HTOP" { spawn-sh "$TERMINAL --class poptop -e htop"; }
+    Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "qs ipc call idle toggle"; }
+    Mod+V hotkey-overlay-title="Open Editor" { spawn-sh "$TERMINAL nvim"; }
+    Mod+F11 hotkey-overlay-title="Lock Screen" { spawn-sh "qs -n -d -p ~/.config/quickshell/lock.qml --no-detailed-logs"; }
+    Mod+Shift+A { spawn-sh "~/.config/niri/scripts/apps.sh"; }
+    Mod+T hotkey-overlay-title="Display Time" { spawn "noti_time"; }
+    Mod+F2 hotkey-overlay-title="Open Calculator" { spawn "galculator"; }
+
+    // WWW/Mail/Downloads
+    Mod+W hotkey-overlay-title="Web browser" { spawn "brave-origin"; }
+    Mod+M hotkey-overlay-title="Open Email" { spawn "thunderbird"; }
+    Mod+A hotkey-overlay-title="Launch Daily Applications" { spawn-sh "~/.config/niri/scripts/apps.sh"; }
+
+    // File managers
+    Mod+E hotkey-overlay-title="TUI Filemanager" { spawn-sh "$TERMINAL lf"; }
+    Mod+Shift+E hotkey-overlay-title="GUI Filemanager" { spawn "thunar"; }
+
+    // Shell
+    Mod+B hotkey-overlay-title="Toggle Bar" { spawn-sh "qs ipc call bar toggle"; }
+    Mod+Ctrl+Q hotkey-overlay-title="Reload Quickshell" { spawn-sh "qs_toggle"; }
+
+    // Shell/Menus
+    Mod+Ctrl+B hotkey-overlay-title="Bluetooth Menu" { spawn-sh "qs ipc call bluetooth toggle"; }
+    Mod+Ctrl+C hotkey-overlay-title="Open Clipboard" { spawn-sh "qs ipc call clipboard toggle"; }
+    Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "qs ipc call notifications toggleDnd"; }
+    Mod+Ctrl+E hotkey-overlay-title="Emoji Picker" { spawn-sh "qs ipc call launcher emoji"; }
+    Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "qs ipc call notificationCenter toggle"; }
+    Mod+Ctrl+I hotkey-overlay-title="Idle Setting" { spawn-sh "qs ipc call idle settings"; }
+    Mod+Ctrl+N hotkey-overlay-title="Network Menu" { spawn-sh "qs ipc call network toggle"; }
+    Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
+    Mod+Ctrl+T hotkey-overlay-title="Open Translator" { spawn-sh "qs ipc call translator toggle"; }
+    Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
+    Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "qs ipc call launcher toggle"; }
+    Mod+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "qs ipc call power toggle"; }
+    Mod+F3 { spawn-sh "$TERMINAL --class keybind-cc -e nvim ~/.config/niri/keybinds.md"; }
+    Mod+F4  hotkey-overlay-title="Process Killer" { spawn "menu_killer"; }
+    Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_passmenu"; }
+    Mod+F8 hotkey-overlay-title="Screen Record Menu" { spawn-sh "qs ipc call recorder open"; }
+    Mod+N hotkey-overlay-title="Browse Notes" { spawn-sh "menu_notes"; }
+    Mod+S hotkey-overlay-title="Find Files" { spawn-sh "qs ipc call launcher search"; }
+    Mod+Shift+D hotkey-overlay-title="Run Launcher" { spawn-sh "menu_run"; }
+    Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "wezterm_tmuxer"; }
+
+    // Submaps
+    Mod+F1 hotkey-overlay-title="System Menu" { spawn-sh "qs ipc call menu system"; }
+    Mod+F12 hotkey-overlay-title="System Configs" { spawn-sh "qs ipc call menu settings"; }
+    Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs ipc call wallpaper toggle"; }
+    Mod+U hotkey-overlay-title="Install and Mange Packages" { spawn-sh "qs ipc call menu packages"; }
+
+    // Screen Recording
+    // Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
+    Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "qs ipc call recorder stop"; }
+    Mod+Print hotkey-overlay-title="Screenshot (Full Screen)" { spawn-sh "wl-shot -f"; }
+    Mod+Shift+Print hotkey-overlay-title="Screenshot (Region)" { spawn-sh "wl-shot -re"; }
+
+    // Media - Volume
+    XF86AudioRaiseVolume hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "qs ipc call volume up"; }
+    XF86AudioLowerVolume hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "qs ipc call volume down"; }
+    Mod+WheelScrollDown cooldown-ms=100 hotkey-overlay-title="Decrease Volume" allow-when-locked=true { spawn-sh "qs ipc call volume down"; }
+    Mod+WheelScrollUp cooldown-ms=100 hotkey-overlay-title="Increase Volume" allow-when-locked=true { spawn-sh "qs ipc call volume up"; }
+    XF86AudioMute hotkey-overlay-title="Mute Audio" allow-when-locked=true { spawn-sh "qs ipc call volume mute"; }
+    XF86AudioMicMute hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    Mod+F10 hotkey-overlay-title="Mute Microphone" allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+
+    // Media - Playback
+    XF86AudioPlay hotkey-overlay-title="Play/Pause" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --play"; }
+    XF86AudioStop hotkey-overlay-title="Stop Playback" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --stop"; }
+    XF86AudioPrev hotkey-overlay-title="Previous Track" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --prv"; }
+    XF86AudioNext hotkey-overlay-title="Next Track" allow-when-locked=true { spawn-sh "~/.config/niri/scripts/mediactrl.sh --nxt"; }
+    Mod+Ctrl+S hotkey-overlay-title="Open Audio Mixer" { spawn-sh "qs ipc call audio toggle"; }
+
+    // Hardware - Brightness
+    XF86MonBrightnessUp hotkey-overlay-title="Increase Brightness" allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown hotkey-overlay-title="Decrease Brightness" allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+
+    // Overview
+    Mod+Tab hotkey-overlay-title="Overview" repeat=false { toggle-overview; }
+
+    // Close Window
+    Mod+Q hotkey-overlay-title="Close Window" repeat=false { close-window; }
+
+    // Navigation (Focus)
+    Mod+Left hotkey-overlay-title="Focus Left" { focus-column-left; }
+    Mod+Down hotkey-overlay-title="Focus Down" { focus-window-or-workspace-down; }
+    Mod+J hotkey-overlay-title="Focus Down (Vim)" { focus-window-or-workspace-down; }
+    Mod+K hotkey-overlay-title="Focus Up (Vim)" { focus-window-or-workspace-up; }
+    Mod+Up hotkey-overlay-title="Focus Up" { focus-window-or-workspace-up; }
+    Mod+Right hotkey-overlay-title="Focus Right" { focus-column-right; }
+    Mod+H hotkey-overlay-title="Focus Left (Vim)" { focus-column-left; }
+    Mod+L hotkey-overlay-title="Focus Right (Vim)" { focus-column-right; }
+
+    // Moving Windows/Columns
+    Mod+Shift+Left hotkey-overlay-title="Move Left" { move-column-left; }
+    Mod+Shift+Down hotkey-overlay-title="Move Down" { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Up hotkey-overlay-title="Move Up" { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Right hotkey-overlay-title="Move Right" { move-column-right; }
+    Mod+Shift+H hotkey-overlay-title="Move Left (Vim)" { move-column-left; }
+    Mod+Shift+J hotkey-overlay-title="Move Down (Vim)" { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K hotkey-overlay-title="Move Up (Vim)" { move-window-up-or-to-workspace-up; }
+    Mod+Shift+L hotkey-overlay-title="Move Right (Vim)" { move-column-right; }
+
+    Mod+Home hotkey-overlay-title="Focus First Column" { focus-column-first; }
+    Mod+End hotkey-overlay-title="Focus Last Column" { focus-column-last; }
+    Mod+Shift+Home hotkey-overlay-title="Move Column to First" { move-column-to-first; }
+    Mod+Shift+End hotkey-overlay-title="Move Column to Last" { move-column-to-last; }
+
+    // Monitor Management
+    Mod+Alt+Left hotkey-overlay-title="Focus Monitor Left" { focus-monitor-left; }
+    Mod+Alt+Down hotkey-overlay-title="Focus Monitor Down" { focus-monitor-down; }
+    Mod+Alt+Up hotkey-overlay-title="Focus Monitor Up" { focus-monitor-up; }
+    Mod+Alt+Right hotkey-overlay-title="Focus Monitor Right" { focus-monitor-right; }
+    Mod+Alt+H hotkey-overlay-title="Focus Monitor Left (Vim)" { focus-monitor-left; }
+    Mod+Alt+J hotkey-overlay-title="Focus Monitor Down (Vim)" { focus-monitor-down; }
+    Mod+Alt+K hotkey-overlay-title="Focus Monitor Up (Vim)" { focus-monitor-up; }
+    Mod+Alt+L hotkey-overlay-title="Focus Monitor Right (Vim)" { focus-monitor-right; }
+
+    Mod+Alt+Ctrl+Left hotkey-overlay-title="Move Column to Monitor Left" { move-column-to-monitor-left; }
+    Mod+Alt+Ctrl+Down hotkey-overlay-title="Move Column to Monitor Down" { move-column-to-monitor-down; }
+    Mod+Alt+Ctrl+Up hotkey-overlay-title="Move Column to Monitor Up" { move-column-to-monitor-up; }
+    Mod+Alt+Ctrl+Right hotkey-overlay-title="Move Column to Monitor Right" { move-column-to-monitor-right; }
+    Mod+Alt+Ctrl+H hotkey-overlay-title="Move Column to Monitor Left (Vim)" { move-column-to-monitor-left; }
+    Mod+Alt+Ctrl+J hotkey-overlay-title="Move Column to Monitor Down (Vim)" { move-column-to-monitor-down; }
+    Mod+Alt+Ctrl+K hotkey-overlay-title="Move Column to Monitor Up (Vim)" { move-column-to-monitor-up; }
+    Mod+Alt+Ctrl+L hotkey-overlay-title="Move Column to Monitor Right (Vim)" { move-column-to-monitor-right; }
+
+    // Workspace Management
+    Mod+Page_Down hotkey-overlay-title="Focus Workspace Down" { focus-workspace-down; }
+    Mod+Page_Up hotkey-overlay-title="Focus Workspace Up" { focus-workspace-up; }
+    Mod+Ctrl+Page_Down hotkey-overlay-title="Move Column to Workspace Down" { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up hotkey-overlay-title="Move Column to Workspace Up" { move-column-to-workspace-up; }
+
+    Mod+Shift+Page_Down hotkey-overlay-title="Move Workspace Down" { move-workspace-down; }
+    Mod+Shift+Page_Up hotkey-overlay-title="Move Workspace Up" { move-workspace-up; }
+
+
+    // Numeric Workspaces (1-9)
+    Mod+1 hotkey-overlay-title="Switch to Workspace 1" { focus-workspace 1; }
+    Mod+2 hotkey-overlay-title="Switch to Workspace 2" { focus-workspace 2; }
+    Mod+3 hotkey-overlay-title="Switch to Workspace 3" { focus-workspace 3; }
+    Mod+4 hotkey-overlay-title="Switch to Workspace 4" { focus-workspace 4; }
+    Mod+5 hotkey-overlay-title="Switch to Workspace 5" { focus-workspace 5; }
+    Mod+6 hotkey-overlay-title="Switch to Workspace 6" { focus-workspace 6; }
+    Mod+7 hotkey-overlay-title="Switch to Workspace 7" { focus-workspace 7; }
+    Mod+8 hotkey-overlay-title="Switch to Workspace 8" { focus-workspace 8; }
+    Mod+9 hotkey-overlay-title="Switch to Workspace 9" { focus-workspace 9; }
+
+    Mod+Shift+1 hotkey-overlay-title="Move Column to Workspace 1" { move-column-to-workspace 1 focus=false; }
+    Mod+Shift+2 hotkey-overlay-title="Move Column to Workspace 2" { move-column-to-workspace 2 focus=false; }
+    Mod+Shift+3 hotkey-overlay-title="Move Column to Workspace 3" { move-column-to-workspace 3 focus=false; }
+    Mod+Shift+4 hotkey-overlay-title="Move Column to Workspace 4" { move-column-to-workspace 4 focus=false; }
+    Mod+Shift+5 hotkey-overlay-title="Move Column to Workspace 5" { move-column-to-workspace 5 focus=false; }
+    Mod+Shift+6 hotkey-overlay-title="Move Column to Workspace 6" { move-column-to-workspace 6 focus=false; }
+    Mod+Shift+7 hotkey-overlay-title="Move Column to Workspace 7" { move-column-to-workspace 7 focus=false; }
+    Mod+Shift+8 hotkey-overlay-title="Move Column to Workspace 8" { move-column-to-workspace 8 focus=false; }
+    Mod+Shift+9 hotkey-overlay-title="Move Column to Workspace 9" { move-column-to-workspace 9 focus=false; }
+
+    Mod+0 hotkey-overlay-title="Previous Workspace" { focus-workspace-previous; }
+
+    // Column and Window Organization
+    Mod+Comma hotkey-overlay-title="Consume Window into Column" { consume-window-into-column; }
+    Mod+Period hotkey-overlay-title="Expel Window from Column" { expel-window-from-column; }
+
+    Mod+Shift+Comma hotkey-overlay-title="Consume/Expel Window Left" { consume-or-expel-window-left; }
+    Mod+Shift+Period hotkey-overlay-title="Consume/Expel Window Right" { consume-or-expel-window-right; }
+
+    // Sizing and Layout
+    Mod+R hotkey-overlay-title="Switch Preset Width" { switch-preset-column-width; }
+    Mod+Ctrl+R hotkey-overlay-title="Reset Window Height" { reset-window-height; }
+    Mod+Ctrl+Shift+R hotkey-overlay-title="Switch Preset Height" { switch-preset-window-height; }
+
+    Mod+F hotkey-overlay-title="Maximize Column" { maximize-column; }
+    Mod+Shift+F hotkey-overlay-title="Fullscreen Window" { fullscreen-window; }
+    Mod+Ctrl+Shift+F hotkey-overlay-title="Toggle Windowed Fullscreen" { toggle-windowed-fullscreen; }
+
+    Mod+Ctrl+F hotkey-overlay-title="Maximize Window to Edges" { maximize-window-to-edges; }
+    Mod+Ctrl+M hotkey-overlay-title="Expand Column Width" { expand-column-to-available-width; }
+
+    Mod+C hotkey-overlay-title="Center Column" { center-column; }
+    Mod+Shift+C hotkey-overlay-title="Center All Visible Columns" { center-visible-columns; }
+
+    Mod+Ctrl+Left hotkey-overlay-title="Decrease Column Width" { set-column-width "-10%"; }
+    Mod+Ctrl+Right hotkey-overlay-title="Increase Column Width" { set-column-width "+10%"; }
+
+    Mod+Ctrl+Down hotkey-overlay-title="Decrease Window Height" { set-window-height "-10%"; }
+    Mod+Ctrl+Up hotkey-overlay-title="Increase Window Height" { set-window-height "+10%"; }
+
+    // Floating and Tabs
+    Mod+Space hotkey-overlay-title="Toggle Floating" { toggle-window-floating; }
+    Mod+Ctrl+Space hotkey-overlay-title="Toggle Floating/Tiling Focus" { switch-focus-between-floating-and-tiling; }
+    Mod+G hotkey-overlay-title="Toggle Column Tabs" { toggle-column-tabbed-display; }
+
+    // Suspend Process
+    Mod+Pause hotkey-overlay-title="Suspend Process (wl-freeze)" { spawn-sh "wl-pause";}
+}

@@ -1,0 +1,5 @@
+new_tab Quickshell
+layout tall
+cd ~/.config/quickshell/
+launch --title "OC" opencode .
+launch --title "Edit" vopen .

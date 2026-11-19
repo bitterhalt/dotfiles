@@ -1,0 +1,13 @@
+--color=fg:#a4a19d,bg:#151311,hl:#8d877f
+--color=fg+:#151311,bg+:#91867b,hl+:#a4a19d
+--color=border:#83807c,header:#a4a19d,gutter:#151311
+--color=spinner:#91867b,info:#91867b,separator:#91867b
+--color=pointer:#9c948c,marker:#969595,prompt:#91867b
+--border="sharp"
+--border-label=""
+--preview-window="border-sharp"
+--prompt="> "
+--marker=">"
+--pointer="*"
+--separator=""
+--scrollbar=""

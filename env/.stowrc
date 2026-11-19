@@ -1,0 +1,6 @@
+--target=/home/bazz
+--ignore=.stowrc
+--ignore=DS_Store
+--ignore=atuin/*
+# Local secrets, never stowed or committed.
+--ignore=40-private.conf

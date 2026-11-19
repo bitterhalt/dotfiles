@@ -1,0 +1,30 @@
+include=~/.config/mako/rules.conf
+include=~/.cache/wal/colors-mako
+
+
+# SETTINGS
+format=<b>%s</b>\n\n%b
+font=Adwaita Mono, Symbols Nerd Font Mono 11
+icons=1
+default-timeout=5000
+ignore-timeout=0
+icon-path=/usr/share/icons/Papirus-Dark/
+layer=overlay
+sort=-time
+output=DP-1
+
+# STYLE
+anchor=top-center
+border-radius=4
+border-size=1
+height=400
+margin=24
+max-history=20
+max-icon-size=48
+padding=15
+width=300
+
+
+# URGENCY LEVELS
+[urgency=high]
+default-timeout=0

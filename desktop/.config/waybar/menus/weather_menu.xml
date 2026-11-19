@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkMenu" id="menu">
+    <child>
+      <object class="GtkMenuItem" id="weather">
+        <property name="label">Show Weather</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="moon">
+        <property name="label">Show Moonphase</property>
+      </object>
+    </child>
+  </object>
+</interface>

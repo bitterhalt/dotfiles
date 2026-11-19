@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+pkill -x vicinae-server
+vicinae server &

@@ -1,0 +1,77 @@
+#!/bin/sh
+# dmenu-compatible front end for the slimshell launcher.
+#
+#   printf '%s\n' one two three | dmenu-runner -p "Pick"
+#
+# Reads choices from stdin, prints the selected line to stdout. Exits 1 if the
+# launcher was closed without a choice. Shift+Enter returns the typed text.
+
+prompt=""
+lines=7
+minimal_lines=false
+index_mode=false
+hide_prompt=false
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -p|--prompt)
+            [ $# -ge 2 ] || { printf '%s requires a value\n' "$1" >&2; exit 2; }
+            prompt="$2"; shift 2 ;;
+        -p*) prompt="${1#-p}"; shift ;;
+        -l|--lines)
+            [ $# -ge 2 ] || { printf '%s requires a value\n' "$1" >&2; exit 2; }
+            lines="$2"; shift 2 ;;
+        --lines=*) lines="${1#--lines=}"; shift ;;
+        -l?*) lines="${1#-l}"; shift ;;
+        --minimal-lines) minimal_lines=true; shift ;;
+        --index) index_mode=true; shift ;;
+        --hide-prompt) hide_prompt=true; shift ;;
+        # dmenu/rofi flags that take a value: accepted and ignored
+        -fn|-nb|-nf|-sb|-sf|-m|-w)
+            [ $# -ge 2 ] || { printf '%s requires a value\n' "$1" >&2; exit 2; }
+            shift 2 ;;
+        *) shift ;;
+    esac
+done
+
+case "$lines" in
+    ''|*[!0-9]*) printf 'lines must be an integer from 0 to 10000\n' >&2; exit 2 ;;
+esac
+# Normalize leading zeroes before passing an integer to IPC.
+lines=$(printf '%s' "$lines" | sed 's/^0*//')
+lines=${lines:-0}
+if [ "${#lines}" -gt 5 ] || [ "$lines" -gt 10000 ]; then
+    printf 'lines must be an integer from 0 to 10000\n' >&2
+    exit 2
+fi
+
+dir=$(mktemp -d "${XDG_RUNTIME_DIR:-/tmp}/slimshell-dmenu.XXXXXX") || exit 1
+trap 'rm -rf "$dir"' 0
+trap 'exit 130' INT
+trap 'exit 143' TERM
+trap 'exit 129' HUP
+
+cat > "$dir/items" || exit 1
+
+# Session identity changes on reload/restart. Bound IPC calls, not the time a
+# user may spend selecting; a vanished shell must not leave the caller waiting.
+session=$(timeout 3 qs ipc call launcher dmenuSession) || exit 1
+timeout 3 qs ipc call launcher dmenu "$dir/items" "$dir/out" "$prompt" "$lines" "$minimal_lines" "$index_mode" "$hide_prompt" >/dev/null || exit 1
+
+ticks=0
+while [ ! -f "$dir/out" ]; do
+    sleep 0.1
+    ticks=$((ticks + 1))
+    if [ "$ticks" -ge 10 ]; then
+        current=$(timeout 3 qs ipc call launcher dmenuSession) || exit 1
+        [ "$current" = "$session" ] || exit 1
+        ticks=0
+    fi
+done
+
+# The launcher renames a complete result into place. A status line separates
+# cancellation from an accepted empty string; cat preserves the payload exactly.
+{
+    IFS= read -r status || exit 1
+    [ "$status" = "ok" ] || exit 1
+    cat
+} < "$dir/out"

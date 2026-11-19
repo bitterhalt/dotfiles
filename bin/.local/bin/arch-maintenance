@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+ask() {
+  read -rp "$1 [y/N] " reply
+  [[ "$reply" =~ ^[Yy]$ ]]
+}
+
+echo "Arch Maintenance"
+echo
+
+sudo_ready=false
+
+if ask "Clean pacman cache?"; then
+  $sudo_ready || { sudo -v && sudo_ready=true; }
+  echo "==> Cleaning pacman cache..."
+  sudo paccache -rk1
+  echo
+fi
+
+if ask "Clean yay cache?"; then
+  echo "==> Cleaning yay cache..."
+  rm -rf ~/.cache/yay/*
+fi
+
+if ask "Remove orphaned packages?"; then
+  orphans=$(pacman -Qdtq 2>/dev/null)
+
+  if [[ -n "$orphans" ]]; then
+    $sudo_ready || { sudo -v && sudo_ready=true; }
+    echo "==> Removing orphaned packages..."
+    sudo pacman -Rns $orphans
+  else
+    echo "No orphaned packages found."
+  fi
+  echo
+fi
+
+echo "==> Maintenance Complete!"
+echo
+read -rp "Press <Enter> to exit this window."

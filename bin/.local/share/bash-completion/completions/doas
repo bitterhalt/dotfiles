@@ -1,0 +1,15 @@
+_doas() {
+  local cur prev words cword split
+  _init_completion -s || return
+
+  for ((i = 1; i <= cword; i++)); do
+    if [[ ${words[i]} != -* ]]; then
+      local PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin
+      local root_command=${words[i]}
+      _command_offset $i
+      return
+    fi
+
+    [[ ${words[i]} == -@(u|C) ]] && ((i++))
+  done
+} && complete -F _doas doas

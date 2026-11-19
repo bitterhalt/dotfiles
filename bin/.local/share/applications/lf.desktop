@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=lf
+Comment=Terminal file manager
+Icon=lf
+Exec=foot -e lf %u
+Keywords=File;Manager;Explorer;Browser;Launcher
+MimeType=inode/directory;
+Categories=Utility;Core;System;FileTools;FileManager;ConsoleOnly

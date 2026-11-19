@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+curl -s "https://httpbin.org/ip" | jq -r .origin

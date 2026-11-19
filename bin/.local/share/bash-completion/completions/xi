@@ -1,0 +1,27 @@
+__load_completion xbps
+
+_xi() {
+	shift
+	_xbps_complete xbps-install "$@"
+}
+
+_xls() {
+	shift
+	_xbps_complete xbps-query "$@"
+}
+
+_xq() {
+	shift
+	_xbps_complete xbps-query "$@"
+}
+
+_xrm() {
+	shift
+	_xbps_complete xbps-remove "$@"
+}
+
+complete -F _xi xi
+complete -F _xls xls
+complete -F _xq xq
+complete -F _xrm xrm
+

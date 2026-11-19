@@ -1,0 +1,59 @@
+
+// Gapps and column widths
+layout {
+    gaps 8
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    // Tab indicator
+    tab-indicator {
+        place-within-column
+        gap 2
+        position "left"
+    }
+
+    // Insert-hint (the thing that appear when you drag windows)
+    insert-hint {
+    }
+
+    // Split ratio
+    default-column-width { proportion 0.5; }
+
+    // Focus ring
+    focus-ring {
+        on
+        width 1
+    }
+
+    // Border
+    border {
+        off
+        // The settings are the same as for the focus ring.
+        // If you enable the border, you probably want to disable the focus ring.
+        width 1
+    }
+
+    // Shadow
+    shadow {
+        // off
+        softness 10
+        spread 4
+        offset x=0 y=2
+    }
+}
+    // Blur
+    blur {
+      passes 4
+      offset 5.0
+      noise 0.02
+      saturation 2.0
+}
+
+// No alt/tab menu
+recent-windows {
+    off
+}
+

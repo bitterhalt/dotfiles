@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+NOTES_DIR="$HOME/Documents/personal/notes"
+EDITOR="${EDITOR:-nvim}"
+DMENU="dmenu-runner"
+
+mkdir -p "$NOTES_DIR"
+cd "$NOTES_DIR" || exit 1
+
+search_notes() {
+  local selection
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU -p Search -l 10)
+  if [ -n "$selection" ] && [ -f "$selection" ]; then
+    exec "$TERMINAL" --app-id noteterm -e "$EDITOR" "$NOTES_DIR/$selection"
+  fi
+}
+
+create_note() {
+  local note_name
+  note_name=$(echo -n | $DMENU \
+    -p "e.g., work/meeting-minutes" \
+    --minimal-lines)
+  if [ -z "$note_name" ]; then
+    exit 0
+  fi
+  if [[ "$note_name" != *.md ]]; then
+    note_name="${note_name}.md"
+  fi
+  local full_path="$NOTES_DIR/$note_name"
+  mkdir -p "$(dirname "$full_path")"
+  exec "$TERMINAL" --app-id noteterm -e "$EDITOR" "$full_path"
+}
+
+landing_menu() {
+  local selection
+  selection=$(printf '%s\n' \
+    '󰍉 Search' \
+    '󰎚 New Note' \
+    ' TODO' \
+    '󰩹 Delete' | "$DMENU" -p "Choose" --minimal-lines) || return 0
+
+  case "$selection" in
+  '󰍉 Search') search_notes ;;
+  '󰎚 New Note') create_note ;;
+  ' TODO') exec "$TERMINAL" --app-id noteterm -e "$EDITOR" "$NOTES_DIR/todo.md" ;;
+  '󰩹 Delete') delete_note ;;
+  esac
+}
+
+delete_note() {
+  local selection
+  selection=$(find . -type f -name "*.md" | sed 's|^\./||' | sort -f | $DMENU \
+    -p "Delete Note")
+  if [ -z "$selection" ] || [ ! -f "$selection" ]; then
+    exit 0
+  fi
+  local confirm
+  confirm=$(echo -e "n ➜ No\ny ➜ Yes" | $DMENU \
+    -p "Trash '$selection'? " \
+    --minimal-lines)
+  if [[ "$confirm" == *"Yes"* ]]; then
+    trash-put "$NOTES_DIR/$selection"
+  fi
+}
+
+case "${1:-}" in
+-s | --search)
+  search_notes
+  ;;
+-c | --create)
+  create_note
+  ;;
+-d | --delete)
+  delete_note
+  ;;
+*)
+  landing_menu
+  ;;
+esac
