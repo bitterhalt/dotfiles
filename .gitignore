@@ -13,4 +13,4 @@ id_rsa*
 # Local-only development files (kept for agent work, not published)
 desktop/.config/quickshell/tests/
 desktop/.config/quickshell/lock-test.qml
-desktop/.config/quickshell/AGENTS.md
+/AGENTS.md
