@@ -11,13 +11,12 @@
 ### Current Stack
 
 - Distro: [Arch](https://archlinux.org)
-- Bar and widgets: [Quickshell](https://quickshell.org/)
+- Bar, launcher and widgets: [Quickshell](https://quickshell.org/)
 - WM: [Niri](https://github.com/niri-wm/niri)
 - Colors [Hellwal](https://github.com/danihek/hellwal)
 - Editor: [NeoVim](https://neovim.io/)
 - Filemanager: [lf](https://github.com/gokcehan/lf/)
 - Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
-- Launcher: [Vicinae](https://github.com/vicinaehq/vicinae/)
 - Login Manager: [ly](https://codeberg.org/fairyglade/ly)
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [Westerm](https://wezterm.org/index.html)
