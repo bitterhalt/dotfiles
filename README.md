@@ -21,6 +21,20 @@
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [Westerm](https://wezterm.org/index.html)
 
+### Repository
+
+```
+.
+├── apps/          application configs
+├── bin/           scripts and ~/.local data
+├── desktop/       niri, quickshell, mako, hellwal
+├── env/           environment.d, GTK, XDG defaults, stow config
+├── shell/         bash and shell aliases
+├── .assets/       screenshots used below
+├── pkglist.txt    pacman packages
+└── pipxlist.txt   pipx packages
+```
+
 ## Gallery
 
 <p align="center">
