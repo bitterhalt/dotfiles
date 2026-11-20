@@ -1,0 +1,1 @@
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", KERNELS=="1-10", ATTR{power/wakeup}="disabled"

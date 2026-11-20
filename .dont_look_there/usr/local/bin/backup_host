@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+###############################################################################
+# WARNING: THIS SCRIPT IS FOR PERSONAL USE ONLY (USER: bazz)
+# DO NOT RUN THIS SCRIPT UNCHANGED ON ANOTHER SYSTEM!
+# - It contains hardcoded paths (/mnt/wd1tb/backup/host)
+# - It assumes a user named "bazz"
+#
+# If you want to reuse it, EDIT all paths, usernames, and options
+# before running. Using it as-is may cause DATA LOSS!
+###############################################################################
+
+user="bazz"
+
+EXCLUDE_FILE="/home/$user/.local/share/rsync-ignore.txt"
+BASE_DEST_HOME="/mnt/wd1tb/backup/host/home"
+BASE_DEST_ETC="/mnt/wd1tb/backup/host/etc"
+
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+DEST_HOME="$BASE_DEST_HOME/$TIMESTAMP"
+DEST_ETC="$BASE_DEST_ETC/$TIMESTAMP"
+
+mkdir -p "$BASE_DEST_HOME"
+mkdir -p "$BASE_DEST_ETC"
+
+# Find the most recent existing backup to use as a hardlink reference
+PREV_HOME=$(ls -dt "$BASE_DEST_HOME"/*/ 2>/dev/null | head -n 1)
+RSYNC_HOME_ARGS="-av --exclude-from=$EXCLUDE_FILE"
+if [ -n "$PREV_HOME" ]; then
+  RSYNC_HOME_ARGS="$RSYNC_HOME_ARGS --link-dest=$PREV_HOME"
+fi
+
+rsync $RSYNC_HOME_ARGS /home/"$user"/ "$DEST_HOME/"
+
+PREV_ETC=$(ls -dt "$BASE_DEST_ETC"/*/ 2>/dev/null | head -n 1)
+RSYNC_ETC_ARGS="-av"
+if [ -n "$PREV_ETC" ]; then
+  RSYNC_ETC_ARGS="$RSYNC_ETC_ARGS --link-dest=$PREV_ETC"
+fi
+
+rsync $RSYNC_ETC_ARGS /etc "$DEST_ETC/"
+
+# Fix permissions
+chown -R "$user":"$user" "$BASE_DEST_HOME" "$BASE_DEST_ETC"
+
+# 3. ROTATION: Keep only the last 3 backups, delete anything older
+# ls -dt lists directories newest-first.
+# tail -n +4 skips the first 3 (newest) and outputs everything older.
+ls -dt "$BASE_DEST_HOME"/*/ 2>/dev/null | tail -n +4 | xargs -r rm -rf
+ls -dt "$BASE_DEST_ETC"/*/ 2>/dev/null | tail -n +4 | xargs -r rm -rf
+
+echo "Backup completed successfully: $TIMESTAMP"
