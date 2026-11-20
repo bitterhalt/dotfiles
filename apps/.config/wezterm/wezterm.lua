@@ -50,18 +50,14 @@ config.cursor_thickness = "1px"
 --- Performance tweaks
 config.max_fps = 60
 config.animation_fps = 1
-config.animation_fps = 1
 config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
 config.check_for_updates = false
 
--- Load modular tabs & keybinds
+-- Load all modular components
 require("titles").setup()
 require("tabs").setup(config, ok and colors or nil)
 require("keys").setup(config)
-
--- Tmux-style persistence
-config.unix_domains = { { name = "unix" } }
-config.default_gui_startup_args = { "connect", "unix" }
+require("persistence").setup(config)
 
 return config
