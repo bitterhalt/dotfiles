@@ -43,7 +43,7 @@ fi
 echo -e "\n=== 4. Repository Status ==="
 if [[ -n $(git status --porcelain) ]]; then
   git status -s
-  echo "Commit and push from lazygit when ready."
+  echo "Commit and push when ready."
 else
   echo "[✓] Working tree is clean."
 fi
