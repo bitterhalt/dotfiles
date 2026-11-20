@@ -21,20 +21,6 @@
 - Media Player: [mpv](https://mpv.io/)
 - Terminal: [Westerm](https://wezterm.org/index.html)
 
-### Repository
-
-```
-.
-├── apps/          application configs
-├── bin/           scripts and ~/.local data
-├── desktop/       niri, quickshell, mako, hellwal
-├── env/           environment.d, GTK, XDG defaults, stow config
-├── shell/         bash and shell aliases
-├── .assets/       screenshots used below
-├── pkglist.txt    pacman packages
-└── pipxlist.txt   pipx packages
-```
-
 ## Gallery
 
 <p align="center">
@@ -92,3 +78,23 @@ stow -R apps bin desktop env shell
 ```
 
 `~/.stowrc` must exist before stowing — it supplies `--target` and the ignore rules, and stow skips creating it itself.
+
+The packages show up in `$HOME` as symlinks back into the checkout:
+
+```
+~
+├── .bash_profile -> dotfiles/shell/.bash_profile
+├── .bashrc -> dotfiles/shell/.bashrc
+├── .stowrc -> dotfiles/env/.stowrc
+├── .config/
+│   ├── niri -> dotfiles/desktop/.config/niri
+│   ├── quickshell -> dotfiles/desktop/.config/quickshell
+│   ├── nvim -> dotfiles/apps/.config/nvim
+│   ├── shell -> dotfiles/shell/.config/shell
+│   └── ...
+└── .local/
+    ├── bin -> dotfiles/bin/.local/bin
+    └── share/
+        ├── applications -> dotfiles/bin/.local/share/applications
+        └── ...
+```
