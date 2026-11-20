@@ -60,14 +60,21 @@
   <sub>Lock screen</sub>
 </p>
 
-### Binds
-
-- **[Keybindings](desktop/.config/niri/keybinds.md)**
-
 ---
 
-### User reviews ❤️
+### Stow setup 🔧
 
-<img width="441" height="173" alt="image" src="https://github.com/user-attachments/assets/b9586fb7-f365-4df7-9c24-12f75099b301" />
+Requires [GNU Stow](https://www.gnu.org/software/stow/).
 
-### [⭐ Inspiration](https://github.com/bitterhalt?tab=stars)
+Clone the repository wherever you like and point `DOTFILES` at that path:
+
+```bash
+git clone git@github.com:bitterhalt/dotfiles.git "$HOME/dotfiles"
+DOTFILES="$HOME/dotfiles"
+
+ln -sfn "$DOTFILES/env/.stowrc" ~/.stowrc
+cd "$DOTFILES"
+stow -R apps bin desktop env shell
+```
+
+`~/.stowrc` must exist before stowing — it supplies `--target` and the ignore rules, and stow skips creating it itself.
