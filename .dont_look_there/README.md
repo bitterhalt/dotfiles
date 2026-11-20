@@ -2,4 +2,4 @@
 
 These are for MY personal use only!
 
-**YOU HAVE BEEN WARNED AND WARRANTY HAS BEEN VOIDED!** ⚠️
+**YOU HAVE BEEN WARNED** ⚠️
