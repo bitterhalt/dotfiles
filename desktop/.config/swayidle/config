@@ -1,4 +1,0 @@
-timeout 1700 'qs -n -d -p ~/.config/quickshell/lock.qml --no-detailed-logs'
-timeout 1800 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors'
-timeout 7200 'systemctl suspend'
-before-sleep 'bash ~/.config/quickshell/lock/lock.sh'
