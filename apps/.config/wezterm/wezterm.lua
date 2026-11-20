@@ -4,7 +4,9 @@ local config = wezterm.config_builder()
 -- Auto reload
 config.automatically_reload_config = true
 
--- Colors (hellwal with fallback)
+-- Colors and theming
+config.bold_brightens_ansi_colors = false
+
 local colors_file = wezterm.home_dir .. "/.cache/hellwal/colors-wezterm.lua"
 local ok, colors = pcall(dofile, colors_file)
 if ok then
