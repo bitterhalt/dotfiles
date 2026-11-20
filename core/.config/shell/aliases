@@ -12,7 +12,8 @@ alias grep="grep --color=auto"
 alias mkdir="mkdir -pv"
 alias mv="mv -iv"
 alias rm="rm -vI"
-alias gp="git push"
+# Git
+alias lg="lazygit"
 # Pacman
 alias cleanup="sudo pacman -Rns $(pacman -Qtdq)" # remove orphaned packages
 alias pacdiff="sudo DIFFPROG=nvim pacdiff"
@@ -37,6 +38,7 @@ alias nvm="sudo nvme smart-log /dev/nvme0"
 alias tma="tmux attach-session -t"
 alias tmn="tmux new-session -s"
 alias tml="tmux list-session"
+alias dot="dotter"
 # Systemd Journal
 alias loger="journalctl -p 3 -xb"
 alias logf="journalctl -f"
