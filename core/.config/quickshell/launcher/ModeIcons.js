@@ -1,7 +1,7 @@
 // Prompt prefix icon for each launcher mode. Empty means no prefix.
 var ICONS = {
   apps: "󰵆",
-  emoji: "󰇷",
+  emoji: "",
   files: "󰱼",
 };
 
