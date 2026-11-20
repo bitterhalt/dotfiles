@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# Archive extraction helper
+# Usage: extract <archive> [archive...]
+
+extract() {
+  if (($# == 0)); then
+    echo "Usage: extract <archive> [archive...]"
+    return 1
+  fi
+
+  local file
+
+  for file in "$@"; do
+    if [[ ! -f "$file" ]]; then
+      echo "extract: '$file' - file does not exist" >&2
+      return 1
+    fi
+
+    case "${file,,}" in
+    *.cbt | *.tar.bz2 | *.tar.gz | *.tar.xz | *.tbz2 | *.tgz | *.txz | *.tar)
+      tar xvf "$file"
+      ;;
+    *.lzma)
+      unlzma -- "$file"
+      ;;
+    *.bz2)
+      bunzip2 -- "$file"
+      ;;
+    *.cbr | *.rar)
+      unrar x -ad -- "$file"
+      ;;
+    *.gz)
+      gunzip -- "$file"
+      ;;
+    *.cbz | *.epub | *.zip)
+      unzip "$file"
+      ;;
+    *.z)
+      uncompress -- "$file"
+      ;;
+    *.7z | *.arj | *.cab | *.cb7 | *.chm | *.deb | *.dmg | *.iso | *.lzh | *.msi | *.pkg | *.rpm | *.udf | *.wim | *.xar)
+      7z x -- "$file"
+      ;;
+    *.xz)
+      unxz -- "$file"
+      ;;
+    *.exe)
+      cabextract "$file"
+      ;;
+    *.cpio)
+      cpio -id <"$file"
+      ;;
+    *.cba | *.ace)
+      unace x "$file"
+      ;;
+    *)
+      echo "extract: '$file' - unknown archive format" >&2
+      return 1
+      ;;
+    esac || return $?
+  done
+}
+
+extract "$@"
