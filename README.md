@@ -72,9 +72,9 @@ Clone the repository wherever you like and point `DOTFILES` at that path:
 git clone git@github.com:bitterhalt/dotfiles.git "$HOME/dotfiles"
 DOTFILES="$HOME/dotfiles"
 
-ln -sfn "$DOTFILES/env/.stowrc" ~/.stowrc
+ln -sfn "$DOTFILES/core/.stowrc" ~/.stowrc
 cd "$DOTFILES"
-stow -R apps bin desktop env shell
+stow -R apps bin core
 ```
 
 `~/.stowrc` must exist before stowing — it supplies `--target` and the ignore rules, and stow skips creating it itself.
@@ -83,14 +83,14 @@ The packages show up in `$HOME` as symlinks back into the checkout:
 
 ```
 ~
-├── .bash_profile -> dotfiles/shell/.bash_profile
-├── .bashrc -> dotfiles/shell/.bashrc
-├── .stowrc -> dotfiles/env/.stowrc
+├── .bash_profile -> dotfiles/core/.bash_profile
+├── .bashrc -> dotfiles/core/.bashrc
+├── .stowrc -> dotfiles/core/.stowrc
 ├── .config/
-│   ├── niri -> dotfiles/desktop/.config/niri
-│   ├── quickshell -> dotfiles/desktop/.config/quickshell
+│   ├── niri -> dotfiles/core/.config/niri
+│   ├── quickshell -> dotfiles/core/.config/quickshell
 │   ├── nvim -> dotfiles/apps/.config/nvim
-│   ├── shell -> dotfiles/shell/.config/shell
+│   ├── shell -> dotfiles/core/.config/shell
 │   └── ...
 └── .local/
     ├── bin -> dotfiles/bin/.local/bin

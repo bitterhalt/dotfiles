@@ -12,16 +12,16 @@ add) ;;
   ;;
 esac
 
-# ~/.stowrc (a symlink to env/.stowrc) supplies --target and the ignore
+# ~/.stowrc (a symlink to core/.stowrc) supplies --target and the ignore
 # rules. Without it stow would target ~/Documents/projects and deploy the
 # private environment file, so refuse to run.
 if [[ ! -f "$HOME/.stowrc" ]]; then
-  echo "Missing ~/.stowrc (expected symlink to $DOTFILES/env/.stowrc)" >&2
+  echo "Missing ~/.stowrc (expected symlink to $DOTFILES/core/.stowrc)" >&2
   exit 1
 fi
 
 echo "=== 1. Restowing Dotfiles Packages ==="
-stow -R -v apps bin desktop env shell
+stow -R -v apps bin core
 
 echo -e "\n=== 2. Exporting Package Manifests ==="
 echo "Dumping pacman package list..."

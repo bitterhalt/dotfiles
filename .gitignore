@@ -4,15 +4,15 @@ __pycache__/
 .#*
 
 # Local secrets: kept in the working tree, never committed
-env/.config/environment.d/40-private.conf
+core/.config/environment.d/40-private.conf
 .env
 *.key
 *.pem
 id_rsa*
 
 # Local-only development files (kept for agent work, not published)
-desktop/.config/quickshell/tests/
-desktop/.config/quickshell/lock-test.qml
+core/.config/quickshell/tests/
+core/.config/quickshell/lock-test.qml
 /AGENTS.md
 
 # OpenCode local service credentials
