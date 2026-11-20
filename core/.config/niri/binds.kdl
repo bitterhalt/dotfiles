@@ -1,6 +1,6 @@
 binds {
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn-sh "wezterm start --always-new-process"; }
-    Mod+Shift+Return hotkey-overlay-title="Open Terminal as Session" { spawn-sh "wezterm"; }
+    Mod+Shift+Return hotkey-overlay-title="Open Terminal as Session" { spawn-sh "wezterm connect unix --class wezterm-session"; }
     Mod+Shift+Delete hotkey-overlay-title="TOP" { spawn-sh "$TERMINAL --class poptop -e btop"; }
     Mod+Ctrl+Delete hotkey-overlay-title="HTOP" { spawn-sh "$TERMINAL --class poptop -e htop"; }
     Mod+Shift+F11 hotkey-overlay-title="Toggle Idle-deamon" { spawn-sh "qs ipc call idle toggle"; }

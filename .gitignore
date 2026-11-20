@@ -9,6 +9,9 @@ core/.config/environment.d/40-private.conf
 *.key
 *.pem
 id_rsa*
+brave*
+intent.cache
+firefox*
 
 # Local-only development files (kept for agent work, not published)
 core/.config/quickshell/tests/
