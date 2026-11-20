@@ -9,7 +9,7 @@ touch "$HISTORY_FILE"
 all_binaries=$(
   echo "$PATH" |
     tr ':' '\n' |
-    xargs -I {} find {} -maxdepth 1 -executable -type f 2>/dev/null |
+    xargs -I {} find -L {} -maxdepth 1 -type f -executable 2>/dev/null |
     awk -F/ '{print $NF}' |
     sort -u
 )
