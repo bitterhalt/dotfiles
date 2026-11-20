@@ -49,8 +49,3 @@ function visibleRows(lines, minimal, itemCount, availableRows) {
     const count = minimal ? Math.min(requested, itemCount) : requested
     return Math.min(count, Math.max(0, availableRows))
 }
-
-// Height above the rows. A hidden prompt keeps only the panel insets.
-function chromeHeight(promptHidden, panelInset, inputHeight, contentSpacing) {
-    return promptHidden ? panelInset * 2 : inputHeight + contentSpacing + panelInset
-}
