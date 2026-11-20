@@ -1,4 +1,4 @@
---target=/home/bazz
+--target=~/
 --ignore=.stowrc
 --ignore=DS_Store
 --ignore=atuin/*
