@@ -4,3 +4,9 @@
 --ignore=atuin/*
 # Local secrets, never stowed or committed.
 --ignore=40-private.conf
+# Desktop files rewritten by applications (Thunderbird, Thunar, xdg-user-dirs)
+# using a temp file and rename. A symlink would be replaced by a real file, so
+# keep these live files real and let dotter add absorb their contents into the
+# repo copies instead of linking them.
+--ignore=mimeapps\.list
+--ignore=user-dirs\.dirs

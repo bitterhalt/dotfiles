@@ -20,10 +20,45 @@ if [[ ! -f "$HOME/.stowrc" ]]; then
   exit 1
 fi
 
-echo "=== 1. Restowing Dotfiles Packages ==="
+echo "=== 1. Absorbing Application-Written Files ==="
+# Stow ignores these (see core/.stowrc): desktop applications rewrite them
+# with a temp file + rename, which replaces a symlink with a real file. The
+# live file stays real; when it is missing we seed it from the repo copy, and
+# when it differs we absorb the application's edits back into the repo.
+ADOPTED=(
+  "core/.config/mimeapps.list"
+  "core/.config/user-dirs.dirs"
+)
+
+for rel in "${ADOPTED[@]}"; do
+  src="$DOTFILES/$rel"
+  live="$HOME/${rel#core/}"
+
+  # Migrate a leftover symlink from before these files were adopted.
+  if [[ -L "$live" ]]; then
+    tmp=$(mktemp)
+    cp -- "$live" "$tmp"
+    rm -f -- "$live"
+    mv -- "$tmp" "$live"
+    echo "[migrated] ~/${rel#core/} is now a real file"
+  fi
+
+  if [[ ! -e "$live" ]]; then
+    if [[ -f "$src" ]]; then
+      mkdir -p -- "$(dirname -- "$live")"
+      cp -- "$src" "$live"
+      echo "[seeded]   ~/${rel#core/} from repo"
+    fi
+  elif [[ -f "$src" ]] && ! cmp -s -- "$src" "$live"; then
+    cp -- "$live" "$src"
+    echo "[absorbed] ~/${rel#core/} -> $rel"
+  fi
+done
+
+echo -e "\n=== 2. Restowing Dotfiles Packages ==="
 stow -R -v apps bin core
 
-echo -e "\n=== 2. Exporting Package Manifests ==="
+echo -e "\n=== 3. Exporting Package Manifests ==="
 echo "Dumping pacman package list..."
 pacman -Qqe >"$DOTFILES/pkglist.txt" 2>/dev/null || echo "pacman not found, skipping."
 
@@ -34,13 +69,20 @@ else
   echo "pipx not found, skipping."
 fi
 
-echo -e "\n=== 3. Running Helpers ==="
+echo -e "\n=== 4. Running Helpers ==="
 if command -v niri_keybind_parser.py &>/dev/null; then
   echo "Running Niri keybind parser..."
   niri_keybind_parser.py || true
 fi
 
-echo -e "\n=== 4. Repository Status ==="
+# Regenerate the desktop database after restowing .desktop files (the cache is
+# generated inside the stowed applications directory and is gitignored).
+if command -v update-desktop-database &>/dev/null; then
+  echo "Refreshing desktop database..."
+  update-desktop-database "$HOME/.local/share/applications" >/dev/null 2>&1 || true
+fi
+
+echo -e "\n=== 5. Repository Status ==="
 if [[ -n $(git status --porcelain) ]]; then
   git status -s
   echo "Commit and push when ready."

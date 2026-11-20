@@ -254,6 +254,14 @@ window-rule {
     open-on-workspace "3"
 }
 
+// Terminal for projects
+window-rule {
+    match app-id="wezterm-session"
+    open-on-workspace "4"
+    open-focused true
+    open-maximized true
+}
+
 // Environment & shell layer rules
 
 // Add shadow to chosen layers
