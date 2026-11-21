@@ -149,7 +149,6 @@ unrar
 unzip
 video-trimmer
 vulkan-radeon
-waybar
 wayland-protocols
 wev
 wezterm-git
