@@ -20,14 +20,14 @@ My Arch Linux setup: a [Niri](https://github.com/YaLTeR/niri) desktop with a cus
 | Role                     | Choice                                                                      |
 | ------------------------ | --------------------------------------------------------------------------- |
 | Distro                   | [Arch Linux](https://archlinux.org)                                         |
-| Compositor               | [Niri](https://github.com/YaLTeR/niri) (scrollable tiling)                  |
-| Shell (bar, menus, lock) | [Quickshell](https://quickshell.org/), my config is called **Slimshell**    |
-| Colors                   | [Hellwal](https://github.com/danihek/hellwal), generated from the wallpaper |
+| Compositor               | [Niri](https://github.com/YaLTeR/niri)       |
+| Shell (bar, menus, lock) | [Quickshell](https://quickshell.org/) |
+| Colors                   | [Hellwal](https://github.com/danihek/hellwal) |
 | Terminal                 | [WezTerm](https://wezterm.org/) (Works as terminal and multiplaxer)         |
 | Editor                   | [Neovim](https://neovim.io/)                                                |
 | File manager             | [lf](https://github.com/gokcehan/lf/), main filemanager                     |
-| Image viewer             | [swayimg](https://github.com/artemsen/swayimg) (Lua config)                 |
-| Media                    | [mpv](https://mpv.io/), zathura for PDFs                                    |
+| Image viewer             | [swayimg](https://github.com/artemsen/swayimg) |
+| Media                    | [mpv](https://mpv.io/)                              |
 | Login manager            | [ly](https://codeberg.org/fairyglade/ly)                                    |
 | Shell                    | bash                                                                        |
 
