@@ -117,9 +117,12 @@ This repository is mainly for hobby and learning, so don't expect everything to 
 ## ISSUES 🔨
 
 - ~~dmenu-runner can't display special symbols (Nerd fonts etc.)~~
-- File structure is messy and files needs to be commented better
 - There are probably plenty of other things as well. Maybe you can show me how to fix them or do better :)
 
 ## TODO
 
-- [ ] Put there something
+- [ ] Removable drives popup (use BarToast component, like BT/Network/Idle uses)
+- [ ] Code has some duplicates, clean and re-use as much as possible
+- [ ] Ram and optimisations here and there (already pretty solid, if you can say that from quickshell)
+- [ ] Workspaces OSD on barless mode, once I nail the correct style
+- [ ] Improve comments
