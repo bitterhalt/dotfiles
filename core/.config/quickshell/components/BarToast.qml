@@ -102,7 +102,7 @@ Item {
                     renderType: Text.NativeRendering
                     width: parent.width
                     color: root.critical ? root.criticalTextColor : root.config.fg
-                    font.pointSize: root.config.textSizeNormal * 0.92
+                    font.pointSize: root.config.textSizeNormal * 0.94
                     font.weight: Font.DemiBold
                     elide: Text.ElideRight
                     text: root.title
