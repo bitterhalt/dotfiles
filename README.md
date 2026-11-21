@@ -1,37 +1,43 @@
 # Dotfiles
 
-![image](https://camo.githubusercontent.com/08b36d190a492dc14e60d5067ed753fff78b20c4f37d79f187b36e6d0fda010f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7374617475732d776f726b732532306f6e2532306d792532306d616368696e652d677265656e)
+![status: works on my machine](https://img.shields.io/badge/status-works%20on%20my%20machine-green)
 
-- Philosophy:
-  - Keyboard driven workflow
-  - Less clutter - a clear working environment
-  - Simplicity
-  - Speed before eye candy
-
-### Current Stack
-
-- Distro: [Arch](https://archlinux.org)
-- Bar, launcher and widgets: [Quickshell](https://quickshell.org/)
-- WM: [Niri](https://github.com/niri-wm/niri)
-- Colors [Hellwal](https://github.com/danihek/hellwal)
-- Editor: [NeoVim](https://neovim.io/)
-- Filemanager: [lf](https://github.com/gokcehan/lf/)
-- Image Viewer: [swayimg](https://github.com/artemsen/swayimg)
-- Login Manager: [ly](https://codeberg.org/fairyglade/ly)
-- Media Player: [mpv](https://mpv.io/)
-- Terminal: [Westerm](https://wezterm.org/index.html)
-
-## Gallery
+My Arch Linux setup: a [Niri](https://github.com/YaLTeR/niri) desktop with a custom [Quickshell](https://quickshell.org/) shell, a lot of small shell scripts, and a terminal-first set of tools. Everything is managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 <p align="center">
   <img src=".assets/desk.png" alt="Desktop" width="100%">
 </p>
 
-<p align="center">
-  <img src=".assets/zen.png" alt="Zen mode" width="100%">
-</p>
+## Philosophy
+
+- **Keyboard driven.** If a widget has buttons, it must also work from the keyboard.
+- **Less clutter.** A clear working environment, no giant menus.
+- **Simplicity.** Small scripts and plain config files over big frameworks.
+- **Speed before eye candy.** Animations are short, and memory use is something I actually watch.
+
+## Stack
+
+| Role                     | Choice                                                                      |
+| ------------------------ | --------------------------------------------------------------------------- |
+| Distro                   | [Arch Linux](https://archlinux.org)                                         |
+| Compositor               | [Niri](https://github.com/YaLTeR/niri) (scrollable tiling)                  |
+| Shell (bar, menus, lock) | [Quickshell](https://quickshell.org/), my config is called **Slimshell**    |
+| Colors                   | [Hellwal](https://github.com/danihek/hellwal), generated from the wallpaper |
+| Terminal                 | [WezTerm](https://wezterm.org/) (Works as terminal and multiplaxer)         |
+| Editor                   | [Neovim](https://neovim.io/)                                                |
+| File manager             | [lf](https://github.com/gokcehan/lf/), main filemanager                     |
+| Image viewer             | [swayimg](https://github.com/artemsen/swayimg) (Lua config)                 |
+| Media                    | [mpv](https://mpv.io/), zathura for PDFs                                    |
+| Login manager            | [ly](https://codeberg.org/fairyglade/ly)                                    |
+| Shell                    | bash                                                                        |
+
+## Gallery
 
 <table>
+  <tr>
+    <td width="50%"><img src=".assets/zen.png" alt="Zen mode" width="100%"><br><sub>Zen mode: bar hidden, only a small info card in the corner</sub></td>
+    <td width="50%"><img src=".assets/launcher.png" alt="Application launcher" width="100%"><br><sub>Application launcher (apps, files, emoji, calculator)</sub></td>
+  </tr>
   <tr>
     <td width="50%"><img src=".assets/clip.png" alt="Clipboard picker" width="100%"><br><sub>Clipboard picker</sub></td>
     <td width="50%"><img src=".assets/translator.png" alt="Translator" width="100%"><br><sub>Translator</sub></td>
@@ -51,22 +57,47 @@
 </table>
 
 <p align="center">
-  <img src=".assets/launcher.png" alt="Application launcher" width="50%"><br>
-  <sub>Application launcher</sub>
-</p>
-
-<p align="center">
   <img src=".assets/lock.png" alt="Lock screen with password feedback and weather" width="100%"><br>
   <sub>Lock screen</sub>
 </p>
 
----
+### Slimshell (Quickshell)
 
-### Stow setup 🔧
+One Quickshell process replaces what used to be a pile of separate tools and increasingly complicated Bash scripts. It lives in [`core/.config/quickshell`](core/.config/quickshell)
 
-Requires [GNU Stow](https://www.gnu.org/software/stow/).
+|              | What's included                                                                                               |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
+| **Bar**      | Workspaces, window title, clock and weather, battery, connections, privacy indicators, removable drives, tray |
+| **Menus**    | Keyboard-driven Bluetooth, Wi-Fi, audio, power and notification menus                                         |
+| **Launcher** | Apps, file search, calculator, emoji, and a dmenu-compatible mode for scripts                                 |
+| **Tools**    | Clipboard history, DeepL translator, screen recording, package updates                                        |
+| **Session**  | Lock screen, idle handling, polkit prompt, wallpaper picker, dynamic theming                                  |
 
-Clone the repository wherever you like and point `DOTFILES` at that path:
+Everything is controlled over IPC, so Niri keybinds and scripts just call it:
+
+```bash
+qs ipc call launcher toggle
+qs ipc call volume up
+qs ipc call lock lock
+```
+
+The full target list is in the [Slimshell README](core/.config/quickshell/README.md).
+
+## Install
+
+> These are personal dotfiles. Read before you copy, and expect to adapt things (paths, locale, hardware, keys).
+
+### 1. Packages
+
+On Arch, with an AUR helper such as [yay](https://github.com/Jguer/yay):
+
+```bash
+yay -S --needed $(< pkglist.txt)
+```
+
+### 2. Stow
+
+Requires [GNU Stow](https://www.gnu.org/software/stow/). Clone the repo wherever you like and point `DOTFILES` at it:
 
 ```bash
 git clone git@github.com:bitterhalt/dotfiles.git "$HOME/dotfiles"
@@ -77,9 +108,10 @@ cd "$DOTFILES"
 stow -R apps bin core
 ```
 
-`~/.stowrc` must exist before stowing — it supplies `--target` and the ignore rules, and stow skips creating it itself.
+<details>
+<summary>What ends up in <code>$HOME</code></summary>
 
-The packages show up in `$HOME` as symlinks back into the checkout:
+Everything shows up as symlinks back into the checkout:
 
 ```
 ~
@@ -98,3 +130,5 @@ The packages show up in `$HOME` as symlinks back into the checkout:
         ├── applications -> dotfiles/bin/.local/share/applications
         └── ...
 ```
+
+</details>
