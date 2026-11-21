@@ -4,7 +4,6 @@ adw-gtk-theme
 amd-ucode
 amdgpu_top
 atool
-awww
 base
 base-devel
 bash-completion

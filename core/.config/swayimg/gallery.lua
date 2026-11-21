@@ -8,11 +8,27 @@ swayimg.gallery.cache = 100
 swayimg.gallery.preload = false
 swayimg.gallery.pstore = true
 
-swayimg.gallery.text = {
+local text = {
 	topleft = {},
 	topright = {},
 	bottomleft = { "{list.index} of {list.total}" },
 	bottomright = { "{name}" },
+}
+swayimg.gallery.text = text
+
+local help = {
+	"Gallery keys (F1 to close)",
+	"",
+	"b\tSet as wallpaper",
+	"y\tCopy image to clipboard",
+	"e\tEdit in GIMP",
+	"Delete\tMove to trash",
+	"h j k l\tMove selection",
+	"g / Shift-g\tFirst / last",
+	"- / +\tThumbnail size",
+	"Return\tOpen in viewer",
+	"f\tFullscreen",
+	"q\tQuit",
 }
 
 local function with_image(fn)
@@ -25,6 +41,8 @@ end
 --------------------------------------------------------------------------------
 -- Binds
 --------------------------------------------------------------------------------
+swayimg.gallery.on_key("F1", make_help_toggle(swayimg.gallery, text, "topleft", help))
+
 swayimg.gallery.on_key("q", function()
 	swayimg.exit()
 end)
@@ -43,11 +61,6 @@ end)
 
 swayimg.gallery.on_key("Shift-g", function()
 	swayimg.gallery.switch_image("last")
-end)
-
-swayimg.gallery.on_key("r", function()
-	rename_image()
-	swayimg.gallery.reload()
 end)
 
 swayimg.gallery.on_key("h", function()
@@ -81,17 +94,7 @@ swayimg.gallery.on_key("Delete", function()
 	end)
 end)
 
-swayimg.gallery.on_key("b", function()
-	with_image(function(image)
-		os.execute("~/.config/swayimg/setbg.sh -p " .. shellescape(image.path) .. " & disown")
-	end)
-end)
-
-swayimg.gallery.on_key("Shift-p", function()
-	with_image(function(image)
-		os.execute("setbg -pf " .. shellescape(image.path) .. " & disown")
-	end)
-end)
+swayimg.gallery.on_key("b", set_wallpaper)
 
 swayimg.gallery.on_key("e", function()
 	with_image(function(image)

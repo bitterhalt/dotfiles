@@ -129,9 +129,18 @@ ShellRoot {
         targetScreen: root.activeScreen
     }
 
+    WallpaperService {
+        id: appWallpaperService
+    }
+
+    WallpaperLayer {
+        service: appWallpaperService
+    }
+
     Wallpaper {
         id: appWallpaperPicker
         config: appConfig
+        wallpaperService: appWallpaperService
         targetScreen: root.activeScreen
         settingsService: appSettingsService
     }

@@ -1,66 +1,57 @@
--- Rename .
-function rename_image()
-	local image = nil
+-- Image currently selected (gallery) or shown (viewer).
+function current_image()
 	local mode = swayimg.mode
 	if mode == "gallery" then
-		image = swayimg.gallery.get_image()
+		return swayimg.gallery.get_image()
 	elseif mode == "viewer" then
-		image = swayimg.viewer.get_image()
-	end
-
-	if not image or not image.path then
-		return
-	end
-
-	local dir = image.path:match("(.*/)") or ""
-	local current_name = image.path:match("^.*/([^/]+)$") or image.path
-
-	local reply = os.tmpname()
-	os.execute(
-		string.format(
-			"echo %s | fuzzel --minimal-lines -d --placeholder 'Rename ' > %s",
-			shellescape(current_name),
-			reply
-		)
-	)
-
-	local f = io.open(reply, "r")
-	local new_name = f and f:read("*all"):gsub("\n$", "") or ""
-	if f then
-		f:close()
-	end
-	os.remove(reply)
-
-	if new_name ~= "" and new_name ~= current_name then
-		local new_path = dir .. new_name
-		local success = os.rename(image.path, new_path)
-
-		if success then
-			swayimg.text.status = "Renamed to: " .. new_name
-		else
-			swayimg.text.status = "Error: Rename failed"
-		end
+		return swayimg.viewer.get_image()
 	end
 end
 
-function run_hellwal()
-	local image = nil
-	local mode = swayimg.mode
-	if mode == "gallery" then
-		image = swayimg.gallery.get_image()
-	elseif mode == "viewer" then
-		image = swayimg.viewer.get_image()
-	end
-
+-- Set the wallpaper through the Quickshell helper, then redraw the
+-- wallpaper layers (WallpaperService, `qs ipc call bg reload`).
+function set_wallpaper()
+	local image = current_image()
 	if not image or not image.path then
 		return
 	end
 
-	os.execute(
-		string.format(
-			"( out=$(setbg -p %s 2>&1) || notify-send 'Wallpaper failed' \"$out\" ) >/dev/null 2>&1 &",
-			shellescape(image.path)
-		)
-	)
-	swayimg.text.status = "Applying wallpaper + hellwal..."
+	os.execute(string.format(
+		"( out=$(python3 ~/.config/quickshell/wallpaper/wallpaper-helper.py apply %s 2>&1)"
+			.. " || { notify-send 'Wallpaper failed' \"$out\"; exit 1; };"
+			.. " qs ipc call bg reload ) >/dev/null 2>&1 &",
+		shellescape(image.path)
+	))
+	swayimg.text.status = "Setting wallpaper..."
+end
+
+-- Build an F1-style key tips toggle for one mode.
+--   mode:  swayimg.viewer / swayimg.gallery
+--   base:  the mode's normal text scheme (table with the four corners)
+--   block: corner that is free to hold the tips ("topleft", "bottomleft", ...)
+--   lines: tips, use "key<TAB>description" so the block gets aligned
+function make_help_toggle(mode, base, block, lines)
+	local shown = false
+
+	local function apply()
+		local scheme = {}
+		for corner, content in pairs(base) do
+			scheme[corner] = content
+		end
+		if shown then
+			scheme[block] = lines
+		end
+		mode.text = scheme
+		swayimg.text.visible = true
+	end
+
+	return function()
+		-- If the overlay already timed out, a press shows the tips again.
+		if shown and swayimg.text.visible then
+			shown = false
+		else
+			shown = true
+		end
+		apply()
+	end
 end

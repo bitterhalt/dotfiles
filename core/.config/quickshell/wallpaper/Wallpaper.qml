@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Io
 import "../components"
 import "../menus"
+import "../services"
 
 Item {
     id: root
@@ -12,12 +13,15 @@ Item {
     required property var config
     required property var targetScreen
     required property var settingsService
+    property WallpaperService wallpaperService: null
     property var menuScreen: null
     property bool opened: false
     property string errorText: ""
     property string noticeText: ""
     property bool replyReceived: false
     property int applyExitCode: 0
+    // Only a real wallpaper change needs the layers reloaded, not a theme refresh.
+    property bool reloadOnReply: false
     readonly property bool busy: applyProcess.running
     readonly property string directory: Quickshell.env("HOME") + "/Pictures/wallpaper"
     readonly property string helperPath: Quickshell.env("HOME") + "/.config/quickshell/wallpaper/wallpaper-helper.py"
@@ -59,6 +63,10 @@ Item {
 
     function handleReply(text) {
         root.replyReceived = true;
+        // Reload even on error: the helper may have replaced the files before failing.
+        if (root.reloadOnReply && root.wallpaperService)
+            root.wallpaperService.reload();
+        root.reloadOnReply = false;
         try {
             const reply = JSON.parse(text);
             if (reply.ok)
@@ -91,6 +99,7 @@ Item {
         errorText = "";
         noticeText = "";
         replyReceived = false;
+        reloadOnReply = true;
         const command = ["python3", helperPath, "apply", path];
         if (hellwal) {
             command.push("--hellwal", "--mode", settingsService.hellwalMode, "--dark-offset", String(settingsService.hellwalDarkOffset), "--bright-offset", String(settingsService.hellwalBrightOffset), "--gray-scale", String(settingsService.hellwalGrayScale));
@@ -107,6 +116,7 @@ Item {
         errorText = "";
         noticeText = "";
         replyReceived = false;
+        reloadOnReply = false;
         const command = ["python3", helperPath, "refresh", "--mode", settingsService.hellwalMode, "--dark-offset", String(settingsService.hellwalDarkOffset), "--bright-offset", String(settingsService.hellwalBrightOffset), "--gray-scale", String(settingsService.hellwalGrayScale)];
         if (settingsService.hellwalBackgroundMode === "fixed")
             command.push("--static-background", settingsService.hellwalBackgroundColor);

@@ -26,7 +26,7 @@ Additional tools are needed only for the features you use:
 | Audio card profiles        | `pactl` and PipeWire's PulseAudio compatibility service                   |
 | Removable drives           | `udisks2` (`udisksctl`) and `lsblk`; `xdg-open` to open mountpoints       |
 | Screen recording           | `gpu-screen-recorder`, `notify-send`                                      |
-| Wallpaper picker           | Python 3, ImageMagick (`magick`), `awww`; Hellwal for generated colors    |
+| Wallpaper picker           | Python 3, ImageMagick (`magick`); Hellwal for generated colors            |
 | Translation                | Python 3, `wl-copy`, and a DeepL API key                                  |
 | Locking and suspension     | Linux-PAM, Bash and systemd/logind; see the lock-screen check below       |
 
@@ -134,13 +134,11 @@ spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 
 ### Wallpaper and colors
 
-Put images in `~/Pictures/wallpaper`. The current wallpaper helper updates both
-the desktop and an `overview` wallpaper, so it expects two `awww` instances:
+Put images in `~/Pictures/wallpaper`. Quickshell draws the wallpaper itself
+(`services/WallpaperService.qml` and `wallpaper/WallpaperLayer.qml`), including a blurred `overview` copy for niri.
+Only this layer rule is needed (scripts can force a redraw with `qs ipc call bg reload`):
 
 ```kdl
-spawn-at-startup "awww-daemon"
-spawn-sh-startup "awww-daemon --namespace overview"
-
 layer-rule {
     match namespace="overview"
     place-within-backdrop true

@@ -5,7 +5,7 @@ swayimg.viewer.autopos = "center"
 swayimg.viewer.loop = true
 swayimg.viewer.preload = 1
 
-swayimg.viewer.text = {
+local text = {
 	topleft = {
 		"File: {name}",
 		"Format: {format}",
@@ -21,6 +21,23 @@ swayimg.viewer.text = {
 	},
 	bottomleft = {},
 	bottomright = {},
+}
+swayimg.viewer.text = text
+
+local help = {
+	"Viewer keys (F1 to close)",
+	"",
+	"b\tSet as wallpaper",
+	"y\tCopy image to clipboard",
+	"e\tEdit in GIMP",
+	"h / l\tPrevious / next image",
+	"g / Shift-g\tFirst / last",
+	"+ / - / wheel\tZoom",
+	"c\tFit to width",
+	"<\tRotate 90 degrees",
+	"Return\tGallery",
+	"f\tFullscreen",
+	"q\tQuit",
 }
 
 swayimg.on_window_resize(function()
@@ -39,6 +56,8 @@ end
 --------------------------------------------------------------------------------
 -- Binds
 --------------------------------------------------------------------------------
+swayimg.viewer.on_key("F1", make_help_toggle(swayimg.viewer, text, "bottomleft", help))
+
 swayimg.viewer.on_key("q", function()
 	swayimg.exit()
 end)
@@ -53,11 +72,6 @@ end)
 
 swayimg.viewer.on_key("Return", function()
 	swayimg.mode = "gallery"
-end)
-
-swayimg.viewer.on_key("r", function()
-	rename_image()
-	swayimg.viewer.reload()
 end)
 
 swayimg.viewer.on_key("Up", function()
@@ -121,6 +135,7 @@ swayimg.viewer.on_scroll(function(kmods, horizontal, vertical)
 		)
 	end
 end)
+
 swayimg.viewer.on_mouse("MouseSide", function()
 	swayimg.viewer.open("prev")
 end)
@@ -129,17 +144,7 @@ swayimg.viewer.on_mouse("MouseExtra", function()
 	swayimg.viewer.open("next")
 end)
 
-swayimg.viewer.on_key("b", function()
-	with_image(function(image)
-		os.execute("~/.config/swayimg/setbg.sh -p " .. shellescape(image.path) .. " & disown")
-	end)
-end)
-
-swayimg.viewer.on_key("Shift-p", function()
-	with_image(function(image)
-		os.execute("setbg -pf " .. shellescape(image.path) .. " & disown")
-	end)
-end)
+swayimg.viewer.on_key("b", set_wallpaper)
 
 swayimg.viewer.on_key("e", function()
 	with_image(function(image)

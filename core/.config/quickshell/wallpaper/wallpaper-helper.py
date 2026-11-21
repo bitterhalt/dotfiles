@@ -173,7 +173,9 @@ def dark_offset(value):
     try:
         offset = float(value)
     except ValueError as error:
-        raise argparse.ArgumentTypeError("dark offset must be between 0 and 1") from error
+        raise argparse.ArgumentTypeError(
+            "dark offset must be between 0 and 1"
+        ) from error
     if not math.isfinite(offset) or not 0 <= offset <= 1:
         raise argparse.ArgumentTypeError("dark offset must be between 0 and 1")
     return offset
@@ -196,16 +198,25 @@ def gray_scale(value):
 
 
 def apply_wallpaper(
-    source, hellwal=False, mode="dark", dark_offset_value=0,
-    bright_offset_value=0, static_background_value=None, gray_scale_value=0
+    source,
+    hellwal=False,
+    mode="dark",
+    dark_offset_value=0,
+    bright_offset_value=0,
+    static_background_value=None,
+    gray_scale_value=0,
 ):
     source = source.expanduser().resolve(strict=True)
     if not source.is_file():
         raise ValueError("Selected wallpaper is not a file")
     if mode not in {"dark", "light"}:
         raise ValueError("Hellwal mode must be dark or light")
-    if (not math.isfinite(dark_offset_value) or not 0 <= dark_offset_value <= 1
-            or not math.isfinite(bright_offset_value) or not 0 <= bright_offset_value <= 1):
+    if (
+        not math.isfinite(dark_offset_value)
+        or not 0 <= dark_offset_value <= 1
+        or not math.isfinite(bright_offset_value)
+        or not 0 <= bright_offset_value <= 1
+    ):
         raise ValueError("Hellwal offsets must be between 0 and 1")
     width, height = resolution(json.loads(run(["niri", "msg", "-j", "outputs"])))
     WALL_DIR.mkdir(parents=True, exist_ok=True)
@@ -232,8 +243,10 @@ def apply_wallpaper(
             [
                 "magick",
                 str(staged / "wallpaper.png"),
+                "-resize",
+                "25%",
                 "-blur",
-                "0x55",
+                "0x14",
                 "-modulate",
                 "80",
                 str(staged / "lockscreen.png"),
@@ -241,28 +254,25 @@ def apply_wallpaper(
         )
         os.replace(staged / "wallpaper.png", wallpaper)
         os.replace(staged / "lockscreen.png", lockscreen)
-    run(
-        [
-            "awww",
-            "img",
-            str(wallpaper),
-            "--transition-type=any",
-            "--transition-step=60",
-            "--transition-fps=60",
-            "--transition-duration=.7",
-        ]
-    )
-    run(["awww", "img", "-n", "overview", str(lockscreen), "--transition-type=none"])
+    # The Quickshell WallpaperService reloads the layers once this helper replies.
     if hellwal:
         refresh_hellwal(
-            wallpaper, mode, dark_offset_value, bright_offset_value,
-            static_background_value, gray_scale_value
+            wallpaper,
+            mode,
+            dark_offset_value,
+            bright_offset_value,
+            static_background_value,
+            gray_scale_value,
         )
 
 
 def refresh_hellwal(
-    source=None, mode="dark", dark_offset_value=0, bright_offset_value=0,
-    static_background_value=None, gray_scale_value=0
+    source=None,
+    mode="dark",
+    dark_offset_value=0,
+    bright_offset_value=0,
+    static_background_value=None,
+    gray_scale_value=0,
 ):
     """Regenerate the theme from the current wallpaper without changing it."""
     source = source or WALL_DIR / "wallpaper.png"
@@ -270,16 +280,27 @@ def refresh_hellwal(
         raise ValueError("No current wallpaper is available")
     if mode not in {"dark", "light"}:
         raise ValueError("Hellwal mode must be dark or light")
-    if (not math.isfinite(dark_offset_value) or not 0 <= dark_offset_value <= 1
-            or not math.isfinite(bright_offset_value) or not 0 <= bright_offset_value <= 1):
+    if (
+        not math.isfinite(dark_offset_value)
+        or not 0 <= dark_offset_value <= 1
+        or not math.isfinite(bright_offset_value)
+        or not 0 <= bright_offset_value <= 1
+    ):
         raise ValueError("Hellwal offsets must be between 0 and 1")
     if not math.isfinite(gray_scale_value) or not 0 <= gray_scale_value <= 1:
         raise ValueError("Grayscale must be between 0 and 1")
     command = [
-        "hellwal", "-i", str(source), "--comfort-mode", "--" + mode,
-        "--dark-offset", str(dark_offset_value),
-        "--bright-offset", str(bright_offset_value),
-        "--gray-scale", str(gray_scale_value),
+        "hellwal",
+        "-i",
+        str(source),
+        "--comfort-mode",
+        "--" + mode,
+        "--dark-offset",
+        str(dark_offset_value),
+        "--bright-offset",
+        str(bright_offset_value),
+        "--gray-scale",
+        str(gray_scale_value),
     ]
     if static_background_value:
         command.extend(["--static-background", static_background_value])
@@ -303,7 +324,9 @@ def main():
     apply.add_argument("--bright-offset", type=dark_offset, default=0)
     apply.add_argument("--gray-scale", type=gray_scale, default=0)
     apply.add_argument("--static-background", type=static_background)
-    refresh = commands.add_parser("refresh", help="Regenerate Hellwal from the current wallpaper")
+    refresh = commands.add_parser(
+        "refresh", help="Regenerate Hellwal from the current wallpaper"
+    )
     refresh.add_argument("--mode", choices=("dark", "light"), default="dark")
     refresh.add_argument("--dark-offset", type=dark_offset, default=0)
     refresh.add_argument("--bright-offset", type=dark_offset, default=0)
@@ -323,8 +346,13 @@ def main():
                         "Another wallpaper change is still running"
                     ) from None
                 apply_wallpaper(
-                    args.path, args.hellwal, args.mode, args.dark_offset,
-                    args.bright_offset, args.static_background, args.gray_scale
+                    args.path,
+                    args.hellwal,
+                    args.mode,
+                    args.dark_offset,
+                    args.bright_offset,
+                    args.static_background,
+                    args.gray_scale,
                 )
         else:
             CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -336,10 +364,11 @@ def main():
                         "Another wallpaper change is still running"
                     ) from None
                 refresh_hellwal(
-                    mode=args.mode, dark_offset_value=args.dark_offset,
+                    mode=args.mode,
+                    dark_offset_value=args.dark_offset,
                     bright_offset_value=args.bright_offset,
                     static_background_value=args.static_background,
-                    gray_scale_value=args.gray_scale
+                    gray_scale_value=args.gray_scale,
                 )
         emit({"ok": True})
         return 0

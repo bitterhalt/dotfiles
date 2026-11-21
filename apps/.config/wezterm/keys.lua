@@ -98,7 +98,7 @@ function M.setup(config)
 		-- Rename current workspace (only active in "unix" domain)
 		{
 			key = "r",
-			mods = "CTRL|SHIFT",
+			mods = "ALT",
 			action = only_in_unix(act.PromptInputLine({
 				description = "Rename current workspace:",
 				action = wezterm.action_callback(function(window, pane, line)
