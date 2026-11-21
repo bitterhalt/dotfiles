@@ -110,7 +110,7 @@ Item {
                         color: root.config.fg
                         opacity: chip.chipOpacity
                         font.family: root.config.textFontFamily
-                        font.pointSize: root.config.textSizeNormal
+                        font.pointSize: root.config.textSizeMedium
                         renderType: Text.NativeRendering
                         text: chip.volume.label
                     }
