@@ -34,13 +34,19 @@ for rel in "${ADOPTED[@]}"; do
   src="$DOTFILES/$rel"
   live="$HOME/${rel#core/}"
 
-  # Migrate a leftover symlink from before these files were adopted.
+  # Migrate a leftover symlink from before these files were adopted. A
+  # dangling link is dropped so the seed step below can replace it.
   if [[ -L "$live" ]]; then
-    tmp=$(mktemp)
-    cp -- "$live" "$tmp"
-    rm -f -- "$live"
-    mv -- "$tmp" "$live"
-    echo "[migrated] ~/${rel#core/} is now a real file"
+    if [[ -e "$live" ]]; then
+      tmp=$(mktemp)
+      cp -- "$live" "$tmp"
+      rm -f -- "$live"
+      mv -- "$tmp" "$live"
+      echo "[migrated] ~/${rel#core/} is now a real file"
+    else
+      rm -f -- "$live"
+      echo "[unlinked] ~/${rel#core/} was a dangling symlink"
+    fi
   fi
 
   if [[ ! -e "$live" ]]; then
