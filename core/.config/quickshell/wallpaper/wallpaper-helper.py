@@ -51,32 +51,6 @@ def run(cmd, timeout=120):
     return result.stdout
 
 
-def kitty_pids(proc=Path("/proc")):
-    """Return the PIDs of running kitty processes, without a process-list tool."""
-    pids = []
-    try:
-        for entry in proc.iterdir():
-            if not entry.name.isdigit():
-                continue
-            try:
-                if (entry / "comm").read_text().strip() == "kitty":
-                    pids.append(int(entry.name))
-            except OSError:
-                continue
-    except OSError:
-        return pids
-    return sorted(pids)
-
-
-def reload_kitty():
-    """Have running kitty instances re-read their config after a theme change."""
-    for pid in kitty_pids():
-        try:
-            os.kill(pid, signal.SIGUSR1)
-        except (ProcessLookupError, PermissionError):
-            pass
-
-
 def image_paths(directory):
     directory = directory.expanduser().resolve()
     if not directory.is_dir():
@@ -305,7 +279,6 @@ def refresh_hellwal(
     if static_background_value:
         command.extend(["--static-background", static_background_value])
     run(command, timeout=180)
-    reload_kitty()
 
 
 def main():
