@@ -2,7 +2,7 @@
 
 ![status: works on my machine](https://img.shields.io/badge/status-works%20on%20my%20machine-green)
 
-My Arch Linux setup: a [Niri](https://github.com/YaLTeR/niri) desktop with a custom [Quickshell](https://quickshell.org/) shell, a lot of small shell scripts, and a terminal-first set of tools. Everything is managed with [GNU Stow](https://www.gnu.org/software/stow/).
+My Arch Linux setup: a [Niri](https://github.com/YaLTeR/niri) desktop with my custom [Quickshell](https://quickshell.org/) 
 
 <p align="center">
   <img src=".assets/desk.png" alt="Desktop" width="100%">
