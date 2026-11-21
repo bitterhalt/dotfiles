@@ -1,6 +1,7 @@
 
 // Gapps and column widths
 layout {
+    background-color "#111111"
     gaps 8
     preset-column-widths {
         proportion 0.33333
