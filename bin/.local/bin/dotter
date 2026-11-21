@@ -12,16 +12,17 @@ add) ;;
   ;;
 esac
 
-# ~/.stowrc (a symlink to core/.stowrc) supplies --target and the ignore
-# rules. Without it stow would target ~/Documents/projects and deploy the
+# $DOTFILES/.stowrc supplies --target and the ignore rules. Stow only reads it
+# from the current directory, so it works because this script cd's into the
+# repo above. Without it stow would target ~/Documents/projects and deploy the
 # private environment file, so refuse to run.
-if [[ ! -f "$HOME/.stowrc" ]]; then
-  echo "Missing ~/.stowrc (expected symlink to $DOTFILES/core/.stowrc)" >&2
+if [[ ! -f "$DOTFILES/.stowrc" ]]; then
+  echo "Missing $DOTFILES/.stowrc (stow reads it from the repo root)" >&2
   exit 1
 fi
 
 echo "=== 1. Absorbing Application-Written Files ==="
-# Stow ignores these (see core/.stowrc): desktop applications rewrite them
+# Stow ignores these (see .stowrc): desktop applications rewrite them
 # with a temp file + rename, which replaces a symlink with a real file. The
 # live file stays real; when it is missing we seed it from the repo copy, and
 # when it differs we absorb the application's edits back into the repo.

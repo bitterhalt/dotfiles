@@ -1,5 +1,6 @@
+# Stow reads this file from the current directory, so it only applies when
+# stow runs from the repository root. dotter add changes into the repo first.
 --target=~/
---ignore=.stowrc
 --ignore=DS_Store
 --ignore=atuin/*
 # Local secrets, never stowed or committed.
