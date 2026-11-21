@@ -19,14 +19,14 @@ My Arch Linux setup: a [Niri](https://github.com/YaLTeR/niri) desktop with a cus
 
 |  | |
 | ------------------------ | --------------------------------------------------------------------------- |
-| Distro                   | [Arch Linux](https://archlinux.org)                                         |
-| Compositor               | [Niri](https://github.com/YaLTeR/niri)       |
-| Shell  | [Quickshell](https://quickshell.org/) - bar, menus, lock, wallpaper etc.|
-| Colors                   | [Hellwal](https://github.com/danihek/hellwal) |
-| Terminal                 | [WezTerm](https://wezterm.org/) - Works as terminal and tmux like persistent multiplaxer         |
-| Editor                   | [Neovim](https://neovim.io/)                                                |
+| Distro                   | [Arch Linux](https://archlinux.org), BTW                                |
+| Compositor               | [Niri](https://github.com/YaLTeR/niri), Compositor     |
+| Shell  | [Quickshell](https://quickshell.org/), Bar, menus, lock, wallpaper etc.|
+| Colors                   | [Hellwal](https://github.com/danihek/hellwal), Like Matugen but better  | 
+| Terminal                 | [WezTerm](https://wezterm.org/), Works as terminal and tmux like persistent multiplaxer         |
+| Editor                   | [Neovim](https://neovim.io/)                                             |
 | File manager             | [lf](https://github.com/gokcehan/lf/), |
-| Image viewer             | [swayimg](https://github.com/artemsen/swayimg) |
+| Image viewer             | [swayimg](https://github.com/artemsen/swayimg), Best inage viewer in wayland |
 | Media                    | [mpv](https://mpv.io/)                              |
 | Login manager            | [ly](https://codeberg.org/fairyglade/ly)                                    |
 | Shell                    | bash                                                                        |
