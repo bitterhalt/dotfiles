@@ -84,20 +84,13 @@ qs ipc call lock lock
 The full target list is in the [Slimshell README](core/.config/quickshell/README.md).
 
 ## Install
+> These are personal dotfiles. Read before you copy, and expect to adapt things for your own.
+>
+> I do not provide any guarantee if your house burns down or you lose your valuable data!
+>
+> **You have been warned! ⚠️**
 
-> These are personal dotfiles. Read before you copy, and expect to adapt things (paths, locale, hardware, keys).
-
-### 1. Packages
-
-On Arch, with an AUR helper such as [yay](https://github.com/Jguer/yay):
-
-```bash
-yay -S --needed $(< pkglist.txt)
-```
-
-### 2. Stow
-
-Requires [GNU Stow](https://www.gnu.org/software/stow/). Clone the repo wherever you like and point `DOTFILES` at it:
+Requires [GNU Stow](https://www.gnu.org/software/stow/)
 
 ```bash
 git clone git@github.com:bitterhalt/dotfiles.git "$HOME/dotfiles"
@@ -107,28 +100,3 @@ ln -sfn "$DOTFILES/core/.stowrc" ~/.stowrc
 cd "$DOTFILES"
 stow -R apps bin core
 ```
-
-<details>
-<summary>What ends up in <code>$HOME</code></summary>
-
-Everything shows up as symlinks back into the checkout:
-
-```
-~
-├── .bash_profile -> dotfiles/core/.bash_profile
-├── .bashrc -> dotfiles/core/.bashrc
-├── .stowrc -> dotfiles/core/.stowrc
-├── .config/
-│   ├── niri -> dotfiles/core/.config/niri
-│   ├── quickshell -> dotfiles/core/.config/quickshell
-│   ├── nvim -> dotfiles/apps/.config/nvim
-│   ├── shell -> dotfiles/core/.config/shell
-│   └── ...
-└── .local/
-    ├── bin -> dotfiles/bin/.local/bin
-    └── share/
-        ├── applications -> dotfiles/bin/.local/share/applications
-        └── ...
-```
-
-</details>
