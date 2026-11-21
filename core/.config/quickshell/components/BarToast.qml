@@ -96,7 +96,7 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: 1
+                spacing: 4
 
                 Text {
                     renderType: Text.NativeRendering
