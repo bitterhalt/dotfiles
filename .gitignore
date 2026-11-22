@@ -24,8 +24,7 @@ apps/.config/opencode/service.json
 # Runtime state, regenerated locally
 apps/.config/htop/htop_history
 
-# Desktop registrations and caches written by applications into the stowed
-# ~/.local/share/applications directory (Thunderbird handler registration,
-# update-desktop-database).
+# Guard against generated desktop registrations and caches landing in the
+# repo; they belong to the live ~/.local/share/applications directory.
 bin/.local/share/applications/userapp-*.desktop
 bin/.local/share/applications/mimeinfo.cache
