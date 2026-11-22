@@ -20,7 +20,7 @@ search_notes() {
 create_note() {
   local note_name
   note_name=$(echo -n | $DMENU \
-    -p "e.g., work/meeting-minutes" \
+    -p "Type a name" \
     --minimal-lines)
   if [ -z "$note_name" ]; then
     exit 0
