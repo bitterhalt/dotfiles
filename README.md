@@ -17,19 +17,19 @@ My Arch Linux setup with: [Niri](https://github.com/YaLTeR/niri) desktop and my 
 
 ## Stack
 
-|  | |
-| ------------------------ | --------------------------------------------------------------------------- |
-| Distro                   | [Arch Linux](https://archlinux.org), BTW                                |
-| Compositor               | [Niri](https://github.com/YaLTeR/niri), Compositor     |
-| Shell  | [Quickshell](https://quickshell.org/), Bar, menus, lock, wallpaper etc.|
-| Colors                   | [Hellwal](https://github.com/danihek/hellwal), Like Matugen but better  | 
-| Terminal                 | [WezTerm](https://wezterm.org/), Works as terminal and tmux like persistent multiplaxer         |
-| Editor                   | [Neovim](https://neovim.io/)                                             |
-| File manager             | [lf](https://github.com/gokcehan/lf/), |
-| Image viewer             | [swayimg](https://github.com/artemsen/swayimg), Best inage viewer in wayland |
-| Media                    | [mpv](https://mpv.io/)                              |
-| Login manager            | [ly](https://codeberg.org/fairyglade/ly)                                    |
-| Shell                    | bash                                                                        |
+|               |                                                                                         |
+| ------------- | --------------------------------------------------------------------------------------- |
+| Distro        | [Arch Linux](https://archlinux.org), BTW                                                |
+| Compositor    | [Niri](https://github.com/YaLTeR/niri), Compositor                                      |
+| Shell         | [Quickshell](https://quickshell.org/), Bar, menus, lock, wallpaper etc.                 |
+| Colors        | [Hellwal](https://github.com/danihek/hellwal), Like Matugen but better                  |
+| Terminal      | [WezTerm](https://wezterm.org/), Works as terminal and tmux like persistent multiplaxer |
+| Editor        | [Neovim](https://neovim.io/)                                                            |
+| File manager  | [lf](https://github.com/gokcehan/lf/),                                                  |
+| Image viewer  | [swayimg](https://github.com/artemsen/swayimg), Best inage viewer in wayland            |
+| Media         | [mpv](https://mpv.io/)                                                                  |
+| Login manager | [ly](https://codeberg.org/fairyglade/ly)                                                |
+| Shell         | bash                                                                                    |
 
 ## Gallery
 
@@ -84,6 +84,7 @@ qs ipc call lock lock
 The full target list is in the [Slimshell README](core/.config/quickshell/README.md).
 
 ## Install
+
 > These are personal dotfiles. Read before you copy, and expect to adapt things for your own.
 >
 > I do not provide any guarantee if your house burns down or you lose your valuable data!

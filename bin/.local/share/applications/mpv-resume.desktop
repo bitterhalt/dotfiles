@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=mpv (Resume)
+Comment=Continue the last played video
+Exec=mpv --player-operation-mode=pseudo-gui --script-opts-append=resume=yes -- %U
+Icon=mpv
+Terminal=false
+Categories=AudioVideo;Video;Player;
