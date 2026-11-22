@@ -39,22 +39,6 @@ Two ways to launch mpv, both using the same config.
    The stock launcher uses `--player-operation-mode=pseudo-gui`, which keeps
    mpv open when started with no file. No `idle=` option is needed.
 
-## Files
-
-```
-~/.config/mpv/
-├── mpv.conf
-├── input.conf
-├── script-opts/
-│   └── memo.conf
-└── scripts/
-    ├── memo.lua
-    └── resume-last.lua
-
-~/.local/share/applications/
-└── mpv-resume.desktop
-```
-
 ## Launchers
 
 `~/.local/share/applications/mpv-resume.desktop`:
@@ -75,12 +59,6 @@ mpv as the default video player. If it doesn't appear in the launcher:
 
 ```bash
 update-desktop-database ~/.local/share/applications
-```
-
-Terminal shortcut (`~/.bashrc` or `~/.zshrc`):
-
-```bash
-alias mpvr='mpv --script-opts-append=resume=yes'
 ```
 
 `--script-opts-append` is used instead of `--script-opts` so it adds to any
