@@ -10,11 +10,27 @@ Item {
     required property var config
     required property var entry
     property bool selected: false
+    readonly property bool isApp: entry.type === "application"
 
     Rectangle {
         anchors.fill: parent
         radius: 4
         color: root.selected ? root.config.muted : "transparent"
+    }
+
+    // Small pin at the right edge of pinned app rows.
+    Text {
+        id: pinMark
+
+        objectName: "launcherPinMark"
+        anchors.right: parent.right
+        anchors.rightMargin: root.config.panelPadding
+        anchors.verticalCenter: parent.verticalCenter
+        visible: root.isApp && root.entry.pinned === true
+        color: root.selected ? root.config.selectionForeground : root.config.muted
+        font.family: root.config.iconFontFamily
+        font.pointSize: root.config.iconSize * 0.7
+        text: "󰐃"
     }
 
     IconImage {
@@ -41,7 +57,8 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: root.entry.type === "dmenu" ? root.config.panelPadding : root.config.panelPadding + 26 + root.config.spacingControl
         anchors.right: parent.right
-        anchors.rightMargin: root.config.panelPadding
+        // Long names elide before reaching the pin.
+        anchors.rightMargin: root.config.panelPadding + (pinMark.visible ? pinMark.implicitWidth + root.config.spacingControl : 0)
         anchors.verticalCenter: parent.verticalCenter
         spacing: 0 // Keep the paired title/status lines compact, like device rows.
 

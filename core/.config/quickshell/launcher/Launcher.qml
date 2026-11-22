@@ -40,6 +40,18 @@ Item {
     property bool appHistoryReady: false
     readonly property int appHistoryKept: 50
     readonly property string appHistoryPath: (Quickshell.env("HOME") || "") + "/.cache/quickshell-app-history.json"
+    // Pinned app IDs in pin order. Stored with the other user data, so pins
+    // survive a cache clean.
+    property var appPins: []
+    property bool appPinsReady: false
+    readonly property string appPinsPath: (Quickshell.env("XDG_DATA_HOME") || (Quickshell.env("HOME") || "") + "/.local/share") + "/quickshell-launcher-pins.json"
+    readonly property var appPinRanks: {
+        const ranks = new Map();
+        for (let i = 0; i < appPins.length; ++i)
+            ranks.set(appPins[i], i);
+        return ranks;
+    }
+
     readonly property var appHistoryRanks: {
         const ranks = new Map();
         for (let i = 0; i < appHistory.length; ++i)
@@ -126,14 +138,16 @@ Item {
         } else if (fileMode) {
             entries = files.results;
         } else if (value === "") {
+            // Pinned apps first (in pin order), then recently used, then A-Z.
             entries = applications.map(entry => ({
                         type: "application",
                         entry: entry,
                         text: entry.name || entry.id,
                         subtitle: entry.genericName || entry.comment || "",
                         icon: entry.icon || "",
+                        pinned: appPinRanks.has(entry.id),
                         score: 0
-                    })).sort((a, b) => applicationRank(a.entry.id) - applicationRank(b.entry.id) || a.text.localeCompare(b.text));
+                    })).sort((a, b) => pinRank(a.entry.id) - pinRank(b.entry.id) || applicationRank(a.entry.id) - applicationRank(b.entry.id) || a.text.localeCompare(b.text));
         } else {
             entries = applications.map(entry => ({
                         type: "application",
@@ -141,8 +155,9 @@ Item {
                         text: entry.name || entry.id,
                         subtitle: entry.genericName || entry.comment || "",
                         icon: entry.icon || "",
+                        pinned: appPinRanks.has(entry.id),
                         score: Scorer.scoreApplication(entry, value)
-                    })).filter(item => item.score > 0).sort((a, b) => b.score - a.score || applicationRank(a.entry.id) - applicationRank(b.entry.id) || a.text.localeCompare(b.text));
+                    })).filter(item => item.score > 0).sort((a, b) => b.score - a.score || pinRank(a.entry.id) - pinRank(b.entry.id) || applicationRank(a.entry.id) - applicationRank(b.entry.id) || a.text.localeCompare(b.text));
         }
 
         if (!fileMode && !dmenuMode && calculatorResult !== "") {
@@ -335,6 +350,60 @@ Item {
             Quickshell.execDetached(["wl-copy", item.emoji]);
             emojiState.record(item.emoji);
             finalizeClose();
+        }
+    }
+
+    function pinRank(id): int {
+        const rank = appPinRanks.get(id);
+        return rank === undefined ? appPins.length : rank;
+    }
+
+    function normalizeAppPins(ids): var {
+        const seen = new Set();
+        const next = [];
+        for (const id of ids) {
+            if (typeof id !== "string" || id === "" || seen.has(id))
+                continue;
+            seen.add(id);
+            next.push(id);
+        }
+        return next;
+    }
+
+    function restoreAppPins(value): void {
+        let stored = [];
+        try {
+            const parsed = JSON.parse(value);
+            if (Array.isArray(parsed))
+                stored = parsed;
+        } catch (error) {}
+
+        // Keep pins made before the initial asynchronous load finished.
+        const pending = !appPinsReady && appPins.length > 0;
+        appPins = normalizeAppPins(appPinsReady ? stored : stored.concat(appPins));
+        appPinsReady = true;
+        if (pending)
+            appPinsFile.setText(JSON.stringify(appPins));
+    }
+
+    // Ctrl+P: pin or unpin the selected application. The selection follows the
+    // app to its new position in the list.
+    function togglePinSelected(): void {
+        if (selectedIndex < 0 || selectedIndex >= results.length)
+            return;
+        const item = results[selectedIndex];
+        if (item.type !== "application")
+            return;
+
+        const id = item.entry.id;
+        appPins = appPinRanks.has(id) ? appPins.filter(pinned => pinned !== id) : appPins.concat([id]);
+        if (appPinsReady)
+            appPinsFile.setText(JSON.stringify(appPins));
+
+        const index = results.findIndex(result => result.type === "application" && result.entry.id === id);
+        if (index >= 0) {
+            selectedIndex = index;
+            resultList.positionViewAtIndex(index, ListView.Contain);
         }
     }
 
@@ -552,6 +621,12 @@ Item {
                             event.accepted = true;
                         }
                         break;
+                    case Qt.Key_P:
+                        if (control) {
+                            root.togglePinSelected();
+                            event.accepted = true;
+                        }
+                        break;
                     case Qt.Key_PageDown:
                         root.selectPage(1);
                         event.accepted = true;
@@ -641,6 +716,20 @@ Item {
             root.appHistoryReady = true;
             if (root.appHistory.length > 0)
                 setText(JSON.stringify(root.appHistory));
+        }
+    }
+
+    FileView {
+        id: appPinsFile
+
+        path: root.appPinsPath
+        atomicWrites: true
+        printErrors: false
+        onLoaded: root.restoreAppPins(text())
+        onLoadFailed: {
+            root.appPinsReady = true;
+            if (root.appPins.length > 0)
+                setText(JSON.stringify(root.appPins));
         }
     }
 
