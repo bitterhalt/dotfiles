@@ -4,74 +4,74 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 ## General
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Return` | Open Terminal |
+| Key                | Action                   |
+| ------------------ | ------------------------ |
+| `Mod+Return`       | Open Terminal            |
 | `Mod+Shift+Return` | Open Terminal as Session |
-| `Mod+Shift+Delete` | TOP |
-| `Mod+Ctrl+Delete` | HTOP |
-| `Mod+Shift+F11` | Toggle Idle-deamon |
-| `Mod+V` | Open Editor |
-| `Mod+F11` | Lock Screen |
-| `Mod+Shift+A` | Launch program |
-| `Mod+T` | Display Time |
-| `Mod+F2` | Open Calculator |
+| `Mod+Shift+Delete` | TOP                      |
+| `Mod+Ctrl+Delete`  | HTOP                     |
+| `Mod+Shift+F11`    | Toggle Idle-deamon       |
+| `Mod+V`            | Open Editor              |
+| `Mod+F11`          | Lock Screen              |
+| `Mod+Shift+A`      | Launch program           |
+| `Mod+T`            | Display Time             |
+| `Mod+F2`           | Open Calculator          |
 
 ## WWW/Mail/Downloads
 
-| Key | Action |
-| --- | ------ |
-| `Mod+W` | Web browser |
-| `Mod+M` | Open Email |
+| Key     | Action                    |
+| ------- | ------------------------- |
+| `Mod+W` | Web browser               |
+| `Mod+M` | Open Email                |
 | `Mod+A` | Launch Daily Applications |
 
 ## File managers
 
-| Key | Action |
-| --- | ------ |
-| `Mod+E` | TUI Filemanager |
+| Key           | Action          |
+| ------------- | --------------- |
+| `Mod+E`       | TUI Filemanager |
 | `Mod+Shift+E` | GUI Filemanager |
 
 ## Shell
 
-| Key | Action |
-| --- | ------ |
-| `Mod+B` | Toggle Bar |
+| Key          | Action            |
+| ------------ | ----------------- |
+| `Mod+B`      | Toggle Bar        |
 | `Mod+Ctrl+Q` | Reload Quickshell |
 
 ## Shell/Menus
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Ctrl+B` | Bluetooth Menu |
-| `Mod+Ctrl+C` | Open Clipboard |
-| `Mod+Ctrl+D` | Hide Notification Pop-ups |
-| `Mod+Ctrl+E` | Emoji Picker |
-| `Mod+Ctrl+H` | Show Notfication History |
-| `Mod+Ctrl+I` | Idle Setting |
-| `Mod+Ctrl+N` | Network Menu |
-| `Mod+Ctrl+P` | Color Picker |
-| `Mod+Ctrl+T` | Open Translator |
-| `Mod+Ctrl+W` | Display Weather |
-| `Mod+D` | Run Application Launcher |
-| `Mod+Escape` | Open Power Menu |
-| `Mod+F3` | Launch program |
-| `Mod+F4` | Process Killer |
-| `Mod+F5` | Passwords and AUTH |
-| `Mod+F8` | Screen Record Menu |
-| `Mod+N` | Browse Notes |
-| `Mod+S` | Find Files |
-| `Mod+Shift+D` | Run Launcher |
-| `Mod+Shift+T` | Tmux Helper |
+| Key           | Action                    |
+| ------------- | ------------------------- |
+| `Mod+Ctrl+B`  | Bluetooth Menu            |
+| `Mod+Ctrl+C`  | Open Clipboard            |
+| `Mod+Ctrl+D`  | Hide Notification Pop-ups |
+| `Mod+Ctrl+E`  | Emoji Picker              |
+| `Mod+Ctrl+H`  | Show Notfication History  |
+| `Mod+Ctrl+I`  | Idle Setting              |
+| `Mod+Ctrl+N`  | Network Menu              |
+| `Mod+Ctrl+P`  | Color Picker              |
+| `Mod+Ctrl+T`  | Open Translator           |
+| `Mod+Ctrl+W`  | Display Weather           |
+| `Mod+D`       | Run Application Launcher  |
+| `Mod+Escape`  | Open Power Menu           |
+| `Mod+F3`      | Launch program            |
+| `Mod+F4`      | Process Killer            |
+| `Mod+F5`      | Passwords and AUTH        |
+| `Mod+F8`      | Screen Record Menu        |
+| `Mod+N`       | Browse Notes              |
+| `Mod+S`       | Find Files                |
+| `Mod+Shift+D` | Run Launcher              |
+| `Mod+Shift+T` | Tmux Helper               |
 
 ## Submaps
 
-| Key | Action |
-| --- | ------ |
-| `Mod+F1` | System Menu |
-| `Mod+F12` | System Configs |
-| `Mod+Shift+W` | Set Wallpaper |
-| `Mod+U` | Install and Mange Packages |
+| Key           | Action                     |
+| ------------- | -------------------------- |
+| `Mod+F1`      | System Menu                |
+| `Mod+F12`     | System Configs             |
+| `Mod+Shift+W` | Set Wallpaper              |
+| `Mod+U`       | Install and Mange Packages |
 
 ## Screen Recording
 
@@ -80,128 +80,128 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 ## Mod+Ctrl+F8 hotkey-overlay-title="Stop Recording" { spawn-sh "wl-record -k && pkill -SIGRTMIN+2 waybar"; }
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Ctrl+F8` | Stop Recording |
-| `Mod+Print` | Screenshot (Full Screen) |
-| `Mod+Shift+Print` | Screenshot (Region) |
+| Key               | Action                   |
+| ----------------- | ------------------------ |
+| `Mod+Ctrl+F8`     | Stop Recording           |
+| `Mod+Print`       | Screenshot (Full Screen) |
+| `Mod+Shift+Print` | Screenshot (Region)      |
 
 ## Media - Volume
 
-| Key | Action |
-| --- | ------ |
+| Key                    | Action          |
+| ---------------------- | --------------- |
 | `XF86AudioRaiseVolume` | Increase Volume |
 | `XF86AudioLowerVolume` | Decrease Volume |
-| `Mod+WheelScrollDown` | Decrease Volume |
-| `Mod+WheelScrollUp` | Increase Volume |
-| `XF86AudioMute` | Mute Audio |
-| `XF86AudioMicMute` | Mute Microphone |
-| `Mod+F10` | Mute Microphone |
+| `Mod+WheelScrollDown`  | Decrease Volume |
+| `Mod+WheelScrollUp`    | Increase Volume |
+| `XF86AudioMute`        | Mute Audio      |
+| `XF86AudioMicMute`     | Mute Microphone |
+| `Mod+F10`              | Mute Microphone |
 
 ## Media - Playback
 
-| Key | Action |
-| --- | ------ |
-| `XF86AudioPlay` | Play/Pause |
-| `XF86AudioStop` | Stop Playback |
-| `XF86AudioPrev` | Previous Track |
-| `XF86AudioNext` | Next Track |
-| `Mod+Ctrl+S` | Open Audio Mixer |
+| Key             | Action           |
+| --------------- | ---------------- |
+| `XF86AudioPlay` | Play/Pause       |
+| `XF86AudioStop` | Stop Playback    |
+| `XF86AudioPrev` | Previous Track   |
+| `XF86AudioNext` | Next Track       |
+| `Mod+Ctrl+S`    | Open Audio Mixer |
 
 ## Hardware - Brightness
 
-| Key | Action |
-| --- | ------ |
-| `XF86MonBrightnessUp` | Increase Brightness |
+| Key                     | Action              |
+| ----------------------- | ------------------- |
+| `XF86MonBrightnessUp`   | Increase Brightness |
 | `XF86MonBrightnessDown` | Decrease Brightness |
 
 ## Overview
 
-| Key | Action |
-| --- | ------ |
+| Key       | Action   |
+| --------- | -------- |
 | `Mod+Tab` | Overview |
 
 ## Close Window
 
-| Key | Action |
-| --- | ------ |
+| Key     | Action       |
+| ------- | ------------ |
 | `Mod+Q` | Close Window |
 
 ## Navigation (Focus)
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Left` | Focus Left |
-| `Mod+Down` | Focus Down |
-| `Mod+J` | Focus Down (Vim) |
-| `Mod+K` | Focus Up (Vim) |
-| `Mod+Up` | Focus Up |
-| `Mod+Right` | Focus Right |
-| `Mod+H` | Focus Left (Vim) |
-| `Mod+L` | Focus Right (Vim) |
+| Key         | Action            |
+| ----------- | ----------------- |
+| `Mod+Left`  | Focus Left        |
+| `Mod+Down`  | Focus Down        |
+| `Mod+J`     | Focus Down (Vim)  |
+| `Mod+K`     | Focus Up (Vim)    |
+| `Mod+Up`    | Focus Up          |
+| `Mod+Right` | Focus Right       |
+| `Mod+H`     | Focus Left (Vim)  |
+| `Mod+L`     | Focus Right (Vim) |
 
 ## Moving Windows/Columns
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Shift+Left` | Move Left |
-| `Mod+Shift+Down` | Move Down |
-| `Mod+Shift+Up` | Move Up |
-| `Mod+Shift+Right` | Move Right |
-| `Mod+Shift+H` | Move Left (Vim) |
-| `Mod+Shift+J` | Move Down (Vim) |
-| `Mod+Shift+K` | Move Up (Vim) |
-| `Mod+Shift+L` | Move Right (Vim) |
-| `Mod+Home` | Focus First Column |
-| `Mod+End` | Focus Last Column |
-| `Mod+Shift+Home` | Move Column to First |
-| `Mod+Shift+End` | Move Column to Last |
+| Key               | Action               |
+| ----------------- | -------------------- |
+| `Mod+Shift+Left`  | Move Left            |
+| `Mod+Shift+Down`  | Move Down            |
+| `Mod+Shift+Up`    | Move Up              |
+| `Mod+Shift+Right` | Move Right           |
+| `Mod+Shift+H`     | Move Left (Vim)      |
+| `Mod+Shift+J`     | Move Down (Vim)      |
+| `Mod+Shift+K`     | Move Up (Vim)        |
+| `Mod+Shift+L`     | Move Right (Vim)     |
+| `Mod+Home`        | Focus First Column   |
+| `Mod+End`         | Focus Last Column    |
+| `Mod+Shift+Home`  | Move Column to First |
+| `Mod+Shift+End`   | Move Column to Last  |
 
 ## Monitor Management
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Alt+Left` | Focus Monitor Left |
-| `Mod+Alt+Down` | Focus Monitor Down |
-| `Mod+Alt+Up` | Focus Monitor Up |
-| `Mod+Alt+Right` | Focus Monitor Right |
-| `Mod+Alt+H` | Focus Monitor Left (Vim) |
-| `Mod+Alt+J` | Focus Monitor Down (Vim) |
-| `Mod+Alt+K` | Focus Monitor Up (Vim) |
-| `Mod+Alt+L` | Focus Monitor Right (Vim) |
-| `Mod+Alt+Ctrl+Left` | Move Column to Monitor Left |
-| `Mod+Alt+Ctrl+Down` | Move Column to Monitor Down |
-| `Mod+Alt+Ctrl+Up` | Move Column to Monitor Up |
-| `Mod+Alt+Ctrl+Right` | Move Column to Monitor Right |
-| `Mod+Alt+Ctrl+H` | Move Column to Monitor Left (Vim) |
-| `Mod+Alt+Ctrl+J` | Move Column to Monitor Down (Vim) |
-| `Mod+Alt+Ctrl+K` | Move Column to Monitor Up (Vim) |
-| `Mod+Alt+Ctrl+L` | Move Column to Monitor Right (Vim) |
+| Key                  | Action                             |
+| -------------------- | ---------------------------------- |
+| `Mod+Alt+Left`       | Focus Monitor Left                 |
+| `Mod+Alt+Down`       | Focus Monitor Down                 |
+| `Mod+Alt+Up`         | Focus Monitor Up                   |
+| `Mod+Alt+Right`      | Focus Monitor Right                |
+| `Mod+Alt+H`          | Focus Monitor Left (Vim)           |
+| `Mod+Alt+J`          | Focus Monitor Down (Vim)           |
+| `Mod+Alt+K`          | Focus Monitor Up (Vim)             |
+| `Mod+Alt+L`          | Focus Monitor Right (Vim)          |
+| `Mod+Alt+Ctrl+Left`  | Move Column to Monitor Left        |
+| `Mod+Alt+Ctrl+Down`  | Move Column to Monitor Down        |
+| `Mod+Alt+Ctrl+Up`    | Move Column to Monitor Up          |
+| `Mod+Alt+Ctrl+Right` | Move Column to Monitor Right       |
+| `Mod+Alt+Ctrl+H`     | Move Column to Monitor Left (Vim)  |
+| `Mod+Alt+Ctrl+J`     | Move Column to Monitor Down (Vim)  |
+| `Mod+Alt+Ctrl+K`     | Move Column to Monitor Up (Vim)    |
+| `Mod+Alt+Ctrl+L`     | Move Column to Monitor Right (Vim) |
 
 ## Workspace Management
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Page_Down` | Focus Workspace Down |
-| `Mod+Page_Up` | Focus Workspace Up |
-| `Mod+Ctrl+Page_Down` | Move Column to Workspace Down |
-| `Mod+Ctrl+Page_Up` | Move Column to Workspace Up |
-| `Mod+Shift+Page_Down` | Move Workspace Down |
-| `Mod+Shift+Page_Up` | Move Workspace Up |
+| Key                   | Action                        |
+| --------------------- | ----------------------------- |
+| `Mod+Page_Down`       | Focus Workspace Down          |
+| `Mod+Page_Up`         | Focus Workspace Up            |
+| `Mod+Ctrl+Page_Down`  | Move Column to Workspace Down |
+| `Mod+Ctrl+Page_Up`    | Move Column to Workspace Up   |
+| `Mod+Shift+Page_Down` | Move Workspace Down           |
+| `Mod+Shift+Page_Up`   | Move Workspace Up             |
 
 ## Numeric Workspaces (1-9)
 
-| Key | Action |
-| --- | ------ |
-| `Mod+1` | Switch to Workspace 1 |
-| `Mod+2` | Switch to Workspace 2 |
-| `Mod+3` | Switch to Workspace 3 |
-| `Mod+4` | Switch to Workspace 4 |
-| `Mod+5` | Switch to Workspace 5 |
-| `Mod+6` | Switch to Workspace 6 |
-| `Mod+7` | Switch to Workspace 7 |
-| `Mod+8` | Switch to Workspace 8 |
-| `Mod+9` | Switch to Workspace 9 |
+| Key           | Action                     |
+| ------------- | -------------------------- |
+| `Mod+1`       | Switch to Workspace 1      |
+| `Mod+2`       | Switch to Workspace 2      |
+| `Mod+3`       | Switch to Workspace 3      |
+| `Mod+4`       | Switch to Workspace 4      |
+| `Mod+5`       | Switch to Workspace 5      |
+| `Mod+6`       | Switch to Workspace 6      |
+| `Mod+7`       | Switch to Workspace 7      |
+| `Mod+8`       | Switch to Workspace 8      |
+| `Mod+9`       | Switch to Workspace 9      |
 | `Mod+Shift+1` | Move Column to Workspace 1 |
 | `Mod+Shift+2` | Move Column to Workspace 2 |
 | `Mod+Shift+3` | Move Column to Workspace 3 |
@@ -211,46 +211,46 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Shift+7` | Move Column to Workspace 7 |
 | `Mod+Shift+8` | Move Column to Workspace 8 |
 | `Mod+Shift+9` | Move Column to Workspace 9 |
-| `Mod+0` | Previous Workspace |
+| `Mod+0`       | Previous Workspace         |
 
 ## Column and Window Organization
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Comma` | Consume Window into Column |
-| `Mod+Period` | Expel Window from Column |
-| `Mod+Shift+Comma` | Consume/Expel Window Left |
+| Key                | Action                     |
+| ------------------ | -------------------------- |
+| `Mod+Comma`        | Consume Window into Column |
+| `Mod+Period`       | Expel Window from Column   |
+| `Mod+Shift+Comma`  | Consume/Expel Window Left  |
 | `Mod+Shift+Period` | Consume/Expel Window Right |
 
 ## Sizing and Layout
 
-| Key | Action |
-| --- | ------ |
-| `Mod+R` | Switch Preset Width |
-| `Mod+Ctrl+R` | Reset Window Height |
-| `Mod+Ctrl+Shift+R` | Switch Preset Height |
-| `Mod+F` | Maximize Column |
-| `Mod+Shift+F` | Fullscreen Window |
+| Key                | Action                     |
+| ------------------ | -------------------------- |
+| `Mod+R`            | Switch Preset Width        |
+| `Mod+Ctrl+R`       | Reset Window Height        |
+| `Mod+Ctrl+Shift+R` | Switch Preset Height       |
+| `Mod+F`            | Maximize Column            |
+| `Mod+Shift+F`      | Fullscreen Window          |
 | `Mod+Ctrl+Shift+F` | Toggle Windowed Fullscreen |
-| `Mod+Ctrl+F` | Maximize Window to Edges |
-| `Mod+Ctrl+M` | Expand Column Width |
-| `Mod+C` | Center Column |
-| `Mod+Shift+C` | Center All Visible Columns |
-| `Mod+Ctrl+Left` | Decrease Column Width |
-| `Mod+Ctrl+Right` | Increase Column Width |
-| `Mod+Ctrl+Down` | Decrease Window Height |
-| `Mod+Ctrl+Up` | Increase Window Height |
+| `Mod+Ctrl+F`       | Maximize Window to Edges   |
+| `Mod+Ctrl+M`       | Expand Column Width        |
+| `Mod+C`            | Center Column              |
+| `Mod+Shift+C`      | Center All Visible Columns |
+| `Mod+Ctrl+Left`    | Decrease Column Width      |
+| `Mod+Ctrl+Right`   | Increase Column Width      |
+| `Mod+Ctrl+Down`    | Decrease Window Height     |
+| `Mod+Ctrl+Up`      | Increase Window Height     |
 
 ## Floating and Tabs
 
-| Key | Action |
-| --- | ------ |
-| `Mod+Space` | Toggle Floating |
+| Key              | Action                       |
+| ---------------- | ---------------------------- |
+| `Mod+Space`      | Toggle Floating              |
 | `Mod+Ctrl+Space` | Toggle Floating/Tiling Focus |
-| `Mod+G` | Toggle Column Tabs |
+| `Mod+G`          | Toggle Column Tabs           |
 
 ## Suspend Process
 
-| Key | Action |
-| --- | ------ |
+| Key         | Action                      |
+| ----------- | --------------------------- |
 | `Mod+Pause` | Suspend Process (wl-freeze) |
