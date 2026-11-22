@@ -49,7 +49,7 @@ Item {
 
     Text {
         anchors.centerIn: parent
-        color: config.fg
+        color: audioMouse.containsMouse ? config.muted : config.fg
         opacity: root.muted ? 0.5 : 1
         font.family: config.iconFontFamily
         font.pointSize: config.iconSize
@@ -58,8 +58,11 @@ Item {
 
     // Left-click opens controls, right-click toggles mute, and the wheel adjusts volume.
     MouseArea {
+        id: audioMouse
+
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
+        hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onClicked: mouse => {
             if (mouse.button === Qt.LeftButton)

@@ -15,7 +15,7 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 |              | What's included                                                                                                    |
 | ------------ | ------------------------------------------------------------------------------------------------------------------ |
 | **Bar**      | Workspaces, Window title, Clock and Weather, Battery, Connections, Privacy indicators, Removable drives, Tray etc. |
-| **Menus**    | Keyboard-driven menus for Bluetooth, Wi-Fi, Audio, Power, and Notifications                                        |
+| **Menus**    | Keyboard-driven menus for Bluetooth and Wi-Fi (one tabbed popup), Audio, Power, and Notifications                  |
 | **launcher** | Application launcher with: File Search, Calculator, Emoji and Dmenu-mode                                           |
 | **Tools**    | Clipboard, DeepL translation, Screen recording, and Package updates                                                |
 | **Session**  | Lock Screen, Wallpaper Picker, and Dynamic theming with [Hellwal](https://hellwal.danihek.xyz/)                    |
@@ -27,7 +27,7 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | -------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | `audio`              | `toggle`, `open`, `close`                                                           | Show or hide the audio menu                                        |
 | `bar`                | `toggle`, `hide`, `show`, `isVisible`                                               | Control or query bar visibility                                    |
-| `bluetooth`          | `toggle`, `open`, `close`                                                           | Show or hide the Bluetooth menu                                    |
+| `bluetooth`          | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Bluetooth tab)                  |
 | `clipboard`          | `toggle`, `open`, `close`, `refresh`, `copySelected`, `deleteSelected`              | Control the clipboard picker                                       |
 | `drives`             | `status`, `refresh`, `mount <dev>`, `unmount <dev>`, `poweroff <dev>`, `open <dev>` | Inspect and control removable drives                               |
 | `idle`               | `toggle`, `isDisabled`, `settings`                                                  | Control idle handling or open its settings                         |
@@ -35,7 +35,7 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | `lock`               | `lock`                                                                              | Lock the session                                                   |
 | `locker`             | `isSecure`                                                                          | Query whether the separate lock-screen process is secure           |
 | `menu`               | `open <name>`, `toggle <name>`, `close`, `packages`, `settings`, `system`           | Open a user menu or close it                                       |
-| `network`            | `toggle`, `open`, `close`                                                           | Show or hide the network menu                                      |
+| `network`            | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Network tab)                    |
 | `notificationCenter` | `toggle`, `open`, `close`                                                           | Show or hide notification history                                  |
 | `notifications`      | `toggleDnd`, `enableDnd`, `disableDnd`, `isDnd`, `clear`, `count`                   | Control DND or notification history                                |
 | `power`              | `toggle`, `open`, `close`                                                           | Control the power menu                                             |

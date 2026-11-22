@@ -5,11 +5,21 @@ import "Model.js" as Model
 import QtQuick
 import Quickshell.Networking
 
-PopoutPanel {
+// Network tab of the combined connections popup (see ConnectionsPopup.qml).
+// The popup owns keyboard focus and forwards key presses to handleKey().
+Column {
     id: root
 
+    required property var config
     required property var network
     required property var popupManager
+    // True while a sub-view is open; the popup hides its tab bar meanwhile.
+    readonly property bool subpage: passwordMode || actionMode
+
+    signal closeRequested
+    signal focusRequested
+
+    spacing: 8
     property bool passwordMode: false
     property bool actionMode: false
     property bool confirmForget: false
@@ -42,7 +52,7 @@ PopoutPanel {
         Qt.callLater(() => {
             const index = root.selectableRows.findIndex(row => row.ssid === previousSsid);
             root.selectNetwork(index < 0 ? root.selectedNetworkIndex : index);
-            root.forceActiveFocus();
+            root.focusRequested();
         });
     }
 
@@ -89,7 +99,7 @@ PopoutPanel {
         resetState();
     }
 
-    function handlePopupKey(event) {
+    function handleKey(event) {
         if (!passwordMode && !actionMode && scanState.handleKey(event.key, event.modifiers)) {
             helpOpen = false;
             event.accepted = true;
@@ -123,7 +133,7 @@ PopoutPanel {
             else if (actionMode) {
                 resetState();
             } else {
-                popupManager.closeHost("network");
+                root.closeRequested();
             }
         } else if (event.key === Qt.Key_Question || event.text === "?") {
             helpOpen = !helpOpen;
@@ -183,13 +193,10 @@ PopoutPanel {
         });
     }
 
-    focus: true
     Component.onCompleted: {
         if (selectableRows.length > 0)
             selectNetwork(0);
-        Qt.callLater(() => forceActiveFocus());
     }
-    Keys.onPressed: event => root.handlePopupKey(event)
     onSelectableRowsChanged: {
         if (!actionMode && !passwordMode) {
             const index = selectableRows.findIndex(row => row.ssid === selectedSsid);
@@ -411,7 +418,7 @@ PopoutPanel {
             item.connectWithPsk(password);
             root.passwordMode = false;
             wifiPassword.text = "";
-            Qt.callLater(() => root.forceActiveFocus());
+            Qt.callLater(() => root.focusRequested());
         }
     }
 
@@ -452,6 +459,10 @@ PopoutPanel {
                 key: "Ctrl+S"
             },
             {
+                name: "Switch tab",
+                key: "Tab"
+            },
+            {
                 name: "Close",
                 key: "Esc"
             }
@@ -462,13 +473,8 @@ PopoutPanel {
     Item {
         objectName: "networkFooter"
         width: parent.width
-        height: Math.max(footerStatus.implicitHeight, scanButton.height) + root.spacing
+        height: Math.max(footerStatus.implicitHeight, scanButton.height)
         visible: !root.passwordMode && !root.actionMode && !root.helpOpen
-
-        PanelSeparator {
-            config: root.config
-            anchors.top: parent.top
-        }
 
         Text {
             id: footerStatus
@@ -484,14 +490,12 @@ PopoutPanel {
             id: scanButton
             iconText: "󰑐"
             objectName: "networkScanButton"
-            filled: true
-            opacity: hovered ? 0.8 : 1
             config: root.config
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.topMargin: root.spacing
             compact: true
             iconSize: root.config.iconSize * 0.78
+            foregroundColor: !enabled ? root.config.muted : visuallyHighlighted ? root.config.selectionForeground : root.config.muted
             enabled: scanState.canScan
             text: scanState.requested ? "Stop" : "Scan"
             onClicked: scanState.toggle()

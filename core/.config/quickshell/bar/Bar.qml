@@ -6,11 +6,10 @@ import Quickshell
 import Quickshell.Wayland
 import "modules/audio"
 import "modules/battery"
-import "modules/bluetooth"
 import "modules/clock"
+import "modules/connections"
 import "modules/drives"
 import "modules/idle"
-import "modules/network"
 import "modules/privacy"
 import "modules/tray"
 import "modules/window"
@@ -137,20 +136,13 @@ PanelWindow {
             driveService: barWindow.driveService
         }
 
-        Network {
+        ConnectionsIndicator {
             config: barWindow.config
             barWindow: barWindow
             popupManager: popupManager
             uiService: barWindow.uiService
             networkService: barWindow.networkService
-        }
-
-        Bluetooth {
-            config: barWindow.config
-            barWindow: barWindow
-            popupManager: popupManager
             bluetoothService: barWindow.bluetoothService
-            uiService: barWindow.uiService
         }
 
         Audio {

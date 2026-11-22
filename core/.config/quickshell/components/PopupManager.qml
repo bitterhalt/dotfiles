@@ -11,7 +11,7 @@ Item {
     readonly property bool hostVisible: hostMotion.surfaceVisible
     readonly property bool hostClosing: hostMotion.closing
     property string activeKey: ""
-    readonly property bool barPopupActive: ["audio", "bluetooth", "network"].includes(activeKey)
+    readonly property bool barPopupActive: ["audio", "connections"].includes(activeKey)
     property var hostComponent: null
     property real hostAnchorCenter: -1
     property var anchorRightOffsets: new Map()

@@ -2,11 +2,20 @@ import "../../../components"
 import "Model.js" as Model
 import QtQuick
 
-PopoutPanel {
+// Bluetooth tab of the combined connections popup (see ConnectionsPopup.qml).
+// The popup owns keyboard focus and forwards key presses to handleKey().
+Column {
     id: root
 
-    required property var popupManager
+    required property var config
     required property var bluetoothService
+    // True while a sub-view is open; the popup hides its tab bar meanwhile.
+    readonly property bool subpage: confirmForget
+
+    signal closeRequested
+    signal focusRequested
+
+    spacing: 8
     readonly property var adapter: bluetoothService.adapter
     readonly property var deviceObjects: bluetoothService.devices
     readonly property var deviceRows: Model.rows(deviceObjects)
@@ -62,7 +71,7 @@ PopoutPanel {
             if (helpOpen)
                 helpOpen = false;
             else
-                popupManager.closeHost("bluetooth");
+                root.closeRequested();
         } else if (event.key === Qt.Key_Question || event.text === "?") {
             helpOpen = !helpOpen;
         } else if (helpOpen || !adapter || !adapter.enabled) {
@@ -119,13 +128,9 @@ PopoutPanel {
         }))
             selectedAddress = popupRows[0].address;
     }
-    focus: true
     Component.onCompleted: {
         root.cancelForget();
         root.helpOpen = false;
-        Qt.callLater(() => {
-            return forceActiveFocus();
-        });
         if (root.popupRows.length > 0 && !root.popupRows.some(row => {
             return row.address === root.selectedAddress;
         }))
@@ -135,11 +140,13 @@ PopoutPanel {
         root.cancelForget();
         root.helpOpen = false;
     }
-    Keys.onPressed: event => {
+
+    // Called by the popup for every key press; returns true when handled.
+    function handleKey(event) {
         if (!root.confirmForget && discoveryState.handleKey(event.key, event.modifiers)) {
             root.helpOpen = false;
             event.accepted = true;
-            return;
+            return true;
         }
         return root.handlePopupKey(event);
     }
@@ -273,6 +280,10 @@ PopoutPanel {
                 key: "Ctrl+S"
             },
             {
+                name: "Switch tab",
+                key: "Tab"
+            },
+            {
                 name: "Back / close help",
                 key: "Esc"
             }
@@ -283,13 +294,8 @@ PopoutPanel {
     Item {
         objectName: "bluetoothFooter"
         width: parent.width
-        height: Math.max(footerStatus.implicitHeight, scanButton.height) + root.spacing
+        height: Math.max(footerStatus.implicitHeight, scanButton.height)
         visible: !!root.adapter && root.adapter.enabled && !root.confirmForget && !root.helpOpen
-
-        PanelSeparator {
-            config: root.config
-            anchors.top: parent.top
-        }
 
         Text {
             id: footerStatus
@@ -306,15 +312,13 @@ PopoutPanel {
             id: scanButton
             iconText: "󰑐"
             objectName: "bluetoothScanButton"
-            filled: true
-            opacity: hovered ? 0.8 : 1
             config: root.config
 
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.topMargin: root.spacing
             compact: true
             iconSize: root.config.iconSize * 0.78
+            foregroundColor: !enabled ? root.config.muted : visuallyHighlighted ? root.config.selectionForeground : root.config.muted
             text: discoveryState.requested ? "Stop" : "Scan"
             onClicked: discoveryState.toggleDiscovery()
         }
