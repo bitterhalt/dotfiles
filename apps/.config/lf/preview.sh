@@ -2,23 +2,8 @@
 mkdir -p "$HOME/.cache/lf"
 
 image() {
-  local file="$1" w="$2" h="$3" x="$4" y="$5"
-  if [ -n "$KITTY_WINDOW_ID" ] && command -v kitten >/dev/null 2>&1; then
-    local thumb="$file"
-    # thumbnail cache, keyed on path + mtime + size
-    local key
-    key="$(stat --printf '%n\0%Y\0%s' -- "$file" | sha256sum | awk '{print $1}')"
-    local cached="$HOME/.cache/lf/preview.$key.png"
-    if [ ! -f "$cached" ]; then
-      vipsthumbnail "$file" --size '1000x1000>' -o "$cached" 2>/dev/null
-    fi
-    [ -f "$cached" ] && thumb="$cached"
-    kitten icat --clear --stdin=no --transfer-mode=memory \
-      --place="${w}x${h}@${x}x${y}" "$thumb" </dev/null >/dev/tty
-    exit 1
-  else
-    chafa "$file" -f sixel -s "${w}x${h}" --animate off --polite on
-  fi
+  local file="$1" w="$2" h="$3"
+  chafa "$file" -f sixel -s "${w}x${h}" --animate off --polite on
 }
 
 batorcat() {
@@ -60,19 +45,19 @@ case "$(printf "%s\n" "$REAL" | awk '{print tolower($0)}')" in
   if [ ! -f "${CACHE}.jpg" ]; then
     pdftoppm -jpeg -f 1 -singlefile "$1" "$CACHE"
   fi
-  image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
+  image "${CACHE}.jpg" "$2" "$3"
   ;;
 *.avi | *.mp4 | *.wmv | *.dat | *.3gp | *.ogv | *.mkv | *.mpg | *.mpeg | *.vob | *.fl[icv] | *.m2v | *.mov | *.webm | *.ts | *.mts | *.m4v | *.r[am] | *.qt | *.divx)
   if [ ! -f "${CACHE}.jpg" ]; then
     ffmpegthumbnailer -i "$1" -o "${CACHE}.jpg" -s 0 -q 5
   fi
-  image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
+  image "${CACHE}.jpg" "$2" "$3"
   ;;
 *.bmp | *.jpg | *.jpeg | *.png | *.xpm | *.webp | *.tiff | *.gif | *.jfif | *.ico)
-  image "$1" "$2" "$3" "$4" "$5"
+  image "$1" "$2" "$3"
   ;;
 *.svg)
-  image "$1" "$2" "$3" "$4" "$5"
+  image "$1" "$2" "$3"
   ;;
 *.md)
   batorcat "$1"
