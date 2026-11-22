@@ -14,7 +14,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: 4
-        color: root.selected ? root.config.selectionBackground : "transparent"
+        color: root.selected ? root.config.muted : "transparent"
     }
 
     IconImage {
