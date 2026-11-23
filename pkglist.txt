@@ -42,7 +42,6 @@ galculator
 gamemode
 gamescope
 gdu
-gimp
 git
 git-filter-repo
 gnome-bluetooth-3.0
@@ -98,6 +97,7 @@ pacseek
 papirus-icon-theme
 pass
 pavucontrol
+pinta
 piper
 pipewire
 pipewire-alsa
