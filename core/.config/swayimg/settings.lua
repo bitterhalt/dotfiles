@@ -22,7 +22,9 @@ swayimg.text.font = "Adwaita Mono"
 swayimg.text.size = 13
 swayimg.text.padding = 10
 swayimg.text.timeout = 15
-swayimg.text.status_timeout = 3
+-- Normal status lifetime, also restored after the startup hint in init.lua.
+STATUS_TIMEOUT = 3
+swayimg.text.status_timeout = STATUS_TIMEOUT
 
 --------------------------------------------------------------------------------
 -- Colors - Load from Pywal
