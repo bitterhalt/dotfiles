@@ -27,17 +27,17 @@ swayimg.viewer.text = text
 local help = {
 	"Viewer keys (F1 to close)",
 	"",
-	"b\tSet as wallpaper",
-	"y\tCopy image to clipboard",
-	"e\tEdit in GIMP",
-	"h / l\tPrevious / next image",
-	"g / Shift-g\tFirst / last",
-	"+ / - / wheel\tZoom",
-	"c\tFit to width",
-	"<\tRotate 90 degrees",
-	"Return\tGallery",
-	"f\tFullscreen",
-	"q\tQuit",
+	help_common.wallpaper,
+	help_common.copy,
+	help_common.edit,
+	"h / l	Previous / next image",
+	help_common.first_last,
+	"+ / - / wheel	Zoom",
+	"c	Fit to width",
+	"<	Rotate 90 degrees",
+	"Return	Gallery",
+	help_common.fullscreen,
+	help_common.quit,
 }
 
 swayimg.on_window_resize(function()
@@ -46,68 +46,40 @@ swayimg.on_window_resize(function()
 	end
 end)
 
-local function with_image(fn)
-	local image = swayimg.viewer.get_image()
-	if image then
-		fn(image)
-	end
+local function next_image()
+	swayimg.viewer.open("next")
+end
+
+local function prev_image()
+	swayimg.viewer.open("prev")
+end
+
+-- Zoom around the mouse pointer by a fraction of the current scale.
+local function zoom(delta)
+	local mouse = swayimg.get_mouse_pos()
+	local scale = swayimg.viewer.scale
+	swayimg.viewer.set_abs_scale(scale + scale * delta, mouse.x, mouse.y)
 end
 
 --------------------------------------------------------------------------------
 -- Binds
 --------------------------------------------------------------------------------
 swayimg.viewer.on_key("F1", make_help_toggle(swayimg.viewer, text, "bottomleft", help))
-
-swayimg.viewer.on_key("q", function()
-	swayimg.exit()
-end)
-
-swayimg.viewer.on_key("f", function()
-	swayimg.fullscreen = not swayimg.fullscreen
-end)
+bind_common(swayimg.viewer)
 
 swayimg.viewer.on_key("<", function()
 	swayimg.viewer.rotate(90)
 end)
 
-swayimg.viewer.on_key("Return", function()
-	swayimg.mode = "gallery"
-end)
-
-swayimg.viewer.on_key("Up", function()
-	swayimg.viewer.open("next")
-end)
-
-swayimg.viewer.on_key("l", function()
-	swayimg.viewer.open("next")
-end)
-
-swayimg.viewer.on_key("Down", function()
-	swayimg.viewer.open("prev")
-end)
-
-swayimg.viewer.on_key("h", function()
-	swayimg.viewer.open("prev")
-end)
-
-swayimg.viewer.on_key("g", function()
-	swayimg.viewer.open("first")
-end)
-
-swayimg.viewer.on_key("Shift-g", function()
-	swayimg.viewer.open("last")
-end)
+swayimg.viewer.on_key({ "Up", "l" }, next_image)
+swayimg.viewer.on_key({ "Down", "h" }, prev_image)
 
 swayimg.viewer.on_key("plus", function()
-	local pos = swayimg.get_mouse_pos()
-	local scale = swayimg.viewer.scale
-	swayimg.viewer.set_abs_scale(scale + scale / 10, pos.x, pos.y)
+	zoom(0.1)
 end)
 
 swayimg.viewer.on_key("minus", function()
-	local pos = swayimg.get_mouse_pos()
-	local scale = swayimg.viewer.scale
-	swayimg.viewer.set_abs_scale(scale - scale / 10, pos.x, pos.y)
+	zoom(-0.1)
 end)
 
 swayimg.viewer.on_key("c", function()
@@ -121,9 +93,7 @@ swayimg.viewer.on_scroll(function(kmods, horizontal, vertical)
 	if kmods == "Ctrl" then
 		-- zoom around the mouse pointer
 		if vertical ~= 0 then
-			local mouse = swayimg.get_mouse_pos()
-			local scale = swayimg.viewer.scale
-			swayimg.viewer.set_abs_scale(scale - scale * vertical / 10, mouse.x, mouse.y)
+			zoom(-vertical / 10)
 		end
 	else
 		-- pan by 5% of the window per wheel notch
@@ -136,25 +106,5 @@ swayimg.viewer.on_scroll(function(kmods, horizontal, vertical)
 	end
 end)
 
-swayimg.viewer.on_mouse("MouseSide", function()
-	swayimg.viewer.open("prev")
-end)
-
-swayimg.viewer.on_mouse("MouseExtra", function()
-	swayimg.viewer.open("next")
-end)
-
-swayimg.viewer.on_key("b", set_wallpaper)
-
-swayimg.viewer.on_key("e", function()
-	with_image(function(image)
-		os.execute("gimp " .. shellescape(image.path) .. " & disown")
-	end)
-end)
-
-swayimg.viewer.on_key("y", function()
-	with_image(function(image)
-		os.execute("wl-copy -t image/png < " .. shellescape(image.path))
-		swayimg.text.status = "Copied to clipboard: " .. image.path
-	end)
-end)
+swayimg.viewer.on_mouse("MouseSide", prev_image)
+swayimg.viewer.on_mouse("MouseExtra", next_image)
