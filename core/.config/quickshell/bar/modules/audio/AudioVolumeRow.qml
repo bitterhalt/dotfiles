@@ -109,7 +109,6 @@ Item {
         stepSize: 0.01
         focusPolicy: Qt.NoFocus
         enabled: root.nodeAudio !== null
-        opacity: root.nodeAudio && root.nodeAudio.muted ? 0.4 : 1
         value: root.nodeAudio ? root.nodeAudio.volume : 0
         onPressedChanged: {
             if (pressed)
@@ -125,6 +124,7 @@ Item {
             config: root.config
             value: slider.value
             maximum: slider.to
+            muted: !!root.nodeAudio && root.nodeAudio.muted
             segmentCount: Math.max(1, Math.floor((width + spacing) / (4 + spacing)))
         }
 

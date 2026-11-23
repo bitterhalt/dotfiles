@@ -316,7 +316,6 @@ PopoutPanel {
         property bool selected: false
         signal activated
         height: root.rowHeight
-        opacity: enabled ? 1 : 0.45
 
         SelectionIndicator {
             objectName: "audioChoiceSelection"
@@ -335,7 +334,7 @@ PopoutPanel {
                 renderType: Text.NativeRendering
                 width: parent.width
                 text: choice.title
-                color: choiceMouse.containsMouse ? choice.config.selectionBackground : choice.config.fg
+                color: !choice.enabled ? choice.config.muted : choiceMouse.containsMouse ? choice.config.selectionBackground : choice.config.fg
                 font.pointSize: choice.config.textSizeMedium
                 font.weight: choice.selected ? Font.DemiBold : Font.Normal
                 elide: Text.ElideRight
@@ -353,8 +352,9 @@ PopoutPanel {
         MouseArea {
             id: choiceMouse
             anchors.fill: parent
+            enabled: choice.enabled
             hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
+            cursorShape: choice.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
             onClicked: choice.activated()
         }
     }

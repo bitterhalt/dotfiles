@@ -159,7 +159,6 @@ FocusScope {
             config: root.config
             compact: true
             filled: true
-            opacity: hovered ? 0.8 : 1
             visible: history.rows.length > 0
             text: "Clear all"
             onClicked: {
@@ -187,7 +186,6 @@ FocusScope {
                 id: dndSwitch
                 config: root.config
                 checked: root.notificationService.dnd
-                opacity: checked ? 1 : 0.65
                 onToggled: {
                     root.notificationService.toggleDnd();
                     root.forceActiveFocus();

@@ -444,7 +444,6 @@ PanelWindow {
                             readonly property bool hovered: enabled && hintMouse.containsMouse
                             width: hintRow.width + root.config.spacingTight * 2
                             height: hintRow.height + root.config.spacingTight * 2
-                            opacity: enabled ? 1 : 0.5
                             enabled: (hint.modelData.action === "settings" || !!root.selected) && !root.controller.busy && !root.settingsOpen
 
                             Rectangle {
@@ -468,13 +467,13 @@ PanelWindow {
                                 KeyCap {
                                     visible: hint.modelData.control
                                     label: "Ctrl"
-                                    edgeColor: hint.hovered ? root.config.selectionForeground : root.config.selectionBackground
+                                    edgeColor: hint.hovered ? root.config.selectionForeground : hint.enabled ? root.config.selectionBackground : root.config.border
                                     textColor: hint.hovered ? root.config.selectionForeground : root.config.muted
                                     fontPointSize: root.config.textSizeSmall
                                 }
                                 KeyCap {
                                     label: hint.modelData.key
-                                    edgeColor: hint.hovered ? root.config.selectionForeground : root.config.selectionBackground
+                                    edgeColor: hint.hovered ? root.config.selectionForeground : hint.enabled ? root.config.selectionBackground : root.config.border
                                     textColor: hint.hovered ? root.config.selectionForeground : root.config.muted
                                     fontPointSize: root.config.textSizeSmall
                                 }
@@ -482,8 +481,9 @@ PanelWindow {
                             MouseArea {
                                 id: hintMouse
                                 anchors.fill: parent
+                                enabled: hint.enabled
                                 hoverEnabled: true
-                                cursorShape: Qt.PointingHandCursor
+                                cursorShape: hint.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
                                 onClicked: root.activateAction(hint.modelData.action)
                             }
                         }

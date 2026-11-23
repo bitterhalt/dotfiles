@@ -123,7 +123,7 @@ Item {
                     config: osd.config
                     value: osd.sinkAudio ? osd.sinkAudio.volume : 0
                     maximum: osd.config.maxVolume
-                    opacity: osd.sinkAudio && osd.sinkAudio.muted ? 0.4 : 1
+                    muted: !!osd.sinkAudio && osd.sinkAudio.muted
                 }
             }
         }

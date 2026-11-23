@@ -76,8 +76,7 @@ Item {
 
             Text {
                 anchors.centerIn: parent
-                color: networkMouse.containsMouse ? root.config.muted : root.config.fg
-                opacity: root.networkService.connectionKind === "disconnected" ? 0.55 : 1
+                color: root.networkService.connectionKind === "disconnected" || networkMouse.containsMouse ? root.config.muted : root.config.fg
                 font.family: root.config.iconFontFamily
                 font.pointSize: root.config.iconSize
                 text: root.networkService.icon
@@ -101,8 +100,7 @@ Item {
 
             Text {
                 anchors.centerIn: parent
-                color: bluetoothMouse.containsMouse ? root.config.muted : root.config.fg
-                opacity: root.adapter && root.adapter.enabled ? (root.connectedCount > 0 ? 1 : 0.55) : 0.4
+                color: !root.adapter || !root.adapter.enabled || root.connectedCount === 0 || bluetoothMouse.containsMouse ? root.config.muted : root.config.fg
                 font.family: root.config.iconFontFamily
                 font.pointSize: root.config.iconSize
                 text: root.adapter && root.adapter.enabled ? "󰂯" : "󰂲"

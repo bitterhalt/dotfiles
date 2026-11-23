@@ -128,7 +128,6 @@ Item {
 
             width: menuColumn.width
             height: 34
-            opacity: entry.enabled ? 1.0 : 0.45
             readonly property bool highlighted: rowMouse.containsMouse && entry.enabled
 
             Rectangle {
@@ -156,7 +155,7 @@ Item {
                 Text {
                     anchors.centerIn: parent
                     visible: entry.icon === "" && entry.buttonType !== QsMenuButtonType.None
-                    color: row.highlighted ? root.config.selectionForeground : root.config.selectionBackground
+                    color: row.highlighted ? root.config.selectionForeground : entry.enabled ? root.config.selectionBackground : root.config.muted
                     font.pointSize: root.config.textSizeMedium
                     text: entry.checkState === Qt.Checked ? "✓" : ""
                 }
@@ -170,7 +169,7 @@ Item {
                 anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
 
-                color: row.highlighted ? root.config.selectionForeground : root.config.fg
+                color: row.highlighted ? root.config.selectionForeground : entry.enabled ? root.config.fg : root.config.muted
                 font.pointSize: root.config.textSizeMedium
                 elide: Text.ElideRight
                 text: entry.text

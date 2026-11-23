@@ -5,7 +5,7 @@ Item {
 
     required property var config
     property bool checked: false
-    // Opt in to Tab focus and Space/Enter toggling.
+    // Opt in to Tab focus; clicking always focuses the switch.
     property bool keyboard: false
 
     signal toggled
@@ -13,10 +13,8 @@ Item {
     implicitWidth: 32
     implicitHeight: 18
     activeFocusOnTab: keyboard
-    Keys.onSpacePressed: if (keyboard)
-        toggled()
-    Keys.onReturnPressed: if (keyboard)
-        toggled()
+    Keys.onSpacePressed: control.toggled()
+    Keys.onReturnPressed: control.toggled()
 
     // Track and thumb; checked controls the thumb position and track fill.
     Rectangle {
@@ -39,7 +37,7 @@ Item {
         anchors.margins: -3
         radius: height / 2
         color: "transparent"
-        visible: control.keyboard && control.activeFocus
+        visible: control.activeFocus
         border.width: 1
         border.color: control.config.selectionBackground
     }
@@ -47,6 +45,9 @@ Item {
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        onClicked: control.toggled()
+        onClicked: {
+            control.forceActiveFocus();
+            control.toggled();
+        }
     }
 }

@@ -74,8 +74,7 @@ Item {
                 width: modelData.is_active ? 24 : 8
                 height: 8
                 radius: 4
-                color: workspaceDot.modelData.is_urgent ? root.config.urgent : workspaceDot.modelData.is_active ? root.config.selectionBackground : root.config.fg
-                opacity: workspaceDot.modelData.is_active ? 1 : 0.7
+                color: workspaceDot.modelData.is_urgent ? root.config.urgent : workspaceDot.modelData.is_active ? root.config.selectionBackground : root.config.muted
 
                 MouseArea {
                     anchors.fill: parent

@@ -306,7 +306,6 @@ PanelWindow {
                 compact: true
                 enabled: !root.controller.busy
                 focusPolicy: Qt.NoFocus
-                opacity: hovered ? 0.8 : 1
                 outlined: true
                 text: "[r] Refresh"
                 onClicked: {
@@ -338,7 +337,6 @@ PanelWindow {
                 enabled: !root.controller.busy && root.total > 0
                 filled: true
                 focusPolicy: Qt.NoFocus
-                opacity: hovered ? 0.8 : 1
                 text: "[u] Upgrade"
                 onClicked: root.controller.upgrade()
             }

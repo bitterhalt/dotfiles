@@ -143,7 +143,6 @@ FocusScope {
                 ColumnLayout {
                     Layout.fillWidth: true
                     enabled: backgroundModeInput.currentIndex === 1
-                    opacity: enabled ? 1 : 0.5
                     SettingLabel {
                         text: "Fixed background color"
                     }
@@ -188,7 +187,7 @@ FocusScope {
     component SettingLabel: Text {
         renderType: Text.NativeRendering
         Layout.fillWidth: true
-        color: root.config.muted
+        color: enabled ? root.config.muted : root.config.border
         font.pointSize: root.config.textSizeMedium
         wrapMode: Text.WordWrap
     }
@@ -199,6 +198,8 @@ FocusScope {
         Layout.minimumWidth: 0
         Layout.preferredWidth: 1
         Layout.preferredHeight: 32
+        color: enabled ? root.config.fg : root.config.muted
+        placeholderTextColor: enabled ? root.config.muted : root.config.border
         onTextChanged: root.errorText = ""
     }
 
@@ -215,7 +216,7 @@ FocusScope {
             leftPadding: 8
             rightPadding: combo.indicator ? combo.indicator.width + 8 : 8
             text: combo.currentText
-            color: root.config.fg
+            color: combo.enabled ? root.config.fg : root.config.muted
             font: combo.font
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
@@ -231,6 +232,5 @@ FocusScope {
         config: root.config
         outlined: true
         outlineColor: root.config.border
-        opacity: enabled ? 1 : 0.5
     }
 }

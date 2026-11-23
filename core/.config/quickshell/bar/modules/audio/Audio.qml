@@ -49,8 +49,7 @@ Item {
 
     Text {
         anchors.centerIn: parent
-        color: audioMouse.containsMouse ? config.muted : config.fg
-        opacity: root.muted ? 0.5 : 1
+        color: root.muted || audioMouse.containsMouse ? config.muted : config.fg
         font.family: config.iconFontFamily
         font.pointSize: config.iconSize
         text: root.icon

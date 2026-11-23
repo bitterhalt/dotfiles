@@ -133,8 +133,7 @@ Rectangle {
                 anchors.leftMargin: 6
                 anchors.verticalCenter: parent.verticalCenter
                 visible: root.expandableBody
-                color: root.config.selectionBackground
-                opacity: root.highlighted ? 1 : 0.5
+                color: root.highlighted ? root.config.selectionBackground : root.config.muted
                 font.family: root.config.iconFontFamily
                 font.pointSize: root.config.iconSize * 0.95
                 text: root.expanded ? "󰅃" : "󰅀"

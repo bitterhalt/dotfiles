@@ -82,8 +82,6 @@ Item {
 
                 readonly property var volume: modelData
                 readonly property bool busy: root.driveService.busyPath === chip.volume.path
-                // Unmounted chips dim like muted text.
-                readonly property real chipOpacity: chip.volume.mounted ? 1 : 0.65
 
                 objectName: "driveChip/" + chip.volume.path
                 width: Math.max(24, chipContent.implicitWidth + 8)
@@ -97,8 +95,7 @@ Item {
                     Text {
                         objectName: "driveGlyph/" + chip.volume.path
                         anchors.verticalCenter: parent.verticalCenter
-                        color: root.config.fg
-                        opacity: chip.chipOpacity
+                        color: chip.volume.mounted ? root.config.fg : root.config.muted
                         font.family: root.config.iconFontFamily
                         font.pointSize: root.config.iconSize
                         text: chip.volume.locked ? "󰌾" : (chip.volume.loop ? "󰗮" : "󰕓")
@@ -107,8 +104,7 @@ Item {
                     Text {
                         objectName: "driveLabel/" + chip.volume.path
                         anchors.verticalCenter: parent.verticalCenter
-                        color: root.config.fg
-                        opacity: chip.chipOpacity
+                        color: chip.volume.mounted ? root.config.fg : root.config.muted
                         font.family: root.config.textFontFamily
                         font.pointSize: root.config.textSizeMedium
                         renderType: Text.NativeRendering
@@ -118,8 +114,7 @@ Item {
                     Text {
                         objectName: "driveSize/" + chip.volume.path
                         anchors.verticalCenter: parent.verticalCenter
-                        color: root.config.fg
-                        opacity: chip.chipOpacity
+                        color: chip.volume.mounted ? root.config.fg : root.config.muted
                         font.family: root.config.textFontFamily
                         font.pointSize: root.config.textSizeMedium
                         renderType: Text.NativeRendering

@@ -23,6 +23,8 @@ Item {
     property int page: 0
     property string errorText: ""
     property string noteText: ""
+    // Sidebar delegates, kept by index so Up/Down can move focus with the page.
+    property var pageRows: []
     readonly property var current: pages[page]
     readonly property var pages: [
         {
@@ -229,6 +231,14 @@ Item {
         page = (index + pages.length) % pages.length;
     }
 
+    // Up/Down in the sidebar moves the page and keyboard focus together.
+    function focusPage(index) {
+        const target = Math.max(0, Math.min(pages.length - 1, index));
+        selectPage(target);
+        if (pageRows[target])
+            pageRows[target].forceActiveFocus(Qt.TabFocusReason);
+    }
+
     // Workspace layout lives in SettingsService, everything else in Config.
     function valueOf(name) {
         return name === "workspaceLayout" ? settingsService.workspaceLayout : config.values[name];
@@ -252,9 +262,19 @@ Item {
     }
 
     function applyIdle() {
-        const field = index => idleFields.itemAt(index).value;
+        const field = index => idleFields.itemAt(index) ? idleFields.itemAt(index).value : "";
         errorText = settingsService.saveTimeouts(Duration.parse(field(0)), Duration.parse(field(1)), Duration.parse(field(2)));
         noteText = errorText === "" ? "Saved" : "";
+    }
+
+    function statusText() {
+        if (errorText !== "")
+            return errorText;
+        if (current.custom === true && idleService.errorText !== "")
+            return idleService.errorText;
+        if (noteText !== "")
+            return noteText;
+        return current.custom === true ? "30s, 30m, 2h · 0 disables an idle action" : current.hint || "";
     }
 
     // Tab order and Up/Down follow the same focus chain.
@@ -345,7 +365,7 @@ Item {
                 id: body
 
                 width: parent.width
-                height: 296
+                height: Math.max(sidebar.implicitHeight, pageTitle.implicitHeight + pageContent.implicitHeight + root.config.panelPadding * 2 + root.config.spacingControl)
 
                 Column {
                     id: sidebar
@@ -366,6 +386,14 @@ Item {
 
                             width: sidebar.width - sidebar.padding * 2
                             height: 32
+                            activeFocusOnTab: true
+
+                            Keys.onUpPressed: root.focusPage(category.index - 1)
+                            Keys.onDownPressed: root.focusPage(category.index + 1)
+                            Keys.onReturnPressed: root.selectPage(category.index)
+                            Keys.onSpacePressed: root.selectPage(category.index)
+                            Component.onCompleted: root.pageRows[category.index] = category
+                            Component.onDestruction: root.pageRows[category.index] = null
 
                             MenuRow {
                                 anchors.fill: parent
@@ -375,32 +403,41 @@ Item {
                                 label: category.modelData.label
                             }
 
+                            Rectangle {
+                                anchors.fill: parent
+                                anchors.margins: -1
+                                radius: 5
+                                color: "transparent"
+                                visible: category.activeFocus
+                                border.width: 1
+                                border.color: root.config.selectionBackground
+                            }
+
                             MouseArea {
                                 id: categoryMouse
 
                                 anchors.fill: parent
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
-                                onClicked: root.selectPage(category.index)
+                                onClicked: {
+                                    root.selectPage(category.index);
+                                    category.forceActiveFocus();
+                                }
                             }
                         }
                     }
                 }
 
                 // Vertical rule, inset like the footer separator.
-                Item {
-                    width: 1
-                    height: parent.height
-
-                    Rectangle {
-                        anchors.fill: parent
-                        anchors.topMargin: root.config.panelPadding
-                        anchors.bottomMargin: root.config.panelPadding
-                        color: root.config.border
-                    }
+                PanelSeparator {
+                    config: root.config
+                    vertical: true
+                    verticalInset: root.config.panelPadding
                 }
 
                 Item {
+                    id: pageArea
+
                     width: parent.width - sidebar.width - 1
                     height: parent.height
 
@@ -419,13 +456,15 @@ Item {
                     }
 
                     Column {
+                        id: pageContent
+
                         anchors.top: pageTitle.bottom
                         anchors.topMargin: root.config.spacingControl
                         anchors.left: parent.left
                         anchors.leftMargin: root.config.panelPadding
                         anchors.right: parent.right
                         anchors.rightMargin: root.config.panelPadding
-                        spacing: 2
+                        spacing: root.config.spacingTight
 
                         Repeater {
                             model: root.current.rows
@@ -441,6 +480,15 @@ Item {
                                 config: root.config
                                 label: modelData.label
                                 stacked: kind === "list"
+                                controlInset: {
+                                    if (kind === "stepper")
+                                        return 136;
+                                    if (kind === "toggle")
+                                        return 32;
+                                    if (kind === "choice")
+                                        return 176;
+                                    return isText && !stacked ? (modelData.wide ? 280 : 160) : 0;
+                                }
 
                                 ShellStepper {
                                     visible: item.kind === "stepper"
@@ -472,8 +520,6 @@ Item {
                                     anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
                                     spacing: root.config.spacingControl
-                                    Keys.onLeftPressed: root.focusStep(false)
-                                    Keys.onRightPressed: root.focusStep(true)
 
                                     Repeater {
                                         model: item.modelData.options || []
@@ -521,6 +567,7 @@ Item {
                             config: root.config
                             label: root.idleService.disabled ? "Idle paused" : "Idle active"
                             muted: true
+                            controlInset: 72
 
                             ShellButton {
                                 anchors.right: parent.right
@@ -558,6 +605,7 @@ Item {
 
                                 config: root.config
                                 label: modelData.label
+                                controlInset: 104
 
                                 ShellTextField {
                                     id: idleInput
@@ -577,6 +625,7 @@ Item {
                         SettingRow {
                             visible: root.current.custom === true
                             config: root.config
+                            controlInset: 64
 
                             ShellButton {
                                 anchors.right: parent.right
@@ -613,9 +662,9 @@ Item {
                     anchors.rightMargin: root.config.spacingControl
                     anchors.verticalCenter: parent.verticalCenter
                     elide: Text.ElideRight
-                    color: root.errorText !== "" ? root.config.urgent : root.config.muted
+                    color: root.errorText !== "" || (root.current.custom === true && root.idleService.errorText !== "") ? root.config.urgent : root.config.muted
                     font.pointSize: root.config.textSizeSmall
-                    text: root.errorText !== "" ? root.errorText : root.noteText !== "" ? root.noteText : root.current.custom === true ? root.idleService.errorText !== "" ? root.idleService.errorText : "30s, 30m, 2h · 0 disables an idle action" : root.current.hint || ""
+                    text: root.statusText()
                 }
 
                 Text {
@@ -627,7 +676,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     color: root.config.muted
                     font.pointSize: root.config.textSizeSmall
-                    text: "↑↓ page · Tab next field · Esc close"
+                    text: "Tab focus · ↑↓ move · Ctrl+J/K page · Esc close"
                 }
             }
         }
