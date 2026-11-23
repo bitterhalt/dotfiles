@@ -32,16 +32,6 @@ Item {
         color: control.checked ? control.config.selectionForeground : control.config.muted
     }
 
-    Rectangle {
-        anchors.fill: parent
-        anchors.margins: -3
-        radius: height / 2
-        color: "transparent"
-        visible: control.activeFocus
-        border.width: 1
-        border.color: control.config.selectionBackground
-    }
-
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor

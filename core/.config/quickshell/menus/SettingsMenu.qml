@@ -403,17 +403,6 @@ Item {
                                 label: category.modelData.label
                             }
 
-                            // Inset focus ring; hide it when the row is already
-                            // highlighted so the two rounded edges cannot seam.
-                            Rectangle {
-                                anchors.fill: parent
-                                radius: 4
-                                color: "transparent"
-                                visible: category.activeFocus && !(root.page === category.index || categoryMouse.containsMouse)
-                                border.width: 1
-                                border.color: root.config.selectionBackground
-                            }
-
                             MouseArea {
                                 id: categoryMouse
 

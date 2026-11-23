@@ -69,14 +69,4 @@ Item {
             }
         }
     }
-
-    Rectangle {
-        anchors.fill: parent
-        anchors.margins: -3
-        radius: 6
-        color: "transparent"
-        visible: root.activeFocus
-        border.width: 1
-        border.color: root.config.selectionBackground
-    }
 }
