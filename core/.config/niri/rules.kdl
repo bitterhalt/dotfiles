@@ -250,11 +250,6 @@ window-rule {
     }
 }
 
-window-rule {
-    match app-id="amethyst-mod-manager"
-    open-on-workspace "3"
-}
-
 // Terminal for projects
 window-rule {
     match app-id="wezterm-session"
