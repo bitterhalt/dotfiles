@@ -158,7 +158,6 @@ FocusScope {
             anchors.topMargin: 8
             config: root.config
             compact: true
-            filled: true
             visible: history.rows.length > 0
             text: "Clear all"
             onClicked: {
