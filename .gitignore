@@ -2,33 +2,21 @@
 __pycache__/
 *.py[cod]
 .#*
-
-# Nvim
-lazy-lock.json
-apps/.config/nvim/lazy-lock.json
-
-# Local secrets: kept in the working tree, never committed
-core/.config/environment.d/40-private.conf
-.env
 *.key
 *.pem
-id_rsa*
-brave*
-intent.cache
-firefox*
-
-# Local-only development files (kept for agent work, not published)
-core/.config/quickshell/tests/
-core/.config/quickshell/lock-test.qml
+.env
 /AGENTS.md
-
-# OpenCode local service credentials
-apps/.config/opencode/service.json
-
-# Runtime state, regenerated locally
 apps/.config/htop/htop_history
-
-# Guard against generated desktop registrations and caches landing in the
-# repo; they belong to the live ~/.local/share/applications directory.
-bin/.local/share/applications/userapp-*.desktop
+apps/.config/nvim/lazy-lock.json
+apps/.config/opencode/service.json
+bin/.local/bin/appimages
 bin/.local/share/applications/mimeinfo.cache
+bin/.local/share/applications/userapp-*.desktop
+brave*
+core/.config/environment.d/40-private.conf
+core/.config/quickshell/lock-test.qml
+core/.config/quickshell/tests/
+firefox*
+id_rsa*
+intent.cache
+lazy-lock.json
