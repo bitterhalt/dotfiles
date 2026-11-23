@@ -14,12 +14,12 @@ TextField {
     color: config.fg
     placeholderTextColor: config.muted
     selectionColor: config.selectionBackground
-    selectedTextColor: config.selectionForeground
+    selectedTextColor: config.bg
     font.pointSize: config.textSizeNormal
     selectByMouse: true
 
     background: Rectangle {
-        color: root.surfaceColor
+        color: config.border
         radius: root.cornerRadius
         border.width: 1
         border.color: root.activeFocus ? root.config.selectionBackground : root.outlineColor

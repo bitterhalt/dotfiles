@@ -12,9 +12,10 @@ Button {
     property bool outlined: false
     property bool destructive: false
     property bool selected: false
-    readonly property bool visuallyHighlighted: enabled && (down || hovered || activeFocus || selected || filled)
+    readonly property bool keyFocused: activeFocus && focusReason !== Qt.MouseFocusReason
+    readonly property bool visuallyHighlighted: enabled && (down || hovered || keyFocused || selected || filled)
     property color foregroundColor: !enabled ? config.muted : visuallyHighlighted ? config.selectionForeground : destructive ? config.urgent : config.fg
-    property color outlineColor: config.selectionBackground
+    property color outlineColor: config.border
     property real cornerRadius: 4
 
     implicitHeight: Math.max(compact ? 22 : 28, implicitContentHeight + topPadding + bottomPadding)
@@ -42,7 +43,7 @@ Button {
     background: Rectangle {
         radius: root.cornerRadius
         color: root.visuallyHighlighted ? root.config.selectionBackground : root.tinted ? Qt.alpha(root.config.selectionBackground, 0.12) : "transparent"
-        border.width: root.outlined || root.activeFocus ? 1 : 0
-        border.color: root.activeFocus ? root.config.selectionBackground : root.outlineColor
+        border.width: root.outlined || root.visuallyHighlighted ? 1 : 0
+        border.color: root.visuallyHighlighted ? root.config.selectionBackground : root.outlineColor
     }
 }
