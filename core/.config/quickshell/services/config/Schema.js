@@ -94,3 +94,46 @@ function parse(text) {
     }
     return {values: values, warnings: [...warnings]}
 }
+
+// Nested {group: {key: value}} document, the shape parse() reads back.
+function toDocument(values) {
+    const document = {}
+    for (const name in fields) {
+        const field = fields[name]
+        if (!document[field[0]])
+            document[field[0]] = {}
+        const value = values[name]
+        document[field[0]][field[1]] = Array.isArray(value) ? value.slice() : value
+    }
+    return document
+}
+
+// [minimum, maximum] of a numeric setting, or null.
+function bounds(name) {
+    const field = fields[name]
+    return field && (field[3] === "number" || field[3] === "integer") ? [field[4], field[5]] : null
+}
+
+// Empty string when the value is acceptable, else a short message for the UI.
+function check(name, value) {
+    const field = fields[name]
+    if (!field)
+        return "Unknown setting"
+    if (valid(value, field))
+        return ""
+    if (field[3] === "integer")
+        return "Enter a whole number from " + field[4] + " to " + field[5]
+    if (field[3] === "number")
+        return "Enter a number from " + field[4] + " to " + field[5]
+    if (field[3] === "strings")
+        return "Enter a comma separated list"
+    return "Invalid value"
+}
+
+// Rules that span several settings.
+function checkAll(values) {
+    if (values.bluetoothBatteryWarningPercent > 0
+            && values.bluetoothBatteryCriticalPercent > values.bluetoothBatteryWarningPercent)
+        return "Critical level must not be above the warning level"
+    return ""
+}

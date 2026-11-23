@@ -12,6 +12,7 @@ Item {
     required property var targetScreen
     required property var lockService
     required property var idleService
+    required property var settingsMenu
     required property var wallpaperPicker
     required property var updatesController
 
@@ -190,10 +191,10 @@ Item {
             return;
         }
 
-        if (item.action === "idleSettings") {
+        if (item.action === "settings") {
             const screen = menuWindow.screen;
             close();
-            idleService.openSettings(screen);
+            settingsMenu.open(screen);
             return;
         }
 

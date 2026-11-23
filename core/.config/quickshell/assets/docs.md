@@ -48,7 +48,7 @@ git clone https://github.com/bitterhalt/slimshell.git ~/.config/quickshell
 Several helpers currently expect `~/.config/quickshell`, so do not install into a
 named subconfiguration or another directory unless you also adjust those paths.
 
-Review `settings.json` for appearance and defaults. Optional commands in
+Appearance and behavior are changed in the Settings menu (`qs ipc call settings open`). Optional commands in
 `menus.json` still include local tools such as `sup`, `vopen` and
 `tmux-sysmon.sh`. Menus and other integrations may rely on personal scripts or
 configuration from my [dotfiles](https://github.com/bitterhalt/dotfiles).
@@ -80,9 +80,8 @@ bundled `lock/pam/quickshell-lock` policy uses `pam_unix` and `pam_faillock`; it
 need adapting to your distribution's authentication policy. Keep another way to
 access your session while testing.
 
-Automatic locking, monitor power-off and suspension are configured through Idle
-Settings (`qs ipc call idle settings`). Set a timeout to `0` to disable that action.
-These preferences are saved separately, not in `settings.json`.
+Automatic locking, monitor power-off and suspension are configured on the Idle
+page of the Settings menu (`qs ipc call idle settings`). Set a timeout to `0` to disable that action.
 
 ## 4. Add Niri startup and keybindings
 
@@ -110,10 +109,13 @@ is already running. More IPC calls are listed in the [README](../README.md#featu
 
 ### Settings
 
-Edit root-level `settings.json` for appearance and behavior defaults. Changes are
-loaded automatically; invalid values use safe defaults, and malformed JSON keeps
-the previous settings. Idle timeouts, wallpaper preferences and workspace layout
-are adjusted through the UI and saved separately.
+Open the Settings menu with `qs ipc call settings open` (or the Settings entry in the
+main menu). It has pages for Idle, Appearance, Bar, Audio, Launcher, Notifications
+and Bluetooth. Up/Down (or Ctrl+Up/Down, Ctrl+J / Ctrl+K) switch pages, Tab and Up/Down then walk the controls, and Left/Right step a value. Choices are saved in
+`~/.local/share/quickshell-config.json`, which is also reloaded when edited by hand:
+invalid values use safe defaults, and malformed JSON keeps the previous settings.
+Without that file the built-in defaults apply. Idle timeouts and workspace layout
+are saved in `quickshell-settings.json`, and wallpaper preferences stay in the wallpaper menu.
 
 Animations can be enabled or disabled in settings; each widget owns its style and timing.
 
@@ -186,7 +188,7 @@ lists. Each item needs a label and one of `command`, `action`, or `page`:
       "shortcut": "t",
       "command": "$TERMINAL"
     },
-    { "label": "Idle Settings", "shortcut": "i", "action": "idleSettings" }
+    { "label": "Settings", "shortcut": "s", "action": "settings" }
   ]
 }
 ```
@@ -194,7 +196,7 @@ lists. Each item needs a label and one of `command`, `action`, or `page`:
 Icons and shortcuts are optional. Shortcuts are single letters or digits and
 must be unique within a list. Commands run through the shell when activated;
 only add commands you trust. Set `"confirm": true` on a command to ask before
-running it. Built-in actions are `idleSettings`, `wallpaper`, `lock`, `suspend`,
+running it. Built-in actions are `settings`, `wallpaper`, `lock`, `suspend`,
 and `updates`; page links accept `user-menu1` through `user-menu4`, or `power`.
 Open a list with `qs ipc call menu open user-menu1`, or use `menu toggle user-menu1`.
 The old `menu packages`, `menu settings`, and `menu system` calls remain aliases

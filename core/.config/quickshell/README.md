@@ -31,6 +31,7 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | `clipboard`          | `toggle`, `open`, `close`, `refresh`, `copySelected`, `deleteSelected`              | Control the clipboard picker                                       |
 | `drives`             | `status`, `refresh`, `mount <dev>`, `unmount <dev>`, `poweroff <dev>`, `open <dev>` | Inspect and control removable drives                               |
 | `idle`               | `toggle`, `isDisabled`, `settings`                                                  | Control idle handling or open its settings                         |
+| `settings`           | `open`, `toggle`, `close`                                                           | Open the settings window                                           |
 | `launcher`           | `toggle`, `open`, `close`, `apps`, `search`, `emoji`, `files`, `calculator`         | Open, switch, or toggle launcher modes; `search` opens File Search |
 | `lock`               | `lock`                                                                              | Lock the session                                                   |
 | `locker`             | `isSecure`                                                                          | Query whether the separate lock-screen process is secure           |
@@ -91,7 +92,6 @@ qs -p "$HOME/.config/quickshell" --no-detailed-logs
 
 ```text
 shell.qml       Shell entrypoint and service wiring
-settings.json   Editable appearance and behavior defaults
 menus.json      Personal menu items and commands
 bar/            Bar and its modules
 components/     Reusable UI and popup components

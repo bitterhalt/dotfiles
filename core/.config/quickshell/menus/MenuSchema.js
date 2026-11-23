@@ -3,7 +3,7 @@
 .import "../services/config/Value.js" as Value
 
 const pages = ["user-menu1", "user-menu2", "user-menu3", "user-menu4"]
-const actions = ["idleSettings", "wallpaper", "lock", "suspend", "updates"]
+const actions = ["settings", "wallpaper", "lock", "suspend", "updates"]
 
 function parse(text) {
     const document = JSON.parse(text)

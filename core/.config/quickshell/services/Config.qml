@@ -52,15 +52,34 @@ Item {
         Quickshell.execDetached(["sh", "-lc", command]);
     }
 
+    // Settings menu entry point: validate, apply and save one value.
+    // Returns an error message, or "" on success.
+    function setValue(name, value) {
+        let error = Schema.check(name, value);
+        if (error !== "")
+            return error;
+        const next = Object.assign({}, values);
+        next[name] = Array.isArray(value) ? value.slice() : value;
+        error = Schema.checkAll(next);
+        if (error !== "")
+            return error;
+        values = next;
+        settingsFile.setText(JSON.stringify(Schema.toDocument(values), null, 2) + "\n");
+        return "";
+    }
+
     function applySettings(text) {
         try {
             const parsed = Schema.parse(text);
-            applying = true;
-            values = parsed.values;
+            // Our own writes come back through the file watcher; ignore no-op reloads.
+            if (JSON.stringify(parsed.values) !== JSON.stringify(values)) {
+                applying = true;
+                values = parsed.values;
+            }
             if (parsed.warnings.length > 0)
-                console.warn("settings.json: using defaults for " + parsed.warnings.join(", "));
+                console.warn("quickshell-config.json: using defaults for " + parsed.warnings.join(", "));
         } catch (error) {
-            console.warn("Invalid settings.json; keeping previous settings");
+            console.warn("Invalid quickshell-config.json; keeping previous settings");
         }
         applying = false;
         ready = true;
@@ -76,16 +95,16 @@ Item {
     FileView {
         id: settingsFile
 
-        path: Qt.resolvedUrl("../settings.json").toString()
+        // Written by the Settings menu; still reloads when edited by hand.
+        path: (Quickshell.env("XDG_DATA_HOME") || Quickshell.env("HOME") + "/.local/share") + "/quickshell-config.json"
         blockLoading: true
         watchChanges: true
+        atomicWrites: true
         printErrors: false
         onFileChanged: reload()
         onLoaded: config.applySettings(text())
-        onLoadFailed: {
-            config.ready = true;
-            console.warn("Could not load settings.json; keeping current settings");
-        }
+        // First run: no file yet, so the built-in defaults stay in effect.
+        onLoadFailed: config.ready = true
     }
 
     FontMetrics {

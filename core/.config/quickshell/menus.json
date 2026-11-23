@@ -59,10 +59,16 @@
       "action": "updates"
     },
     {
-      "label": "Idle Settings",
-      "icon": "󰤄",
-      "shortcut": "i",
-      "action": "idleSettings"
+      "label": "Settings",
+      "icon": "󰒓",
+      "shortcut": "s",
+      "action": "settings"
+    },
+    {
+      "label": "Wallpaper",
+      "icon": "󰉏",
+      "shortcut": "w",
+      "action": "wallpaper"
     }
   ],
   "user-menu4": []

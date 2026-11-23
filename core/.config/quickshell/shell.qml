@@ -100,6 +100,7 @@ ShellRoot {
         targetScreen: root.activeScreen
         lockService: appLockService
         idleService: appIdleService
+        settingsMenu: settingsMenu
         wallpaperPicker: appWallpaperPicker
         updatesController: appUpdates
     }
@@ -210,8 +211,8 @@ ShellRoot {
         targetScreen: root.activeScreen
     }
 
-    IdleSettings {
-        id: idleSettings
+    SettingsMenu {
+        id: settingsMenu
         config: appConfig
         idleService: appIdleService
         settingsService: appSettingsService
@@ -221,7 +222,7 @@ ShellRoot {
     Connections {
         target: appIdleService
         function onSettingsRequested(screen) {
-            idleSettings.open(screen);
+            settingsMenu.open(screen, "idle");
         }
     }
 
