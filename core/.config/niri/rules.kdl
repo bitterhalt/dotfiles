@@ -16,29 +16,30 @@ window-rule {
 
 //  Utility & system floating windows
 
-// Standard system dialogs, authentication agents, and configuration tools
+// Standard floaters
 window-rule {
     match app-id="GParted"
     match app-id="Pinentry-gtk"
-    match app-id="piper"
     match app-id="anomalydx11avx.exe"
     match app-id="anomalylauncher.exe"
     match app-id="blueman-manager"
     match app-id="btrfs-assistant"
+    match app-id="dev.faetalize.waytator"
     match app-id="localsend_app"
     match app-id="modorganizer.exe"
     match app-id="nwg-look"
     match app-id="org.gnome.FileRoller"
     match app-id="org.pulseaudio.pavucontrol"
+    match app-id="piper"
     match app-id="polkit-gnome-authentication-agent-1"
     match app-id="qt6ct"
-    match app-id="dev.faetalize.waytator"
     match app-id="satty"
     match app-id="xdg-desktop-portal-gnome"
     match app-id="xdg-desktop-portal-gtk"
     match app-id="yad"
     match app-id="zenity"
     match title="Vivaldi Settings: General - Vivaldi"
+  match app-id="com.github.PintaProject.Pinta"
     open-floating true
 }
 
