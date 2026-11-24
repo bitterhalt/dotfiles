@@ -17,6 +17,7 @@ Item {
 
     readonly property string hostKey: "connections"
     readonly property var adapter: bluetoothService.adapter
+    readonly property bool hasBluetooth: !!adapter
     readonly property int connectedCount: BluetoothModel.rows(bluetoothService.devices).filter(row => row.connected).length
     readonly property bool popupOpen: popupManager.hostRequested && popupManager.activeKey === hostKey
     // Tab shown by the popup; the popup asks for changes via tabRequested.
@@ -27,6 +28,9 @@ Item {
     readonly property int cellWidth: 24
 
     function show(next) {
+        // No adapter: the Bluetooth page no longer exists, so do nothing.
+        if (next === "bluetooth" && !hasBluetooth)
+            return;
         tab = next;
         if (!popupOpen)
             popupManager.openHost(hostKey, popupComponent, root, true);
@@ -51,8 +55,14 @@ Item {
     }
 
     // Matches the old separate widgets: two 24 px cells with the bar's 8 px gap.
-    width: cellWidth * 2 + root.config.spacingControl
+    width: hasBluetooth ? cellWidth * 2 + root.config.spacingControl : cellWidth
     height: barWindow.height
+
+    // Keep the popup on a tab that still exists.
+    onAdapterChanged: {
+        if (!hasBluetooth && tab === "bluetooth")
+            tab = "network";
+    }
 
     Connections {
         target: root.uiService
@@ -75,6 +85,7 @@ Item {
             height: root.barWindow.height
 
             Text {
+                objectName: "networkIcon"
                 anchors.centerIn: parent
                 color: root.networkService.connectionKind === "disconnected" || networkMouse.containsMouse ? root.config.muted : root.config.fg
                 font.family: root.config.iconFontFamily
@@ -97,8 +108,10 @@ Item {
         Item {
             width: root.cellWidth
             height: root.barWindow.height
+            visible: root.hasBluetooth
 
             Text {
+                objectName: "bluetoothIcon"
                 anchors.centerIn: parent
                 color: !root.adapter || !root.adapter.enabled || root.connectedCount === 0 || bluetoothMouse.containsMouse ? root.config.muted : root.config.fg
                 font.family: root.config.iconFontFamily

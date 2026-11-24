@@ -18,7 +18,8 @@ PopoutPanel {
     required property string tab
     property string selectedAddress: ""
 
-    readonly property var tabs: [
+    readonly property bool hasBluetooth: !!bluetoothService.adapter
+    readonly property var tabs: hasBluetooth ? [
         {
             key: "network",
             label: "Network"
@@ -27,15 +28,21 @@ PopoutPanel {
             key: "bluetooth",
             label: "Bluetooth"
         }
+    ] : [
+        {
+            key: "network",
+            label: "Network"
+        }
     ]
-
+    // A stale tab (adapter removed) must never load a page that no longer exists.
+    readonly property string activeTab: tabs.some(entry => entry.key === tab) ? tab : "network"
     readonly property var page: pageLoader.item
-    readonly property bool tabsVisible: !page || !page.subpage
+    readonly property bool tabsVisible: tabs.length > 1 && (!page || !page.subpage)
 
     signal tabRequested(string tab)
 
     function switchTab(next) {
-        if (next !== tab)
+        if (next !== tab && tabs.some(entry => entry.key === next))
             tabRequested(next);
     }
 
@@ -48,7 +55,7 @@ PopoutPanel {
             return;
         if ((event.key === Qt.Key_Tab || event.key === Qt.Key_Backtab) && !(event.modifiers & (Qt.ControlModifier | Qt.AltModifier | Qt.MetaModifier)) && root.tabsVisible) {
             // Follow the visual tab order, so the left icon maps to the left tab.
-            const index = root.tabs.findIndex(entry => entry.key === root.tab);
+            const index = root.tabs.findIndex(entry => entry.key === root.activeTab);
             const step = event.key === Qt.Key_Backtab ? -1 : 1;
             root.switchTab(root.tabs[(index + step + root.tabs.length) % root.tabs.length].key);
             event.accepted = true;
@@ -60,7 +67,7 @@ PopoutPanel {
 
         width: parent.width
         height: item ? item.implicitHeight : 0
-        sourceComponent: root.tab === "network" ? networkPageComponent : bluetoothPageComponent
+        sourceComponent: root.activeTab === "network" ? networkPageComponent : bluetoothPageComponent
         onLoaded: Qt.callLater(() => root.forceActiveFocus())
     }
 
@@ -92,7 +99,7 @@ PopoutPanel {
                     required property var modelData
                     width: tabRow.width / root.tabs.length
                     height: 26
-                    readonly property bool highlighted: root.tab === tab.modelData.key || tabMouse.containsMouse
+                    readonly property bool highlighted: root.activeTab === tab.modelData.key || tabMouse.containsMouse
 
                     Rectangle {
                         anchors.fill: parent
