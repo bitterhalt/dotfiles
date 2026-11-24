@@ -26,8 +26,6 @@ Item {
     property string errorText: ""
     property string noteText: ""
     property bool helpOpen: false
-    // Editors keep Ctrl+Left/Right for word jumps; the H/L shortcuts still page.
-    readonly property bool editingText: !!card.Window.activeFocusItem && card.Window.activeFocusItem.cursorPosition !== undefined
     // Edited values of a staged page; written by Apply, dropped when the page changes.
     property var draft: ({})
     property bool themingPending: false
@@ -309,14 +307,6 @@ Item {
             pageRows[page].forceActiveFocus(Qt.TabFocusReason);
     }
 
-    // Ctrl+H/L and Ctrl+J/K always switch pages; Ctrl+Left/Right only outside
-    // text editors, where they keep their word-jump behaviour.
-    function stepPage(direction) {
-        selectPage(page + direction);
-        if (pageRows[page])
-            pageRows[page].forceActiveFocus(Qt.TabFocusReason);
-    }
-
     function toggle(screen) {
         opened ? close() : open(screen);
     }
@@ -554,35 +544,12 @@ Item {
             // Page switching that also works while a text field has focus.
             Shortcut {
                 sequences: ["Ctrl+J", "Ctrl+Down"]
-                onActivated: root.stepPage(1)
+                onActivated: root.selectPage(root.page + 1)
             }
 
             Shortcut {
                 sequences: ["Ctrl+K", "Ctrl+Up"]
-                onActivated: root.stepPage(-1)
-            }
-
-            Shortcut {
-                sequences: ["Ctrl+L"]
-                onActivated: root.stepPage(1)
-            }
-
-            Shortcut {
-                sequences: ["Ctrl+H"]
-                onActivated: root.stepPage(-1)
-            }
-
-            // Ctrl+Left/Right stay with the editor while it has focus.
-            Shortcut {
-                sequences: ["Ctrl+Right"]
-                enabled: !root.editingText
-                onActivated: root.stepPage(1)
-            }
-
-            Shortcut {
-                sequences: ["Ctrl+Left"]
-                enabled: !root.editingText
-                onActivated: root.stepPage(-1)
+                onActivated: root.selectPage(root.page - 1)
             }
 
             Row {
@@ -683,14 +650,6 @@ Item {
                         visible: root.helpOpen
                         config: root.config
                         entries: [
-                            {
-                                name: "Next / previous page",
-                                key: "Ctrl+H / Ctrl+L"
-                            },
-                            {
-                                name: "Next / previous page",
-                                key: "Ctrl+← / Ctrl+→"
-                            },
                             {
                                 name: "Next / previous page",
                                 key: "Ctrl+J / Ctrl+K"
