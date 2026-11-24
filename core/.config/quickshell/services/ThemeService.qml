@@ -27,9 +27,8 @@ Item {
     property color selectionBackground: fallbackSelectionBackground
     property color selectionForeground: fallbackSelectionForeground
 
-    // Binding: updates automatically whenever selectionBackground changes
-    readonly property color border: Qt.alpha(selectionBackground, borderAlpha)
-    // readonly property color border: Qt.tint(bg, Qt.alpha(selectionBackground, borderAlpha))
+    // Opaque tint: the border keeps its colour over overlapping surfaces.
+    readonly property color border: Qt.tint(bg, Qt.alpha(selectionBackground, borderAlpha))
 
     property bool hellwalActive: false
 
