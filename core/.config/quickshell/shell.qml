@@ -214,6 +214,7 @@ ShellRoot {
     SettingsMenu {
         id: settingsMenu
         config: appConfig
+        wallpaperController: appWallpaperPicker
         idleService: appIdleService
         settingsService: appSettingsService
         targetScreen: root.activeScreen

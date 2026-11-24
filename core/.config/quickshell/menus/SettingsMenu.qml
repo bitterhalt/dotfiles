@@ -8,24 +8,30 @@ import Quickshell
 import Quickshell.Wayland
 
 // One settings window: category sidebar on the left, page on the right.
-// Pages are described by data (`pages`) and drawn by the same delegate; Idle is
-// the one custom page because its timeouts are validated together with Apply.
-// Everything else applies instantly through Config.setValue() / SettingsService.
+// Pages are described by data (`pages`) and drawn by the same delegate. Most apply
+// instantly through Config.setValue() / SettingsService. Two pages are saved with
+// Apply instead: Idle (custom timeouts, validated together) and Theming (`staged`:
+// rows edit a draft, because saving regenerates the Hellwal colors).
 Item {
     id: root
 
     required property var config
     required property var idleService
     required property var settingsService
+    required property var wallpaperController
     required property var targetScreen
     property var menuScreen: null
     property bool opened: false
     property int page: 0
     property string errorText: ""
     property string noteText: ""
+    // Edited values of a staged page; written by Apply, dropped when the page changes.
+    property var draft: ({})
+    property bool themingPending: false
     // Sidebar delegates, kept by index so Up/Down can move focus with the page.
     property var pageRows: []
     readonly property var current: pages[page]
+    readonly property bool staged: current.staged === true
     readonly property var pages: [
         {
             id: "idle",
@@ -76,6 +82,81 @@ Item {
                     name: "popupRadius",
                     label: "Popup radius",
                     suffix: " px"
+                }
+            ]
+        },
+        {
+            id: "theming",
+            label: "Theming",
+            icon: "󰃣",
+            staged: true,
+            hint: "Colors are generated from the current wallpaper with Hellwal",
+            rows: [
+                {
+                    kind: "choice",
+                    name: "hellwalMode",
+                    label: "Mode",
+                    options: [
+                        {
+                            value: "dark",
+                            label: "Dark"
+                        },
+                        {
+                            value: "light",
+                            label: "Light"
+                        }
+                    ]
+                },
+                {
+                    kind: "stepper",
+                    name: "hellwalDarkOffset",
+                    label: "Dark offset",
+                    from: 0,
+                    to: 1,
+                    step: 0.05,
+                    decimals: 2
+                },
+                {
+                    kind: "stepper",
+                    name: "hellwalBrightOffset",
+                    label: "Bright offset",
+                    from: 0,
+                    to: 1,
+                    step: 0.05,
+                    decimals: 2
+                },
+                {
+                    kind: "stepper",
+                    name: "hellwalGrayScale",
+                    label: "Grayscale",
+                    from: 0,
+                    to: 1,
+                    step: 0.05,
+                    decimals: 2
+                },
+                {
+                    kind: "choice",
+                    name: "hellwalBackgroundMode",
+                    label: "Background",
+                    options: [
+                        {
+                            value: "dynamic",
+                            label: "Dynamic"
+                        },
+                        {
+                            value: "fixed",
+                            label: "Fixed"
+                        }
+                    ]
+                },
+                {
+                    kind: "text",
+                    name: "hellwalBackgroundColor",
+                    label: "Fixed color",
+                    when: {
+                        name: "hellwalBackgroundMode",
+                        value: "fixed"
+                    }
                 }
             ]
         },
@@ -228,7 +309,21 @@ Item {
     function selectPage(index) {
         errorText = "";
         noteText = "";
-        page = (index + pages.length) % pages.length;
+        const next = (index + pages.length) % pages.length;
+        if (pages[next].staged)
+            beginDraft();
+        page = next;
+    }
+
+    function beginDraft() {
+        draft = {
+            hellwalMode: settingsService.hellwalMode,
+            hellwalDarkOffset: settingsService.hellwalDarkOffset,
+            hellwalBrightOffset: settingsService.hellwalBrightOffset,
+            hellwalGrayScale: settingsService.hellwalGrayScale,
+            hellwalBackgroundMode: settingsService.hellwalBackgroundMode,
+            hellwalBackgroundColor: settingsService.hellwalBackgroundColor
+        };
     }
 
     // Up/Down in the sidebar moves the page and keyboard focus together.
@@ -239,14 +334,42 @@ Item {
             pageRows[target].forceActiveFocus(Qt.TabFocusReason);
     }
 
-    // Workspace layout lives in SettingsService, everything else in Config.
+    // Staged pages read and write the draft, workspace layout lives in
+    // SettingsService, everything else in Config.
     function valueOf(name) {
+        if (staged)
+            return draft[name];
         return name === "workspaceLayout" ? settingsService.workspaceLayout : config.values[name];
     }
 
     function save(name, value) {
+        if (staged) {
+            errorText = "";
+            draft = Object.assign({}, draft, {
+                [name]: value
+            });
+            return true;
+        }
         errorText = name === "workspaceLayout" ? settingsService.saveWorkspaceLayout(value) : config.setValue(name, value);
         return errorText === "";
+    }
+
+    // Apply button and Ctrl+Enter.
+    function apply() {
+        if (current.id === "idle")
+            applyIdle();
+        else if (current.id === "theming")
+            applyTheming();
+    }
+
+    function applyTheming() {
+        if (wallpaperController.busy)
+            return;
+        errorText = settingsService.saveHellwalSettings(draft.hellwalMode, Number(draft.hellwalDarkOffset), Number(draft.hellwalBrightOffset), draft.hellwalBackgroundMode, draft.hellwalBackgroundColor, Number(draft.hellwalGrayScale));
+        noteText = "";
+        themingPending = errorText === "";
+        if (themingPending)
+            wallpaperController.refreshHellwal();
     }
 
     function formatText(kind, value) {
@@ -267,9 +390,23 @@ Item {
         noteText = errorText === "" ? "Saved" : "";
     }
 
+    function statusIsError() {
+        if (errorText !== "")
+            return true;
+        if (current.id === "theming")
+            return wallpaperController.errorText !== "";
+        return current.custom === true && idleService.errorText !== "";
+    }
+
     function statusText() {
         if (errorText !== "")
             return errorText;
+        if (current.id === "theming") {
+            if (wallpaperController.busy)
+                return "Generating colors…";
+            if (wallpaperController.errorText !== "")
+                return wallpaperController.errorText;
+        }
         if (current.custom === true && idleService.errorText !== "")
             return idleService.errorText;
         if (noteText !== "")
@@ -283,6 +420,18 @@ Item {
         const next = item ? item.nextItemInFocusChain(forward) : null;
         if (next)
             next.forceActiveFocus(forward ? Qt.TabFocusReason : Qt.BacktabFocusReason);
+    }
+
+    // Report the end of a Theming apply once the Hellwal run has finished.
+    Connections {
+        target: root.wallpaperController
+
+        function onBusyChanged() {
+            if (root.wallpaperController.busy || !root.themingPending)
+                return;
+            root.themingPending = false;
+            root.noteText = root.wallpaperController.errorText === "" ? "Colors updated" : "";
+        }
     }
 
     PopupIpcHandler {
@@ -348,6 +497,12 @@ Item {
             Shortcut {
                 sequence: "Escape"
                 onActivated: root.close()
+            }
+
+            Shortcut {
+                sequences: ["Ctrl+Return", "Ctrl+Enter"]
+                enabled: root.opened && (root.staged || root.current.custom === true)
+                onActivated: root.apply()
             }
 
             // Page switching that also works while a text field has focus.
@@ -467,6 +622,7 @@ Item {
                                 readonly property bool isText: kind === "text" || kind === "integer" || kind === "list"
                                 readonly property var range: Schema.bounds(modelData.name) || [-1e9, 1e9]
 
+                                visible: !modelData.when || root.valueOf(modelData.when.name) === modelData.when.value
                                 config: root.config
                                 label: modelData.label
                                 stacked: kind === "list"
@@ -490,8 +646,8 @@ Item {
                                     factor: item.modelData.factor || 1
                                     decimals: item.modelData.decimals || 0
                                     suffix: item.modelData.suffix || ""
-                                    from: item.range[0]
-                                    to: item.range[1]
+                                    from: item.modelData.from !== undefined ? item.modelData.from : item.range[0]
+                                    to: item.modelData.to !== undefined ? item.modelData.to : item.range[1]
                                     onMoved: next => root.save(item.modelData.name, next)
                                 }
 
@@ -613,7 +769,7 @@ Item {
                         }
 
                         SettingRow {
-                            visible: root.current.custom === true
+                            visible: root.current.custom === true || root.staged
                             config: root.config
                             controlInset: 64
 
@@ -622,8 +778,9 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 config: root.config
                                 outlined: true
+                                enabled: !(root.staged && root.wallpaperController.busy)
                                 text: "Apply"
-                                onClicked: root.applyIdle()
+                                onClicked: root.apply()
                             }
                         }
                     }
@@ -652,7 +809,7 @@ Item {
                     anchors.rightMargin: root.config.spacingControl
                     anchors.verticalCenter: parent.verticalCenter
                     elide: Text.ElideRight
-                    color: root.errorText !== "" || (root.current.custom === true && root.idleService.errorText !== "") ? root.config.urgent : root.config.muted
+                    color: root.statusIsError() ? root.config.urgent : root.config.muted
                     font.pointSize: root.config.textSizeSmall
                     text: root.statusText()
                 }

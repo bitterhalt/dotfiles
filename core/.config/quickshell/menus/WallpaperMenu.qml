@@ -20,7 +20,6 @@ PanelWindow {
     property string scanNotice: ""
     property bool scanFinished: false
     property string selectedPath: ""
-    property bool settingsOpen: false
     Binding {
         target: root.popupMotion
         property: "surfaceHeight"
@@ -38,12 +37,6 @@ PanelWindow {
             label: "Hellwal",
             key: "h",
             action: "hellwal",
-            control: false
-        },
-        {
-            label: "Settings",
-            key: "s",
-            action: "settings",
             control: false
         }
     ]
@@ -108,32 +101,12 @@ PanelWindow {
             controller.apply(selected.path, hellwal);
     }
 
-    function openSettings() {
-        settingsOpen = true;
-        settingsPanel.begin();
-    }
-
-    function closeSettings() {
-        settingsOpen = false;
-        grid.forceActiveFocus();
-    }
-
-    function saveSettingsAndRefresh() {
-        closeSettings();
-        controller.refreshHellwal();
-    }
-
     function activateAction(action) {
-        if (action === "settings")
-            openSettings();
-        else
-            applySelection(action === "hellwal");
+        applySelection(action === "hellwal");
     }
 
     function handleEscape() {
-        if (settingsOpen) {
-            closeSettings();
-        } else if (search.activeFocus) {
+        if (search.activeFocus) {
             grid.forceActiveFocus();
         } else {
             closeRequested();
@@ -188,18 +161,13 @@ PanelWindow {
     }
     Shortcut {
         sequence: "B"
-        enabled: !search.activeFocus && !root.settingsOpen && !!root.selected && !root.controller.busy
+        enabled: !search.activeFocus && !!root.selected && !root.controller.busy
         onActivated: root.applySelection(false)
     }
     Shortcut {
         sequence: "H"
-        enabled: !search.activeFocus && !root.settingsOpen && !!root.selected && !root.controller.busy
+        enabled: !search.activeFocus && !!root.selected && !root.controller.busy
         onActivated: root.applySelection(true)
-    }
-    Shortcut {
-        sequence: "S"
-        enabled: !search.activeFocus && !root.settingsOpen
-        onActivated: root.openSettings()
     }
 
     Process {
@@ -257,7 +225,6 @@ PanelWindow {
                 renderType: Text.NativeRendering
                 Layout.fillWidth: true
                 Layout.preferredHeight: 34
-                visible: !root.settingsOpen
                 placeholderText: "Search wallpapers…"
                 color: root.config.fg
                 placeholderTextColor: root.config.muted
@@ -265,7 +232,6 @@ PanelWindow {
                 selectedTextColor: root.config.selectionForeground
                 font.pointSize: root.config.textSizeNormal
                 selectByMouse: true
-                enabled: !root.settingsOpen
                 KeyNavigation.priority: KeyNavigation.BeforeItem
                 KeyNavigation.tab: grid
                 KeyNavigation.backtab: grid
@@ -301,8 +267,6 @@ PanelWindow {
                 keyNavigationEnabled: false
                 reuseItems: true
                 cacheBuffer: 145
-                visible: !root.settingsOpen
-                enabled: !root.settingsOpen
                 activeFocusOnTab: true
                 KeyNavigation.priority: KeyNavigation.BeforeItem
                 KeyNavigation.tab: search
@@ -382,30 +346,16 @@ PanelWindow {
                 }
             }
 
-            WallpaperSettings {
-                id: settingsPanel
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                visible: root.settingsOpen
-                config: root.config
-                settingsService: root.controller.settingsService
-                busy: root.controller.busy
-                onSaved: root.saveSettingsAndRefresh()
-                onCancelled: root.closeSettings()
-            }
-
             Rectangle {
                 Layout.fillWidth: true
                 implicitHeight: 1
                 color: root.config.border
-                visible: !root.settingsOpen
             }
 
             // Status, errors, and action/shortcut hints.
             Item {
                 Layout.fillWidth: true
                 Layout.preferredHeight: Math.max(30, actionTips.implicitHeight)
-                visible: !root.settingsOpen
 
                 Text {
                     id: wallpaperStatus
@@ -444,7 +394,7 @@ PanelWindow {
                             readonly property bool hovered: enabled && hintMouse.containsMouse
                             width: hintRow.width + root.config.spacingTight * 2
                             height: hintRow.height + root.config.spacingTight * 2
-                            enabled: (hint.modelData.action === "settings" || !!root.selected) && !root.controller.busy && !root.settingsOpen
+                            enabled: !!root.selected && !root.controller.busy
 
                             Rectangle {
                                 anchors.fill: parent
