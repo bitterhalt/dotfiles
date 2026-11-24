@@ -6,6 +6,8 @@ __pycache__/
 *.pem
 .env
 /AGENTS.md
+apps/.config/opencode/AGENTS.md
+core/.config/quickshell/AGENTS.md
 apps/.config/htop/htop_history
 apps/.config/nvim/lazy-lock.json
 apps/.config/opencode/service.json
