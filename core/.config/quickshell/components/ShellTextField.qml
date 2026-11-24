@@ -19,7 +19,7 @@ TextField {
     selectByMouse: true
 
     background: Rectangle {
-        color: config.border
+        color: Qt.alpha(root.config.selectionBackground, 0.05)
         radius: root.cornerRadius
         border.width: 1
         border.color: root.activeFocus ? root.config.selectionBackground : root.outlineColor
