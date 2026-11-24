@@ -25,6 +25,9 @@ Item {
     property int page: 0
     property string errorText: ""
     property string noteText: ""
+    property bool helpOpen: false
+    // Editors keep Ctrl+Left/Right for word jumps; the H/L shortcuts still page.
+    readonly property bool editingText: !!card.Window.activeFocusItem && card.Window.activeFocusItem.cursorPosition !== undefined
     // Edited values of a staged page; written by Apply, dropped when the page changes.
     property var draft: ({})
     property bool themingPending: false
@@ -284,6 +287,7 @@ Item {
 
     function open(screen, pageId) {
         menuScreen = screen || targetScreen;
+        helpOpen = false;
         const index = pages.findIndex(entry => entry.id === pageId);
         selectPage(index >= 0 ? index : page, true);
         opened = true;
@@ -292,8 +296,25 @@ Item {
 
     function close() {
         opened = false;
+        helpOpen = false;
         themingPending = false;
         themingAttempted = false;
+    }
+
+    function toggleHelp() {
+        helpOpen = !helpOpen;
+        if (helpOpen)
+            card.forceActiveFocus();
+        else if (pageRows[page])
+            pageRows[page].forceActiveFocus(Qt.TabFocusReason);
+    }
+
+    // Ctrl+H/L and Ctrl+J/K always switch pages; Ctrl+Left/Right only outside
+    // text editors, where they keep their word-jump behaviour.
+    function stepPage(direction) {
+        selectPage(page + direction);
+        if (pageRows[page])
+            pageRows[page].forceActiveFocus(Qt.TabFocusReason);
     }
 
     function toggle(screen) {
@@ -312,6 +333,7 @@ Item {
     function selectPage(index, resetDraft) {
         const next = (index + pages.length) % pages.length;
         const leavingTheming = pages[page].id === "theming" && next !== page;
+        helpOpen = false;
         errorText = "";
         noteText = "";
         if (leavingTheming) {
@@ -509,7 +531,18 @@ Item {
 
             Shortcut {
                 sequence: "Escape"
-                onActivated: root.close()
+                onActivated: {
+                    if (root.helpOpen)
+                        root.toggleHelp();
+                    else
+                        root.close();
+                }
+            }
+
+            Shortcut {
+                sequence: "?"
+                enabled: root.opened
+                onActivated: root.toggleHelp()
             }
 
             Shortcut {
@@ -521,19 +554,42 @@ Item {
             // Page switching that also works while a text field has focus.
             Shortcut {
                 sequences: ["Ctrl+J", "Ctrl+Down"]
-                onActivated: root.selectPage(root.page + 1)
+                onActivated: root.stepPage(1)
             }
 
             Shortcut {
                 sequences: ["Ctrl+K", "Ctrl+Up"]
-                onActivated: root.selectPage(root.page - 1)
+                onActivated: root.stepPage(-1)
+            }
+
+            Shortcut {
+                sequences: ["Ctrl+L"]
+                onActivated: root.stepPage(1)
+            }
+
+            Shortcut {
+                sequences: ["Ctrl+H"]
+                onActivated: root.stepPage(-1)
+            }
+
+            // Ctrl+Left/Right stay with the editor while it has focus.
+            Shortcut {
+                sequences: ["Ctrl+Right"]
+                enabled: !root.editingText
+                onActivated: root.stepPage(1)
+            }
+
+            Shortcut {
+                sequences: ["Ctrl+Left"]
+                enabled: !root.editingText
+                onActivated: root.stepPage(-1)
             }
 
             Row {
                 id: body
 
                 width: parent.width
-                height: Math.max(sidebar.implicitHeight, pageTitle.implicitHeight + pageContent.implicitHeight + root.config.panelPadding * 2 + root.config.spacingControl)
+                height: Math.max(sidebar.implicitHeight, root.helpOpen ? helpPanel.implicitHeight + root.config.panelPadding * 2 : pageTitle.implicitHeight + pageContent.implicitHeight + root.config.panelPadding * 2 + root.config.spacingControl)
 
                 Column {
                     id: sidebar
@@ -610,7 +666,60 @@ Item {
                         color: root.config.fg
                         font.pointSize: root.config.textSizeNormal
                         font.weight: Font.DemiBold
+                        visible: !root.helpOpen
                         text: root.current.label
+                    }
+
+                    // Settings shortcuts, shown in place of the page like the bar popups.
+                    KeyboardHelp {
+                        id: helpPanel
+
+                        anchors.top: parent.top
+                        anchors.topMargin: root.config.panelPadding
+                        anchors.left: parent.left
+                        anchors.leftMargin: root.config.panelPadding
+                        anchors.right: parent.right
+                        anchors.rightMargin: root.config.panelPadding
+                        visible: root.helpOpen
+                        config: root.config
+                        entries: [
+                            {
+                                name: "Next / previous page",
+                                key: "Ctrl+H / Ctrl+L"
+                            },
+                            {
+                                name: "Next / previous page",
+                                key: "Ctrl+← / Ctrl+→"
+                            },
+                            {
+                                name: "Next / previous page",
+                                key: "Ctrl+J / Ctrl+K"
+                            },
+                            {
+                                name: "Next / previous control",
+                                key: "Tab / Shift+Tab"
+                            },
+                            {
+                                name: "Move within page",
+                                key: "↑ / ↓"
+                            },
+                            {
+                                name: "Change value",
+                                key: "← / → · Enter"
+                            },
+                            {
+                                name: "Apply changes",
+                                key: "Ctrl+Enter"
+                            },
+                            {
+                                name: "Show / hide help",
+                                key: "?"
+                            },
+                            {
+                                name: "Back / close",
+                                key: "Esc"
+                            }
+                        ]
                     }
 
                     Column {
@@ -623,6 +732,7 @@ Item {
                         anchors.right: parent.right
                         anchors.rightMargin: root.config.panelPadding
                         spacing: root.config.spacingTight
+                        visible: !root.helpOpen
 
                         Repeater {
                             model: root.current.rows
@@ -801,7 +911,7 @@ Item {
             }
 
             // Footer like the clipboard and wallpaper menus: status or hint on the
-            // left, keys on the right, under an inset separator.
+            // left, the help toggle on the right, under an inset separator.
             Item {
                 id: footer
 
@@ -834,9 +944,18 @@ Item {
                     anchors.right: parent.right
                     anchors.rightMargin: root.config.panelPadding
                     anchors.verticalCenter: parent.verticalCenter
-                    color: root.config.muted
+                    color: footerKeyMouse.containsMouse ? root.config.fg : root.config.muted
                     font.pointSize: root.config.textSizeSmall
-                    text: "Tab focus · ↑↓ move · Ctrl+J/K page · Esc close"
+                    text: root.helpOpen ? "? Close help" : "? Help"
+
+                    MouseArea {
+                        id: footerKeyMouse
+
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.toggleHelp()
+                    }
                 }
             }
         }

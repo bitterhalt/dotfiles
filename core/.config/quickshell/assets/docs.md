@@ -113,7 +113,9 @@ Open the Settings menu with `qs ipc call settings open` (or the Settings entry i
 main menu). It has pages for Idle, Appearance, Theming, Bar, Audio, Launcher, Notifications
 and Bluetooth. Tab moves focus through the page list and the controls. Up/Down switch
 pages from the sidebar and walk fields in the page, Left/Right step a value,
-Ctrl+Up/Down or Ctrl+J/K switch pages from anywhere, and Esc closes. Choices are saved in
+Ctrl+Up/Down, Ctrl+J/K, Ctrl+H/L or Ctrl+Left/Right switch pages from anywhere
+(Ctrl+Left/Right keep word jumps inside a text field), and Esc closes. Press `?` or
+click `? Help` for the key list. Choices are saved in
 `~/.local/share/quickshell-config.json`, which is also reloaded when edited by hand:
 invalid values use safe defaults, and malformed JSON keeps the previous settings.
 Without that file the built-in defaults apply. Idle timeouts, workspace layout and the
