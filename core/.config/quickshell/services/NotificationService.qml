@@ -16,6 +16,8 @@ Item {
     property int toastSerial: 0
     property var receivedTimes: ({})
 
+    signal cleared
+
     readonly property var notifications: server.trackedNotifications.values
     readonly property var historyNotifications: HistoryPolicy.visibleNotifications(notifications, config.notificationHistoryExcludedApps)
     readonly property int notificationCount: historyNotifications.length
@@ -154,6 +156,7 @@ Item {
 
         toastNotification = null;
         receivedTimes = ({});
+        cleared();
     }
 
     NotificationServer {

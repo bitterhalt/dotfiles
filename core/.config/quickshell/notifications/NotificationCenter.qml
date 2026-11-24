@@ -70,6 +70,15 @@ FocusScope {
         onCloseRequested: root.closeRequested()
     }
 
+    // Every clear path (button, Ctrl+X, IPC) closes the history popup.
+    Connections {
+        target: root.notificationService
+
+        function onCleared() {
+            root.closeRequested();
+        }
+    }
+
     PanelSurface {
         anchors.fill: parent
         config: root.config
@@ -160,10 +169,7 @@ FocusScope {
             compact: true
             visible: history.rows.length > 0
             text: "Clear all"
-            onClicked: {
-                root.notificationService.clearAll();
-                root.forceActiveFocus();
-            }
+            onClicked: root.notificationService.clearAll()
         }
 
         Row {
