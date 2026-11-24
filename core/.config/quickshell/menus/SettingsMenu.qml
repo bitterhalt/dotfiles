@@ -90,7 +90,7 @@ Item {
             label: "Theming",
             icon: "󰃣",
             staged: true,
-            hint: "Colors are generated from the current wallpaper with Hellwal",
+            hint: "Colors are generated from the current wallpaper",
             rows: [
                 {
                     kind: "choice",
