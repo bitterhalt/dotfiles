@@ -152,7 +152,8 @@ layer-rule {
 
 Open the picker with `qs ipc call wallpaper open`. Generated wallpaper/lock-screen
 images go into `~/.local/share/wall`. The shell uses its fallback palette until
-Hellwal supplies `~/.cache/hellwal/colors.css`.
+Hellwal supplies `~/.cache/hellwal/colors.css`. Change the Hellwal mode, offsets,
+grayscale, and fixed background under Settings → Theming.
 
 ### Emoji
 

@@ -28,6 +28,7 @@ Item {
     // Edited values of a staged page; written by Apply, dropped when the page changes.
     property var draft: ({})
     property bool themingPending: false
+    property bool themingAttempted: false
     // Sidebar delegates, kept by index so Up/Down can move focus with the page.
     property var pageRows: []
     readonly property var current: pages[page]
@@ -284,13 +285,15 @@ Item {
     function open(screen, pageId) {
         menuScreen = screen || targetScreen;
         const index = pages.findIndex(entry => entry.id === pageId);
-        selectPage(index >= 0 ? index : page);
+        selectPage(index >= 0 ? index : page, true);
         opened = true;
         Qt.callLater(() => card.forceActiveFocus());
     }
 
     function close() {
         opened = false;
+        themingPending = false;
+        themingAttempted = false;
     }
 
     function toggle(screen) {
@@ -306,16 +309,23 @@ Item {
             toggle(targetScreen);
     }
 
-    function selectPage(index) {
+    function selectPage(index, resetDraft) {
+        const next = (index + pages.length) % pages.length;
+        const leavingTheming = pages[page].id === "theming" && next !== page;
         errorText = "";
         noteText = "";
-        const next = (index + pages.length) % pages.length;
-        if (pages[next].staged)
+        if (leavingTheming) {
+            themingPending = false;
+            themingAttempted = false;
+        }
+        if (pages[next].staged && (next !== page || resetDraft === true))
             beginDraft();
         page = next;
     }
 
     function beginDraft() {
+        themingPending = false;
+        themingAttempted = false;
         draft = {
             hellwalMode: settingsService.hellwalMode,
             hellwalDarkOffset: settingsService.hellwalDarkOffset,
@@ -365,11 +375,14 @@ Item {
     function applyTheming() {
         if (wallpaperController.busy)
             return;
+        themingAttempted = false;
         errorText = settingsService.saveHellwalSettings(draft.hellwalMode, Number(draft.hellwalDarkOffset), Number(draft.hellwalBrightOffset), draft.hellwalBackgroundMode, draft.hellwalBackgroundColor, Number(draft.hellwalGrayScale));
         noteText = "";
         themingPending = errorText === "";
-        if (themingPending)
+        if (themingPending) {
+            themingAttempted = true;
             wallpaperController.refreshHellwal();
+        }
     }
 
     function formatText(kind, value) {
@@ -393,7 +406,7 @@ Item {
     function statusIsError() {
         if (errorText !== "")
             return true;
-        if (current.id === "theming")
+        if (current.id === "theming" && themingAttempted)
             return wallpaperController.errorText !== "";
         return current.custom === true && idleService.errorText !== "";
     }
@@ -401,7 +414,7 @@ Item {
     function statusText() {
         if (errorText !== "")
             return errorText;
-        if (current.id === "theming") {
+        if (current.id === "theming" && themingAttempted) {
             if (wallpaperController.busy)
                 return "Generating colors…";
             if (wallpaperController.errorText !== "")
@@ -427,7 +440,7 @@ Item {
         target: root.wallpaperController
 
         function onBusyChanged() {
-            if (root.wallpaperController.busy || !root.themingPending)
+            if (root.wallpaperController.busy || !root.themingPending || root.current.id !== "theming")
                 return;
             root.themingPending = false;
             root.noteText = root.wallpaperController.errorText === "" ? "Colors updated" : "";
@@ -501,7 +514,7 @@ Item {
 
             Shortcut {
                 sequences: ["Ctrl+Return", "Ctrl+Enter"]
-                enabled: root.opened && (root.staged || root.current.custom === true)
+                enabled: root.opened && (root.staged || root.current.custom === true) && !(root.staged && root.wallpaperController.busy)
                 onActivated: root.apply()
             }
 

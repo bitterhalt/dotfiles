@@ -7,7 +7,6 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import "../components"
-import "../wallpaper"
 
 PanelWindow {
     id: root

@@ -5,7 +5,8 @@ TextField {
     id: root
 
     required property var config
-    property color surfaceColor: "transparent"
+    // Solid card fill derived from the panel background and the current accent.
+    property color surfaceColor: Qt.tint(config.bg, Qt.alpha(config.selectionBackground, 0.10))
     property color outlineColor: config.border
     property real cornerRadius: 4
 
@@ -14,12 +15,12 @@ TextField {
     color: config.fg
     placeholderTextColor: config.muted
     selectionColor: config.selectionBackground
-    selectedTextColor: config.bg
+    selectedTextColor: config.selectionForeground
     font.pointSize: config.textSizeNormal
     selectByMouse: true
 
     background: Rectangle {
-        color: Qt.alpha(root.config.selectionBackground, 0.05)
+        color: root.surfaceColor
         radius: root.cornerRadius
         border.width: 1
         border.color: root.activeFocus ? root.config.selectionBackground : root.outlineColor

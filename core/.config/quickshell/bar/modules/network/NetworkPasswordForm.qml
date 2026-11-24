@@ -39,7 +39,6 @@ Column {
         id: passwordInput
         objectName: "networkPasswordInput"
         config: root.config
-        surfaceColor: root.config.bg
         outlineColor: root.config.selectionBackground
         cornerRadius: root.config.popupRadius
         KeyNavigation.tab: cancelPassword

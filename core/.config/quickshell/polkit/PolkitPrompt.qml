@@ -102,7 +102,6 @@ PanelSurface {
             id: responseField
             objectName: "polkitResponseField"
             config: root.config
-            surfaceColor: root.config.bg
             outlineColor: root.config.muted
             width: parent.width
             visible: !!root.flow && root.flow.isResponseRequired
