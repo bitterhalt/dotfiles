@@ -83,7 +83,21 @@ Item {
 
     // ":" shows only custom actions; text after it filters that list.
     readonly property bool actionListPrefix: !emojiMode && !fileMode && !dmenuMode && query.trim().startsWith(":")
-    readonly property string actionNeedle: actionListPrefix ? query.trim().slice(1).trim().toLowerCase() : ""
+    readonly property string actionNeedle: actionListPrefix ? query.trim().slice(1).trim() : ""
+    // A leading known category name narrows the list; the rest filters by text.
+    readonly property string actionCategory: {
+        if (!actionListPrefix || actionNeedle === "")
+            return "";
+        const space = actionNeedle.indexOf(" ");
+        const first = (space < 0 ? actionNeedle : actionNeedle.slice(0, space)).toLowerCase();
+        const categories = actionConfig.actions.map(action => action.category.toLowerCase());
+        return categories.includes(first) ? first : "";
+    }
+    readonly property string actionTextNeedle: {
+        if (!actionListPrefix)
+            return "";
+        return (actionCategory === "" ? actionNeedle : actionNeedle.slice(actionCategory.length).trim()).toLowerCase();
+    }
 
     // Plain math without the prefix is still detected automatically.
     readonly property bool calculatorQuery: {
@@ -152,14 +166,14 @@ Item {
         let entries = [];
 
         if (actionListPrefix) {
-            const actions = actionConfig.actions.map(action => ({
+            const actions = actionConfig.actions.filter(action => actionCategory === "" || action.category.toLowerCase() === actionCategory).map(action => ({
                         type: "action",
                         entry: action,
-                        text: "[action] " + action.label,
+                        text: "[action] " + action.category + ": " + action.label,
                         icon: root.actionIcon,
-                        score: actionNeedle === "" ? 0 : Scorer.scoreLine(action.keyword + " " + action.label, actionNeedle)
+                        score: actionTextNeedle === "" ? 0 : Scorer.scoreLine(action.keyword + " " + action.label, actionTextNeedle)
                     }));
-            return actionNeedle === "" ? actions : actions.filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.text.localeCompare(b.text));
+            return actionTextNeedle === "" ? actions : actions.filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.text.localeCompare(b.text));
         }
 
         if (dmenuMode) {

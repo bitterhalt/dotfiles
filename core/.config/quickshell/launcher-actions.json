@@ -3,31 +3,36 @@
     "label": "Reboot",
     "keyword": "reboot",
     "command": "systemctl reboot",
-    "confirm": true
+    "confirm": true,
+    "category": "pwr"
   },
   {
     "label": "Shut down",
     "keyword": "shutdown",
     "command": "systemctl poweroff",
-    "confirm": true
+    "confirm": true,
+    "category": "pwr"
   },
   {
-    "label": "Sleep",
+    "label": "zZz",
     "keyword": "sleep",
     "command": "systemctl suspend",
-    "confirm": true
+    "confirm": true,
+    "category": "pwr"
   },
   {
     "label": "Log out",
     "keyword": "logout",
     "command": "niri msg action quit",
-    "confirm": true
+    "confirm": true,
+    "category": "pwr"
   },
   {
     "label": "Lock screen",
     "keyword": "lock",
     "command": "qs ipc call lock lock",
-    "confirm": false
+    "confirm": false,
+    "category": "pwr"
   },
   {
     "label": "Gif recorder",

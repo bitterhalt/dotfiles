@@ -2,7 +2,7 @@
 
 .import "../services/config/Value.js" as Value
 
-const fields = ["label", "keyword", "command", "confirm"]
+const fields = ["label", "keyword", "command", "confirm", "category"]
 
 function parse(text) {
     const document = JSON.parse(text);
@@ -24,11 +24,15 @@ function parse(text) {
         if (typeof confirm !== "boolean")
             throw new Error(location + ": confirm must be true or false");
 
+        if (entry.category !== undefined && (typeof entry.category !== "string" || entry.category.trim() === ""))
+            throw new Error(location + ": category must not be empty");
+
         return {
             label: entry.label,
             keyword: entry.keyword.trim().toLowerCase(),
             command: entry.command,
-            confirm: confirm
+            confirm: confirm,
+            category: entry.category === undefined ? "misc" : entry.category.trim()
         };
     });
 }

@@ -217,7 +217,8 @@ running. See the [dmenu examples](../README.md#dmenu-mode).
 
 Edit `launcher-actions.json` to add custom commands to the launcher's normal
 search. Each entry needs a `label`, a `keyword`, and a `command`; `confirm` is
-optional and defaults to `true`:
+optional and defaults to `true`, and `category` is optional and defaults to
+`misc`:
 
 ```json
 [
@@ -225,13 +226,15 @@ optional and defaults to `true`:
     "label": "Reboot",
     "keyword": "reboot",
     "command": "systemctl reboot",
-    "confirm": true
+    "confirm": true,
+    "category": "pwr"
   },
   {
     "label": "Lock screen",
     "keyword": "lock",
     "command": "qs ipc call lock lock",
-    "confirm": false
+    "confirm": false,
+    "category": "pwr"
   }
 ]
 ```
@@ -240,10 +243,10 @@ Type the keyword (or part of the label) in the launcher and pick the result;
 actions are labelled `[action] <name>` and show the `utilities-terminal` icon
 so they stay distinct from applications. Change `actionIcon` in
 `launcher/Launcher.qml` to use a different icon. With `confirm: true` the launcher
-asks Yes/No before running the command. Type just `:` to list every action;
-text after it filters that list.
-Commands run through the shell, so only add commands you trust. Invalid edits
-or a missing file keep the last loaded list.
+asks Yes/No before running the command. Type just `:` to list every action as
+`[action] <category>: <name>`; `:pwr` lists only that category, and `:pwr reb`
+filters within it. Commands run through the shell, so only add commands you
+trust. Invalid edits or a missing file keep the last loaded list.
 
 ### Updates
 
