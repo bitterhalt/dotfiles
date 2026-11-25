@@ -215,7 +215,7 @@ running. See the [dmenu examples](../README.md#dmenu-mode).
 
 ### Launcher actions
 
-Edit `launcher-actions.json` to add custom commands to the launcher's normal
+Edit `launcher/launcher-actions.json` to add custom commands to the launcher's normal
 search. Each entry needs a `label`, a `keyword`, and a `command`; `confirm` is
 optional and defaults to `true`, and `category` is optional and defaults to
 `misc`:

@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell.Io
 import "LauncherActionsSchema.js" as Schema
 
-// Personal launcher actions live in root launcher-actions.json. Like menus,
+// Personal launcher actions live in launcher/launcher-actions.json. Like menus,
 // invalid edits keep the last valid list instead of blanking the launcher.
 Item {
     id: root
@@ -33,7 +33,7 @@ Item {
         id: actionFile
 
         objectName: "launcherActionsFile"
-        path: Qt.resolvedUrl("../launcher-actions.json").toString()
+        path: Qt.resolvedUrl("launcher-actions.json").toString()
         blockLoading: true
         watchChanges: true
         printErrors: false
