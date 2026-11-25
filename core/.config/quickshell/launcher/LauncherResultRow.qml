@@ -10,7 +10,6 @@ Item {
     required property var config
     required property var entry
     property bool selected: false
-    readonly property bool isApp: entry.type === "application"
 
     Rectangle {
         anchors.fill: parent
@@ -18,7 +17,7 @@ Item {
         color: root.selected ? root.config.muted : "transparent"
     }
 
-    // Small pin at the right edge of pinned app rows.
+    // Small pin at the right edge of pinned app and command rows.
     Text {
         id: pinMark
 
@@ -26,7 +25,7 @@ Item {
         anchors.right: parent.right
         anchors.rightMargin: root.config.panelPadding
         anchors.verticalCenter: parent.verticalCenter
-        visible: root.isApp && root.entry.pinned === true
+        visible: root.entry.pinned === true
         color: root.selected ? root.config.selectionForeground : root.config.muted
         font.family: root.config.iconFontFamily
         font.pointSize: root.config.iconSize * 0.7

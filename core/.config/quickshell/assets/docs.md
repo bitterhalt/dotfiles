@@ -245,8 +245,11 @@ so they stay distinct from applications. Change `actionIcon` in
 `launcher/Launcher.qml` to use a different icon. With `confirm: true` the launcher
 asks Yes/No before running the command. Type just `:` to list every action as
 `[action] <category>: <name>`; `:pwr` lists only that category, and `:pwr reb`
-filters within it. Commands run through the shell, so only add commands you
-trust. Invalid edits or a missing file keep the last loaded list.
+filters within it. `Ctrl+P` pins the selected command; pinned commands appear
+first in an empty launcher, above pinned apps, and are stored in
+`~/.local/share/quickshell-launcher-action-pins.json`. Commands run through the
+shell, so only add commands you trust. Invalid edits or a missing file keep the
+last loaded list.
 
 ### Updates
 

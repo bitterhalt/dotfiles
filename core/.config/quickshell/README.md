@@ -65,7 +65,7 @@ Launcher modes. Switch directly with the shortcuts below, or cycle with **Ctrl+â
 In Apps mode, `=expression` `=1+2`
 Plain math works too. Use `Ctrl+S` or cycle modes to search local files.
 
-Press `Ctrl+P` on an app to pin or unpin it. Pinned apps are listed first, marked with a small pin, and stored in `~/.local/share/quickshell-launcher-pins.json`.
+Press `Ctrl+P` on an app or quick command to pin or unpin it. Pinned commands and apps are listed first, marked with a small pin, and stored in `~/.local/share/quickshell-launcher-action-pins.json` and `~/.local/share/quickshell-launcher-pins.json` respectively.
 
 ## Dmenu mode
 

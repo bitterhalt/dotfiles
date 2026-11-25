@@ -52,6 +52,17 @@ Item {
         return ranks;
     }
 
+    // Pinned command keywords in pin order.
+    property var actionPins: []
+    property bool actionPinsReady: false
+    readonly property string actionPinsPath: (Quickshell.env("XDG_DATA_HOME") || (Quickshell.env("HOME") || "") + "/.local/share") + "/quickshell-launcher-action-pins.json"
+    readonly property var actionPinRanks: {
+        const ranks = new Map();
+        for (let i = 0; i < actionPins.length; ++i)
+            ranks.set(actionPins[i], i);
+        return ranks;
+    }
+
     readonly property var appHistoryRanks: {
         const ranks = new Map();
         for (let i = 0; i < appHistory.length; ++i)
@@ -166,14 +177,19 @@ Item {
         let entries = [];
 
         if (actionListPrefix) {
-            const actions = actionConfig.actions.filter(action => actionCategory === "" || action.category.toLowerCase() === actionCategory).map(action => ({
+            const actions = actionConfig.actions.filter(action => actionCategory === "" || action.category.toLowerCase() === actionCategory).map((action, index) => ({
                         type: "action",
                         entry: action,
                         text: "[action] " + action.category + ": " + action.label,
                         icon: root.actionIcon,
+                        pinned: actionPinRanks.has(action.keyword),
+                        index: index,
                         score: actionTextNeedle === "" ? 0 : Scorer.scoreLine(action.keyword + " " + action.label, actionTextNeedle)
                     }));
-            return actionTextNeedle === "" ? actions : actions.filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.text.localeCompare(b.text));
+            const visible = actionTextNeedle === "" ? actions : actions.filter(item => item.score > 0);
+            // Pinned commands first in pin order, then score and configuration order.
+            visible.sort((a, b) => actionPinRank(a.entry.keyword) - actionPinRank(b.entry.keyword) || b.score - a.score || a.index - b.index);
+            return visible;
         }
 
         if (dmenuMode) {
@@ -185,8 +201,17 @@ Item {
         } else if (fileMode) {
             entries = files.results;
         } else if (value === "") {
-            // Pinned apps first (in pin order), then recently used, then A-Z.
-            entries = applications.map(entry => ({
+            // Pinned commands first, then pinned apps (in pin order), then
+            // recently used apps and the rest A-Z.
+            const pinnedActions = actionConfig.actions.filter(action => actionPinRanks.has(action.keyword)).map(action => ({
+                        type: "action",
+                        entry: action,
+                        text: "[action] " + action.label,
+                        icon: root.actionIcon,
+                        pinned: true,
+                        score: 0
+                    })).sort((a, b) => actionPinRank(a.entry.keyword) - actionPinRank(b.entry.keyword));
+            entries = pinnedActions.concat(applications.map(entry => ({
                         type: "application",
                         entry: entry,
                         text: entry.name || entry.id,
@@ -194,7 +219,7 @@ Item {
                         icon: entry.icon || "",
                         pinned: appPinRanks.has(entry.id),
                         score: 0
-                    })).sort((a, b) => pinRank(a.entry.id) - pinRank(b.entry.id) || applicationRank(a.entry.id) - applicationRank(b.entry.id) || a.text.localeCompare(b.text));
+                    })).sort((a, b) => pinRank(a.entry.id) - pinRank(b.entry.id) || applicationRank(a.entry.id) - applicationRank(b.entry.id) || a.text.localeCompare(b.text)));
         } else {
             entries = applications.map(entry => ({
                         type: "application",
@@ -213,6 +238,7 @@ Item {
                         entry: action,
                         text: "[action] " + action.label,
                         icon: root.actionIcon,
+                        pinned: actionPinRanks.has(action.keyword),
                         score: Scorer.scoreLine(action.keyword + " " + action.label, value)
                     })).filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.text.localeCompare(b.text)).concat(entries);
         }
@@ -437,7 +463,12 @@ Item {
         return rank === undefined ? appPins.length : rank;
     }
 
-    function normalizeAppPins(ids): var {
+    function actionPinRank(keyword): int {
+        const rank = actionPinRanks.get(keyword);
+        return rank === undefined ? actionPins.length : rank;
+    }
+
+    function normalizePins(ids): var {
         const seen = new Set();
         const next = [];
         for (const id of ids) {
@@ -459,27 +490,52 @@ Item {
 
         // Keep pins made before the initial asynchronous load finished.
         const pending = !appPinsReady && appPins.length > 0;
-        appPins = normalizeAppPins(appPinsReady ? stored : stored.concat(appPins));
+        appPins = normalizePins(appPinsReady ? stored : stored.concat(appPins));
         appPinsReady = true;
         if (pending)
             appPinsFile.setText(JSON.stringify(appPins));
     }
 
-    // Ctrl+P: pin or unpin the selected application. The selection follows the
-    // app to its new position in the list.
+    function restoreActionPins(value): void {
+        let stored = [];
+        try {
+            const parsed = JSON.parse(value);
+            if (Array.isArray(parsed))
+                stored = parsed;
+        } catch (error) {}
+
+        const pending = !actionPinsReady && actionPins.length > 0;
+        actionPins = normalizePins(actionPinsReady ? stored : stored.concat(actionPins));
+        actionPinsReady = true;
+        if (pending)
+            actionPinsFile.setText(JSON.stringify(actionPins));
+    }
+
+    // Ctrl+P: pin or unpin the selected app or command. The selection follows
+    // the item to its new position in the list.
     function togglePinSelected(): void {
         if (selectedIndex < 0 || selectedIndex >= results.length)
             return;
         const item = results[selectedIndex];
-        if (item.type !== "application")
+        let matches;
+
+        if (item.type === "application") {
+            const id = item.entry.id;
+            appPins = appPinRanks.has(id) ? appPins.filter(pinned => pinned !== id) : appPins.concat([id]);
+            if (appPinsReady)
+                appPinsFile.setText(JSON.stringify(appPins));
+            matches = result => result.type === "application" && result.entry.id === id;
+        } else if (item.type === "action" && item.entry && !item.confirmAction) {
+            const keyword = item.entry.keyword;
+            actionPins = actionPinRanks.has(keyword) ? actionPins.filter(pinned => pinned !== keyword) : actionPins.concat([keyword]);
+            if (actionPinsReady)
+                actionPinsFile.setText(JSON.stringify(actionPins));
+            matches = result => result.type === "action" && result.entry && result.entry.keyword === keyword;
+        } else {
             return;
+        }
 
-        const id = item.entry.id;
-        appPins = appPinRanks.has(id) ? appPins.filter(pinned => pinned !== id) : appPins.concat([id]);
-        if (appPinsReady)
-            appPinsFile.setText(JSON.stringify(appPins));
-
-        const index = results.findIndex(result => result.type === "application" && result.entry.id === id);
+        const index = results.findIndex(matches);
         if (index >= 0) {
             selectedIndex = index;
             resultList.positionViewAtIndex(index, ListView.Contain);
@@ -810,6 +866,20 @@ Item {
             root.appPinsReady = true;
             if (root.appPins.length > 0)
                 setText(JSON.stringify(root.appPins));
+        }
+    }
+
+    FileView {
+        id: actionPinsFile
+
+        path: root.actionPinsPath
+        atomicWrites: true
+        printErrors: false
+        onLoaded: root.restoreActionPins(text())
+        onLoadFailed: {
+            root.actionPinsReady = true;
+            if (root.actionPins.length > 0)
+                setText(JSON.stringify(root.actionPins));
         }
     }
 
