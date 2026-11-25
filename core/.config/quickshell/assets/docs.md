@@ -240,7 +240,8 @@ Type the keyword (or part of the label) in the launcher and pick the result;
 actions are labelled `[action] <name>` and show the `utilities-terminal` icon
 so they stay distinct from applications. Change `actionIcon` in
 `launcher/Launcher.qml` to use a different icon. With `confirm: true` the launcher
-asks Yes/No before running the command.
+asks Yes/No before running the command. Type just `:` to list every action;
+text after it filters that list.
 Commands run through the shell, so only add commands you trust. Invalid edits
 or a missing file keep the last loaded list.
 

@@ -81,6 +81,10 @@ Item {
     readonly property bool calcPrefix: !emojiMode && !fileMode && !dmenuMode && query.trim().startsWith("=")
     readonly property string calcExpression: calcPrefix ? query.trim().slice(1).trim() : query.trim()
 
+    // ":" shows only custom actions; text after it filters that list.
+    readonly property bool actionListPrefix: !emojiMode && !fileMode && !dmenuMode && query.trim().startsWith(":")
+    readonly property string actionNeedle: actionListPrefix ? query.trim().slice(1).trim().toLowerCase() : ""
+
     // Plain math without the prefix is still detected automatically.
     readonly property bool calculatorQuery: {
         if (calcPrefix)
@@ -146,6 +150,17 @@ Item {
 
         const value = query.trim().toLowerCase();
         let entries = [];
+
+        if (actionListPrefix) {
+            const actions = actionConfig.actions.map(action => ({
+                        type: "action",
+                        entry: action,
+                        text: "[action] " + action.label,
+                        icon: root.actionIcon,
+                        score: actionNeedle === "" ? 0 : Scorer.scoreLine(action.keyword + " " + action.label, actionNeedle)
+                    }));
+            return actionNeedle === "" ? actions : actions.filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.text.localeCompare(b.text));
+        }
 
         if (dmenuMode) {
             entries = dmenuResults;
