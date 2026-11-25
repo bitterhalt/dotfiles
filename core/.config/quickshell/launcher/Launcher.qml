@@ -59,6 +59,8 @@ Item {
         return ranks;
     }
 
+    // Marker icon for custom command results; change here to theme it.
+    readonly property string actionIcon: "utilities-terminal"
     readonly property string placeholder: dmenuMode ? (dmenuPrompt !== "" ? dmenuPrompt : "Select") : emojiMode ? "Search emojis" : fileMode ? "Search files" : "Search applications"
     readonly property string modePrefixIcon: ModeIcons.icon(mode)
 
@@ -126,6 +128,22 @@ Item {
         if (!opened)
             return [];
 
+        if (pendingAction)
+            return [
+                {
+                    type: "action",
+                    text: "Yes, run " + pendingAction.label,
+                    icon: "dialog-ok",
+                    confirmAction: true
+                },
+                {
+                    type: "action",
+                    text: "No",
+                    icon: "dialog-cancel",
+                    confirmAction: false
+                }
+            ];
+
         const value = query.trim().toLowerCase();
         let entries = [];
 
@@ -158,6 +176,16 @@ Item {
                         pinned: appPinRanks.has(entry.id),
                         score: Scorer.scoreApplication(entry, value)
                     })).filter(item => item.score > 0).sort((a, b) => b.score - a.score || pinRank(a.entry.id) - pinRank(b.entry.id) || applicationRank(a.entry.id) - applicationRank(b.entry.id) || a.text.localeCompare(b.text));
+
+            // Custom commands are always marked with an icon so they cannot be
+            // confused with a .desktop app of the same name.
+            entries = actionConfig.actions.map(action => ({
+                        type: "action",
+                        entry: action,
+                        text: action.label,
+                        icon: root.actionIcon,
+                        score: Scorer.scoreLine(action.keyword + " " + action.label, value)
+                    })).filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.text.localeCompare(b.text)).concat(entries);
         }
 
         if (!fileMode && !dmenuMode && calculatorResult !== "") {
@@ -200,10 +228,18 @@ Item {
             Qt.quit();
     }
 
+    LauncherActions {
+        id: actionConfig
+    }
+
+    // Confirmation for a pending command action; null outside the confirmation step.
+    property var pendingAction: null
+
     function reset(): void {
         mode = "apps";
         query = "";
         selectedIndex = 0;
+        pendingAction = null;
         searchInput.text = "";
     }
 
@@ -346,6 +382,20 @@ Item {
             finalizeClose();
         } else if (item.type === "file") {
             files.open(item.path);
+        } else if (item.type === "action") {
+            if (root.pendingAction) {
+                if (item.confirmAction)
+                    root.config.run(root.pendingAction.command);
+                root.pendingAction = null;
+                if (item.confirmAction)
+                    finalizeClose();
+            } else if (item.entry.confirm) {
+                root.pendingAction = item.entry;
+                selectedIndex = 0;
+            } else {
+                root.config.run(item.entry.command);
+                finalizeClose();
+            }
         } else if (item.type === "emoji") {
             Quickshell.execDetached(["wl-copy", item.emoji]);
             emojiState.record(item.emoji);
@@ -559,6 +609,7 @@ Item {
                 onTextChanged: {
                     root.query = text;
                     root.selectedIndex = 0;
+                    root.pendingAction = null;
                 }
                 Keys.onPressed: event => {
                     const control = event.modifiers & Qt.ControlModifier;

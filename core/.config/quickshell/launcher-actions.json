@@ -1,0 +1,38 @@
+[
+  {
+    "label": "Reboot",
+    "keyword": "reboot",
+    "command": "systemctl reboot",
+    "confirm": true
+  },
+  {
+    "label": "Shut down",
+    "keyword": "shutdown",
+    "command": "systemctl poweroff",
+    "confirm": true
+  },
+  {
+    "label": "Sleep",
+    "keyword": "sleep",
+    "command": "systemctl suspend",
+    "confirm": true
+  },
+  {
+    "label": "Log out",
+    "keyword": "logout",
+    "command": "niri msg action quit",
+    "confirm": true
+  },
+  {
+    "label": "Lock screen",
+    "keyword": "lock",
+    "command": "qs ipc call lock lock",
+    "confirm": false
+  },
+  {
+    "label": "Gif recorder",
+    "keyword": "gif",
+    "command": "wezterm_run --class gifrec -e gif_rec",
+    "confirm": false
+  }
+]

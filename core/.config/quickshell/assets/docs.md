@@ -213,6 +213,36 @@ menus; if none have loaded yet, the custom lists are empty and Power still works
 Scripts can call `~/.config/quickshell/launcher/dmenu-runner` while Slimshell is
 running. See the [dmenu examples](../README.md#dmenu-mode).
 
+### Launcher actions
+
+Edit `launcher-actions.json` to add custom commands to the launcher's normal
+search. Each entry needs a `label`, a `keyword`, and a `command`; `confirm` is
+optional and defaults to `true`:
+
+```json
+[
+  {
+    "label": "Reboot",
+    "keyword": "reboot",
+    "command": "systemctl reboot",
+    "confirm": true
+  },
+  {
+    "label": "Lock screen",
+    "keyword": "lock",
+    "command": "qs ipc call lock lock",
+    "confirm": false
+  }
+]
+```
+
+Type the keyword (or part of the label) in the launcher and pick the result;
+actions always show the `utilities-terminal` icon so they stay distinct from
+applications. Change `actionIcon` in `launcher/Launcher.qml` to use a different
+icon. With `confirm: true` the launcher asks Yes/No before running the command.
+Commands run through the shell, so only add commands you trust. Invalid edits
+or a missing file keep the last loaded list.
+
 ### Updates
 
 Open **Updates** through an `updates` entry in `menus.json` (or
