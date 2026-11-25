@@ -48,7 +48,7 @@ ShellRoot {
         id: themeService
     }
 
-    Config {
+    Settings {
         id: appConfig
         theme: themeService
     }

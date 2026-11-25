@@ -8,8 +8,8 @@ ShellRoot {
     ThemeService {
         id: lockTheme
     }
-    Config {
-        id: lockConfig
+    Settings {
+        id: lockSettings
         theme: lockTheme
     }
     ResumeService {
@@ -38,7 +38,7 @@ ShellRoot {
             LockSurface {
                 anchors.fill: parent
                 context: lockContext
-                config: lockConfig
+                config: lockSettings
                 resumeService: lockResumeService
             }
         }

@@ -9,7 +9,7 @@ import Quickshell.Wayland
 
 // One settings window: category sidebar on the left, page on the right.
 // Pages are described by data (`pages`) and drawn by the same delegate. Most apply
-// instantly through Config.setValue() / SettingsService. Two pages are saved with
+// instantly through Settings.setValue() / SettingsService. Two pages are saved with
 // Apply instead: Idle (custom timeouts, validated together) and Theming (`staged`:
 // rows edit a draft, because saving regenerates the Hellwal colors).
 Item {
@@ -357,7 +357,7 @@ Item {
     }
 
     // Staged pages read and write the draft, workspace layout lives in
-    // SettingsService, everything else in Config.
+    // SettingsService, everything else in Settings.
     function valueOf(name) {
         if (staged)
             return draft[name];
