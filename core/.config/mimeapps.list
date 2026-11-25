@@ -31,6 +31,8 @@ x-scheme-handler/unknown=brave-origin.desktop
 x-scheme-handler/ror2mm=amethystmodmanager-ror2mm.desktop
 x-scheme-handler/modl=amethystmodmanager-modl.desktop
 x-scheme-handler/nxm=amethystmodmanager-nxm.desktop
+x-scheme-handler/gale=amethystmodmanager-gale.desktop
+x-scheme-handler/wabbajack=amethystmodmanager-wabbajack.desktop
 
 [Added Associations]
 image/x-xcf=gimp.desktop;
@@ -61,5 +63,7 @@ application/x-desktop=text.desktop;nvim.desktop;
 text/plain=nvim.desktop;
 x-scheme-handler/ror2mm=amethystmodmanager-ror2mm.desktop
 x-scheme-handler/modl=amethystmodmanager-modl.desktop
-x-scheme-handler/nxm=amethystmodmanager-nxm.desktop
 message/rfc822=userapp-Thunderbird-UE1JZ3.desktop;
+x-scheme-handler/nxm=amethystmodmanager-nxm.desktop
+x-scheme-handler/gale=amethystmodmanager-gale.desktop
+x-scheme-handler/wabbajack=amethystmodmanager-wabbajack.desktop
