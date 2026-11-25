@@ -2,9 +2,12 @@
 
 .import "../services/config/Value.js" as Value
 
-const fields = ["label", "keyword", "command", "confirm", "category"]
+const fields = ["label", "keyword", "command", "confirm"]
 
-function parse(text) {
+// Category comes from the file name (launcher/actions/<category>.json).
+function parse(text, category) {
+    if (typeof category !== "string" || category.trim() === "")
+        throw new Error("Missing action category");
     const document = JSON.parse(text);
     if (!Array.isArray(document))
         throw new Error("Expected a list of launcher actions");
@@ -24,15 +27,12 @@ function parse(text) {
         if (typeof confirm !== "boolean")
             throw new Error(location + ": confirm must be true or false");
 
-        if (entry.category !== undefined && (typeof entry.category !== "string" || entry.category.trim() === ""))
-            throw new Error(location + ": category must not be empty");
-
         return {
             label: entry.label,
             keyword: entry.keyword.trim().toLowerCase(),
             command: entry.command,
             confirm: confirm,
-            category: entry.category === undefined ? "misc" : entry.category.trim()
+            category: category.trim()
         };
     });
 }

@@ -48,9 +48,9 @@ git clone https://github.com/bitterhalt/slimshell.git ~/.config/quickshell
 Several helpers currently expect `~/.config/quickshell`, so do not install into a
 named subconfiguration or another directory unless you also adjust those paths.
 
-Appearance and behavior are changed in the Settings menu (`qs ipc call settings open`). Optional commands in
-`menus.json` still include local tools such as `sup`, `vopen` and
-`tmux-sysmon.sh`. Menus and other integrations may rely on personal scripts or
+Appearance and behavior are changed in the Settings menu (`qs ipc call settings open`). Optional
+launcher actions in `launcher/actions/` still include local tools such as `sup`, `vopen` and
+`tmux-sysmon.sh`. Launcher actions and other integrations may rely on personal scripts or
 configuration from my [dotfiles](https://github.com/bitterhalt/dotfiles).
 Review those before borrowing them, or replace/remove entries you do not use.
 Your own dmenu scripts are independent of these built-in menus.
@@ -109,8 +109,8 @@ is already running. More IPC calls are listed in the [README](../README.md#featu
 
 ### Settings
 
-Open the Settings menu with `qs ipc call settings open` (or the Settings entry in the
-main menu). It has pages for Idle, Appearance, Theming, Bar, Audio, Launcher, Notifications
+Open the Settings menu with `qs ipc call settings open` (or the Settings launcher
+action). It has pages for Idle, Appearance, Theming, Bar, Audio, Launcher, Notifications
 and Bluetooth. Tab moves focus through the page list and the controls. Up/Down switch
 pages from the sidebar and walk fields in the page, Left/Right step a value,
 Ctrl+Up/Down or Ctrl+J/K switch pages from anywhere, and Esc closes. Press `?` or
@@ -123,11 +123,6 @@ visibility and the Theming (Hellwal) options are saved in
 saved with Apply (Ctrl+Enter); Theming also regenerates the colors from the current wallpaper.
 
 Animations can be enabled or disabled in settings; each widget owns its style and timing.
-
-Edit `menus.json` to customize `user-menu1` through `user-menu4`; the fourth is an empty placeholder.
-Open one with `qs ipc call menu open user-menu1`.
-Changes reload automatically; invalid edits keep the last working menus. Power
-actions remain built in.
 
 ### Clipboard history
 
@@ -180,46 +175,12 @@ Set `WEATHER_LOCATION` to a city, or `WEATHER_LAT` and `WEATHER_LON` (optionally
 helper uses approximate IP geolocation. Conditions come from Open-Meteo and
 are cached for one hour.
 
-### Your own menus
-
-Edit `menus.json` to replace or extend the `user-menu1` through `user-menu4`
-lists. Each item needs a label and one of `command`, `action`, or `page`:
-
-```json
-{
-  "user-menu1": [
-    {
-      "label": "Terminal",
-      "icon": "󰆍",
-      "shortcut": "t",
-      "command": "$TERMINAL"
-    },
-    { "label": "Settings", "shortcut": "s", "action": "settings" }
-  ]
-}
-```
-
-Icons and shortcuts are optional. Shortcuts are single letters or digits and
-must be unique within a list. Commands run through the shell when activated;
-only add commands you trust. Set `"confirm": true` on a command to ask before
-running it. Built-in actions are `settings`, `wallpaper`, `lock`, `suspend`,
-and `updates`; page links accept `user-menu1` through `user-menu4`, or `power`.
-Open a list with `qs ipc call menu open user-menu1`, or use `menu toggle user-menu1`.
-The old `menu packages`, `menu settings`, and `menu system` calls remain aliases
-for the first three menus, so existing keybindings still work. The fourth list
-ships empty as a placeholder.
-Omitted lists are empty. Invalid edits or a missing file keep the last loaded
-menus; if none have loaded yet, the custom lists are empty and Power still works.
-
-Scripts can call `~/.config/quickshell/launcher/dmenu-runner` while Slimshell is
-running. See the [dmenu examples](../README.md#dmenu-mode).
-
 ### Launcher actions
 
-Edit `launcher/launcher-actions.json` to add custom commands to the launcher's normal
-search. Each entry needs a `label`, a `keyword`, and a `command`; `confirm` is
-optional and defaults to `true`, and `category` is optional and defaults to
-`misc`:
+Add custom commands to the launcher with one JSON list per category in
+`launcher/actions/`; the file name becomes the category. Each entry needs a
+`label`, a `keyword`, and a `command`; `confirm` is optional and defaults to
+`true`:
 
 ```json
 [
@@ -227,35 +188,40 @@ optional and defaults to `true`, and `category` is optional and defaults to
     "label": "Reboot",
     "keyword": "reboot",
     "command": "systemctl reboot",
-    "confirm": true,
-    "category": "pwr"
+    "confirm": true
   },
   {
     "label": "Lock screen",
     "keyword": "lock",
     "command": "qs ipc call lock lock",
-    "confirm": false,
-    "category": "pwr"
+    "confirm": false
   }
 ]
 ```
 
+Saved as `launcher/actions/power.json`, those entries appear under the `power`
+category. Files are watched, so edits reload automatically. An invalid file
+keeps that file's last valid entries; if none have loaded yet, its entries are
+missing but the launcher still works.
+
 Type the keyword (or part of the label) in the launcher and pick the result;
-actions are labelled `[action] <name>` and show the `utilities-terminal` icon
-so they stay distinct from applications. Change `actionIcon` in
-`launcher/Launcher.qml` to use a different icon. With `confirm: true` the launcher
-asks Yes/No before running the command. Type just `:` to list every action as
-`[action] <category>: <name>`; `:pwr` lists only that category, and `:pwr reb`
+actions are labelled `[action] <category>: <name>` and show the
+`utilities-terminal` icon so they stay distinct from applications. Change
+`actionIcon` in `launcher/Launcher.qml` to use a different icon. With
+`confirm: true` the launcher asks Yes/No before running the command. Type just
+`:` to list every action; `:power` lists only that category, and `:power reb`
 filters within it. `Ctrl+P` pins the selected command; pinned commands appear
 first in an empty launcher, above pinned apps, and are stored in
 `~/.local/share/quickshell-launcher-action-pins.json`. Commands run through the
-shell, so only add commands you trust. Invalid edits or a missing file keep the
-last loaded list.
+shell, so only add commands you trust.
+
+Scripts can call `~/.config/quickshell/launcher/dmenu-runner` while Slimshell is
+running. See the [dmenu examples](../README.md#dmenu-mode).
 
 ### Updates
 
-Open **Updates** through an `updates` entry in `menus.json` (or
-`qs ipc call updates toggle`) to see pending package updates. Nothing checks in
+Open **Updates** with the Updates launcher action, through an `updates` entry in
+`launcher/actions/sys.json` (or `qs ipc call updates toggle`) to see pending package updates. Nothing checks in
 the background: the first open in a session runs a package check, later opens
 reuse the cached report, and **Refresh** (`r`) checks again. Long reports stay
 at most three quarters of the screen high and scroll with the wheel or

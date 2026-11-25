@@ -1,48 +1,72 @@
 import QtQuick
 import Quickshell.Io
-import "LauncherActionsSchema.js" as Schema
+import Qt.labs.folderlistmodel
+import "ActionFiles.js" as ActionFiles
 
-// Personal launcher actions live in launcher/launcher-actions.json. Like menus,
-// invalid edits keep the last valid list instead of blanking the launcher.
+// Personal launcher actions live in launcher/actions/<category>.json, one list
+// per category. A bad edit keeps that file's last valid entries instead of
+// blanking the launcher.
 Item {
     id: root
 
     visible: false
 
+    readonly property url actionsDir: Qt.resolvedUrl("actions")
     property var actions: []
+    property var fileNames: []
+    property var loaded: ({})
     property string errorText: ""
     property bool ready: false
 
-    Component.onCompleted: {
-        if (!ready)
-            applyActions(actionFile.text());
-    }
-
-    function applyActions(text): void {
+    function applyFile(fileName, text): void {
         try {
-            root.actions = Schema.parse(text);
+            loaded = ActionFiles.load(loaded, fileName, text);
             errorText = "";
         } catch (error) {
-            errorText = "Invalid launcher-actions.json: " + error.message;
+            errorText = "Invalid " + fileName + ": " + error.message;
             console.warn(errorText + "; keeping current actions");
         }
+        rebuild();
         ready = true;
     }
 
-    FileView {
-        id: actionFile
+    function syncFiles(): void {
+        const names = [];
+        for (let i = 0; i < folderModel.count; ++i)
+            names.push(folderModel.get(i, "fileName"));
+        fileNames = names;
+        rebuild();
+    }
 
-        objectName: "launcherActionsFile"
-        path: Qt.resolvedUrl("launcher-actions.json").toString()
-        blockLoading: true
-        watchChanges: true
-        printErrors: false
-        onLoaded: root.applyActions(text())
-        onFileChanged: reload()
-        onLoadFailed: {
-            root.ready = true;
-            root.errorText = "Could not load launcher-actions.json; keeping current actions";
-            console.warn(root.errorText);
+    function rebuild(): void {
+        actions = ActionFiles.merge(fileNames, loaded);
+    }
+
+    FolderListModel {
+        id: folderModel
+
+        folder: root.actionsDir
+        nameFilters: ["*.json"]
+        showDirs: false
+        sortField: FolderListModel.Name
+        onCountChanged: root.syncFiles()
+        Component.onCompleted: root.syncFiles()
+    }
+
+    Repeater {
+        model: folderModel
+
+        delegate: FileView {
+            required property string fileName
+
+            path: Qt.resolvedUrl("actions/" + fileName).toString()
+            blockLoading: true
+            watchChanges: true
+            printErrors: false
+            Component.onCompleted: root.applyFile(fileName, text())
+            onFileChanged: reload()
+            onLoaded: root.applyFile(fileName, text())
+            onLoadFailed: console.warn("Could not load " + fileName + "; keeping current actions")
         }
     }
 }

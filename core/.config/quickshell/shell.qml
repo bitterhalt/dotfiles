@@ -94,17 +94,6 @@ ShellRoot {
         targetScreen: root.activeScreen
     }
 
-    MainMenu {
-        id: mainMenu
-        config: appConfig
-        targetScreen: root.activeScreen
-        lockService: appLockService
-        idleService: appIdleService
-        settingsMenu: settingsMenu
-        wallpaperPicker: appWallpaperPicker
-        updatesController: appUpdates
-    }
-
     LockService {
         id: appLockService
     }

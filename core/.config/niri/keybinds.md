@@ -54,7 +54,6 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Ctrl+T` | Open Translator |
 | `Mod+Ctrl+W` | Display Weather |
 | `Mod+D` | Run Application Launcher |
-| `Mod+Escape` | Open Power Menu |
 | `Mod+F3` | Launch program |
 | `Mod+F4` | Process Killer |
 | `Mod+F5` | Passwords and AUTH |
@@ -68,10 +67,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 
 | Key | Action |
 | --- | ------ |
-| `Mod+F1` | System Menu |
-| `Mod+F12` | System Configs |
 | `Mod+Shift+W` | Set Wallpaper |
-| `Mod+U` | Install and Mange Packages |
 
 ## Screen Recording
 

@@ -15,8 +15,8 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 |              | What's included                                                                                                    |
 | ------------ | ------------------------------------------------------------------------------------------------------------------ |
 | **Bar**      | Workspaces, Window title, Clock and Weather, Battery, Connections, Privacy indicators, Removable drives, Tray etc. |
-| **Menus**    | Keyboard-driven menus for Bluetooth and Wi-Fi (one tabbed popup), Audio, Power, and Notifications                  |
-| **launcher** | Dmenu compatible application launcher with modes for: File Search, Calculator, Emoji, Quick Actions                                        |
+| **Menus**    | Keyboard-driven menus for Bluetooth and Wi-Fi (one tabbed popup), Audio, and Notifications                          |
+| **Launcher** | Dmenu compatible application launcher with modes for: File Search, Calculator, Emoji, Quick Actions                 |
 | **Tools**    | Clipboard, DeepL translation, Screen recording, and Package updates                                                |
 | **Session**  | Lock Screen, Wallpaper Picker, and Dynamic theming with [Hellwal](https://hellwal.danihek.xyz/)                    |
 
@@ -35,11 +35,9 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | `launcher`           | `toggle`, `open`, `close`, `apps`, `search`, `emoji`, `files`, `calculator`         | Open, switch, or toggle launcher modes; `search` opens File Search |
 | `lock`               | `lock`                                                                              | Lock the session                                                   |
 | `locker`             | `isSecure`                                                                          | Query whether the separate lock-screen process is secure           |
-| `menu`               | `open <name>`, `toggle <name>`, `close`, `packages`, `settings`, `system`           | Open a user menu or close it                                       |
 | `network`            | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Network tab)                    |
 | `notificationCenter` | `toggle`, `open`, `close`                                                           | Show or hide notification history                                  |
 | `notifications`      | `toggleDnd`, `enableDnd`, `disableDnd`, `isDnd`, `clear`, `count`                   | Control DND or notification history                                |
-| `power`              | `toggle`, `open`, `close`                                                           | Control the power menu                                             |
 | `recorder`           | `toggle`, `open`, `close`, `fullscreen`, `region`, `stop`                           | Control screen recording                                           |
 | `theme`              | `refresh`, `usingHellwal`                                                           | Reload or query the active theme                                   |
 | `translator`         | `toggle`, `open`, `close`                                                           | Control the translator                                             |
@@ -92,13 +90,12 @@ qs -p "$HOME/.config/quickshell" --no-detailed-logs
 
 ```text
 shell.qml       Shell entrypoint and service wiring
-menus.json      Personal menu items and commands
 bar/            Bar and its modules
 components/     Reusable UI and popup components
 services/       Shared desktop state and integrations
 tests/          Offline tests and fixtures, grouped by feature
-launcher/       Launcher, dmenu runner, and search helpers
-menus/          System and wallpaper menus
+launcher/       Launcher, per-category actions, dmenu runner, and search helpers
+menus/          Settings and wallpaper menus
 notifications/  Notification popups and history
 clipboard/      Clipboard picker and previews
 lock/           Lock screen components and PAM setup

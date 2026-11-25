@@ -1,0 +1,20 @@
+[
+  {
+    "label": "Gif Recorder",
+    "keyword": "gif",
+    "command": "wezterm_run --class gifrec -e gif_rec",
+    "confirm": false
+  },
+  {
+    "label": "Update System",
+    "keyword": "sup",
+    "command": "wezterm_run --class pop-upgrade -e sup",
+    "confirm": false
+  },
+  {
+    "label": "mpv (resume)",
+    "keyword": "mpvr",
+    "command": "mpv --player-operation-mode=pseudo-gui --script-opts-append=resume=yes",
+    "confirm": false
+  }
+]

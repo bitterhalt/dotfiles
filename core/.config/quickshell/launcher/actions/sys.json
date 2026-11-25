@@ -1,0 +1,44 @@
+[
+  {
+    "label": "Bluetooth Off",
+    "keyword": "bt-off",
+    "command": "bluetoothctl power off",
+    "confirm": false
+  },
+  {
+    "label": "Bluetooth On",
+    "keyword": "bt-on",
+    "command": "bluetoothctl power on",
+    "confirm": false
+  },
+  {
+    "label": "Bluetooth Settings",
+    "keyword": "bt-settings",
+    "command": "wezterm_run --class bluetui -e bluetui",
+    "confirm": false
+  },
+  {
+    "label": "Wifi Settings",
+    "keyword": "wifi-settings",
+    "command": "wezterm_run --class impala -e impala",
+    "confirm": false
+  },
+  {
+    "label": "Install Packages",
+    "keyword": "packages",
+    "command": "$TERMINAL --app-id pacseek -e pacseek -m",
+    "confirm": false
+  },
+  {
+    "label": "Network Manager",
+    "keyword": "network",
+    "command": "$TERMINAL -e nmtui",
+    "confirm": false
+  },
+  {
+    "label": "Updates",
+    "keyword": "updates",
+    "command": "qs ipc call updates toggle",
+    "confirm": false
+  }
+]
