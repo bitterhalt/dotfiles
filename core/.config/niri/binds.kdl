@@ -35,7 +35,7 @@ binds {
     Mod+Ctrl+T hotkey-overlay-title="Open Translator" { spawn-sh "qs ipc call translator toggle"; }
     Mod+Ctrl+W hotkey-overlay-title="Display Weather" { spawn-sh "qs ipc call weather toggle"; }
     Mod+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "qs ipc call launcher toggle"; }
-    Mod+F1 hotkey-overlay-title="Open Quickshell Settings" { spawn-sh "qs ipc call settings toggle"; }
+    Mod+Escape hotkey-overlay-title="Open Quickshell Settings" { spawn-sh "qs ipc call settings toggle"; }
     Mod+F3 { spawn-sh "$TERMINAL --class keybind-cc -e nvim ~/.config/niri/keybinds.md"; }
     Mod+F4  hotkey-overlay-title="Process Killer" { spawn "menu_killer"; }
     Mod+F5 hotkey-overlay-title="Passwords and AUTH" { spawn-sh "menu_passmenu"; }

@@ -54,6 +54,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Ctrl+T` | Open Translator |
 | `Mod+Ctrl+W` | Display Weather |
 | `Mod+D` | Run Application Launcher |
+| `Mod+Escape` | Open Quickshell Settings |
 | `Mod+F3` | Launch program |
 | `Mod+F4` | Process Killer |
 | `Mod+F5` | Passwords and AUTH |
