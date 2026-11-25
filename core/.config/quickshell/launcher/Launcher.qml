@@ -132,7 +132,7 @@ Item {
             return [
                 {
                     type: "action",
-                    text: "Yes, run " + pendingAction.label,
+                    text: "Yes, " + pendingAction.label,
                     icon: "dialog-ok",
                     confirmAction: true
                 },
