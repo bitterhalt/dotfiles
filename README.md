@@ -2,7 +2,7 @@
 
 ![status: works on my machine](https://img.shields.io/badge/status-works%20on%20my%20machine-green)
 
-My Arch Linux setup with: [Niri](https://github.com/YaLTeR/niri) desktop and my custom baked [Quickshell](https://quickshell.org/) config
+My Arch Linux setup with: [Niri](https://github.com/YaLTeR/niri) desktop and my custom baked [Quickshell](https://github.com/bitterhalt/dotfiles/tree/master/core/.config/quickshell) config.
 
 <p align="center">
   <img src=".assets/desk.png" alt="Desktop" width="100%">
