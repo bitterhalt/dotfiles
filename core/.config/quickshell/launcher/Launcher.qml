@@ -182,7 +182,7 @@ Item {
             entries = actionConfig.actions.map(action => ({
                         type: "action",
                         entry: action,
-                        text: action.label,
+                        text: "[action] " + action.label,
                         icon: root.actionIcon,
                         score: Scorer.scoreLine(action.keyword + " " + action.label, value)
                     })).filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.text.localeCompare(b.text)).concat(entries);
