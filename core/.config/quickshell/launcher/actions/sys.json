@@ -40,5 +40,23 @@
     "keyword": "updates",
     "command": "qs ipc call updates toggle",
     "confirm": false
+  },
+  {
+    "label": "Record Fullscreen",
+    "keyword": "rec",
+    "command": "qs ipc call recorder fullscreen",
+    "confirm": false
+  },
+  {
+    "label": "Record Region",
+    "keyword": "recregion",
+    "command": "qs ipc call recorder region",
+    "confirm": false
+  },
+  {
+    "label": "Stop Recording",
+    "keyword": "recstop",
+    "command": "qs ipc call recorder stop",
+    "confirm": false
   }
 ]

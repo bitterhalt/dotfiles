@@ -13,7 +13,7 @@ function parse(text, category) {
         throw new Error("Expected a list of launcher actions");
 
     return document.map((entry, index) => {
-        const location = "launcher-actions[" + index + "]";
+        const location = category + "[" + index + "]";
         if (!Value.isObject(entry) || Object.keys(entry).some(key => !fields.includes(key)))
             throw new Error(location + ": invalid action entry");
         if (typeof entry.label !== "string" || entry.label.trim() === "")

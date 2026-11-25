@@ -1,4 +1,5 @@
 import QtQuick
+import QtQml.Models
 import Quickshell.Io
 import Qt.labs.folderlistmodel
 import "ActionFiles.js" as ActionFiles
@@ -15,19 +16,14 @@ Item {
     property var actions: []
     property var fileNames: []
     property var loaded: ({})
-    property string errorText: ""
-    property bool ready: false
 
     function applyFile(fileName, text): void {
         try {
             loaded = ActionFiles.load(loaded, fileName, text);
-            errorText = "";
         } catch (error) {
-            errorText = "Invalid " + fileName + ": " + error.message;
-            console.warn(errorText + "; keeping current actions");
+            console.warn("Invalid " + fileName + ": " + error.message + "; keeping current actions");
         }
         rebuild();
-        ready = true;
     }
 
     function syncFiles(): void {
@@ -53,7 +49,8 @@ Item {
         Component.onCompleted: root.syncFiles()
     }
 
-    Repeater {
+    // FileView is a QObject, so it needs Instantiator rather than Repeater.
+    Instantiator {
         model: folderModel
 
         delegate: FileView {

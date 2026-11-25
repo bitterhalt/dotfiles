@@ -38,7 +38,7 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | `network`            | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Network tab)                    |
 | `notificationCenter` | `toggle`, `open`, `close`                                                           | Show or hide notification history                                  |
 | `notifications`      | `toggleDnd`, `enableDnd`, `disableDnd`, `isDnd`, `clear`, `count`                   | Control DND or notification history                                |
-| `recorder`           | `toggle`, `open`, `close`, `fullscreen`, `region`, `stop`                           | Control screen recording                                           |
+| `recorder`           | `fullscreen`, `region`, `stop`, `isRecording`                                     | Start or stop a recording, or query its state                       |
 | `theme`              | `refresh`, `usingHellwal`                                                           | Reload or query the active theme                                   |
 | `translator`         | `toggle`, `open`, `close`                                                           | Control the translator                                             |
 | `updates`            | `toggle`, `open`, `close`                                                           | Show or hide the package updates popup                             |
@@ -99,7 +99,7 @@ menus/          Settings and wallpaper menus
 notifications/  Notification popups and history
 clipboard/      Clipboard picker and previews
 lock/           Lock screen components and PAM setup
-recorder/       Screen recording and region selection
+recorder/       Region selection overlay for the recorder
 translator/     DeepL translator
 updates/        Package update checks, popup, and upgrade script
 wallpaper/      Wallpaper helpers

@@ -16,7 +16,6 @@ Item {
     readonly property bool runningNow: recorderProcess.running
     readonly property bool busy: runningNow || prepareDirectory.running
 
-    signal menuActionRequested(string action)
     signal regionSelectionRequested
 
     function captureDirectory(): string {
@@ -126,20 +125,7 @@ Item {
     IpcHandler {
         target: "recorder"
 
-        function toggle(): void {
-            root.menuActionRequested("toggle");
-        }
-
-        function open(): void {
-            root.menuActionRequested("open");
-        }
-
-        function close(): void {
-            root.menuActionRequested("close");
-        }
-
         function fullscreen(): void {
-            root.menuActionRequested("close");
             root.fullscreen();
         }
 
@@ -148,7 +134,6 @@ Item {
         }
 
         function stop(): void {
-            root.menuActionRequested("close");
             root.stop();
         }
 

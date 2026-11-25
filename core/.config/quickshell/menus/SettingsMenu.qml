@@ -26,6 +26,33 @@ Item {
     property string errorText: ""
     property string noteText: ""
     property bool helpOpen: false
+    // Destructive footer action awaiting Yes/No ("exit", "reboot", or "shutdown").
+    property string pendingPower: ""
+    readonly property var powerActions: [
+        {
+            id: "exit",
+            label: "[E]xit"
+        },
+        {
+            id: "sleep",
+            label: "[Z]zz"
+        },
+        {
+            id: "reboot",
+            label: "[R]eboot"
+        },
+        {
+            id: "shutdown",
+            label: "[S]hutdown"
+        }
+    ]
+
+    // Same muted/hover treatment as the bar popup scan buttons.
+    component FooterButton: ShellButton {
+        config: root.config
+        foregroundColor: !enabled ? root.config.muted : visuallyHighlighted ? root.config.selectionForeground : root.config.muted
+    }
+
     // Edited values of a staged page; written by Apply, dropped when the page changes.
     property var draft: ({})
     property bool themingPending: false
@@ -92,7 +119,6 @@ Item {
             label: "Theming",
             icon: "󰃣",
             staged: true,
-            hint: "Colors are generated from the current wallpaper",
             rows: [
                 {
                     kind: "choice",
@@ -225,7 +251,6 @@ Item {
             id: "audio",
             label: "Audio",
             icon: "󰕾",
-            hint: "Values above 100% amplify the signal",
             rows: [
                 {
                     kind: "stepper",
@@ -253,7 +278,6 @@ Item {
             id: "notifications",
             label: "Notifications",
             icon: "󰂚",
-            hint: "Excluded apps are comma separated app names",
             rows: [
                 {
                     kind: "integer",
@@ -271,7 +295,6 @@ Item {
             id: "bluetooth",
             label: "Bluetooth",
             icon: "󰂯",
-            hint: "0 disables a battery notification",
             rows: [
                 {
                     kind: "stepper",
@@ -301,6 +324,7 @@ Item {
     function open(screen, pageId) {
         menuScreen = screen || targetScreen;
         helpOpen = false;
+        pendingPower = "";
         const index = pages.findIndex(entry => entry.id === pageId);
         selectPage(index >= 0 ? index : page, true);
         opened = true;
@@ -310,16 +334,48 @@ Item {
     function close() {
         opened = false;
         helpOpen = false;
+        pendingPower = "";
         themingPending = false;
         themingAttempted = false;
     }
 
     function toggleHelp() {
+        pendingPower = "";
         helpOpen = !helpOpen;
         if (helpOpen)
             card.forceActiveFocus();
         else if (pageRows[page])
             pageRows[page].forceActiveFocus(Qt.TabFocusReason);
+    }
+
+    // Destructive actions wait for [Y]es / [N]o; sleep runs immediately.
+    function requestPower(action) {
+        if (action === "sleep") {
+            close();
+            idleService.suspend();
+            return;
+        }
+        pendingPower = action;
+        card.forceActiveFocus();
+    }
+
+    function confirmPower() {
+        const action = pendingPower;
+        pendingPower = "";
+        if (action === "")
+            return;
+        close();
+        if (action === "exit")
+            Quickshell.execDetached(["niri", "msg", "action", "quit"]);
+        else if (action === "reboot")
+            Quickshell.execDetached(["systemctl", "reboot"]);
+        else if (action === "shutdown")
+            Quickshell.execDetached(["systemctl", "poweroff"]);
+    }
+
+    function cancelPower() {
+        pendingPower = "";
+        card.forceActiveFocus();
     }
 
     function toggle(screen) {
@@ -339,6 +395,7 @@ Item {
         const next = (index + pages.length) % pages.length;
         const leavingTheming = pages[page].id === "theming" && next !== page;
         helpOpen = false;
+        pendingPower = "";
         errorText = "";
         noteText = "";
         if (leavingTheming) {
@@ -447,7 +504,8 @@ Item {
         return current.custom === true && idleService.errorText !== "";
     }
 
-    function statusText() {
+    // Only real status replaces the footer buttons; page hints are gone.
+    function footerStatusText() {
         if (errorText !== "")
             return errorText;
         if (current.id === "theming" && themingAttempted) {
@@ -458,9 +516,7 @@ Item {
         }
         if (current.custom === true && idleService.errorText !== "")
             return idleService.errorText;
-        if (noteText !== "")
-            return noteText;
-        return current.custom === true ? "30s, 30m, 2h · 0 disables an idle action" : current.hint || "";
+        return noteText;
     }
 
     // Tab order and Up/Down follow the same focus chain.
@@ -533,20 +589,41 @@ Item {
             // Up/Down walk the page list from the sidebar, or the page controls
             // once one has focus (same order as Tab).
             Keys.onPressed: event => {
-                if (event.key !== Qt.Key_Up && event.key !== Qt.Key_Down)
+                const key = event.text.toLowerCase();
+                if (root.pendingPower !== "") {
+                    if (key === "y") {
+                        root.confirmPower();
+                        event.accepted = true;
+                    } else if (key === "n") {
+                        root.cancelPower();
+                        event.accepted = true;
+                    }
                     return;
-                const forward = event.key === Qt.Key_Down;
-                if (card.activeFocus)
-                    root.selectPage(root.page + (forward ? 1 : -1));
-                else
-                    root.focusStep(forward);
-                event.accepted = true;
+                }
+                if (event.key === Qt.Key_Up || event.key === Qt.Key_Down) {
+                    const forward = event.key === Qt.Key_Down;
+                    if (card.activeFocus)
+                        root.selectPage(root.page + (forward ? 1 : -1));
+                    else
+                        root.focusStep(forward);
+                    event.accepted = true;
+                    return;
+                }
+                if (root.helpOpen)
+                    return;
+                const action = key === "e" ? "exit" : key === "z" ? "sleep" : key === "r" ? "reboot" : key === "s" ? "shutdown" : "";
+                if (action !== "") {
+                    root.requestPower(action);
+                    event.accepted = true;
+                }
             }
 
             Shortcut {
                 sequence: "Escape"
                 onActivated: {
-                    if (root.helpOpen)
+                    if (root.pendingPower !== "")
+                        root.cancelPower();
+                    else if (root.helpOpen)
                         root.toggleHelp();
                     else
                         root.close();
@@ -693,6 +770,14 @@ Item {
                             {
                                 name: "Apply changes",
                                 key: "Ctrl+Enter"
+                            },
+                            {
+                                name: "Power actions",
+                                key: "E / Z / R / S"
+                            },
+                            {
+                                name: "Confirm / cancel power action",
+                                key: "Y / N"
                             },
                             {
                                 name: "Show / hide help",
@@ -893,8 +978,8 @@ Item {
                 }
             }
 
-            // Footer like the clipboard and wallpaper menus: status or hint on the
-            // left, the help toggle on the right, under an inset separator.
+            // Footer power actions replace the old status/hint line; the help
+            // toggle stays on the right under an inset separator.
             Item {
                 id: footer
 
@@ -907,17 +992,61 @@ Item {
                     anchors.top: parent.top
                 }
 
+                Row {
+                    id: powerButtons
+
+                    anchors.left: parent.left
+                    anchors.leftMargin: root.config.panelPadding
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: root.config.spacingControl
+                    visible: root.pendingPower === "" && root.footerStatusText() === ""
+
+                    Repeater {
+                        model: root.powerActions
+
+                        delegate: FooterButton {
+                            required property var modelData
+
+                            text: modelData.label
+                            onClicked: root.requestPower(modelData.id)
+                        }
+                    }
+                }
+
+                Row {
+                    id: confirmButtons
+
+                    anchors.left: parent.left
+                    anchors.leftMargin: root.config.panelPadding
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: root.config.spacingControl
+                    visible: root.pendingPower !== ""
+
+                    FooterButton {
+                        text: "[Y]es"
+                        onClicked: root.confirmPower()
+                    }
+
+                    FooterButton {
+                        text: "[N]o"
+                        onClicked: root.cancelPower()
+                    }
+                }
+
                 Text {
+                    id: footerStatus
+
                     renderType: Text.NativeRendering
                     anchors.left: parent.left
                     anchors.leftMargin: root.config.panelPadding
                     anchors.right: footerKeys.left
                     anchors.rightMargin: root.config.spacingControl
                     anchors.verticalCenter: parent.verticalCenter
+                    visible: root.pendingPower === "" && root.footerStatusText() !== ""
                     elide: Text.ElideRight
                     color: root.statusIsError() ? root.config.urgent : root.config.muted
                     font.pointSize: root.config.textSizeSmall
-                    text: root.statusText()
+                    text: root.footerStatusText()
                 }
 
                 Text {

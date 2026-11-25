@@ -1,6 +1,5 @@
 import "../components"
 import "../notifications"
-import "../recorder"
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
@@ -52,13 +51,6 @@ PanelWindow {
 
         barWindow: barWindow
         config: barWindow.config
-    }
-
-    // Recorder UI is controlled through its existing IPC; Privacy shows activity.
-    Recorder {
-        config: barWindow.config
-        barWindow: barWindow
-        recorderService: barWindow.recorderService
     }
 
     // ---------------------------------------------------------

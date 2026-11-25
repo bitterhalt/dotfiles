@@ -221,6 +221,23 @@ ShellRoot {
         targetScreen: root.activeScreen
     }
 
+    // The recorder menu is gone, but region recording still needs a selector.
+    RegionSelector {
+        id: appRegionSelector
+
+        config: appConfig
+        targetScreen: root.activeScreen
+        onAccepted: geometry => appRecorderService.startRegion(geometry)
+    }
+
+    Connections {
+        target: appRecorderService
+
+        function onRegionSelectionRequested(): void {
+            appRegionSelector.open();
+        }
+    }
+
     ShellUiService {
         id: shellUiService
         targetScreen: root.activeScreen

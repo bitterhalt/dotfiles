@@ -122,6 +122,11 @@ visibility and the Theming (Hellwal) options are saved in
 `quickshell-settings.json`. Idle and Theming are
 saved with Apply (Ctrl+Enter); Theming also regenerates the colors from the current wallpaper.
 
+The footer has `[E]xit`, `[Z]zz`, `[R]eboot` and `[S]hutdown` actions. Press the
+letter or click a button; Sleep runs immediately, while the other three replace the
+buttons with `[Y]es` and `[N]o` for confirmation (`N` or `Esc` cancels). Real status
+messages temporarily replace the buttons.
+
 Animations can be enabled or disabled in settings; each widget owns its style and timing.
 
 ### Clipboard history
