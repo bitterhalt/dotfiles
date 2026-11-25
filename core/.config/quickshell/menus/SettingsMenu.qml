@@ -168,16 +168,19 @@ Item {
             icon: "󰍜",
             rows: [
                 {
-                    kind: "stepper",
-                    name: "barHeight",
-                    label: "Height",
-                    step: 2,
-                    suffix: " px"
-                },
-                {
-                    kind: "toggle",
-                    name: "showTray",
-                    label: "Show tray"
+                    kind: "choice",
+                    name: "barVisible",
+                    label: "Visibility",
+                    options: [
+                        {
+                            value: true,
+                            label: "Shown"
+                        },
+                        {
+                            value: false,
+                            label: "Hidden"
+                        }
+                    ]
                 },
                 {
                     kind: "choice",
@@ -193,6 +196,18 @@ Item {
                             label: "Minimal"
                         }
                     ]
+                },
+                {
+                    kind: "stepper",
+                    name: "barHeight",
+                    label: "Height",
+                    step: 2,
+                    suffix: " px"
+                },
+                {
+                    kind: "toggle",
+                    name: "showTray",
+                    label: "Show tray"
                 },
                 {
                     kind: "text",
@@ -356,12 +371,16 @@ Item {
             pageRows[target].forceActiveFocus(Qt.TabFocusReason);
     }
 
-    // Staged pages read and write the draft, workspace layout lives in
-    // SettingsService, everything else in Settings.
+    // Staged pages read and write the draft, workspace layout and bar
+    // visibility live in SettingsService, everything else in Settings.
     function valueOf(name) {
         if (staged)
             return draft[name];
-        return name === "workspaceLayout" ? settingsService.workspaceLayout : config.values[name];
+        if (name === "workspaceLayout")
+            return settingsService.workspaceLayout;
+        if (name === "barVisible")
+            return settingsService.barVisible;
+        return config.values[name];
     }
 
     function save(name, value) {
@@ -372,7 +391,12 @@ Item {
             });
             return true;
         }
-        errorText = name === "workspaceLayout" ? settingsService.saveWorkspaceLayout(value) : config.setValue(name, value);
+        if (name === "workspaceLayout")
+            errorText = settingsService.saveWorkspaceLayout(value);
+        else if (name === "barVisible")
+            errorText = settingsService.saveBarVisible(value);
+        else
+            errorText = config.setValue(name, value);
         return errorText === "";
     }
 

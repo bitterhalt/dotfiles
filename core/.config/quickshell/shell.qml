@@ -29,7 +29,7 @@ import "updates"
 ShellRoot {
     id: root
 
-    property bool barVisible: true
+    readonly property bool barVisible: appSettingsService.barVisible
     readonly property var activeScreen: {
         const screens = Quickshell.screens;
 
@@ -265,19 +265,19 @@ ShellRoot {
         target: "bar"
 
         function toggle(): void {
-            root.barVisible = !root.barVisible;
+            appSettingsService.saveBarVisible(!appSettingsService.barVisible);
         }
 
         function hide(): void {
-            root.barVisible = false;
+            appSettingsService.saveBarVisible(false);
         }
 
         function show(): void {
-            root.barVisible = true;
+            appSettingsService.saveBarVisible(true);
         }
 
         function isVisible(): bool {
-            return root.barVisible;
+            return appSettingsService.barVisible;
         }
     }
 

@@ -117,8 +117,9 @@ Ctrl+Up/Down or Ctrl+J/K switch pages from anywhere, and Esc closes. Press `?` o
 click `? Help` for the key list. Choices are saved in
 `~/.local/share/quickshell-config.json`, which is also reloaded when edited by hand:
 invalid values use safe defaults, and malformed JSON keeps the previous settings.
-Without that file the built-in defaults apply. Idle timeouts, workspace layout and the
-Theming (Hellwal) options are saved in `quickshell-settings.json`. Idle and Theming are
+Without that file the built-in defaults apply. Idle timeouts, workspace layout, bar
+visibility and the Theming (Hellwal) options are saved in
+`quickshell-settings.json`. Idle and Theming are
 saved with Apply (Ctrl+Enter); Theming also regenerates the colors from the current wallpaper.
 
 Animations can be enabled or disabled in settings; each widget owns its style and timing.

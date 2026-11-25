@@ -26,7 +26,7 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | Target               | Calls                                                                               | Effect                                                             |
 | -------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | `audio`              | `toggle`, `open`, `close`                                                           | Show or hide the audio menu                                        |
-| `bar`                | `toggle`, `hide`, `show`, `isVisible`                                               | Control or query bar visibility                                    |
+| `bar`                | `toggle`, `hide`, `show`, `isVisible`                                               | Control or query bar visibility; the state persists                |
 | `bluetooth`          | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Bluetooth tab)                  |
 | `clipboard`          | `toggle`, `open`, `close`, `refresh`, `copySelected`, `deleteSelected`              | Control the clipboard picker                                       |
 | `drives`             | `status`, `refresh`, `mount <dev>`, `unmount <dev>`, `poweroff <dev>`, `open <dev>` | Inspect and control removable drives                               |

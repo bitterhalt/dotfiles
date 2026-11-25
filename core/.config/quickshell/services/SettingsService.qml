@@ -21,6 +21,17 @@ Item {
     property string hellwalBackgroundMode: "dynamic"
     property string hellwalBackgroundColor: "#111111"
     property string workspaceLayout: "dots"
+    property bool barVisible: true
+
+    function saveBarVisible(visible) {
+        if (typeof visible !== "boolean")
+            return "Choose shown or hidden";
+        if (!settingsLoaded)
+            return "Settings are still loading";
+        barVisible = visible;
+        persistSettings();
+        return "";
+    }
 
     function saveTimeouts(lockSeconds, offSeconds, suspendSeconds) {
         const error = Duration.validate(lockSeconds, offSeconds, suspendSeconds);
@@ -85,6 +96,7 @@ Item {
             hellwalBrightOffset,
             hellwalGrayScale,
             workspaceLayout,
+            barVisible,
             hellwalBackgroundMode,
             hellwalBackgroundColor
         }));
@@ -117,6 +129,8 @@ Item {
                     root.hellwalGrayScale = saved.hellwalGrayScale;
                 if (saved.workspaceLayout === "dots" || saved.workspaceLayout === "minimal")
                     root.workspaceLayout = saved.workspaceLayout;
+                if (typeof saved.barVisible === "boolean")
+                    root.barVisible = saved.barVisible;
                 if (typeof saved.hellwalBackgroundColor === "string" && /^#[0-9a-fA-F]{6}$/.test(saved.hellwalBackgroundColor))
                     root.hellwalBackgroundColor = saved.hellwalBackgroundColor;
                 if (saved.hellwalBackgroundMode === "dynamic" || saved.hellwalBackgroundMode === "fixed")
