@@ -180,7 +180,6 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top-right"
 }
 
-// Wiremix
 window-rule {
     match app-id="wiremix"
     open-floating true
@@ -189,7 +188,6 @@ window-rule {
     default-window-height { fixed 300; }
 }
 
-// Calculator
 window-rule {
     match app-id="galculator"
     open-floating true
@@ -198,13 +196,21 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="top-right"
 }
 
-// Proton-authenticator
 window-rule {
     match app-id="proton-authenticator"
     open-floating true
     default-column-width { fixed 420; }
     default-window-height { fixed 685; }
     default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+// Top-left floaters
+window-rule {
+    match app-id="gifrec"
+    open-floating true
+    default-column-width { fixed 480; }
+    default-window-height { fixed 600; }
+    default-floating-position x=10 y=10 relative-to="top-left"
 }
 
 // Workspace assignments
