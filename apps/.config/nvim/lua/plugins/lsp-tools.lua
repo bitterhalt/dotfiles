@@ -97,6 +97,12 @@ return {
           lua = { "stylua" },
           python = { "ruff_format" },
           sh = { "shfmt" },
+          qml = { "qmlformat" },
+        },
+        formatters = {
+          qmlformat = {
+            command = "/usr/lib/qt6/bin/qmlformat",
+          },
         },
         format_on_save = {
           lsp_fallback = true,
