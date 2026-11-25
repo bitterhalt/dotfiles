@@ -10,6 +10,7 @@ Item {
     property var windows: ({})
     property int focusedWindowId: -1
     property int reconnectDelay: 1000
+    signal workspaceActivated(int id, bool focused)
     readonly property string focusedOutput: {
         for (let i = 0; i < workspaces.length; ++i) {
             if (workspaces[i].is_focused)
@@ -98,7 +99,10 @@ Item {
                 return;
             }
             if (event.WorkspaceActivated) {
-                updateWorkspaceActivation(event.WorkspaceActivated.id, event.WorkspaceActivated.focused === true);
+                const activation = event.WorkspaceActivated;
+                const focused = activation.focused === true;
+                updateWorkspaceActivation(activation.id, focused);
+                workspaceActivated(activation.id, focused);
                 return;
             }
             if (event.WorkspaceUrgencyChanged) {

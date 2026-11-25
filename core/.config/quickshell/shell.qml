@@ -243,6 +243,19 @@ ShellRoot {
         targetScreen: root.activeScreen
     }
 
+    Variants {
+        model: Quickshell.screens
+
+        WorkspaceOsd {
+            required property var modelData
+
+            config: appConfig
+            niri: niriService
+            targetScreen: modelData
+            barVisible: root.barVisible
+        }
+    }
+
     // Niri/keybind control:
     //
     //   qs ipc call bar toggle

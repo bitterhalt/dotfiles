@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import "../components"
 
 PanelWindow {
     id: root
@@ -17,8 +18,8 @@ PanelWindow {
     implicitHeight: labels.implicitHeight + verticalPadding * 2
     exclusiveZone: 0
     focusable: false
-    margins.top: 32
-    margins.right: 32
+    margins.top: config.popupGap
+    margins.right: config.popupGap
     WlrLayershell.layer: WlrLayer.Bottom
     WlrLayershell.namespace: "slim-zen-card"
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None

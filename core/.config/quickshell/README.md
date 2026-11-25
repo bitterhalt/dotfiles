@@ -107,7 +107,7 @@ translator/     DeepL translator
 updates/        Package update checks, popup, and upgrade script
 wallpaper/      Wallpaper helpers
 weather/        Weather forecast popup and helper
-osd/            Volume overlay
+osd/            Volume and workspace overlays
 ```
 
 ## Transparency
@@ -126,5 +126,5 @@ This repository is mainly for hobby and learning, so don't expect everything to 
 - [ ] Removable drives popup (use BarToast component, like BT/Network/Idle uses)
 - [ ] Code has some duplicates, clean and re-use as much as possible
 - [ ] Ram and optimisations here and there (already pretty solid, if you can say that from quickshell)
-- [ ] Workspaces OSD on barless mode, once I nail the correct style
+- [x] Workspaces OSD on barless mode, once I nail the correct style
 - [ ] Improve comments
