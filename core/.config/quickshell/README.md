@@ -16,7 +16,7 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | ------------ | ------------------------------------------------------------------------------------------------------------------ |
 | **Bar**      | Workspaces, Window title, Clock and Weather, Battery, Connections, Privacy indicators, Removable drives, Tray etc. |
 | **Menus**    | Keyboard-driven menus for Bluetooth and Wi-Fi (one tabbed popup), Audio, Power, and Notifications                  |
-| **launcher** | Application launcher with: File Search, Calculator, Emoji and Dmenu-mode                                           |
+| **launcher** | Dmenu compatible application launcher with modes for: File Search, Calculator, Emoji, Quick actions                                        |
 | **Tools**    | Clipboard, DeepL translation, Screen recording, and Package updates                                                |
 | **Session**  | Lock Screen, Wallpaper Picker, and Dynamic theming with [Hellwal](https://hellwal.danihek.xyz/)                    |
 
