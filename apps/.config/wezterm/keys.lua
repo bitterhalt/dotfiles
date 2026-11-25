@@ -123,40 +123,17 @@ function M.setup(config)
 			})),
 		},
 
-		-- Switch to monitoring workspace (btop + amdgpu_top split inside "unix" domain)
+		-- Switch to monitoring workspace (htop inside "unix" domain)
 		{
 			key = "m",
 			mods = "CTRL|SHIFT",
-			action = wezterm.action_callback(function(window, pane)
-				if pane:get_domain_name() ~= "unix" then
-					return
-				end
-
-				-- Check if "monitoring" workspace already has active windows
-				local exists = false
-				for _, mux_win in ipairs(wezterm.mux.all_windows()) do
-					if mux_win:get_workspace() == "monitoring" then
-						exists = true
-						break
-					end
-				end
-
-				if not exists then
-					-- Spawn inside "unix" domain and explicitly assign it to "monitoring"
-					local _, btop_pane, mux_win = wezterm.mux.spawn_window({
-						domain = { DomainName = "unix" },
-						args = { "btop" },
-					})
-					mux_win:set_workspace("monitoring")
-
-					btop_pane:split({
-						direction = "Right",
-						args = { "amdgpu_top", "--smi" },
-					})
-				end
-
-				window:perform_action(act.SwitchToWorkspace({ name = "monitoring" }), pane)
-			end),
+			action = only_in_unix(act.SwitchToWorkspace({
+				name = "monitoring",
+				spawn = {
+					domain = { DomainName = "unix" },
+					args = { "btop" },
+				},
+			})),
 		},
 
 		-- Dotfiles workspace
