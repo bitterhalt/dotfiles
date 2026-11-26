@@ -36,7 +36,7 @@
     "confirm": false
   },
   {
-    "label": "Settings",
+    "label": "Settings (GUI)",
     "keyword": "settings",
     "command": "qs ipc call settings toggle",
     "confirm": false

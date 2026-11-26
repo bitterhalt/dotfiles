@@ -43,10 +43,8 @@ rsync $RSYNC_ETC_ARGS /etc "$DEST_ETC/"
 # Fix permissions
 chown -R "$user":"$user" "$BASE_DEST_HOME" "$BASE_DEST_ETC"
 
-# 3. ROTATION: Keep only the last 3 backups, delete anything older
-# ls -dt lists directories newest-first.
-# tail -n +4 skips the first 3 (newest) and outputs everything older.
-ls -dt "$BASE_DEST_HOME"/*/ 2>/dev/null | tail -n +4 | xargs -r rm -rf
-ls -dt "$BASE_DEST_ETC"/*/ 2>/dev/null | tail -n +4 | xargs -r rm -rf
+# 3. ROTATION: Keep only the last 5 backups, delete anything older
+ls -dt "$BASE_DEST_HOME"/*/ 2>/dev/null | tail -n +6 | xargs -r rm -rf
+ls -dt "$BASE_DEST_ETC"/*/ 2>/dev/null | tail -n +6 | xargs -r rm -rf
 
 echo "Backup completed successfully: $TIMESTAMP"
