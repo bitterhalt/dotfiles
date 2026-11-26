@@ -18,7 +18,6 @@ Scope {
     readonly property alias pamMessage: pam.message
     readonly property alias pamMessageIsError: pam.messageIsError
     readonly property alias pamResponseRequired: pam.responseRequired
-    readonly property alias pamResponseVisible: pam.responseVisible
 
     signal unlocked
     signal failed
@@ -107,7 +106,7 @@ Scope {
 
         interval: 10000
         repeat: false
-        onTriggered: cancelPam()
+        onTriggered: root.cancelPam()
     }
 
     PamContext {

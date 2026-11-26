@@ -11,7 +11,6 @@ Item {
     readonly property var sink: Pipewire.defaultAudioSink
     readonly property var sinkAudio: sink ? sink.audio : null
     readonly property var source: Pipewire.defaultAudioSource
-    readonly property var sourceAudio: source ? source.audio : null
     readonly property var allNodes: Pipewire.nodes ? Pipewire.nodes.values : []
     readonly property var trackedNodes: [...new Set([sink, source].concat(allNodes.filter(node => node && node.audio)))].filter(node => !!node)
     readonly property var outputRows: Model.deviceRows(allNodes, true, sink ? sink.id : -1)
