@@ -16,5 +16,11 @@
     "keyword": "reload-portals",
     "command": "reload-portals.sh",
     "confirm": false
+  },
+  {
+    "label": "Arch maintenance",
+    "keyword": "maintenance",
+    "command": "$TERMINAL -e arch-maintenance",
+    "confirm": false
   }
 ]
