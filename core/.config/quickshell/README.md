@@ -12,13 +12,13 @@ Many Quickshell setups use large Material Design menus and features I never touc
 
 ## Features
 
-|              | What's included                                                                                                    |
-| ------------ | ------------------------------------------------------------------------------------------------------------------ |
-| **Bar**      | Workspaces, window title, clock and weather, battery, connections, privacy indicators, removable drives, tray etc. |
-| **Menus**    | Keyboard-driven menus for Bluetooth and Wi-Fi (one tabbed popup), audio, and notifications                          |
-| **Launcher** | Dmenu-compatible application launcher with modes for file search, calculator, emoji, and quick actions             |
-| **Tools**    | Clipboard, DeepL translation, screen recording, and package updates                                                |
-| **Session**  | Lock screen, wallpaper picker, and dynamic theming with [Hellwal](https://hellwal.danihek.xyz/)                     |
+|              | What's included                                                                                                 |
+| ------------ | --------------------------------------------------------------------------------------------------------------- |
+| **Bar**      | Workspaces, Window title, Clock, Weather, Battery, Connections, Privacy indicators, Removable drives, Tray etc. |
+| **Menus**    | Keyboard-driven menus for Bluetooth and Wi-Fi (one tabbed popup), Audio, and Notifications                      |
+| **Launcher** | Dmenu-compatible app launcher with modes for File search, Calculator, Emojis, and Quick actions                 |
+| **Tools**    | Clipboard, DeepL translation, Screen recording, Update checker                                                  |
+| **Session**  | Lock screen, Wallpaper picker, Dynamic theming with [Hellwal](https://hellwal.danihek.xyz/)                     |
 
 <details>
 <summary>IPC reference</summary>
@@ -117,8 +117,5 @@ I build this shell with LLM assistance, direct the design, review every change, 
 
 ## TODO
 
-- [ ] Removable drives popup using `BarToast`, like Bluetooth, network, and idle
-- [ ] Remove remaining duplicate code
-- [ ] Reduce memory use
 - [x] Workspaces OSD on barless mode, once I nail the correct style
 - [ ] Improve comments
