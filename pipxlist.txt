@@ -1,2 +1,2 @@
-linecast 2.13.0
+linecast 2.13.1
 yle-dl 20261106
