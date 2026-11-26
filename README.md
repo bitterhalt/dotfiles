@@ -69,7 +69,7 @@ One Quickshell process replaces what used to be a pile of separate tools and inc
 | ------------ | ------------------------------------------------------------------------------------------------------------- |
 | **Bar**      | Workspaces, window title, clock and weather, battery, connections, privacy indicators, removable drives, tray |
 | **Menus**    | Keyboard-driven Bluetooth, Wi-Fi, audio, power and notification menus                                         |
-| **Launcher** | Apps, file search, calculator, emoji, and a dmenu-compatible mode for scripts                                 |
+| **Launcher** | Apps, Quick Actions, File search, Calculator, Emoji, and a Dmenu-mode                                         |
 | **Tools**    | Clipboard history, DeepL translator, screen recording, package updates                                        |
 | **Session**  | Lock screen, idle handling, polkit prompt, wallpaper picker, dynamic theming                                  |
 
