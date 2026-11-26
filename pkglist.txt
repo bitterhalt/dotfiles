@@ -91,6 +91,8 @@ noto-fonts-extra
 npm
 nvme-cli
 nwg-look
+ollama
+ollama-vulkan
 opencode
 pacman-contrib
 pacseek
