@@ -4,6 +4,7 @@ import "../components"
 import "../services/config/Schema.js" as Schema
 import "../services/idle/Duration.js" as Duration
 import QtQuick
+import Quickshell
 import Quickshell.Wayland
 
 // One settings window: category sidebar on the left, page on the right.
