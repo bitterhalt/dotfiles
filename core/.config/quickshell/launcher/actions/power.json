@@ -2,25 +2,25 @@
   {
     "label": "Reboot",
     "keyword": "reboot",
-    "command": "systemctl reboot",
+    "command": "qs ipc call power reboot",
     "confirm": true
   },
   {
     "label": "Shut down",
     "keyword": "shutdown",
-    "command": "systemctl poweroff",
+    "command": "qs ipc call power shutdown",
     "confirm": true
   },
   {
     "label": "zZz",
     "keyword": "sleep",
-    "command": "systemctl suspend",
+    "command": "qs ipc call power suspend",
     "confirm": true
   },
   {
     "label": "Exit",
     "keyword": "logout",
-    "command": "niri msg action quit",
+    "command": "qs ipc call power exit",
     "confirm": true
   },
   {

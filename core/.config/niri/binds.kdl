@@ -29,7 +29,6 @@ binds {
     Mod+Ctrl+D hotkey-overlay-title="Hide Notification Pop-ups" { spawn-sh "qs ipc call notifications toggleDnd"; }
     Mod+Ctrl+E hotkey-overlay-title="Emoji Picker" { spawn-sh "qs ipc call launcher emoji"; }
     Mod+Ctrl+H hotkey-overlay-title="Show Notfication History" { spawn-sh "qs ipc call notificationCenter toggle"; }
-    Mod+Ctrl+I hotkey-overlay-title="Shell Setting" { spawn-sh "qs ipc call settings toggle"; }
     Mod+Ctrl+N hotkey-overlay-title="Network Menu" { spawn-sh "qs ipc call network toggle"; }
     Mod+Ctrl+P hotkey-overlay-title="Color Picker" { spawn "wl-colorpicker"; }
     Mod+Ctrl+T hotkey-overlay-title="Open Translator" { spawn-sh "qs ipc call translator toggle"; }

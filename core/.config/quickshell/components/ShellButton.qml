@@ -12,9 +12,11 @@ Button {
     property bool outlined: false
     property bool destructive: false
     property bool selected: false
+    // Muted labels with the usual hover/focus highlight.
+    property bool quiet: false
     readonly property bool keyFocused: activeFocus && focusReason !== Qt.MouseFocusReason
     readonly property bool visuallyHighlighted: enabled && (down || hovered || keyFocused || selected || filled)
-    property color foregroundColor: !enabled ? config.muted : visuallyHighlighted ? config.selectionForeground : destructive ? config.urgent : config.fg
+    property color foregroundColor: !enabled ? config.muted : visuallyHighlighted ? config.selectionForeground : quiet ? config.muted : destructive ? config.urgent : config.fg
     property color outlineColor: config.border
     property real cornerRadius: 4
 

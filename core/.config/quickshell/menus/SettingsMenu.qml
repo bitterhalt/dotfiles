@@ -4,7 +4,6 @@ import "../components"
 import "../services/config/Schema.js" as Schema
 import "../services/idle/Duration.js" as Duration
 import QtQuick
-import Quickshell
 import Quickshell.Wayland
 
 // One settings window: category sidebar on the left, page on the right.
@@ -17,6 +16,7 @@ Item {
 
     required property var config
     required property var idleService
+    required property var powerService
     required property var settingsService
     required property var wallpaperController
     required property var targetScreen
@@ -50,7 +50,7 @@ Item {
     // Same muted/hover treatment as the bar popup scan buttons.
     component FooterButton: ShellButton {
         config: root.config
-        foregroundColor: !enabled ? root.config.muted : visuallyHighlighted ? root.config.selectionForeground : root.config.muted
+        quiet: true
     }
 
     // Edited values of a staged page; written by Apply, dropped when the page changes.
@@ -352,7 +352,7 @@ Item {
     function requestPower(action) {
         if (action === "sleep") {
             close();
-            idleService.suspend();
+            powerService.suspend();
             return;
         }
         pendingPower = action;
@@ -366,11 +366,11 @@ Item {
             return;
         close();
         if (action === "exit")
-            Quickshell.execDetached(["niri", "msg", "action", "quit"]);
+            powerService.exitSession();
         else if (action === "reboot")
-            Quickshell.execDetached(["systemctl", "reboot"]);
+            powerService.reboot();
         else if (action === "shutdown")
-            Quickshell.execDetached(["systemctl", "poweroff"]);
+            powerService.shutdown();
     }
 
     function cancelPower() {

@@ -48,7 +48,6 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Ctrl+D` | Hide Notification Pop-ups |
 | `Mod+Ctrl+E` | Emoji Picker |
 | `Mod+Ctrl+H` | Show Notfication History |
-| `Mod+Ctrl+I` | Shell Setting |
 | `Mod+Ctrl+N` | Network Menu |
 | `Mod+Ctrl+P` | Color Picker |
 | `Mod+Ctrl+T` | Open Translator |

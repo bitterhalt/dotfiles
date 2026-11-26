@@ -21,7 +21,7 @@ ShellButton {
             anchors.verticalCenter: parent.verticalCenter
             renderType: Text.NativeRendering
             textFormat: Text.PlainText
-            color: !root.enabled ? root.config.muted : root.visuallyHighlighted ? root.config.selectionForeground : root.destructive ? root.config.urgent : root.config.fg
+            color: root.foregroundColor
             font: root.font
             elide: Text.ElideRight
             text: root.text

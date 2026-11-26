@@ -7,6 +7,7 @@ import "../components"
 import "Scorer.js" as Scorer
 import "Dmenu.js" as Dmenu
 import "ModeIcons.js" as ModeIcons
+import "JsonList.js" as JsonList
 
 Item {
     id: root
@@ -468,44 +469,22 @@ Item {
         return rank === undefined ? actionPins.length : rank;
     }
 
-    function normalizePins(ids): var {
-        const seen = new Set();
-        const next = [];
-        for (const id of ids) {
-            if (typeof id !== "string" || id === "" || seen.has(id))
-                continue;
-            seen.add(id);
-            next.push(id);
-        }
-        return next;
-    }
-
     function restoreAppPins(value): void {
-        let stored = [];
-        try {
-            const parsed = JSON.parse(value);
-            if (Array.isArray(parsed))
-                stored = parsed;
-        } catch (error) {}
+        const stored = JsonList.parse(value);
 
         // Keep pins made before the initial asynchronous load finished.
         const pending = !appPinsReady && appPins.length > 0;
-        appPins = normalizePins(appPinsReady ? stored : stored.concat(appPins));
+        appPins = JsonList.normalize(appPinsReady ? stored : stored.concat(appPins));
         appPinsReady = true;
         if (pending)
             appPinsFile.setText(JSON.stringify(appPins));
     }
 
     function restoreActionPins(value): void {
-        let stored = [];
-        try {
-            const parsed = JSON.parse(value);
-            if (Array.isArray(parsed))
-                stored = parsed;
-        } catch (error) {}
+        const stored = JsonList.parse(value);
 
         const pending = !actionPinsReady && actionPins.length > 0;
-        actionPins = normalizePins(actionPinsReady ? stored : stored.concat(actionPins));
+        actionPins = JsonList.normalize(actionPinsReady ? stored : stored.concat(actionPins));
         actionPinsReady = true;
         if (pending)
             actionPinsFile.setText(JSON.stringify(actionPins));
@@ -547,31 +526,12 @@ Item {
         return rank === undefined ? appHistoryKept : rank;
     }
 
-    function normalizeAppHistory(ids): var {
-        const seen = new Set();
-        const next = [];
-        for (const id of ids) {
-            if (typeof id !== "string" || id === "" || seen.has(id))
-                continue;
-            seen.add(id);
-            next.push(id);
-            if (next.length === appHistoryKept)
-                break;
-        }
-        return next;
-    }
-
     function restoreAppHistory(value): void {
-        let stored = [];
-        try {
-            const parsed = JSON.parse(value);
-            if (Array.isArray(parsed))
-                stored = parsed;
-        } catch (error) {}
+        const stored = JsonList.parse(value);
 
         // Preserve launches made before the initial asynchronous load finishes.
         const pending = !appHistoryReady && appHistory.length > 0;
-        appHistory = normalizeAppHistory(appHistoryReady ? stored : appHistory.concat(stored));
+        appHistory = JsonList.normalize(appHistoryReady ? stored : appHistory.concat(stored), appHistoryKept);
         appHistoryReady = true;
         if (pending)
             appHistoryFile.setText(JSON.stringify(appHistory));
@@ -581,7 +541,7 @@ Item {
         const installed = new Set(applications.map(entry => entry.id));
         if (!installed.has(id))
             return;
-        appHistory = normalizeAppHistory([id].concat(appHistory.filter(previous => installed.has(previous))));
+        appHistory = JsonList.normalize([id].concat(appHistory.filter(previous => installed.has(previous))), appHistoryKept);
         if (appHistoryReady)
             appHistoryFile.setText(JSON.stringify(appHistory));
     }

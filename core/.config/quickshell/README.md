@@ -38,6 +38,7 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | `network`            | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Network tab)                    |
 | `notificationCenter` | `toggle`, `open`, `close`                                                           | Show or hide notification history                                  |
 | `notifications`      | `toggleDnd`, `enableDnd`, `disableDnd`, `isDnd`, `clear`, `count`                   | Control DND or notification history                                |
+| `power`              | `exit`, `suspend`, `reboot`, `shutdown`                                             | Run a session power action                                        |
 | `recorder`           | `fullscreen`, `region`, `stop`, `isRecording`                                     | Start or stop a recording, or query its state                       |
 | `theme`              | `refresh`, `usingHellwal`                                                           | Reload or query the active theme                                   |
 | `translator`         | `toggle`, `open`, `close`                                                           | Control the translator                                             |

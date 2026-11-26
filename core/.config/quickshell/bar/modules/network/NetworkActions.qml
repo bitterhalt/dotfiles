@@ -47,7 +47,7 @@ Row {
         config: root.config
         outlined: true
         outlineColor: root.config.border
-        foregroundColor: !enabled ? root.config.muted : visuallyHighlighted ? root.config.selectionForeground : root.config.muted
+        quiet: true
         selected: root.visible && root.selectedIndex === 0
         KeyNavigation.tab: forgetAction
         KeyNavigation.backtab: cancelAction

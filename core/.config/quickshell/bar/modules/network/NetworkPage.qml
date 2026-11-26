@@ -495,7 +495,7 @@ Column {
             anchors.top: parent.top
             compact: true
             iconSize: root.config.iconSize * 0.78
-            foregroundColor: !enabled ? root.config.muted : visuallyHighlighted ? root.config.selectionForeground : root.config.muted
+            quiet: true
             enabled: scanState.canScan
             text: scanState.requested ? "Stop" : "Scan"
             onClicked: scanState.toggle()

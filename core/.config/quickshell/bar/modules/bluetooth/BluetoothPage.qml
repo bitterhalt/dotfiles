@@ -318,7 +318,7 @@ Column {
             anchors.top: parent.top
             compact: true
             iconSize: root.config.iconSize * 0.78
-            foregroundColor: !enabled ? root.config.muted : visuallyHighlighted ? root.config.selectionForeground : root.config.muted
+            quiet: true
             text: discoveryState.requested ? "Stop" : "Scan"
             onClicked: discoveryState.toggleDiscovery()
         }
