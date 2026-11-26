@@ -10,10 +10,10 @@ My Arch Linux setup: [Niri](https://github.com/YaLTeR/niri) with my [Quickshell]
 
 ## Philosophy
 
-- **Keyboard first.** Every control also works from the keyboard.
-- **Small menus.** Keep the working area clear.
-- **Plain config.** Small scripts and config files where possible.
-- **Short animations.** I keep motion brief and watch memory use.
+- **Keyboard driven.** If a widget has buttons, it must also work from the keyboard.
+- **Less clutter.** A clear working environment, no giant menus.
+- **Simplicity.** Small scripts and plain config files over big frameworks.
+- **Speed before eye candy.** Animations are short, and memory use is something I actually watch.
 
 ## Stack
 

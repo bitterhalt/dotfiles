@@ -11,6 +11,8 @@ core/.config/quickshell/AGENTS.md
 apps/.config/htop/htop_history
 apps/.config/nvim/lazy-lock.json
 apps/.config/opencode/service.json
+# Nested skill repos are stowed as plain files, not gitlinks.
+apps/.config/opencode/skills/*/.git/
 bin/.local/bin/appimages
 bin/.local/share/applications/mimeinfo.cache
 bin/.local/share/applications/userapp-*.desktop
