@@ -2,7 +2,7 @@
 
 ![status: works on my machine](https://img.shields.io/badge/status-works%20on%20my%20machine-green)
 
-My Arch Linux setup with: [Niri](https://github.com/YaLTeR/niri) desktop and my custom baked [Quickshell](https://github.com/bitterhalt/dotfiles/tree/master/core/.config/quickshell) config.
+My Arch Linux setup: [Niri](https://github.com/YaLTeR/niri) with my [Quickshell](https://github.com/bitterhalt/dotfiles/tree/master/core/.config/quickshell) shell.
 
 <p align="center">
   <img src=".assets/desk.png" alt="Desktop" width="100%">
@@ -10,26 +10,26 @@ My Arch Linux setup with: [Niri](https://github.com/YaLTeR/niri) desktop and my 
 
 ## Philosophy
 
-- **Keyboard driven.** If a widget has buttons, it must also work from the keyboard.
-- **Less clutter.** A clear working environment, no giant menus.
-- **Simplicity.** Small scripts and plain config files over big frameworks.
-- **Speed before eye candy.** Animations are short, and memory use is something I actually watch.
+- **Keyboard first.** Every control also works from the keyboard.
+- **Small menus.** Keep the working area clear.
+- **Plain config.** Small scripts and config files where possible.
+- **Short animations.** I keep motion brief and watch memory use.
 
 ## Stack
 
-|               |                                                                                         |
-| ------------- | --------------------------------------------------------------------------------------- |
-| Distro        | [Arch Linux](https://archlinux.org), BTW                                                |
-| Compositor    | [Niri](https://github.com/YaLTeR/niri), Compositor                                      |
-| Shell         | [Quickshell](https://quickshell.org/), Bar, menus, lock, wallpaper etc.                 |
-| Colors        | [Hellwal](https://github.com/danihek/hellwal), Like Matugen but better                  |
-| Terminal      | [WezTerm](https://wezterm.org/), Works as terminal and tmux like persistent multiplaxer |
-| Editor        | [Neovim](https://neovim.io/)                                                            |
-| File manager  | [lf](https://github.com/gokcehan/lf/),                                                  |
-| Image viewer  | [swayimg](https://github.com/artemsen/swayimg), Best inage viewer in wayland            |
-| Media         | [mpv](https://mpv.io/)                                                                  |
-| Login manager | [ly](https://codeberg.org/fairyglade/ly)                                                |
-| Shell         | bash                                                                                    |
+|               |                                                                            |
+| ------------- | -------------------------------------------------------------------------- |
+| Distro        | [Arch Linux](https://archlinux.org)                                        |
+| Compositor    | [Niri](https://github.com/YaLTeR/niri)                                     |
+| Shell UI      | [Quickshell](https://quickshell.org/): bar, menus, lock screen, wallpaper  |
+| Colors        | [Hellwal](https://github.com/danihek/hellwal)                              |
+| Terminal      | [WezTerm](https://wezterm.org/), also my persistent tmux-style multiplexer |
+| Editor        | [Neovim](https://neovim.io/)                                               |
+| File manager  | [lf](https://github.com/gokcehan/lf)                                       |
+| Image viewer  | [swayimg](https://github.com/artemsen/swayimg)                             |
+| Media         | [mpv](https://mpv.io/)                                                     |
+| Login manager | [ly](https://codeberg.org/fairyglade/ly)                                   |
+| Shell         | bash                                                                       |
 
 ## Gallery
 
@@ -63,17 +63,17 @@ My Arch Linux setup with: [Niri](https://github.com/YaLTeR/niri) desktop and my 
 
 ### Slimshell (Quickshell)
 
-One Quickshell process replaces what used to be a pile of separate tools and increasingly complicated Bash scripts. It lives in [`core/.config/quickshell`](core/.config/quickshell)
+The shell lives in [`core/.config/quickshell`](core/.config/quickshell). It replaces several separate tools and Bash scripts.
 
 |              | What's included                                                                                               |
 | ------------ | ------------------------------------------------------------------------------------------------------------- |
 | **Bar**      | Workspaces, window title, clock and weather, battery, connections, privacy indicators, removable drives, tray |
-| **Menus**    | Keyboard-driven Bluetooth, Wi-Fi, audio, power and notification menus                                         |
-| **Launcher** | Apps, Quick Actions, File search, Calculator, Emoji, and a Dmenu-mode                                         |
+| **Menus**    | Keyboard-driven Bluetooth, Wi-Fi, audio, and notification menus                                               |
+| **Launcher** | Apps, quick actions, file search, calculator, emoji, and dmenu mode                                           |
 | **Tools**    | Clipboard history, DeepL translator, screen recording, package updates                                        |
 | **Session**  | Lock screen, idle handling, polkit prompt, wallpaper picker, dynamic theming                                  |
 
-Everything is controlled over IPC, so Niri keybinds and scripts just call it:
+Niri keybinds and scripts control it over IPC:
 
 ```bash
 qs ipc call launcher toggle
@@ -85,11 +85,8 @@ The full target list is in the [Slimshell README](core/.config/quickshell/README
 
 ## Install
 
-> These are personal dotfiles. Read before you copy, and expect to adapt things for your own.
->
-> I do not provide any guarantee if your house burns down or you lose your valuable data!
->
-> **You have been warned! ⚠️**
+> These are personal dotfiles. Read before copying, and expect to adapt them.
+> No warranty; back up your data.
 
 Requires [GNU Stow](https://www.gnu.org/software/stow/)
 

@@ -1,4 +1,4 @@
-# mpv: with persistent workflow
+# mpv: persistent window and resume
 
 Two ways to launch mpv, both using the same config.
 
@@ -27,11 +27,11 @@ Two ways to launch mpv, both using the same config.
 
 3. **Auto-resume on empty start** (`scripts/resume-last.lua`)
 
-   If mpv starts with no file **and** the `resume=yes` script option is set, the
+   If mpv starts with no file and the `resume=yes` script option is set, the
    script waits 0.5 s and then runs `memo/memo-last`. Per-file resume (1) then
    puts you at the saved position.
 
-   Without the flag, the script does nothing, which gives the plain empty
+   Without the flag, the script does nothing and mpv stays as an empty
    persistent window.
 
 4. **Persistent window**

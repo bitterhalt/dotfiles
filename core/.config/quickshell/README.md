@@ -4,21 +4,21 @@
 
 # Slimshell
 
-Slimshell brings my bar, notifications, and some useful menus together—replacing a collection of separate tools and increasingly complicated Bash scripts.
+Slimshell combines my bar, notifications, and menus. It replaces several separate tools and Bash scripts.
 
 ## Why?
 
-Why does this exist? Because all the well-known Quickshell setups focus too much on large Material Design Menus and features that, at the end of the day, no productive user actually needs. If a widget has functions, it must also work 100% with the keyboard. Bluetooth or the Wi-Fi menus do not need to take half of your 1440p screen space. So the goal was simple = Make the most of the best features of the Quickshell in terms of usability.
+Many Quickshell setups use large Material Design menus and features I never touch. Slimshell keeps menus small and keyboard-driven. Every control works from the keyboard, and the Bluetooth and Wi-Fi menus take only the space they need.
 
 ## Features
 
 |              | What's included                                                                                                    |
 | ------------ | ------------------------------------------------------------------------------------------------------------------ |
-| **Bar**      | Workspaces, Window title, Clock and Weather, Battery, Connections, Privacy indicators, Removable drives, Tray etc. |
-| **Menus**    | Keyboard-driven menus for Bluetooth and Wi-Fi (one tabbed popup), Audio, and Notifications                          |
-| **Launcher** | Dmenu compatible application launcher with modes for: File Search, Calculator, Emoji, Quick Actions                 |
-| **Tools**    | Clipboard, DeepL translation, Screen recording, and Package updates                                                |
-| **Session**  | Lock Screen, Wallpaper Picker, and Dynamic theming with [Hellwal](https://hellwal.danihek.xyz/)                    |
+| **Bar**      | Workspaces, window title, clock and weather, battery, connections, privacy indicators, removable drives, tray etc. |
+| **Menus**    | Keyboard-driven menus for Bluetooth and Wi-Fi (one tabbed popup), audio, and notifications                          |
+| **Launcher** | Dmenu-compatible application launcher with modes for file search, calculator, emoji, and quick actions             |
+| **Tools**    | Clipboard, DeepL translation, screen recording, and package updates                                                |
+| **Session**  | Lock screen, wallpaper picker, and dynamic theming with [Hellwal](https://hellwal.danihek.xyz/)                     |
 
 <details>
 <summary>IPC reference</summary>
@@ -38,8 +38,8 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | `network`            | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Network tab)                    |
 | `notificationCenter` | `toggle`, `open`, `close`                                                           | Show or hide notification history                                  |
 | `notifications`      | `toggleDnd`, `enableDnd`, `disableDnd`, `isDnd`, `clear`, `count`                   | Control DND or notification history                                |
-| `power`              | `exit`, `suspend`, `reboot`, `shutdown`                                             | Run a session power action                                        |
-| `recorder`           | `fullscreen`, `region`, `stop`, `isRecording`                                     | Start or stop a recording, or query its state                       |
+| `power`              | `exit`, `suspend`, `reboot`, `shutdown`                                             | Run a session power action                                         |
+| `recorder`           | `fullscreen`, `region`, `stop`, `isRecording`                                       | Start or stop a recording, or query its state                      |
 | `theme`              | `refresh`, `usingHellwal`                                                           | Reload or query the active theme                                   |
 | `translator`         | `toggle`, `open`, `close`                                                           | Control the translator                                             |
 | `updates`            | `toggle`, `open`, `close`                                                           | Show or hide the package updates popup                             |
@@ -47,13 +47,13 @@ Why does this exist? Because all the well-known Quickshell setups focus too much
 | `wallpaper`          | `toggle`, `open`, `close`                                                           | Control the wallpaper picker                                       |
 | `weather`            | `toggle`, `open`, `close`                                                           | Show or hide the weather forecast                                  |
 
-For example, `qs ipc call volume up` raises the volume by one step. `launcher/dmenu-runner` uses the launcher's IPC internally; call the script to open a picker.
+`qs ipc call volume up` raises the volume by one step. `launcher/dmenu-runner` uses the launcher IPC internally; call the script to open a picker.
 
 </details>
 
 ## Launcher
 
-Launcher modes. Switch directly with the shortcuts below, or cycle with **Ctrl+← / Ctrl+→**.
+Switch modes with the shortcuts below, or cycle with **Ctrl+← / Ctrl+→**.
 
 | Mode  | Shortcut | What it does                |
 | ----- | -------- | --------------------------- |
@@ -61,10 +61,9 @@ Launcher modes. Switch directly with the shortcuts below, or cycle with **Ctrl+�
 | Emoji | `Ctrl+E` | Emoji Selector              |
 | Files | `Ctrl+S` | Search local files          |
 
-In Apps mode, `=expression` `=1+2`
-Plain math works too. Use `Ctrl+S` or cycle modes to search local files.
+Type `=1+2` in Apps mode to use the calculator. Plain math works without the prefix. Use `Ctrl+S` or cycle modes to search files.
 
-Press `Ctrl+P` on an app or quick command to pin or unpin it. Pinned commands and apps are listed first, marked with a small pin, and stored in `~/.local/share/quickshell-launcher-action-pins.json` and `~/.local/share/quickshell-launcher-pins.json` respectively.
+Press `Ctrl+P` on an app or quick command to pin or unpin it. Pinned items appear first with a pin and are stored in `~/.local/share/quickshell-launcher-action-pins.json` and `~/.local/share/quickshell-launcher-pins.json`.
 
 ## Dmenu mode
 
@@ -74,14 +73,13 @@ For scripts that use dmenu-style pickers:
 printf '%s\n' Search 'New Note' TODO Delete | ./launcher/dmenu-runner -p "Notes" -l 4 --minimal-lines
 ```
 
-- Supported options: `-p`/`--prompt`, `-l <number>`/`--lines <number` , `--minimal-lines`, and `--index` (return the original zero-based input index; typed text returns `-1`).
+- Supported options: `-p`/`--prompt`, `-l <number>`/`--lines <number>`, `--minimal-lines`, and `--index` (returns the original zero-based input index; typed text returns `-1`).
 
-Slimshell must be running. This is a small dmenu-compatible runner, not a full dmenu/rofi replacement!
+Slimshell must be running. It is a small dmenu-compatible runner, not a dmenu/rofi replacement.
 
 ## Getting started
 
-Follow the [installation guide](assets/docs.md) for dependencies, Niri startup,
-keybindings, and optional feature setup. Install into `~/.config/quickshell`, then run:
+Follow the [installation guide](assets/docs.md) for dependencies, Niri startup, keybindings, and optional feature setup. Install into `~/.config/quickshell`, then run:
 
 ```bash
 qs -p "$HOME/.config/quickshell" --no-detailed-logs
@@ -110,19 +108,17 @@ osd/            Volume and workspace overlays
 
 ## Transparency
 
-This shell was developed with LLM assistance under my supervision. I direct the design, review the changes, and test them on my own desktop. These are personal dotfiles, so review and adapt them before using them on yours.
-
-This repository is mainly for hobby and learning, so don't expect everything to work out of the box.
+I build this shell with LLM assistance, direct the design, review every change, and test it on my desktop. These are personal dotfiles; review and adapt them before use. Expect rough edges.
 
 ## ISSUES 🔨
 
 - ~~dmenu-runner can't display special symbols (Nerd fonts etc.)~~
-- There are probably plenty of other things as well. Maybe you can show me how to fix them or do better :)
+- Other issues likely exist. Fixes and suggestions are welcome.
 
 ## TODO
 
-- [ ] Removable drives popup (use BarToast component, like BT/Network/Idle uses)
-- [ ] Code has some duplicates, clean and re-use as much as possible
-- [ ] Ram and optimisations here and there (already pretty solid, if you can say that from quickshell)
+- [ ] Removable drives popup using `BarToast`, like Bluetooth, network, and idle
+- [ ] Remove remaining duplicate code
+- [ ] Reduce memory use
 - [x] Workspaces OSD on barless mode, once I nail the correct style
 - [ ] Improve comments
