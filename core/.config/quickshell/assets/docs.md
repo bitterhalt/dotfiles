@@ -51,7 +51,7 @@ Several helpers expect `~/.config/quickshell`, so keep that path. Adjust the lin
 if you install the shell somewhere else.
 
 Change appearance and behavior in the Settings menu (`qs ipc call settings open`).
-Optional launcher actions in `launcher/actions/` include local tools such as `sup`,
+Optional launcher actions in `launcher/actions.json` include local tools such as `sup`,
 `vopen`, and `tmux-sysmon.sh`. Some entries rely on personal scripts or configuration
 from my [dotfiles](https://github.com/bitterhalt/dotfiles). Review or replace them.
 These menus do not affect your own dmenu scripts.
@@ -186,20 +186,21 @@ helper caches them for one hour.
 
 ### Launcher actions
 
-Add custom commands to the launcher with one JSON list per category in
-`launcher/actions/`; the file name becomes the category. Each entry needs a
-`label`, a `keyword`, and a `command`; `confirm` is optional and defaults to
-`true`:
+Add custom commands to the launcher in `launcher/actions.json`, a single JSON
+list. Each entry needs a `category`, a `label`, a `keyword`, and a `command`;
+`confirm` is optional and defaults to `true`:
 
 ```json
 [
   {
+    "category": "power",
     "label": "Reboot",
     "keyword": "reboot",
     "command": "qs ipc call power reboot",
     "confirm": true
   },
   {
+    "category": "power",
     "label": "Lock screen",
     "keyword": "lock",
     "command": "qs ipc call lock lock",
@@ -208,10 +209,10 @@ Add custom commands to the launcher with one JSON list per category in
 ]
 ```
 
-Saved as `launcher/actions/power.json`, those entries appear under the `power`
-category. Slimshell watches the files, so edits reload automatically. When a file
-is invalid, Slimshell keeps its last valid entries; if none have loaded yet, it
-skips that file but the launcher still works.
+Those entries appear under the `power` category. Slimshell watches the file, so
+edits reload automatically. When it is invalid, Slimshell keeps its last valid
+entries; if none have loaded yet, it skips the invalid file but the launcher
+still works.
 
 Type the keyword (or part of the label) in the launcher and pick the result;
 Slimshell labels actions `[action] <category>: <name>` and shows the
@@ -230,7 +231,7 @@ running. See the [dmenu examples](../README.md#dmenu-mode).
 ### Updates
 
 Open **Updates** from the Updates launcher action (an `updates` entry in
-`launcher/actions/sys.json`) or with `qs ipc call updates toggle`. Nothing checks
+`launcher/actions.json`) or with `qs ipc call updates toggle`. Nothing checks
 in the background: the first open in a session runs a package check, later opens
 reuse the cached report, and **Refresh** (`r`) checks again. Long reports stay
 at most three quarters of the screen high and scroll with the wheel or

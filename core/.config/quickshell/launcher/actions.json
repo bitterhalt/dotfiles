@@ -1,0 +1,205 @@
+[
+  {
+    "category": "cmd",
+    "label": "Run Hellwal",
+    "keyword": "hw",
+    "command": "hellwal -i ~/.local/share/wall/wallpaper.png --comfort-mode --dark-offset 0.20",
+    "confirm": false
+  },
+  {
+    "category": "cmd",
+    "label": "mpv (resume)",
+    "keyword": "mpvr",
+    "command": "mpv --player-operation-mode=pseudo-gui --script-opts-append=resume=yes",
+    "confirm": false
+  },
+  {
+    "category": "cmd",
+    "label": "Reload Portals",
+    "keyword": "reload-portals",
+    "command": "reload-portals.sh",
+    "confirm": false
+  },
+  {
+    "category": "cmd",
+    "label": "Arch maintenance",
+    "keyword": "maintenance",
+    "command": "$TERMINAL -e arch-maintenance",
+    "confirm": false
+  },
+  {
+    "category": "misc",
+    "label": "Gif Recorder",
+    "keyword": "gif",
+    "command": "wezterm_run --class gifrec -e gif_rec",
+    "confirm": false
+  },
+  {
+    "category": "misc",
+    "label": "Update System",
+    "keyword": "sup",
+    "command": "wezterm_run --class pop-upgrade -e sup",
+    "confirm": false
+  },
+  {
+    "category": "power",
+    "label": "Reboot",
+    "keyword": "reboot",
+    "command": "qs ipc call power reboot",
+    "confirm": true
+  },
+  {
+    "category": "power",
+    "label": "Shut down",
+    "keyword": "shutdown",
+    "command": "qs ipc call power shutdown",
+    "confirm": true
+  },
+  {
+    "category": "power",
+    "label": "zZz",
+    "keyword": "sleep",
+    "command": "qs ipc call power suspend",
+    "confirm": true
+  },
+  {
+    "category": "power",
+    "label": "Exit",
+    "keyword": "logout",
+    "command": "qs ipc call power exit",
+    "confirm": true
+  },
+  {
+    "category": "power",
+    "label": "Lock Screen",
+    "keyword": "lock",
+    "command": "qs ipc call lock lock",
+    "confirm": false
+  },
+  {
+    "category": "settings",
+    "label": "Niri Settings",
+    "keyword": "niri",
+    "command": "$TERMINAL sh -c 'cd ~/.config/niri/ && nvim *'",
+    "confirm": false
+  },
+  {
+    "category": "settings",
+    "label": "Nvim Setting",
+    "keyword": "nvim",
+    "command": "$TERMINAL sh -c 'cd ~/.config/nvim && vopen .'",
+    "confirm": false
+  },
+  {
+    "category": "settings",
+    "label": "Hellwal Settings",
+    "keyword": "hellwal",
+    "command": "$TERMINAL -e nvim ~/.config/hellwal/templates/*",
+    "confirm": false
+  },
+  {
+    "category": "settings",
+    "label": "Quickshell Settings",
+    "keyword": "quickshell",
+    "command": "$TERMINAL sh -c 'cd ~/.config/quickshell && vopen .'",
+    "confirm": false
+  },
+  {
+    "category": "settings",
+    "label": "Wezterm Settings",
+    "keyword": "wezterm",
+    "command": "$TERMINAL sh -c 'cd ~/.config/wezterm && vopen . *'",
+    "confirm": false
+  },
+  {
+    "category": "settings",
+    "label": "Set Wallpaper",
+    "keyword": "wallpaper",
+    "command": "qs ipc call wallpaper open",
+    "confirm": false
+  },
+  {
+    "category": "settings",
+    "label": "Settings (GUI)",
+    "keyword": "settings",
+    "command": "qs ipc call settings toggle",
+    "confirm": false
+  },
+  {
+    "category": "settings",
+    "label": "Launcher Actions",
+    "keyword": "actions",
+    "command": "$TERMINAL -e nvim ~/.config/quickshell/launcher/actions.json",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Bluetooth Off",
+    "keyword": "bt-off",
+    "command": "bluetoothctl power off",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Bluetooth On",
+    "keyword": "bt-on",
+    "command": "bluetoothctl power on",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Bluetooth Settings",
+    "keyword": "bt-settings",
+    "command": "wezterm_run --class bluetui -e bluetui",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Wifi Settings",
+    "keyword": "wifi-settings",
+    "command": "wezterm_run --class impala -e impala",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Install Packages",
+    "keyword": "packages",
+    "command": "$TERMINAL --app-id pacseek -e pacseek -m",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Network Manager",
+    "keyword": "network",
+    "command": "$TERMINAL -e nmtui",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Updates",
+    "keyword": "updates",
+    "command": "qs ipc call updates toggle",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Record Fullscreen",
+    "keyword": "rec",
+    "command": "qs ipc call recorder fullscreen",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Record Region",
+    "keyword": "recregion",
+    "command": "qs ipc call recorder region",
+    "confirm": false
+  },
+  {
+    "category": "sys",
+    "label": "Stop Recording",
+    "keyword": "recstop",
+    "command": "qs ipc call recorder stop",
+    "confirm": false
+  }
+]
