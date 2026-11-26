@@ -40,5 +40,11 @@
     "keyword": "settings",
     "command": "qs ipc call settings toggle",
     "confirm": false
+  },
+  {
+    "label": "Launcher Actions",
+    "keyword": "actions",
+    "command": "$TERMINAL -e nvim ~/.config/quickshell/launcher/actions/*",
+    "confirm": false
   }
 ]
