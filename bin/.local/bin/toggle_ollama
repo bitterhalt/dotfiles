@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 
 if pgrep -x ollama >/dev/null; then
-    pkill -TERM -x ollama
-    notify-send "Ollama" "Server stopped"
+  pkill -TERM -x ollama
+  notify-send "Ollama" "Server stopped"
 else
-    (
-        export OLLAMA_CONTEXT_LENGTH=32768
-        export OLLAMA_FLASH_ATTENTION=1
-        export OLLAMA_KV_CACHE_TYPE=q8_0
+  (
+    export OLLAMA_CONTEXT_LENGTH=32768
+    export OLLAMA_FLASH_ATTENTION=1
+    export OLLAMA_KV_CACHE_TYPE=q8_0
+    export OLLAMA_KEEP_ALIVE=30s
 
-        ollama serve
-    ) >~/.cache/ollama.log 2>&1 &
+    ollama serve
+  ) >~/.cache/ollama.log 2>&1 &
 
-    sleep 1
+  sleep 1
 
-    if pgrep -x ollama >/dev/null; then
-        notify-send "Ollama" "Server started"
-    else
-        notify-send "Ollama" "Failed to start — check ~/.cache/ollama.log"
-    fi
+  if pgrep -x ollama >/dev/null; then
+    notify-send "Ollama" "Server started"
+  else
+    notify-send "Ollama" "Failed to start — check ~/.cache/ollama.log"
+  fi
 fi
