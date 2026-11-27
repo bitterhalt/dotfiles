@@ -1,7 +1,3 @@
-<p align="center">
-  A compact, keyboard-first desktop shell for <a href="https://github.com/YaLTeR/niri">Niri</a>, built with <a href="https://quickshell.org/">Quickshell</a>.
-</p>
-
 # Slimshell
 
 Slimshell combines my bar, notifications, and menus. It replaces several separate tools and Bash scripts.
