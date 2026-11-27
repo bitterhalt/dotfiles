@@ -1,8 +1,8 @@
 pragma ComponentBehavior: Bound
 
 import "../components"
-import "../services/config/Schema.js" as Schema
-import "../services/idle/Duration.js" as Duration
+import "SettingsPages.js" as SettingsPages
+import "settings"
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
@@ -48,12 +48,6 @@ Item {
         }
     ]
 
-    // Same muted/hover treatment as the bar popup scan buttons.
-    component FooterButton: ShellButton {
-        config: root.config
-        quiet: true
-    }
-
     // Edited values of a staged page; written by Apply, dropped when the page changes.
     property var draft: ({})
     property bool themingPending: false
@@ -62,265 +56,7 @@ Item {
     property var pageRows: []
     readonly property var current: pages[page]
     readonly property bool staged: current.staged === true
-    readonly property var pages: [
-        {
-            id: "idle",
-            label: "Idle",
-            icon: "󰤄",
-            custom: true,
-            rows: []
-        },
-        {
-            id: "appearance",
-            label: "Appearance",
-            icon: "󰏘",
-            rows: [
-                {
-                    kind: "stepper",
-                    name: "fontScale",
-                    label: "Font scale",
-                    step: 0.1,
-                    decimals: 1
-                },
-                {
-                    kind: "stepper",
-                    name: "iconScale",
-                    label: "Icon scale",
-                    step: 0.1,
-                    decimals: 1
-                },
-                {
-                    kind: "text",
-                    name: "iconFontFamily",
-                    label: "Icon font",
-                    wide: true
-                },
-                {
-                    kind: "toggle",
-                    name: "popupAnimations",
-                    label: "Animations"
-                },
-                {
-                    kind: "stepper",
-                    name: "popupGap",
-                    label: "Popup gap",
-                    step: 2,
-                    suffix: " px"
-                },
-                {
-                    kind: "stepper",
-                    name: "popupRadius",
-                    label: "Popup radius",
-                    suffix: " px"
-                }
-            ]
-        },
-        {
-            id: "theming",
-            label: "Theming",
-            icon: "󰃣",
-            staged: true,
-            rows: [
-                {
-                    kind: "choice",
-                    name: "hellwalMode",
-                    label: "Mode",
-                    options: [
-                        {
-                            value: "dark",
-                            label: "Dark"
-                        },
-                        {
-                            value: "light",
-                            label: "Light"
-                        }
-                    ]
-                },
-                {
-                    kind: "stepper",
-                    name: "hellwalDarkOffset",
-                    label: "Dark offset",
-                    from: 0,
-                    to: 1,
-                    step: 0.05,
-                    decimals: 2
-                },
-                {
-                    kind: "stepper",
-                    name: "hellwalBrightOffset",
-                    label: "Bright offset",
-                    from: 0,
-                    to: 1,
-                    step: 0.05,
-                    decimals: 2
-                },
-                {
-                    kind: "stepper",
-                    name: "hellwalGrayScale",
-                    label: "Grayscale",
-                    from: 0,
-                    to: 1,
-                    step: 0.05,
-                    decimals: 2
-                },
-                {
-                    kind: "choice",
-                    name: "hellwalBackgroundMode",
-                    label: "Background",
-                    options: [
-                        {
-                            value: "dynamic",
-                            label: "Dynamic"
-                        },
-                        {
-                            value: "fixed",
-                            label: "Fixed"
-                        }
-                    ]
-                },
-                {
-                    kind: "text",
-                    name: "hellwalBackgroundColor",
-                    label: "Fixed color",
-                    when: {
-                        name: "hellwalBackgroundMode",
-                        value: "fixed"
-                    }
-                }
-            ]
-        },
-        {
-            id: "bar",
-            label: "Bar",
-            icon: "󰍜",
-            rows: [
-                {
-                    kind: "choice",
-                    name: "barVisible",
-                    label: "Visibility",
-                    options: [
-                        {
-                            value: true,
-                            label: "Shown"
-                        },
-                        {
-                            value: false,
-                            label: "Hidden"
-                        }
-                    ]
-                },
-                {
-                    kind: "choice",
-                    name: "workspaceLayout",
-                    label: "Workspace layout",
-                    options: [
-                        {
-                            value: "dots",
-                            label: "Dots"
-                        },
-                        {
-                            value: "minimal",
-                            label: "Minimal"
-                        }
-                    ]
-                },
-                {
-                    kind: "stepper",
-                    name: "barHeight",
-                    label: "Height",
-                    step: 2,
-                    suffix: " px"
-                },
-                {
-                    kind: "toggle",
-                    name: "showTray",
-                    label: "Show tray"
-                },
-                {
-                    kind: "text",
-                    name: "clockFormat",
-                    label: "Clock format"
-                },
-                {
-                    kind: "text",
-                    name: "clockAlternativeFormat",
-                    label: "Alternative format"
-                }
-            ]
-        },
-        {
-            id: "audio",
-            label: "Audio",
-            icon: "󰕾",
-            rows: [
-                {
-                    kind: "stepper",
-                    name: "maxVolume",
-                    label: "Max volume",
-                    step: 0.05,
-                    factor: 100,
-                    suffix: "%"
-                }
-            ]
-        },
-        {
-            id: "launcher",
-            label: "Launcher",
-            icon: "󰀻",
-            rows: [
-                {
-                    kind: "toggle",
-                    name: "launcherEnabled",
-                    label: "Launcher enabled"
-                }
-            ]
-        },
-        {
-            id: "notifications",
-            label: "Notifications",
-            icon: "󰂚",
-            rows: [
-                {
-                    kind: "integer",
-                    name: "notificationHistoryLimit",
-                    label: "History limit"
-                },
-                {
-                    kind: "list",
-                    name: "notificationHistoryExcludedApps",
-                    label: "Excluded apps"
-                }
-            ]
-        },
-        {
-            id: "bluetooth",
-            label: "Bluetooth",
-            icon: "󰂯",
-            rows: [
-                {
-                    kind: "stepper",
-                    name: "bluetoothBatteryWarningPercent",
-                    label: "Battery warning",
-                    step: 5,
-                    suffix: "%"
-                },
-                {
-                    kind: "stepper",
-                    name: "bluetoothBatteryCriticalPercent",
-                    label: "Battery critical",
-                    step: 5,
-                    suffix: "%"
-                },
-                {
-                    kind: "stepper",
-                    name: "bluetoothBatteryRearmMargin",
-                    label: "Re-arm margin",
-                    step: 5,
-                    suffix: "%"
-                }
-            ]
-        }
-    ]
+    readonly property var pages: SettingsPages.pages
 
     function open(screen, pageId) {
         menuScreen = screen || targetScreen;
@@ -479,22 +215,9 @@ Item {
         }
     }
 
-    function formatText(kind, value) {
-        return kind === "list" ? value.join(", ") : String(value);
-    }
-
-    function parseText(kind, text) {
-        if (kind === "integer")
-            return /^\d+$/.test(text.trim()) ? Number(text) : NaN;
-        if (kind === "list")
-            return text.split(",").map(item => item.trim()).filter(item => item !== "");
-        return text;
-    }
-
     function applyIdle() {
-        const field = index => idleFields.itemAt(index) ? idleFields.itemAt(index).value : "";
-        errorText = settingsService.saveTimeouts(Duration.parse(field(0)), Duration.parse(field(1)), Duration.parse(field(2)));
-        noteText = errorText === "" ? "Saved" : "";
+        errorText = idlePage.apply();
+        noteText = idlePage.noteText;
     }
 
     function statusIsError() {
@@ -806,158 +529,23 @@ Item {
                         Repeater {
                             model: root.current.rows
 
-                            delegate: SettingRow {
-                                id: item
-
-                                required property var modelData
-                                readonly property string kind: modelData.kind
-                                readonly property bool isText: kind === "text" || kind === "integer" || kind === "list"
-                                readonly property var range: Schema.bounds(modelData.name) || [-1e9, 1e9]
-
+                            delegate: SettingControl {
+                                config: root.config
+                                value: root.valueOf(modelData.name)
                                 visible: !modelData.when || root.valueOf(modelData.when.name) === modelData.when.value
-                                config: root.config
-                                label: modelData.label
-                                stacked: kind === "list"
-                                controlInset: {
-                                    if (kind === "stepper")
-                                        return 136;
-                                    if (kind === "toggle")
-                                        return 32;
-                                    if (kind === "choice")
-                                        return 176;
-                                    return isText && !stacked ? (modelData.wide ? 280 : 160) : 0;
-                                }
-
-                                ShellStepper {
-                                    visible: item.kind === "stepper"
-                                    anchors.right: parent.right
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    config: root.config
-                                    value: Number(root.valueOf(item.modelData.name))
-                                    step: item.modelData.step || 1
-                                    factor: item.modelData.factor || 1
-                                    decimals: item.modelData.decimals || 0
-                                    suffix: item.modelData.suffix || ""
-                                    from: item.modelData.from !== undefined ? item.modelData.from : item.range[0]
-                                    to: item.modelData.to !== undefined ? item.modelData.to : item.range[1]
-                                    onMoved: next => root.save(item.modelData.name, next)
-                                }
-
-                                ToggleSwitch {
-                                    visible: item.kind === "toggle"
-                                    anchors.right: parent.right
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    config: root.config
-                                    keyboard: true
-                                    checked: !!root.valueOf(item.modelData.name)
-                                    onToggled: root.save(item.modelData.name, !checked)
-                                }
-
-                                Row {
-                                    visible: item.kind === "choice"
-                                    anchors.right: parent.right
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    spacing: root.config.spacingControl
-
-                                    Repeater {
-                                        model: item.modelData.options || []
-
-                                        delegate: ShellButton {
-                                            required property var modelData
-
-                                            config: root.config
-                                            outlined: true
-                                            width: 84
-                                            selected: root.valueOf(item.modelData.name) === modelData.value
-                                            text: modelData.label
-                                            onClicked: root.save(item.modelData.name, modelData.value)
-                                        }
-                                    }
-                                }
-
-                                // Short fields sit right of the label; lists get a wide wrapped box.
-                                ShellTextField {
-                                    id: field
-
-                                    visible: item.isText
-                                    x: item.stacked ? 0 : parent.width - width
-                                    y: item.stacked ? item.stackedOffset : (parent.height - height) / 2
-                                    width: item.stacked ? parent.width : item.modelData.wide ? 280 : 160
-                                    height: item.stacked ? item.stackedHeight : 28
-                                    config: root.config
-                                    wrapMode: item.stacked ? TextInput.Wrap : TextInput.NoWrap
-                                    verticalAlignment: item.stacked ? TextInput.AlignTop : TextInput.AlignVCenter
-                                    font.pointSize: root.config.textSizeMedium
-                                    text: root.formatText(item.kind, root.valueOf(item.modelData.name))
-                                    // Saved on Enter or blur; the stored value is shown again afterwards,
-                                    // which also restores it after a rejected entry.
-                                    onEditingFinished: {
-                                        root.save(item.modelData.name, root.parseText(item.kind, text));
-                                        text = Qt.binding(() => root.formatText(item.kind, root.valueOf(item.modelData.name)));
-                                    }
-                                }
+                                onSaveRequested: (name, next) => root.save(name, next)
                             }
                         }
 
-                        // Idle page: timeouts are validated together and saved with Apply.
-                        SettingRow {
-                            visible: root.current.custom === true
+                        IdleSettingsPage {
+                            id: idlePage
+
                             config: root.config
-                            label: root.idleService.disabled ? "Idle paused" : "Idle active"
-                            muted: true
-                            controlInset: 72
-
-                            ShellButton {
-                                anchors.right: parent.right
-                                anchors.verticalCenter: parent.verticalCenter
-                                config: root.config
-                                outlined: true
-                                text: root.idleService.disabled ? "Enable" : "Pause"
-                                onClicked: root.idleService.toggle(root.menuScreen)
-                            }
-                        }
-
-                        Repeater {
-                            id: idleFields
-
-                            model: root.current.custom === true ? [
-                                {
-                                    label: "Lock",
-                                    key: "lockTimeout"
-                                },
-                                {
-                                    label: "Monitors off",
-                                    key: "offTimeout"
-                                },
-                                {
-                                    label: "Suspend",
-                                    key: "suspendTimeout"
-                                }
-                            ] : []
-
-                            delegate: SettingRow {
-                                id: idleRow
-
-                                required property var modelData
-                                property alias value: idleInput.text
-
-                                config: root.config
-                                label: modelData.label
-                                controlInset: 104
-
-                                ShellTextField {
-                                    id: idleInput
-
-                                    anchors.right: parent.right
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    width: 104
-                                    implicitHeight: 28
-                                    config: root.config
-                                    font.pointSize: root.config.textSizeMedium
-                                    Component.onCompleted: text = Duration.format(root.settingsService[idleRow.modelData.key])
-                                    onAccepted: root.applyIdle()
-                                }
-                            }
+                            idleService: root.idleService
+                            settingsService: root.settingsService
+                            menuScreen: root.menuScreen
+                            active: root.current.custom === true
+                            onApplyRequested: root.applyIdle()
                         }
 
                         SettingRow {
@@ -979,97 +567,17 @@ Item {
                 }
             }
 
-            // Footer power actions replace the old status/hint line; the help
-            // toggle stays on the right under an inset separator.
-            Item {
-                id: footer
-
-                width: parent.width
-                height: footerKeys.implicitHeight + root.config.panelPadding * 2
-
-                PanelSeparator {
-                    config: root.config
-                    horizontalInset: root.config.panelPadding
-                    anchors.top: parent.top
-                }
-
-                Row {
-                    id: powerButtons
-
-                    anchors.left: parent.left
-                    anchors.leftMargin: root.config.panelPadding
-                    anchors.verticalCenter: parent.verticalCenter
-                    spacing: root.config.spacingControl
-                    visible: root.pendingPower === "" && root.footerStatusText() === ""
-
-                    Repeater {
-                        model: root.powerActions
-
-                        delegate: FooterButton {
-                            required property var modelData
-
-                            text: modelData.label
-                            onClicked: root.requestPower(modelData.id)
-                        }
-                    }
-                }
-
-                Row {
-                    id: confirmButtons
-
-                    anchors.left: parent.left
-                    anchors.leftMargin: root.config.panelPadding
-                    anchors.verticalCenter: parent.verticalCenter
-                    spacing: root.config.spacingControl
-                    visible: root.pendingPower !== ""
-
-                    FooterButton {
-                        text: "[Y]es"
-                        onClicked: root.confirmPower()
-                    }
-
-                    FooterButton {
-                        text: "[N]o"
-                        onClicked: root.cancelPower()
-                    }
-                }
-
-                Text {
-                    id: footerStatus
-
-                    renderType: Text.NativeRendering
-                    anchors.left: parent.left
-                    anchors.leftMargin: root.config.panelPadding
-                    anchors.right: footerKeys.left
-                    anchors.rightMargin: root.config.spacingControl
-                    anchors.verticalCenter: parent.verticalCenter
-                    visible: root.pendingPower === "" && root.footerStatusText() !== ""
-                    elide: Text.ElideRight
-                    color: root.statusIsError() ? root.config.urgent : root.config.muted
-                    font.pointSize: root.config.textSizeSmall
-                    text: root.footerStatusText()
-                }
-
-                Text {
-                    id: footerKeys
-
-                    renderType: Text.NativeRendering
-                    anchors.right: parent.right
-                    anchors.rightMargin: root.config.panelPadding
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: footerKeyMouse.containsMouse ? root.config.fg : root.config.muted
-                    font.pointSize: root.config.textSizeSmall
-                    text: root.helpOpen ? "? Close help" : "? Help"
-
-                    MouseArea {
-                        id: footerKeyMouse
-
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: root.toggleHelp()
-                    }
-                }
+            SettingsFooter {
+                config: root.config
+                powerActions: root.powerActions
+                pendingPower: root.pendingPower
+                statusText: root.footerStatusText()
+                statusIsError: root.statusIsError()
+                helpOpen: root.helpOpen
+                onPowerRequested: action => root.requestPower(action)
+                onConfirmRequested: root.confirmPower()
+                onCancelRequested: root.cancelPower()
+                onHelpToggled: root.toggleHelp()
             }
         }
     }
