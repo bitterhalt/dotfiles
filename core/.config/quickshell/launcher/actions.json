@@ -206,7 +206,7 @@
     "category": "cmd",
     "label": "Toggle Ollama",
     "keyword": "ollama",
-    "command": "ollama-toggle",
+    "command": "toggle_ollama",
     "confirm": false
   }
 ]
