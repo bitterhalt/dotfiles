@@ -89,7 +89,7 @@ bar/            Bar and its modules
 components/     Reusable UI and popup components
 services/       Shared desktop state and integrations
 tests/          Offline tests and fixtures, grouped by feature
-launcher/       Launcher, actions.json, dmenu runner, and search helpers
+launcher/       Launcher, UserActions.qml, dmenu runner, and search helpers
 menus/          Settings and wallpaper menus
 notifications/  Notification popups and history
 clipboard/      Clipboard picker and previews

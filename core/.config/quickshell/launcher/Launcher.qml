@@ -182,7 +182,7 @@ Item {
                         type: "action",
                         entry: action,
                         text: "[action] " + action.category + ": " + action.label,
-                        icon: root.actionIcon,
+                        icon: action.icon || root.actionIcon,
                         pinned: actionPinRanks.has(action.keyword),
                         index: index,
                         score: actionTextNeedle === "" ? 0 : Scorer.scoreLine(action.keyword + " " + action.label, actionTextNeedle)
@@ -208,7 +208,7 @@ Item {
                         type: "action",
                         entry: action,
                         text: "[action] " + action.label,
-                        icon: root.actionIcon,
+                        icon: action.icon || root.actionIcon,
                         pinned: true,
                         score: 0
                     })).sort((a, b) => actionPinRank(a.entry.keyword) - actionPinRank(b.entry.keyword));
@@ -238,7 +238,7 @@ Item {
                         type: "action",
                         entry: action,
                         text: "[action] " + action.label,
-                        icon: root.actionIcon,
+                        icon: action.icon || root.actionIcon,
                         pinned: actionPinRanks.has(action.keyword),
                         score: Scorer.scoreLine(action.keyword + " " + action.label, value)
                     })).filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.text.localeCompare(b.text)).concat(entries);

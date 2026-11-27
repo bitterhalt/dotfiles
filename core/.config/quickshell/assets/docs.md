@@ -51,7 +51,7 @@ Several helpers expect `~/.config/quickshell`, so keep that path. Adjust the lin
 if you install the shell somewhere else.
 
 Change appearance and behavior in the Settings menu (`qs ipc call settings open`).
-Optional launcher actions in `launcher/actions.json` include local tools such as `sup`,
+Optional launcher actions in `launcher/UserActions.qml` include local tools such as `sup`,
 `vopen`, and `tmux-sysmon.sh`. Some entries rely on personal scripts or configuration
 from my [dotfiles](https://github.com/bitterhalt/dotfiles). Review or replace them.
 These menus do not affect your own dmenu scripts.
@@ -186,42 +186,46 @@ helper caches them for one hour.
 
 ### Launcher actions
 
-Add custom commands to the launcher in `launcher/actions.json`, a single JSON
-list. Each entry needs a `category`, a `label`, a `keyword`, and a `command`;
-`confirm` is optional and defaults to `true`:
+The shell's own graphical commands are built in. They live under the
+`quickshell` category and use the `settings` icon: power actions, lock screen,
+wallpaper, settings, updates, and screen recording. Their definitions live in
+`components/QuickshellActions.qml`, separate from personal commands, so other
+menus can reuse the same list. Type `:quickshell` to list them.
 
-```json
-[
-  {
-    "category": "power",
-    "label": "Reboot",
-    "keyword": "reboot",
-    "command": "qs ipc call power reboot",
-    "confirm": true
-  },
-  {
-    "category": "power",
-    "label": "Lock screen",
-    "keyword": "lock",
-    "command": "qs ipc call lock lock",
-    "confirm": false
-  }
-]
+Add personal commands in `launcher/UserActions.qml`, a QML list. Each entry
+needs a `category`, a `label`, a `keyword`, and a `command`; `confirm` is
+optional and defaults to `true`:
+
+```qml
+import QtQuick
+
+QtObject {
+    readonly property var actions: [
+        {
+            category: "misc",
+            label: "Notification test",
+            keyword: "notify",
+            command: "notify-send hello",
+            confirm: false
+        }
+    ]
+}
 ```
 
-Those entries appear under the `power` category. Slimshell watches the file, so
-edits reload automatically. When it is invalid, Slimshell keeps its last valid
-entries; if none have loaded yet, it skips the invalid file but the launcher
-still works.
+Quickshell watches QML sources, so edits reload automatically. Because this is
+QML rather than JSON, comments and trailing commas are allowed; a syntax error
+shows in the QML logs instead of silently keeping the previous list.
 
 Type the keyword (or part of the label) in the launcher and pick the result;
 Slimshell labels actions `[action] <category>: <name>` and shows the
-`utilities-terminal` icon so they stay distinct from applications. Change
-`actionIcon` in `launcher/Launcher.qml` to use a different icon. With
+`utilities-terminal` icon for personal commands (built-ins use `settings`) so
+they stay distinct from applications. Change `actionIcon` in
+`launcher/Launcher.qml` to use a different icon for personal commands. With
 `confirm: true` the launcher asks Yes/No before running the command. Type
-`:` to list every action; `:power` lists only that category, and `:power reb`
-filters within it. `Ctrl+P` pins the selected command; pinned commands appear
-first in an empty launcher, above pinned apps, and Slimshell stores them in
+`:` to list every action; `:quickshell` lists the built-ins, `:misc` lists that
+personal category, and `:misc notif` filters within it. `Ctrl+P` pins the
+selected command; pinned commands appear first in an empty launcher, above
+pinned apps, and Slimshell stores them in
 `~/.local/share/quickshell-launcher-action-pins.json`. Commands run through the
 shell, so only add commands you trust.
 
@@ -230,8 +234,8 @@ running. See the [dmenu examples](../README.md#dmenu-mode).
 
 ### Updates
 
-Open **Updates** from the Updates launcher action (an `updates` entry in
-`launcher/actions.json`) or with `qs ipc call updates toggle`. Nothing checks
+Open **Updates** from the built-in Updates launcher action (category
+`quickshell`) or with `qs ipc call updates toggle`. Nothing checks
 in the background: the first open in a session runs a package check, later opens
 reuse the cached report, and **Refresh** (`r`) checks again. Long reports stay
 at most three quarters of the screen high and scroll with the wheel or

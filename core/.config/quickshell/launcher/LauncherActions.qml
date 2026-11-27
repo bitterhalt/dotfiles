@@ -1,36 +1,34 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import Quickshell.Io
-import "LauncherActionsSchema.js" as Schema
+import "../components"
 
-// Personal launcher actions live in launcher/actions.json. A bad edit keeps the
-// last valid entries instead of blanking the launcher.
+// Personal launcher actions live in launcher/UserActions.qml; built-in shell
+// actions live in components/QuickshellActions.qml. Both are merged here so the
+// rest of the launcher searches a single list.
 Item {
     id: root
 
     visible: false
 
-    property var actions: []
+    // Personal actions, normalized to the same shape as the built-in ones.
+    readonly property var userActions: user.actions.map(action => ({
+                label: action.label,
+                keyword: action.keyword.trim().toLowerCase(),
+                command: action.command,
+                confirm: action.confirm === undefined ? true : action.confirm,
+                category: action.category.trim(),
+                icon: action.icon || ""
+            }))
 
-    function applyText(text): void {
-        try {
-            actions = Schema.parse(text);
-        } catch (error) {
-            console.warn("Invalid actions.json: " + error.message + "; keeping current actions");
-        }
+    // Everything the launcher searches: built-in shell actions first, then personal.
+    readonly property var actions: builtin.actions.concat(userActions)
+
+    QuickshellActions {
+        id: builtin
     }
 
-    FileView {
-        id: actionsFile
-
-        path: Qt.resolvedUrl("actions.json").toString()
-        blockLoading: true
-        watchChanges: true
-        printErrors: false
-        Component.onCompleted: root.applyText(text())
-        onFileChanged: reload()
-        onLoaded: root.applyText(text())
-        onLoadFailed: console.warn("Could not load actions.json; keeping current actions")
+    UserActions {
+        id: user
     }
 }
