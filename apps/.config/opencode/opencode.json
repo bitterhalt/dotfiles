@@ -1,15 +1,15 @@
 {
-  "$schema": "https://opencode.ai",
-  "model": "ollama/hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M",
+  "$schema": "https://opencode.ai/config.json",
+  "model": "ollama/hf.co/empero-ai/Qwythos-9B-v2-GGUF:Q4_K_M",
   "providers": {
     "ollama": {
-      "package": "@ai-sdk/openai-compatible",
+      "package": "@opencode-ai/ai/providers/openai-compatible",
       "name": "Ollama",
       "settings": {
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M": {
+        "hf.co/empero-ai/Qwythos-9B-v2-GGUF:Q4_K_M": {
           "name": "Qwythos 9B",
           "capabilities": {
             "tools": true,
@@ -19,7 +19,7 @@
           },
           "limit": {
             "context": 32768,
-            "output": 8192
+            "output": 16384
           },
           "settings": {
             "temperature": 0.6,
