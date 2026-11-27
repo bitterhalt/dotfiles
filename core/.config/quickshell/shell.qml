@@ -205,12 +205,19 @@ ShellRoot {
         idleService: appIdleService
     }
 
+    PowerMenu {
+        id: powerMenu
+        config: appConfig
+        lockService: appLockService
+        powerService: appPowerService
+        targetScreen: root.activeScreen
+    }
+
     SettingsMenu {
         id: settingsMenu
         config: appConfig
         wallpaperController: appWallpaperPicker
         idleService: appIdleService
-        powerService: appPowerService
         settingsService: appSettingsService
         targetScreen: root.activeScreen
     }

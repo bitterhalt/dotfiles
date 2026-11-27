@@ -17,7 +17,6 @@ Item {
 
     required property var config
     required property var idleService
-    required property var powerService
     required property var settingsService
     required property var wallpaperController
     required property var targetScreen
@@ -27,26 +26,6 @@ Item {
     property string errorText: ""
     property string noteText: ""
     property bool helpOpen: false
-    // Destructive footer action awaiting Yes/No ("exit", "reboot", or "shutdown").
-    property string pendingPower: ""
-    readonly property var powerActions: [
-        {
-            id: "exit",
-            label: "[E]xit"
-        },
-        {
-            id: "sleep",
-            label: "[Z]zz"
-        },
-        {
-            id: "reboot",
-            label: "[R]eboot"
-        },
-        {
-            id: "shutdown",
-            label: "[S]hutdown"
-        }
-    ]
 
     // Edited values of a staged page; written by Apply, dropped when the page changes.
     property var draft: ({})
@@ -61,7 +40,6 @@ Item {
     function open(screen, pageId) {
         menuScreen = screen || targetScreen;
         helpOpen = false;
-        pendingPower = "";
         const index = pages.findIndex(entry => entry.id === pageId);
         selectPage(index >= 0 ? index : page, true);
         opened = true;
@@ -71,48 +49,16 @@ Item {
     function close() {
         opened = false;
         helpOpen = false;
-        pendingPower = "";
         themingPending = false;
         themingAttempted = false;
     }
 
     function toggleHelp() {
-        pendingPower = "";
         helpOpen = !helpOpen;
         if (helpOpen)
             card.forceActiveFocus();
         else if (pageRows[page])
             pageRows[page].forceActiveFocus(Qt.TabFocusReason);
-    }
-
-    // Destructive actions wait for [Y]es / [N]o; sleep runs immediately.
-    function requestPower(action) {
-        if (action === "sleep") {
-            close();
-            powerService.suspend();
-            return;
-        }
-        pendingPower = action;
-        card.forceActiveFocus();
-    }
-
-    function confirmPower() {
-        const action = pendingPower;
-        pendingPower = "";
-        if (action === "")
-            return;
-        close();
-        if (action === "exit")
-            powerService.exitSession();
-        else if (action === "reboot")
-            powerService.reboot();
-        else if (action === "shutdown")
-            powerService.shutdown();
-    }
-
-    function cancelPower() {
-        pendingPower = "";
-        card.forceActiveFocus();
     }
 
     function toggle(screen) {
@@ -132,7 +78,6 @@ Item {
         const next = (index + pages.length) % pages.length;
         const leavingTheming = pages[page].id === "theming" && next !== page;
         helpOpen = false;
-        pendingPower = "";
         errorText = "";
         noteText = "";
         if (leavingTheming) {
@@ -228,8 +173,8 @@ Item {
         return current.custom === true && idleService.errorText !== "";
     }
 
-    // Only real status replaces the footer buttons; page hints are gone.
-    function footerStatusText() {
+    // Real status takes precedence; otherwise show the page's hint.
+    function statusText() {
         if (errorText !== "")
             return errorText;
         if (current.id === "theming" && themingAttempted) {
@@ -240,7 +185,9 @@ Item {
         }
         if (current.custom === true && idleService.errorText !== "")
             return idleService.errorText;
-        return noteText;
+        if (noteText !== "")
+            return noteText;
+        return current.custom === true ? "30s, 30m, 2h · 0 disables an idle action" : current.hint || "";
     }
 
     // Tab order and Up/Down follow the same focus chain.
@@ -313,41 +260,20 @@ Item {
             // Up/Down walk the page list from the sidebar, or the page controls
             // once one has focus (same order as Tab).
             Keys.onPressed: event => {
-                const key = event.text.toLowerCase();
-                if (root.pendingPower !== "") {
-                    if (key === "y") {
-                        root.confirmPower();
-                        event.accepted = true;
-                    } else if (key === "n") {
-                        root.cancelPower();
-                        event.accepted = true;
-                    }
+                if (event.key !== Qt.Key_Up && event.key !== Qt.Key_Down)
                     return;
-                }
-                if (event.key === Qt.Key_Up || event.key === Qt.Key_Down) {
-                    const forward = event.key === Qt.Key_Down;
-                    if (card.activeFocus)
-                        root.selectPage(root.page + (forward ? 1 : -1));
-                    else
-                        root.focusStep(forward);
-                    event.accepted = true;
-                    return;
-                }
-                if (root.helpOpen)
-                    return;
-                const action = key === "e" ? "exit" : key === "z" ? "sleep" : key === "r" ? "reboot" : key === "s" ? "shutdown" : "";
-                if (action !== "") {
-                    root.requestPower(action);
-                    event.accepted = true;
-                }
+                const forward = event.key === Qt.Key_Down;
+                if (card.activeFocus)
+                    root.selectPage(root.page + (forward ? 1 : -1));
+                else
+                    root.focusStep(forward);
+                event.accepted = true;
             }
 
             Shortcut {
                 sequence: "Escape"
                 onActivated: {
-                    if (root.pendingPower !== "")
-                        root.cancelPower();
-                    else if (root.helpOpen)
+                    if (root.helpOpen)
                         root.toggleHelp();
                     else
                         root.close();
@@ -496,14 +422,6 @@ Item {
                                 key: "Ctrl+Enter"
                             },
                             {
-                                name: "Power actions",
-                                key: "E / Z / R / S"
-                            },
-                            {
-                                name: "Confirm / cancel power action",
-                                key: "Y / N"
-                            },
-                            {
                                 name: "Show / hide help",
                                 key: "?"
                             },
@@ -569,14 +487,9 @@ Item {
 
             SettingsFooter {
                 config: root.config
-                powerActions: root.powerActions
-                pendingPower: root.pendingPower
-                statusText: root.footerStatusText()
+                statusText: root.statusText()
                 statusIsError: root.statusIsError()
                 helpOpen: root.helpOpen
-                onPowerRequested: action => root.requestPower(action)
-                onConfirmRequested: root.confirmPower()
-                onCancelRequested: root.cancelPower()
                 onHelpToggled: root.toggleHelp()
             }
         }

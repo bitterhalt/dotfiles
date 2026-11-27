@@ -35,6 +35,7 @@ Many Quickshell setups use large Material Design menus and features I never touc
 | `notificationCenter` | `toggle`, `open`, `close`                                                           | Show or hide notification history                                  |
 | `notifications`      | `toggleDnd`, `enableDnd`, `disableDnd`, `isDnd`, `clear`, `count`                   | Control DND or notification history                                |
 | `power`              | `exit`, `suspend`, `reboot`, `shutdown`                                             | Run a session power action                                         |
+| `powermenu`          | `toggle`, `open`, `close`                                                           | Show or hide the standalone Power menu                              |
 | `recorder`           | `fullscreen`, `region`, `stop`, `isRecording`                                       | Start or stop a recording, or query its state                      |
 | `theme`              | `refresh`, `usingHellwal`                                                           | Reload or query the active theme                                   |
 | `translator`         | `toggle`, `open`, `close`                                                           | Control the translator                                             |

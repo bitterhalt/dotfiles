@@ -60,6 +60,7 @@ var pages = [
         id: "theming",
         label: "Theming",
         icon: "󰃣",
+        hint: "Colors are generated from the current wallpaper",
         staged: true,
         rows: [
             {
@@ -193,6 +194,7 @@ var pages = [
         id: "audio",
         label: "Audio",
         icon: "󰕾",
+        hint: "Values above 100% amplify the signal",
         rows: [
             {
                 kind: "stepper",
@@ -220,6 +222,7 @@ var pages = [
         id: "notifications",
         label: "Notifications",
         icon: "󰂚",
+        hint: "Excluded apps are comma separated app names",
         rows: [
             {
                 kind: "integer",
@@ -237,6 +240,7 @@ var pages = [
         id: "bluetooth",
         label: "Bluetooth",
         icon: "󰂯",
+        hint: "0 disables a battery notification",
         rows: [
             {
                 kind: "stepper",

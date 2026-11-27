@@ -125,10 +125,11 @@ idle timeouts, workspace layout, bar visibility, and Theming (Hellwal) options.
 Idle and Theming use Apply (Ctrl+Enter); Theming also regenerates colors from the
 current wallpaper.
 
-The footer has `[E]xit`, `[Z]zz`, `[R]eboot` and `[S]hutdown` actions. Press the
-letter or click a button; Sleep runs immediately, while the other three replace the
-buttons with `[Y]es` and `[N]o` for confirmation (`N` or `Esc` cancels). Real status
-messages temporarily replace the buttons.
+The footer shows a tip for the current page (for example, that values above 100%
+amplify the signal, or that `0` disables an idle action). Real status messages,
+such as errors and save confirmations, temporarily replace the tip. Click `? Help`
+or press `?` for the key list. Power actions live in the Power menu (`Mod+Escape`)
+and the launcher.
 
 Settings toggles animations; each widget owns its style and timing.
 

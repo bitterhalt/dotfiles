@@ -11,6 +11,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Shift+Delete` | TOP |
 | `Mod+Ctrl+Delete` | HTOP |
 | `Mod+Shift+F11` | Toggle Idle-deamon |
+| `Mod+Escape` | Open Power Menu |
 | `Mod+V` | Open Editor |
 | `Mod+F11` | Lock Screen |
 | `Mod+Shift+A` | Launch program |
