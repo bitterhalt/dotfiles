@@ -28,6 +28,13 @@
     "confirm": false
   },
   {
+    "category": "cmd",
+    "label": "Toggle Ollama",
+    "keyword": "ollama",
+    "command": "toggle_ollama",
+    "confirm": false
+  },
+  {
     "category": "misc",
     "label": "Gif Recorder",
     "keyword": "gif",
@@ -200,13 +207,6 @@
     "label": "Stop Recording",
     "keyword": "recstop",
     "command": "qs ipc call recorder stop",
-    "confirm": false
-  },
-  {
-    "category": "cmd",
-    "label": "Toggle Ollama",
-    "keyword": "ollama",
-    "command": "toggle_ollama",
     "confirm": false
   }
 ]
