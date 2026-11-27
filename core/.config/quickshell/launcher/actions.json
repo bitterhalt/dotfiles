@@ -201,5 +201,12 @@
     "keyword": "recstop",
     "command": "qs ipc call recorder stop",
     "confirm": false
+  },
+  {
+    "category": "cmd",
+    "label": "Toggle Ollama",
+    "keyword": "ollama",
+    "command": "ollama-toggle",
+    "confirm": false
   }
 ]
