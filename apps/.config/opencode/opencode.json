@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "ollama/hf.co/empero-ai/Qwythos-9B-v2-GGUF:Q4_K_M",
   "providers": {
     "ollama": {
       "package": "@opencode-ai/ai/providers/openai-compatible",
