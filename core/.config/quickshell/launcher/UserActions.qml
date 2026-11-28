@@ -42,14 +42,21 @@ QtObject {
             confirm: false
         },
         {
-            category: "misc",
+            category: "cmd",
+            label: "atop",
+            keyword: "atop",
+            command: "wezterm_run -e amdgpu_top --smi",
+            confirm: false
+        },
+        {
+            category: "cmd",
             label: "Gif Recorder",
             keyword: "gif",
             command: "wezterm_run --class gifrec -e gif_rec",
             confirm: false
         },
         {
-            category: "misc",
+            category: "cmd",
             label: "Update System",
             keyword: "sup",
             command: "wezterm_run --class pop-upgrade -e sup",
