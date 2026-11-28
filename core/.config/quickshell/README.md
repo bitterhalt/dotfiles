@@ -23,7 +23,7 @@ Many Quickshell setups use large Material Design menus and features I never touc
 | -------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | `audio`              | `toggle`, `open`, `close`                                                           | Show or hide the audio menu                                        |
 | `bar`                | `toggle`, `hide`, `show`, `isVisible`                                               | Control or query bar visibility; the state persists                |
-| `bluetooth`          | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Bluetooth tab)                  |
+| `bluetooth`          | `toggle`, `open`, `close`                                                           | Show or hide the Bluetooth menu                                    |
 | `clipboard`          | `toggle`, `open`, `close`, `refresh`, `copySelected`, `deleteSelected`              | Control the clipboard picker                                       |
 | `drives`             | `status`, `refresh`, `mount <dev>`, `unmount <dev>`, `poweroff <dev>`, `open <dev>` | Inspect and control removable drives                               |
 | `idle`               | `toggle`, `isDisabled`, `settings`                                                  | Control idle handling or open its settings                         |
@@ -31,7 +31,7 @@ Many Quickshell setups use large Material Design menus and features I never touc
 | `launcher`           | `toggle`, `open`, `close`, `apps`, `search`, `emoji`, `files`, `calculator`         | Open, switch, or toggle launcher modes; `search` opens File Search |
 | `lock`               | `lock`                                                                              | Lock the session                                                   |
 | `locker`             | `isSecure`                                                                          | Query whether the separate lock-screen process is secure           |
-| `network`            | `toggle`, `open`, `close`                                                           | Show or hide the connections menu (Network tab)                    |
+| `network`            | `toggle`, `open`, `close`                                                           | Show or hide the network menu                                      |
 | `notificationCenter` | `toggle`, `open`, `close`                                                           | Show or hide notification history                                  |
 | `notifications`      | `toggleDnd`, `enableDnd`, `disableDnd`, `isDnd`, `clear`, `count`                   | Control DND or notification history                                |
 | `power`              | `exit`, `suspend`, `reboot`, `shutdown`                                             | Run a session power action                                         |

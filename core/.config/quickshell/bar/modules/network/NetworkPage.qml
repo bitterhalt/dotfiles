@@ -5,16 +5,14 @@ import "Model.js" as Model
 import QtQuick
 import Quickshell.Networking
 
-// Network tab of the combined connections popup (see ConnectionsPopup.qml).
-// The popup owns keyboard focus and forwards key presses to handleKey().
+// Network popup content. The popup owns keyboard focus and forwards key
+// presses to handleKey().
 Column {
     id: root
 
     required property var config
     required property var network
     required property var popupManager
-    // True while a sub-view is open; the popup hides its tab bar meanwhile.
-    readonly property bool subpage: passwordMode || actionMode
 
     signal closeRequested
     signal focusRequested
@@ -473,8 +471,13 @@ Column {
     Item {
         objectName: "networkFooter"
         width: parent.width
-        height: Math.max(footerStatus.implicitHeight, scanButton.height)
+        height: Math.max(footerStatus.implicitHeight, scanButton.height) + root.spacing
         visible: !root.passwordMode && !root.actionMode && !root.helpOpen
+
+        PanelSeparator {
+            config: root.config
+            anchors.top: parent.top
+        }
 
         Text {
             id: footerStatus
@@ -493,6 +496,7 @@ Column {
             config: root.config
             anchors.right: parent.right
             anchors.top: parent.top
+            anchors.topMargin: root.spacing
             compact: true
             iconSize: root.config.iconSize * 0.78
             quiet: true

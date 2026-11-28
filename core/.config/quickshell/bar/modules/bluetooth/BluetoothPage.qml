@@ -2,15 +2,13 @@ import "../../../components"
 import "Model.js" as Model
 import QtQuick
 
-// Bluetooth tab of the combined connections popup (see ConnectionsPopup.qml).
-// The popup owns keyboard focus and forwards key presses to handleKey().
+// Bluetooth popup content. The popup owns keyboard focus and forwards key
+// presses to handleKey().
 Column {
     id: root
 
     required property var config
     required property var bluetoothService
-    // True while a sub-view is open; the popup hides its tab bar meanwhile.
-    readonly property bool subpage: confirmForget
 
     signal closeRequested
     signal focusRequested
@@ -136,11 +134,6 @@ Column {
         }))
             root.selectedAddress = root.popupRows[0].address;
     }
-    Component.onDestruction: {
-        root.cancelForget();
-        root.helpOpen = false;
-    }
-
     // Called by the popup for every key press; returns true when handled.
     function handleKey(event) {
         if (!root.confirmForget && discoveryState.handleKey(event.key, event.modifiers)) {
@@ -294,8 +287,13 @@ Column {
     Item {
         objectName: "bluetoothFooter"
         width: parent.width
-        height: Math.max(footerStatus.implicitHeight, scanButton.height)
+        height: Math.max(footerStatus.implicitHeight, scanButton.height) + root.spacing
         visible: !!root.adapter && root.adapter.enabled && !root.confirmForget && !root.helpOpen
+
+        PanelSeparator {
+            config: root.config
+            anchors.top: parent.top
+        }
 
         Text {
             id: footerStatus
@@ -316,6 +314,7 @@ Column {
 
             anchors.right: parent.right
             anchors.top: parent.top
+            anchors.topMargin: root.spacing
             compact: true
             iconSize: root.config.iconSize * 0.78
             quiet: true
