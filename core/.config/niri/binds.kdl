@@ -42,7 +42,6 @@ binds {
     Mod+N hotkey-overlay-title="Browse Notes" { spawn-sh "menu_notes"; }
     Mod+S hotkey-overlay-title="Find Files" { spawn-sh "qs ipc call launcher search"; }
     Mod+Shift+D hotkey-overlay-title="Run Launcher" { spawn-sh "menu_run"; }
-    Mod+Shift+T hotkey-overlay-title="Tmux Helper" { spawn-sh "wezterm_tmuxer"; }
 
     // Submaps
     Mod+Shift+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs ipc call wallpaper toggle"; }

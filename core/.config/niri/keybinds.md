@@ -61,7 +61,6 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+N` | Browse Notes |
 | `Mod+S` | Find Files |
 | `Mod+Shift+D` | Run Launcher |
-| `Mod+Shift+T` | Tmux Helper |
 
 ## Submaps
 
