@@ -13,7 +13,7 @@ My Arch Linux setup: [Niri](https://github.com/YaLTeR/niri) with my [Quickshell]
 - **Keyboard driven.** If a widget has buttons, it must also work from the keyboard.
 - **Less clutter.** A clear working environment, no giant menus.
 - **Simplicity.** Small scripts and plain config files over big frameworks.
-- **Speed before eye candy.** This is not a working environment, not unixporn.
+- **Speed before eye candy.** This is a working environment, not unixporn.
 
   
 ## Stack
