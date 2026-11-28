@@ -2,13 +2,21 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local M = {}
 
--- Only run action if the current pane belongs to the persistent "unix" domain
 local function only_in_unix(action)
 	return wezterm.action_callback(function(window, pane)
 		if pane:get_domain_name() == "unix" then
 			window:perform_action(action, pane)
 		end
 	end)
+end
+
+local function workspace_has_windows(name)
+	for _, mux_win in ipairs(wezterm.mux.all_windows()) do
+		if mux_win:get_workspace() == name then
+			return true
+		end
+	end
+	return false
 end
 
 function M.setup(config)
@@ -123,20 +131,33 @@ function M.setup(config)
 			})),
 		},
 
-		-- Switch to monitoring workspace (htop inside "unix" domain)
+		-- Switch to monitoring workspace (btop inside "unix" domain).
 		{
 			key = "m",
 			mods = "CTRL|SHIFT",
-			action = only_in_unix(act.SwitchToWorkspace({
-				name = "monitoring",
-				spawn = {
-					domain = { DomainName = "unix" },
-					args = { "btop" },
-				},
-			})),
+			action = wezterm.action_callback(function(window, pane)
+				if pane:get_domain_name() ~= "unix" then
+					return
+				end
+
+				if not workspace_has_windows("monitoring") then
+					window:perform_action(
+						act.SwitchToWorkspace({
+							name = "monitoring",
+							spawn = {
+								domain = { DomainName = "unix" },
+								args = { "btop" },
+							},
+						}),
+						pane
+					)
+				else
+					window:perform_action(act.SwitchToWorkspace({ name = "monitoring" }), pane)
+				end
+			end),
 		},
 
-		-- Dotfiles workspace
+		-- Dotfiles workspace (lazy build, reused once it has a window)
 		{
 			key = "d",
 			mods = "CTRL|SHIFT",
@@ -147,16 +168,7 @@ function M.setup(config)
 
 				local dir = wezterm.home_dir .. "/Documents/projects/dotfiles"
 
-				-- Only build it once, afterwards just switch to it
-				local exists = false
-				for _, mux_win in ipairs(wezterm.mux.all_windows()) do
-					if mux_win:get_workspace() == "dotfiles" then
-						exists = true
-						break
-					end
-				end
-
-				if not exists then
+				if not workspace_has_windows("dotfiles") then
 					local _, left_pane, mux_win = wezterm.mux.spawn_window({
 						domain = { DomainName = "unix" },
 						cwd = dir,
