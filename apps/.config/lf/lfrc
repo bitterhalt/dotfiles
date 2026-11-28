@@ -52,7 +52,7 @@ map p :paste; clear
 map x cut
 map y copy
 map z zi
-map Z archive
+
 
 #-----------------------------------------------------#
 #                      Jump                           #

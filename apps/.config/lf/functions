@@ -115,31 +115,7 @@ cmd bulkrename ${{
     lf -remote "send $id unselect"
 }}
 
-#-----------------------------------------------------#
-#                      Archive                        #
-#-----------------------------------------------------#
-cmd archive ${{
-    set -f
-    printf "Archive name (e.g. foo.tar.gz, foo.zip, foo.7z): "
-    read -r name
-    [ -z "$name" ] && exit 0
 
-    if [ -e "$name" ]; then
-        printf "'%s' exists, overwrite? [y/N] " "$name"
-        read -r -n 1 ans
-        echo
-        [[ "${ans,,}" == y ]] || exit 0
-        rm -f -- "$name"
-    fi
-
-    files=()
-    while IFS= read -r line; do files+=("$(basename -- "$line")"); done <<< "$fx"
-
-    apack "$name" "${files[@]}"
-    lf -remote "send $id unselect"
-    lf -remote "send $id reload"
-    lf -remote "send $id select \"$name\""
-}}
 
 #-----------------------------------------------------#
 #                      Unarchive                      #
