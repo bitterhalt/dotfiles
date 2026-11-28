@@ -11,7 +11,6 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Shift+Delete` | TOP |
 | `Mod+Ctrl+Delete` | HTOP |
 | `Mod+Shift+F11` | Toggle Idle-deamon |
-| `Mod+Escape` | Open Power Menu |
 | `Mod+V` | Open Editor |
 | `Mod+F11` | Lock Screen |
 | `Mod+Shift+A` | Launch program |
@@ -54,6 +53,7 @@ _Generated automatically from `~/.config/niri/binds.kdl`._
 | `Mod+Ctrl+T` | Open Translator |
 | `Mod+Ctrl+W` | Display Weather |
 | `Mod+D` | Run Application Launcher |
+| `Mod+Escape` | Open Power Menu |
 | `Mod+F1` | Open Quickshell Settings |
 | `Mod+F3` | Launch program |
 | `Mod+F4` | Process Killer |
