@@ -8,7 +8,7 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "hf.co/empero-ai/Qwythos-9B-v2-GGUF:Q4_K_M": {
+        "qwythos-v2": {
           "name": "Qwythos 9B",
           "capabilities": {
             "tools": true,
@@ -19,12 +19,6 @@
           "limit": {
             "context": 32768,
             "output": 16384
-          },
-          "settings": {
-            "temperature": 0.6,
-            "top_p": 0.95,
-            "top_k": 20,
-            "repeat_penalty": 1.05
           }
         }
       }
