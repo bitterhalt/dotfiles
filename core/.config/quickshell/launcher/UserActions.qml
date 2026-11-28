@@ -29,9 +29,9 @@ QtObject {
         },
         {
             category: "cmd",
-            label: "Arch maintenance",
+            label: "System maintenance",
             keyword: "maintenance",
-            command: "$TERMINAL -e arch-maintenance",
+            command: "$TERMINAL -e system_mainenance",
             confirm: false
         },
         {

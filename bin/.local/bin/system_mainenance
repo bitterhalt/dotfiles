@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+echo "System Maintenance"
+echo
+
+sudo_ready=false
+
+menu() {
+  echo "Select actions by number (space or comma separated, e.g. 1 3 5)."
+  echo
+  echo "  1. Clean pacman cache"
+  echo "  2. Clean yay cache"
+  echo "  3. Remove orphaned packages"
+  echo "  4. Trash ~/Downloads"
+  echo "  5. Clean journals"
+  echo "  6. All"
+  echo
+  echo "Enter selection (empty to finish):"
+}
+
+run_action() {
+  case "$1" in
+    1)
+      if ! $sudo_ready; then sudo -v && sudo_ready=true; fi
+      echo "==> Cleaning pacman cache..."
+      sudo paccache -rk1
+      ;;
+    2)
+      echo "==> Cleaning yay cache..."
+      rm -rf ~/.cache/yay/*
+      ;;
+    3)
+      orphans=$(pacman -Qdtq 2>/dev/null)
+      if [[ -n "$orphans" ]]; then
+        if ! $sudo_ready; then sudo -v && sudo_ready=true; fi
+        echo "==> Removing orphaned packages..."
+        sudo pacman -Rns $orphans
+      else
+        echo "==> No orphaned packages found."
+      fi
+      ;;
+    4)
+      shopt -s nullglob
+      files=(~/Downloads/*)
+      shopt -u nullglob
+      if (( ${#files[@]} )); then
+        echo "==> Trashing ~/Downloads..."
+        gio trash "${files[@]}"
+      else
+        echo "==> No files to trash."
+      fi
+      ;;
+    5)
+      if ! $sudo_ready; then sudo -v && sudo_ready=true; fi
+      echo "==> Cleaning journals..."
+      sudo journalctl --rotate --vacuum-time=1s
+      ;;
+    6)
+      for n in 1 2 3 4 5; do run_action "$n"; done
+      ;;
+    *)
+      echo "==> Invalid selection: $1"
+      ;;
+  esac
+  echo
+}
+
+while true; do
+  menu
+  read -rp "> " input
+
+  [[ -z "$input" ]] && break
+
+  # Normalize separators: commas to spaces, then read tokens
+  input=${input//,/ }
+  for choice in $input; do
+    run_action "$choice"
+  done
+done
+
+echo "==> Maintenance Complete!"
+echo
+read -rp "Press <Enter> to exit this window."
