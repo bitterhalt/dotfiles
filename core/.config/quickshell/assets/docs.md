@@ -92,11 +92,9 @@ Startup takes effect on your next session. Don't launch a second copy if one is 
 
 `qs ipc call settings open` brings up the Settings menu, and there's a Settings launcher action too. Pages cover Idle, Appearance, Theming, Bar, Audio, Launcher, Notifications and Bluetooth. Tab walks the page list and the controls. Up/Down flip through sidebar pages and move between fields in a page, Left/Right step a value, Ctrl+Up/Down or Ctrl+J/K change pages from anywhere, and Esc closes. Hit `?` or click `? Help` for the full key list.
 
-Your choices land in `~/.local/share/quickshell-config.json`, and Slimshell reloads that file when you edit it. Invalid values get replaced with safe defaults, and a malformed JSON file leaves your previous settings alone. No file yet means the built-in defaults apply. `quickshell-settings.json` holds idle timeouts, workspace layout, bar visibility and the Theming (Hellwal) options. Idle and Theming need Apply (Ctrl+Enter); Theming also rebuilds colors from the current wallpaper.
+Your choices land in `~/.local/share/quickshell-config.json`, and Slimshell reloads that file when you edit it. Invalid values get replaced with safe defaults, and a malformed JSON file leaves your previous settings alone. No file yet means the built-in defaults apply. `quickshell-settings.json` holds idle timeouts, workspace layout, bar visibility and the Theming (Hellwal) options. Idle and Theming need Apply (Ctrl+Enter). Theming also rebuilds colors from the current wallpaper.
 
-The footer shows a tip about the current page, like the fact that values over 100% amplify the signal or that `0` disables an idle action. Real messages, errors and save confirmations for instance, push the tip aside for a moment. `? Help` or the `?` key gives you the key list. Power actions sit in the Power menu (`Mod+Escape`) and the launcher.
-
-Animations get toggled in Settings. Each widget keeps its own style and timing.
+The footer shows a tip about the current page and gives way to messages, errors and save confirmations. Power actions sit in the Power menu (`Mod+Escape`) and the launcher.
 
 ### Clipboard history
 
@@ -161,7 +159,7 @@ QtObject {
 
 Quickshell watches QML sources, so edits reload on their own. Since this is QML and not JSON, comments and trailing commas are fine, and a syntax error shows up in the QML logs instead of silently keeping the old list.
 
-Type the keyword or part of the label and pick the result. Slimshell marks actions as `[action] <category>: <name>` and gives personal commands the `utilities-terminal` icon while built-ins use `settings`, so they're easy to tell apart from applications. Want a different icon? Change `actionIcon` in `launcher/Launcher.qml`. With `confirm: true` the launcher asks Yes/No first. Type `:` to list everything, `:quickshell` for built-ins, `:misc` for that personal category, or `:misc notif` to filter inside it. `Ctrl+P` pins the selected command. Pinned commands come first in an empty launcher, ahead of pinned apps, and Slimshell saves them in `~/.local/share/quickshell-launcher-action-pins.json`. Commands go through the shell, so only add ones you trust.
+Type the keyword or part of the label to find an action. In a category view actions show as `[action] <category>: <label>`, and personal commands get the `utilities-terminal` icon while built-ins use `settings`. A `confirm: true` entry asks Yes/No first. Type `:` to list everything, `:misc` for that personal category, or `:misc notif` to filter inside it. `Ctrl+P` pins the selected command. Pins are stored in `~/.local/share/quickshell-launcher-action-pins.json`. Commands go through the shell, so only add ones you trust.
 
 While Slimshell is running, scripts can call `~/.config/quickshell/launcher/dmenu-runner`. The [dmenu examples](../README.md#dmenu-mode) show how.
 
@@ -169,14 +167,10 @@ While Slimshell is running, scripts can call `~/.config/quickshell/launcher/dmen
 
 Updates opens from its built-in launcher action in the `quickshell` category, or with `qs ipc call updates toggle`. Nothing polls in the background. The first open in a session runs a package check, later opens reuse the cached report, and **Refresh** (`r`) checks again. Long reports cap at three quarters of the screen and scroll with the wheel, Up/Down, PageUp/PageDown or Home/End. A thin bar on the right shows where you are.
 
-Checks cover `pacman` (plus `checkupdates` when installed) and AUR through `yay` or `paru`, along with `apt`, `dnf`, `flatpak`, `snap` and `pipx` when those tools are present.
-
-**Upgrade** (`u`) opens `$TERMINAL --app-id pop-upgrade -e bash ~/.config/quickshell/updates/upgrade.sh`. That script upgrades whatever managers it finds (Arch via yay/paru or pacman, then apt, dnf, snap, flatpak and pipx) and leaves prompts and build output visible in the terminal. `$TERMINAL` needs to accept `-e`; Slimshell falls back to `foot`. The `--app-id` flag lets a Niri window rule float the upgrade terminal.
+Checks cover `pacman` (plus `checkupdates` when installed) and AUR through `yay` or `paru`, along with `apt`, `dnf`, `flatpak`, `snap` and `pipx` when those tools are present. **Upgrade** (`u`) runs `updates/upgrade.sh` in your terminal, upgrading whatever managers are installed and leaving prompts visible.
 
 ## Updating and troubleshooting
 
 Update with `git -C ~/.config/quickshell pull --ff-only`. Commit or stash local changes first, since Git won't overwrite conflicting work.
 
 If startup breaks, stop the running instance and rerun the foreground command from step 3. A missing QML module means your Quickshell build is too old or missing an integration. Missing icons usually means you skipped the Nerd Font.
-
-The offline tests run with `python -B tests/run.py` from the checkout. They need Qt 6's `qmltestrunner` and never touch or reload the live shell.
