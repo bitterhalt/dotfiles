@@ -1,20 +1,18 @@
 # Install Slimshell
 
-Slimshell runs inside an existing Niri session. It does not install or replace
-your compositor configuration.
+Slimshell runs inside a Niri session you already have up and running. Your compositor config stays exactly as it is.
 
 ## 1. Install dependencies
 
-Install these with your distribution's package manager:
+Grab these from your distro's package manager:
 
-- Niri and a current Qt 6 build of [Quickshell](https://quickshell.org/docs/guide/install-setup/),
-  including its Wayland, PipeWire, Networking, Bluetooth, UPower, Polkit and PAM modules.
-- PipeWire, NetworkManager, BlueZ, UPower and polkit, with the relevant services running.
-- Symbols Nerd Font Mono for icons, plus your preferred text font.
-- Git to clone the repository.
-- `dbus-monitor` (shipped with D-Bus) to refresh clocks immediately after resume.
+- Niri plus a current Qt 6 build of [Quickshell](https://quickshell.org/docs/guide/install-setup/), with its Wayland, PipeWire, Networking, Bluetooth, UPower, Polkit and PAM modules.
+- PipeWire, NetworkManager, BlueZ, UPower and polkit, and make sure those services are actually running.
+- Symbols Nerd Font Mono for the icons, plus whatever text font you like.
+- Git, for cloning the repo.
+- `dbus-monitor`, which ships with D-Bus. Clocks refresh right after resume because of it.
 
-Install these tools only for the features you use:
+Only install the extras for features you'll use:
 
 | Feature                    | Dependencies                                                              |
 | -------------------------- | ------------------------------------------------------------------------- |
@@ -30,16 +28,11 @@ Install these tools only for the features you use:
 | Translation                | Python 3, `wl-copy`, and a DeepL API key                                  |
 | Locking and suspension     | Linux-PAM, Bash and systemd/logind; see the lock-screen check below       |
 
-Most distributions supply `notify-send` in a package named `libnotify`. Some ship
-`fd` under another name; Slimshell expects `fd` on `PATH`.
-Menus launch `$TERMINAL`, and commands run through a shell. Set
-`TERMINAL` and `EDITOR` in the environment that starts the shell; file search
-falls back to `foot` and `nvim` when they are unset.
+`notify-send` comes from a package called `libnotify` on most distros. Some rename `fd`, but Slimshell looks for `fd` on `PATH`. Menus launch `$TERMINAL` and commands go through a shell, so set `TERMINAL` and `EDITOR` in whatever starts the shell. Leave them unset and file search uses `foot` and `nvim`.
 
 ## 2. Install the configuration
 
-Back up any existing `~/.config/quickshell` first. Clone the dotfiles and link
-the shell into place:
+Back up any existing `~/.config/quickshell` before you start. Then clone the dotfiles and link the shell in:
 
 ```sh
 mkdir -p ~/.config
@@ -47,48 +40,35 @@ git clone https://github.com/bitterhalt/dotfiles.git ~/dotfiles
 ln -sfT ~/dotfiles/core/.config/quickshell ~/.config/quickshell
 ```
 
-Several helpers expect `~/.config/quickshell`, so keep that path. Adjust the link
-if you install the shell somewhere else.
+Keep that `~/.config/quickshell` path: several helpers hard-code it. If you put the shell somewhere else, adjust the link accordingly.
 
-Change appearance and behavior in the Settings menu (`qs ipc call settings open`).
-Optional launcher actions in `launcher/UserActions.qml` include local tools such as `sup`,
-`vopen`, and `tmux-sysmon.sh`. Some entries rely on personal scripts or configuration
-from my [dotfiles](https://github.com/bitterhalt/dotfiles). Review or replace them.
-These menus do not affect your own dmenu scripts.
+Appearance and behavior live in the Settings menu (`qs ipc call settings open`). The optional launcher actions in `launcher/UserActions.qml` cover local tools like `sup`, `vopen`, and `tmux-sysmon.sh`. Some of those entries point at personal scripts from my [dotfiles](https://github.com/bitterhalt/dotfiles), so look them over and swap out anything you don't want. None of this touches your own dmenu scripts.
 
 ## 3. Try it in your Niri session
 
-Stop any other notification daemon, such as Mako or Dunst, and avoid running a
-second polkit authentication agent. Disable the old bar's autostart if replacing it.
+Stop Mako, Dunst, or whatever notification daemon you're running, and don't start a second polkit agent. If you're replacing an old bar, turn off its autostart too.
 
 ```sh
 qs -p "$HOME/.config/quickshell" --no-detailed-logs
 ```
 
-Keep the terminal open to see errors. Press Ctrl+C to stop this foreground instance
-before starting it another way.
+Leave the terminal open so you can see errors. Ctrl+C stops the foreground instance.
 
 ### Check the lock screen
 
-From another terminal, while Slimshell is running:
+Open a second terminal while Slimshell is still running:
 
 ```sh
 qs ipc call lock lock
 ```
 
-Test that you can unlock before relying on automatic locking or suspension. The
-bundled `lock/pam/quickshell-lock` policy uses `pam_unix` and `pam_faillock`;
-adapt it to your distribution's authentication policy if needed. Keep another
-way to access your session while testing.
+Make sure you can unlock again before you trust automatic locking or suspension. The bundled `lock/pam/quickshell-lock` policy uses `pam_unix` and `pam_faillock`. Adapt it if your distro does authentication differently, and keep another way into your session while you test.
 
-Configure automatic locking, monitor power-off, and suspension on the Idle page
-of the Settings menu (`qs ipc call idle settings`). Set a timeout to `0` to
-disable that action.
+Automatic locking, monitor power-off and suspension are on the Idle page of the Settings menu (`qs ipc call idle settings`). A timeout of `0` turns that action off.
 
 ## 4. Add Niri startup and keybindings
 
-Add the following to your Niri configuration, merging the bindings into your
-existing `binds` block:
+Drop this into your Niri config, folding the bindings into your existing `binds` block:
 
 ```kdl
 spawn-sh-at-startup "qs -n --no-detailed-logs"
@@ -104,39 +84,23 @@ binds {
 }
 ```
 
-The startup command takes effect next session. Do not start a second copy if one
-is already running. More IPC calls are listed in the [README](../README.md#features).
+Startup takes effect on your next session. Don't launch a second copy if one is already up. The [README](../README.md#features) lists the other IPC calls.
 
 ## 5. Set up optional features
 
 ### Settings
 
-Open the Settings menu with `qs ipc call settings open` (or the Settings launcher
-action). It has pages for Idle, Appearance, Theming, Bar, Audio, Launcher, Notifications
-and Bluetooth. Tab moves focus through the page list and the controls. Up/Down switch
-pages from the sidebar and walk fields in the page, Left/Right step a value,
-Ctrl+Up/Down or Ctrl+J/K switch pages from anywhere, and Esc closes. Press `?` or
-click `? Help` for the key list. Slimshell saves choices in
-`~/.local/share/quickshell-config.json` and reloads the file when you edit it.
-It replaces invalid values with safe defaults and keeps the previous settings
-when the JSON is malformed.
-Without that file the built-in defaults apply. `quickshell-settings.json` stores
-idle timeouts, workspace layout, bar visibility, and Theming (Hellwal) options.
-Idle and Theming use Apply (Ctrl+Enter); Theming also regenerates colors from the
-current wallpaper.
+`qs ipc call settings open` brings up the Settings menu, and there's a Settings launcher action too. Pages cover Idle, Appearance, Theming, Bar, Audio, Launcher, Notifications and Bluetooth. Tab walks the page list and the controls. Up/Down flip through sidebar pages and move between fields in a page, Left/Right step a value, Ctrl+Up/Down or Ctrl+J/K change pages from anywhere, and Esc closes. Hit `?` or click `? Help` for the full key list.
 
-The footer shows a tip for the current page (for example, that values above 100%
-amplify the signal, or that `0` disables an idle action). Real status messages,
-such as errors and save confirmations, temporarily replace the tip. Click `? Help`
-or press `?` for the key list. Power actions live in the Power menu (`Mod+Escape`)
-and the launcher.
+Your choices land in `~/.local/share/quickshell-config.json`, and Slimshell reloads that file when you edit it. Invalid values get replaced with safe defaults, and a malformed JSON file leaves your previous settings alone. No file yet means the built-in defaults apply. `quickshell-settings.json` holds idle timeouts, workspace layout, bar visibility and the Theming (Hellwal) options. Idle and Theming need Apply (Ctrl+Enter); Theming also rebuilds colors from the current wallpaper.
 
-Settings toggles animations; each widget owns its style and timing.
+The footer shows a tip about the current page, like the fact that values over 100% amplify the signal or that `0` disables an idle action. Real messages, errors and save confirmations for instance, push the tip aside for a moment. `? Help` or the `?` key gives you the key list. Power actions sit in the Power menu (`Mod+Escape`) and the launcher.
+
+Animations get toggled in Settings. Each widget keeps its own style and timing.
 
 ### Clipboard history
 
-Slimshell displays history but does not collect it. Add these Niri startup entries
-if you do not already run clipboard watchers:
+Slimshell shows clipboard history but doesn't collect it. If you have no clipboard watchers yet, add these to Niri's startup entries:
 
 ```kdl
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
@@ -145,10 +109,7 @@ spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 
 ### Wallpaper and colors
 
-Put images in `~/Pictures/wallpaper`. Quickshell draws the wallpaper itself
-(`services/WallpaperService.qml` and `wallpaper/WallpaperLayer.qml`), including a
-blurred `overview` copy for niri. Only this layer rule is needed (scripts can force
-a redraw with `qs ipc call bg reload`):
+Images go in `~/Pictures/wallpaper`. Quickshell draws the wallpaper itself, in `services/WallpaperService.qml` and `wallpaper/WallpaperLayer.qml`, and makes a blurred `overview` copy for niri. You only need this one layer rule. Scripts can force a redraw with `qs ipc call bg reload`:
 
 ```kdl
 layer-rule {
@@ -157,15 +118,11 @@ layer-rule {
 }
 ```
 
-Open the picker with `qs ipc call wallpaper open`. Generated wallpaper/lock-screen
-images go into `~/.local/share/wall`. The shell uses its fallback palette until
-Hellwal supplies `~/.cache/hellwal/colors.css`. Change the Hellwal mode, offsets,
-grayscale, and fixed background under Settings → Theming.
+`qs ipc call wallpaper open` opens the picker. Generated wallpaper and lock-screen images end up in `~/.local/share/wall`. Until Hellwal writes `~/.cache/hellwal/colors.css`, the shell uses its fallback palette. The Hellwal mode, offsets, grayscale and fixed background are all under Settings → Theming.
 
 ### Emoji
 
-The bundled UTF-8 list is at `components/emoji/emoji.txt`, with an emoji followed by
-its search description on each line:
+The bundled UTF-8 list is `components/emoji/emoji.txt`. One emoji per line, then its search description:
 
 ```text
 🐀 rat
@@ -174,28 +131,17 @@ its search description on each line:
 
 ### Translation
 
-Set `DEEPL_API` in the environment before you launch Slimshell.
-Do not put the key in this repository or commit it to your configuration.
+Set `DEEPL_API` in the environment before you launch Slimshell. Keep the key out of this repo and out of your commits.
 
 ### Weather
 
-Hover the clock and click the weather to open the forecast. Press F5 to refresh.
-Set `WEATHER_LOCATION` to a city, or `WEATHER_LAT` and `WEATHER_LON` (optionally
-`WEATHER_NAME`) in the shell's environment. Without a configured location, the
-helper uses approximate IP geolocation. Conditions come from Open-Meteo; the
-helper caches them for one hour.
+Hover the clock and click the weather to see the forecast. F5 refreshes it. Set `WEATHER_LOCATION` to a city, or use `WEATHER_LAT` and `WEATHER_LON` with an optional `WEATHER_NAME`, all in the shell's environment. With nothing configured the helper falls back to rough IP geolocation. Conditions come from Open-Meteo and get cached for an hour.
 
 ### Launcher actions
 
-The shell's own graphical commands are built in. They live under the
-`quickshell` category and use the `settings` icon: power actions, lock screen,
-wallpaper, settings, updates, and screen recording. Their definitions live in
-`components/QuickshellActions.qml`, separate from personal commands, so other
-menus can reuse the same list. Type `:quickshell` to list them.
+The shell's own graphical commands are built in, under the `quickshell` category with the `settings` icon. That covers power actions, lock screen, wallpaper, settings, updates and screen recording. You'll find their definitions in `components/QuickshellActions.qml`, kept apart from personal commands so other menus can share the list. Type `:quickshell` to see them.
 
-Add personal commands in `launcher/UserActions.qml`, a QML list. Each entry
-needs a `category`, a `label`, a `keyword`, and a `command`; `confirm` is
-optional and defaults to `true`:
+Personal commands go in `launcher/UserActions.qml` as a QML list. Every entry needs a `category`, a `label`, a `keyword` and a `command`. `confirm` is optional and defaults to `true`:
 
 ```qml
 import QtQuick
@@ -213,54 +159,24 @@ QtObject {
 }
 ```
 
-Quickshell watches QML sources, so edits reload automatically. Because this is
-QML rather than JSON, comments and trailing commas are allowed; a syntax error
-shows in the QML logs instead of silently keeping the previous list.
+Quickshell watches QML sources, so edits reload on their own. Since this is QML and not JSON, comments and trailing commas are fine, and a syntax error shows up in the QML logs instead of silently keeping the old list.
 
-Type the keyword (or part of the label) in the launcher and pick the result;
-Slimshell labels actions `[action] <category>: <name>` and shows the
-`utilities-terminal` icon for personal commands (built-ins use `settings`) so
-they stay distinct from applications. Change `actionIcon` in
-`launcher/Launcher.qml` to use a different icon for personal commands. With
-`confirm: true` the launcher asks Yes/No before running the command. Type
-`:` to list every action; `:quickshell` lists the built-ins, `:misc` lists that
-personal category, and `:misc notif` filters within it. `Ctrl+P` pins the
-selected command; pinned commands appear first in an empty launcher, above
-pinned apps, and Slimshell stores them in
-`~/.local/share/quickshell-launcher-action-pins.json`. Commands run through the
-shell, so only add commands you trust.
+Type the keyword or part of the label and pick the result. Slimshell marks actions as `[action] <category>: <name>` and gives personal commands the `utilities-terminal` icon while built-ins use `settings`, so they're easy to tell apart from applications. Want a different icon? Change `actionIcon` in `launcher/Launcher.qml`. With `confirm: true` the launcher asks Yes/No first. Type `:` to list everything, `:quickshell` for built-ins, `:misc` for that personal category, or `:misc notif` to filter inside it. `Ctrl+P` pins the selected command. Pinned commands come first in an empty launcher, ahead of pinned apps, and Slimshell saves them in `~/.local/share/quickshell-launcher-action-pins.json`. Commands go through the shell, so only add ones you trust.
 
-Scripts can call `~/.config/quickshell/launcher/dmenu-runner` while Slimshell is
-running. See the [dmenu examples](../README.md#dmenu-mode).
+While Slimshell is running, scripts can call `~/.config/quickshell/launcher/dmenu-runner`. The [dmenu examples](../README.md#dmenu-mode) show how.
 
 ### Updates
 
-Open **Updates** from the built-in Updates launcher action (category
-`quickshell`) or with `qs ipc call updates toggle`. Nothing checks
-in the background: the first open in a session runs a package check, later opens
-reuse the cached report, and **Refresh** (`r`) checks again. Long reports stay
-at most three quarters of the screen high and scroll with the wheel or
-Up/Down/PageUp/PageDown/Home/End; a thin bar on the right shows the position.
+Updates opens from its built-in launcher action in the `quickshell` category, or with `qs ipc call updates toggle`. Nothing polls in the background. The first open in a session runs a package check, later opens reuse the cached report, and **Refresh** (`r`) checks again. Long reports cap at three quarters of the screen and scroll with the wheel, Up/Down, PageUp/PageDown or Home/End. A thin bar on the right shows where you are.
 
-Checks cover `pacman` (with `checkupdates` when installed) and AUR through `yay`
-or `paru`, plus `apt`, `dnf`, `flatpak`, `snap`, and `pipx` when those tools
-exist.
+Checks cover `pacman` (plus `checkupdates` when installed) and AUR through `yay` or `paru`, along with `apt`, `dnf`, `flatpak`, `snap` and `pipx` when those tools are present.
 
-**Upgrade** (`u`) opens `$TERMINAL --app-id pop-upgrade -e bash
-~/.config/quickshell/updates/upgrade.sh`. The script upgrades every manager it
-finds (Arch via yay/paru or pacman, plus apt, dnf, snap, flatpak, and pipx) and
-keeps prompts and build output visible in the terminal. `$TERMINAL` must accept
-`-e`; Slimshell uses `foot` when the variable is unset. The `--app-id` flag lets a
-Niri window rule keep the upgrade terminal floating.
+**Upgrade** (`u`) opens `$TERMINAL --app-id pop-upgrade -e bash ~/.config/quickshell/updates/upgrade.sh`. That script upgrades whatever managers it finds (Arch via yay/paru or pacman, then apt, dnf, snap, flatpak and pipx) and leaves prompts and build output visible in the terminal. `$TERMINAL` needs to accept `-e`; Slimshell falls back to `foot`. The `--app-id` flag lets a Niri window rule float the upgrade terminal.
 
 ## Updating and troubleshooting
 
-Update with `git -C ~/.config/quickshell pull --ff-only`. Preserve or commit your
-local changes first; Git will refuse updates that would overwrite conflicting work.
+Update with `git -C ~/.config/quickshell pull --ff-only`. Commit or stash local changes first, since Git won't overwrite conflicting work.
 
-If startup fails, stop the existing instance and run the foreground command from
-step 3. If a QML module is missing, your Quickshell build is too old or lacks an
-integration. Install the Nerd Font if icons are missing.
+If startup breaks, stop the running instance and rerun the foreground command from step 3. A missing QML module means your Quickshell build is too old or missing an integration. Missing icons usually means you skipped the Nerd Font.
 
-Run the offline tests with `python -B tests/run.py` from the checkout. They require
-Qt 6's `qmltestrunner` and never start or reload the live shell.
+The offline tests run with `python -B tests/run.py` from the checkout. They need Qt 6's `qmltestrunner` and never touch or reload the live shell.
