@@ -8,7 +8,7 @@ else
     export OLLAMA_CONTEXT_LENGTH=32768
     export OLLAMA_FLASH_ATTENTION=1
     export OLLAMA_KV_CACHE_TYPE=q8_0
-    export OLLAMA_KEEP_ALIVE=30s
+    export OLLAMA_KEEP_ALIVE=2m
 
     ollama serve
   ) >~/.cache/ollama.log 2>&1 &
